@@ -4,7 +4,7 @@
     <string name="Usuario">Usuario</string>
     <string name="Senha">Senha</string>
     <string name="title_activity_ficha">Ficha</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_home">Home</string>
+    <string name="title_activity_home">Pacientes</string>
 </resources>

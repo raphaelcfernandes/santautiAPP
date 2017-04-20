@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,20 +20,18 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+        listView = (ListView)findViewById(R.id.list_item);
+        setSupportActionBar(myToolbar);
         // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.list);
+
 
         // Defined Array values to show in ListView
-        String[] values = new String[] { "Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
-        };
+        String[] values = new String[30];
+        for(int i=0;i<30;i++){
+            values[i]="Paciente "+i;
+        }
+
 
         // Define a new Adapter
         // First parameter - Context
@@ -44,10 +43,10 @@ public class Home extends AppCompatActivity {
                 android.R.layout.simple_list_item_activated_2, android.R.id.text1, values);
 
 
-        // Assign adapter to ListView
+        //Assign adapter to ListView
         listView.setAdapter(adapter);
-
-        // ListView Item Click Listener
+//
+//        // ListView Item Click Listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -70,5 +69,10 @@ public class Home extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
 }
 

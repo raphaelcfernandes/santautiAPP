@@ -24,12 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity-->
-            <!--android:name=".Ficha"-->
-            <!--android:label="@string/title_activity_ficha"/>-->
-        <!--<activity-->
-            <!--android:name=".Home"-->
-            <!--android:label="@string/title_activity_home"/>-->
+        <activity
+            android:name=".Ficha"
+            android:label="@string/title_activity_ficha"/>
+        <activity
+            android:name=".Home"
+
+            android:label="@string/title_activity_home"
+            />
     </application>
 
 </manifest>

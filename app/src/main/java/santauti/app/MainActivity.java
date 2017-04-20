@@ -17,25 +17,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = this.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(this);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//        final EditText username = (EditText)findViewById(R.id.input_usuario);
-//        final EditText password = (EditText)findViewById(R.id.input_password);
-//        Button login = (Button)findViewById(R.id.btn_login);
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Context context = getApplicationContext();
-//                Toast.makeText(context,"Olá "+username.getText().toString(), Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(MainActivity.this,Home.class);
-//                MainActivity.this.startActivity(intent);
-//            }
-//        });
+
+        final EditText username = (EditText)findViewById(R.id.input_usuario);
+        final EditText password = (EditText)findViewById(R.id.input_password);
+        Button login = (Button)findViewById(R.id.btn_login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                Toast.makeText(context,"Olá "+username.getText().toString(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this,Home.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
     }
 }
