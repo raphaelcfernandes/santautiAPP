@@ -22,16 +22,16 @@ import android.view.ContextMenu.ContextMenuInfo;
 public class Home extends AppCompatActivity {
 
     ListView listView ;
-
+    String pacient_choose;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
-       /* listView = (ListView)findViewById(R.id.list_item);*/
+        listView = (ListView)findViewById(R.id.list_item);
         setSupportActionBar(myToolbar);
         // Get ListView object from xml
-
 
         // Defined Array values to show in ListView
         String[] values = new String[30];
@@ -49,20 +49,19 @@ public class Home extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_activated_2, android.R.id.text1, values);
 
-        final ListView lv = (ListView)findViewById(R.id.list_item);
-        this.registerForContextMenu(lv);
+        this.registerForContextMenu(listView);
 
 
         //Assign adapter to ListView
-        lv.setAdapter(adapter);
+        listView.setAdapter(adapter);
 //
 //        // ListView Item Click Listener
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Log.d("NomePaciente:",(String) parent.getItemAtPosition(position));
-                lv.showContextMenuForChild(view);
+                pacient_choose = (String) parent.getItemAtPosition(position);
+                listView.showContextMenuForChild(view);
 /*
                 // ListView Clicked item index
                 int itemPosition     = position;
@@ -101,6 +100,8 @@ public class Home extends AppCompatActivity {
             case R.id.MnuOpc1:
                 Context context = getApplicationContext();
                 Intent intent = new Intent(Home.this,Ficha.class);
+                intent.putExtra("tipoFicha", "Diurna");
+                intent.putExtra("pacienteID", pacient_choose);
                 Home.this.startActivity(intent);
                 return true;
             case R.id.MnuOpc2:
