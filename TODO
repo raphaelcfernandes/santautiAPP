@@ -1,5 +1,8 @@
-Layout Learning:
-    Each XML can have only one Root tag
-    <LinearLayout> element creates a LinearLayout view group.
-    ScrollView can host only one direct chield (LinearLayout)
-
+Geral:
+    - Tentar fazer requisiçao ao server e tratar resposta
+    - Navigation Drawer. Como ficarao os itens na navigation?
+HOME:
+    - Criar um Search para filtrar os pacientes do ListView
+    - Arrumar o layout para o fundo da listView ficar branco (seguir o layout do Gmail APP)
+FICHA:
+    - Como facilitar o cliente a navegar nas tabs da ficha?

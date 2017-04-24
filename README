@@ -1,0 +1,4 @@
+textColorPrimary -> Cor que irá aparecer no titulo do tema
+colorPrimary -> Cor da toolbar
+colorPrimaryDark -> Cor da linha que contém os status do celular + notificaçoes (bateria,horas,wifi,3g,etc)
+navigationBarColor -> Cor da onde fica os botoes navegaveis entre apps do celular

@@ -33,8 +33,8 @@ public class Ficha extends AppCompatActivity {
         setContentView(R.layout.activity_ficha);
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar); //Sets the toolbar
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar); //Sets the toolbar
         /*
          * Create the adapter that will return a fragment for each of the three
          * primary sections of the activity.

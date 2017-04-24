@@ -27,9 +27,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
         listView = (ListView)findViewById(R.id.list_item);
-        setSupportActionBar(myToolbar);
         // Get ListView object from xml
 
         // Defined Array values to show in ListView
