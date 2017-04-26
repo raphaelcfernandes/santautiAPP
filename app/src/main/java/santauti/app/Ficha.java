@@ -68,7 +68,7 @@ public class Ficha extends AppCompatActivity {
                 R.drawable.blood_drop,
                 R.drawable.thyroid,
                 R.drawable.cell,
-                R.drawable.kidneys};
+                R.drawable.exercise};
 
         FichaSection a = new FichaSection("Neurologico",covers[0]);
         fichaSectionList.add(a);
