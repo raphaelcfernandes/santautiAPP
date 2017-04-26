@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 /**
- * Created by rapha on 25-Apr-17.
+ * Created by raphael fernandes on 25-Apr-17.
  */
 
 public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.MyViewHolder>{

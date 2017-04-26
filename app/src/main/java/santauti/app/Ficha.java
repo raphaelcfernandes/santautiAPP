@@ -46,9 +46,9 @@ public class Ficha extends AppCompatActivity {
         fichaSectionList = new ArrayList<>();
         adapter = new FichaSectionAdapter(this, fichaSectionList);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int represnta quantos cards terão por grid
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(5), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
@@ -61,16 +61,14 @@ public class Ficha extends AppCompatActivity {
     private void prepareFichas() {
         int[] covers = new int[]{
                 R.drawable.brain,
-                R.drawable.album2,
-                R.drawable.album3,
-                R.drawable.album4,
-                R.drawable.album5,
-                R.drawable.album6,
-                R.drawable.album7,
-                R.drawable.album8,
-                R.drawable.album9,
-                R.drawable.album10,
-                R.drawable.album11};
+                R.drawable.cardiogram,
+                R.drawable.lungs,
+                R.drawable.intestine,
+                R.drawable.kidneys,
+                R.drawable.blood_drop,
+                R.drawable.thyroid,
+                R.drawable.cell,
+                R.drawable.kidneys};
 
         FichaSection a = new FichaSection("Neurologico",covers[0]);
         fichaSectionList.add(a);
