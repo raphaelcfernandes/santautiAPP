@@ -1,4 +1,4 @@
-package santauti.app;
+package santauti.app.Controller.Ficha;
 
 /**
  * Created by raphael fernandes on 25-Apr-17.

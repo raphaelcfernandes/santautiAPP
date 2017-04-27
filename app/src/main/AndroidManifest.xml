@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".View.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/loginTheme">
             <intent-filter>
@@ -26,10 +26,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Ficha"
+            android:name=".View.Ficha"
             android:label="@string/title_activity_ficha"/>
         <activity
-            android:name=".Home"
+            android:name=".View.Home"
             android:label="@string/title_activity_home"
             />
     </application>

@@ -2,7 +2,7 @@ Geral:
     - Tentar fazer requisiçao ao server e tratar resposta
     - Navigation Drawer. Como ficarao os itens na navigation?
 HOME:
-    - Criar um Search para filtrar os pacientes do ListView
-    - Arrumar o layout para o fundo da listView ficar branco (seguir o layout do Gmail APP)
+    - Criar um Search para filtrar os pacientes da lista
+    - RecyclerView precisa de separador de itens
+    - Criar clickListener para acessar a activity de Ficha
 FICHA:
-    - Como facilitar o cliente a navegar nas tabs da ficha?

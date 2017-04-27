@@ -1,4 +1,4 @@
-package santauti.app;
+package santauti.app.Controller.Ficha;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,19 +12,21 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import santauti.app.R;
+
 /**
  * Created by raphael fernandes on 25-Apr-17.
  */
 
-public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.MyViewHolder>{
+public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.FichaAdapterHolder>{
     private Context mContext;
     private List<FichaSection> fichaSectionList;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class FichaAdapterHolder extends RecyclerView.ViewHolder   {
         public TextView title;
         public ImageView thumbnail;
 
-        public MyViewHolder(View view) {
+        public FichaAdapterHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
@@ -38,15 +40,15 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FichaAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.ficha_card, parent, false);
 
-        return new MyViewHolder(itemView);
+        return new FichaAdapterHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final FichaAdapterHolder holder, int position) {
         FichaSection fichaSection = fichaSectionList.get(position);
         holder.title.setText(fichaSection.getName());
 
