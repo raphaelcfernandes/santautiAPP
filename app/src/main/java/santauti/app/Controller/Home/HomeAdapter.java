@@ -19,14 +19,13 @@ import santauti.app.R;
  */
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
-    private Context mContext;
-    private List<HomeModel> homeModelList;
+    private final List<HomeModel> homeModelList;
 
     public class HomeViewHolder extends RecyclerView.ViewHolder{
-        public TextView nomePaciente;
-        public TextView leito;
-        public TextView box;
-        public ImageView contactImage;
+        public final TextView nomePaciente;
+        public final TextView leito;
+        public final TextView box;
+        public final ImageView contactImage;
 
         public HomeViewHolder(View itemView) {
             super(itemView);
@@ -42,8 +41,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             });
         }
     }
-    public HomeAdapter(Context mContext,List<HomeModel> homeModelList){
-        this.mContext = mContext;
+    public HomeAdapter(List<HomeModel> homeModelList){
         this.homeModelList = homeModelList;
     }
 

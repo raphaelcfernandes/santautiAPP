@@ -37,7 +37,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         homeModelList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        homeAdapter = new HomeAdapter(this, homeModelList);
+        homeAdapter = new HomeAdapter(homeModelList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(homeAdapter);

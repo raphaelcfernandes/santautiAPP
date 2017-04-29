@@ -4,12 +4,10 @@ package santauti.app.Controller.Ficha;
  * Created by raphael fernandes on 25-Apr-17.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class FichaSection {
     private String name;
     private int thumbnail;
-
-    public FichaSection() {
-    }
 
     public FichaSection(String name, int thumbnail) {
         this.name = name;
