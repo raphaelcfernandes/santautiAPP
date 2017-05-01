@@ -1,6 +1,7 @@
 Geral:
     - Tentar fazer requisiçao ao server e tratar resposta
     - Navigation Drawer. Como ficarao os itens na navigation?
+    - Adapter itens,botoes e todos layout para diferentes padroes e tamanhos de tela
 HOME:
     - Criar um Search para filtrar os pacientes da lista
     - RecyclerView precisa de separador de itens
