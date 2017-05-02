@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import santauti.app.R;
+import santauti.app.View.Home.Home;
 
 public class MainActivity extends AppCompatActivity {
 

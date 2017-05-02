@@ -7,3 +7,14 @@ HOME:
     - RecyclerView precisa de separador de itens
     - Criar clickListener para acessar a activity de Ficha
 FICHA:
+    - Itens não estão padronizados em tamanho, disposiçao de texto e cards
+    - Criar layouts:
+        - Neurologico
+        - Hemodinamico
+        - Respiratorio
+        - Gastrointestinal
+        - Renal
+        - Hematologico
+        - Endocrino
+        - Infeccioso
+        - Metabolico

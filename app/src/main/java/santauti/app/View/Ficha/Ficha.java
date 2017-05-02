@@ -1,27 +1,26 @@
-package santauti.app.View;
+package santauti.app.View.Ficha;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import santauti.app.Controller.Ficha.FichaSection;
 import santauti.app.Controller.Ficha.FichaSectionAdapter;
 import santauti.app.R;
 
 public class Ficha extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FichaSectionAdapter adapter;
-    private List<FichaSection> fichaSectionList; //albumList
+    private List<santauti.app.Model.Ficha.Ficha> fichaList; //albumList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +29,24 @@ public class Ficha extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        fichaSectionList = new ArrayList<>();
-        adapter = new FichaSectionAdapter(this, fichaSectionList);
+        fichaList = new ArrayList<>();
+        adapter = new FichaSectionAdapter(this, fichaList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int represnta quantos cards terão por grid
         recyclerView.setLayoutManager(mLayoutManager);
         //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(5), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
+        recyclerView.setHasFixedSize(true);
+        adapter.setOnItemClickListener(onItemClickListener);
         prepareFichas();
     }
-
+    FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(View v, int position) {
+            Toast.makeText(getApplicationContext(),"Voce clicou na ficha de posição: "+position, Toast.LENGTH_SHORT).show();
+        }
+    };
     /**
      * Adding few albums for testing
      */
@@ -57,32 +62,32 @@ public class Ficha extends AppCompatActivity {
                 R.drawable.cell,
                 R.drawable.exercise};
 
-        FichaSection a = new FichaSection("Neurologico",covers[0]);
-        fichaSectionList.add(a);
+        santauti.app.Model.Ficha.Ficha a = new santauti.app.Model.Ficha.Ficha("Neurologico",covers[0]);
+        fichaList.add(a);
 
-        a = new FichaSection("Hemodinamico",covers[1]);
-        fichaSectionList.add(a);
+        a = new santauti.app.Model.Ficha.Ficha("Hemodinamico",covers[1]);
+        fichaList.add(a);
 
-        a = new FichaSection("Respiratorio", covers[2]);
-        fichaSectionList.add(a);
+        a = new santauti.app.Model.Ficha.Ficha("Respiratorio", covers[2]);
+        fichaList.add(a);
 
-        a = new FichaSection("Gastrointestinal", covers[3]);
-        fichaSectionList.add(a);
+        a = new santauti.app.Model.Ficha.Ficha("Gastrointestinal", covers[3]);
+        fichaList.add(a);
 
-        a = new FichaSection("Renal", covers[4]);
-        fichaSectionList.add(a);
+        a = new santauti.app.Model.Ficha.Ficha("Renal", covers[4]);
+        fichaList.add(a);
 
-        a = new FichaSection("Hematologico", covers[5]);
-        fichaSectionList.add(a);
+        a = new santauti.app.Model.Ficha.Ficha("Hematologico", covers[5]);
+        fichaList.add(a);
 
-        a = new FichaSection("Endocrino", covers[6]);
-        fichaSectionList.add(a);
+        a = new santauti.app.Model.Ficha.Ficha("Endocrino", covers[6]);
+        fichaList.add(a);
 
-        a = new FichaSection("Infeccioso", covers[7]);
-        fichaSectionList.add(a);
+        a = new santauti.app.Model.Ficha.Ficha("Infeccioso", covers[7]);
+        fichaList.add(a);
 
-        a = new FichaSection("Metabolico", covers[8]);
-        fichaSectionList.add(a);
+        a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8]);
+        fichaList.add(a);
 
         adapter.notifyDataSetChanged();
     }

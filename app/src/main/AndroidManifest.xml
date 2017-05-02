@@ -26,11 +26,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".View.Ficha"
+            android:name=".View.Ficha.Ficha"
             android:launchMode="singleInstance"
-            android:label="@string/title_activity_ficha"/>
+            android:label="@string/title_activity_ficha">
+        </activity>
         <activity
-            android:name=".View.Home"
+            android:name=".View.Home.Home"
             android:label="@string/title_activity_home"
             />
     </application>

@@ -1,6 +1,7 @@
 package santauti.app.Controller.Ficha;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,52 +13,71 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
 
 /**
  * Created by raphael fernandes on 25-Apr-17.
  */
 
-public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.FichaAdapterHolder>{
-    private Context mContext;
-    private List<FichaSection> fichaSectionList;
+public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.ViewHolder>{
+    Context mContext;
+    private List<Ficha> fichaList;
+    OnItemClickListener mItemClickListener;
+    private int position;
+    public FichaSectionAdapter(Context context, List<Ficha> fichaList){
+        this.mContext = context;
+        this.fichaList = fichaList;
+    }
 
-    public class FichaAdapterHolder extends RecyclerView.ViewHolder   {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView title;
         public ImageView thumbnail;
-
-        public FichaAdapterHolder(View view) {
+        public CardView cardView;
+        public ViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            cardView = (CardView)view.findViewById(R.id.card_view);
+            view.setOnClickListener(this);
+
+            title.setOnClickListener(this);
+            thumbnail.setOnClickListener(this);
+            cardView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(view,getLayoutPosition());
+            }
         }
     }
-
-
-    public FichaSectionAdapter(Context mContext, List<FichaSection> fichaSectionList) {
-        this.mContext = mContext;
-        this.fichaSectionList = fichaSectionList;
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 
     @Override
-    public FichaAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.ficha_card, parent, false);
-
-        return new FichaAdapterHolder(itemView);
+    public FichaSectionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ficha_card, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final FichaAdapterHolder holder, int position) {
-        FichaSection fichaSection = fichaSectionList.get(position);
-        holder.title.setText(fichaSection.getName());
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Ficha ficha = fichaList.get(position);
+        holder.title.setText(ficha.getName());
+        Glide.with(mContext).load(ficha.getThumbnail()).into(holder.thumbnail);
 
-        // loading album cover using Glide library
-        Glide.with(mContext).load(fichaSection.getThumbnail()).into(holder.thumbnail);
     }
 
     @Override
     public int getItemCount() {
-        return fichaSectionList.size();
+        return fichaList.size();
     }
+
+
 }

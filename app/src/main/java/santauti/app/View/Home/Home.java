@@ -1,4 +1,4 @@
-package santauti.app.View;
+package santauti.app.View.Home;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import santauti.app.Controller.Home.HomeAdapter;
-
-import santauti.app.Model.HomeModel;
+import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
+import santauti.app.View.Ficha.Ficha;
 
 public class Home extends AppCompatActivity {
 
@@ -37,7 +37,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         homeModelList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        homeAdapter = new HomeAdapter(homeModelList);
+        homeAdapter = new HomeAdapter(homeModelList,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(homeAdapter);

@@ -1,4 +1,4 @@
-package santauti.app.Model;
+package santauti.app.Model.Home;
 
 /**
  * Created by rapha on 27-Apr-17.

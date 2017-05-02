@@ -1,15 +1,15 @@
-package santauti.app.Controller.Ficha;
+package santauti.app.Model.Ficha;
 
 /**
  * Created by raphael fernandes on 25-Apr-17.
  */
 
 @SuppressWarnings("DefaultFileTemplate")
-public class FichaSection {
+public class Ficha {
     private String name;
     private int thumbnail;
 
-    public FichaSection(String name, int thumbnail) {
+    public Ficha(String name, int thumbnail) {
         this.name = name;
         this.thumbnail = thumbnail;
     }

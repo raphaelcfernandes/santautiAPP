@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,35 +11,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import santauti.app.Model.HomeModel;
+import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
-import santauti.app.View.Ficha;
-import santauti.app.View.Home;
+import santauti.app.View.Ficha.Ficha;
 
 /**
  * Created by rapha on 27-Apr-17.
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private final List<HomeModel> homeModelList;
-    private Context context;
+    private Context mContext;
     private Intent intent;
-    public class HomeViewHolder extends RecyclerView.ViewHolder{
+    public HomeAdapter(List<HomeModel> homeModelList,Context context){
+        this.homeModelList = homeModelList;
+        this.mContext = context;
+    }
+    public class ViewHolder extends RecyclerView.ViewHolder{
         public final TextView nomePaciente;
         public final TextView leito;
         public final TextView box;
-        public final ImageView contactImage;
+        public final ImageView contactThumbnail;
 
-        public HomeViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             nomePaciente = (TextView) itemView.findViewById(R.id.pacienteNome);
             leito = (TextView)itemView.findViewById(R.id.pacienteLeito);
             box = (TextView)itemView.findViewById(R.id.pacienteBox);
-            contactImage = (ImageView)itemView.findViewById(R.id.pacienteImage);
+            contactThumbnail = (ImageView)itemView.findViewById(R.id.pacienteImage);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
@@ -70,27 +73,21 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             });
         }
     }
-    public HomeAdapter(List<HomeModel> homeModelList){
-        this.homeModelList = homeModelList;
+
+
+    @Override
+    public HomeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pacientes_view,parent,false);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public HomeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pacientes_view,parent,false);
-        return new HomeViewHolder(itemView);
-    }
-    public void removeItem(int position) {
-        homeModelList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, homeModelList.size());
-    }
-    @Override
-    public void onBindViewHolder(HomeViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         HomeModel homeModelVO = homeModelList.get(position);
         holder.nomePaciente.setText(homeModelVO.getNomePaciente());
         holder.box.setText(Integer.toString(homeModelVO.getBoxPaciente()));
         holder.leito.setText(Integer.toString(homeModelVO.getLeitoPaciente()));
-        holder.contactImage.setImageResource(homeModelVO.getThumbnail());
+        Glide.with(mContext).load(homeModelVO.getThumbnail()).into(holder.contactThumbnail);
 
     }
 
