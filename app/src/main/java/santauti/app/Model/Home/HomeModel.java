@@ -1,7 +1,7 @@
 package santauti.app.Model.Home;
 
 /**
- * Created by rapha on 27-Apr-17.
+ * Created by Raphael Fernandes on 27-Apr-17.
  */
 
 public class HomeModel {

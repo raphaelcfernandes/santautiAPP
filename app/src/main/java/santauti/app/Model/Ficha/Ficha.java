@@ -1,7 +1,7 @@
 package santauti.app.Model.Ficha;
 
 /**
- * Created by raphael fernandes on 25-Apr-17.
+ * Created by Raphael Fernandes on 25-Apr-17.
  */
 
 @SuppressWarnings("DefaultFileTemplate")

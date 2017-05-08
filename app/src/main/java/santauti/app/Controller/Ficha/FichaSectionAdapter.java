@@ -17,7 +17,7 @@ import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
 
 /**
- * Created by raphael fernandes on 25-Apr-17.
+ * Created by Raphael Fernandes on 25-Apr-17.
  */
 
 public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.ViewHolder>{

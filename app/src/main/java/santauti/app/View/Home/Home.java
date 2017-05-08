@@ -1,20 +1,10 @@
 package santauti.app.View.Home;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +12,8 @@ import java.util.List;
 import santauti.app.Controller.Home.HomeAdapter;
 import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
-import santauti.app.View.Ficha.Ficha;
 
 public class Home extends AppCompatActivity {
-
-    String pacient_choose;
 
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
@@ -77,37 +64,5 @@ public class Home extends AppCompatActivity {
 
         homeAdapter.notifyDataSetChanged();
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_select_ficha, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()) {
-            case R.id.MnuOpc1:
-                Context context = getApplicationContext();
-                Intent intent = new Intent(Home.this,Ficha.class);
-                intent.putExtra("tipoFicha", "Diurna");
-                intent.putExtra("pacienteID", pacient_choose);
-                Home.this.startActivity(intent);
-                return true;
-            case R.id.MnuOpc2:
-                Log.v("S1","Menu2 Select");
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
-
 }
 

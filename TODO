@@ -1,11 +1,8 @@
 Geral:
     - Tentar fazer requisiçao ao server e tratar resposta
-    - Navigation Drawer. Como ficarao os itens na navigation?
     - Adapter itens,botoes e todos layout para diferentes padroes e tamanhos de tela
 HOME:
     - Criar um Search para filtrar os pacientes da lista
-    - RecyclerView precisa de separador de itens
-    - Criar clickListener para acessar a activity de Ficha
 FICHA:
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards
     - Criar layouts:
@@ -18,3 +15,132 @@ FICHA:
         - Endocrino
         - Infeccioso
         - Metabolico
+
+Layout partes médicas:
+    - Neurologico:
+        - nivel consciencia: texto (lista de opcoes) obrigatorio
+            - pupila texto obrigatorio (tamanho pupila, simetria, reatividade a luz)
+            - sedado?
+                Sim:
+                    - ramsay: numerico
+                    - RASS (http://www.ineuro.com.br/wp-content/uploads/Escala-RASS-de-Seda%C3%A7%C3%A3o.pdf)
+                    - Dose + tipo sedativo (opcional)
+                Nao:
+                    - glasgow: numerico
+            - deficit motor: texto (lista de opcoes) (obrigatorio)
+            - pic: numerico opt
+            - ppc: numerico opt
+        - sjo2: numerico opt
+    - Hemodinamico:
+        - ritmo: lista de opcoes (obrigatorio) ritmo/aritmo
+        - freq: numerico (obrigatorio)
+        - bulhas: texto (lista de opcoes) (obrigatorio)
+        - pam: numerico (opcional)
+        - drogas vasoativvas: texto (obrigatorio) lista + doses
+        - pvc: numerico (opcional)
+        - swan-ganz: numerico (opcional)
+    - Respiratório:
+        - oxigenacao tissular: texto (sem nada, n colocar por enqnto)
+            - Ventilaćao: texto (obrigatorio)
+                ventilacao invasiva
+                    - Volume: numerico
+                    - Modo ventilatorio: (lista)
+                    - FIO2: percentual
+                    - Freq respiratoria: numerico
+                    - PEEP: numerico
+                    - pressao do cuff: numerico (só se estiver sobre ventialcao invasiva)
+                Nao invasiva:
+                    - Volume: numerico
+                    - IPAP: numerico
+                    - EPAP: numerico
+            - Saturaćao
+            - raio-x de torax: texto (opcional) no PC
+        - canula latraquial: numerico (opcional)
+    - Gastrointestinal:
+        - exame do abdome: lista de opcoes
+            - Formato: 3 opcoes
+            - Tensao: lista de opcoes normotenso, hipertenso, flacido
+            - Ruidos:
+                - Presente
+                    - Normal
+                    - Aumentado
+                    - Reduzido
+                - Ausente
+            - VCM:
+                - Presente: descrever no pc
+        - debito por sondas: texto no pc
+        - caracteristica evacuacoes: texto no pc
+    - Renal:
+        - diurese: numerico (obrigatorio) no pc
+            - peso: numerico, diurese + peso = grafico (opcional) no pc
+            - balanco hidrico: numerico (obrigatorio) no pc
+            - periodo de observaćao (obrigatorio) tempo
+            - dialise: obrigatorio, no pc
+                Sim ou nao:
+                - Tipo: texto
+                - volume: numerico
+            - VER CAMPO TEXTO PARA COMPLEMENTAR
+        - escorias renais: texto (obrigatorio) no pc
+    - Hematologico:
+        Sim hemograma:
+                - indice hematimetrico: lista de opcoes, obrigatorio
+                - coagulograma: lista de opcoes, obrigatorio
+            Nao: Nao hemogram
+            Tromboprofilaxia:
+                Sim
+                    - Tipo medicamento: lista
+                Nao:
+                    - Campo para explicar pq nao tá
+    - Endocrino:
+        - glicemia: texto obrigatorio no pc lista
+            - uso de insulina: texto obrigatorio
+                sim ou nao:
+                    - Tipos: lista.
+                    - Observacoes
+        - outras observacoes: texto opcional no pc
+    - Infeccioso:
+         - Sim:
+            - curva termica: no pc obrigatorio
+                - Febril ou Afebril
+            - Marcadores de infeccao: obrigatorio
+                - Leucograma: texto no pc
+                - Observacao: texto no pc
+            - antibiotico: obrigatorio no pc
+                Sim ou nao
+                    - qual: texto
+                    - tempo: numerico
+            - Culturas: desktop, obrigatorio
+                - Material: Lista de opcoes
+                - Positividade: texto, desktop, obrigatorio
+                - Germe: fungo/bacteria...
+                - Sensibilidade/resistencia
+        - Nao:
+            Gerar texto sem sinal de infeccao
+    - Metabolico:
+        - gasometria arterial: numerico opcional lista
+              - acido-base: texto opcional
+              - eletrolito: texto obrigatorio
+        - funcao hepatica: texto opcional
+    - Nutriçao
+        - recebendo dieta? obrigatorio lista
+              Sim
+                  Oral:
+                      - Tipo: texto, obrigatorio
+                      - Aceitacao? texto obrigatorio
+                  Enteral:
+                      Sim
+                          - Volume Infundido: numerico no pc
+                          - Velocidade Infusao: numerico
+                  Parenteral:
+                      Sim
+                          - Volume Infundido: numerico no pc
+                          - Velocidade Infusao: numerico
+        - outros comentarios: texto
+    - Psiquico:
+         - familiares inteirados: sim ou nao + comentario
+            - delirio: sim ou nao + comentario
+                - CAM ICO
+            - Depressao: sim ou nao + comentario
+            - acompanhamento psicologico: sim ou nao + comentario
+            - terapia ocupacional: sim ou nao + comentario
+        - storm: sim ou nao + comentario

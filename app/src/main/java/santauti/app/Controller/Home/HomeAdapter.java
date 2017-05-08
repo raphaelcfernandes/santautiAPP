@@ -21,7 +21,7 @@ import santauti.app.R;
 import santauti.app.View.Ficha.Ficha;
 
 /**
- * Created by rapha on 27-Apr-17.
+ * Created by Raphael Fernandes on 27-Apr-17.
  */
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
