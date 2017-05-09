@@ -2,3 +2,202 @@ textColorPrimary -> Cor que irá aparecer no titulo do tema
 colorPrimary -> Cor da toolbar
 colorPrimaryDark -> Cor da linha que contém os status do celular + notificaçoes (bateria,horas,wifi,3g,etc)
 navigationBarColor -> Cor da onde fica os botoes navegaveis entre apps do celular
+
+
+/***************************************************/
+Ficha adapter:
+package santauti.app.Controller.Ficha;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+import santauti.app.Model.Ficha.Ficha;
+import santauti.app.R;
+import santauti.app.View.Ficha.PartesMedicas.Neurologico;
+
+/**
+ * Created by Raphael Fernandes on 25-Apr-17.
+ */
+
+public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.ViewHolder>{
+    Context mContext;
+    private List<Ficha> fichaList;
+    private Intent intent;
+    public FichaSectionAdapter(Context context, List<Ficha> fichaList){
+        this.mContext = context;
+        this.fichaList = fichaList;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView title;
+        public ImageView thumbnail;
+        public CardView cardView;
+        public ViewHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.title);
+            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            cardView = (CardView)view.findViewById(R.id.card_view);
+        }
+    }
+
+    @Override
+    public FichaSectionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ficha_card, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        Ficha ficha = fichaList.get(position);
+        holder.title.setText(ficha.getName());
+        Glide.with(mContext).load(ficha.getThumbnail()).into(holder.thumbnail);
+        holder.thumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(position==0){
+                    view.setBackgroundResource(R.color.light_green);
+                    intent = new Intent(view.getContext(),Neurologico.class);
+                    ((Activity)view.getContext()).startActivityForResult(intent,2);
+                }
+                Toast.makeText(view.getContext(),"Voce clicou na ficha de posição: "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return fichaList.size();
+    }
+
+
+}
+
+/***************************************************************************************/
+FICHA:
+package santauti.app.View.Ficha;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import santauti.app.Controller.Ficha.FichaSectionAdapter;
+import santauti.app.R;
+import santauti.app.View.Ficha.PartesMedicas.Renal;
+
+public class Ficha extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private FichaSectionAdapter adapter;
+    private List<santauti.app.Model.Ficha.Ficha> fichaList; //albumList
+    private Intent intent;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ficha);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        fichaList = new ArrayList<>();
+        adapter = new FichaSectionAdapter(this, fichaList);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int represnta quantos cards terão por grid
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+
+        prepareFichas();
+    }
+    private void prepareFichas() {
+        int[] covers = new int[]{
+                R.drawable.brain,
+                R.drawable.cardiogram,
+                R.drawable.lungs,
+                R.drawable.intestine,
+                R.drawable.kidneys,
+                R.drawable.blood_drop,
+                R.drawable.thyroid,
+                R.drawable.cell,
+                R.drawable.exercise};
+
+        santauti.app.Model.Ficha.Ficha a = new santauti.app.Model.Ficha.Ficha("Neurologico",covers[0]);
+        fichaList.add(a);
+
+        a = new santauti.app.Model.Ficha.Ficha("Hemodinamico",covers[1]);
+        fichaList.add(a);
+
+        a = new santauti.app.Model.Ficha.Ficha("Respiratorio", covers[2]);
+        fichaList.add(a);
+
+        a = new santauti.app.Model.Ficha.Ficha("Gastrointestinal", covers[3]);
+        fichaList.add(a);
+
+        a = new santauti.app.Model.Ficha.Ficha("Renal", covers[4]);
+        fichaList.add(a);
+
+        a = new santauti.app.Model.Ficha.Ficha("Hematologico", covers[5]);
+        fichaList.add(a);
+
+        a = new santauti.app.Model.Ficha.Ficha("Endocrino", covers[6]);
+        fichaList.add(a);
+
+        a = new santauti.app.Model.Ficha.Ficha("Infeccioso", covers[7]);
+        fichaList.add(a);
+
+        a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8]);
+        fichaList.add(a);
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("eentrei aqui");
+        switch(resultCode){
+            case RESULT_OK:
+
+                // ... Check for some data from the intent
+                if(requestCode == 1001){
+                    // .. lets toast again
+                    int position = -1;
+                    if(data != null){
+                        position = data.getIntExtra("Position", 0);
+                    }
+
+                    if(position != -1) {
+                        Toast.makeText(this, "Handled the result successfully at position " + position, Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(this, "Failed to get data from intent" , Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                break;
+
+            case RESULT_CANCELED:
+
+                // ... Handle this situation
+                break;
+        }
+    }
+}

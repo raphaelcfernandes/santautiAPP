@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 Context context = getApplicationContext();
                 Toast.makeText(context,"Olá "+username.getText().toString(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this,Home.class);
-                MainActivity.this.startActivity(intent);
+                startActivity(intent);
             }
         });
     }

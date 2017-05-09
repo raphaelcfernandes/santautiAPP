@@ -27,13 +27,15 @@
         </activity>
         <activity
             android:name=".View.Ficha.Ficha"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:label="@string/title_activity_ficha">
         </activity>
         <activity
             android:name=".View.Home.Home"
             android:label="@string/title_activity_home"
             />
+        <activity android:name=".View.Ficha.PartesMedicas.Renal" />
+        <activity android:name=".View.Ficha.PartesMedicas.Neurologico" />
     </application>
 
 </manifest>

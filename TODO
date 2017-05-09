@@ -16,6 +16,12 @@ FICHA:
         - Infeccioso
         - Metabolico
 
+- onClick no adapter ou na activity Ficha?
+- onActivityResult??? Como implementar
+
+
+
+
 Layout partes médicas:
     - Neurologico:
         - nivel consciencia: texto (lista de opcoes) obrigatorio

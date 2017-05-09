@@ -1,5 +1,7 @@
 package santauti.app.View.Ficha;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -16,12 +18,14 @@ import java.util.List;
 
 import santauti.app.Controller.Ficha.FichaSectionAdapter;
 import santauti.app.R;
+import santauti.app.View.Ficha.PartesMedicas.Neurologico;
 
 public class Ficha extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FichaSectionAdapter adapter;
     private List<santauti.app.Model.Ficha.Ficha> fichaList; //albumList
-
+    private Context context;
+    private static final int MY_REQUEST = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +49,42 @@ public class Ficha extends AppCompatActivity {
         @Override
         public void onItemClick(View v, int position) {
             Toast.makeText(getApplicationContext(),"Voce clicou na ficha de posição: "+position, Toast.LENGTH_SHORT).show();
+            if(position==0){
+                Intent intent = new Intent(getApplicationContext(), Neurologico.class);
+                startActivityForResult(intent,MY_REQUEST);
+            }
         }
     };
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println(resultCode);
+        switch(resultCode){
+            case RESULT_OK:
+
+                // ... Check for some data from the intent
+                if(requestCode == MY_REQUEST){
+                    // .. lets toast again
+                    int position = -1;
+                    if(data != null){
+                        position = data.getIntExtra("Position", 0);
+                    }
+
+                    if(position != -1) {
+                        Toast.makeText(this, "Handled the result successfully at position " + position, Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(this, "Failed to get data from intent" , Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                break;
+
+            case RESULT_CANCELED:
+
+                // ... Handle this situation
+                break;
+        }
+    }
     /**
      * Adding few albums for testing
      */

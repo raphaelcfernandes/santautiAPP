@@ -28,6 +28,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private final List<HomeModel> homeModelList;
     private Context mContext;
     private Intent intent;
+
     public HomeAdapter(List<HomeModel> homeModelList,Context context){
         this.homeModelList = homeModelList;
         this.mContext = context;
