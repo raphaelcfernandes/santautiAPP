@@ -8,4 +8,13 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_home">Pacientes</string>
     <string name="action_search">Filtrar</string>
+    <string name="Neurologico">Neurológico</string>
+    <string name="Hemodinamico">Hemodinâmico</string>
+    <string name="Respiratorio">Respiratório</string>
+    <string name="GastroIntestinal">GastroIntestinal</string>
+    <string name="Renal">Renal</string>
+    <string name="Hematologico">Hematológico</string>
+    <string name="Endocrino">Endócrino</string>
+    <string name="Infeccioso">Infeccioso</string>
+    <string name="Metabolico">Metabólico</string>
 </resources>

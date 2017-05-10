@@ -21,20 +21,21 @@ import santauti.app.R;
  */
 
 public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.ViewHolder>{
-    Context mContext;
+    private Context mContext;
     private List<Ficha> fichaList;
-    OnItemClickListener mItemClickListener;
+    private OnItemClickListener mItemClickListener;
     private int position;
+    private static int loaded=0;
     public FichaSectionAdapter(Context context, List<Ficha> fichaList){
         this.mContext = context;
         this.fichaList = fichaList;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView title;
-        public ImageView thumbnail;
-        public CardView cardView;
-        public ViewHolder(View view) {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView title;
+        ImageView thumbnail;
+        CardView cardView;
+        ViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
@@ -71,13 +72,12 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
         Ficha ficha = fichaList.get(position);
         holder.title.setText(ficha.getName());
         Glide.with(mContext).load(ficha.getThumbnail()).into(holder.thumbnail);
-
+        if(fichaList.get(position).getColor()==1)
+            holder.cardView.setBackgroundResource(R.color.light_green);
     }
 
     @Override
     public int getItemCount() {
         return fichaList.size();
     }
-
-
 }

@@ -26,26 +26,36 @@ import java.util.List;
 
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
+import santauti.app.View.Ficha.PartesMedicas.Endocrino;
+import santauti.app.View.Ficha.PartesMedicas.Gastrointestinal;
+import santauti.app.View.Ficha.PartesMedicas.Hematologico;
+import santauti.app.View.Ficha.PartesMedicas.Hemodinamico;
+import santauti.app.View.Ficha.PartesMedicas.Infeccioso;
+import santauti.app.View.Ficha.PartesMedicas.Metabolico;
 import santauti.app.View.Ficha.PartesMedicas.Neurologico;
+import santauti.app.View.Ficha.PartesMedicas.Renal;
+import santauti.app.View.Ficha.PartesMedicas.Respiratorio;
 
 /**
  * Created by Raphael Fernandes on 25-Apr-17.
  */
 
 public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.ViewHolder>{
-    Context mContext;
+    private Context mContext;
     private List<Ficha> fichaList;
     private Intent intent;
+    private int position;
+
     public FichaSectionAdapter(Context context, List<Ficha> fichaList){
         this.mContext = context;
         this.fichaList = fichaList;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         public TextView title;
-        public ImageView thumbnail;
-        public CardView cardView;
-        public ViewHolder(View view) {
+        ImageView thumbnail;
+        CardView cardView;
+        ViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
@@ -64,15 +74,30 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
         Ficha ficha = fichaList.get(position);
         holder.title.setText(ficha.getName());
         Glide.with(mContext).load(ficha.getThumbnail()).into(holder.thumbnail);
+        if(fichaList.get(position).getColor()==1)
+            holder.cardView.setBackgroundResource(R.color.light_green);
         holder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(position==0){
-                    view.setBackgroundResource(R.color.light_green);
+                if(position==0)
                     intent = new Intent(view.getContext(),Neurologico.class);
-                    ((Activity)view.getContext()).startActivityForResult(intent,2);
-                }
-                Toast.makeText(view.getContext(),"Voce clicou na ficha de posição: "+position, Toast.LENGTH_SHORT).show();
+                else if(position==1)
+                    intent = new Intent(view.getContext(),Hemodinamico.class);
+                else if(position==2)
+                    intent = new Intent(view.getContext(),Respiratorio.class);
+                else if(position==3)
+                    intent = new Intent(view.getContext(),Gastrointestinal.class);
+                else if(position==4)
+                    intent = new Intent(view.getContext(),Renal.class);
+                else if(position==5)
+                    intent = new Intent(view.getContext(),Hematologico.class);
+                else if(position==6)
+                    intent = new Intent(view.getContext(),Endocrino.class);
+                else if(position==7)
+                    intent = new Intent(view.getContext(),Infeccioso.class);
+                else if(position==8)
+                    intent = new Intent(view.getContext(),Metabolico.class);
+                ((Activity)view.getContext()).startActivityForResult(intent,position);
             }
         });
     }
@@ -81,8 +106,6 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
     public int getItemCount() {
         return fichaList.size();
     }
-
-
 }
 
 /***************************************************************************************/
@@ -95,7 +118,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -103,7 +125,6 @@ import java.util.List;
 
 import santauti.app.Controller.Ficha.FichaSectionAdapter;
 import santauti.app.R;
-import santauti.app.View.Ficha.PartesMedicas.Renal;
 
 public class Ficha extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -140,64 +161,109 @@ public class Ficha extends AppCompatActivity {
                 R.drawable.cell,
                 R.drawable.exercise};
 
-        santauti.app.Model.Ficha.Ficha a = new santauti.app.Model.Ficha.Ficha("Neurologico",covers[0]);
+        santauti.app.Model.Ficha.Ficha a = new santauti.app.Model.Ficha.Ficha("Neurologico",covers[0],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Hemodinamico",covers[1]);
+        a = new santauti.app.Model.Ficha.Ficha("Hemodinamico",covers[1],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Respiratorio", covers[2]);
+        a = new santauti.app.Model.Ficha.Ficha("Respiratorio", covers[2],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Gastrointestinal", covers[3]);
+        a = new santauti.app.Model.Ficha.Ficha("Gastrointestinal", covers[3],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Renal", covers[4]);
+        a = new santauti.app.Model.Ficha.Ficha("Renal", covers[4],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Hematologico", covers[5]);
+        a = new santauti.app.Model.Ficha.Ficha("Hematologico", covers[5],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Endocrino", covers[6]);
+        a = new santauti.app.Model.Ficha.Ficha("Endocrino", covers[6],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Infeccioso", covers[7]);
+        a = new santauti.app.Model.Ficha.Ficha("Infeccioso", covers[7],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8]);
+        a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8],0);
         fichaList.add(a);
 
         adapter.notifyDataSetChanged();
     }
 
-    @Override
+    //@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("eentrei aqui");
-        switch(resultCode){
-            case RESULT_OK:
-
-                // ... Check for some data from the intent
-                if(requestCode == 1001){
-                    // .. lets toast again
-                    int position = -1;
-                    if(data != null){
-                        position = data.getIntExtra("Position", 0);
-                    }
-
-                    if(position != -1) {
-                        Toast.makeText(this, "Handled the result successfully at position " + position, Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(this, "Failed to get data from intent" , Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                break;
-
-            case RESULT_CANCELED:
-
-                // ... Handle this situation
-                break;
+        if(resultCode==RESULT_OK){
+            fichaList.get(requestCode).setColor(1);
+            adapter.notifyDataSetChanged();
         }
+        //super.onActivityResult(requestCode, resultCode, data);
+
+//        switch(resultCode){
+//            case RESULT_OK:
+//                int position = -1;
+//                if(data != null){
+//                    position = data.getIntExtra("Position", position);
+//                }
+//                if(position != -1) {
+//                    fichaList.get(position).setColor(1);
+//                    adapter.notifyDataSetChanged();
+//
+//                }else{
+//                    Toast.makeText(this, "Failed to get data from intent" , Toast.LENGTH_SHORT).show();
+//                }
+//
+//                break;
+//
+//            case RESULT_CANCELED:
+//
+//                // ... Handle this situation
+//                break;
+//        }
+    }
+}
+/********************************************************************************/
+FICHA MODEL:
+package santauti.app.Model.Ficha;
+
+/**
+ * Created by Raphael Fernandes on 25-Apr-17.
+ */
+
+
+public class Ficha {
+    private String name;
+    private int thumbnail;
+    private int color;
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public Ficha(String name, int thumbnail, int color) {
+        this.name = name;
+        this.thumbnail = thumbnail;
+        this.color = color;
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(int thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

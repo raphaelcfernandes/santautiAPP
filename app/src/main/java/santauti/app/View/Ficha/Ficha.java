@@ -11,21 +11,20 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import santauti.app.Controller.Ficha.FichaSectionAdapter;
 import santauti.app.R;
-import santauti.app.View.Ficha.PartesMedicas.Neurologico;
+import santauti.app.View.Ficha.PartesMedicas.PartesMedicas;
 
 public class Ficha extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FichaSectionAdapter adapter;
     private List<santauti.app.Model.Ficha.Ficha> fichaList; //albumList
     private Context context;
-    private static final int MY_REQUEST = 1001;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,6 @@ public class Ficha extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int represnta quantos cards terão por grid
         recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(5), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
@@ -48,46 +46,21 @@ public class Ficha extends AppCompatActivity {
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View v, int position) {
-            Toast.makeText(getApplicationContext(),"Voce clicou na ficha de posição: "+position, Toast.LENGTH_SHORT).show();
-            if(position==0){
-                Intent intent = new Intent(getApplicationContext(), Neurologico.class);
-                startActivityForResult(intent,MY_REQUEST);
-            }
+            intent = new Intent(v.getContext(),PartesMedicas.class);
+            intent.putExtra("Position",position);
+            startActivityForResult(intent,position);
         }
     };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println(resultCode);
-        switch(resultCode){
-            case RESULT_OK:
-
-                // ... Check for some data from the intent
-                if(requestCode == MY_REQUEST){
-                    // .. lets toast again
-                    int position = -1;
-                    if(data != null){
-                        position = data.getIntExtra("Position", 0);
-                    }
-
-                    if(position != -1) {
-                        Toast.makeText(this, "Handled the result successfully at position " + position, Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(this, "Failed to get data from intent" , Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                break;
-
-            case RESULT_CANCELED:
-
-                // ... Handle this situation
-                break;
+        if(resultCode==RESULT_OK){
+            fichaList.get(requestCode).setColor(1);
+            adapter.notifyDataSetChanged();
         }
     }
-    /**
-     * Adding few albums for testing
-     */
+
     private void prepareFichas() {
         int[] covers = new int[]{
                 R.drawable.brain,
@@ -100,79 +73,33 @@ public class Ficha extends AppCompatActivity {
                 R.drawable.cell,
                 R.drawable.exercise};
 
-        santauti.app.Model.Ficha.Ficha a = new santauti.app.Model.Ficha.Ficha("Neurologico",covers[0]);
+        santauti.app.Model.Ficha.Ficha a = new santauti.app.Model.Ficha.Ficha("Neurologico",covers[0],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Hemodinamico",covers[1]);
+        a = new santauti.app.Model.Ficha.Ficha("Hemodinamico",covers[1],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Respiratorio", covers[2]);
+        a = new santauti.app.Model.Ficha.Ficha("Respiratorio", covers[2],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Gastrointestinal", covers[3]);
+        a = new santauti.app.Model.Ficha.Ficha("Gastrointestinal", covers[3],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Renal", covers[4]);
+        a = new santauti.app.Model.Ficha.Ficha("Renal", covers[4],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Hematologico", covers[5]);
+        a = new santauti.app.Model.Ficha.Ficha("Hematologico", covers[5],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Endocrino", covers[6]);
+        a = new santauti.app.Model.Ficha.Ficha("Endocrino", covers[6],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Infeccioso", covers[7]);
+        a = new santauti.app.Model.Ficha.Ficha("Infeccioso", covers[7],0);
         fichaList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8]);
+        a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8],0);
         fichaList.add(a);
 
         adapter.notifyDataSetChanged();
-    }
-
-    /**
-     * RecyclerView item decoration - give equal margin around grid item
-     */
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
-                }
-            }
-        }
-    }
-
-    /**
-     * Converting dp to pixel
-     */
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 }

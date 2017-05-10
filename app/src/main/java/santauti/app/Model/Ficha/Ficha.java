@@ -8,10 +8,21 @@ package santauti.app.Model.Ficha;
 public class Ficha {
     private String name;
     private int thumbnail;
+    private int color;
 
-    public Ficha(String name, int thumbnail) {
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public Ficha(String name, int thumbnail, int color) {
         this.name = name;
         this.thumbnail = thumbnail;
+        this.color = color;
+
     }
 
     public String getName() {

@@ -17,7 +17,10 @@ FICHA:
         - Metabolico
 
 - onClick no adapter ou na activity Ficha?
-- onActivityResult??? Como implementar
+- fazer uma activity por ficha? COrreto?
+- replicaçao de codigo dentro do onClick em fichaSection
+- Criar uma classe responsavel por montar um intent. Tem como?
+- Fabrica de ficha?
 
 
 
