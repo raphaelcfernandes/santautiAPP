@@ -3,17 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:minHeight="70dp"
     android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/pacienteImage"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

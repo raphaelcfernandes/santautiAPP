@@ -58,14 +58,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                                     intent = new Intent(view.getContext(),Ficha.class);
                                     intent.putExtra("tipoFicha", "Diurna");
                                     view.getContext().startActivity(intent);
+                                    break;
                                 case R.id.MnuOpc2:
                                     intent = new Intent(view.getContext(),Ficha.class);
                                     intent.putExtra("tipoFicha", "Noturna");
-
                                     view.getContext().startActivity(intent);
+                                    break;
                                 default:
                                     return false;
                             }
+                            return false;
                         }
                     });
 

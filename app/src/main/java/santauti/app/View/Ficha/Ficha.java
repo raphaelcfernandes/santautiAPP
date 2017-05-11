@@ -3,13 +3,20 @@ package santauti.app.View.Ficha;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -33,15 +40,21 @@ public class Ficha extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         fichaList = new ArrayList<>();
-        adapter = new FichaSectionAdapter(this, fichaList);
+        prepareFichas();
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int represnta quantos cards terão por grid
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         adapter.setOnItemClickListener(onItemClickListener);
-        prepareFichas();
+
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setDisplayHomeAsUpEnabled(true);
+
+        SpannableString s = new SpannableString(toolbar.getTitle());
+        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        toolbar.setTitle(s);
+
     }
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
         @Override
@@ -100,6 +113,15 @@ public class Ficha extends AppCompatActivity {
         a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8],0);
         fichaList.add(a);
 
-        adapter.notifyDataSetChanged();
+        adapter = new FichaSectionAdapter(this, fichaList);
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home)
+            finish();
+        return true;
     }
 }

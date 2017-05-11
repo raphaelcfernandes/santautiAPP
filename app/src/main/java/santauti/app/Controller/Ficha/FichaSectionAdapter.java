@@ -45,6 +45,8 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
             title.setOnClickListener(this);
             thumbnail.setOnClickListener(this);
             cardView.setOnClickListener(this);
+
+            setIsRecyclable(false);
         }
 
         @Override
