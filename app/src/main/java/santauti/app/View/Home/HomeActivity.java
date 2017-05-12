@@ -19,7 +19,7 @@ import santauti.app.Controller.Home.HomeAdapter;
 import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
 
-public class Home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;

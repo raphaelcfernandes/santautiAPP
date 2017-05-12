@@ -1,12 +1,23 @@
 Geral:
     - Tentar fazer requisiçao ao server e tratar resposta
-    - Adapter itens,botoes e todos layout para diferentes padroes e tamanhos de tela
+    - Adaptar itens,botoes e todos layout para diferentes padroes e tamanhos de tela
 HOME:
     - Criar um Search para filtrar os pacientes da lista
+    - Ordenar por ordem alfabética
 FICHA:
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards
     - Criar layouts:
-        - Neurologico
+        - Neurologico -> Done
+            - Arrumar disposiçao de itens
+            - Nao está aparecendo opçao padrao nos Spinner
+            - Avaliaçao Pupilar e Deficit Motor -> Estão faltando input
+            - Input de texto -> tratar para manter Design do Material
+            - Rass -> Spinner ta muito pequeno
+            - Checar spinner no guidelines do material
+            - Tratar textos grandes dentro do spinner
+            - Dose e sedativo -> Pode haver + de 1?
+            - Radio buttons -> trocar cor (azul escuro) para a cor do tema (azul claro).
+            - Como pegar os valores dos spinner em int? E.G: pegar spinners de glasgow e fazer a soma
         - Hemodinamico
         - Respiratorio
         - Gastrointestinal

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="santauti.app.View.Home.Home">
+    tools:context="santauti.app.View.Home.HomeActivity">
 
     <include layout="@layout/content_recycler_view" />
 </RelativeLayout>

@@ -2,10 +2,7 @@ package santauti.app.View.Ficha;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -24,9 +20,9 @@ import java.util.List;
 
 import santauti.app.Controller.Ficha.FichaSectionAdapter;
 import santauti.app.R;
-import santauti.app.View.Ficha.PartesMedicas.PartesMedicas;
+import santauti.app.View.Ficha.PartesMedicas.PartesMedicasActivity;
 
-public class Ficha extends AppCompatActivity {
+public class FichaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FichaSectionAdapter adapter;
     private List<santauti.app.Model.Ficha.Ficha> fichaList; //albumList
@@ -59,7 +55,7 @@ public class Ficha extends AppCompatActivity {
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View v, int position) {
-            intent = new Intent(v.getContext(),PartesMedicas.class);
+            intent = new Intent(v.getContext(),PartesMedicasActivity.class);
             intent.putExtra("Position",position);
             startActivityForResult(intent,position);
         }

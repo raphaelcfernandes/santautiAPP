@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import santauti.app.R;
-import santauti.app.View.Home.Home;
+import santauti.app.View.Home.HomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 Toast.makeText(context,"Olá "+username.getText().toString(), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this,Home.class);
+                Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                 startActivity(intent);
             }
         });

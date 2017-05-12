@@ -18,7 +18,7 @@ import java.util.List;
 
 import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
-import santauti.app.View.Ficha.Ficha;
+import santauti.app.View.Ficha.FichaActivity;
 
 /**
  * Created by Raphael Fernandes on 27-Apr-17.
@@ -55,12 +55,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()){
                                 case R.id.MnuOpc1:
-                                    intent = new Intent(view.getContext(),Ficha.class);
+                                    intent = new Intent(view.getContext(),FichaActivity.class);
                                     intent.putExtra("tipoFicha", "Diurna");
                                     view.getContext().startActivity(intent);
                                     break;
                                 case R.id.MnuOpc2:
-                                    intent = new Intent(view.getContext(),Ficha.class);
+                                    intent = new Intent(view.getContext(),FichaActivity.class);
                                     intent.putExtra("tipoFicha", "Noturna");
                                     view.getContext().startActivity(intent);
                                     break;
