@@ -19,7 +19,8 @@ FICHA:
             - Tratar textos grandes dentro do spinner
             - Dose e sedativo -> Pode haver + de 1?
             - Como pegar os valores dos spinner em int? E.G: pegar spinners de glasgow e fazer a soma
-        - Hemodinamico
+        - Hemodinamico -> Done
+            - Drogas vasoativas: o que deve ter na lista?
         - Respiratorio
         - Gastrointestinal
         - Renal
