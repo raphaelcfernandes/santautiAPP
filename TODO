@@ -10,13 +10,14 @@ FICHA:
         - Neurologico -> Done
             - Arrumar disposiçao de itens
             - Nao está aparecendo opçao padrao nos Spinner
-            - Avaliaçao Pupilar e Deficit Motor -> Estão faltando input
+            - Deficit Motor:
+                - Presente: paresia ou plegia, lado esquerdo ou direito. (Criar um bonequinho clicavel direito/esquerdo)
+            - Pupila -> OBS: Quando anisocóricas, sempre anotar a pupila maior em relação à menor - pupilas anisocóricas, esquerda maior que direita (E> D).
             - Input de texto -> tratar para manter Design do Material
             - Rass -> Spinner ta muito pequeno
             - Checar spinner no guidelines do material
             - Tratar textos grandes dentro do spinner
             - Dose e sedativo -> Pode haver + de 1?
-            - Radio buttons -> trocar cor (azul escuro) para a cor do tema (azul claro).
             - Como pegar os valores dos spinner em int? E.G: pegar spinners de glasgow e fazer a soma
         - Hemodinamico
         - Respiratorio

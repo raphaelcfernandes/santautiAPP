@@ -20,7 +20,8 @@ import java.util.List;
 
 import santauti.app.Controller.Ficha.FichaSectionAdapter;
 import santauti.app.R;
-import santauti.app.View.Ficha.PartesMedicas.PartesMedicasActivity;
+import santauti.app.View.Ficha.PartesMedicas.HemodinamicoActivity;
+import santauti.app.View.Ficha.PartesMedicas.NeurologicoActivity;
 
 public class FichaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -55,7 +56,10 @@ public class FichaActivity extends AppCompatActivity {
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View v, int position) {
-            intent = new Intent(v.getContext(),PartesMedicasActivity.class);
+            if(position==0)
+                intent = new Intent(v.getContext(), NeurologicoActivity.class);
+            else if(position==1)
+                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
             intent.putExtra("Position",position);
             startActivityForResult(intent,position);
         }
