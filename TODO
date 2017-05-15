@@ -52,6 +52,7 @@ Layout partes médicas:
         - bulhas: texto (lista de opcoes) (obrigatorio)
         - pam: numerico (opcional)
         - drogas vasoativas: texto (obrigatorio) lista + doses
+            - Dobutamina, Dopamina, nitroprussiato de sodio, nitroglicerina, milrinona, noradrenalina,adrenalina.
         - pvc: numerico (opcional)
         - swan-ganz: numerico (opcional)
     - Respiratório:
@@ -72,8 +73,8 @@ Layout partes médicas:
             - raio-x de torax: texto (opcional) no PC
         - canula latraquial: numerico (opcional)
     - Gastrointestinal:
-        - exame do abdome: lista de opcoes
-            - Formato: 3 opcoes
+        - exame do abdome
+            - Formato: 3 opcoes (plano, globoso, semigloboso, escavado)
             - Tensao: lista de opcoes normotenso, hipertenso, flacido
             - Ruidos:
                 - Presente
@@ -98,17 +99,18 @@ Layout partes médicas:
         - escorias renais: texto (obrigatorio) no pc
     - Hematologico:
         Sim hemograma:
-                - indice hematimetrico: lista de opcoes, obrigatorio
-                - coagulograma: lista de opcoes, obrigatorio
+                - indice hematimetrico: no pc
+                - hemoglobina: no pc
+                - coagulograma: no pc
             Nao: Nao hemogram
             Tromboprofilaxia:
                 Sim
-                    - Tipo medicamento: lista
+                    - Tipo medicamento: heparina fracionada, heparina nao fracionada, 
                 Nao:
                     - Campo para explicar pq nao tá
     - Endocrino:
         - glicemia: texto obrigatorio no pc lista
-            - uso de insulina: texto obrigatorio
+            - uso de insulina em bomba de infusao: texto obrigatorio
                 sim ou nao:
                     - Tipos: lista.
                     - Observacoes
@@ -132,7 +134,7 @@ Layout partes médicas:
         - Nao:
             Gerar texto sem sinal de infeccao
     - Metabolico:
-        - gasometria arterial: numerico opcional lista
+        - gasometria arterial: numerico opcional
               - acido-base: texto opcional
               - eletrolito: texto obrigatorio
         - funcao hepatica: texto opcional
