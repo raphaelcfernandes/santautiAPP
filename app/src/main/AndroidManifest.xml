@@ -36,6 +36,13 @@
         </activity>
         <activity android:name=".View.Ficha.PartesMedicas.HemodinamicoActivity" />
         <activity android:name=".View.Ficha.PartesMedicas.NeurologicoActivity" />
+        <activity android:name=".View.Ficha.PartesMedicas.RespiratorioActivity" />
+        <activity android:name=".View.Ficha.PartesMedicas.GastrointestinalActivity" />
+        <activity android:name=".View.Ficha.PartesMedicas.RenalActivity" />
+        <activity android:name=".View.Ficha.PartesMedicas.HematologicoActivity" />
+        <activity android:name=".View.Ficha.PartesMedicas.EndocrinoActivity" />
+        <activity android:name=".View.Ficha.PartesMedicas.InfecciosoActivity" />
+        <activity android:name=".View.Ficha.PartesMedicas.MetabolicoActivity" />
     </application>
 
 </manifest>

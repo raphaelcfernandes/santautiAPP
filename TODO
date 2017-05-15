@@ -21,8 +21,10 @@ FICHA:
             - Como pegar os valores dos spinner em int? E.G: pegar spinners de glasgow e fazer a soma
         - Hemodinamico -> Done
             - Drogas vasoativas: o que deve ter na lista?
-        - Respiratorio
-        - Gastrointestinal
+        - Respiratorio -> Done
+        - Gastrointestinal ->
+            - Exame do abdome
+            - Formato
         - Renal
         - Hematologico
         - Endocrino
@@ -49,7 +51,7 @@ Layout partes médicas:
         - freq: numerico (obrigatorio)
         - bulhas: texto (lista de opcoes) (obrigatorio)
         - pam: numerico (opcional)
-        - drogas vasoativvas: texto (obrigatorio) lista + doses
+        - drogas vasoativas: texto (obrigatorio) lista + doses
         - pvc: numerico (opcional)
         - swan-ganz: numerico (opcional)
     - Respiratório:
@@ -75,9 +77,9 @@ Layout partes médicas:
             - Tensao: lista de opcoes normotenso, hipertenso, flacido
             - Ruidos:
                 - Presente
-                    - Normal
-                    - Aumentado
-                    - Reduzido
+                - Normal
+                - Aumentado
+                - Reduzido
                 - Ausente
             - VCM:
                 - Presente: descrever no pc
@@ -134,26 +136,3 @@ Layout partes médicas:
               - acido-base: texto opcional
               - eletrolito: texto obrigatorio
         - funcao hepatica: texto opcional
-    - Nutriçao
-        - recebendo dieta? obrigatorio lista
-              Sim
-                  Oral:
-                      - Tipo: texto, obrigatorio
-                      - Aceitacao? texto obrigatorio
-                  Enteral:
-                      Sim
-                          - Volume Infundido: numerico no pc
-                          - Velocidade Infusao: numerico
-                  Parenteral:
-                      Sim
-                          - Volume Infundido: numerico no pc
-                          - Velocidade Infusao: numerico
-        - outros comentarios: texto
-    - Psiquico:
-         - familiares inteirados: sim ou nao + comentario
-            - delirio: sim ou nao + comentario
-                - CAM ICO
-            - Depressao: sim ou nao + comentario
-            - acompanhamento psicologico: sim ou nao + comentario
-            - terapia ocupacional: sim ou nao + comentario
-        - storm: sim ou nao + comentario

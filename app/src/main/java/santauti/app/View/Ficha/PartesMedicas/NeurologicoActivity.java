@@ -16,8 +16,6 @@ import santauti.app.R;
  */
 
 public class NeurologicoActivity extends AppCompatActivity{
-    private int x=0;
-    private Intent intent;
     Spinner nivelConscienciaSpinner,ramsaySpinner,rassSpinner,deficitMotorSpinner;
     Spinner aberturaOcularSpinner,respostaVerbalSpinner,respostaMotoraSpinner,pupilaReatividadeLuzSpinner;
     Spinner pupilaSimetriaSpinner,pupilaTamanhoSpinner;
@@ -27,9 +25,7 @@ public class NeurologicoActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.neurologico);
-        intent = getIntent();
-        x=intent.getIntExtra("Position",x);
+        setContentView(R.layout.activity_neurologico);
         getSupportActionBar().setTitle(R.string.Neurologico);
 
         sedado_sim = (RadioButton)findViewById(R.id.sedado_sim);
@@ -41,7 +37,7 @@ public class NeurologicoActivity extends AppCompatActivity{
         sedado_nao_layout.setVisibility(View.GONE);
         neurologico_opcional_layout.setVisibility(View.GONE);
         prepareNeurologicoSpinners();
-        buildIntent(x);
+        buildIntent();
     }
 
     public void neuroligicoSedadoOnRadioButtonClicked(View view){
@@ -130,9 +126,8 @@ public class NeurologicoActivity extends AppCompatActivity{
 
 
     }
-    private Intent buildIntent(int x){
+    private Intent buildIntent(){
         Intent resultIntent = new Intent();
-        resultIntent.putExtra("position",x);
         setResult(RESULT_OK, resultIntent);
         return resultIntent;
     }

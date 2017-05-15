@@ -16,16 +16,13 @@ import santauti.app.R;
  */
 
 public class HemodinamicoActivity extends AppCompatActivity{
-    private int x=0;
     Spinner ritmo,bulhas;
     RadioButton hemodinamico_opcional_sim,hemodinamico_opcional_nao;
     private View hemodinamico_opcional_layout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        x= intent.getIntExtra("Position",x);
-        setContentView(R.layout.hemodinamico);
+        setContentView(R.layout.activity_hemodinamico);
         findViewById(R.id.hemodinamico_layout).requestFocus();
         getSupportActionBar().setTitle(R.string.Hemodinamico);
         hemodinamico_opcional_nao = (RadioButton)findViewById(R.id.hemodinamico_opcional_nao);
@@ -33,13 +30,12 @@ public class HemodinamicoActivity extends AppCompatActivity{
         this.hemodinamico_opcional_layout = findViewById(R.id.hemodinamico_opcional_layout);
         this.hemodinamico_opcional_layout.setVisibility(View.GONE);
         prepareHemodinamicoSpinners();
-        buildIntent(x);
+        buildIntent();
     }
 
 
-    private Intent buildIntent(int x){
+    private Intent buildIntent(){
         Intent resultIntent = new Intent();
-        resultIntent.putExtra("position",x);
         setResult(RESULT_OK, resultIntent);
         return resultIntent;
     }
@@ -56,6 +52,7 @@ public class HemodinamicoActivity extends AppCompatActivity{
         ArrayAdapter<String> adapterBulhas = new ArrayAdapter<>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, bulhas);
         this.bulhas.setAdapter(adapterBulhas);
     }
+
     public void hemodinamicoOpcionalOnRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {

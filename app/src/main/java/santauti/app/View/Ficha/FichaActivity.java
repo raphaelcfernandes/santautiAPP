@@ -20,8 +20,15 @@ import java.util.List;
 
 import santauti.app.Controller.Ficha.FichaSectionAdapter;
 import santauti.app.R;
+import santauti.app.View.Ficha.PartesMedicas.EndocrinoActivity;
+import santauti.app.View.Ficha.PartesMedicas.GastrointestinalActivity;
+import santauti.app.View.Ficha.PartesMedicas.HematologicoActivity;
 import santauti.app.View.Ficha.PartesMedicas.HemodinamicoActivity;
+import santauti.app.View.Ficha.PartesMedicas.InfecciosoActivity;
+import santauti.app.View.Ficha.PartesMedicas.MetabolicoActivity;
 import santauti.app.View.Ficha.PartesMedicas.NeurologicoActivity;
+import santauti.app.View.Ficha.PartesMedicas.RenalActivity;
+import santauti.app.View.Ficha.PartesMedicas.RespiratorioActivity;
 
 public class FichaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -60,6 +67,20 @@ public class FichaActivity extends AppCompatActivity {
                 intent = new Intent(v.getContext(), NeurologicoActivity.class);
             else if(position==1)
                 intent = new Intent(v.getContext(), HemodinamicoActivity.class);
+            else if(position==2)
+                intent = new Intent(v.getContext(), RespiratorioActivity.class);
+            else if(position==3)
+                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
+            else if(position==4)
+                intent = new Intent(v.getContext(), RenalActivity.class);
+            else if(position==5)
+                intent = new Intent(v.getContext(), HematologicoActivity.class);
+            else if(position==6)
+                intent = new Intent(v.getContext(), EndocrinoActivity.class);
+            else if(position==7)
+                intent = new Intent(v.getContext(), InfecciosoActivity.class);
+            else if(position==8)
+                intent = new Intent(v.getContext(), MetabolicoActivity.class);
             intent.putExtra("Position",position);
             startActivityForResult(intent,position);
         }
