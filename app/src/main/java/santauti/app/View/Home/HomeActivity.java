@@ -13,13 +13,15 @@ import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import santauti.app.Controller.Home.HomeAdapter;
 import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity  {
 
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
@@ -48,43 +50,50 @@ public class HomeActivity extends AppCompatActivity {
         int[] covers = new int[]{
                 R.drawable.ic_person_black};
 
-        HomeModel a = new HomeModel("Paciente 1",1,1,covers[0]);
+        HomeModel a = new HomeModel("João Roberto Silva",1,1,covers[0]);
         homeModelList.add(a);
 
-        a = new HomeModel("Paciente 2",2,2,covers[0]);
+        a = new HomeModel("Raphael Cardoso Fernandes",2,2,covers[0]);
         homeModelList.add(a);
 
-        a = new HomeModel("Paciente 3",3,3,covers[0]);
+        a = new HomeModel("Antonio Silva Sauro",3,3,covers[0]);
         homeModelList.add(a);
 
-        a = new HomeModel("Paciente 4",4,4,covers[0]);
+        a = new HomeModel("Barbara Costa Preta",4,4,covers[0]);
         homeModelList.add(a);
 
-        a = new HomeModel("Paciente 5",5,5,covers[0]);
+        a = new HomeModel("Julio Cesar de Roma",5,5,covers[0]);
         homeModelList.add(a);
 
-        a = new HomeModel("Paciente 6",6,6,covers[0]);
+        a = new HomeModel("César Augusto",6,6,covers[0]);
         homeModelList.add(a);
 
-        a = new HomeModel("Paciente 7",7,7,covers[0]);
+        a = new HomeModel("Napoleao Bonaparte",7,7,covers[0]);
         homeModelList.add(a);
 
-        a = new HomeModel("Paciente 8",8,8,covers[0]);
+        a = new HomeModel("Adolf Hitler",8,8,covers[0]);
         homeModelList.add(a);
 
-        a = new HomeModel("Paciente 9",9,9,covers[0]);
+        a = new HomeModel("Obama",9,9,covers[0]);
         homeModelList.add(a);
-        a = new HomeModel("Paciente 10",10,10,covers[0]);
+        a = new HomeModel("Lula da Silva",10,10,covers[0]);
         homeModelList.add(a);
-        a = new HomeModel("Paciente 11",11,11,covers[0]);
+        a = new HomeModel("Dilma DuCheff",11,11,covers[0]);
         homeModelList.add(a);
-        a = new HomeModel("Paciente 12",12,12,covers[0]);
+        a = new HomeModel("Lucas Borges",12,12,covers[0]);
         homeModelList.add(a);
-        a = new HomeModel("Paciente 13",13,13,covers[0]);
+        a = new HomeModel("Laura Borges",13,13,covers[0]);
         homeModelList.add(a);
-        a = new HomeModel("Paciente 14",14,14,covers[0]);
+        a = new HomeModel("Zenaide Gomes",14,14,covers[0]);
 
         homeModelList.add(a);
+        
+        Collections.sort(homeModelList, new Comparator<HomeModel>() {
+            @Override
+            public int compare(final HomeModel object1, final HomeModel object2) {
+                return object1.getNomePaciente().compareTo(object2.getNomePaciente());
+            }
+        });
 
         homeAdapter = new HomeAdapter(homeModelList,this);
         recyclerView.setAdapter(homeAdapter);
