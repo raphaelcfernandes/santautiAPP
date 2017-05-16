@@ -83,6 +83,7 @@ public class FichaActivity extends AppCompatActivity {
                 intent = new Intent(v.getContext(), MetabolicoActivity.class);
             intent.putExtra("Position",position);
             startActivityForResult(intent,position);
+
         }
     };
 

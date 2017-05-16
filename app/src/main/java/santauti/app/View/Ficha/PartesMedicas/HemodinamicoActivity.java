@@ -3,7 +3,9 @@ package santauti.app.View.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
@@ -25,6 +27,8 @@ public class HemodinamicoActivity extends AppCompatActivity{
         setContentView(R.layout.activity_hemodinamico);
         findViewById(R.id.hemodinamico_layout).requestFocus();
         getSupportActionBar().setTitle(R.string.Hemodinamico);
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setDisplayHomeAsUpEnabled(true);
         hemodinamico_opcional_nao = (RadioButton)findViewById(R.id.hemodinamico_opcional_nao);
         hemodinamico_opcional_sim = (RadioButton)findViewById(R.id.hemodinamico_opcional_sim);
         this.hemodinamico_opcional_layout = findViewById(R.id.hemodinamico_opcional_layout);
@@ -33,7 +37,12 @@ public class HemodinamicoActivity extends AppCompatActivity{
         buildIntent();
     }
 
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home)
+            finish();
+        return true;
+    }
     private Intent buildIntent(){
         Intent resultIntent = new Intent();
         setResult(RESULT_OK, resultIntent);

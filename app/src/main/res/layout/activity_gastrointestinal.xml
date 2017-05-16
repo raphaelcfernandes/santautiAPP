@@ -11,18 +11,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exame do abdome: "
+            android:text="Exame do abdome"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        <Spinner
-            android:id="@+id/exame_abdome"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:orientation="horizontal">
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:paddingTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

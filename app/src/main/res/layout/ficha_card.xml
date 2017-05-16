@@ -23,7 +23,7 @@
             <ImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/album_cover_height"
+                android:layout_height="130dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:scaleType="fitXY" />
@@ -44,7 +44,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/album_title"
-                android:textSize="@dimen/album_title" />
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         </LinearLayout>
 

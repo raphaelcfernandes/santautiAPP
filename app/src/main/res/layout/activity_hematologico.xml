@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tromboprofilaxia?"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="0dp"
+                android:paddingStart="20dp"
+                android:text="Sim"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <RadioButton
+                android:id="@+id/hematologico_profilaxia_sim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="hematologicoProfilaxiaOnRadioButtonClicked" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="0dp"
+                android:paddingStart="20dp"
+                android:text="Não"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <RadioButton
+                android:id="@+id/hematologico_profilaxia_nao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="hematologicoProfilaxiaOnRadioButtonClicked" />
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:visibility="gone"
+        android:id="@+id/tromboprofilaxia_layout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nivel_consciencia"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Spinner
+            android:id="@+id/tromboprofilaxia_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hemograma?"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="0dp"
+                android:paddingStart="20dp"
+                android:text="Sim"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <RadioButton
+                android:id="@+id/hematologico_sim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="hematologicoOnRadioButtonClicked" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="0dp"
+                android:paddingStart="20dp"
+                android:text="Não"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <RadioButton
+                android:id="@+id/hematologico_nao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="hematologicoOnRadioButtonClicked" />
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>

@@ -61,6 +61,7 @@
                 android:gravity="center"
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,4 +106,4 @@
     </LinearLayout>
 </ScrollView>
 
-<!-- - drogas vasoativvas: texto (obrigatorio) lista + doses-->
+<!-- - drogas vasoativvas: Dobutamina, Dopamina, nitroprussiato de sodio, nitroglicerina, milrinona, noradrenalina,adrenalina.-->

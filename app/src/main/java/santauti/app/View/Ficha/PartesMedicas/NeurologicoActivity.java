@@ -3,7 +3,9 @@ package santauti.app.View.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
@@ -27,7 +29,8 @@ public class NeurologicoActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neurologico);
         getSupportActionBar().setTitle(R.string.Neurologico);
-
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setDisplayHomeAsUpEnabled(true);
         sedado_sim = (RadioButton)findViewById(R.id.sedado_sim);
         sedado_nao = (RadioButton)findViewById(R.id.sedado_nao);
         sedado_sim_layout = findViewById(R.id.sedado_sim_layout);
@@ -39,7 +42,12 @@ public class NeurologicoActivity extends AppCompatActivity{
         prepareNeurologicoSpinners();
         buildIntent();
     }
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home)
+            finish();
+        return true;
+    }
     public void neuroligicoSedadoOnRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {

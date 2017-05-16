@@ -74,24 +74,6 @@
             android:inputType="number"
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" android:paddingTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Canula latraquial (opcional): "
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-        <EditText
-            android:id="@+id/peep"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            />
-    </LinearLayout>
 </LinearLayout>
 <!--Nao invasiva:-->
 <!-- - Volume: numerico-->

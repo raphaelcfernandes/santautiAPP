@@ -3,7 +3,9 @@ package santauti.app.View.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
@@ -16,17 +18,24 @@ import santauti.app.R;
  */
 
 public class GastrointestinalActivity extends AppCompatActivity {
-    Spinner exameAbdomeSpinner,formatoSpinner,tensaoSpinner,ruidosSpinner;
+    Spinner formatoSpinner,tensaoSpinner,ruidosSpinner;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gastrointestinal);
         findViewById(R.id.gastrointestinal_layout).requestFocus();
         getSupportActionBar().setTitle(R.string.GastroIntestinal);
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setDisplayHomeAsUpEnabled(true);
         prepareGastrointestinalSpinners();
         buildIntent();
     }
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home)
+            finish();
+        return true;
+    }
     private Intent buildIntent(){
         Intent resultIntent = new Intent();
         setResult(RESULT_OK, resultIntent);
@@ -35,6 +44,7 @@ public class GastrointestinalActivity extends AppCompatActivity {
     private void prepareGastrointestinalSpinners(){
         String[] ruidos = {"Aumentado","Presente","Normal","Reduzido","Ausente"};
         String[] tensao = {"Hipertenso","Normotenso","Flacido"};
+        String[] formato = {"Plano","Globoso","Semigloboso","Escavado"};
 
         ruidosSpinner = (Spinner) findViewById(R.id.gastrointestinal_ruidos);
         ArrayAdapter<String> adapterRuido = new ArrayAdapter<>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, ruidos);
@@ -43,6 +53,10 @@ public class GastrointestinalActivity extends AppCompatActivity {
         tensaoSpinner = (Spinner) findViewById(R.id.gastrointestinal_tensao);
         ArrayAdapter<String> adapterTensao = new ArrayAdapter<>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, tensao);
         tensaoSpinner.setAdapter(adapterTensao);
+
+        formatoSpinner = (Spinner) findViewById(R.id.formato_abdome);
+        ArrayAdapter<String> adapterFormato = new ArrayAdapter<>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, formato);
+        formatoSpinner.setAdapter(adapterFormato);
     }
 
     public void gastrointestinalOnRadioButtonClicked(View view){

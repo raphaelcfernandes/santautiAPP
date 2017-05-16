@@ -3,7 +3,9 @@ package santauti.app.View.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
@@ -24,6 +26,8 @@ public class RespiratorioActivity extends AppCompatActivity{
         setContentView(R.layout.activity_respiratorio);
         findViewById(R.id.respiratorio_layout).requestFocus();
         getSupportActionBar().setTitle(R.string.Respiratorio);
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setDisplayHomeAsUpEnabled(true);
         invasivoView = findViewById(R.id.ventilacao_invasiva);
         naoInvasivoView = findViewById(R.id.ventilacao_nao_invasiva);
         invasivoView.setVisibility(View.GONE);
@@ -36,7 +40,12 @@ public class RespiratorioActivity extends AppCompatActivity{
         setResult(RESULT_OK, resultIntent);
         return resultIntent;
     }
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home)
+            finish();
+        return true;
+    }
     private void prepareRespiratorioSpinners(){
         String[] modoVentilatorio = {"A/C,VCV","A/C,PCV","PSV","SIMV"};
 

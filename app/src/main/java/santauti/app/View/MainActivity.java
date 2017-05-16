@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext();
-                Toast.makeText(context,"Olá "+username.getText().toString(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                 startActivity(intent);
             }

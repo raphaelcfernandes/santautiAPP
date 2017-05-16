@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingTop="10dp">
+    android:paddingTop="10dp"
+    android:id="@+id/teste">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

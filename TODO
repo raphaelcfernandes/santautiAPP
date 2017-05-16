@@ -1,6 +1,7 @@
 Geral:
     - Tentar fazer requisiçao ao server e tratar resposta
     - Adaptar itens,botoes e todos layout para diferentes padroes e tamanhos de tela
+    - Aplicar transiçoes entre telas
 HOME:
     - Criar um Search para filtrar os pacientes da lista
     - Ordenar por ordem alfabética
@@ -20,16 +21,15 @@ FICHA:
             - Dose e sedativo -> Pode haver + de 1?
             - Como pegar os valores dos spinner em int? E.G: pegar spinners de glasgow e fazer a soma
         - Hemodinamico -> Done
-            - Drogas vasoativas: o que deve ter na lista?
+            - Ritmo aritmico e ritmico possuem diversas opçoes
         - Respiratorio -> Done
         - Gastrointestinal -> Done
-            - Exame do abdome
-            - Formato
-        - Renal
-        - Hematologico
-        - Endocrino
-        - Infeccioso
-        - Metabolico
+        - Renal -> Done
+        - Hematologico -> Done
+            - Tromboprofilaxia spinner deve ficar embaixo do radio group
+        - Endocrino -> Done
+        - Infeccioso -> Done
+        - Metabolico -> Done
 
 Layout partes médicas:
     - Neurologico:
