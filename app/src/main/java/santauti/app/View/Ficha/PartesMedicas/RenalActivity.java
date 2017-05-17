@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
@@ -20,9 +21,11 @@ public class RenalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);setContentView(R.layout.activity_renal);
-        getSupportActionBar().setTitle(R.string.Renal);
         findViewById(R.id.activity_renal).requestFocus();
+        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tbar);
         ActionBar toolbar = getSupportActionBar();
+        toolbar.setTitle(R.string.Renal);
         toolbar.setDisplayHomeAsUpEnabled(true);
         buildIntent();
     }

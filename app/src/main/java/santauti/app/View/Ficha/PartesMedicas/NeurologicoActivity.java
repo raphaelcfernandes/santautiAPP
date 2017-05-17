@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -28,9 +29,11 @@ public class NeurologicoActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neurologico);
-        getSupportActionBar().setTitle(R.string.Neurologico);
+        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tbar);
         ActionBar toolbar = getSupportActionBar();
         toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(R.string.Neurologico);
         sedado_sim = (RadioButton)findViewById(R.id.sedado_sim);
         sedado_nao = (RadioButton)findViewById(R.id.sedado_nao);
         sedado_sim_layout = findViewById(R.id.sedado_sim_layout);

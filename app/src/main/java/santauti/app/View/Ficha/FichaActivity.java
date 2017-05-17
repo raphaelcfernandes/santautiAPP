@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -41,6 +42,15 @@ public class FichaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha);
 
+        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tbar);
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setDisplayHomeAsUpEnabled(true);
+
+        SpannableString s = new SpannableString(toolbar.getTitle());
+        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        toolbar.setTitle(s);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         fichaList = new ArrayList<>();
@@ -52,12 +62,6 @@ public class FichaActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         adapter.setOnItemClickListener(onItemClickListener);
 
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setDisplayHomeAsUpEnabled(true);
-
-        SpannableString s = new SpannableString(toolbar.getTitle());
-        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        toolbar.setTitle(s);
 
     }
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import santauti.app.Model.Home.HomeModel;
@@ -25,7 +26,7 @@ import santauti.app.View.Ficha.FichaActivity;
  */
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
-    private final List<HomeModel> homeModelList;
+    private List<HomeModel> homeModelList;
     private Context mContext;
     private Intent intent;
 
@@ -77,6 +78,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         }
     }
 
+    public void updateList(List<HomeModel> list){
+        homeModelList = new ArrayList<>();
+        homeModelList.addAll(list);
+        notifyDataSetChanged();
+    }
 
     @Override
     public HomeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

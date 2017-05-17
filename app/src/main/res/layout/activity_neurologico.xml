@@ -2,79 +2,84 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:paddingBottom="@dimen/activity_vertical_margin">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <include layout="@layout/nivel_consciencia"/>
-        <include layout="@layout/avaliacao_pupilar"/>
-        <include layout="@layout/sedado"/>
-        <include layout="@layout/sim_sedado"/>
-        <include layout="@layout/nao_sedado"/>
+        <include layout="@layout/toolbar"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-            <TextView
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+            <include layout="@layout/nivel_consciencia"/>
+            <include layout="@layout/avaliacao_pupilar"/>
+            <include layout="@layout/sedado"/>
+            <include layout="@layout/sim_sedado"/>
+            <include layout="@layout/nao_sedado"/>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Deficit Motor:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                />
-            <Spinner
-                android:id="@+id/deficitMotor_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textColorHint="@color/colorPrimary"
-                android:gravity="center"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Preencher opcionais?"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sim"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="0dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <RadioButton
+                    android:text="Deficit Motor:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <Spinner
+                    android:id="@+id/deficitMotor_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/neurologico_opcional_sim"
-                    android:onClick="neurologicoOpcionalOnRadioButtonClicked"/>
+                    android:layout_marginStart="10dp"
+                    android:textColorHint="@color/colorPrimary"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Não"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="0dp"
+                    android:text="Preencher opcionais?"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
-                <RadioButton
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/neurologico_opcional_nao"
-                    android:onClick="neurologicoOpcionalOnRadioButtonClicked"/>
-            </RadioGroup>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sim"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="0dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/neurologico_opcional_sim"
+                        android:onClick="neurologicoOpcionalOnRadioButtonClicked"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Não"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="0dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/neurologico_opcional_nao"
+                        android:onClick="neurologicoOpcionalOnRadioButtonClicked"/>
+                </RadioGroup>
+            </LinearLayout>
+            <include layout="@layout/neurologico_opcional_layout"/>
         </LinearLayout>
-        <include layout="@layout/neurologico_opcional_layout"/>
     </LinearLayout>
 </ScrollView>

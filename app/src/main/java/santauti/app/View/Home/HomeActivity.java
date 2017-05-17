@@ -2,15 +2,19 @@ package santauti.app.View.Home;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,16 +25,17 @@ import santauti.app.Controller.Home.HomeAdapter;
 import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
 
-public class HomeActivity extends AppCompatActivity  {
+public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
-    private List<HomeModel> homeModelList; //albumList
+    private List<HomeModel> homeModelList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -87,7 +92,7 @@ public class HomeActivity extends AppCompatActivity  {
         a = new HomeModel("Zenaide Gomes",14,14,covers[0]);
 
         homeModelList.add(a);
-        
+
         Collections.sort(homeModelList, new Comparator<HomeModel>() {
             @Override
             public int compare(final HomeModel object1, final HomeModel object2) {
@@ -101,7 +106,45 @@ public class HomeActivity extends AppCompatActivity  {
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_home,menu);
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
+        MenuItemCompat.setOnActionExpandListener(item,
+                new MenuItemCompat.OnActionExpandListener() {
+                    @Override
+                    public boolean onMenuItemActionCollapse(MenuItem item) {
+                        homeAdapter.updateList(homeModelList);
+                        return true; // Return true to collapse action view
+                    }
+                    @Override
+                    public boolean onMenuItemActionExpand(MenuItem item) {
+                        return true; // Return true to expand action view
+                    }
+                });
         return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    public boolean onQueryTextChange(String query) {
+        final List<HomeModel> filteredModelList = filter(homeModelList, query);
+
+        homeAdapter.updateList(filteredModelList);
+        return false;
+    }
+    private List<HomeModel> filter(List<HomeModel> models, String query) {
+        query = query.toLowerCase();
+        final List<HomeModel> filteredModelList = new ArrayList<>();
+        for (HomeModel model : models) {
+            final String text = model.getNomePaciente().toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
     }
 }
 

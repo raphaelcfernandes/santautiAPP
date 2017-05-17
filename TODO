@@ -3,8 +3,6 @@ Geral:
     - Adaptar itens,botoes e todos layout para diferentes padroes e tamanhos de tela
     - Aplicar transiçoes entre telas
 HOME:
-    - Criar um Search para filtrar os pacientes da lista
-    - Ordenar por ordem alfabética
 FICHA:
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards
     - Criar layouts:

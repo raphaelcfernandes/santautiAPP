@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText username = (EditText)findViewById(R.id.input_usuario);
         final EditText password = (EditText)findViewById(R.id.input_password);
         Button login = (Button)findViewById(R.id.btn_login);
+        findViewById(R.id.login).requestFocus();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,6 +5,7 @@
     android:id="@+id/activity_metabolico"
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants">
+    <include layout="@layout/toolbar"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
