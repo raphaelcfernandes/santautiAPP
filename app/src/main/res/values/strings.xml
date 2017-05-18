@@ -20,4 +20,6 @@
     <string name="nivel_consciencia">Nível de Consciência:</string>
     <string name="escolha_opcao">Selecione um</string>
     <string name="country_prompt">Choose a country</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
 </resources>

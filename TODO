@@ -3,7 +3,10 @@ Geral:
     - Adaptar itens,botoes e todos layout para diferentes padroes e tamanhos de tela
     - Aplicar transiçoes entre telas
 HOME:
+    - Fazer parte logica de logout
+    - Navigation view n fica transparente no colorPrimaryDark
 FICHA:
+    - Como fazer alteraçao de ficha sem ter que voltar ao FichaActivity pra selecionar um outro card
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards
     - Criar layouts:
         - Neurologico -> Done
