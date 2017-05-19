@@ -16,4 +16,8 @@ public class SnackbarCreator {
         Snackbar.make(view, "Avaliação gerada automaticamente.", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
+    public static void createText(View view,String string){
+        Snackbar.make(view,string, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
 }

@@ -1,5 +1,9 @@
 Geral:
+
+    /*******************************RELER************************************/
     - Tentar fazer requisiçao ao server e tratar resposta
+        - NAO SEI SE ESTOU FAZENDO CERTO A CONEXAO SSL ISSO É IMPORTANTE
+    /*******************************RELER************************************/
     - Adaptar itens,botoes e todos layout para diferentes padroes e tamanhos de tela
     - Aplicar transiçoes entre telas
 HOME:
