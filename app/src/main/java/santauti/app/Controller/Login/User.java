@@ -11,6 +11,26 @@ public class User {
     private String user;
     @SerializedName("passw")
     private String password;
+    @SerializedName("token")
+    private String token;
+    @SerializedName("tipoProfissional")
+    private String tipoProfissional;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getTipoProfissional() {
+        return tipoProfissional;
+    }
+
+    public void setTipoProfissional(String tipoProfissional) {
+        this.tipoProfissional = tipoProfissional;
+    }
 
     public String getUser() {
         return user;

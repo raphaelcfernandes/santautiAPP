@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -36,18 +38,18 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                user.setPassword(password.getText().toString().trim());
-                user.setUser(username.getText().toString().trim());
-
+//                user.setPassword(password.getText().toString().trim());
+//                user.setUser(username.getText().toString().trim());
+                user.setUser("admin");
+                user.setPassword("1");
                 APIService apiService =
                         RestClient.getClient(v.getContext()).create(APIService.class);
 
-                Call call = apiService.login(user);
-                call.enqueue(new Callback() {
+                Call<User> call = apiService.login(user);
+                call.enqueue(new Callback<User>() {
                     @Override
-                    public void onResponse(Call call, Response response) {
+                    public void onResponse(Call<User> call, Response<User> response) {
                         if(response.code()==200) {
-
                             Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                             startActivity(intent);
                         }
