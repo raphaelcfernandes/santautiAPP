@@ -1,5 +1,6 @@
-package santauti.app.View.Home;
+package santauti.app.Activities.Home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,19 +17,22 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import santauti.app.Controller.Home.HomeAdapter;
+import santauti.app.Adapters.Home.HomeAdapter;
 import santauti.app.Model.Home.HomeModel;
+import santauti.app.Model.User;
 import santauti.app.R;
 
 public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
@@ -50,7 +54,15 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
-
+//        Intent intent = this.getIntent();
+//        Bundle bundle = intent.getExtras();
+//        User a;
+//        a = (User) bundle.getSerializable("UserObject");
+//        System.out.println("TOKEN "+a.getToken());
+//        System.out.println("USER: "+a.getUser());
+//        System.out.println("PASS: "+a.getPassword());
+//        System.out.println("TIPOPROFISSIONAL: "+String.valueOf(a.getTipoProfissional()));
+//        System.out.println("REGISTRO"+ String.valueOf(a.getRegistro()));
         homeModelList = new ArrayList<>();
         prepareListaPacientes();
 

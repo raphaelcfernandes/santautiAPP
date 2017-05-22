@@ -1,4 +1,4 @@
-package santauti.app.Controller.Login;
+package santauti.app.Adapters;
 
 import android.content.Context;
 
@@ -13,10 +13,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.util.Arrays;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
@@ -36,7 +33,6 @@ public class RestClient{
     static final String BASE_URL = "https://192.168.1.11:3000/#";
     private static Retrofit retrofit = null;
 
-
     public static Retrofit getClient(Context context) {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
@@ -47,7 +43,7 @@ public class RestClient{
         }
         return retrofit;
     }
-    public static OkHttpClient getUnsafeOkHttpClient(Context context) {
+    private static OkHttpClient getUnsafeOkHttpClient(Context context) {
 
         try {
 //            // Create a trust manager that does not validate certificate chains
@@ -71,7 +67,7 @@ public class RestClient{
 //            } };
 
             // Create an ssl socket factory with our all-trusting manager
-            final SSLSocketFactory sslSocketFactory = getSSLConfig(context)
+            final SSLSocketFactory sslSocketFactory = getSSLConfig(context.getApplicationContext())
                     .getSocketFactory();
 
             TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
@@ -95,7 +91,7 @@ public class RestClient{
 
     }
 
-    public static SSLContext getSSLConfig(Context context) throws CertificateException, IOException,
+    private static SSLContext getSSLConfig(Context context) throws CertificateException, IOException,
             KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
 
         // Loading CAs from an InputStream

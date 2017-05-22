@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme"
         >
         <activity
-            android:name=".View.MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/loginTheme">
             <intent-filter>
@@ -27,24 +27,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".View.Ficha.FichaActivity"
+            android:name=".Activities.Ficha.FichaActivity"
             android:launchMode="singleTop"
             android:label="@string/title_activity_ficha">
         </activity>
         <activity
-            android:name=".View.Home.HomeActivity"
+            android:name=".Activities.Home.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".View.Ficha.PartesMedicas.HemodinamicoActivity" />
-        <activity android:name=".View.Ficha.PartesMedicas.NeurologicoActivity" />
-        <activity android:name=".View.Ficha.PartesMedicas.RespiratorioActivity" />
-        <activity android:name=".View.Ficha.PartesMedicas.GastrointestinalActivity" />
-        <activity android:name=".View.Ficha.PartesMedicas.RenalActivity" />
-        <activity android:name=".View.Ficha.PartesMedicas.HematologicoActivity" />
-        <activity android:name=".View.Ficha.PartesMedicas.EndocrinoActivity" />
-        <activity android:name=".View.Ficha.PartesMedicas.InfecciosoActivity" />
-        <activity android:name=".View.Ficha.PartesMedicas.MetabolicoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.HemodinamicoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.NeurologicoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.RespiratorioActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.GastrointestinalActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.RenalActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.HematologicoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.EndocrinoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.InfecciosoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.MetabolicoActivity" />
     </application>
 
 </manifest>

@@ -1,12 +1,14 @@
-package santauti.app.Controller.Login;
+package santauti.app.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
- * Created by Raphael Fernandes on 19-May-17.
+ * Created by Raphael Fernandes on 21-May-17.
  */
 
-public class User {
+public class User implements Serializable{
     @SerializedName("user")
     private String user;
     @SerializedName("passw")
@@ -14,7 +16,17 @@ public class User {
     @SerializedName("token")
     private String token;
     @SerializedName("tipoProfissional")
-    private String tipoProfissional;
+    private int tipoProfissional;
+    @SerializedName("registro")
+    private int registro;
+
+    public int getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(int registro) {
+        this.registro = registro;
+    }
 
     public String getToken() {
         return token;
@@ -24,11 +36,11 @@ public class User {
         this.token = token;
     }
 
-    public String getTipoProfissional() {
+    public int getTipoProfissional() {
         return tipoProfissional;
     }
 
-    public void setTipoProfissional(String tipoProfissional) {
+    public void setTipoProfissional(int tipoProfissional) {
         this.tipoProfissional = tipoProfissional;
     }
 

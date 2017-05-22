@@ -1,9 +1,8 @@
-package santauti.app.View.Ficha.PartesMedicas;
+package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import santauti.app.R;
-import santauti.app.View.SnackbarCreator;
+import santauti.app.Activities.SnackbarCreator;
 
 /**
  * Created by Raphael Fernandes on 15-May-17.

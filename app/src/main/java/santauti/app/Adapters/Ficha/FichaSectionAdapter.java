@@ -1,4 +1,4 @@
-package santauti.app.Controller.Ficha;
+package santauti.app.Adapters.Ficha;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;

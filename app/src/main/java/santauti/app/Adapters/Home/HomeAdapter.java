@@ -1,4 +1,4 @@
-package santauti.app.Controller.Home;
+package santauti.app.Adapters.Home;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import java.util.List;
 
 import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
-import santauti.app.View.Ficha.FichaActivity;
+import santauti.app.Activities.Ficha.FichaActivity;
 
 /**
  * Created by Raphael Fernandes on 27-Apr-17.

@@ -1,4 +1,4 @@
-package santauti.app.View.Ficha.PartesMedicas;
+package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,29 +17,29 @@ import santauti.app.R;
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class EndocrinoActivity extends AppCompatActivity {
+public class InfecciosoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_endocrino);
+        setContentView(R.layout.activity_infeccioso);
         Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tbar);
         ActionBar toolbar = getSupportActionBar();
+        toolbar.setTitle(R.string.Infeccioso);
         toolbar.setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle(R.string.Endocrino);
         buildIntent();
     }
-    private Intent buildIntent(){
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        return resultIntent;
-    }
-    public void endocrinoOnRadioButtonClicked(View view){
+    public void infecciosoOnRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
-            case R.id.endocrino_sim:
+            case R.id.infeccioso_sim:
                 if (checked)
                     Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                break;
+            case R.id.infeccioso_nao:
+                if (checked)
+                    Snackbar.make(view, "Avaliação gerada automaticamente.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 break;
         }
@@ -49,5 +49,10 @@ public class EndocrinoActivity extends AppCompatActivity {
         if(id == android.R.id.home)
             finish();
         return true;
+    }
+    private Intent buildIntent(){
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
+        return resultIntent;
     }
 }

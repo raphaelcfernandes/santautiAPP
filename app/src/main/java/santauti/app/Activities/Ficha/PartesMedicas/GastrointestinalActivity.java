@@ -1,4 +1,4 @@
-package santauti.app.View.Ficha.PartesMedicas;
+package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.Intent;
 import android.os.Bundle;

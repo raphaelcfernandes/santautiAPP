@@ -1,4 +1,4 @@
-package santauti.app.View;
+package santauti.app.Activities;
 
 import android.support.design.widget.Snackbar;
 import android.view.View;

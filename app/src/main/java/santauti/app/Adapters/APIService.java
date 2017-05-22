@@ -1,12 +1,9 @@
-package santauti.app.Controller.Login;
-
-import java.util.List;
+package santauti.app.Adapters;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+import santauti.app.Model.User;
 
 /**
  * Created by Raphael Fernandes on 19-May-17.

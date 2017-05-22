@@ -1,4 +1,4 @@
-package santauti.app.View.Ficha;
+package santauti.app.Activities.Ficha;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,17 +19,17 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import santauti.app.Controller.Ficha.FichaSectionAdapter;
+import santauti.app.Adapters.Ficha.FichaSectionAdapter;
 import santauti.app.R;
-import santauti.app.View.Ficha.PartesMedicas.EndocrinoActivity;
-import santauti.app.View.Ficha.PartesMedicas.GastrointestinalActivity;
-import santauti.app.View.Ficha.PartesMedicas.HematologicoActivity;
-import santauti.app.View.Ficha.PartesMedicas.HemodinamicoActivity;
-import santauti.app.View.Ficha.PartesMedicas.InfecciosoActivity;
-import santauti.app.View.Ficha.PartesMedicas.MetabolicoActivity;
-import santauti.app.View.Ficha.PartesMedicas.NeurologicoActivity;
-import santauti.app.View.Ficha.PartesMedicas.RenalActivity;
-import santauti.app.View.Ficha.PartesMedicas.RespiratorioActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.GastrointestinalActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.HematologicoActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.HemodinamicoActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.InfecciosoActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.MetabolicoActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.NeurologicoActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
 
 public class FichaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
