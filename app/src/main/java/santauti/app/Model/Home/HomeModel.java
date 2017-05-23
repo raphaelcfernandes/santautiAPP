@@ -9,12 +9,35 @@ public class HomeModel {
     private int boxPaciente;
     private int leitoPaciente;
     private int thumbnail;
+    private String medicoResponsavel;
+    private int idPaciente;
+    private int responsavelRegistro;
 
-    public HomeModel(String nome, int box, int leito, int thumbnail) {
+    public HomeModel(String nome, int box, int leito, int thumbnail, String medicoResponsavel, int idPaciente, int responsavelRegistro) {
         this.nomePaciente = nome;
         this.boxPaciente = box;
         this.leitoPaciente = leito;
         this.thumbnail = thumbnail;
+        this.medicoResponsavel = medicoResponsavel;
+        this.responsavelRegistro = responsavelRegistro;
+        this.idPaciente = idPaciente;
+
+    }
+
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public int getResponsavelRegistro() {
+        return responsavelRegistro;
+    }
+
+    public String getMedicoResponsavel() {
+        return medicoResponsavel;
+    }
+
+    public void setMedicoResponsavel(String medicoResponsavel) {
+        this.medicoResponsavel = medicoResponsavel;
     }
 
     public String getNomePaciente() {

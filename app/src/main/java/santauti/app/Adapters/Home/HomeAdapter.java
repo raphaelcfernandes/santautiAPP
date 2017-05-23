@@ -2,6 +2,8 @@ package santauti.app.Adapters.Home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.BundleCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +32,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private List<HomeModel> homeModelList;
     private Context mContext;
     private Intent intent;
-
     public HomeAdapter(List<HomeModel> homeModelList,Context context){
         this.homeModelList = homeModelList;
         this.mContext = context;
@@ -38,14 +40,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         public final TextView nomePaciente;
         public final TextView leito;
         public final TextView box;
+        public final TextView medicoResponsavel;
         public final ImageView contactThumbnail;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             nomePaciente = (TextView) itemView.findViewById(R.id.pacienteNome);
             leito = (TextView)itemView.findViewById(R.id.pacienteLeito);
             box = (TextView)itemView.findViewById(R.id.pacienteBox);
             contactThumbnail = (ImageView)itemView.findViewById(R.id.pacienteImage);
+            medicoResponsavel = (TextView)itemView.findViewById(R.id.medico_responsavel);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
@@ -54,14 +58,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
+                            intent = new Intent(view.getContext(),FichaActivity.class);
+                            intent.putExtra("idPaciente",homeModelList.get(getAdapterPosition()).getIdPaciente());
+                            intent.putExtra("responsavelRegistro",homeModelList.get(getAdapterPosition()).getResponsavelRegistro());
                             switch (item.getItemId()){
                                 case R.id.MnuOpc1:
-                                    intent = new Intent(view.getContext(),FichaActivity.class);
                                     intent.putExtra("tipoFicha", "Diurna");
                                     view.getContext().startActivity(intent);
                                     break;
                                 case R.id.MnuOpc2:
-                                    intent = new Intent(view.getContext(),FichaActivity.class);
                                     intent.putExtra("tipoFicha", "Noturna");
                                     view.getContext().startActivity(intent);
                                     break;
@@ -94,10 +99,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         HomeModel homeModelVO = homeModelList.get(position);
         holder.nomePaciente.setText(homeModelVO.getNomePaciente());
+        holder.medicoResponsavel.setText(homeModelVO.getMedicoResponsavel());
         holder.box.setText(Integer.toString(homeModelVO.getBoxPaciente()));
         holder.leito.setText(Integer.toString(homeModelVO.getLeitoPaciente()));
         Glide.with(mContext).load(homeModelVO.getThumbnail()).into(holder.contactThumbnail);
-
     }
 
     @Override

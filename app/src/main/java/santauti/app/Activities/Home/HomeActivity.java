@@ -1,8 +1,11 @@
 package santauti.app.Activities.Home;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,17 +24,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import santauti.app.APIServices.APIService;
+import santauti.app.APIServices.RestClient;
 import santauti.app.Adapters.Home.HomeAdapter;
 import santauti.app.Model.Home.HomeModel;
+import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 import santauti.app.R;
 
@@ -39,9 +48,10 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
-    private List<HomeModel> homeModelList;
+    private List<HomeModel> homeModelList = null;
     private Toolbar tbar;
     private DrawerLayout drawerLayout;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,24 +63,20 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
-//        Intent intent = this.getIntent();
-//        Bundle bundle = intent.getExtras();
-//        User a;
-//        a = (User) bundle.getSerializable("UserObject");
-//        System.out.println("TOKEN "+a.getToken());
-//        System.out.println("USER: "+a.getUser());
-//        System.out.println("PASS: "+a.getPassword());
-//        System.out.println("TIPOPROFISSIONAL: "+String.valueOf(a.getTipoProfissional()));
-//        System.out.println("REGISTRO"+ String.valueOf(a.getRegistro()));
-        homeModelList = new ArrayList<>();
-        prepareListaPacientes();
+        progressBar = (ProgressBar)findViewById(R.id.progressbar_recycler);
+        if(homeModelList==null) {
+            homeModelList = new ArrayList<>();
+            requestPacienteList();
+//            recyclerView.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.GONE);
+        }
 
         ActionBar toolbar = getSupportActionBar();
         toolbar.setDisplayHomeAsUpEnabled(false);
         SpannableString s = new SpannableString(toolbar.getTitle());
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         toolbar.setTitle(s);
+
     }
 
     public void initNavigationDrawer() {
@@ -111,48 +117,38 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
-    private void prepareListaPacientes() {
+
+    private void populateListaPacientes(Paciente paciente){
         int[] covers = new int[]{
                 R.drawable.ic_person_black};
+        HomeModel p = new HomeModel(paciente.getNome()+" "+paciente.getSobrenome(),paciente.getLeito(),paciente.getBox(),
+                covers[0],paciente.getNomeMedico()+" "+paciente.getSobrenomeMedico(),paciente.getID(),paciente.getResponsavel());
+        homeModelList.add(p);
+    }
 
-        HomeModel a = new HomeModel("João Roberto Silva",1,1,covers[0]);
-        homeModelList.add(a);
+    private List<HomeModel> requestPacienteList(){
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        APIService apiService =
+                RestClient.getClient(this).create(APIService.class);
+        Call<List<Paciente>> call = apiService.getPacientes(((User) bundle.getSerializable("UserObject")).getToken());
+        call.enqueue(new Callback<List<Paciente>>() {
+            @Override
+            public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response) {
+                for(Paciente i : response.body()){
+                    populateListaPacientes(i);
+                }
+                prepareListaPacientes();
+            }
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                Log.d("ERROR",t.getMessage());
+            }
+        });
+        return homeModelList;
+    }
 
-        a = new HomeModel("Raphael Cardoso Fernandes",2,2,covers[0]);
-        homeModelList.add(a);
-
-        a = new HomeModel("Antonio Silva Sauro",3,3,covers[0]);
-        homeModelList.add(a);
-
-        a = new HomeModel("Barbara Costa Preta",4,4,covers[0]);
-        homeModelList.add(a);
-
-        a = new HomeModel("Julio Cesar de Roma",5,5,covers[0]);
-        homeModelList.add(a);
-
-        a = new HomeModel("César Augusto",6,6,covers[0]);
-        homeModelList.add(a);
-
-        a = new HomeModel("Napoleao Bonaparte",7,7,covers[0]);
-        homeModelList.add(a);
-
-        a = new HomeModel("Adolf Hitler",8,8,covers[0]);
-        homeModelList.add(a);
-
-        a = new HomeModel("Obama",9,9,covers[0]);
-        homeModelList.add(a);
-        a = new HomeModel("Lula da Silva",10,10,covers[0]);
-        homeModelList.add(a);
-        a = new HomeModel("Dilma DuCheff",11,11,covers[0]);
-        homeModelList.add(a);
-        a = new HomeModel("Lucas Borges",12,12,covers[0]);
-        homeModelList.add(a);
-        a = new HomeModel("Laura Borges",13,13,covers[0]);
-        homeModelList.add(a);
-        a = new HomeModel("Zenaide Gomes",14,14,covers[0]);
-
-        homeModelList.add(a);
-
+    private void prepareListaPacientes() {
         Collections.sort(homeModelList, new Comparator<HomeModel>() {
             @Override
             public int compare(final HomeModel object1, final HomeModel object2) {
@@ -195,6 +191,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         homeAdapter.updateList(filteredModelList);
         return false;
     }
+
     private List<HomeModel> filter(List<HomeModel> models, String query) {
         query = query.toLowerCase();
         final List<HomeModel> filteredModelList = new ArrayList<>();
@@ -206,5 +203,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         }
         return filteredModelList;
     }
+
 }
 

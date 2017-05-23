@@ -13,6 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/progressbar_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="false"
+        android:visibility="gone" />
 
 </RelativeLayout>

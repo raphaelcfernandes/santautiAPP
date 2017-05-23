@@ -44,7 +44,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/album_title"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         </LinearLayout>
 

@@ -1,4 +1,5 @@
 package santauti.app.Activities;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,14 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import santauti.app.Activities.Home.HomeActivity;
-import santauti.app.Adapters.APIService;
-import santauti.app.Adapters.RestClient;
+import santauti.app.APIServices.APIService;
+import santauti.app.APIServices.RestClient;
 import santauti.app.Model.User;
 import santauti.app.R;
 //JSONObject json = new JSONObject(inputStreamAsString);
@@ -33,10 +32,18 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this,
+                        R.style.Theme_AppCompat_DayNight_Dialog);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Autenticando...");
+                progressDialog.show();
+
                 APIService apiService =
                         RestClient.getClient(v.getContext()).create(APIService.class);
                 user.setPassword("1");
                 user.setUser("udiacf");
+//                user.setPassword(password.getText().toString().trim());
+//                user.setUser(username.getText().toString().trim());
                 Call<User> call = apiService.login(user);
                 call.enqueue(new Callback<User>() {
                     @Override
@@ -50,16 +57,22 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }
+                        else if(response.code()==200 && response.body().getTipoProfissional()==1)
+                            SnackbarCreator.createText(v, "Perfil sem acesso a esta área");
+                        else if(response.code()==400)
+                            SnackbarCreator.createText(v, "Usuário e/ou senha incorretos");
+
+                        progressDialog.dismiss();
                     }
                     @Override
                     public void onFailure(@NonNull Call call, @NonNull Throwable t) {
                         Log.d("ERROR",t.getMessage());
                     }
                 });
-
             }
         });
     }
+
     private void setUser(String token,int tipoProfissional, int registro){
         this.user.setPassword(null);
         this.user.setUser(null);

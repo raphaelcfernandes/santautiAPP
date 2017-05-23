@@ -1,4 +1,4 @@
-package santauti.app.Adapters;
+package santauti.app.APIServices;
 
 import android.content.Context;
 

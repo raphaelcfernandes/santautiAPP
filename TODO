@@ -9,6 +9,8 @@ Geral:
 HOME:
     - Fazer parte logica de logout
     - Navigation view n fica transparente no colorPrimaryDark
+    - APÓS LOGIN, COLOCAR ICONE DE CARREGANDO LISTA
+    - Criar timer para dar refresh na lista. (5 min?), interessante colocar uma barra do tempo de refresh?
 FICHA:
     - Como fazer alteraçao de ficha sem ter que voltar ao FichaActivity pra selecionar um outro card
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards

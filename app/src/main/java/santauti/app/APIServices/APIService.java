@@ -1,8 +1,13 @@
-package santauti.app.Adapters;
+package santauti.app.APIServices;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 
 /**
@@ -12,4 +17,6 @@ import santauti.app.Model.User;
 public interface APIService {
     @POST("/login")
     Call<User> login(@Body User user);
+    @GET("/getPacientes")
+    Call<List<Paciente>> getPacientes(@Header("access_token") String token);
 }
