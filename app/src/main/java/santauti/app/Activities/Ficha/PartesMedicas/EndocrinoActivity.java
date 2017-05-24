@@ -11,28 +11,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
+import santauti.app.Activities.Ficha.Generico;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class EndocrinoActivity extends AppCompatActivity {
+public class EndocrinoActivity extends Generico {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_endocrino);
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle(R.string.Endocrino);
-        buildIntent();
-    }
-    private Intent buildIntent(){
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        return resultIntent;
+        setToolbar(getString(R.string.Endocrino));
+
     }
     public void endocrinoOnRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
@@ -44,6 +36,7 @@ public class EndocrinoActivity extends AppCompatActivity {
                 break;
         }
     }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home)

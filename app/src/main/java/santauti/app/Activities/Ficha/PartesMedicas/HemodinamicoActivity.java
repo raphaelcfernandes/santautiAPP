@@ -12,13 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import santauti.app.Activities.Ficha.Generico;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 10-May-17.
  */
 
-public class HemodinamicoActivity extends AppCompatActivity{
+public class HemodinamicoActivity extends Generico{
     Spinner ritmo,bulhas;
     RadioButton hemodinamico_opcional_sim,hemodinamico_opcional_nao;
     private View hemodinamico_opcional_layout;
@@ -27,29 +28,20 @@ public class HemodinamicoActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hemodinamico);
         findViewById(R.id.hemodinamico_layout).requestFocus();
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setTitle(R.string.Hemodinamico);
-        toolbar.setDisplayHomeAsUpEnabled(true);
+        setToolbar(getString(R.string.Hemodinamico));
         hemodinamico_opcional_nao = (RadioButton)findViewById(R.id.hemodinamico_opcional_nao);
         hemodinamico_opcional_sim = (RadioButton)findViewById(R.id.hemodinamico_opcional_sim);
         this.hemodinamico_opcional_layout = findViewById(R.id.hemodinamico_opcional_layout);
         this.hemodinamico_opcional_layout.setVisibility(View.GONE);
         prepareHemodinamicoSpinners();
-        buildIntent();
-    }
 
+    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home)
             finish();
         return true;
-    }
-    private Intent buildIntent(){
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        return resultIntent;
     }
 
     private void prepareHemodinamicoSpinners(){

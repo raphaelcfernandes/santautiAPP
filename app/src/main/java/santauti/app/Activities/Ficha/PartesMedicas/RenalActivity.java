@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
+import santauti.app.Activities.Ficha.Generico;
 import santauti.app.R;
 import santauti.app.Activities.SnackbarCreator;
 
@@ -17,17 +18,19 @@ import santauti.app.Activities.SnackbarCreator;
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class RenalActivity extends AppCompatActivity {
+public class RenalActivity extends Generico {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);setContentView(R.layout.activity_renal);
         findViewById(R.id.activity_renal).requestFocus();
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setTitle(R.string.Renal);
-        toolbar.setDisplayHomeAsUpEnabled(true);
-        buildIntent();
+        setToolbar(getString(R.string.Renal));
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home)
+            finish();
+        return true;
     }
     public void renalOnRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
@@ -41,16 +44,5 @@ public class RenalActivity extends AppCompatActivity {
                     SnackbarCreator.avaliacaoGeradaAutomaticamente(view);
                 break;
         }
-    }
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if(id == android.R.id.home)
-            finish();
-        return true;
-    }
-    private Intent buildIntent(){
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        return resultIntent;
     }
 }

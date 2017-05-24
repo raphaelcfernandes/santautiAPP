@@ -24,8 +24,7 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
     private Context mContext;
     private List<Ficha> fichaList;
     private OnItemClickListener mItemClickListener;
-    private int position;
-    private static int loaded=0;
+
     public FichaSectionAdapter(Context context, List<Ficha> fichaList){
         this.mContext = context;
         this.fichaList = fichaList;

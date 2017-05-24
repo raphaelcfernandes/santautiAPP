@@ -11,23 +11,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
+import santauti.app.Activities.Ficha.Generico;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class InfecciosoActivity extends AppCompatActivity {
+public class InfecciosoActivity extends Generico {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infeccioso);
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setTitle(R.string.Infeccioso);
-        toolbar.setDisplayHomeAsUpEnabled(true);
-        buildIntent();
+        setToolbar(getString(R.string.Infeccioso));
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home)
+            finish();
+        return true;
     }
     public void infecciosoOnRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
@@ -43,16 +46,5 @@ public class InfecciosoActivity extends AppCompatActivity {
                             .setAction("Action", null).show();
                 break;
         }
-    }
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if(id == android.R.id.home)
-            finish();
-        return true;
-    }
-    private Intent buildIntent(){
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        return resultIntent;
     }
 }

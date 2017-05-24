@@ -1,11 +1,9 @@
 package santauti.app.Activities.Ficha;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import santauti.app.Adapters.Ficha.FichaSectionAdapter;
-import santauti.app.R;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.GastrointestinalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.HematologicoActivity;
@@ -30,26 +26,22 @@ import santauti.app.Activities.Ficha.PartesMedicas.MetabolicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.NeurologicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
+import santauti.app.Adapters.Ficha.FichaSectionAdapter;
+import santauti.app.Model.Ficha.Metabolico;
+import santauti.app.Model.User;
+import santauti.app.R;
 
-public class FichaActivity extends AppCompatActivity {
+public class FichaActivity extends Generico {
     private RecyclerView recyclerView;
-    private FichaSectionAdapter adapter;
-    private List<santauti.app.Model.Ficha.Ficha> fichaList; //albumList
-    private Context context;
+    public static FichaSectionAdapter adapter;
+    public static List<santauti.app.Model.Ficha.Ficha> fichaList;
     private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha);
 
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setDisplayHomeAsUpEnabled(true);
-
-        SpannableString s = new SpannableString(toolbar.getTitle());
-        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        toolbar.setTitle(s);
+        setToolbar(this.getString(R.string.Evolucao));
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -61,9 +53,8 @@ public class FichaActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
         adapter.setOnItemClickListener(onItemClickListener);
-
-
     }
+
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View v, int position) {
@@ -87,18 +78,8 @@ public class FichaActivity extends AppCompatActivity {
                 intent = new Intent(v.getContext(), MetabolicoActivity.class);
             intent.putExtra("Position",position);
             startActivityForResult(intent,position);
-
         }
     };
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
-            fichaList.get(requestCode).setColor(1);
-            adapter.notifyDataSetChanged();
-        }
-    }
 
     private void prepareFichas() {
         int[] covers = new int[]{
@@ -142,12 +123,5 @@ public class FichaActivity extends AppCompatActivity {
         adapter = new FichaSectionAdapter(this, fichaList);
         recyclerView.setAdapter(adapter);
 
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if(id == android.R.id.home)
-            finish();
-        return true;
     }
 }

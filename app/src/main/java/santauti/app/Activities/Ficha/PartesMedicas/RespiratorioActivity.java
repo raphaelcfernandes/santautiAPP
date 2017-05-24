@@ -12,13 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import santauti.app.Activities.Ficha.Generico;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class RespiratorioActivity extends AppCompatActivity{
+public class RespiratorioActivity extends Generico{
     private View invasivoView, naoInvasivoView;
     Spinner respiratorioSpinner;
     @Override
@@ -26,23 +27,17 @@ public class RespiratorioActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_respiratorio);
         findViewById(R.id.respiratorio_layout).requestFocus();
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setTitle(R.string.Respiratorio);
-        toolbar.setDisplayHomeAsUpEnabled(true);
+        setToolbar(getString(R.string.Respiratorio));
+
         invasivoView = findViewById(R.id.ventilacao_invasiva);
         naoInvasivoView = findViewById(R.id.ventilacao_nao_invasiva);
         invasivoView.setVisibility(View.GONE);
         naoInvasivoView.setVisibility(View.GONE);
+
         prepareRespiratorioSpinners();
-        buildIntent();
+
     }
-    private Intent buildIntent(){
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        return resultIntent;
-    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home)

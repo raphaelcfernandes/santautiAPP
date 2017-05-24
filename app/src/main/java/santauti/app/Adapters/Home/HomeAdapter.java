@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.BundleCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,7 +21,9 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import santauti.app.Adapters.Ficha.FichaSectionAdapter;
 import santauti.app.Model.Home.HomeModel;
+import santauti.app.Model.User;
 import santauti.app.R;
 import santauti.app.Activities.Ficha.FichaActivity;
 
@@ -31,12 +34,12 @@ import santauti.app.Activities.Ficha.FichaActivity;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private List<HomeModel> homeModelList;
     private Context mContext;
-    private Intent intent;
+    private OnItemClickListener mItemClickListener;
     public HomeAdapter(List<HomeModel> homeModelList,Context context){
         this.homeModelList = homeModelList;
         this.mContext = context;
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public final TextView nomePaciente;
         public final TextView leito;
         public final TextView box;
@@ -50,39 +53,22 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             box = (TextView)itemView.findViewById(R.id.pacienteBox);
             contactThumbnail = (ImageView)itemView.findViewById(R.id.pacienteImage);
             medicoResponsavel = (TextView)itemView.findViewById(R.id.medico_responsavel);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    PopupMenu popupMenu = new PopupMenu(view.getContext(), view, Gravity.NO_GRAVITY, R.attr.actionOverflowMenuStyle, 0);
-                    popupMenu.getMenuInflater().inflate(R.menu.menu_select_ficha,popupMenu.getMenu());
-                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            intent = new Intent(view.getContext(),FichaActivity.class);
-                            intent.putExtra("idPaciente",homeModelList.get(getAdapterPosition()).getIdPaciente());
-                            intent.putExtra("responsavelRegistro",homeModelList.get(getAdapterPosition()).getResponsavelRegistro());
-                            switch (item.getItemId()){
-                                case R.id.MnuOpc1:
-                                    intent.putExtra("tipoFicha", "Diurna");
-                                    view.getContext().startActivity(intent);
-                                    break;
-                                case R.id.MnuOpc2:
-                                    intent.putExtra("tipoFicha", "Noturna");
-                                    view.getContext().startActivity(intent);
-                                    break;
-                                default:
-                                    return false;
-                            }
-                            return false;
-                        }
-                    });
 
-                    popupMenu.show();
-                }
-            });
+            itemView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View view) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(view,getLayoutPosition());
+            }
         }
     }
-
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+    public void setOnItemClickListener(final HomeAdapter.OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
     public void updateList(List<HomeModel> list){
         homeModelList = new ArrayList<>();
         homeModelList.addAll(list);

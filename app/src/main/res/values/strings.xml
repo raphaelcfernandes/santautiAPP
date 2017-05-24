@@ -17,6 +17,7 @@
     <string name="Endocrino">Endócrino</string>
     <string name="Infeccioso">Infeccioso</string>
     <string name="Metabolico">Metabólico</string>
+    <string name="Evolucao">Evolução</string>
     <string name="nivel_consciencia">Nível de Consciência:</string>
     <string name="escolha_opcao">Selecione um</string>
     <string name="country_prompt">Choose a country</string>

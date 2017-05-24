@@ -12,13 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import santauti.app.Activities.Ficha.Generico;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 13-May-17.
  */
 
-public class NeurologicoActivity extends AppCompatActivity{
+public class NeurologicoActivity extends Generico{
     Spinner nivelConscienciaSpinner,ramsaySpinner,rassSpinner,deficitMotorSpinner;
     Spinner aberturaOcularSpinner,respostaVerbalSpinner,respostaMotoraSpinner,pupilaReatividadeLuzSpinner;
     Spinner pupilaSimetriaSpinner,pupilaTamanhoSpinner;
@@ -29,11 +30,7 @@ public class NeurologicoActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neurologico);
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle(R.string.Neurologico);
+        setToolbar(getString(R.string.Neurologico));
         sedado_sim = (RadioButton)findViewById(R.id.sedado_sim);
         sedado_nao = (RadioButton)findViewById(R.id.sedado_nao);
         sedado_sim_layout = findViewById(R.id.sedado_sim_layout);
@@ -43,8 +40,9 @@ public class NeurologicoActivity extends AppCompatActivity{
         sedado_nao_layout.setVisibility(View.GONE);
         neurologico_opcional_layout.setVisibility(View.GONE);
         prepareNeurologicoSpinners();
-        buildIntent();
+
     }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home)
@@ -136,10 +134,5 @@ public class NeurologicoActivity extends AppCompatActivity{
         pupilaTamanhoSpinner.setAdapter(adapterPupilaTamanho);
 
 
-    }
-    private Intent buildIntent(){
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        return resultIntent;
     }
 }

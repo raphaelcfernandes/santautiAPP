@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import santauti.app.APIServices.APIService;
 import santauti.app.APIServices.RestClient;
+import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Adapters.Home.HomeAdapter;
 import santauti.app.Model.Home.HomeModel;
 import santauti.app.Model.Paciente;
@@ -52,6 +55,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     private Toolbar tbar;
     private DrawerLayout drawerLayout;
     ProgressBar progressBar;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +130,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         homeModelList.add(p);
     }
 
-    private List<HomeModel> requestPacienteList(){
+    private void requestPacienteList(){
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         APIService apiService =
@@ -145,7 +149,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                 Log.d("ERROR",t.getMessage());
             }
         });
-        return homeModelList;
     }
 
     private void prepareListaPacientes() {
@@ -158,6 +161,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
         homeAdapter = new HomeAdapter(homeModelList,this);
         recyclerView.setAdapter(homeAdapter);
+        homeAdapter.setOnItemClickListener(onItemClickListener);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -203,6 +207,41 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         }
         return filteredModelList;
     }
+
+    HomeAdapter.OnItemClickListener onItemClickListener = new HomeAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(final View view, final int position) {
+            PopupMenu popupMenu = new PopupMenu(view.getContext(), view, Gravity.NO_GRAVITY, R.attr.actionOverflowMenuStyle, 0);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_select_ficha, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("UserObject",getIntent().getExtras().getSerializable("UserObject"));
+                    intent = new Intent(view.getContext(), FichaActivity.class);
+                    intent.putExtra("idPaciente", homeModelList.get(position).getIdPaciente());
+                    intent.putExtra("responsavelRegistro", homeModelList.get(position).getResponsavelRegistro());
+                    intent.putExtras(bundle);
+                    switch (item.getItemId()) {
+                        case R.id.MnuOpc1:
+                            intent.putExtra("tipoFicha", "Diurna");
+                            view.getContext().startActivity(intent);
+                            break;
+                        case R.id.MnuOpc2:
+                            intent.putExtra("tipoFicha", "Noturna");
+                            view.getContext().startActivity(intent);
+                            break;
+                        default:
+                            return false;
+                    }
+                    return false;
+                }
+            });
+
+            popupMenu.show();
+
+        }
+    };
 
 }
 

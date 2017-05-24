@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import santauti.app.Activities.Ficha.Generico;
 import santauti.app.R;
 import santauti.app.Activities.SnackbarCreator;
 
@@ -19,7 +20,7 @@ import santauti.app.Activities.SnackbarCreator;
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class HematologicoActivity extends AppCompatActivity {
+public class HematologicoActivity extends Generico {
     private Spinner tromboprofilaxiaSpinner;
     private View tromboprofilaxia;
     private boolean visibility=false;
@@ -29,11 +30,8 @@ public class HematologicoActivity extends AppCompatActivity {
         Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tbar);
         tromboprofilaxia = findViewById(R.id.tromboprofilaxia_layout);
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setTitle(R.string.Hematologico);
-        toolbar.setDisplayHomeAsUpEnabled(true);
-        prepareHematologicoSpinners();
-        buildIntent();
+        setToolbar(getString(R.string.Hematologico));
+
     }
     private void prepareHematologicoSpinners(){
         String[] nivelConsciencia = {"Heparina Fracionada","Heparina não Fracionada"};
@@ -77,15 +75,11 @@ public class HematologicoActivity extends AppCompatActivity {
                 break;
         }
     }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home)
             finish();
         return true;
-    }
-    private Intent buildIntent(){
-        Intent resultIntent = new Intent();
-        setResult(RESULT_OK, resultIntent);
-        return resultIntent;
     }
 }
