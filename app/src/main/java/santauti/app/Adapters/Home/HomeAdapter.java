@@ -1,19 +1,11 @@
 package santauti.app.Adapters.Home;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.BundleCompat;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,11 +13,8 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-import santauti.app.Adapters.Ficha.FichaSectionAdapter;
 import santauti.app.Model.Home.HomeModel;
-import santauti.app.Model.User;
 import santauti.app.R;
-import santauti.app.Activities.Ficha.FichaActivity;
 
 /**
  * Created by Raphael Fernandes on 27-Apr-17.

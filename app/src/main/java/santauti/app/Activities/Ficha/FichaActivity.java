@@ -1,17 +1,10 @@
 package santauti.app.Activities.Ficha;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -27,8 +20,6 @@ import santauti.app.Activities.Ficha.PartesMedicas.NeurologicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
 import santauti.app.Adapters.Ficha.FichaSectionAdapter;
-import santauti.app.Model.Ficha.Metabolico;
-import santauti.app.Model.User;
 import santauti.app.R;
 
 public class FichaActivity extends Generico {

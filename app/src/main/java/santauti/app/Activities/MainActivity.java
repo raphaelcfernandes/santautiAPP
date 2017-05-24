@@ -1,4 +1,5 @@
 package santauti.app.Activities;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +13,9 @@ import android.widget.EditText;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import santauti.app.Activities.Home.HomeActivity;
 import santauti.app.APIServices.APIService;
 import santauti.app.APIServices.RestClient;
+import santauti.app.Activities.Home.HomeActivity;
 import santauti.app.Model.User;
 import santauti.app.R;
 //JSONObject json = new JSONObject(inputStreamAsString);
