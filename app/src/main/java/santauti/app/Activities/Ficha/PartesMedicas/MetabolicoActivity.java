@@ -8,7 +8,6 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 import santauti.app.Activities.Ficha.Generico;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Metabolico;
@@ -23,6 +22,7 @@ public class MetabolicoActivity extends Generico {
     private int i=0;
     private Realm realm;
     private int gasometriaArterialInput;
+    private int idFicha;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,13 @@ public class MetabolicoActivity extends Generico {
 
         gasometrialArterial = (TextInputEditText)findViewById(R.id.gasometrial_arterial);
         gasometrialArterial.addTextChangedListener(textWatcher);
+        idFicha=getIntent().getIntExtra("idFicha",0);
 
+        realm = Realm.getDefaultInstance();
+
+        if(getGasometria()!=-1) {
+            gasometrialArterial.setText(String.valueOf(getGasometria()));
+        }
     }
 
     @Override
@@ -58,34 +64,46 @@ public class MetabolicoActivity extends Generico {
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
-
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
+        public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
         @Override
         public void afterTextChanged(Editable editable) {
-            gasometriaArterialInput = (Integer.parseInt(gasometrialArterial.getText().toString()));
+            if(gasometrialArterial.getText().toString().length()>0)
+                gasometriaArterialInput = (Integer.parseInt(gasometrialArterial.getText().toString()));
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
     };
 
+    /**
+     * Verifica se existe registro da Gasometria previamente. Utilizado para setar o editText caso o usuario tenha retornado a esta ficha
+     * Caso nao exista registro, editText ficará vazio à espera de new input.
+     * @return valor da gasometria preenchido pelo usuario previamente, ou retorna -1 se nao foi preenchido
+     */
+    private int getGasometria(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getMetabolico()!=null)
+            return ficha.getMetabolico().getGasometriaArterial();
+        else
+            return -1;
+    }
+
+    /**
+     * Verifica se o editText foi preenchido, APENAS irá colorir o card se ele tiver sido preenchido
+     * Atualiza campo Metabolico ou insere novo objeto em Ficha com idFicha
+     */
     private void verificaCamposENotificaAdapter(){
         if(gasometrialArterial.getText().toString().length()>0) {
-            realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             Metabolico metabolico = realm.createObject(Metabolico.class);
             metabolico.setGasometriaArterial(gasometriaArterialInput);
-            final Ficha r = realm.where(Ficha.class).equalTo("NroAtendimento",1).findFirst();
+            Ficha r = getProperFicha();
             r.setMetabolico(metabolico);
             realm.copyToRealmOrUpdate(r);
             realm.commitTransaction();
             changeCardColor();
         }
-
     }
 }

@@ -9,6 +9,8 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 
+import io.realm.Realm;
+import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
 
 /**
@@ -42,5 +44,14 @@ public abstract class Generico extends AppCompatActivity {
     public void changeCardColor(){
         FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
         FichaActivity.adapter.notifyDataSetChanged();
+    }
+    public Ficha getProperFicha(){
+        Realm realm;
+        realm = Realm.getDefaultInstance();
+        return realm.where(Ficha.class).equalTo("NroAtendimento",getFichaId()).findFirst();
+    }
+
+    public int getFichaId(){
+        return getIntent().getIntExtra("idFicha",0);
     }
 }

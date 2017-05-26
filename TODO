@@ -12,6 +12,7 @@ HOME:
     - APÓS LOGIN, COLOCAR ICONE DE CARREGANDO LISTA
     - Criar timer para dar refresh na lista. (5 min?), interessante colocar uma barra do tempo de refresh?
 FICHA:
+    - Meu pai sugeriu mostrar as fichas como o feed do FB
     - Como fazer alteraçao de fichaAdapterModel sem ter que voltar ao FichaActivity pra selecionar um outro card
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards
     - Criar layouts:
@@ -34,10 +35,12 @@ FICHA:
         - Renal -> Done
         - Hematologico -> Done
             - Tromboprofilaxia spinner deve ficar embaixo do radio group
-        - Endocrino -> Done
-        - Infeccioso -> Done
-        - Metabolico -> Done
-
+        - Endocrino -> Layout?
+            - Backend ok. Está salvando no banco com a idFicha correto.
+        - Infeccioso -> Layout?
+            - Backend ok. Está salvando no banco com a idFicha correto.
+        - Metabolico -> Layout?
+            - Backend ok. Está salvando no banco com a idFicha correto.
 Layout partes médicas:
     - Neurologico:
         - nivel consciencia: texto (lista de opcoes) obrigatorio

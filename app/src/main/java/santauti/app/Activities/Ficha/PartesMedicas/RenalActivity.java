@@ -15,6 +15,8 @@ import santauti.app.R;
  */
 
 public class RenalActivity extends Generico {
+    RadioButton renalS,renalN;
+    private int renalChecked;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);setContentView(R.layout.activity_renal);
@@ -32,12 +34,16 @@ public class RenalActivity extends Generico {
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.renal_sim:
-                if (checked)
+                if (checked) {
                     SnackbarCreator.camposAPreencher(view);
+                    renalChecked=1;
+                }
                 break;
             case R.id.renal_nao:
-                if (checked)
+                if (checked) {
                     SnackbarCreator.avaliacaoGeradaAutomaticamente(view);
+                    renalChecked=0;
+                }
                 break;
         }
     }

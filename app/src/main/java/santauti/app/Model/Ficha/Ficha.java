@@ -20,6 +20,24 @@ public class Ficha extends RealmObject implements Serializable{
     private User user;
     private Paciente paciente;
     private Metabolico metabolico;
+    private Infeccioso infeccioso;
+    private Endocrino endocrino;
+
+    public Endocrino getEndocrino() {
+        return endocrino;
+    }
+
+    public void setEndocrino(Endocrino endocrino) {
+        this.endocrino = endocrino;
+    }
+
+    public Infeccioso getInfeccioso() {
+        return infeccioso;
+    }
+
+    public void setInfeccioso(Infeccioso infeccioso) {
+        this.infeccioso = infeccioso;
+    }
 
     public Metabolico getMetabolico() {
         return metabolico;
