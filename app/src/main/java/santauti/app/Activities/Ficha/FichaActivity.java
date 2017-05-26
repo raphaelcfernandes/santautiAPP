@@ -1,6 +1,8 @@
 package santauti.app.Activities.Ficha;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,8 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.GastrointestinalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.HematologicoActivity;
@@ -19,24 +24,28 @@ import santauti.app.Activities.Ficha.PartesMedicas.MetabolicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.NeurologicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
+import santauti.app.Adapters.Ficha.FichaAdapterModel;
 import santauti.app.Adapters.Ficha.FichaSectionAdapter;
+import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Paciente;
+import santauti.app.Model.User;
 import santauti.app.R;
 
 public class FichaActivity extends Generico {
     private RecyclerView recyclerView;
     public static FichaSectionAdapter adapter;
-    public static List<santauti.app.Model.Ficha.Ficha> fichaList;
+    public static List<FichaAdapterModel> fichaAdapterModelList;
     private Intent intent;
+    private int idCriado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha);
-
         setToolbar(this.getString(R.string.Evolucao));
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        fichaList = new ArrayList<>();
+        fichaAdapterModelList = new ArrayList<>();
         prepareFichas();
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int represnta quantos cards terão por grid
@@ -44,6 +53,60 @@ public class FichaActivity extends Generico {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
         adapter.setOnItemClickListener(onItemClickListener);
+
+        createNewFicha();
+    }
+
+
+    private void createNewFicha(){
+        int idPaciente = getIntent().getIntExtra("idPaciente",0);
+
+        Realm realm;
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+
+        final Ficha ficha = new Ficha();
+        Number currentIdNum = realm.where(Ficha.class).max("NroAtendimento");
+        idCriado = currentIdNum == null? 1 : currentIdNum.intValue()+1;
+        ficha.setNroAtendimento(idCriado);
+        Calendar c = Calendar.getInstance();
+        ficha.setDataCriado(c.getTime());
+
+        User user = realm.createObject(User.class);
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        user.setRegistro(sharedPref.getInt(getString(R.string.registroMedico),0));
+        user.setToken(sharedPref.getString("acess_token",""));
+        user.setTipoProfissional(sharedPref.getInt("tipoProfissional",0));
+
+        Paciente paciente = realm.createObject(Paciente.class);
+        paciente.setInternado(idPaciente);
+        ficha.setPaciente(paciente);
+        ficha.setUser(user);
+
+        realm.copyToRealm(ficha);
+        realm.commitTransaction();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Ficha> query = realm.where(Ficha.class).findAll();
+//        realm.executeTransaction(new Realm.Transaction(){
+//            @Override
+//            public void execute(Realm realm) {
+//                query.deleteAllFromRealm();
+//            }
+//        });
+        for (int i = 0; i<query.size(); i++) {
+            System.out.println(query.get(i));
+        }
+//        final RealmResults<Ficha> query = realm.where(Ficha.class).findAll();
+//        for (int i = 0; i<query.size(); i++) {
+//            System.out.println(query.get(i));
+//        }
+
     }
 
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
@@ -68,6 +131,7 @@ public class FichaActivity extends Generico {
             else if(position==8)
                 intent = new Intent(v.getContext(), MetabolicoActivity.class);
             intent.putExtra("Position",position);
+            intent.putExtra("idFicha",idCriado);
             startActivityForResult(intent,position);
         }
     };
@@ -84,34 +148,34 @@ public class FichaActivity extends Generico {
                 R.drawable.cell,
                 R.drawable.exercise};
 
-        santauti.app.Model.Ficha.Ficha a = new santauti.app.Model.Ficha.Ficha("Neurologico",covers[0],0);
-        fichaList.add(a);
+        FichaAdapterModel a = new FichaAdapterModel("Neurologico",covers[0],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Hemodinamico",covers[1],0);
-        fichaList.add(a);
+        a = new FichaAdapterModel("Hemodinamico",covers[1],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Respiratorio", covers[2],0);
-        fichaList.add(a);
+        a = new FichaAdapterModel("Respiratorio", covers[2],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Gastrointestinal", covers[3],0);
-        fichaList.add(a);
+        a = new FichaAdapterModel("Gastrointestinal", covers[3],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Renal", covers[4],0);
-        fichaList.add(a);
+        a = new FichaAdapterModel("Renal", covers[4],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Hematologico", covers[5],0);
-        fichaList.add(a);
+        a = new FichaAdapterModel("Hematologico", covers[5],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Endocrino", covers[6],0);
-        fichaList.add(a);
+        a = new FichaAdapterModel("Endocrino", covers[6],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Infeccioso", covers[7],0);
-        fichaList.add(a);
+        a = new FichaAdapterModel("Infeccioso", covers[7],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8],0);
-        fichaList.add(a);
+        a = new FichaAdapterModel("Metabolico", covers[8],0);
+        fichaAdapterModelList.add(a);
 
-        adapter = new FichaSectionAdapter(this, fichaList);
+        adapter = new FichaSectionAdapter(this, fichaAdapterModelList);
         recyclerView.setAdapter(adapter);
 
     }

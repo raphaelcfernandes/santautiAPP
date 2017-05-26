@@ -1,7 +1,9 @@
 package santauti.app.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -50,12 +52,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public final void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                         if(response.code()==200 && response.body().getTipoProfissional()>1){
-                            setUser(response.body().getToken(),response.body().getTipoProfissional(),
-                                    response.body().getRegistro());
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("UserObject",user);
+
                             Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                            intent.putExtras(bundle);
+
+                            SharedPreferences sharedPref = getSharedPreferences(v.getContext().getString(R.string.sharedPrefecences),Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(v.getContext().getString(R.string.acess_token),response.body().getToken());
+                            editor.putInt(v.getContext().getString(R.string.registroMedico),response.body().getRegistro());
+                            editor.putInt("tipoProfissional",response.body().getTipoProfissional());
+                            editor.apply();
+
+                            //intent.putExtras(bundle);
                             startActivity(intent);
                         }
                         else if(response.code()==200 && response.body().getTipoProfissional()==1)

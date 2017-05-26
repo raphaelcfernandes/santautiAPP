@@ -4,11 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Raphael Fernandes on 23-May-17.
  */
 
-public class Paciente implements Serializable {
+public class Paciente extends RealmObject implements Serializable {
     @SerializedName("ID")
     private int ID;
     @SerializedName("Leito")
@@ -25,6 +27,12 @@ public class Paciente implements Serializable {
     private int Responsavel;
     @SerializedName("Nome")
     private String Nome;
+    @SerializedName("Sobrenome")
+    private String Sobrenome;
+    @SerializedName("NomeMedico")
+    private String NomeMedico;
+    @SerializedName("SobrenomeMedico")
+    private String SobrenomeMedico;
 
     public String getNome() {
         return Nome;
@@ -33,13 +41,6 @@ public class Paciente implements Serializable {
     public void setNome(String nome) {
         Nome = nome;
     }
-
-    @SerializedName("Sobrenome")
-    private String Sobrenome;
-    @SerializedName("NomeMedico")
-    private String NomeMedico;
-    @SerializedName("SobrenomeMedico")
-    private String SobrenomeMedico;
 
     public int getInternado() {
         return Internado;

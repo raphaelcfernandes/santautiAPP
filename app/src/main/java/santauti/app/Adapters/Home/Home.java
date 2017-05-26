@@ -13,18 +13,17 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-import santauti.app.Model.Home.HomeModel;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 27-Apr-17.
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class Home extends RecyclerView.Adapter<Home.ViewHolder> {
     private List<HomeModel> homeModelList;
     private Context mContext;
     private OnItemClickListener mItemClickListener;
-    public HomeAdapter(List<HomeModel> homeModelList,Context context){
+    public Home(List<HomeModel> homeModelList, Context context){
         this.homeModelList = homeModelList;
         this.mContext = context;
     }
@@ -55,7 +54,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
-    public void setOnItemClickListener(final HomeAdapter.OnItemClickListener mItemClickListener) {
+    public void setOnItemClickListener(final Home.OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
     public void updateList(List<HomeModel> list){
@@ -65,7 +64,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     @Override
-    public HomeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Home.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pacientes_view,parent,false);
         return new ViewHolder(itemView);
     }

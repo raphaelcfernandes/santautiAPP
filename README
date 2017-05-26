@@ -24,7 +24,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Adapters.Ficha.FichaAdapterModel;
 import santauti.app.R;
 import santauti.app.View.Ficha.PartesMedicas.Endocrino;
 import santauti.app.View.Ficha.PartesMedicas.Gastrointestinal;
@@ -42,13 +42,13 @@ import santauti.app.View.Ficha.PartesMedicas.Respiratorio;
 
 public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.ViewHolder>{
     private Context mContext;
-    private List<Ficha> fichaList;
+    private List<Ficha> fichaAdapterModelList;
     private Intent intent;
     private int position;
 
-    public FichaSectionAdapter(Context context, List<Ficha> fichaList){
+    public FichaSectionAdapter(Context context, List<Ficha> fichaAdapterModelList){
         this.mContext = context;
-        this.fichaList = fichaList;
+        this.fichaAdapterModelList = fichaAdapterModelList;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -71,10 +71,10 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Ficha ficha = fichaList.get(position);
-        holder.title.setText(ficha.getName());
-        Glide.with(mContext).load(ficha.getThumbnail()).into(holder.thumbnail);
-        if(fichaList.get(position).getColor()==1)
+        Ficha fichaAdapterModel = fichaAdapterModelList.get(position);
+        holder.title.setText(fichaAdapterModel.getName());
+        Glide.with(mContext).load(fichaAdapterModel.getThumbnail()).into(holder.thumbnail);
+        if(fichaAdapterModelList.get(position).getColor()==1)
             holder.cardView.setBackgroundResource(R.color.light_green);
         holder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +104,7 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
 
     @Override
     public int getItemCount() {
-        return fichaList.size();
+        return fichaAdapterModelList.size();
     }
 }
 
@@ -129,7 +129,7 @@ import santauti.app.R;
 public class Ficha extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FichaSectionAdapter adapter;
-    private List<santauti.app.Model.Ficha.Ficha> fichaList; //albumList
+    private List<santauti.app.Adapters.Ficha.FichaAdapterModel> fichaAdapterModelList; //albumList
     private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,8 +138,8 @@ public class Ficha extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        fichaList = new ArrayList<>();
-        adapter = new FichaSectionAdapter(this, fichaList);
+        fichaAdapterModelList = new ArrayList<>();
+        adapter = new FichaSectionAdapter(this, fichaAdapterModelList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int represnta quantos cards terão por grid
         recyclerView.setLayoutManager(mLayoutManager);
@@ -161,32 +161,32 @@ public class Ficha extends AppCompatActivity {
                 R.drawable.cell,
                 R.drawable.exercise};
 
-        santauti.app.Model.Ficha.Ficha a = new santauti.app.Model.Ficha.Ficha("Neurologico",covers[0],0);
-        fichaList.add(a);
+        santauti.app.Adapters.Ficha.FichaAdapterModel a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Neurologico",covers[0],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Hemodinamico",covers[1],0);
-        fichaList.add(a);
+        a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Hemodinamico",covers[1],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Respiratorio", covers[2],0);
-        fichaList.add(a);
+        a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Respiratorio", covers[2],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Gastrointestinal", covers[3],0);
-        fichaList.add(a);
+        a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Gastrointestinal", covers[3],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Renal", covers[4],0);
-        fichaList.add(a);
+        a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Renal", covers[4],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Hematologico", covers[5],0);
-        fichaList.add(a);
+        a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Hematologico", covers[5],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Endocrino", covers[6],0);
-        fichaList.add(a);
+        a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Endocrino", covers[6],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Infeccioso", covers[7],0);
-        fichaList.add(a);
+        a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Infeccioso", covers[7],0);
+        fichaAdapterModelList.add(a);
 
-        a = new santauti.app.Model.Ficha.Ficha("Metabolico", covers[8],0);
-        fichaList.add(a);
+        a = new santauti.app.Adapters.Ficha.FichaAdapterModel("Metabolico", covers[8],0);
+        fichaAdapterModelList.add(a);
 
         adapter.notifyDataSetChanged();
     }
@@ -194,7 +194,7 @@ public class Ficha extends AppCompatActivity {
     //@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode==RESULT_OK){
-            fichaList.get(requestCode).setColor(1);
+            fichaAdapterModelList.get(requestCode).setColor(1);
             adapter.notifyDataSetChanged();
         }
         //super.onActivityResult(requestCode, resultCode, data);
@@ -206,7 +206,7 @@ public class Ficha extends AppCompatActivity {
 //                    position = data.getIntExtra("Position", position);
 //                }
 //                if(position != -1) {
-//                    fichaList.get(position).setColor(1);
+//                    fichaAdapterModelList.get(position).setColor(1);
 //                    adapter.notifyDataSetChanged();
 //
 //                }else{

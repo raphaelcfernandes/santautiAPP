@@ -40,7 +40,7 @@ public abstract class Generico extends AppCompatActivity {
     }
 
     public void changeCardColor(){
-        FichaActivity.fichaList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
+        FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
         FichaActivity.adapter.notifyDataSetChanged();
     }
 }

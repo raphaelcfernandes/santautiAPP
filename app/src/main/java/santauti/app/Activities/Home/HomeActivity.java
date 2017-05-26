@@ -1,5 +1,6 @@
 package santauti.app.Activities.Home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,27 +34,28 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import santauti.app.APIServices.APIService;
 import santauti.app.APIServices.RestClient;
 import santauti.app.Activities.Ficha.FichaActivity;
-import santauti.app.Adapters.Home.HomeAdapter;
-import santauti.app.Model.Home.HomeModel;
+import santauti.app.Adapters.Home.Home;
+import santauti.app.Adapters.Home.HomeModel;
 import santauti.app.Model.Paciente;
-import santauti.app.Model.User;
 import santauti.app.R;
 
 public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private RecyclerView recyclerView;
-    private HomeAdapter homeAdapter;
+    private Home home;
     private List<HomeModel> homeModelList = null;
     private Toolbar tbar;
     private DrawerLayout drawerLayout;
     ProgressBar progressBar;
     private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +63,11 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         tbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tbar);
         initNavigationDrawer();
-
+//        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences),Context.MODE_PRIVATE);
+//
+//        System.out.println(sharedPref.getString("acess_token",""));
+//        System.out.println(sharedPref.getInt(getString(R.string.registroMedico),0));
+//        System.out.println(sharedPref.getInt("tipoProfissional",0));
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -129,11 +135,10 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     private void requestPacienteList(){
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
         APIService apiService =
                 RestClient.getClient(this).create(APIService.class);
-        Call<List<Paciente>> call = apiService.getPacientes(((User) bundle.getSerializable("UserObject")).getToken());
+        Call<List<Paciente>> call = apiService.getPacientes(getSharedPreferences(getString(R.string.sharedPrefecences),
+                Context.MODE_PRIVATE).getString("acess_token",""));
         call.enqueue(new Callback<List<Paciente>>() {
             @Override
             public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response) {
@@ -157,9 +162,9 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
-        homeAdapter = new HomeAdapter(homeModelList,this);
-        recyclerView.setAdapter(homeAdapter);
-        homeAdapter.setOnItemClickListener(onItemClickListener);
+        home = new Home(homeModelList,this);
+        recyclerView.setAdapter(home);
+        home.setOnItemClickListener(onItemClickListener);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -171,7 +176,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                 new MenuItemCompat.OnActionExpandListener() {
                     @Override
                     public boolean onMenuItemActionCollapse(MenuItem item) {
-                        homeAdapter.updateList(homeModelList);
+                        home.updateList(homeModelList);
                         return true; // Return true to collapse action view
                     }
                     @Override
@@ -190,7 +195,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextChange(String query) {
         final List<HomeModel> filteredModelList = filter(homeModelList, query);
 
-        homeAdapter.updateList(filteredModelList);
+        home.updateList(filteredModelList);
         return false;
     }
 
@@ -206,7 +211,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         return filteredModelList;
     }
 
-    HomeAdapter.OnItemClickListener onItemClickListener = new HomeAdapter.OnItemClickListener() {
+    Home.OnItemClickListener onItemClickListener = new Home.OnItemClickListener() {
         @Override
         public void onItemClick(final View view, final int position) {
             PopupMenu popupMenu = new PopupMenu(view.getContext(), view, Gravity.NO_GRAVITY, R.attr.actionOverflowMenuStyle, 0);
@@ -214,12 +219,8 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("UserObject",getIntent().getExtras().getSerializable("UserObject"));
                     intent = new Intent(view.getContext(), FichaActivity.class);
                     intent.putExtra("idPaciente", homeModelList.get(position).getIdPaciente());
-                    intent.putExtra("responsavelRegistro", homeModelList.get(position).getResponsavelRegistro());
-                    intent.putExtras(bundle);
                     switch (item.getItemId()) {
                         case R.id.MnuOpc1:
                             intent.putExtra("tipoFicha", "Diurna");

@@ -4,11 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Raphael Fernandes on 24-May-17.
  */
 
-public class Metabolico implements Serializable{
+public class Metabolico extends RealmObject implements Serializable{
     @SerializedName("gasometriaArterial")
     private int gasometriaArterial;
 

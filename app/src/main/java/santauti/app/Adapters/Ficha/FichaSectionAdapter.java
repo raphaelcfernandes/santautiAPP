@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
 
 /**
@@ -22,12 +21,12 @@ import santauti.app.R;
 
 public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapter.ViewHolder>{
     private Context mContext;
-    private List<Ficha> fichaList;
+    private List<FichaAdapterModel> fichaAdapterModelList;
     private OnItemClickListener mItemClickListener;
 
-    public FichaSectionAdapter(Context context, List<Ficha> fichaList){
+    public FichaSectionAdapter(Context context, List<FichaAdapterModel> fichaAdapterModelList){
         this.mContext = context;
-        this.fichaList = fichaList;
+        this.fichaAdapterModelList = fichaAdapterModelList;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -70,15 +69,15 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Ficha ficha = fichaList.get(position);
-        holder.title.setText(ficha.getName());
-        Glide.with(mContext).load(ficha.getThumbnail()).into(holder.thumbnail);
-        if(fichaList.get(position).getColor()==1)
+        FichaAdapterModel fichaAdapterModel = fichaAdapterModelList.get(position);
+        holder.title.setText(fichaAdapterModel.getName());
+        Glide.with(mContext).load(fichaAdapterModel.getThumbnail()).into(holder.thumbnail);
+        if(fichaAdapterModelList.get(position).getColor()==1)
             holder.cardView.setBackgroundResource(R.color.light_green);
     }
 
     @Override
     public int getItemCount() {
-        return fichaList.size();
+        return fichaAdapterModelList.size();
     }
 }

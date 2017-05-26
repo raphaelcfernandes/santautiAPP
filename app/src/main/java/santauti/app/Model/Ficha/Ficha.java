@@ -1,43 +1,63 @@
 package santauti.app.Model.Ficha;
 
+import java.io.Serializable;
+import java.util.Date;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import santauti.app.Model.Paciente;
+import santauti.app.Model.User;
+
 /**
- * Created by Raphael Fernandes on 25-Apr-17.
+ * Created by Raphael Fernandes on 25-May-17.
  */
 
-@SuppressWarnings("DefaultFileTemplate")
-public class Ficha {
-    private String name;
-    private int thumbnail;
-    private int color;
+public class Ficha extends RealmObject implements Serializable{
 
-    public int getColor() {
-        return color;
+    @PrimaryKey
+    private int NroAtendimento;
+    private Date dataCriado;
+    private User user;
+    private Paciente paciente;
+    private Metabolico metabolico;
+
+    public Metabolico getMetabolico() {
+        return metabolico;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setMetabolico(Metabolico metabolico) {
+        this.metabolico = metabolico;
     }
 
-    public Ficha(String name, int thumbnail, int color) {
-        this.name = name;
-        this.thumbnail = thumbnail;
-        this.color = color;
-
+    public int getNroAtendimento() {
+        return NroAtendimento;
     }
 
-    public String getName() {
-        return name;
+    public void setNroAtendimento(int nroAtendimento) {
+        NroAtendimento = nroAtendimento;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Date getDataCriado() {
+        return dataCriado;
     }
 
-    public int getThumbnail() {
-        return thumbnail;
+    public void setDataCriado(Date dataCriado) {
+        this.dataCriado = dataCriado;
     }
 
-    public void setThumbnail(int thumbnail) {
-        this.thumbnail = thumbnail;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 }
