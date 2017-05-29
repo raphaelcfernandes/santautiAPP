@@ -18,7 +18,6 @@ FICHA:
     - Criar layouts:
         - Neurologico -> Done
             - Arrumar disposiçao de itens
-            - Nao está aparecendo opçao padrao nos Spinner
             - Deficit Motor:
                 - Presente: paresia ou plegia, lado esquerdo ou direito. (Criar um bonequinho clicavel direito/esquerdo)
             - Pupila -> OBS: Quando anisocóricas, sempre anotar a pupila maior em relação à menor - pupilas anisocóricas, esquerda maior que direita (E> D).
@@ -31,10 +30,12 @@ FICHA:
         - Hemodinamico -> Done
             - Ritmo aritmico e ritmico possuem diversas opçoes
         - Respiratorio -> Done
-        - Gastrointestinal -> Done
-        - Renal -> Done
-        - Hematologico -> Done
-            - Tromboprofilaxia spinner deve ficar embaixo do radio group
+        - Gastrointestinal -> Layout?
+            - Backend ok. Está salvando no banco com a idFicha correto.
+        - Renal -> Layout?
+            - Backend ok. Está salvando no banco com a idFicha correto.
+        - Hematologico -> Layout?
+            - Backend ok. Está salvando no banco com a idFicha correto.
         - Endocrino -> Layout?
             - Backend ok. Está salvando no banco com a idFicha correto.
         - Infeccioso -> Layout?

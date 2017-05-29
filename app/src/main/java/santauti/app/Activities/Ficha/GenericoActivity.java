@@ -17,7 +17,8 @@ import santauti.app.R;
  * Created by Raphael Fernandes on 24-May-17.
  */
 
-public abstract class Generico extends AppCompatActivity {
+public abstract class GenericoActivity extends AppCompatActivity {
+    public String defaultSpinnerString = "Selecione um item...";
     @Override
     public void onBackPressed(){
         finish();
@@ -45,6 +46,7 @@ public abstract class Generico extends AppCompatActivity {
         FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
         FichaActivity.adapter.notifyDataSetChanged();
     }
+
     public Ficha getProperFicha(){
         Realm realm;
         realm = Realm.getDefaultInstance();

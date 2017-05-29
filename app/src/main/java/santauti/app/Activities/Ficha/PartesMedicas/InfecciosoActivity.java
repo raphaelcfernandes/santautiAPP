@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import io.realm.Realm;
-import santauti.app.Activities.Ficha.Generico;
+import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Infeccioso;
 import santauti.app.R;
@@ -17,9 +17,8 @@ import santauti.app.R;
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class InfecciosoActivity extends Generico {
+public class InfecciosoActivity extends GenericoActivity {
     private Realm realm;
-    private int idFicha;
     private int infeccioso;
     RadioButton infecciosoSim,infecciosoNao;
 
@@ -29,7 +28,6 @@ public class InfecciosoActivity extends Generico {
         setContentView(R.layout.activity_infeccioso);
         setToolbar(getString(R.string.Infeccioso));
 
-        idFicha=getIntent().getIntExtra("idFicha",0);
         realm = Realm.getDefaultInstance();
 
         infecciosoSim = (RadioButton)findViewById(R.id.infeccioso_sim);

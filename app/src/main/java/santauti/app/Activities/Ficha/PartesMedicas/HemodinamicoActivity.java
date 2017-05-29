@@ -8,14 +8,14 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import santauti.app.Activities.Ficha.Generico;
+import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 10-May-17.
  */
 
-public class HemodinamicoActivity extends Generico{
+public class HemodinamicoActivity extends GenericoActivity {
     Spinner ritmo,bulhas;
     RadioButton hemodinamico_opcional_sim,hemodinamico_opcional_nao;
     private View hemodinamico_opcional_layout;

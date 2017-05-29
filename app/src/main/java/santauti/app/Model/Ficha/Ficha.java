@@ -22,6 +22,33 @@ public class Ficha extends RealmObject implements Serializable{
     private Metabolico metabolico;
     private Infeccioso infeccioso;
     private Endocrino endocrino;
+    private Renal renal;
+    private Hematologico hematologico;
+    private Gastrointestinal gastrointestinal;
+
+    public Gastrointestinal getGastrointestinal() {
+        return gastrointestinal;
+    }
+
+    public void setGastrointestinal(Gastrointestinal gastrointestinal) {
+        this.gastrointestinal = gastrointestinal;
+    }
+
+    public Hematologico getHematologico() {
+        return hematologico;
+    }
+
+    public void setHematologico(Hematologico hematologico) {
+        this.hematologico = hematologico;
+    }
+
+    public Renal getRenal() {
+        return renal;
+    }
+
+    public void setRenal(Renal renal) {
+        this.renal = renal;
+    }
 
     public Endocrino getEndocrino() {
         return endocrino;

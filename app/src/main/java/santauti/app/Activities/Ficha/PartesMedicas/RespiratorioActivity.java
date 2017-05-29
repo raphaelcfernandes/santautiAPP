@@ -8,14 +8,14 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import santauti.app.Activities.Ficha.Generico;
+import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class RespiratorioActivity extends Generico{
+public class RespiratorioActivity extends GenericoActivity {
     private View invasivoView, naoInvasivoView;
     Spinner respiratorioSpinner;
     @Override

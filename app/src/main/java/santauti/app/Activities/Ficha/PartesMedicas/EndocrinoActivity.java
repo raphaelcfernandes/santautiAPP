@@ -8,17 +8,16 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import io.realm.Realm;
-import santauti.app.Activities.Ficha.Generico;
+import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Endocrino;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Infeccioso;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class EndocrinoActivity extends Generico {
+public class EndocrinoActivity extends GenericoActivity {
     private int usoInsulinaBombaInfusao;
     private Realm realm;
     private RadioButton endocrinoS,endocrinoN;

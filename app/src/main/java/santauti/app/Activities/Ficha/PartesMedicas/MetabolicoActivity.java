@@ -8,7 +8,7 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 
 import io.realm.Realm;
-import santauti.app.Activities.Ficha.Generico;
+import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.R;
@@ -17,7 +17,7 @@ import santauti.app.R;
  * Created by Raphael Fernandes on 15-May-17.
  */
 
-public class MetabolicoActivity extends Generico {
+public class MetabolicoActivity extends GenericoActivity {
     TextInputEditText gasometrialArterial;
     private int i=0;
     private Realm realm;

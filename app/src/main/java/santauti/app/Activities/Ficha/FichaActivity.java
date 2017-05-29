@@ -31,12 +31,13 @@ import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 import santauti.app.R;
 
-public class FichaActivity extends Generico {
+public class FichaActivity extends GenericoActivity {
     private RecyclerView recyclerView;
     public static FichaSectionAdapter adapter;
     public static List<FichaAdapterModel> fichaAdapterModelList;
     private Intent intent;
     private int idCriado;
+    private Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +55,15 @@ public class FichaActivity extends Generico {
         recyclerView.setHasFixedSize(true);
         adapter.setOnItemClickListener(onItemClickListener);
 
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
+
         createNewFicha();
     }
 
 
     private void createNewFicha(){
         int idPaciente = getIntent().getIntExtra("idPaciente",0);
-
-        Realm realm;
-        Realm.init(this);
-        realm = Realm.getDefaultInstance();
         realm.beginTransaction();
 
         final Ficha ficha = new Ficha();
@@ -86,6 +86,12 @@ public class FichaActivity extends Generico {
 
         realm.copyToRealm(ficha);
         realm.commitTransaction();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
     @Override
@@ -179,4 +185,5 @@ public class FichaActivity extends Generico {
         recyclerView.setAdapter(adapter);
 
     }
+
 }

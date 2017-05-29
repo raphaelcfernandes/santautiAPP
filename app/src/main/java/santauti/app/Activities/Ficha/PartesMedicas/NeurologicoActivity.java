@@ -8,14 +8,14 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import santauti.app.Activities.Ficha.Generico;
+import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 13-May-17.
  */
 
-public class NeurologicoActivity extends Generico{
+public class NeurologicoActivity extends GenericoActivity {
     Spinner nivelConscienciaSpinner,ramsaySpinner,rassSpinner,deficitMotorSpinner;
     Spinner aberturaOcularSpinner,respostaVerbalSpinner,respostaMotoraSpinner,pupilaReatividadeLuzSpinner;
     Spinner pupilaSimetriaSpinner,pupilaTamanhoSpinner;

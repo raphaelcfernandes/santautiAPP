@@ -36,7 +36,7 @@
                 android:text="Sim"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <RadioButton
-                android:id="@+id/hematologico_profilaxia_sim"
+                android:id="@+id/tromboprofilaxia_sim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="hematologicoProfilaxiaOnRadioButtonClicked" />
@@ -48,7 +48,7 @@
                 android:text="Não"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <RadioButton
-                android:id="@+id/hematologico_profilaxia_nao"
+                android:id="@+id/tromboprofilaxia_nao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="hematologicoProfilaxiaOnRadioButtonClicked" />
@@ -61,17 +61,18 @@
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:visibility="gone"
-        android:id="@+id/tromboprofilaxia_layout">
+        android:id="@+id/tromboprofilaxia_layout" >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nivel_consciencia"
+            android:text="Tipo medicamento: "
             android:textAppearance="?android:attr/textAppearanceMedium" />
         <Spinner
             android:id="@+id/tromboprofilaxia_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
+
             android:gravity="center"
             />
     </LinearLayout>
@@ -108,7 +109,7 @@
                 android:text="Sim"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <RadioButton
-                android:id="@+id/hematologico_sim"
+                android:id="@+id/hemograma_sim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="hematologicoOnRadioButtonClicked" />
@@ -120,7 +121,7 @@
                 android:text="Não"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <RadioButton
-                android:id="@+id/hematologico_nao"
+                android:id="@+id/hemograma_nao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="hematologicoOnRadioButtonClicked" />
