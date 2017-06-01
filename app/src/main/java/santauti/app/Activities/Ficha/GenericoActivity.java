@@ -1,6 +1,7 @@
 package santauti.app.Activities.Ficha;
 
 import android.graphics.Color;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -55,5 +56,9 @@ public abstract class GenericoActivity extends AppCompatActivity {
 
     public int getFichaId(){
         return getIntent().getIntExtra("idFicha",0);
+    }
+
+    public boolean isTextInpudEditTextEmpty(TextInputEditText etText) {
+        return etText.getText().toString().trim().length() == 0;
     }
 }

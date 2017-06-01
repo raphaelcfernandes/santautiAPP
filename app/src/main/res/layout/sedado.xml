@@ -39,4 +39,13 @@
             android:id="@+id/sedado_nao"
             android:onClick="neuroligicoSedadoOnRadioButtonClicked"/>
     </RadioGroup>
+    <ImageView
+        android:id="@+id/sedadoToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:contentDescription="image_desc"
+        android:layout_marginStart="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_action_name" />
 </LinearLayout>

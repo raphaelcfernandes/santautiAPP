@@ -48,6 +48,7 @@ public class GastrointestinalActivity extends GenericoActivity {
                 vcmPresente.setChecked(true);
             else
                 vcmAusente.setChecked(true);
+
             spinnerPosition = adapterFormato.getPosition(ficha.getGastrointestinal().getFormato());
             formatoSpinner.setSelection(spinnerPosition);
 

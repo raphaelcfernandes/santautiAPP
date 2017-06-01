@@ -5,6 +5,7 @@ import java.util.Date;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import santauti.app.Model.Ficha.Respiratorio.Respiratorio;
 import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 
@@ -25,6 +26,15 @@ public class Ficha extends RealmObject implements Serializable{
     private Renal renal;
     private Hematologico hematologico;
     private Gastrointestinal gastrointestinal;
+    private Respiratorio respiratorio;
+
+    public Respiratorio getRespiratorio() {
+        return respiratorio;
+    }
+
+    public void setRespiratorio(Respiratorio respiratorio) {
+        this.respiratorio = respiratorio;
+    }
 
     public Gastrointestinal getGastrointestinal() {
         return gastrointestinal;

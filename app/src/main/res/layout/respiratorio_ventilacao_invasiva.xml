@@ -3,24 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/ventilacao_invasiva">
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" android:paddingTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/respiratorio_volume"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volume: "
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:inputType="number"
-            />
-    </LinearLayout>
+            android:hint="Volume"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,83 +33,68 @@
             android:gravity="center"
             />
     </LinearLayout>
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" android:paddingTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/respiratorio_fio2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FiO2 (%): "
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-        <EditText
-            android:id="@+id/fio2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:inputType="number"
-            />
-    </LinearLayout>
-    <LinearLayout
+            android:hint="FiO2 (%)"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" android:paddingTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/freq_respiratoria"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Frequência Respiratória: "
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-        <EditText
-            android:id="@+id/freq_resp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:inputType="number"
-            />
-    </LinearLayout>
-    <LinearLayout
+            android:hint="Frequência Respiratória"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" android:paddingTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/respiratorio_peep"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PEEP: "
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-        <EditText
-            android:id="@+id/peep"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:inputType="number"
-            />
-    </LinearLayout>
-    <LinearLayout
+            android:hint="PEEP"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" android:paddingTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/respiratorio_pressaoCuff"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pressão do Cuff: "
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-        <EditText
-            android:id="@+id/pressao_cuff"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:inputType="number"
-            />
-    </LinearLayout>
+            android:hint="Pressão Cuff"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
 </LinearLayout>
-<!--ventilacao invasiva-->
-<!-- - Volume: numerico-->
-<!-- - Modo ventilatorio: (lista)-->
-<!-- - FIO2: percentual-->
-<!-- - Freq respiratoria: numerico-->
-<!-- - PEEP: numerico-->
-<!-- - pressao do cuff: numerico (só se estiver sobre ventialcao invasiva)-->
+    <!--<android.support.design.widget.TextInputLayout-->
+    <!--android:id="@+id/full_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="10dp">-->
+
+    <!--<android.support.design.widget.TextInputEditText-->
+    <!--android:id="@+id/gasometrial_arterial"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:ems="10"-->
+    <!--android:hint="Gasometria arterial"-->
+    <!--android:inputType="number" />-->
+
+    <!--</android.support.design.widget.TextInputLayout>-->

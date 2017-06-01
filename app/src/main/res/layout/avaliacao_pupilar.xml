@@ -3,68 +3,113 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Avaliação Pupilar"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tamanho"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        <TextView
+            android:text="Avaliação Pupilar"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/avaliacaoToggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Simetria"
-            android:paddingStart="60dp"
-            android:paddingEnd="10dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reatividade a Luz"
-            android:paddingStart="50dp"
-            android:paddingEnd="10dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_centerInParent="true"
+            android:contentDescription="image_desc"
+            android:layout_marginStart="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_action_name" />
+
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp">
-        <Spinner
-            android:id="@+id/pupila_tamanho_spinner"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:id="@+id/avaliacaoPupilar"
+        android:animateLayoutChanges="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tamanho"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:prompt="@string/country_prompt"
-            android:textColorHint="@color/colorPrimary"
-            />
-        <Spinner
-            android:id="@+id/pupila_simetria_spinner"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+            <Spinner
+                android:id="@+id/pupila_tamanho_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Simetria"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="40dp"
-            android:paddingEnd="10dp"
-            android:prompt="@string/country_prompt"
-            android:textColorHint="@color/colorPrimary"
-            android:gravity="center"
-            />
-        <Spinner
-            android:id="@+id/pupila_reatividade_spinner"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+            <Spinner
+                android:id="@+id/pupila_simetria_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reatividade a Luz"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="30dp"
-            android:paddingEnd="10dp"
-            android:prompt="@string/country_prompt"
-            android:textColorHint="@color/colorPrimary"
-            android:gravity="center"
-            />
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+            <Spinner
+                android:id="@+id/pupila_reatividade_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
     </LinearLayout>
+
 
 </LinearLayout>
