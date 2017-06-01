@@ -36,6 +36,7 @@ public class RespiratorioActivity extends GenericoActivity {
     private Realm realm;
     private ArrayAdapter<String> adapterRespiratorio;
     private Ficha ficha;
+    private MyAnimation myAnimation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,7 @@ public class RespiratorioActivity extends GenericoActivity {
         prepareRespiratorioNaoInvasivo();
 
 
+        myAnimation = new MyAnimation();
         realm = Realm.getDefaultInstance();
         ficha = getProperFicha();
         if(ficha.getRespiratorio()!=null){
@@ -234,12 +236,10 @@ public class RespiratorioActivity extends GenericoActivity {
                         preencherInvasivo();
                     else {
                         if(naoInvasivoView.isShown()) {
-                            MyAnimation.slide_up(this, naoInvasivoView);
-                            naoInvasivoView.setVisibility(View.GONE);
+                            myAnimation.slide_up(this, naoInvasivoView);
                         }
                         if(!invasivoView.isShown()) {
-                            MyAnimation.slide_down(this, invasivoView);
-                            invasivoView.setVisibility(View.VISIBLE);
+                            myAnimation.slide_down(this, invasivoView);
                         }
 
                     }
@@ -252,11 +252,9 @@ public class RespiratorioActivity extends GenericoActivity {
                         preencherNaoInvasivo();
                     else{
                         if(invasivoView.isShown()) {
-                            MyAnimation.slide_up(this, invasivoView);
-                            invasivoView.setVisibility(View.GONE);
+                            myAnimation.slide_up(this, invasivoView);
                         }
-                        MyAnimation.slide_down(this, naoInvasivoView);
-                        naoInvasivoView.setVisibility(View.VISIBLE);
+                        myAnimation.slide_down(this, naoInvasivoView);
                     }
                 }
                 break;

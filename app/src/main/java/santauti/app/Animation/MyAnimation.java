@@ -13,31 +13,33 @@ import santauti.app.R;
  */
 
 public class MyAnimation {
-    private static int rotationAngle = 0;
-    public static void rotateImageView180(ImageView v){
+    private int rotationAngle = 0;
+    public void rotateImageView180(ImageView v){
         ObjectAnimator anim = ObjectAnimator.ofFloat(v, "rotation",rotationAngle, rotationAngle + 180);
         anim.setDuration(500);
         anim.start();
         rotationAngle += 180;
         rotationAngle = rotationAngle%360;
     }
-    public static void slide_down(Context ctx, View v) {
+    public void slide_down(Context ctx, View v) {
         android.view.animation.Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_down);
         if (a != null) {
             a.reset();
             if (v != null) {
                 v.clearAnimation();
                 v.startAnimation(a);
+                v.setVisibility(View.VISIBLE);
             }
         }
     }
-    public static void slide_up(Context ctx, View v) {
+    public void slide_up(Context ctx, View v) {
         android.view.animation.Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_up);
         if (a != null) {
             a.reset();
             if (v != null) {
                 v.clearAnimation();
                 v.startAnimation(a);
+                v.setVisibility(View.GONE);
             }
         }
     }

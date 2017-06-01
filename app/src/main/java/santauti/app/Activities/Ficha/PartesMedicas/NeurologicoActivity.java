@@ -26,6 +26,7 @@ import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Metabolico;
+import santauti.app.Model.Ficha.Neurologico.Neurologico;
 import santauti.app.R;
 
 /**
@@ -40,6 +41,7 @@ public class NeurologicoActivity extends GenericoActivity {
     private View sedado_sim_layout,sedado_nao_layout,neurologico_opcional_layout,avaliacaoPupilarLayout;
     private Realm realm;
     private ImageView avaliacaoPupilarToggleButton,sedadoToggleButton;
+    private MyAnimation myAnimation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,17 +61,20 @@ public class NeurologicoActivity extends GenericoActivity {
         sedado_nao_layout.setVisibility(View.GONE);
         neurologico_opcional_layout.setVisibility(View.GONE);
 
+        myAnimation = new MyAnimation();
+
         avaliacaoPupilarToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyAnimation.rotateImageView180(avaliacaoPupilarToggleButton);
+                myAnimation.rotateImageView180(avaliacaoPupilarToggleButton);
+
                 if(avaliacaoPupilarLayout.isShown()){
-                    MyAnimation.slide_up(NeurologicoActivity.this,avaliacaoPupilarLayout);
+                    myAnimation.slide_up(NeurologicoActivity.this,avaliacaoPupilarLayout);
                     avaliacaoPupilarLayout.setVisibility(View.GONE);
 
                 }
                 else{
-                    MyAnimation.slide_down(NeurologicoActivity.this, avaliacaoPupilarLayout);
+                    myAnimation.slide_down(NeurologicoActivity.this, avaliacaoPupilarLayout);
                     avaliacaoPupilarLayout.setVisibility(View.VISIBLE);
                 }
             }
