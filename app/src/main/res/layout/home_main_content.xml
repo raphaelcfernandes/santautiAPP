@@ -17,5 +17,11 @@
         app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
 
+
     <include layout="@layout/content_recycler_view"/>
+
+
+
+
+
 </android.support.design.widget.CoordinatorLayout>

@@ -2,6 +2,7 @@ package santauti.app.Activities.Home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -41,6 +42,7 @@ import retrofit2.Response;
 import santauti.app.APIServices.APIService;
 import santauti.app.APIServices.RestClient;
 import santauti.app.Activities.Ficha.FichaActivity;
+import santauti.app.Activities.MainActivity;
 import santauti.app.Adapters.Home.Home;
 import santauti.app.Adapters.Home.HomeModel;
 import santauti.app.Model.Paciente;
@@ -55,6 +57,8 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     private DrawerLayout drawerLayout;
     ProgressBar progressBar;
     private Intent intent;
+    SharedPreferences sp;
+    ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,13 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 //        System.out.println(sharedPref.getString("acess_token",""));
 //        System.out.println(sharedPref.getInt(getString(R.string.registroMedico),0));
 //        System.out.println(sharedPref.getInt("tipoProfissional",0));
+
+        progress = (ProgressBar) findViewById(R.id.progressbar_recycler);
+
+
+        sp = getSharedPreferences(getString(R.string.sharedPrefecences), 0);
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -98,7 +109,12 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
                 switch (id){
                     case R.id.home:
-                        Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
+                        sp.edit().clear().commit();
+
+                        Intent it = new Intent(HomeActivity.this, MainActivity.class);
+                        startActivity(it);
+                        finish();
+
                         drawerLayout.closeDrawers();
                         break;
                 }
@@ -135,6 +151,8 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     private void requestPacienteList(){
+        progress.setVisibility(View.VISIBLE);
+
         APIService apiService =
                 RestClient.getClient(this).create(APIService.class);
         Call<List<Paciente>> call = apiService.getPacientes(getSharedPreferences(getString(R.string.sharedPrefecences),
@@ -142,6 +160,8 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         call.enqueue(new Callback<List<Paciente>>() {
             @Override
             public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response) {
+                progress.setVisibility(View.GONE);
+
                 for(Paciente i : response.body()){
                     populateListaPacientes(i);
                 }
@@ -150,6 +170,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
             @Override
             public void onFailure(@NonNull Call call, @NonNull Throwable t) {
                 Log.d("ERROR",t.getMessage());
+                progress.setVisibility(View.GONE);
             }
         });
     }
