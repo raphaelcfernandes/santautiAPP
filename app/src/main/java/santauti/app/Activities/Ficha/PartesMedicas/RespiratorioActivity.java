@@ -2,6 +2,7 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -37,6 +38,7 @@ public class RespiratorioActivity extends GenericoActivity {
     private ArrayAdapter<String> adapterRespiratorio;
     private Ficha ficha;
     private MyAnimation myAnimation;
+    private Handler handler = new Handler();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +77,6 @@ public class RespiratorioActivity extends GenericoActivity {
         ipap.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getIpap()));
         epap.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getEpap()));
         saturacao.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getSaturacao()));
-        invasivoView.setVisibility(View.GONE);
-        naoInvasivoView.setVisibility(View.VISIBLE);
     }
 
     private void preencherInvasivo(){
@@ -88,9 +88,6 @@ public class RespiratorioActivity extends GenericoActivity {
         pressaoCuff.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioInvasiva().getPressaoCuff()));
         int spinnerPosition = adapterRespiratorio.getPosition(ficha.getRespiratorio().getRespiratorioInvasiva().getModoVentilatorio());
         respiratorioSpinner.setSelection(spinnerPosition);
-
-        naoInvasivoView.setVisibility(View.GONE);
-        invasivoView.setVisibility(View.VISIBLE);
     }
 
     private void prepareRespiratorioNaoInvasivo() {
@@ -234,28 +231,34 @@ public class RespiratorioActivity extends GenericoActivity {
                 if (checked) {
                     if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioInvasiva()!=null)
                         preencherInvasivo();
-                    else {
-                        if(naoInvasivoView.isShown()) {
-                            myAnimation.slide_up(this, naoInvasivoView);
-                        }
-                        if(!invasivoView.isShown()) {
-                            myAnimation.slide_down(this, invasivoView);
-                        }
-
+                    if(naoInvasivoView.isShown()) {
+                        myAnimation.slide_up(this, naoInvasivoView);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                myAnimation.slide_down(RespiratorioActivity.this, invasivoView);
+                            }
+                        }, 250);
                     }
-
+                    else if(!invasivoView.isShown())
+                        myAnimation.slide_down(RespiratorioActivity.this, invasivoView);
                 }
                 break;
             case R.id.respiratorio_nao_invasivo:
                 if (checked) {
                     if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioNaoInvasiva()!=null)
                         preencherNaoInvasivo();
-                    else{
-                        if(invasivoView.isShown()) {
-                            myAnimation.slide_up(this, invasivoView);
-                        }
-                        myAnimation.slide_down(this, naoInvasivoView);
+                    if(invasivoView.isShown()) {
+                        myAnimation.slide_up(this, invasivoView);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                myAnimation.slide_down(RespiratorioActivity.this, naoInvasivoView);
+                            }
+                        }, 250);
                     }
+                    else if(!naoInvasivoView.isShown())
+                        myAnimation.slide_down(RespiratorioActivity.this, naoInvasivoView);
                 }
                 break;
         }

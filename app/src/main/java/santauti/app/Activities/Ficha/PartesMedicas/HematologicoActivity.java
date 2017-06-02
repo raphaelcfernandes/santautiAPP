@@ -1,5 +1,7 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Activities.SnackbarCreator;
+import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Hematologico;
 import santauti.app.Model.Ficha.Renal;
@@ -32,6 +35,7 @@ public class HematologicoActivity extends GenericoActivity {
     private RadioButton hemogramaS,hemogramaN,tromboprofilaxiaS,tromboprofilaxiaN;
     private Realm realm;
     private ArrayAdapter<String> adapterProfilaxia;
+    private MyAnimation myAnimation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);setContentView(R.layout.activity_hematologico);
@@ -45,7 +49,7 @@ public class HematologicoActivity extends GenericoActivity {
         tromboprofilaxiaN = (RadioButton)findViewById(R.id.tromboprofilaxia_nao);
 
         setToolbar(getString(R.string.Hematologico));
-
+        myAnimation = new MyAnimation();
 
         prepareHematologicoSpinners();
 
@@ -100,13 +104,15 @@ public class HematologicoActivity extends GenericoActivity {
             case R.id.tromboprofilaxia_sim:
                 if (checked) {
                     SnackbarCreator.camposAPreencher(view);
-                    tromboprofilaxia.setVisibility(View.VISIBLE);
+                    if(!tromboprofilaxia.isShown())
+                        myAnimation.slide_down(this,tromboprofilaxia);
                 }
                 break;
             case R.id.tromboprofilaxia_nao:
                 if (checked) {
                     SnackbarCreator.camposAPreencher(view);
-                    tromboprofilaxia.setVisibility(View.GONE);
+                    if(tromboprofilaxia.isShown())
+                        myAnimation.slide_up(this,tromboprofilaxia);
                 }
                 break;
         }

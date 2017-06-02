@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ public class NeurologicoActivity extends GenericoActivity {
     private Realm realm;
     private ImageView avaliacaoPupilarToggleButton,sedadoToggleButton;
     private MyAnimation myAnimation;
+    private Handler handler = new Handler();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +72,9 @@ public class NeurologicoActivity extends GenericoActivity {
 
                 if(avaliacaoPupilarLayout.isShown()){
                     myAnimation.slide_up(NeurologicoActivity.this,avaliacaoPupilarLayout);
-                    avaliacaoPupilarLayout.setVisibility(View.GONE);
-
                 }
                 else{
                     myAnimation.slide_down(NeurologicoActivity.this, avaliacaoPupilarLayout);
-                    avaliacaoPupilarLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -83,6 +82,23 @@ public class NeurologicoActivity extends GenericoActivity {
         sedadoToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(myAnimation.getRotationAngle()==180) {
+                    if (sedado_nao_layout.isShown())
+                        myAnimation.slide_up(NeurologicoActivity.this, sedado_nao_layout);
+                    if (sedado_sim_layout.isShown())
+                        myAnimation.slide_up(NeurologicoActivity.this, sedado_sim_layout);
+                    myAnimation.rotateImageView180(sedadoToggleButton);
+                }
+                else{
+                    if(sedado_sim.isChecked()) {
+                        myAnimation.slide_down(NeurologicoActivity.this, sedado_sim_layout);
+                        myAnimation.rotateImageView180(sedadoToggleButton);
+                    }
+                    if(sedado_nao.isChecked()) {
+                        myAnimation.slide_down(NeurologicoActivity.this, sedado_nao_layout);
+                        myAnimation.rotateImageView180(sedadoToggleButton);
+                    }
+                }
 
             }
         });
@@ -119,15 +135,38 @@ public class NeurologicoActivity extends GenericoActivity {
         switch(view.getId()) {
             case R.id.sedado_sim:
                 if (checked) {
-                    sedado_nao_layout.setVisibility(View.GONE);
-                    sedado_sim_layout.setVisibility(View.VISIBLE);
+                    if(sedado_nao_layout.isShown()) {
+                        myAnimation.slide_up(NeurologicoActivity.this, sedado_nao_layout);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                myAnimation.slide_down(NeurologicoActivity.this, sedado_sim_layout);
+                            }
+                        }, 250);
+                    }
+                    else if(!sedado_sim_layout.isShown())
+                        myAnimation.slide_down(NeurologicoActivity.this,sedado_sim_layout);
+                    if(myAnimation.getRotationAngle()!=180)
+                        myAnimation.rotateImageView180(sedadoToggleButton);
                 }
                 break;
             case R.id.sedado_nao:
                 if (checked) {
-                    sedado_sim_layout.setVisibility(View.GONE);
-                    sedado_nao_layout.setVisibility(View.VISIBLE);
+                    if(sedado_sim_layout.isShown()) {
+                        myAnimation.slide_up(NeurologicoActivity.this, sedado_sim_layout);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                myAnimation.slide_down(NeurologicoActivity.this, sedado_nao_layout);
+                            }
+                        }, 250);
+                    }
+                    else if(!sedado_nao_layout.isShown())
+                        myAnimation.slide_down(NeurologicoActivity.this,sedado_nao_layout);
+                    if(myAnimation.getRotationAngle()!=180)
+                        myAnimation.rotateImageView180(sedadoToggleButton);
                 }
+
                 break;
         }
     }
@@ -147,6 +186,7 @@ public class NeurologicoActivity extends GenericoActivity {
                 break;
         }
     }
+
     private void prepareNeurologicoSpinners(){
         String[] nivelConsciencia = {defaultSpinnerString,"Alerta","Sonolência","Obnubilação","Torpor","Coma"};
         String[] ramsay = {defaultSpinnerString,"Grau 1","Grau 2","Grau 3","Grau 4","Grau 5","Grau 6"};
