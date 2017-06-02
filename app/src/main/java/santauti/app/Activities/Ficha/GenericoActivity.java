@@ -61,4 +61,7 @@ public abstract class GenericoActivity extends AppCompatActivity {
     public boolean isTextInpudEditTextEmpty(TextInputEditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
+    public boolean isSpinnerDefault(String string){
+        return string.equals(defaultSpinnerString);
+    }
 }
