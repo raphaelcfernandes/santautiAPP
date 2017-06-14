@@ -53,15 +53,12 @@ public class EndocrinoActivity extends GenericoActivity {
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.endocrino_sim:
-                if (checked) {
-                    Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    usoInsulinaBombaInfusao=1;
-                }
+                Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                usoInsulinaBombaInfusao=1;
                 break;
             case R.id.endocrino_nao:
-                if(checked)
-                    usoInsulinaBombaInfusao=0;
+                usoInsulinaBombaInfusao=0;
                 break;
         }
     }

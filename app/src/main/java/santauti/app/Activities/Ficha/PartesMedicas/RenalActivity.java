@@ -111,12 +111,10 @@ public class RenalActivity extends GenericoActivity {
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.renal_sim:
-                if (checked)
-                    SnackbarCreator.camposAPreencher(view);
+                SnackbarCreator.camposAPreencher(view);
                 break;
             case R.id.renal_nao:
-                if (checked)
-                    SnackbarCreator.avaliacaoGeradaAutomaticamente(view);
+                SnackbarCreator.avaliacaoGeradaAutomaticamente(view);
                 break;
         }
     }

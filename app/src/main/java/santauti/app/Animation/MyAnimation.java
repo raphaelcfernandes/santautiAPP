@@ -73,4 +73,15 @@ public class MyAnimation {
     public void fade_out(View view){
         view.animate().alpha(0.0f);
     }
+
+    public void slideInLeft(Context context,View view){
+        android.view.animation.Animation a = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        view.startAnimation(a);
+    }
+
+    public void slideOutRight(Context context,View view){
+        android.view.animation.Animation a = AnimationUtils.loadAnimation(context, android.R.anim.slide_out_right);
+        view.startAnimation(a);
+    }
+
 }

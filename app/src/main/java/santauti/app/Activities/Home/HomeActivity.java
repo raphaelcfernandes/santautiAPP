@@ -28,14 +28,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +41,7 @@ import santauti.app.APIServices.APIService;
 import santauti.app.APIServices.RestClient;
 import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.MainActivity;
-import santauti.app.Adapters.Home.Home;
+import santauti.app.Adapters.Home.HomeAdapter;
 import santauti.app.Adapters.Home.HomeModel;
 import santauti.app.Model.Paciente;
 import santauti.app.R;
@@ -51,7 +49,7 @@ import santauti.app.R;
 public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private RecyclerView recyclerView;
-    private Home home;
+    private HomeAdapter homeAdapter;
     private List<HomeModel> homeModelList = null;
     private Toolbar tbar;
     private DrawerLayout drawerLayout;
@@ -86,8 +84,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         if(homeModelList==null) {
             homeModelList = new ArrayList<>();
             requestPacienteList();
-//            recyclerView.setVisibility(View.VISIBLE);
-//            progressBar.setVisibility(View.GONE);
         }
 
         ActionBar toolbar = getSupportActionBar();
@@ -183,9 +179,9 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
-        home = new Home(homeModelList,this);
-        recyclerView.setAdapter(home);
-        home.setOnItemClickListener(onItemClickListener);
+        homeAdapter = new HomeAdapter(homeModelList,this);
+        recyclerView.setAdapter(homeAdapter);
+        homeAdapter.setOnItemClickListener(onItemClickListener);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -197,7 +193,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                 new MenuItemCompat.OnActionExpandListener() {
                     @Override
                     public boolean onMenuItemActionCollapse(MenuItem item) {
-                        home.updateList(homeModelList);
+                        homeAdapter.updateList(homeModelList);
                         return true; // Return true to collapse action view
                     }
                     @Override
@@ -216,7 +212,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextChange(String query) {
         final List<HomeModel> filteredModelList = filter(homeModelList, query);
 
-        home.updateList(filteredModelList);
+        homeAdapter.updateList(filteredModelList);
         return false;
     }
 
@@ -232,7 +228,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         return filteredModelList;
     }
 
-    Home.OnItemClickListener onItemClickListener = new Home.OnItemClickListener() {
+    HomeAdapter.OnItemClickListener onItemClickListener = new HomeAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(final View view, final int position) {
             PopupMenu popupMenu = new PopupMenu(view.getContext(), view, Gravity.NO_GRAVITY, R.attr.actionOverflowMenuStyle, 0);

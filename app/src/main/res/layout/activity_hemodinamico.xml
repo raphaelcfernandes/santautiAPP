@@ -1,108 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
     android:id="@+id/hemodinamico_layout">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <include layout="@layout/toolbar"/>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:orientation="horizontal"
-            android:paddingTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ritmo: "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <Spinner
-                android:id="@+id/hemodinamico_ritmo"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Frequência cardíaca: "
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:layout_height="wrap_content" android:orientation="horizontal"
+                android:paddingTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ritmo: "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/hemodinamico_ritmo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/hemodinamico_frequencia"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="number" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:orientation="horizontal">
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bulhas: "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <Spinner
-                android:id="@+id/hemodinamico_bulhas"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                />
-        </LinearLayout>
+                android:layout_height="wrap_content" android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:id="@+id/bulhas_layout"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bulhas: "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/hemodinamico_bulhas"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Preencher opcionais?"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <RadioGroup
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray">
+            </LinearLayout> <!--Linha horizontal de demarcaçao-->
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sim"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="0dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/hemodinamico_opcional_sim"
-                    android:onClick="hemodinamicoOpcionalOnRadioButtonClicked"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Não"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="0dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/hemodinamico_opcional_nao"
-                    android:onClick="hemodinamicoOpcionalOnRadioButtonClicked"/>
-            </RadioGroup>
-        </LinearLayout>
-        <include layout="@layout/hemodinamico_opcional_layout"/>
-    </LinearLayout>
-</LinearLayout>
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/hemodinamico_frequencia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Frequencia Cardiaca"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
-<!-- - drogas vasoativvas: Dobutamina, Dopamina, nitroprussiato de sodio, nitroglicerina, milrinona, noradrenalina,adrenalina.-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/gray">
+            </LinearLayout> <!--Linha horizontal de demarcaçao-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Drogas Vasoativas?"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                <Button
+                    android:id="@+id/addDrogaVasoativa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Adicionar"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:theme="@style/buttonPattern"
+                    android:onClick="addDrogaVasoativa"/>
+            </LinearLayout>
+
+            <include layout="@layout/content_recycler_view"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/gray">
+            </LinearLayout> <!--Linha horizontal de demarcaçao-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Preencher opcionais?"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sim"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="0dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hemodinamico_opcional_sim"
+                        android:onClick="hemodinamicoOpcionalOnRadioButtonClicked"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Não"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="0dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hemodinamico_opcional_nao"
+                        android:onClick="hemodinamicoOpcionalOnRadioButtonClicked"/>
+                </RadioGroup>
+            </LinearLayout>
+
+            <include layout="@layout/hemodinamico_opcional_layout"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

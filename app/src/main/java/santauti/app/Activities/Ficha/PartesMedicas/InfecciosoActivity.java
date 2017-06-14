@@ -90,18 +90,14 @@ public class InfecciosoActivity extends GenericoActivity {
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.infeccioso_sim:
-                if (checked) {
-                    Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    infeccioso=1;
-                }
+                Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                infeccioso=1;
                 break;
             case R.id.infeccioso_nao:
-                if (checked) {
-                    Snackbar.make(view, "Avaliação gerada automaticamente.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    infeccioso=0;
-                }
+                Snackbar.make(view, "Avaliação gerada automaticamente.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                infeccioso=0;
                 break;
         }
     }

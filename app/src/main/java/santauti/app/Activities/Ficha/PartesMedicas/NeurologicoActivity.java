@@ -195,39 +195,34 @@ public class NeurologicoActivity extends GenericoActivity {
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.sedado_sim:
-                if (checked) {
-                    if(sedado_nao_layout.isShown()) {
-                        myAnimation.slide_up(NeurologicoActivity.this, sedado_nao_layout);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                myAnimation.slide_down(NeurologicoActivity.this, sedado_sim_layout);
-                            }
-                        }, 250);
-                    }
-                    else if(!sedado_sim_layout.isShown())
-                        myAnimation.slide_down(NeurologicoActivity.this,sedado_sim_layout);
-                    if(myAnimation.getRotationAngle()!=180)
-                        myAnimation.rotateImageView180(sedadoToggleButton);
+                if(sedado_nao_layout.isShown()) {
+                    myAnimation.slide_up(NeurologicoActivity.this, sedado_nao_layout);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            myAnimation.slide_down(NeurologicoActivity.this, sedado_sim_layout);
+                        }
+                    }, 250);
                 }
+                else if(!sedado_sim_layout.isShown())
+                    myAnimation.slide_down(NeurologicoActivity.this,sedado_sim_layout);
+                if(myAnimation.getRotationAngle()!=180)
+                    myAnimation.rotateImageView180(sedadoToggleButton);
                 break;
             case R.id.sedado_nao:
-                if (checked) {
-                    if(sedado_sim_layout.isShown()) {
-                        myAnimation.slide_up(NeurologicoActivity.this, sedado_sim_layout);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                myAnimation.slide_down(NeurologicoActivity.this, sedado_nao_layout);
-                            }
-                        }, 250);
-                    }
-                    else if(!sedado_nao_layout.isShown())
-                        myAnimation.slide_down(NeurologicoActivity.this,sedado_nao_layout);
-                    if(myAnimation.getRotationAngle()!=180)
-                        myAnimation.rotateImageView180(sedadoToggleButton);
+                if(sedado_sim_layout.isShown()) {
+                    myAnimation.slide_up(NeurologicoActivity.this, sedado_sim_layout);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            myAnimation.slide_down(NeurologicoActivity.this, sedado_nao_layout);
+                        }
+                    }, 250);
                 }
-
+                else if(!sedado_nao_layout.isShown())
+                    myAnimation.slide_down(NeurologicoActivity.this,sedado_nao_layout);
+                if(myAnimation.getRotationAngle()!=180)
+                    myAnimation.rotateImageView180(sedadoToggleButton);
                 break;
         }
     }

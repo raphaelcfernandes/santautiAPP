@@ -102,18 +102,14 @@ public class HematologicoActivity extends GenericoActivity {
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.tromboprofilaxia_sim:
-                if (checked) {
-                    SnackbarCreator.camposAPreencher(view);
-                    if(!tromboprofilaxia.isShown())
-                        myAnimation.slide_down(this,tromboprofilaxia);
-                }
+                SnackbarCreator.camposAPreencher(view);
+                if(!tromboprofilaxia.isShown())
+                    myAnimation.slide_down(this,tromboprofilaxia);
                 break;
             case R.id.tromboprofilaxia_nao:
-                if (checked) {
-                    SnackbarCreator.camposAPreencher(view);
-                    if(tromboprofilaxia.isShown())
-                        myAnimation.slide_up(this,tromboprofilaxia);
-                }
+                SnackbarCreator.camposAPreencher(view);
+                if(tromboprofilaxia.isShown())
+                    myAnimation.slide_up(this,tromboprofilaxia);
                 break;
         }
     }
@@ -122,12 +118,10 @@ public class HematologicoActivity extends GenericoActivity {
         boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.hemograma_sim:
-                if (checked)
-                    SnackbarCreator.camposAPreencher(view);
+                SnackbarCreator.camposAPreencher(view);
                 break;
             case R.id.hemograma_nao:
-                if (checked)
-                    SnackbarCreator.avaliacaoGeradaAutomaticamente(view);
+                SnackbarCreator.avaliacaoGeradaAutomaticamente(view);
                 break;
         }
     }
