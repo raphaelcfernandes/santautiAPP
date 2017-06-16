@@ -5,6 +5,8 @@ import java.util.Date;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import santauti.app.Model.Ficha.Hemodinamico.Hemodinamico;
+import santauti.app.Model.Ficha.Hemodinamico.HemodinamicoOpcional;
 import santauti.app.Model.Ficha.Neurologico.Neurologico;
 import santauti.app.Model.Ficha.Respiratorio.Respiratorio;
 import santauti.app.Model.Paciente;
@@ -29,6 +31,24 @@ public class Ficha extends RealmObject implements Serializable{
     private Gastrointestinal gastrointestinal;
     private Respiratorio respiratorio;
     private Neurologico neurologico;
+    private Hemodinamico hemodinamico;
+    private HemodinamicoOpcional hemodinamicoOpcional;
+
+    public HemodinamicoOpcional getHemodinamicoOpcional() {
+        return hemodinamicoOpcional;
+    }
+
+    public void setHemodinamicoOpcional(HemodinamicoOpcional hemodinamicoOpcional) {
+        this.hemodinamicoOpcional = hemodinamicoOpcional;
+    }
+
+    public Hemodinamico getHemodinamico() {
+        return hemodinamico;
+    }
+
+    public void setHemodinamico(Hemodinamico hemodinamico) {
+        this.hemodinamico = hemodinamico;
+    }
 
     public Neurologico getNeurologico() {
         return neurologico;

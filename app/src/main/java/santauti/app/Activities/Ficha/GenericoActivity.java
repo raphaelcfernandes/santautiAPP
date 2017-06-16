@@ -64,4 +64,8 @@ public abstract class GenericoActivity extends AppCompatActivity {
     public boolean isSpinnerDefault(String string){
         return string.equals(defaultSpinnerString);
     }
+
+    public int getIntegerFromTextInputEditText(TextInputEditText textInputEditText){
+        return Integer.parseInt(textInputEditText.getText().toString());
+    }
 }

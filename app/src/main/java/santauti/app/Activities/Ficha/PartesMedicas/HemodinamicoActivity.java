@@ -11,15 +11,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,11 +24,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Adapters.Ficha.Hemodinamico.HemodinamicoAdapter;
 import santauti.app.Adapters.Ficha.Hemodinamico.HemodinamicoModel;
-import santauti.app.Adapters.Home.HomeModel;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.Hemodinamico.Hemodinamico;
+import santauti.app.Model.Ficha.Hemodinamico.HemodinamicoOpcional;
 import santauti.app.R;
 
 /**
@@ -39,14 +39,16 @@ import santauti.app.R;
  */
 
 public class HemodinamicoActivity extends GenericoActivity {
-    Spinner ritmo,bulhas,drogasVasoativas;
-    RadioButton hemodinamico_opcional_sim,hemodinamico_opcional_nao,drogaVasoativa_sim,drogaVasoativa_nao;
+    private Spinner ritmo,bulhas,drogasVasoativas;
+    private RadioButton hemodinamico_opcional_sim,hemodinamico_opcional_nao,drogaVasoativa_sim,drogaVasoativa_nao;
     private View hemodinamico_opcional_layout,bulhas_layout,doseDrogaVasoativa;
     private boolean bulhasIsShown=false;
     private MyAnimation myAnimation;
     private List<HemodinamicoModel> hemodinamicoModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private HemodinamicoAdapter hemodinamicoAdapter;
+    private TextInputEditText frequenciaCardiaca,PAM,PVC,swan_ganz;
+    private Realm realm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,14 @@ public class HemodinamicoActivity extends GenericoActivity {
         hemodinamico_opcional_layout = findViewById(R.id.hemodinamico_opcional_layout);
         hemodinamico_opcional_layout.setVisibility(View.GONE);
         bulhas_layout=findViewById(R.id.bulhas_layout);
+
+        frequenciaCardiaca = (TextInputEditText)findViewById(R.id.hemodinamico_frequencia);
+        PAM = (TextInputEditText)findViewById(R.id.pam);
+        PVC = (TextInputEditText)findViewById(R.id.pvc);
+        swan_ganz = (TextInputEditText)findViewById(R.id.swan_ganz);
+
+        realm=Realm.getDefaultInstance();
+
         myAnimation = new MyAnimation();
 
         prepareHemodinamicoSpinners();
@@ -115,13 +125,54 @@ public class HemodinamicoActivity extends GenericoActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        verificaCamposENotificaAdapter();
+        finish();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if(id == android.R.id.home)
+        if(id == android.R.id.home) {
+            verificaCamposENotificaAdapter();
             finish();
+        }
         return true;
     }
 
+    public void verificaCamposENotificaAdapter(){
+        boolean obrigatorios = false;
+        boolean opcionais = false;
+
+        if(!ritmo.getSelectedItem().toString().equals(defaultSpinnerString) &&
+                !bulhas.getSelectedItem().toString().equals(defaultSpinnerString) && !isTextInpudEditTextEmpty(frequenciaCardiaca))
+            obrigatorios=true;
+        if(hemodinamico_opcional_sim.isChecked())
+            if(!isTextInpudEditTextEmpty(PAM) && !isTextInpudEditTextEmpty(PVC) && !isTextInpudEditTextEmpty(swan_ganz))
+                opcionais = true;
+        if(obrigatorios) {
+            Hemodinamico hemodinamico = realm.createObject(Hemodinamico.class);
+            HemodinamicoOpcional hemodinamicoOpcional = realm.createObject(HemodinamicoOpcional.class);
+            hemodinamico.setRitmo(ritmo.getSelectedItem().toString());
+            hemodinamico.setBulhas(bulhas.getSelectedItem().toString());
+            hemodinamico.setFreqCardiaca(Integer.parseInt(frequenciaCardiaca.getText().toString()));
+            if(opcionais){
+                hemodinamico.setPam(getIntegerFromTextInputEditText(PAM));
+                hemodinamico.setPvc(getIntegerFromTextInputEditText(PVC));
+                hemodinamico.setSwan_ganz(getIntegerFromTextInputEditText(swan_ganz));
+            }
+            for(HemodinamicoModel h : hemodinamicoModelList){
+                hemodinamicoOpcional.setDose(h.getDose());
+                hemodinamicoOpcional.setDroga(h.getDroga());
+                hemodinamico.getHemodinamicoOpcionals().add(hemodinamicoOpcional);
+            }
+            Ficha r = getProperFicha();
+            r.setHemodinamico(hemodinamico);
+            realm.copyToRealmOrUpdate(r);
+            realm.commitTransaction();
+            changeCardColor();
+        }
+    }
     private void prepareBulhasRitmicoSpinner(){
         String[] bulhas = {defaultSpinnerString,"Sinusal","Bradicardico","Taquicardico"};
         this.bulhas = (Spinner) findViewById(R.id.hemodinamico_bulhas);

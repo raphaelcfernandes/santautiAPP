@@ -28,6 +28,7 @@ FICHA:
             - Backend ok. Está salvando no banco com a idFicha correto.
             - Manter dados já salvados. ex:
                 - Preenche invasivo, retornar a ficha, preencher nao invasivo, retornar a ficha e manter os dados que havia de invasivo
+            - Depois de preenchido, nao está mostrando os campos
         - Gastrointestinal -> Layout?
             - Backend ok. Está salvando no banco com a idFicha correto.
         - Renal -> Layout?

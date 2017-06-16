@@ -9,12 +9,17 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import io.realm.DynamicRealm;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmMigration;
 import io.realm.RealmResults;
+import io.realm.RealmSchema;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.GastrointestinalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.HematologicoActivity;
@@ -57,7 +62,14 @@ public class FichaActivity extends GenericoActivity {
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();
+        RealmConfiguration config2 = new RealmConfiguration.Builder()
+                .name("santaUTI")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
 
+        realm = Realm.getInstance(config2);
+        realm.close();
         createNewFicha();
     }
 
