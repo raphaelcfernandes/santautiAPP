@@ -32,15 +32,6 @@ public class Ficha extends RealmObject implements Serializable{
     private Respiratorio respiratorio;
     private Neurologico neurologico;
     private Hemodinamico hemodinamico;
-    private HemodinamicoOpcional hemodinamicoOpcional;
-
-    public HemodinamicoOpcional getHemodinamicoOpcional() {
-        return hemodinamicoOpcional;
-    }
-
-    public void setHemodinamicoOpcional(HemodinamicoOpcional hemodinamicoOpcional) {
-        this.hemodinamicoOpcional = hemodinamicoOpcional;
-    }
 
     public Hemodinamico getHemodinamico() {
         return hemodinamico;

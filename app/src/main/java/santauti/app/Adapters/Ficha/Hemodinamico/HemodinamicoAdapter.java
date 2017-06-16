@@ -96,6 +96,7 @@ public class HemodinamicoAdapter extends RecyclerView.Adapter<HemodinamicoAdapte
             lastPosition = position;
         }
     }
+
     @Override
     public int getItemCount() {
         return hemodinamicoAdapterModelList.size();

@@ -1,6 +1,7 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
@@ -8,6 +9,12 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +31,14 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Activities.SnackbarCreator;
+import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapter;
+import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapterModel;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Metabolico;
@@ -50,7 +62,9 @@ public class NeurologicoActivity extends GenericoActivity {
     private MyAnimation myAnimation;
     private Handler handler = new Handler();
     private ArrayAdapter<String> adapterDecifitLado;
-    private TextInputEditText tipoSedativo,doseSedativo;
+    private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private NeurologicoAdapter neurologicoAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,8 +95,17 @@ public class NeurologicoActivity extends GenericoActivity {
         deficitMotorToggleButton = (ImageView)findViewById(R.id.deficitMotorToggle);
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
 
-        tipoSedativo = (TextInputEditText)findViewById(R.id.tipoSedativo);
-        doseSedativo = (TextInputEditText)findViewById(R.id.doseSedativo);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        neurologicoAdapter = new NeurologicoAdapter(this,neurologicoAdapterModelList);
+        recyclerView.setAdapter(neurologicoAdapter);
+
+        NeurologicoAdapterModel n = new NeurologicoAdapterModel("teste",1);
+        neurologicoAdapterModelList.add(n);
+        NeurologicoAdapterModel n1 = new NeurologicoAdapterModel("teste2",2);
+        neurologicoAdapterModelList.add(n1);
+        neurologicoAdapter.notifyDataSetChanged();
 
         myAnimation = new MyAnimation();
         prepareNeurologicoSpinners();
@@ -247,7 +270,7 @@ public class NeurologicoActivity extends GenericoActivity {
         String[] rass = {defaultSpinnerString,"+4","+3","+2","+1","0","-1","-2","-3","-4","-5"};
         String[] deficitMotor = {defaultSpinnerString,"Presente","Ausente"};
         String[] deficitTipo = {defaultSpinnerString,"Paresia","Plegia"};
-        String[] deficitLado = {defaultSpinnerString,"Esquerdo","Direito"};
+        String[] deficitLado = {defaultSpinnerString,"Esquerdo","Direito","Ambos os lados"};
         String[] aberturaOcular = {defaultSpinnerString,"4 - Espontânea","3 - À voz","2 - À dor","1 - Nenhuma"};
         String[] respostaVerbal = {defaultSpinnerString,"5 - Orientada","4 - Confusa","3 - Palavras inapropriadas","2 - Palavras incompreensiveis","1 - Nenhuma"};
         String[] respostaMotora = {defaultSpinnerString,"6 - Obedece comandos","5 - Localiza dor","4 - Movimento de retirada","3 - Flexão anormal","2 - Extensão anormal","1 - Nenhuma"};
@@ -584,5 +607,37 @@ public class NeurologicoActivity extends GenericoActivity {
 //            changeCardColor();
 //        }
         realm.commitTransaction();
+    }
+
+    public void addSedativo(View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(NeurologicoActivity.this);
+        builder.setTitle("Adicionar Sedativo");
+
+        LayoutInflater li = LayoutInflater.from(this);
+        View dialogView = li.inflate(R.layout.neurologico_dialog_sedativo,null);
+        dialogView.requestFocus();
+        final TextInputEditText doseSedativo = (TextInputEditText) dialogView.findViewById(R.id.doseSedativo);
+        final TextInputEditText tipoSedativo = (TextInputEditText) dialogView.findViewById(R.id.tipoSedativo);
+
+
+        builder.setView(dialogView);
+        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+
+        final AlertDialog dialog = builder.show();
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
     }
 }

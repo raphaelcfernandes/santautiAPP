@@ -11,10 +11,19 @@ public class Hemodinamico extends RealmObject {
     private String ritmo;
     private String bulhas;
     private int freqCardiaca;
+    private boolean opcionais;
     private int pam;
     private int pvc;
     private int swan_ganz;
     private RealmList<HemodinamicoOpcional> hemodinamicoOpcionals;
+
+    public boolean isOpcionais() {
+        return opcionais;
+    }
+
+    public void setOpcionais(boolean opcionais) {
+        this.opcionais = opcionais;
+    }
 
     public RealmList<HemodinamicoOpcional> getHemodinamicoOpcionals() {
         return hemodinamicoOpcionals;

@@ -10,6 +10,7 @@ HOME:
     - Navigation view n fica transparente no colorPrimaryDark
     - Criar timer para dar refresh na lista. (5 min?), interessante colocar uma barra do tempo de refresh?
 FICHA:
+    - CHECAR PQ REALM PRECISA DE deleteRealmIfMigrationNeeded
     - Meu pai sugeriu mostrar as fichas como o feed do FB
     - Como fazer alteraçao de fichaAdapterModel sem ter que voltar ao FichaActivity pra selecionar um outro card
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards
@@ -22,8 +23,9 @@ FICHA:
                 - Tipo de deficit? Nome certo? Tem como acontecer em ambos os lados?
             - Pupila -> OBS: Quando anisocóricas, sempre anotar a pupila maior em relação à menor - pupilas anisocóricas, esquerda maior que direita (E> D).
             - Dose e sedativo -> Pode haver + de 1?
-        - Hemodinamico -> Done
-            - Ritmo aritmico e ritmico possuem diversas opçoes
+        - Hemodinamico -> Layout?
+            - Backend ok. Está salvando no banco com a idFicha correto.
+            - Editar -> Drogas Vasoativas
         - Respiratorio -> Layout?
             - Backend ok. Está salvando no banco com a idFicha correto.
             - Manter dados já salvados. ex:

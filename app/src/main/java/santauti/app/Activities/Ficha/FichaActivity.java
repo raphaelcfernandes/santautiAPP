@@ -61,15 +61,12 @@ public class FichaActivity extends GenericoActivity {
         adapter.setOnItemClickListener(onItemClickListener);
 
         Realm.init(this);
-        realm = Realm.getDefaultInstance();
-        RealmConfiguration config2 = new RealmConfiguration.Builder()
-                .name("santaUTI")
-                .schemaVersion(1)
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
+        realm = Realm.getDefaultInstance();
 
-        realm = Realm.getInstance(config2);
-        realm.close();
         createNewFicha();
     }
 
@@ -117,9 +114,9 @@ public class FichaActivity extends GenericoActivity {
 //                query.deleteAllFromRealm();
 //            }
 //        });
-        for (int i = 0; i<query.size(); i++) {
-            System.out.println(query.get(i));
-        }
+//        for (int i = 0; i<query.size(); i++) {
+//            System.out.println(query.get(i).getHemodinamico());
+//        }
 //        final RealmResults<Ficha> query = realm.where(Ficha.class).findAll();
 //        for (int i = 0; i<query.size(); i++) {
 //            System.out.println(query.get(i));
