@@ -1,9 +1,7 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -18,15 +16,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -36,12 +29,9 @@ import java.util.List;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapter;
 import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapterModel;
 import santauti.app.Animation.MyAnimation;
-import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.Model.Ficha.Neurologico.NaoSedado;
 import santauti.app.Model.Ficha.Neurologico.Neurologico;
 import santauti.app.Model.Ficha.Neurologico.Sedado;
@@ -50,13 +40,13 @@ import santauti.app.R;
 /**
  * Created by Raphael Fernandes on 13-May-17.
  */
-
+//Nivel de consciencia: ok
 public class NeurologicoActivity extends GenericoActivity {
     private Spinner nivelConscienciaSpinner,ramsaySpinner,rassSpinner,deficitMotorSpinner;
     private Spinner aberturaOcularSpinner,respostaVerbalSpinner,respostaMotoraSpinner,pupilaReatividadeLuzSpinner;
     private Spinner pupilaSimetriaSpinner,pupilaTamanhoSpinner,tipoDecifitSpinner,ladoDeficitSpinner;
     private RadioButton sedado_sim,sedado_nao,opcionalSim,opcionalNao;
-    private View sedado_sim_layout,sedado_nao_layout,neurologico_opcional_layout,avaliacaoPupilarLayout,deficitMotorLado,deficitMotorTipo;
+    private LinearLayout sedado_sim_layout,sedado_nao_layout,neurologico_opcional_layout,avaliacaoPupilarLayout,deficitMotorLado,deficitMotorTipo;
     private Realm realm;
     private ImageView avaliacaoPupilarToggleButton,sedadoToggleButton,deficitMotorToggleButton;
     private MyAnimation myAnimation;
@@ -65,6 +55,7 @@ public class NeurologicoActivity extends GenericoActivity {
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NeurologicoAdapter neurologicoAdapter;
+    private int pupilaRotationAngle=0,sedadoRotationAngle=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,13 +63,13 @@ public class NeurologicoActivity extends GenericoActivity {
         setToolbar(getString(R.string.Neurologico));
 
         /******************************VARIAVEIS LAYOUTS*************************************/
-        sedado_sim_layout = findViewById(R.id.sedado_sim_layout);
-        sedado_nao_layout = findViewById(R.id.sedado_nao_layout);
-        neurologico_opcional_layout = findViewById(R.id.neurologico_opcional_layout);
-        avaliacaoPupilarLayout = findViewById(R.id.avaliacaoPupilar);
+        sedado_sim_layout = (LinearLayout)findViewById(R.id.sedado_sim_layout);
+        sedado_nao_layout = (LinearLayout)findViewById(R.id.sedado_nao_layout);
+        neurologico_opcional_layout = (LinearLayout)findViewById(R.id.neurologico_opcional_layout);
+        avaliacaoPupilarLayout = (LinearLayout)findViewById(R.id.avaliacaoPupilar);
 
-        deficitMotorLado = findViewById(R.id.ladoDecificitLayout);
-        deficitMotorTipo = findViewById(R.id.tipoDecificitLayout);
+        deficitMotorLado = (LinearLayout)findViewById(R.id.ladoDecificitLayout);
+        deficitMotorTipo = (LinearLayout)findViewById(R.id.tipoDecificitLayout);
 
         /******************************VARIAVEIS LAYOUTS*************************************/
 
@@ -101,11 +92,6 @@ public class NeurologicoActivity extends GenericoActivity {
         neurologicoAdapter = new NeurologicoAdapter(this,neurologicoAdapterModelList);
         recyclerView.setAdapter(neurologicoAdapter);
 
-        NeurologicoAdapterModel n = new NeurologicoAdapterModel("teste",1);
-        neurologicoAdapterModelList.add(n);
-        NeurologicoAdapterModel n1 = new NeurologicoAdapterModel("teste2",2);
-        neurologicoAdapterModelList.add(n1);
-        neurologicoAdapter.notifyDataSetChanged();
 
         myAnimation = new MyAnimation();
         prepareNeurologicoSpinners();
@@ -114,13 +100,13 @@ public class NeurologicoActivity extends GenericoActivity {
         avaliacaoPupilarToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myAnimation.rotateImageView180(avaliacaoPupilarToggleButton);
+                pupilaRotationAngle =  myAnimation.rotateImageView180(avaliacaoPupilarToggleButton,pupilaRotationAngle);
 
                 if(avaliacaoPupilarLayout.isShown()){
-                    myAnimation.slide_up(NeurologicoActivity.this,avaliacaoPupilarLayout);
+                    myAnimation.slideUpLinearLayout(NeurologicoActivity.this,avaliacaoPupilarLayout);
                 }
                 else{
-                    myAnimation.slide_down(NeurologicoActivity.this, avaliacaoPupilarLayout);
+                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this, avaliacaoPupilarLayout);
                 }
             }
         });
@@ -128,21 +114,21 @@ public class NeurologicoActivity extends GenericoActivity {
         sedadoToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(myAnimation.getRotationAngle()==180) {
+                if(sedadoRotationAngle==180) {
                     if (sedado_nao_layout.isShown())
-                        myAnimation.slide_up(NeurologicoActivity.this, sedado_nao_layout);
+                         myAnimation.slideUpLinearLayout(NeurologicoActivity.this, sedado_nao_layout);
                     if (sedado_sim_layout.isShown())
-                        myAnimation.slide_up(NeurologicoActivity.this, sedado_sim_layout);
-                    myAnimation.rotateImageView180(sedadoToggleButton);
+                         myAnimation.slideUpLinearLayout(NeurologicoActivity.this, sedado_sim_layout);
+                    sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                 }
                 else{
                     if(sedado_sim.isChecked()) {
-                        myAnimation.slide_down(NeurologicoActivity.this, sedado_sim_layout);
-                        myAnimation.rotateImageView180(sedadoToggleButton);
+                         myAnimation.slideDownLinearLayout(NeurologicoActivity.this, sedado_sim_layout);
+                        sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                     }
                     if(sedado_nao.isChecked()) {
-                        myAnimation.slide_down(NeurologicoActivity.this, sedado_nao_layout);
-                        myAnimation.rotateImageView180(sedadoToggleButton);
+                         myAnimation.slideDownLinearLayout(NeurologicoActivity.this, sedado_nao_layout);
+                        sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                     }
                 }
 
@@ -154,21 +140,21 @@ public class NeurologicoActivity extends GenericoActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(deficitMotorSpinner.getSelectedItem().toString().equals("Presente")){
 //                    deficitMotorToggleButton.setVisibility(View.VISIBLE);
-//                    if(myAnimation.getRotationAngle()!=180)
-//                        myAnimation.rotateImageView180(deficitMotorToggleButton);
-                    myAnimation.slide_down(NeurologicoActivity.this,deficitMotorTipo);
+//                    if( getRotationAngle()!=180)
+//                         myAnimation.rotateImageView180(deficitMotorToggleButton);
+                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,deficitMotorTipo);
                     if(tipoDecifitSpinner.getSelectedItem()!=null)
-                        myAnimation.slide_down(NeurologicoActivity.this,deficitMotorTipo);
+                         myAnimation.slideDownLinearLayout(NeurologicoActivity.this,deficitMotorTipo);
 //                    if(adapterDecifitLado.getPosition(ladoDeficitSpinner.getSelectedItem().toString())!=0)
-//                        myAnimation.slide_down(NeurologicoActivity.this,deficitMotorLado);
+//                         myAnimation.slideDownLinearLayout(NeurologicoActivity.this,deficitMotorLado);
                 }
                 if(deficitMotorSpinner.getSelectedItem().toString().equals("Ausente")){
-                    //myAnimation.rotateImageView180(deficitMotorToggleButton);
+                    // myAnimation.rotateImageView180(deficitMotorToggleButton);
                     if(deficitMotorTipo.isShown())
-                        myAnimation.slide_up(NeurologicoActivity.this,deficitMotorTipo);
+                         myAnimation.slideUpLinearLayout(NeurologicoActivity.this,deficitMotorTipo);
                     if(deficitMotorLado.isShown())
-                        myAnimation.slide_up(NeurologicoActivity.this,deficitMotorLado);
-                    //myAnimation.slide_up(NeurologicoActivity.this,deficitMotorToggleButton);
+                         myAnimation.slideUpLinearLayout(NeurologicoActivity.this,deficitMotorLado);
+                    // myAnimation.slideUpLinearLayout(NeurologicoActivity.this,deficitMotorToggleButton);
                 }
             }
             @Override
@@ -181,7 +167,7 @@ public class NeurologicoActivity extends GenericoActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!tipoDecifitSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
-                    myAnimation.slide_down(NeurologicoActivity.this,deficitMotorLado);
+                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,deficitMotorLado);
                 }
             }
             @Override
@@ -215,37 +201,39 @@ public class NeurologicoActivity extends GenericoActivity {
     }
 
     public void neuroligicoSedadoOnRadioButtonClicked(View view){
-        boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.sedado_sim:
-                if(sedado_nao_layout.isShown()) {
-                    myAnimation.slide_up(NeurologicoActivity.this, sedado_nao_layout);
+                if(sedado_nao_layout.isShown()) {//Se layout de nao sedado estiver aparecendo, ele deve ser escondido
+                     myAnimation.slideUpLinearLayout(NeurologicoActivity.this, sedado_nao_layout);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            myAnimation.slide_down(NeurologicoActivity.this, sedado_sim_layout);
+                             myAnimation.slideDownLinearLayout(NeurologicoActivity.this, sedado_sim_layout);
                         }
                     }, 250);
                 }
-                else if(!sedado_sim_layout.isShown())
-                    myAnimation.slide_down(NeurologicoActivity.this,sedado_sim_layout);
-                if(myAnimation.getRotationAngle()!=180)
-                    myAnimation.rotateImageView180(sedadoToggleButton);
+                else if(!sedado_sim_layout.isShown())//Caso n esteja nada aparecendo, mostrar sedado layout
+                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,sedado_sim_layout);
+                /*
+                 * Verifica se o toggle button de retrair/exapandir o layout está na posiçao inicial
+                 */
+                if(sedadoRotationAngle==0)
+                    sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                 break;
             case R.id.sedado_nao:
                 if(sedado_sim_layout.isShown()) {
-                    myAnimation.slide_up(NeurologicoActivity.this, sedado_sim_layout);
+                     myAnimation.slideUpLinearLayout(NeurologicoActivity.this, sedado_sim_layout);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            myAnimation.slide_down(NeurologicoActivity.this, sedado_nao_layout);
+                             myAnimation.slideDownLinearLayout(NeurologicoActivity.this, sedado_nao_layout);
                         }
                     }, 250);
                 }
                 else if(!sedado_nao_layout.isShown())
-                    myAnimation.slide_down(NeurologicoActivity.this,sedado_nao_layout);
-                if(myAnimation.getRotationAngle()!=180)
-                    myAnimation.rotateImageView180(sedadoToggleButton);
+                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,sedado_nao_layout);
+                if(sedadoRotationAngle==0)
+                    sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                 break;
         }
     }
@@ -255,11 +243,11 @@ public class NeurologicoActivity extends GenericoActivity {
         switch(view.getId()) {
             case R.id.neurologico_opcional_sim:
                 if(!neurologico_opcional_layout.isShown())
-                    myAnimation.slide_down(NeurologicoActivity.this,neurologico_opcional_layout);
+                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,neurologico_opcional_layout);
                 break;
             case R.id.neurologico_opcional_nao:
                 if(neurologico_opcional_layout.isShown())
-                    myAnimation.slide_up(NeurologicoActivity.this,neurologico_opcional_layout);
+                     myAnimation.slideUpLinearLayout(NeurologicoActivity.this,neurologico_opcional_layout);
                 break;
         }
     }
@@ -517,8 +505,6 @@ public class NeurologicoActivity extends GenericoActivity {
             }
         };
         pupilaTamanhoSpinner.setAdapter(adapterPupilaTamanho);
-
-
     }
 
     private void verificaCamposENotificaAdapter(){
@@ -640,4 +626,5 @@ public class NeurologicoActivity extends GenericoActivity {
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
     }
+
 }

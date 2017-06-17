@@ -1,5 +1,7 @@
 package santauti.app.Activities.Ficha;
 
+import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
@@ -9,6 +11,11 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import io.realm.Realm;
 import santauti.app.Model.Ficha.Ficha;
@@ -68,4 +75,5 @@ public abstract class GenericoActivity extends AppCompatActivity {
     public int getIntegerFromTextInputEditText(TextInputEditText textInputEditText){
         return Integer.parseInt(textInputEditText.getText().toString());
     }
+
 }

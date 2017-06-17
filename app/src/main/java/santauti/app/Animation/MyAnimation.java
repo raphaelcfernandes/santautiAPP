@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import santauti.app.R;
 
@@ -15,37 +16,37 @@ import santauti.app.R;
  */
 
 public class MyAnimation {
-    private int rotationAngle = 0;
 
-    public int getRotationAngle() {
-        return rotationAngle;
-    }
-
-    public void rotateImageView180(ImageView v){
-        ObjectAnimator anim = ObjectAnimator.ofFloat(v, "rotation",rotationAngle, rotationAngle + 180);
-        anim.setDuration(500);
-        anim.start();
-        rotationAngle += 180;
-        rotationAngle = rotationAngle%360;
-    }
-
-    public void slide_down(Context ctx, final View v) {
+    public void slideDownLinearLayout(Context ctx, final LinearLayout linearLayout) {
         android.view.animation.Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_down);
-        if (a != null) {
+        if(a!=null) {
             a.reset();
-            if (v != null) {
-                v.clearAnimation();
-                v.setVisibility(View.VISIBLE);
-                v.startAnimation(a);
-            }
+            linearLayout.clearAnimation();
+            a.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    linearLayout.clearAnimation();
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            linearLayout.startAnimation(a);
         }
     }
 
-    public void slide_up(Context ctx, final View v) {
+    public void slideUpLinearLayout(Context ctx, final LinearLayout linearLayout) {
         android.view.animation.Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_up);
         if(a!=null) {
             a.reset();
-            v.clearAnimation();
+            linearLayout.clearAnimation();
             a.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
@@ -54,7 +55,8 @@ public class MyAnimation {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    v.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.GONE);
+                    linearLayout.clearAnimation();
                 }
 
                 @Override
@@ -62,8 +64,17 @@ public class MyAnimation {
 
                 }
             });
-            v.startAnimation(a);
+            linearLayout.startAnimation(a);
         }
+    }
+
+    public int rotateImageView180(ImageView v, int myRotationAngle){
+        ObjectAnimator anim = ObjectAnimator.ofFloat(v, "rotation",myRotationAngle, myRotationAngle + 180);
+        anim.setDuration(500);
+        anim.start();
+        myRotationAngle += 180;
+        myRotationAngle = myRotationAngle%360;
+        return myRotationAngle;
     }
 
     public void fade_in(View view){

@@ -6,18 +6,18 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Respiratorio.Respiratorio;
@@ -31,7 +31,7 @@ import santauti.app.R;
 
 public class RespiratorioActivity extends GenericoActivity {
     private TextInputEditText volume,fio2,freqRespiratoria,peep,pressaoCuff,volumeNaoInvasivo,ipap,epap,saturacao;
-    private View invasivoView, naoInvasivoView;
+    private LinearLayout invasivoView,naoInvasivoView;
     private Spinner respiratorioSpinner;
     private RadioButton invasivo,naoInvasivo;
     private Realm realm;
@@ -45,9 +45,8 @@ public class RespiratorioActivity extends GenericoActivity {
         setContentView(R.layout.activity_respiratorio);
         findViewById(R.id.respiratorio_layout).requestFocus();
         setToolbar(getString(R.string.Respiratorio));
-
-        invasivoView = findViewById(R.id.ventilacao_invasiva);
-        naoInvasivoView = findViewById(R.id.ventilacao_nao_invasiva);
+        invasivoView = (LinearLayout)findViewById(R.id.ventilacao_invasiva);
+        naoInvasivoView = (LinearLayout)findViewById(R.id.ventilacao_nao_invasiva);
         invasivoView.setVisibility(View.GONE);
         naoInvasivoView.setVisibility(View.GONE);
 
@@ -225,37 +224,36 @@ public class RespiratorioActivity extends GenericoActivity {
     }
 
     public void respiratorioVentilacaoOnRadioButtonClicked(View view){
-        boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.respiratorio_invasivo:
                 if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioInvasiva()!=null)
                     preencherInvasivo();
                 if(naoInvasivoView.isShown()) {
-                    myAnimation.slide_up(this, naoInvasivoView);
+                    myAnimation.slideUpLinearLayout(this, naoInvasivoView);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            myAnimation.slide_down(RespiratorioActivity.this, invasivoView);
+                            myAnimation.slideDownLinearLayout(RespiratorioActivity.this, invasivoView);
                         }
                     }, 250);
                 }
                 else if(!invasivoView.isShown())
-                    myAnimation.slide_down(RespiratorioActivity.this, invasivoView);
+                    myAnimation.slideDownLinearLayout(RespiratorioActivity.this, invasivoView);
                 break;
             case R.id.respiratorio_nao_invasivo:
                 if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioNaoInvasiva()!=null)
                     preencherNaoInvasivo();
                 if(invasivoView.isShown()) {
-                    myAnimation.slide_up(this, invasivoView);
+                    myAnimation.slideUpLinearLayout(this, invasivoView);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            myAnimation.slide_down(RespiratorioActivity.this, naoInvasivoView);
+                            myAnimation.slideDownLinearLayout(RespiratorioActivity.this, naoInvasivoView);
                         }
                     }, 250);
                 }
                 else if(!naoInvasivoView.isShown())
-                    myAnimation.slide_down(RespiratorioActivity.this, naoInvasivoView);
+                    myAnimation.slideDownLinearLayout(RespiratorioActivity.this, naoInvasivoView);
                 break;
         }
     }

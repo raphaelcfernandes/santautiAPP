@@ -54,6 +54,7 @@
                 android:onClick="hematologicoProfilaxiaOnRadioButtonClicked" />
         </RadioGroup>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,8 +62,7 @@
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:visibility="gone"
-        android:id="@+id/tromboprofilaxia_layout"
-        android:animateLayoutChanges="true">
+        android:id="@+id/tromboprofilaxia_layout">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,8 +72,6 @@
             android:id="@+id/tromboprofilaxia_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-
             android:gravity="center"
             />
     </LinearLayout>
@@ -128,4 +126,5 @@
                 android:onClick="hematologicoOnRadioButtonClicked" />
         </RadioGroup>
     </LinearLayout>
+
 </LinearLayout>

@@ -95,7 +95,7 @@
                     android:id="@+id/addDrogaVasoativa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adicionar Drogas Vasoativas"
+                    android:text="Adicionar Droga Vasoativa"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:theme="@style/buttonPattern"
                     android:onClick="addDrogaVasoativa"/>

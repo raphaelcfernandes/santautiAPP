@@ -1,7 +1,5 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,7 +22,6 @@ import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Hematologico;
-import santauti.app.Model.Ficha.Renal;
 import santauti.app.R;
 
 /**
@@ -30,18 +30,18 @@ import santauti.app.R;
 
 public class HematologicoActivity extends GenericoActivity {
     private Spinner tromboprofilaxiaSpinner;
-    private View tromboprofilaxia;
-    private boolean visibility=false;
+    private LinearLayout tromboprofilaxia;
     private RadioButton hemogramaS,hemogramaN,tromboprofilaxiaS,tromboprofilaxiaN;
     private Realm realm;
     private ArrayAdapter<String> adapterProfilaxia;
-    private MyAnimation myAnimation;
+    private MyAnimation myAnimation = new MyAnimation();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);setContentView(R.layout.activity_hematologico);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hematologico);
         Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tbar);
-        tromboprofilaxia = findViewById(R.id.tromboprofilaxia_layout);
+        tromboprofilaxia = (LinearLayout)findViewById(R.id.tromboprofilaxia_layout);
 
         hemogramaS = (RadioButton)findViewById(R.id.hemograma_sim);
         hemogramaN = (RadioButton)findViewById(R.id.hemograma_nao);
@@ -49,7 +49,6 @@ public class HematologicoActivity extends GenericoActivity {
         tromboprofilaxiaN = (RadioButton)findViewById(R.id.tromboprofilaxia_nao);
 
         setToolbar(getString(R.string.Hematologico));
-        myAnimation = new MyAnimation();
 
         prepareHematologicoSpinners();
 
@@ -99,23 +98,22 @@ public class HematologicoActivity extends GenericoActivity {
     }
 
     public void hematologicoProfilaxiaOnRadioButtonClicked(View view){
-        boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.tromboprofilaxia_sim:
                 SnackbarCreator.camposAPreencher(view);
                 if(!tromboprofilaxia.isShown())
-                    myAnimation.slide_down(this,tromboprofilaxia);
+                    myAnimation.slideDownLinearLayout(this,tromboprofilaxia);
                 break;
             case R.id.tromboprofilaxia_nao:
                 SnackbarCreator.camposAPreencher(view);
-                if(tromboprofilaxia.isShown())
-                    myAnimation.slide_up(this,tromboprofilaxia);
+                if(tromboprofilaxia.isShown()) {
+                    myAnimation.slideUpLinearLayout(this, tromboprofilaxia);
+                }
                 break;
         }
     }
 
     public void hematologicoOnRadioButtonClicked(View view){
-        boolean checked = ((RadioButton) view).isChecked();
         switch(view.getId()) {
             case R.id.hemograma_sim:
                 SnackbarCreator.camposAPreencher(view);

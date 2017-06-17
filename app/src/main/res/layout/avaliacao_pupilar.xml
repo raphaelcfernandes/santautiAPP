@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="10dp">
@@ -29,10 +29,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="3px"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/gray">
+        android:background="@color/colorPrimary">
 
     </LinearLayout>
 
@@ -56,8 +56,9 @@
                 android:text="Tamanho"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="10dp">
@@ -79,7 +80,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,8 +91,9 @@
                 android:text="Simetria"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="10dp">
@@ -100,7 +101,6 @@
                 android:id="@+id/pupila_simetria_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
                 android:gravity="center"
                 />
         </LinearLayout>
@@ -125,8 +125,9 @@
                 android:text="Reatividade a Luz"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="10dp">
@@ -134,21 +135,19 @@
                 android:id="@+id/pupila_reatividade_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
                 android:gravity="center"
                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="3px"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/gray">
+            android:background="@color/colorPrimary">
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>
