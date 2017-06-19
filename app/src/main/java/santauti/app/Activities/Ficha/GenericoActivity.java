@@ -26,7 +26,7 @@ import santauti.app.R;
  */
 
 public abstract class GenericoActivity extends AppCompatActivity {
-    public String defaultSpinnerString = "Selecione um item...";
+    public String defaultSpinnerString = "Selecione";
     @Override
     public void onBackPressed(){
         finish();

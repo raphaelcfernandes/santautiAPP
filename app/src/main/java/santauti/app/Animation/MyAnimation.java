@@ -17,20 +17,20 @@ import santauti.app.R;
 
 public class MyAnimation {
 
-    public void slideDownLinearLayout(Context ctx, final LinearLayout linearLayout) {
+    public void slideDownView(Context ctx, final View view) {
         android.view.animation.Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_down);
         if(a!=null) {
             a.reset();
-            linearLayout.clearAnimation();
+            view.clearAnimation();
             a.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
-                    linearLayout.setVisibility(View.VISIBLE);
+                    view.setVisibility(View.VISIBLE);
                 }
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    linearLayout.clearAnimation();
+                    view.clearAnimation();
                 }
 
                 @Override
@@ -38,15 +38,15 @@ public class MyAnimation {
 
                 }
             });
-            linearLayout.startAnimation(a);
+            view.startAnimation(a);
         }
     }
 
-    public void slideUpLinearLayout(Context ctx, final LinearLayout linearLayout) {
+    public void slideUpView(Context ctx, final View view) {
         android.view.animation.Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_up);
         if(a!=null) {
             a.reset();
-            linearLayout.clearAnimation();
+            view.clearAnimation();
             a.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
@@ -55,8 +55,8 @@ public class MyAnimation {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    linearLayout.setVisibility(View.GONE);
-                    linearLayout.clearAnimation();
+                    view.setVisibility(View.GONE);
+                    view.clearAnimation();
                 }
 
                 @Override
@@ -64,7 +64,7 @@ public class MyAnimation {
 
                 }
             });
-            linearLayout.startAnimation(a);
+            view.startAnimation(a);
         }
     }
 

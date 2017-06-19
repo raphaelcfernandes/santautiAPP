@@ -24,6 +24,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,30 +34,36 @@ import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapter;
 import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapterModel;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Neurologico.NaoSedado;
 import santauti.app.Model.Ficha.Neurologico.Neurologico;
+import santauti.app.Model.Ficha.Neurologico.Opcionais;
 import santauti.app.Model.Ficha.Neurologico.Sedado;
+import santauti.app.Model.Ficha.Neurologico.Sedativo;
 import santauti.app.R;
 
 /**
  * Created by Raphael Fernandes on 13-May-17.
  */
-//Nivel de consciencia: ok
+
 public class NeurologicoActivity extends GenericoActivity {
+    private TextInputEditText pic,ppc,sjo2;
     private Spinner nivelConscienciaSpinner,ramsaySpinner,rassSpinner,deficitMotorSpinner;
     private Spinner aberturaOcularSpinner,respostaVerbalSpinner,respostaMotoraSpinner,pupilaReatividadeLuzSpinner;
-    private Spinner pupilaSimetriaSpinner,pupilaTamanhoSpinner,tipoDecifitSpinner,ladoDeficitSpinner;
+    private Spinner pupilaSimetriaSpinner,pupilaTamanhoSpinner,tipoDecifitSpinner,ladoDeficitSpinner,diferencaPupilarSpinner;
     private RadioButton sedado_sim,sedado_nao,opcionalSim,opcionalNao;
-    private LinearLayout sedado_sim_layout,sedado_nao_layout,neurologico_opcional_layout,avaliacaoPupilarLayout,deficitMotorLado,deficitMotorTipo;
+    private View sedado_sim_layout,sedado_nao_layout,neurologico_opcional_layout,avaliacaoPupilarLayout,deficitMotorLado,deficitMotorTipo,pupilarTraco;
     private Realm realm;
     private ImageView avaliacaoPupilarToggleButton,sedadoToggleButton,deficitMotorToggleButton;
     private MyAnimation myAnimation;
     private Handler handler = new Handler();
-    private ArrayAdapter<String> adapterDecifitLado;
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NeurologicoAdapter neurologicoAdapter;
     private int pupilaRotationAngle=0,sedadoRotationAngle=0;
+    private TextView diferencaPupilar;
+    private ArrayAdapter<String> adapterPupilaDiferenca,adapterPupilaTamanho,adapterPupilaSimetria,adapterPupilaReatividadeLuz,adapterDecifitTipo,adapterDeficitMotor,adapterRass,adapterDecifitLado,adapterNivelConsciencia,adapterAberturaOcular,adapterRespostaVerbal,adapterRespostaMotora,adapterRamsay;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +71,14 @@ public class NeurologicoActivity extends GenericoActivity {
         setToolbar(getString(R.string.Neurologico));
 
         /******************************VARIAVEIS LAYOUTS*************************************/
-        sedado_sim_layout = (LinearLayout)findViewById(R.id.sedado_sim_layout);
-        sedado_nao_layout = (LinearLayout)findViewById(R.id.sedado_nao_layout);
-        neurologico_opcional_layout = (LinearLayout)findViewById(R.id.neurologico_opcional_layout);
-        avaliacaoPupilarLayout = (LinearLayout)findViewById(R.id.avaliacaoPupilar);
+        sedado_sim_layout = findViewById(R.id.sedado_sim_layout);
+        sedado_nao_layout = findViewById(R.id.sedado_nao_layout);
+        neurologico_opcional_layout = findViewById(R.id.neurologico_opcional_layout);
+        avaliacaoPupilarLayout = findViewById(R.id.avaliacaoPupilar);
 
-        deficitMotorLado = (LinearLayout)findViewById(R.id.ladoDecificitLayout);
-        deficitMotorTipo = (LinearLayout)findViewById(R.id.tipoDecificitLayout);
+        deficitMotorLado = findViewById(R.id.ladoDecificitLayout);
+        deficitMotorTipo = findViewById(R.id.tipoDecificitLayout);
+        //pupilarTraco = findViewById(R.id.avaliacaoPupilarTraco);
 
         /******************************VARIAVEIS LAYOUTS*************************************/
 
@@ -86,16 +95,25 @@ public class NeurologicoActivity extends GenericoActivity {
         deficitMotorToggleButton = (ImageView)findViewById(R.id.deficitMotorToggle);
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
 
+        pic = (TextInputEditText)findViewById(R.id.PIC);
+        ppc = (TextInputEditText)findViewById(R.id.PPC);
+        sjo2 = (TextInputEditText)findViewById(R.id.SjO2);
+
+        diferencaPupilar = (TextView)findViewById(R.id.diferencaPupilar);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         neurologicoAdapter = new NeurologicoAdapter(this,neurologicoAdapterModelList);
         recyclerView.setAdapter(neurologicoAdapter);
 
-
-        myAnimation = new MyAnimation();
-        prepareNeurologicoSpinners();
         realm = Realm.getDefaultInstance();
+        myAnimation = new MyAnimation();
+
+        prepareNeurologicoSpinners();
+        Ficha ficha = getProperFicha();
+        if(ficha.getNeurologico()!=null)
+            prepareDadosPreviamenteSalvos(ficha);
 
         avaliacaoPupilarToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,10 +121,12 @@ public class NeurologicoActivity extends GenericoActivity {
                 pupilaRotationAngle =  myAnimation.rotateImageView180(avaliacaoPupilarToggleButton,pupilaRotationAngle);
 
                 if(avaliacaoPupilarLayout.isShown()){
-                    myAnimation.slideUpLinearLayout(NeurologicoActivity.this,avaliacaoPupilarLayout);
+                    myAnimation.slideUpView(NeurologicoActivity.this,avaliacaoPupilarLayout);
+                    //pupilarTraco.setVisibility(View.VISIBLE);
                 }
                 else{
-                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this, avaliacaoPupilarLayout);
+                    myAnimation.slideDownView(NeurologicoActivity.this, avaliacaoPupilarLayout);
+                    //pupilarTraco.setVisibility(View.GONE);
                 }
             }
         });
@@ -116,22 +136,21 @@ public class NeurologicoActivity extends GenericoActivity {
             public void onClick(View view) {
                 if(sedadoRotationAngle==180) {
                     if (sedado_nao_layout.isShown())
-                         myAnimation.slideUpLinearLayout(NeurologicoActivity.this, sedado_nao_layout);
+                        myAnimation.slideUpView(NeurologicoActivity.this, sedado_nao_layout);
                     if (sedado_sim_layout.isShown())
-                         myAnimation.slideUpLinearLayout(NeurologicoActivity.this, sedado_sim_layout);
+                        myAnimation.slideUpView(NeurologicoActivity.this, sedado_sim_layout);
                     sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                 }
                 else{
                     if(sedado_sim.isChecked()) {
-                         myAnimation.slideDownLinearLayout(NeurologicoActivity.this, sedado_sim_layout);
+                        myAnimation.slideDownView(NeurologicoActivity.this, sedado_sim_layout);
                         sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                     }
                     if(sedado_nao.isChecked()) {
-                         myAnimation.slideDownLinearLayout(NeurologicoActivity.this, sedado_nao_layout);
+                        myAnimation.slideDownView(NeurologicoActivity.this, sedado_nao_layout);
                         sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                     }
                 }
-
             }
         });
 
@@ -142,19 +161,19 @@ public class NeurologicoActivity extends GenericoActivity {
 //                    deficitMotorToggleButton.setVisibility(View.VISIBLE);
 //                    if( getRotationAngle()!=180)
 //                         myAnimation.rotateImageView180(deficitMotorToggleButton);
-                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,deficitMotorTipo);
+                    myAnimation.slideDownView(NeurologicoActivity.this,deficitMotorTipo);
                     if(tipoDecifitSpinner.getSelectedItem()!=null)
-                         myAnimation.slideDownLinearLayout(NeurologicoActivity.this,deficitMotorTipo);
+                        myAnimation.slideDownView(NeurologicoActivity.this,deficitMotorTipo);
 //                    if(adapterDecifitLado.getPosition(ladoDeficitSpinner.getSelectedItem().toString())!=0)
-//                         myAnimation.slideDownLinearLayout(NeurologicoActivity.this,deficitMotorLado);
+//                         myAnimation.slideDownView(NeurologicoActivity.this,deficitMotorLado);
                 }
                 if(deficitMotorSpinner.getSelectedItem().toString().equals("Ausente")){
                     // myAnimation.rotateImageView180(deficitMotorToggleButton);
                     if(deficitMotorTipo.isShown())
-                         myAnimation.slideUpLinearLayout(NeurologicoActivity.this,deficitMotorTipo);
+                        myAnimation.slideUpView(NeurologicoActivity.this,deficitMotorTipo);
                     if(deficitMotorLado.isShown())
-                         myAnimation.slideUpLinearLayout(NeurologicoActivity.this,deficitMotorLado);
-                    // myAnimation.slideUpLinearLayout(NeurologicoActivity.this,deficitMotorToggleButton);
+                        myAnimation.slideUpView(NeurologicoActivity.this,deficitMotorLado);
+                    // myAnimation.slideUpView(NeurologicoActivity.this,deficitMotorToggleButton);
                 }
             }
             @Override
@@ -167,7 +186,7 @@ public class NeurologicoActivity extends GenericoActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!tipoDecifitSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
-                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,deficitMotorLado);
+                    myAnimation.slideDownView(NeurologicoActivity.this,deficitMotorLado);
                 }
             }
             @Override
@@ -176,6 +195,95 @@ public class NeurologicoActivity extends GenericoActivity {
             }
         });
 
+        pupilaSimetriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(pupilaSimetriaSpinner.getSelectedItem().equals("Anisocóricas")) {
+                    myAnimation.slideDownView(NeurologicoActivity.this,diferencaPupilar);
+                    myAnimation.slideDownView(NeurologicoActivity.this,diferencaPupilarSpinner);
+                }
+                if(diferencaPupilarSpinner.isShown() && diferencaPupilar.isShown() && !pupilaSimetriaSpinner.getSelectedItem().equals("Anisocóricas")){
+                    myAnimation.slideUpView(NeurologicoActivity.this,diferencaPupilar);
+                    myAnimation.slideUpView(NeurologicoActivity.this,diferencaPupilarSpinner);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    private void prepareDadosPreviamenteSalvos(Ficha ficha) {
+        int spinnerPosition;
+        //Nivel Consciencia
+        spinnerPosition = adapterNivelConsciencia.getPosition(ficha.getNeurologico().getNivelConsciencia());
+        nivelConscienciaSpinner.setSelection(spinnerPosition);
+
+        //Avaliacao Pupilar
+        spinnerPosition = adapterPupilaTamanho.getPosition(ficha.getNeurologico().getTamanhoPupila());
+        pupilaTamanhoSpinner.setSelection(spinnerPosition);
+        spinnerPosition = adapterPupilaSimetria.getPosition(ficha.getNeurologico().getSimetriaPupila());
+        pupilaSimetriaSpinner.setSelection(spinnerPosition);
+        if(ficha.getNeurologico().getSimetriaPupila().equals("Anisocóricas")){
+            spinnerPosition = adapterPupilaDiferenca.getPosition(ficha.getNeurologico().getDiferencaPupilar());
+            diferencaPupilarSpinner.setSelection(spinnerPosition);
+        }
+        spinnerPosition = adapterPupilaReatividadeLuz.getPosition(ficha.getNeurologico().getReatividadeLuzPupila());
+        pupilaReatividadeLuzSpinner.setSelection(spinnerPosition);
+
+        //Sedado sim
+        if(ficha.getNeurologico().getIsSedado()){
+            spinnerPosition = adapterRamsay.getPosition(ficha.getNeurologico().getSedado().getRamsay());
+            ramsaySpinner.setSelection(spinnerPosition);
+            spinnerPosition = adapterRass.getPosition(ficha.getNeurologico().getSedado().getRass());
+            rassSpinner.setSelection(spinnerPosition);
+            sedado_sim.setChecked(true);
+            for(Sedativo sedativo : ficha.getNeurologico().getSedado().getSedativo()){
+                NeurologicoAdapterModel neurologicoAdapterModel = new NeurologicoAdapterModel(sedativo.getTipoSedativo(),sedativo.getDoseSedativo());
+                neurologicoAdapterModelList.add(neurologicoAdapterModel);
+                neurologicoAdapter.notifyItemInserted(neurologicoAdapter.getItemCount()-1);
+            }
+            neurologicoAdapter.notifyDataSetChanged();
+        }
+
+        //Sedado nao
+        if(!ficha.getNeurologico().getIsSedado()){
+            aberturaOcularSpinner.setSelection(ficha.getNeurologico().getNaoSedado().getAberturaOcular());
+            respostaVerbalSpinner.setSelection(ficha.getNeurologico().getNaoSedado().getRespostaVerbal());
+            respostaMotoraSpinner.setSelection(ficha.getNeurologico().getNaoSedado().getRespostaMotora());
+            sedado_nao.setChecked(true);
+        }
+
+        //Deficit Motor Presente
+        if(ficha.getNeurologico().getDeficitMotor()){
+            spinnerPosition = adapterDeficitMotor.getPosition("Presente");
+            deficitMotorSpinner.setSelection(spinnerPosition);
+            spinnerPosition = adapterDecifitTipo.getPosition(ficha.getNeurologico().getTipoDecifit());
+            tipoDecifitSpinner.setSelection(spinnerPosition);
+            spinnerPosition = adapterDecifitLado.getPosition(ficha.getNeurologico().getLadoDeficit());
+            ladoDeficitSpinner.setSelection(spinnerPosition);
+
+        }
+
+        //Deficit motor Ausente
+        if(!ficha.getNeurologico().getDeficitMotor()){
+            spinnerPosition = adapterDeficitMotor.getPosition("Ausente");
+            deficitMotorSpinner.setSelection(spinnerPosition);
+        }
+
+        //Opcionais sim
+        if(ficha.getNeurologico().getOpcionais()!=null){
+            opcionalSim.setChecked(true);
+            pic.setText(String.valueOf(ficha.getNeurologico().getOpcionais().getPic()));
+            ppc.setText(String.valueOf(ficha.getNeurologico().getOpcionais().getPpc()));
+            sjo2.setText(String.valueOf(ficha.getNeurologico().getOpcionais().getSjo2()));
+            myAnimation.slideDownView(NeurologicoActivity.this,neurologico_opcional_layout);
+        }
+        else
+            opcionalNao.setChecked(true);
     }
 
     @Override
@@ -200,20 +308,20 @@ public class NeurologicoActivity extends GenericoActivity {
         return true;
     }
 
-    public void neuroligicoSedadoOnRadioButtonClicked(View view){
+    public void neurologicoSedadoOnRadioButtonClicked(View view){
         switch(view.getId()) {
             case R.id.sedado_sim:
                 if(sedado_nao_layout.isShown()) {//Se layout de nao sedado estiver aparecendo, ele deve ser escondido
-                     myAnimation.slideUpLinearLayout(NeurologicoActivity.this, sedado_nao_layout);
+                    myAnimation.slideUpView(NeurologicoActivity.this, sedado_nao_layout);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                             myAnimation.slideDownLinearLayout(NeurologicoActivity.this, sedado_sim_layout);
+                            myAnimation.slideDownView(NeurologicoActivity.this, sedado_sim_layout);
                         }
                     }, 250);
                 }
                 else if(!sedado_sim_layout.isShown())//Caso n esteja nada aparecendo, mostrar sedado layout
-                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,sedado_sim_layout);
+                    myAnimation.slideDownView(NeurologicoActivity.this,sedado_sim_layout);
                 /*
                  * Verifica se o toggle button de retrair/exapandir o layout está na posiçao inicial
                  */
@@ -222,16 +330,16 @@ public class NeurologicoActivity extends GenericoActivity {
                 break;
             case R.id.sedado_nao:
                 if(sedado_sim_layout.isShown()) {
-                     myAnimation.slideUpLinearLayout(NeurologicoActivity.this, sedado_sim_layout);
+                    myAnimation.slideUpView(NeurologicoActivity.this, sedado_sim_layout);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                             myAnimation.slideDownLinearLayout(NeurologicoActivity.this, sedado_nao_layout);
+                            myAnimation.slideDownView(NeurologicoActivity.this, sedado_nao_layout);
                         }
                     }, 250);
                 }
                 else if(!sedado_nao_layout.isShown())
-                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,sedado_nao_layout);
+                    myAnimation.slideDownView(NeurologicoActivity.this,sedado_nao_layout);
                 if(sedadoRotationAngle==0)
                     sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                 break;
@@ -243,11 +351,11 @@ public class NeurologicoActivity extends GenericoActivity {
         switch(view.getId()) {
             case R.id.neurologico_opcional_sim:
                 if(!neurologico_opcional_layout.isShown())
-                     myAnimation.slideDownLinearLayout(NeurologicoActivity.this,neurologico_opcional_layout);
+                    myAnimation.slideDownView(NeurologicoActivity.this,neurologico_opcional_layout);
                 break;
             case R.id.neurologico_opcional_nao:
                 if(neurologico_opcional_layout.isShown())
-                     myAnimation.slideUpLinearLayout(NeurologicoActivity.this,neurologico_opcional_layout);
+                    myAnimation.slideUpView(NeurologicoActivity.this,neurologico_opcional_layout);
                 break;
         }
     }
@@ -259,15 +367,36 @@ public class NeurologicoActivity extends GenericoActivity {
         String[] deficitMotor = {defaultSpinnerString,"Presente","Ausente"};
         String[] deficitTipo = {defaultSpinnerString,"Paresia","Plegia"};
         String[] deficitLado = {defaultSpinnerString,"Esquerdo","Direito","Ambos os lados"};
-        String[] aberturaOcular = {defaultSpinnerString,"4 - Espontânea","3 - À voz","2 - À dor","1 - Nenhuma"};
-        String[] respostaVerbal = {defaultSpinnerString,"5 - Orientada","4 - Confusa","3 - Palavras inapropriadas","2 - Palavras incompreensiveis","1 - Nenhuma"};
-        String[] respostaMotora = {defaultSpinnerString,"6 - Obedece comandos","5 - Localiza dor","4 - Movimento de retirada","3 - Flexão anormal","2 - Extensão anormal","1 - Nenhuma"};
+        String[] aberturaOcular = {defaultSpinnerString,"1 - Nenhuma","2 - À dor","3 - À voz","4 - Espontânea"};
+        String[] respostaVerbal = {defaultSpinnerString,"1 - Nenhuma","2 - Palavras incompreensiveis","3 - Palavras inapropriadas","4 - Confusa","5 - Orientada"};
+        String[] respostaMotora = {defaultSpinnerString,"1 - Nenhuma","2 - Extensão anormal","3 - Flexão anormal","4 - Movimento de retirada","5 - Localiza dor","6 - Obedece comandos"};
         String[] pupilaReatividadeLuz = {defaultSpinnerString,"RFM+","RFM-"};
         String[] pupilaSimetria = {defaultSpinnerString,"Isocóricas","Anisocóricas"};
         String[] pupilaTamanho = {defaultSpinnerString,"Miose","Midríase"};
+        String[] diferencaPupila = {defaultSpinnerString,"Esquerda > Direita","Direita > Esquerda"};
+
+        diferencaPupilarSpinner = (Spinner)findViewById(R.id.pupila_simetria_diferenca_spinner);
+        adapterPupilaDiferenca = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, diferencaPupila){
+            @Override
+            public boolean isEnabled(int position) {
+                return position != 0;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0)
+                    tv.setTextColor(Color.GRAY);
+                else
+                    tv.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
+        diferencaPupilarSpinner.setAdapter(adapterPupilaDiferenca);
 
         nivelConscienciaSpinner = (Spinner) findViewById(R.id.material_spinner1);
-        ArrayAdapter<String> adapterNivelConsciencia = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, nivelConsciencia){
+        adapterNivelConsciencia = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, nivelConsciencia){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -287,7 +416,7 @@ public class NeurologicoActivity extends GenericoActivity {
         nivelConscienciaSpinner.setAdapter(adapterNivelConsciencia);
 
         ramsaySpinner = (Spinner)findViewById(R.id.ramsay_spinner);
-        ArrayAdapter<String> adapterRamsay = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, ramsay){
+        adapterRamsay = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, ramsay){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -307,7 +436,7 @@ public class NeurologicoActivity extends GenericoActivity {
         ramsaySpinner.setAdapter(adapterRamsay);
 
         rassSpinner = (Spinner)findViewById(R.id.rass_spinner);
-        ArrayAdapter<String> adapterRass = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, rass){
+        adapterRass = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, rass){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -327,7 +456,7 @@ public class NeurologicoActivity extends GenericoActivity {
         rassSpinner.setAdapter(adapterRass);
 
         deficitMotorSpinner = (Spinner)findViewById(R.id.deficitMotor_spinner);
-        ArrayAdapter<String> adapterDeficitMotor = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, deficitMotor){
+        adapterDeficitMotor = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, deficitMotor){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -347,7 +476,7 @@ public class NeurologicoActivity extends GenericoActivity {
         deficitMotorSpinner.setAdapter(adapterDeficitMotor);
 
         tipoDecifitSpinner = (Spinner)findViewById(R.id.deficitMotor_tipo);
-        ArrayAdapter<String> adapterDecifitTipo = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, deficitTipo){
+        adapterDecifitTipo = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, deficitTipo){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -387,7 +516,7 @@ public class NeurologicoActivity extends GenericoActivity {
         ladoDeficitSpinner.setAdapter(adapterDecifitLado);
 
         aberturaOcularSpinner = (Spinner)findViewById(R.id.aberturaOcular_spinner);
-        ArrayAdapter<String> adapterAberturaOcular = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, aberturaOcular){
+        adapterAberturaOcular = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, aberturaOcular){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -407,7 +536,7 @@ public class NeurologicoActivity extends GenericoActivity {
         aberturaOcularSpinner.setAdapter(adapterAberturaOcular);
 
         respostaVerbalSpinner = (Spinner)findViewById(R.id.respostaVerbal_spinner);
-        ArrayAdapter<String> adapterRespostaVerbal = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, respostaVerbal){
+        adapterRespostaVerbal = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, respostaVerbal){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -427,7 +556,7 @@ public class NeurologicoActivity extends GenericoActivity {
         respostaVerbalSpinner.setAdapter(adapterRespostaVerbal);
 
         respostaMotoraSpinner = (Spinner)findViewById(R.id.respostaMotora_spinner);
-        ArrayAdapter<String> adapterRespostaMotora = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, respostaMotora){
+        adapterRespostaMotora = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, respostaMotora){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -447,7 +576,7 @@ public class NeurologicoActivity extends GenericoActivity {
         respostaMotoraSpinner.setAdapter(adapterRespostaMotora);
 
         pupilaReatividadeLuzSpinner = (Spinner)findViewById(R.id.pupila_reatividade_spinner);
-        ArrayAdapter<String> adapterPupilaReatividadeLuz = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, pupilaReatividadeLuz){
+        adapterPupilaReatividadeLuz = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, pupilaReatividadeLuz){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -467,7 +596,7 @@ public class NeurologicoActivity extends GenericoActivity {
         pupilaReatividadeLuzSpinner.setAdapter(adapterPupilaReatividadeLuz);
 
         pupilaSimetriaSpinner = (Spinner)findViewById(R.id.pupila_simetria_spinner);
-        ArrayAdapter<String> adapterPupilaSimetria = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, pupilaSimetria){
+        adapterPupilaSimetria = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, pupilaSimetria){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -487,7 +616,7 @@ public class NeurologicoActivity extends GenericoActivity {
         pupilaSimetriaSpinner.setAdapter(adapterPupilaSimetria);
 
         pupilaTamanhoSpinner = (Spinner)findViewById(R.id.pupila_tamanho_spinner);
-        ArrayAdapter<String> adapterPupilaTamanho = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, pupilaTamanho){
+        adapterPupilaTamanho = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, pupilaTamanho){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -505,93 +634,105 @@ public class NeurologicoActivity extends GenericoActivity {
             }
         };
         pupilaTamanhoSpinner.setAdapter(adapterPupilaTamanho);
+
+
     }
 
     private void verificaCamposENotificaAdapter(){
+        boolean nivelConsciencia=false,avaliacaoPupilar=false,sedadoSim=false,sedadoNao=false,deficitMotor=false,opcional=false;
         realm.beginTransaction();
         int i=0;
+
         Neurologico neurologico = realm.createObject(Neurologico.class);
-        if(!nivelConscienciaSpinner.getSelectedItem().toString().equals(defaultSpinnerString)) {
+        if(!nivelConscienciaSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
             neurologico.setNivelConsciencia(nivelConscienciaSpinner.getSelectedItem().toString());
-            i++;
-        }
-        if(!pupilaTamanhoSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
-            neurologico.setTamanhoPupila(pupilaTamanhoSpinner.getSelectedItem().toString());
-            i++;
-        }
-        if(!isSpinnerDefault(pupilaSimetriaSpinner.getSelectedItem().toString())){
-            neurologico.setSimetriaPupila(pupilaSimetriaSpinner.getSelectedItem().toString());
-            i++;
-        }
-        if(!isSpinnerDefault(pupilaReatividadeLuzSpinner.getSelectedItem().toString())){
-            neurologico.setReatividadeLuzPupila(pupilaReatividadeLuzSpinner.getSelectedItem().toString());
-            i++;
+            nivelConsciencia=true;
         }
 
-        if(deficitMotorSpinner.getSelectedItem().toString().equals("Presente")){
-            neurologico.setDeficitMotor(1);
-            if(!tipoDecifitSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
-                neurologico.setTipoDecifit(tipoDecifitSpinner.getSelectedItem().toString());
-                i++;
+        /**
+         * Avaliaçao Pupilar
+         */
+        if(!pupilaSimetriaSpinner.getSelectedItem().toString().equals(defaultSpinnerString) &&
+                !pupilaTamanhoSpinner.getSelectedItem().toString().equals(defaultSpinnerString) &&
+                !pupilaReatividadeLuzSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
+            if(pupilaSimetriaSpinner.getSelectedItem().toString().equals("Anisocóricas") &&
+                    !diferencaPupilarSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
+                neurologico.setDiferencaPupilar(diferencaPupilarSpinner.getSelectedItem().toString());
             }
-            if(!ladoDeficitSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
-                neurologico.setLadoDeficit(ladoDeficitSpinner.getSelectedItem().toString());
-                i++;
-            }
-        }
-        else if(deficitMotorSpinner.getSelectedItem().toString().equals("Ausente")){
-            neurologico.setDeficitMotor(0);
+            neurologico.setSimetriaPupila(pupilaSimetriaSpinner.getSelectedItem().toString());
+            neurologico.setTamanhoPupila(pupilaTamanhoSpinner.getSelectedItem().toString());
+            neurologico.setReatividadeLuzPupila(pupilaReatividadeLuzSpinner.getSelectedItem().toString());
+            avaliacaoPupilar=true;
         }
 
 
         if(sedado_sim.isChecked()){
-            Sedado sedado = realm.createObject(Sedado.class);
-            neurologico.setIsSedado(1); //Posso alterar isso no model do neurologico? Setar NaoSedado e criar objeto Sedado automaticamente
-            neurologico.setNaoSedado(null);
-
-            if(!ramsaySpinner.getSelectedItem().toString().equals(defaultSpinnerString)) {
+            if(!ramsaySpinner.getSelectedItem().toString().equals(defaultSpinnerString) &&
+                    !rassSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
+                Sedado sedado = realm.createObject(Sedado.class);
+                neurologico.setIsSedado(true);
                 sedado.setRamsay(ramsaySpinner.getSelectedItem().toString());
-                i++;
-            }
-            if(!rassSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
                 sedado.setRass(rassSpinner.getSelectedItem().toString());
-                i++;
-            }
-//            if(!isTextInpudEditTextEmpty(tipoSedativo) && !isTextInpudEditTextEmpty(doseSedativo)){
-//                sedado.putIntoSedativo(tipoSedativo.toString(),Integer.parseInt(doseSedativo.toString()));
-//                i++;
-//            }
-        }
-
-        else if(sedado_nao.isChecked()){
-            NaoSedado naoSedado = realm.createObject(NaoSedado.class);
-            if(!isSpinnerDefault(aberturaOcularSpinner.getSelectedItem().toString())){
-
-            }
-            if(!isSpinnerDefault(respostaVerbalSpinner.getSelectedItem().toString())){
-
-            }
-            if(!isSpinnerDefault(respostaMotoraSpinner.getSelectedItem().toString())){
-
+                sedadoSim=true;
+                neurologico.setSedado(sedado);
+                //Fzer lista de sedativos
+                for(NeurologicoAdapterModel h : neurologicoAdapterModelList){
+                    Sedativo sedativo = realm.createObject(Sedativo.class);
+                    sedativo.setDoseSedativo(h.getDoseSedativo());
+                    sedativo.setTipoSedativo(h.getTipoSedativo());
+                    sedado.getSedativo().add(sedativo);
+                }
             }
 
         }
+        if(sedado_nao.isChecked()){
+            if(!aberturaOcularSpinner.getSelectedItem().toString().equals(defaultSpinnerString) &&
+                    !respostaMotoraSpinner.getSelectedItem().toString().equals(defaultSpinnerString) &&
+                    !respostaVerbalSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
+                neurologico.setIsSedado(false);
+                NaoSedado naoSedado = realm.createObject(NaoSedado.class);
+                naoSedado.setAberturaOcular(adapterAberturaOcular.getPosition(aberturaOcularSpinner.getSelectedItem().toString()));
+                naoSedado.setRespostaMotora(adapterRespostaMotora.getPosition(respostaMotoraSpinner.getSelectedItem().toString()));
+                naoSedado.setRespostaVerbal(adapterRespostaVerbal.getPosition(respostaVerbalSpinner.getSelectedItem().toString()));
+                sedadoNao=true;
+                neurologico.setNaoSedado(naoSedado);
+            }
+        }
+
+        if(deficitMotorSpinner.getSelectedItem().toString().equals("Presente")){
+            if(!tipoDecifitSpinner.getSelectedItem().toString().equals(defaultSpinnerString) &&
+                    !ladoDeficitSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
+                neurologico.setDeficitMotor(true);
+                neurologico.setTipoDecifit(tipoDecifitSpinner.getSelectedItem().toString());
+                neurologico.setLadoDeficit(ladoDeficitSpinner.getSelectedItem().toString());
+                deficitMotor=true;
+            }
+        }
+
+        if(deficitMotorSpinner.getSelectedItem().toString().equals("Ausente")) {
+            neurologico.setDeficitMotor(false);
+            deficitMotor=true;
+        }
+
         if(opcionalSim.isChecked()){
-
+            if(!isTextInpudEditTextEmpty(pic) && !isTextInpudEditTextEmpty(ppc) && !isTextInpudEditTextEmpty(sjo2)) {
+                Opcionais opcionais = realm.createObject(Opcionais.class);
+                opcionais.setPic(getIntegerFromTextInputEditText(pic));
+                opcionais.setPpc(getIntegerFromTextInputEditText(ppc));
+                opcionais.setSjo2(getIntegerFromTextInputEditText(sjo2));
+                neurologico.setOpcionais(opcionais);
+            }
         }
-        else if(opcionalSim.isChecked()){
 
+        if(opcionalNao.isChecked() || (!opcionalSim.isChecked() && !opcionalNao.isChecked()))
+            neurologico.setOpcionais(null);
+
+        if(nivelConsciencia && avaliacaoPupilar && (sedadoSim || sedadoNao) && deficitMotor) {
+            Ficha r = getProperFicha();
+            r.setNeurologico(neurologico);
+            realm.copyToRealmOrUpdate(r);
+            changeCardColor();
         }
-//        if(gasometrialArterial.getText().toString().length()>0) {
-//            realm.beginTransaction();
-//            Metabolico metabolico = realm.createObject(Metabolico.class);
-//            metabolico.setGasometriaArterial(gasometriaArterialInput);
-//            Ficha r = getProperFicha();
-//            r.setMetabolico(metabolico);
-//            realm.copyToRealmOrUpdate(r);
-//            realm.commitTransaction();
-//            changeCardColor();
-//        }
         realm.commitTransaction();
     }
 
@@ -610,7 +751,7 @@ public class NeurologicoActivity extends GenericoActivity {
         builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                addDataFromDialogIntoAdapter(tipoSedativo.getText().toString(),Integer.parseInt(doseSedativo.getText().toString()));
             }
         });
 
@@ -625,6 +766,15 @@ public class NeurologicoActivity extends GenericoActivity {
         final AlertDialog dialog = builder.show();
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+    }
+
+    private void addDataFromDialogIntoAdapter(String droga,int dose){
+        if(!droga.equals(defaultSpinnerString)){
+            NeurologicoAdapterModel neurologicoAdapterModel = new NeurologicoAdapterModel(droga,dose);
+            neurologicoAdapterModelList.add(neurologicoAdapterModel);
+            neurologicoAdapter.notifyItemInserted(neurologicoAdapter.getItemCount()-1);
+            neurologicoAdapter.notifyDataSetChanged();
+        }
     }
 
 }

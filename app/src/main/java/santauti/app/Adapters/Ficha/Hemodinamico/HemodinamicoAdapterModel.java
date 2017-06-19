@@ -7,13 +7,13 @@ import android.widget.Spinner;
  * Created by Raphael Fernandes on 14-Jun-17.
  */
 
-public class HemodinamicoModel {
+public class HemodinamicoAdapterModel {
     private ImageView deleteIcon;
     private ImageView editIcon;
     private String droga;
     private int dose;
 
-    public HemodinamicoModel(String droga, int dose){
+    public HemodinamicoAdapterModel(String droga, int dose){
 
         this.droga=droga;
         this.dose=dose;

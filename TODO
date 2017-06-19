@@ -16,13 +16,11 @@ FICHA:
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards
     - Como fzer de uma maneira que o usuário n perdeu o que preencheu, caso troque de ficha ou volte pra FichaActivity?
     - Criar layouts:
-        - Neurologico -> Done
-            - Arrumar disposiçao de itens
+        - Neurologico -> Layout?
             - Deficit Motor:
                 - (Criar um bonequinho clicavel direito/esquerdo)?
-                - Tipo de deficit? Nome certo? Tem como acontecer em ambos os lados?
-            - Pupila -> OBS: Quando anisocóricas, sempre anotar a pupila maior em relação à menor - pupilas anisocóricas, esquerda maior que direita (E> D).
-            - Dose e sedativo -> Pode haver + de 1?
+            - Dose e sedativo -> Obrigatorio?
+            - Backend ok. Está salvando no banco com a idFicha correto.
         - Hemodinamico -> Layout?
             - Backend ok. Está salvando no banco com a idFicha correto.
             - Editar -> Drogas Vasoativas
@@ -30,16 +28,3 @@ FICHA:
             - Backend ok. Está salvando no banco com a idFicha correto.
             - Manter dados já salvados. ex:
                 - Preenche invasivo, retornar a ficha, preencher nao invasivo, retornar a ficha e manter os dados que havia de invasivo
-            - Depois de preenchido, nao está mostrando os campos
-        - Gastrointestinal -> Layout?
-            - Backend ok. Está salvando no banco com a idFicha correto.
-        - Renal -> Layout?
-            - Backend ok. Está salvando no banco com a idFicha correto.
-        - Hematologico -> Layout?
-            - Backend ok. Está salvando no banco com a idFicha correto.
-        - Endocrino -> Layout?
-            - Backend ok. Está salvando no banco com a idFicha correto.
-        - Infeccioso -> Layout?
-            - Backend ok. Está salvando no banco com a idFicha correto.
-        - Metabolico -> Layout?
-            - Backend ok. Está salvando no banco com a idFicha correto.

@@ -11,19 +11,28 @@ public class Neurologico extends RealmObject{
     private String tamanhoPupila;
     private String simetriaPupila;
     private String reatividadeLuzPupila;
-    private int isSedado;
+    private String diferencaPupilar;
+    private boolean isSedado;
     private Sedado sedado;
     private NaoSedado naoSedado;
     private Opcionais opcionais;
-    private int deficitMotor;
+    private boolean deficitMotor;
     private String tipoDecifit;
     private String ladoDeficit;
 
-    public int getDeficitMotor() {
+    public String getDiferencaPupilar() {
+        return diferencaPupilar;
+    }
+
+    public void setDiferencaPupilar(String diferencaPupilar) {
+        this.diferencaPupilar = diferencaPupilar;
+    }
+
+    public boolean getDeficitMotor() {
         return deficitMotor;
     }
 
-    public void setDeficitMotor(int deficitMotor) {
+    public void setDeficitMotor(boolean deficitMotor) {
         this.deficitMotor = deficitMotor;
     }
 
@@ -83,11 +92,11 @@ public class Neurologico extends RealmObject{
         this.reatividadeLuzPupila = reatividadeLuzPupila;
     }
 
-    public int getIsSedado() {
+    public boolean getIsSedado() {
         return isSedado;
     }
 
-    public void setIsSedado(int isSedado) {
+    public void setIsSedado(boolean isSedado) {
         this.isSedado = isSedado;
     }
 

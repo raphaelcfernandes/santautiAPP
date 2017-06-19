@@ -51,7 +51,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/escolha_opcao"
             android:layout_marginStart="10dp"
-            android:textColorHint="@color/colorPrimary"
             android:gravity="center"
             />
     </LinearLayout>
@@ -83,16 +82,4 @@
 
     <include layout="@layout/content_recycler_view"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="3px"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/colorPrimary">
-
-    </LinearLayout>
 </LinearLayout>
-<!--Sim:-->
-<!-- - ramsay: numerico-->
-<!-- - RASS (http://www.ineuro.com.br/wp-content/uploads/Escala-RASS-de-Seda%C3%A7%C3%A3o.pdf)-->
-<!-- - Dose + tipo sedativo (opcional)-->

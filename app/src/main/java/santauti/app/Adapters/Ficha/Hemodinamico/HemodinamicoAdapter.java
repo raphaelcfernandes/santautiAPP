@@ -20,7 +20,7 @@ import santauti.app.R;
 
 public class HemodinamicoAdapter extends RecyclerView.Adapter<HemodinamicoAdapter.ViewHolder>{
     private Context context;
-    private List<HemodinamicoModel> hemodinamicoAdapterModelList;
+    private List<HemodinamicoAdapterModel> hemodinamicoAdapterModelList;
     private int lastPosition=-1;
     private MyAnimation myAnimation = new MyAnimation();
     private OnItemClickListener mItemClickListener;
@@ -57,7 +57,7 @@ public class HemodinamicoAdapter extends RecyclerView.Adapter<HemodinamicoAdapte
     public void setOnItemClickListener(final HemodinamicoAdapter.OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
-    public HemodinamicoAdapter(Context context, List<HemodinamicoModel> hemodinamicoAdapterModelList){
+    public HemodinamicoAdapter(Context context, List<HemodinamicoAdapterModel> hemodinamicoAdapterModelList){
         this.context=context;
         this.hemodinamicoAdapterModelList = hemodinamicoAdapterModelList;
     }
@@ -71,7 +71,7 @@ public class HemodinamicoAdapter extends RecyclerView.Adapter<HemodinamicoAdapte
 
     @Override
     public void onBindViewHolder(final HemodinamicoAdapter.ViewHolder holder, final int position) {
-        HemodinamicoModel hemodinamicoModel = hemodinamicoAdapterModelList.get(position);
+        HemodinamicoAdapterModel hemodinamicoModel = hemodinamicoAdapterModelList.get(position);
         holder.dose.setText(String.valueOf(hemodinamicoModel.getDose()));
         holder.droga.setText(hemodinamicoModel.getDroga());
         setAnimationNewItem(holder.itemView, position);

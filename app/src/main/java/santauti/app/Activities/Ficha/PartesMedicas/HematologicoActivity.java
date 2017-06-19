@@ -30,7 +30,7 @@ import santauti.app.R;
 
 public class HematologicoActivity extends GenericoActivity {
     private Spinner tromboprofilaxiaSpinner;
-    private LinearLayout tromboprofilaxia;
+    private View tromboprofilaxia;
     private RadioButton hemogramaS,hemogramaN,tromboprofilaxiaS,tromboprofilaxiaN;
     private Realm realm;
     private ArrayAdapter<String> adapterProfilaxia;
@@ -41,7 +41,7 @@ public class HematologicoActivity extends GenericoActivity {
         setContentView(R.layout.activity_hematologico);
         Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tbar);
-        tromboprofilaxia = (LinearLayout)findViewById(R.id.tromboprofilaxia_layout);
+        tromboprofilaxia = findViewById(R.id.tromboprofilaxia_layout);
 
         hemogramaS = (RadioButton)findViewById(R.id.hemograma_sim);
         hemogramaN = (RadioButton)findViewById(R.id.hemograma_nao);
@@ -102,12 +102,12 @@ public class HematologicoActivity extends GenericoActivity {
             case R.id.tromboprofilaxia_sim:
                 SnackbarCreator.camposAPreencher(view);
                 if(!tromboprofilaxia.isShown())
-                    myAnimation.slideDownLinearLayout(this,tromboprofilaxia);
+                    myAnimation.slideDownView(this,tromboprofilaxia);
                 break;
             case R.id.tromboprofilaxia_nao:
                 SnackbarCreator.camposAPreencher(view);
                 if(tromboprofilaxia.isShown()) {
-                    myAnimation.slideUpLinearLayout(this, tromboprofilaxia);
+                    myAnimation.slideDownView(this, tromboprofilaxia);
                 }
                 break;
         }

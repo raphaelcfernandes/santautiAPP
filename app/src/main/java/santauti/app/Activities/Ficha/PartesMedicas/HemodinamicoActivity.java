@@ -28,7 +28,7 @@ import java.util.List;
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Adapters.Ficha.Hemodinamico.HemodinamicoAdapter;
-import santauti.app.Adapters.Ficha.Hemodinamico.HemodinamicoModel;
+import santauti.app.Adapters.Ficha.Hemodinamico.HemodinamicoAdapterModel;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Hemodinamico.Hemodinamico;
@@ -45,7 +45,7 @@ public class HemodinamicoActivity extends GenericoActivity {
     private LinearLayout hemodinamico_opcional_layout,bulhas_layout;
     private boolean bulhasIsShown=false;
     private MyAnimation myAnimation;
-    private List<HemodinamicoModel> hemodinamicoModelList = new ArrayList<>();
+    private List<HemodinamicoAdapterModel> hemodinamicoModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private HemodinamicoAdapter hemodinamicoAdapter;
     private TextInputEditText frequenciaCardiaca,PAM,PVC,swan_ganz;
@@ -94,7 +94,7 @@ public class HemodinamicoActivity extends GenericoActivity {
                         prepareBulhasAritmicoSpinner();
                     if (!bulhasIsShown) {
                         bulhasIsShown = true;
-                         myAnimation.slideDownLinearLayout(HemodinamicoActivity.this, bulhas_layout);
+                         myAnimation.slideDownView(HemodinamicoActivity.this, bulhas_layout);
                     }
                 } else if (ritmoSpinner.getSelectedItem().toString().equals("Ritmico")) {
                     /*
@@ -105,7 +105,7 @@ public class HemodinamicoActivity extends GenericoActivity {
                         prepareBulhasRitmicoSpinner();
                     if (!bulhasIsShown) {
                         bulhasIsShown = true;
-                         myAnimation.slideDownLinearLayout(HemodinamicoActivity.this, bulhas_layout);
+                         myAnimation.slideDownView(HemodinamicoActivity.this, bulhas_layout);
                     }
                 }
             }
@@ -126,11 +126,11 @@ public class HemodinamicoActivity extends GenericoActivity {
             ritmoSpinner.setSelection(spinnerPosition);
             spinnerPosition = adapterBulhas.getPosition(ficha.getHemodinamico().getBulhas());
             bulhasSpinner.setSelection(spinnerPosition);
-            myAnimation.slideDownLinearLayout(HemodinamicoActivity.this,bulhas_layout);
+            myAnimation.slideDownView(HemodinamicoActivity.this,bulhas_layout);
             frequenciaCardiaca.setText(String.valueOf(ficha.getHemodinamico().getFreqCardiaca()));
             if(ficha.getHemodinamico().getHemodinamicoOpcionals().size()>0){//Verifica e percorre lista de drogas vasoativas ativadas
                 for(HemodinamicoOpcional h : ficha.getHemodinamico().getHemodinamicoOpcionals()){
-                    HemodinamicoModel hemodinamicoModel = new HemodinamicoModel(h.getDroga(),h.getDose());
+                    HemodinamicoAdapterModel hemodinamicoModel = new HemodinamicoAdapterModel(h.getDroga(),h.getDose());
                     hemodinamicoModelList.add(hemodinamicoModel);
                     hemodinamicoAdapter.notifyItemInserted(hemodinamicoAdapter.getItemCount()-1);
                 }
@@ -141,7 +141,7 @@ public class HemodinamicoActivity extends GenericoActivity {
                 PAM.setText(String.valueOf(ficha.getHemodinamico().getPam()));
                 swan_ganz.setText(String.valueOf(ficha.getHemodinamico().getSwan_ganz()));
                 PVC.setText(String.valueOf(ficha.getHemodinamico().getPvc()));
-                 myAnimation.slideDownLinearLayout(this,hemodinamico_opcional_layout);
+                 myAnimation.slideDownView(this,hemodinamico_opcional_layout);
             }
             else
                 hemodinamico_opcional_nao.setChecked(true);
@@ -201,7 +201,7 @@ public class HemodinamicoActivity extends GenericoActivity {
             hemodinamico.setSwan_ganz(getIntegerFromTextInputEditText(swan_ganz));
         }
 
-        for(HemodinamicoModel h : hemodinamicoModelList){
+        for(HemodinamicoAdapterModel h : hemodinamicoModelList){
             HemodinamicoOpcional hemodinamicoOpcional = realm.createObject(HemodinamicoOpcional.class);
             hemodinamicoOpcional.setDose(h.getDose());
             hemodinamicoOpcional.setDroga(h.getDroga());
@@ -292,10 +292,10 @@ public class HemodinamicoActivity extends GenericoActivity {
     public void hemodinamicoOpcionalOnRadioButtonClicked(View view){
         switch(view.getId()) {
             case R.id.hemodinamico_opcional_sim:
-                 myAnimation.slideDownLinearLayout(HemodinamicoActivity.this,hemodinamico_opcional_layout);
+                 myAnimation.slideDownView(HemodinamicoActivity.this,hemodinamico_opcional_layout);
                 break;
             case R.id.hemodinamico_opcional_nao:
-                 myAnimation.slideUpLinearLayout(HemodinamicoActivity.this,hemodinamico_opcional_layout);
+                 myAnimation.slideUpView(HemodinamicoActivity.this,hemodinamico_opcional_layout);
                 break;
         }
     }
@@ -355,7 +355,7 @@ public class HemodinamicoActivity extends GenericoActivity {
 
     private void addDataFromDialogIntoAdapter(String droga,int dose){
         if(!droga.equals(defaultSpinnerString)){
-            HemodinamicoModel h = new HemodinamicoModel(droga,dose);
+            HemodinamicoAdapterModel h = new HemodinamicoAdapterModel(droga,dose);
             hemodinamicoModelList.add(h);
             hemodinamicoAdapter.notifyItemInserted(hemodinamicoAdapter.getItemCount()-1);
             hemodinamicoAdapter.notifyDataSetChanged();

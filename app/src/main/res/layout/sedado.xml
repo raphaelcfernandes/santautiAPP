@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sedado_sim"
-            android:onClick="neuroligicoSedadoOnRadioButtonClicked"/>
+            android:onClick="neurologicoSedadoOnRadioButtonClicked"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sedado_nao"
-            android:onClick="neuroligicoSedadoOnRadioButtonClicked"/>
+            android:onClick="neurologicoSedadoOnRadioButtonClicked"/>
     </RadioGroup>
     <ImageView
         android:id="@+id/sedadoToggleButton"

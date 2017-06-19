@@ -31,7 +31,20 @@
 
             <include layout="@layout/avaliacao_pupilar"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimary">
+
+            </LinearLayout>
+
             <include layout="@layout/sedado"/>
+
+            <include layout="@layout/sim_sedado"/>
+
+            <include layout="@layout/nao_sedado"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,10 +53,6 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/colorPrimary">
             </LinearLayout>
-
-            <include layout="@layout/sim_sedado"/>
-
-            <include layout="@layout/nao_sedado"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

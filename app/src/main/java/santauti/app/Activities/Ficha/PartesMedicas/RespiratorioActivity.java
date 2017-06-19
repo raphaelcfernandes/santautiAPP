@@ -76,6 +76,7 @@ public class RespiratorioActivity extends GenericoActivity {
         ipap.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getIpap()));
         epap.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getEpap()));
         saturacao.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getSaturacao()));
+        myAnimation.slideDownView(this,naoInvasivoView);
     }
 
     private void preencherInvasivo(){
@@ -87,6 +88,7 @@ public class RespiratorioActivity extends GenericoActivity {
         pressaoCuff.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioInvasiva().getPressaoCuff()));
         int spinnerPosition = adapterRespiratorio.getPosition(ficha.getRespiratorio().getRespiratorioInvasiva().getModoVentilatorio());
         respiratorioSpinner.setSelection(spinnerPosition);
+        myAnimation.slideDownView(this,invasivoView);
     }
 
     private void prepareRespiratorioNaoInvasivo() {
@@ -229,31 +231,31 @@ public class RespiratorioActivity extends GenericoActivity {
                 if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioInvasiva()!=null)
                     preencherInvasivo();
                 if(naoInvasivoView.isShown()) {
-                    myAnimation.slideUpLinearLayout(this, naoInvasivoView);
+                    myAnimation.slideUpView(this, naoInvasivoView);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            myAnimation.slideDownLinearLayout(RespiratorioActivity.this, invasivoView);
+                            myAnimation.slideDownView(RespiratorioActivity.this, invasivoView);
                         }
                     }, 250);
                 }
                 else if(!invasivoView.isShown())
-                    myAnimation.slideDownLinearLayout(RespiratorioActivity.this, invasivoView);
+                    myAnimation.slideDownView(RespiratorioActivity.this, invasivoView);
                 break;
             case R.id.respiratorio_nao_invasivo:
                 if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioNaoInvasiva()!=null)
                     preencherNaoInvasivo();
                 if(invasivoView.isShown()) {
-                    myAnimation.slideUpLinearLayout(this, invasivoView);
+                    myAnimation.slideUpView(this, invasivoView);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            myAnimation.slideDownLinearLayout(RespiratorioActivity.this, naoInvasivoView);
+                            myAnimation.slideDownView(RespiratorioActivity.this, naoInvasivoView);
                         }
                     }, 250);
                 }
                 else if(!naoInvasivoView.isShown())
-                    myAnimation.slideDownLinearLayout(RespiratorioActivity.this, naoInvasivoView);
+                    myAnimation.slideDownView(RespiratorioActivity.this, naoInvasivoView);
                 break;
         }
     }
