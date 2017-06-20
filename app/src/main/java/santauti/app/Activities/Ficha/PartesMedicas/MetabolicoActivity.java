@@ -22,7 +22,7 @@ public class MetabolicoActivity extends GenericoActivity {
     private int i=0;
     private Realm realm;
     private int gasometriaArterialInput;
-    private int idFicha;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,6 @@ public class MetabolicoActivity extends GenericoActivity {
 
         gasometrialArterial = (TextInputEditText)findViewById(R.id.gasometrial_arterial);
         gasometrialArterial.addTextChangedListener(textWatcher);
-        idFicha=getIntent().getIntExtra("idFicha",0);
 
         realm = Realm.getDefaultInstance();
 
@@ -101,7 +100,7 @@ public class MetabolicoActivity extends GenericoActivity {
             metabolico.setGasometriaArterial(gasometriaArterialInput);
             Ficha r = getProperFicha();
             r.setMetabolico(metabolico);
-            realm.copyToRealmOrUpdate(r);
+            realm.insertOrUpdate(metabolico);
             realm.commitTransaction();
             changeCardColor();
         }

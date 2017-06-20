@@ -1,5 +1,7 @@
 package santauti.app.Model.Ficha;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,18 +21,31 @@ import santauti.app.Model.User;
 public class Ficha extends RealmObject implements Serializable{
 
     @PrimaryKey
+    @SerializedName("NroAtendimento")
     private int NroAtendimento;
+    @SerializedName("dataCriado")
     private Date dataCriado;
+    @SerializedName("user")
     private User user;
+    @SerializedName("paciente")
     private Paciente paciente;
+    @SerializedName("metabolico")
     private Metabolico metabolico;
+    @SerializedName("infeccioso")
     private Infeccioso infeccioso;
+    @SerializedName("endocrino")
     private Endocrino endocrino;
+    @SerializedName("renal")
     private Renal renal;
+    @SerializedName("hematologico")
     private Hematologico hematologico;
+    @SerializedName("gastrointestinal")
     private Gastrointestinal gastrointestinal;
+    @SerializedName("respiratorio")
     private Respiratorio respiratorio;
+    @SerializedName("neurologico")
     private Neurologico neurologico;
+    @SerializedName("hemodinamico")
     private Hemodinamico hemodinamico;
 
     public Hemodinamico getHemodinamico() {

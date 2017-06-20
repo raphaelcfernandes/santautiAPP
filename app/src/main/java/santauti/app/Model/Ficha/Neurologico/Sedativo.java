@@ -1,13 +1,19 @@
 package santauti.app.Model.Ficha.Neurologico;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
  * Created by Raphael Fernandes on 02-Jun-17.
  */
 
-public class Sedativo extends RealmObject {
+public class Sedativo extends RealmObject implements Serializable{
+    @SerializedName("tipoSedativo")
     private String tipoSedativo;
+    @SerializedName("doseSedativo")
     private int doseSedativo;
 
     public String getTipoSedativo() {

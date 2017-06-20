@@ -1,15 +1,23 @@
 package santauti.app.Model.Ficha.Respiratorio;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
  * Created by Raphael Fernandes on 30-May-17.
  */
 
-public class Respiratorio extends RealmObject {
+public class Respiratorio extends RealmObject implements Serializable{
+    @SerializedName("invasiva")
     private int invasiva;
+    @SerializedName("volume")
     private int volume;
+    @SerializedName("respiratorioInvasiva")
     private RespiratorioInvasiva respiratorioInvasiva;
+    @SerializedName("respiratorioNaoInvasiva")
     private RespiratorioNaoInvasiva respiratorioNaoInvasiva;
 
     public int getInvasiva() {

@@ -1,15 +1,23 @@
 package santauti.app.Model.Ficha;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
  * Created by Raphael Fernandes on 29-May-17.
  */
 
-public class Gastrointestinal extends RealmObject {
+public class Gastrointestinal extends RealmObject implements Serializable {
+    @SerializedName("formato")
     private String formato;
+    @SerializedName("tensao")
     private String tensao;
+    @SerializedName("ruidos")
     private String ruidos;
+    @SerializedName("vcm")
     private int vcm;
 
     public String getFormato() {

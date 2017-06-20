@@ -1,23 +1,39 @@
 package santauti.app.Model.Ficha.Neurologico;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
  * Created by Raphael Fernandes on 01-Jun-17.
  */
 
-public class Neurologico extends RealmObject{
+public class Neurologico extends RealmObject implements Serializable{
+    @SerializedName("nivelConsciencia")
     private String nivelConsciencia;
+    @SerializedName("tamanhoPupila")
     private String tamanhoPupila;
+    @SerializedName("simetriaPupila")
     private String simetriaPupila;
+    @SerializedName("reatividaeLuzPupila")
     private String reatividadeLuzPupila;
+    @SerializedName("diferencaPupilar")
     private String diferencaPupilar;
+    @SerializedName("isSedado")
     private boolean isSedado;
+    @SerializedName("sedado")
     private Sedado sedado;
+    @SerializedName("naoSedado")
     private NaoSedado naoSedado;
+    @SerializedName("opcionais")
     private Opcionais opcionais;
+    @SerializedName("deficitMotor")
     private boolean deficitMotor;
+    @SerializedName("tipoDeficit")
     private String tipoDecifit;
+    @SerializedName("ladoDeficit")
     private String ladoDeficit;
 
     public String getDiferencaPupilar() {

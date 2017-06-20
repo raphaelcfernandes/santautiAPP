@@ -58,20 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Autenticando...");
                 progressDialog.show();
-
-
-
-
             }
         });
-    }
-
-    private void setUser(String token,int tipoProfissional, int registro){
-        this.user.setPassword(null);
-        this.user.setUser(null);
-        this.user.setTipoProfissional(tipoProfissional);
-        this.user.setRegistro(registro);
-        this.user.setToken(token);
     }
 
     public void login(){

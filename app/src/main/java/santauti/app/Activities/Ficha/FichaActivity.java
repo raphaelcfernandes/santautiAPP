@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import java.io.FileNotFoundException;
@@ -20,6 +23,11 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmMigration;
 import io.realm.RealmResults;
 import io.realm.RealmSchema;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import santauti.app.APIServices.APIService;
+import santauti.app.APIServices.RestClient;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.GastrointestinalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.HematologicoActivity;
@@ -29,9 +37,12 @@ import santauti.app.Activities.Ficha.PartesMedicas.MetabolicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.NeurologicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
+import santauti.app.Activities.MainActivity;
+import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Adapters.Ficha.FichaAdapterModel;
 import santauti.app.Adapters.Ficha.FichaSectionAdapter;
 import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 import santauti.app.R;
@@ -43,12 +54,18 @@ public class FichaActivity extends GenericoActivity {
     private Intent intent;
     private int idCriado;
     private Realm realm;
+    private FloatingActionButton floatingActionButton;
+    APIService apiService;
+    private Ficha ficha;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha);
         setToolbar(this.getString(R.string.Evolucao));
+        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
 
+        apiService = RestClient.getClient(FichaActivity.this).create(APIService.class);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         fichaAdapterModelList = new ArrayList<>();
@@ -59,7 +76,6 @@ public class FichaActivity extends GenericoActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
         adapter.setOnItemClickListener(onItemClickListener);
-
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
@@ -68,14 +84,19 @@ public class FichaActivity extends GenericoActivity {
         realm = Realm.getDefaultInstance();
 
         createNewFicha();
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendFichaToServer(view);
+            }
+        });
     }
-
 
     private void createNewFicha(){
         int idPaciente = getIntent().getIntExtra("idPaciente",0);
         realm.beginTransaction();
 
-        final Ficha ficha = new Ficha();
+        ficha = new Ficha();
         Number currentIdNum = realm.where(Ficha.class).max("NroAtendimento");
         idCriado = currentIdNum == null? 1 : currentIdNum.intValue()+1;
         ficha.setNroAtendimento(idCriado);
@@ -93,7 +114,7 @@ public class FichaActivity extends GenericoActivity {
         ficha.setPaciente(paciente);
         ficha.setUser(user);
 
-        realm.copyToRealm(ficha);
+        realm.insert(ficha);
         realm.commitTransaction();
     }
 
@@ -107,21 +128,20 @@ public class FichaActivity extends GenericoActivity {
     protected void onResume() {
         super.onResume();
         Realm realm = Realm.getDefaultInstance();
-        final RealmResults<Ficha> query = realm.where(Ficha.class).findAll();
+        final Ficha query = realm.where(Ficha.class).equalTo("NroAtendimento",ficha.getNroAtendimento()).findFirst();
+        int i=0;
+        for(FichaAdapterModel fichaAdapterModel : fichaAdapterModelList)
+            if(fichaAdapterModel.getColor()==1)
+                i++;
+        //if(i==fichaAdapterModelList.size())
+        floatingActionButton.setVisibility(View.VISIBLE);
+
 //        realm.executeTransaction(new Realm.Transaction(){
 //            @Override
 //            public void execute(Realm realm) {
 //                query.deleteAllFromRealm();
 //            }
 //        });
-//        for (int i = 0; i<query.size(); i++) {
-//            System.out.println(query.get(i).getHemodinamico());
-//        }
-//        final RealmResults<Ficha> query = realm.where(Ficha.class).findAll();
-//        for (int i = 0; i<query.size(); i++) {
-//            System.out.println(query.get(i));
-//        }
-
     }
 
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
@@ -195,4 +215,25 @@ public class FichaActivity extends GenericoActivity {
 
     }
 
+    private void sendFichaToServer(final View view){
+        System.out.println(ficha.getNroAtendimento());
+        Ficha fichaToSend = realm.where(Ficha.class).equalTo("NroAtendimento",ficha.getNroAtendimento()).findFirst();
+        Call<Ficha> call = apiService.sendFichaFromAppToServer(fichaToSend.getUser().getToken(),fichaToSend);
+        call.enqueue(new Callback<Ficha>() {
+            @Override
+            public final void onResponse(@NonNull Call<Ficha> call, @NonNull Response<Ficha> response) {
+                if(response.isSuccessful())
+                    SnackbarCreator.createText(view, "Perfil sem acesso a esta área");
+
+                else
+                    SnackbarCreator.createText(view, "Usuário e/ou senha incorretos");
+            }
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+                t.printStackTrace();
+                Log.d("ERROR",t.getMessage());
+            }
+
+        });
+    }
 }

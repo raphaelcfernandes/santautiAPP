@@ -1,14 +1,21 @@
 package santauti.app.Model.Ficha.Neurologico;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
  * Created by Raphael Fernandes on 02-Jun-17.
  */
 
-public class Opcionais extends RealmObject {
+public class Opcionais extends RealmObject implements Serializable{
+    @SerializedName("pic")
     private int pic;
+    @SerializedName("ppc")
     private int ppc;
+    @SerializedName("sjo2")
     private int sjo2;
 
     public int getPic() {

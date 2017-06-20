@@ -1,5 +1,8 @@
 package santauti.app.Model.Ficha.Neurologico;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,9 +13,12 @@ import io.realm.RealmObject;
  * Created by Raphael Fernandes on 02-Jun-17.
  */
 
-public class Sedado extends RealmObject {
+public class Sedado extends RealmObject implements Serializable{
+    @SerializedName("ramsay")
     private String ramsay;
+    @SerializedName("rass")
     private String rass;
+    @SerializedName("sedativo")
     private RealmList<Sedativo> sedativo;
 
     public RealmList<Sedativo> getSedativo() {

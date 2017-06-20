@@ -1,5 +1,9 @@
 package santauti.app.Model.Ficha.Hemodinamico;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 
@@ -7,15 +11,23 @@ import io.realm.RealmObject;
  * Created by Raphael Fernandes on 16-Jun-17.
  */
 
-public class Hemodinamico extends RealmObject {
+public class Hemodinamico extends RealmObject implements Serializable{
+    @SerializedName("ritmo")
     private String ritmo;
+    @SerializedName("bulhas")
     private String bulhas;
+    @SerializedName("freqCardiaca")
     private int freqCardiaca;
+    @SerializedName("opcionais")
     private boolean opcionais;
+    @SerializedName("pam")
     private int pam;
+    @SerializedName("pvc")
     private int pvc;
+    @SerializedName("swan_ganz")
     private int swan_ganz;
-    private RealmList<HemodinamicoOpcional> hemodinamicoOpcionals;
+    @SerializedName("hemodinamicoOpcinais")
+    private RealmList<HemodinamicoOpcional> hemodinamicoOpcionais;
 
     public boolean isOpcionais() {
         return opcionais;
@@ -25,12 +37,12 @@ public class Hemodinamico extends RealmObject {
         this.opcionais = opcionais;
     }
 
-    public RealmList<HemodinamicoOpcional> getHemodinamicoOpcionals() {
-        return hemodinamicoOpcionals;
+    public RealmList<HemodinamicoOpcional> getHemodinamicoOpcionais() {
+        return hemodinamicoOpcionais;
     }
 
-    public void setHemodinamicoOpcionals(RealmList<HemodinamicoOpcional> hemodinamicoOpcionals) {
-        this.hemodinamicoOpcionals = hemodinamicoOpcionals;
+    public void setHemodinamicoOpcionais(RealmList<HemodinamicoOpcional> hemodinamicoOpcionais) {
+        this.hemodinamicoOpcionais = hemodinamicoOpcionais;
     }
 
     public String getRitmo() {

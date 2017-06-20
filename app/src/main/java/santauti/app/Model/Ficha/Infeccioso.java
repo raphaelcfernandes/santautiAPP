@@ -1,5 +1,7 @@
 package santauti.app.Model.Ficha;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 import io.realm.RealmObject;
@@ -9,6 +11,7 @@ import io.realm.RealmObject;
  */
 
 public class Infeccioso extends RealmObject implements Serializable{
+    @SerializedName("pacienteComInfeccao")
     private int pacienteComInfeccao;
 
     public int getPacienteComInfeccao() {

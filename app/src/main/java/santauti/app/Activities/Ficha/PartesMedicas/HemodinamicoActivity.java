@@ -128,8 +128,8 @@ public class HemodinamicoActivity extends GenericoActivity {
             bulhasSpinner.setSelection(spinnerPosition);
             myAnimation.slideDownView(HemodinamicoActivity.this,bulhas_layout);
             frequenciaCardiaca.setText(String.valueOf(ficha.getHemodinamico().getFreqCardiaca()));
-            if(ficha.getHemodinamico().getHemodinamicoOpcionals().size()>0){//Verifica e percorre lista de drogas vasoativas ativadas
-                for(HemodinamicoOpcional h : ficha.getHemodinamico().getHemodinamicoOpcionals()){
+            if(ficha.getHemodinamico().getHemodinamicoOpcionais().size()>0){//Verifica e percorre lista de drogas vasoativas ativadas
+                for(HemodinamicoOpcional h : ficha.getHemodinamico().getHemodinamicoOpcionais()){
                     HemodinamicoAdapterModel hemodinamicoModel = new HemodinamicoAdapterModel(h.getDroga(),h.getDose());
                     hemodinamicoModelList.add(hemodinamicoModel);
                     hemodinamicoAdapter.notifyItemInserted(hemodinamicoAdapter.getItemCount()-1);
@@ -205,7 +205,7 @@ public class HemodinamicoActivity extends GenericoActivity {
             HemodinamicoOpcional hemodinamicoOpcional = realm.createObject(HemodinamicoOpcional.class);
             hemodinamicoOpcional.setDose(h.getDose());
             hemodinamicoOpcional.setDroga(h.getDroga());
-            hemodinamico.getHemodinamicoOpcionals().add(hemodinamicoOpcional);
+            hemodinamico.getHemodinamicoOpcionais().add(hemodinamicoOpcional);
         }
 
         if(obrigatorios) {
@@ -301,7 +301,7 @@ public class HemodinamicoActivity extends GenericoActivity {
     }
 
     public void addDrogaVasoativa(View view) {
-        String[] drogasVasoativaString = {defaultSpinnerString,"Dobutamina","Dopamina","Nitroprussiato de Sodio","Nitroglicerina","Milrinona","Noradrenalina","Adrenalina"};
+        final String[] drogasVasoativaString = {defaultSpinnerString,"Dobutamina","Dopamina","Nitroprussiato de Sodio","Nitroglicerina","Milrinona","Noradrenalina","Adrenalina"};
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(HemodinamicoActivity.this);
         builder.setTitle("Adicionar Droga Vasoativa");
@@ -335,7 +335,8 @@ public class HemodinamicoActivity extends GenericoActivity {
         builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                addDataFromDialogIntoAdapter(drogasVasoativasSpinner.getSelectedItem().toString(),Integer.parseInt(doseDroga.getText().toString()));
+                if(!drogasVasoativasSpinner.getSelectedItem().toString().equals(defaultSpinnerString) && !isTextInpudEditTextEmpty(doseDroga))
+                    addDataFromDialogIntoAdapter(drogasVasoativasSpinner.getSelectedItem().toString(),Integer.parseInt(doseDroga.getText().toString()));
             }
         });
 
