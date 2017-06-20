@@ -372,7 +372,7 @@ public class NeurologicoActivity extends GenericoActivity {
         String[] respostaMotora = {defaultSpinnerString,"1 - Nenhuma","2 - Extensão anormal","3 - Flexão anormal","4 - Movimento de retirada","5 - Localiza dor","6 - Obedece comandos"};
         String[] pupilaReatividadeLuz = {defaultSpinnerString,"RFM+","RFM-"};
         String[] pupilaSimetria = {defaultSpinnerString,"Isocóricas","Anisocóricas"};
-        String[] pupilaTamanho = {defaultSpinnerString,"Miose","Midríase"};
+        String[] pupilaTamanho = {defaultSpinnerString,"Miose","Normal","Midríase"};
         String[] diferencaPupila = {defaultSpinnerString,"Esquerda > Direita","Direita > Esquerda"};
 
         diferencaPupilarSpinner = (Spinner)findViewById(R.id.pupila_simetria_diferenca_spinner);
