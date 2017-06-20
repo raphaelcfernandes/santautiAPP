@@ -28,3 +28,21 @@ FICHA:
             - Backend ok. Está salvando no banco com a idFicha correto.
             - Manter dados já salvados. ex:
                 - Preenche invasivo, retornar a ficha, preencher nao invasivo, retornar a ficha e manter os dados que havia de invasivo
+
+Neurologico:
+	- Tamanho pupila: normal
+	- Nivel coma: escala de glasgow tirar de sedado
+Monitor:
+	- traćado eletrocardiografico
+		sinusal normal, fibrilaćao atrial, flutter atrial, juncional, idioventricular, ritmo de marcapasso
+	- frequencia cardiaca: numerico
+	- pressao arterial media
+	- saturaćao de o2
+	- freq. respiratoria
+	- temperatura
+
+Hemodinamico:
+	- Ritmo
+	- bulhas: normofonetica, hipofonetica, hiperfonetica
+	- sopro: sim ou nao. FM, FT, FA, IFT
+		intensidade: +1 ~ +6 (mais forte)

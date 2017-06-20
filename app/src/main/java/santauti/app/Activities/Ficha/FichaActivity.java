@@ -12,17 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import io.realm.DynamicRealm;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmMigration;
-import io.realm.RealmResults;
-import io.realm.RealmSchema;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,15 +29,14 @@ import santauti.app.Activities.Ficha.PartesMedicas.HematologicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.HemodinamicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.InfecciosoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.MetabolicoActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.MonitorMultiparametricoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.NeurologicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
-import santauti.app.Activities.MainActivity;
 import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Adapters.Ficha.FichaAdapterModel;
 import santauti.app.Adapters.Ficha.FichaSectionAdapter;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 import santauti.app.R;
@@ -148,22 +142,24 @@ public class FichaActivity extends GenericoActivity {
         @Override
         public void onItemClick(View v, int position) {
             if(position==0)
-                intent = new Intent(v.getContext(), NeurologicoActivity.class);
+                intent = new Intent(v.getContext(), MonitorMultiparametricoActivity.class);
             else if(position==1)
-                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
+                intent = new Intent(v.getContext(), NeurologicoActivity.class);
             else if(position==2)
-                intent = new Intent(v.getContext(), RespiratorioActivity.class);
+                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
             else if(position==3)
-                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
+                intent = new Intent(v.getContext(), RespiratorioActivity.class);
             else if(position==4)
-                intent = new Intent(v.getContext(), RenalActivity.class);
+                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
             else if(position==5)
-                intent = new Intent(v.getContext(), HematologicoActivity.class);
+                intent = new Intent(v.getContext(), RenalActivity.class);
             else if(position==6)
-                intent = new Intent(v.getContext(), EndocrinoActivity.class);
+                intent = new Intent(v.getContext(), HematologicoActivity.class);
             else if(position==7)
-                intent = new Intent(v.getContext(), InfecciosoActivity.class);
+                intent = new Intent(v.getContext(), EndocrinoActivity.class);
             else if(position==8)
+                intent = new Intent(v.getContext(), InfecciosoActivity.class);
+            else if(position==9)
                 intent = new Intent(v.getContext(), MetabolicoActivity.class);
             intent.putExtra("Position",position);
             intent.putExtra("idFicha",idCriado);
@@ -181,9 +177,13 @@ public class FichaActivity extends GenericoActivity {
                 R.drawable.blood_drop,
                 R.drawable.thyroid,
                 R.drawable.cell,
-                R.drawable.exercise};
+                R.drawable.exercise,
+                R.drawable.icu_monitor};
 
-        FichaAdapterModel a = new FichaAdapterModel("Neurologico",covers[0],0);
+        FichaAdapterModel a = new FichaAdapterModel("Monitor Multiparametrico",covers[9],0);
+        fichaAdapterModelList.add(a);
+
+        a = new FichaAdapterModel("Neurologico",covers[0],0);
         fichaAdapterModelList.add(a);
 
         a = new FichaAdapterModel("Hemodinamico",covers[1],0);
