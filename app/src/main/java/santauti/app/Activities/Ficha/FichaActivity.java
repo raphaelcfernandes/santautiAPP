@@ -133,7 +133,7 @@ public class FichaActivity extends GenericoActivity {
         for(FichaAdapterModel fichaAdapterModel : fichaAdapterModelList)
             if(fichaAdapterModel.getColor()==1)
                 i++;
-        //if(i==fichaAdapterModelList.size())
+        if(i==fichaAdapterModelList.size())
         floatingActionButton.setVisibility(View.VISIBLE);
 
 //        realm.executeTransaction(new Realm.Transaction(){
