@@ -40,7 +40,8 @@ import santauti.app.R;
  */
 
 public class HemodinamicoActivity extends GenericoActivity {
-    private Spinner ritmoSpinner, bulhasSpinner, drogasVasoativasSpinner;
+    private Spinner bulhasSpinner;
+    private Spinner drogasVasoativasSpinner,soproSpinner,intensidadeSoproSpinner,tipoSoproSpinner;
     private RadioButton hemodinamico_opcional_sim,hemodinamico_opcional_nao;
     private LinearLayout hemodinamico_opcional_layout,bulhas_layout;
     private boolean bulhasIsShown=false;
@@ -51,8 +52,7 @@ public class HemodinamicoActivity extends GenericoActivity {
     private TextInputEditText frequenciaCardiaca,PAM,PVC,swan_ganz;
     private Realm realm;
     private Ficha ficha;
-    private int spinnerPosition;
-    private ArrayAdapter<String> adapterRitmo,adapterBulhas;
+    private ArrayAdapter<String> adapterBulhas,adapterSopro,adapterIntensidade,adapterTipoSopro;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,70 +82,37 @@ public class HemodinamicoActivity extends GenericoActivity {
         realm=Realm.getDefaultInstance();
         ficha=getProperFicha();
 
-        ritmoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (ritmoSpinner.getSelectedItem().toString().equals("Aritmico")) {
-                    /*
-                     * Se n houver dado salvo, ou se o dado salvo for diferente do que o usuario quer agora
-                     * Caso esteja ritmico previamente salvo e usuario deseja escolher Aritmico
-                     */
-                    if(ficha.getHemodinamico()==null || !ficha.getHemodinamico().getRitmo().equals("Aritmico"))
-                        prepareBulhasAritmicoSpinner();
-                    if (!bulhasIsShown) {
-                        bulhasIsShown = true;
-                         myAnimation.slideDownView(HemodinamicoActivity.this, bulhas_layout);
-                    }
-                } else if (ritmoSpinner.getSelectedItem().toString().equals("Ritmico")) {
-                    /*
-                     * Se n houver dado salvo, ou se o dado salvo for diferente do que o usuario quer agora
-                     * Caso esteja ritmico previamente salvo e usuario deseja escolher Aritmico
-                     */
-                    if(ficha.getHemodinamico()==null || !ficha.getHemodinamico().getRitmo().equals("Ritmico"))
-                        prepareBulhasRitmicoSpinner();
-                    if (!bulhasIsShown) {
-                        bulhasIsShown = true;
-                         myAnimation.slideDownView(HemodinamicoActivity.this, bulhas_layout);
-                    }
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        if(ficha.getHemodinamico()!=null){
-            if(ficha.getHemodinamico().getRitmo().equals("Ritmico")) {
-                prepareBulhasRitmicoSpinner();
-            }
-            if(ficha.getHemodinamico().getRitmo().equals("Aritmico")) {
-                prepareBulhasAritmicoSpinner();
-            }
-            spinnerPosition = adapterRitmo.getPosition(ficha.getHemodinamico().getRitmo());
-            ritmoSpinner.setSelection(spinnerPosition);
-            spinnerPosition = adapterBulhas.getPosition(ficha.getHemodinamico().getBulhas());
-            bulhasSpinner.setSelection(spinnerPosition);
-            myAnimation.slideDownView(HemodinamicoActivity.this,bulhas_layout);
-            frequenciaCardiaca.setText(String.valueOf(ficha.getHemodinamico().getFreqCardiaca()));
-            if(ficha.getHemodinamico().getHemodinamicoOpcionais().size()>0){//Verifica e percorre lista de drogas vasoativas ativadas
-                for(HemodinamicoOpcional h : ficha.getHemodinamico().getHemodinamicoOpcionais()){
-                    HemodinamicoAdapterModel hemodinamicoModel = new HemodinamicoAdapterModel(h.getDroga(),h.getDose());
-                    hemodinamicoModelList.add(hemodinamicoModel);
-                    hemodinamicoAdapter.notifyItemInserted(hemodinamicoAdapter.getItemCount()-1);
-                }
-                hemodinamicoAdapter.notifyDataSetChanged();
-            }
-            if(ficha.getHemodinamico().isOpcionais()){
-                hemodinamico_opcional_sim.setChecked(true);
-                PAM.setText(String.valueOf(ficha.getHemodinamico().getPam()));
-                swan_ganz.setText(String.valueOf(ficha.getHemodinamico().getSwan_ganz()));
-                PVC.setText(String.valueOf(ficha.getHemodinamico().getPvc()));
-                 myAnimation.slideDownView(this,hemodinamico_opcional_layout);
-            }
-            else
-                hemodinamico_opcional_nao.setChecked(true);
-        }
+//        if(ficha.getHemodinamico()!=null){
+//            if(ficha.getHemodinamico().getRitmo().equals("Ritmico")) {
+//                prepareBulhasRitmicoSpinner();
+//            }
+//            if(ficha.getHemodinamico().getRitmo().equals("Aritmico")) {
+//                prepareBulhasAritmicoSpinner();
+//            }
+//            spinnerPosition = adapterRitmo.getPosition(ficha.getHemodinamico().getRitmo());
+//            ritmoSpinner.setSelection(spinnerPosition);
+//            spinnerPosition = adapterBulhas.getPosition(ficha.getHemodinamico().getBulhas());
+//            bulhasSpinner.setSelection(spinnerPosition);
+//            myAnimation.slideDownView(HemodinamicoActivity.this,bulhas_layout);
+//            frequenciaCardiaca.setText(String.valueOf(ficha.getHemodinamico().getFreqCardiaca()));
+//            if(ficha.getHemodinamico().getHemodinamicoOpcionais().size()>0){//Verifica e percorre lista de drogas vasoativas ativadas
+//                for(HemodinamicoOpcional h : ficha.getHemodinamico().getHemodinamicoOpcionais()){
+//                    HemodinamicoAdapterModel hemodinamicoModel = new HemodinamicoAdapterModel(h.getDroga(),h.getDose());
+//                    hemodinamicoModelList.add(hemodinamicoModel);
+//                    hemodinamicoAdapter.notifyItemInserted(hemodinamicoAdapter.getItemCount()-1);
+//                }
+//                hemodinamicoAdapter.notifyDataSetChanged();
+//            }
+//            if(ficha.getHemodinamico().isOpcionais()){
+//                hemodinamico_opcional_sim.setChecked(true);
+//                PAM.setText(String.valueOf(ficha.getHemodinamico().getPam()));
+//                swan_ganz.setText(String.valueOf(ficha.getHemodinamico().getSwan_ganz()));
+//                PVC.setText(String.valueOf(ficha.getHemodinamico().getPvc()));
+//                 myAnimation.slideDownView(this,hemodinamico_opcional_layout);
+//            }
+//            else
+//                hemodinamico_opcional_nao.setChecked(true);
+//        }
     }
 
     HemodinamicoAdapter.OnItemClickListener onItemClickListener = new HemodinamicoAdapter.OnItemClickListener(){
@@ -183,10 +150,8 @@ public class HemodinamicoActivity extends GenericoActivity {
         ficha=getProperFicha();
         realm.beginTransaction();
         Hemodinamico hemodinamico = realm.createObject(Hemodinamico.class);
-        if(!ritmoSpinner.getSelectedItem().toString().equals(defaultSpinnerString) &&
-                !bulhasSpinner.getSelectedItem().toString().equals(defaultSpinnerString) && !isTextInpudEditTextEmpty(frequenciaCardiaca)) {
+        if(!bulhasSpinner.getSelectedItem().toString().equals(defaultSpinnerString) && !isTextInpudEditTextEmpty(frequenciaCardiaca)) {
             obrigatorios = true;
-            hemodinamico.setRitmo(ritmoSpinner.getSelectedItem().toString());
             hemodinamico.setBulhas(bulhasSpinner.getSelectedItem().toString());
             hemodinamico.setFreqCardiaca(Integer.parseInt(frequenciaCardiaca.getText().toString()));
         }
@@ -217,59 +182,14 @@ public class HemodinamicoActivity extends GenericoActivity {
         realm.commitTransaction();
     }
 
-    private void prepareBulhasRitmicoSpinner(){
-        String[] bulhas = {defaultSpinnerString,"Sinusal","Bradicardico","Taquicardico"};
-
-        bulhasSpinner = (Spinner) findViewById(R.id.hemodinamico_bulhas);
-        adapterBulhas = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, bulhas){
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        bulhasSpinner.setAdapter(adapterBulhas);
-    }
-
-    private void prepareBulhasAritmicoSpinner(){
-        String[] bulhas = {defaultSpinnerString,"Fibrilação Atrial","Flutter Atrial"};
-
-        bulhasSpinner = (Spinner) findViewById(R.id.hemodinamico_bulhas);
-        adapterBulhas = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, bulhas){
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        bulhasSpinner.setAdapter(adapterBulhas);
-    }
-
     private void prepareHemodinamicoSpinners(){
-        String[] tiposRitmos = {defaultSpinnerString,"Ritmico","Aritmico"};
+        String[] tipoBulhas = {defaultSpinnerString,"Hiperfonetica","Normofonetica","Hipofonetica"};
+        String[] sopro = {defaultSpinnerString,"Sim","Não"};
+        String[] tipoSopro = {defaultSpinnerString,"FM","FT","FA","IFT"};
+        String[] intensidadeSopro = {defaultSpinnerString,"+1","+2","+3","+4","+5","+6"};
 
-        ritmoSpinner = (Spinner) findViewById(R.id.hemodinamico_ritmo);
-        adapterRitmo = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, tiposRitmos) {
+        bulhasSpinner = (Spinner) findViewById(R.id.hemodinamico_bulhas);
+        adapterBulhas = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, tipoBulhas) {
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -286,7 +206,68 @@ public class HemodinamicoActivity extends GenericoActivity {
                 return view;
             }
         };
-        ritmoSpinner.setAdapter(adapterRitmo);
+        bulhasSpinner.setAdapter(adapterBulhas);
+
+        soproSpinner = (Spinner) findViewById(R.id.hemodinamico_sopro);
+        adapterSopro = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, sopro) {
+            @Override
+            public boolean isEnabled(int position) {
+                return position != 0;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0)
+                    tv.setTextColor(Color.GRAY);
+                else
+                    tv.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
+        soproSpinner.setAdapter(adapterSopro);
+
+        tipoSoproSpinner = (Spinner) findViewById(R.id.hemodinamico_tipoSpro);
+        adapterTipoSopro = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, tipoSopro) {
+            @Override
+            public boolean isEnabled(int position) {
+                return position != 0;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0)
+                    tv.setTextColor(Color.GRAY);
+                else
+                    tv.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
+        tipoSoproSpinner.setAdapter(adapterTipoSopro);
+
+        intensidadeSoproSpinner = (Spinner) findViewById(R.id.hemodinamico_intensidade_sopro);
+        adapterIntensidade = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, intensidadeSopro) {
+            @Override
+            public boolean isEnabled(int position) {
+                return position != 0;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0)
+                    tv.setTextColor(Color.GRAY);
+                else
+                    tv.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
+        intensidadeSoproSpinner.setAdapter(adapterIntensidade);
+
     }
 
     public void hemodinamicoOpcionalOnRadioButtonClicked(View view){

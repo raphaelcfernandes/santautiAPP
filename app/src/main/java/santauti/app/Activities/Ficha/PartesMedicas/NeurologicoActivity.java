@@ -52,9 +52,15 @@ public class NeurologicoActivity extends GenericoActivity {
     private Spinner aberturaOcularSpinner,respostaVerbalSpinner,respostaMotoraSpinner,pupilaReatividadeLuzSpinner;
     private Spinner pupilaSimetriaSpinner,pupilaTamanhoSpinner,tipoDecifitSpinner,ladoDeficitSpinner,diferencaPupilarSpinner;
     private RadioButton sedado_sim,sedado_nao,opcionalSim,opcionalNao;
-    private View sedado_sim_layout,sedado_nao_layout,neurologico_opcional_layout,avaliacaoPupilarLayout,deficitMotorLado,deficitMotorTipo,pupilarTraco;
+    private View sedado_sim_layout;
+    private View sedado_nao_layout;
+    private View neurologico_opcional_layout;
+    private View avaliacaoPupilarLayout;
+    private View deficitMotorLado;
+    private View deficitMotorTipo, nivelConsciencia;
     private Realm realm;
-    private ImageView avaliacaoPupilarToggleButton,sedadoToggleButton,deficitMotorToggleButton;
+    private ImageView avaliacaoPupilarToggleButton;
+    private ImageView sedadoToggleButton;
     private MyAnimation myAnimation;
     private Handler handler = new Handler();
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
@@ -78,6 +84,7 @@ public class NeurologicoActivity extends GenericoActivity {
 
         deficitMotorLado = findViewById(R.id.ladoDecificitLayout);
         deficitMotorTipo = findViewById(R.id.tipoDecificitLayout);
+        nivelConsciencia = findViewById(R.id.nivel_consciencia);
         //pupilarTraco = findViewById(R.id.avaliacaoPupilarTraco);
 
         /******************************VARIAVEIS LAYOUTS*************************************/
@@ -92,7 +99,6 @@ public class NeurologicoActivity extends GenericoActivity {
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
         sedadoToggleButton = (ImageView)findViewById(R.id.sedadoToggleButton);
         avaliacaoPupilarToggleButton = (ImageView)findViewById(R.id.avaliacaoToggleButton);
-        deficitMotorToggleButton = (ImageView)findViewById(R.id.deficitMotorToggle);
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
 
         pic = (TextInputEditText)findViewById(R.id.PIC);
@@ -135,8 +141,6 @@ public class NeurologicoActivity extends GenericoActivity {
             @Override
             public void onClick(View view) {
                 if(sedadoRotationAngle==180) {
-                    if (sedado_nao_layout.isShown())
-                        myAnimation.slideUpView(NeurologicoActivity.this, sedado_nao_layout);
                     if (sedado_sim_layout.isShown())
                         myAnimation.slideUpView(NeurologicoActivity.this, sedado_sim_layout);
                     sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
@@ -146,11 +150,23 @@ public class NeurologicoActivity extends GenericoActivity {
                         myAnimation.slideDownView(NeurologicoActivity.this, sedado_sim_layout);
                         sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
                     }
-                    if(sedado_nao.isChecked()) {
-                        myAnimation.slideDownView(NeurologicoActivity.this, sedado_nao_layout);
-                        sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
-                    }
                 }
+            }
+        });
+
+        nivelConscienciaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(nivelConscienciaSpinner.getSelectedItem().toString().equals("Coma")){
+                    myAnimation.slideDownView(NeurologicoActivity.this,sedado_nao_layout);
+                }
+                else
+                    myAnimation.slideUpView(NeurologicoActivity.this,sedado_nao_layout);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -311,37 +327,23 @@ public class NeurologicoActivity extends GenericoActivity {
     public void neurologicoSedadoOnRadioButtonClicked(View view){
         switch(view.getId()) {
             case R.id.sedado_sim:
-                if(sedado_nao_layout.isShown()) {//Se layout de nao sedado estiver aparecendo, ele deve ser escondido
-                    myAnimation.slideUpView(NeurologicoActivity.this, sedado_nao_layout);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            myAnimation.slideDownView(NeurologicoActivity.this, sedado_sim_layout);
-                        }
-                    }, 250);
-                }
-                else if(!sedado_sim_layout.isShown())//Caso n esteja nada aparecendo, mostrar sedado layout
-                    myAnimation.slideDownView(NeurologicoActivity.this,sedado_sim_layout);
-                /*
-                 * Verifica se o toggle button de retrair/exapandir o layout está na posiçao inicial
-                 */
-                if(sedadoRotationAngle==0)
+                if(!nivelConsciencia.isShown() || !sedado_sim_layout.isShown()) {//Se layout de nao sedado estiver aparecendo, ele deve ser escondido
+                    myAnimation.slideDownView(NeurologicoActivity.this, sedado_sim_layout);
+                    myAnimation.slideDownView(NeurologicoActivity.this, nivelConsciencia);
+                    /*
+                    * Verifica se o toggle button de retrair/exapandir o layout está na posiçao inicial
+                    */
                     sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
+                }
                 break;
             case R.id.sedado_nao:
                 if(sedado_sim_layout.isShown()) {
                     myAnimation.slideUpView(NeurologicoActivity.this, sedado_sim_layout);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            myAnimation.slideDownView(NeurologicoActivity.this, sedado_nao_layout);
-                        }
-                    }, 250);
-                }
-                else if(!sedado_nao_layout.isShown())
-                    myAnimation.slideDownView(NeurologicoActivity.this,sedado_nao_layout);
-                if(sedadoRotationAngle==0)
+                    myAnimation.slideUpView(NeurologicoActivity.this,nivelConsciencia);
                     sedadoRotationAngle =  myAnimation.rotateImageView180(sedadoToggleButton,sedadoRotationAngle);
+                }
+                else if(nivelConsciencia.isShown())
+                    myAnimation.slideUpView(NeurologicoActivity.this,nivelConsciencia);
                 break;
         }
     }
@@ -362,8 +364,12 @@ public class NeurologicoActivity extends GenericoActivity {
 
     private void prepareNeurologicoSpinners(){
         String[] nivelConsciencia = {defaultSpinnerString,"Alerta","Sonolência","Obnubilação","Torpor","Coma"};
-        String[] ramsay = {defaultSpinnerString,"Grau 1","Grau 2","Grau 3","Grau 4","Grau 5","Grau 6"};
-        String[] rass = {defaultSpinnerString,"+4","+3","+2","+1","0","-1","-2","-3","-4","-5"};
+        String[] ramsay = {defaultSpinnerString,"1 - Combativo","Grau 2 - Conduta agressiva","Grau 3 - Movimentos despropositados frequentes","Grau 4 - Ansioso","Grau 5 - Alerta, Calmo","Grau 6 - Sem resposta a estímulo verbal ou físico"};
+        String[] rass = {defaultSpinnerString,"+4 - Violento, risco para equipe","+3 - Agressivo verbal, arranca tubos e cateteres",
+                "+2 - Movimentos sem coordenaćao frequentes","+1 - Ansioso, sem movimentos agressivos",
+                "0 - Alerta e calmo","-1 - Despertar c/ estimulo verbal, contato visual > 10 s",
+                "-2 - Despertar c/ estimulo verbal, contato visual < 10 s","-3 Ab. ocular ao estimulo verbal, sem contato visual",
+                "-4 - Sem resp. ao estimulo verbal, ab. ocular ao toque ","-5 - Sem resposta ao estimulo verbal ou fisico"};
         String[] deficitMotor = {defaultSpinnerString,"Presente","Ausente"};
         String[] deficitTipo = {defaultSpinnerString,"Paresia","Plegia"};
         String[] deficitLado = {defaultSpinnerString,"Esquerdo","Direito","Ambos os lados"};
