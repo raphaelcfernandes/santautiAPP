@@ -1,5 +1,6 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -35,7 +36,7 @@ public class RenalActivity extends GenericoActivity {
         diureseTxt = (TextInputEditText)findViewById(R.id.diurese);
         pesoTxt = (TextInputEditText)findViewById(R.id.peso);
         balancoHidricoTxt = (TextInputEditText)findViewById(R.id.balanco_hidrico);
-
+        prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
         ficha=getProperFicha();
         if(ficha.getRenal()!=null){
@@ -50,6 +51,29 @@ public class RenalActivity extends GenericoActivity {
             else if(ficha.getRenal().getDialise()==1)
                 renalS.setChecked(true);
         }
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), HematologicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), GastrointestinalActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Endocrino;
 import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.Infeccioso;
 import santauti.app.R;
 
 /**
@@ -29,7 +31,7 @@ public class EndocrinoActivity extends GenericoActivity {
 
         endocrinoS = (RadioButton)findViewById(R.id.endocrino_sim);
         endocrinoN = (RadioButton)findViewById(R.id.endocrino_nao);
-
+        prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
 
         if(getEndocrinoSelected()!=-1){
@@ -38,6 +40,30 @@ public class EndocrinoActivity extends GenericoActivity {
             else
                 endocrinoN.setChecked(true);
         }
+
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), InfecciosoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), HematologicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
 
     }
 

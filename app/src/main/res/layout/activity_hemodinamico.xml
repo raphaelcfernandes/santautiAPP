@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content" android:orientation="horizontal"
                 android:paddingTop="10dp"
                 android:id="@+id/tipoSopro_layout"
-                android:visibility="visible">
+                android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,8 +80,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:orientation="horizontal"
                 android:paddingTop="10dp"
-                android:id="@+id/intensidade_sopro"
-                android:visibility="visible">
+                android:id="@+id/intensidade_sopro_layout"
+                android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -195,6 +195,7 @@
             </LinearLayout>
 
             <include layout="@layout/hemodinamico_opcional_layout"/>
+            <include layout="@layout/bottom_buttons_navigate_fichas"/>
 
         </LinearLayout>
     </LinearLayout>

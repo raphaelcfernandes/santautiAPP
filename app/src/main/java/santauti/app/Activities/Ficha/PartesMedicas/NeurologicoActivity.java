@@ -1,6 +1,7 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -62,7 +63,6 @@ public class NeurologicoActivity extends GenericoActivity {
     private ImageView avaliacaoPupilarToggleButton;
     private ImageView sedadoToggleButton;
     private MyAnimation myAnimation;
-    private Handler handler = new Handler();
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NeurologicoAdapter neurologicoAdapter;
@@ -85,7 +85,6 @@ public class NeurologicoActivity extends GenericoActivity {
         deficitMotorLado = findViewById(R.id.ladoDecificitLayout);
         deficitMotorTipo = findViewById(R.id.tipoDecificitLayout);
         nivelConsciencia = findViewById(R.id.nivel_consciencia);
-        //pupilarTraco = findViewById(R.id.avaliacaoPupilarTraco);
 
         /******************************VARIAVEIS LAYOUTS*************************************/
 
@@ -115,7 +114,7 @@ public class NeurologicoActivity extends GenericoActivity {
 
         realm = Realm.getDefaultInstance();
         myAnimation = new MyAnimation();
-
+        prepareNavigationButtons();
         prepareNeurologicoSpinners();
         Ficha ficha = getProperFicha();
         if(ficha.getNeurologico()!=null)
@@ -125,15 +124,10 @@ public class NeurologicoActivity extends GenericoActivity {
             @Override
             public void onClick(View view) {
                 pupilaRotationAngle =  myAnimation.rotateImageView180(avaliacaoPupilarToggleButton,pupilaRotationAngle);
-
-                if(avaliacaoPupilarLayout.isShown()){
+                if(avaliacaoPupilarLayout.isShown())
                     myAnimation.slideUpView(NeurologicoActivity.this,avaliacaoPupilarLayout);
-                    //pupilarTraco.setVisibility(View.VISIBLE);
-                }
-                else{
+                else
                     myAnimation.slideDownView(NeurologicoActivity.this, avaliacaoPupilarLayout);
-                    //pupilarTraco.setVisibility(View.GONE);
-                }
             }
         });
 
@@ -230,6 +224,29 @@ public class NeurologicoActivity extends GenericoActivity {
             }
         });
 
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), HemodinamicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), MonitorMultiparametricoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
     }
 
     private void prepareDadosPreviamenteSalvos(Ficha ficha) {
@@ -364,7 +381,8 @@ public class NeurologicoActivity extends GenericoActivity {
 
     private void prepareNeurologicoSpinners(){
         String[] nivelConsciencia = {defaultSpinnerString,"Alerta","Sonolência","Obnubilação","Torpor","Coma"};
-        String[] ramsay = {defaultSpinnerString,"1 - Combativo","Grau 2 - Conduta agressiva","Grau 3 - Movimentos despropositados frequentes","Grau 4 - Ansioso","Grau 5 - Alerta, Calmo","Grau 6 - Sem resposta a estímulo verbal ou físico"};
+        String[] ramsay = {defaultSpinnerString,"1 - Combativo","2 - Conduta agressiva","3 - Movimentos despropositados frequentes",
+                "4 - Ansioso","5 - Alerta, Calmo","6 - Sem resposta a estímulo verbal ou físico"};
         String[] rass = {defaultSpinnerString,"+4 - Violento, risco para equipe","+3 - Agressivo verbal, arranca tubos e cateteres",
                 "+2 - Movimentos sem coordenaćao frequentes","+1 - Ansioso, sem movimentos agressivos",
                 "0 - Alerta e calmo","-1 - Despertar c/ estimulo verbal, contato visual > 10 s",

@@ -48,6 +48,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.Ficha.PartesMedicas.MonitorMultiparametricoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.DispositivoActivity" />
     </application>
 
 </manifest>

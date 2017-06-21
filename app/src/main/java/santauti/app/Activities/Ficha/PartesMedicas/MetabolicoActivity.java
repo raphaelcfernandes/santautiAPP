@@ -1,13 +1,17 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import io.realm.Realm;
+import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Metabolico;
@@ -22,7 +26,6 @@ public class MetabolicoActivity extends GenericoActivity {
     private int i=0;
     private Realm realm;
     private int gasometriaArterialInput;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +35,32 @@ public class MetabolicoActivity extends GenericoActivity {
 
         gasometrialArterial = (TextInputEditText)findViewById(R.id.gasometrial_arterial);
         gasometrialArterial.addTextChangedListener(textWatcher);
-
+        prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
 
         if(getGasometria()!=-1) {
             gasometrialArterial.setText(String.valueOf(getGasometria()));
         }
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), InfecciosoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void prepareNavigationButtons() {
+        proxFicha = (Button)findViewById(R.id.fichaProxima);
+        proxFicha.setVisibility(View.GONE);
+        antFicha = (Button)findViewById(R.id.fichaAnterior);
+        antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
+
     }
 
     @Override

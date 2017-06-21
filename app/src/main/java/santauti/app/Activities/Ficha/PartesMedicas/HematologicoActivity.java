@@ -1,5 +1,6 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,10 +40,8 @@ public class HematologicoActivity extends GenericoActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hematologico);
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
         tromboprofilaxia = findViewById(R.id.tromboprofilaxia_layout);
-
+        prepareNavigationButtons();
         hemogramaS = (RadioButton)findViewById(R.id.hemograma_sim);
         hemogramaN = (RadioButton)findViewById(R.id.hemograma_nao);
         tromboprofilaxiaS = (RadioButton)findViewById(R.id.tromboprofilaxia_sim);
@@ -71,6 +70,29 @@ public class HematologicoActivity extends GenericoActivity {
             else
                 hemogramaN.setChecked(true);
         }
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), EndocrinoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), RenalActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
     }
 
     private void prepareHematologicoSpinners(){
