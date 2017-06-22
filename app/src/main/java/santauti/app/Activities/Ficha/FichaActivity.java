@@ -23,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import santauti.app.APIServices.APIService;
 import santauti.app.APIServices.RestClient;
+import santauti.app.Activities.Ficha.PartesMedicas.DispositivoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.GastrointestinalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.HematologicoActivity;
@@ -90,10 +91,10 @@ public class FichaActivity extends GenericoActivity {
         int idPaciente = getIntent().getIntExtra("idPaciente",0);
         realm.beginTransaction();
 
-        ficha = new Ficha();
         Number currentIdNum = realm.where(Ficha.class).max("NroAtendimento");
         idCriado = currentIdNum == null? 1 : currentIdNum.intValue()+1;
-        ficha.setNroAtendimento(idCriado);
+        ficha = realm.createObject(Ficha.class,idCriado);
+        //ficha.setNroAtendimento(idCriado);
         Calendar c = Calendar.getInstance();
         ficha.setDataCriado(c.getTime());
 
@@ -104,7 +105,7 @@ public class FichaActivity extends GenericoActivity {
         user.setTipoProfissional(sharedPref.getInt("tipoProfissional",0));
 
         Paciente paciente = realm.createObject(Paciente.class);
-        paciente.setInternado(idPaciente);
+        paciente.setID(idPaciente);
         ficha.setPaciente(paciente);
         ficha.setUser(user);
 
@@ -127,7 +128,7 @@ public class FichaActivity extends GenericoActivity {
         for(FichaAdapterModel fichaAdapterModel : fichaAdapterModelList)
             if(fichaAdapterModel.getColor()==1)
                 i++;
-        if(i==fichaAdapterModelList.size())
+        //if(i==fichaAdapterModelList.size())
         floatingActionButton.setVisibility(View.VISIBLE);
 
 //        realm.executeTransaction(new Realm.Transaction(){
@@ -142,28 +143,29 @@ public class FichaActivity extends GenericoActivity {
         @Override
         public void onItemClick(View v, int position) {
             if(position==0)
-                intent = new Intent(v.getContext(), MonitorMultiparametricoActivity.class);
+                intent = new Intent(v.getContext(), DispositivoActivity.class);
             else if(position==1)
-                intent = new Intent(v.getContext(), NeurologicoActivity.class);
+                intent = new Intent(v.getContext(), MonitorMultiparametricoActivity.class);
             else if(position==2)
-                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
+                intent = new Intent(v.getContext(), NeurologicoActivity.class);
             else if(position==3)
-                intent = new Intent(v.getContext(), RespiratorioActivity.class);
+                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
             else if(position==4)
-                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
+                intent = new Intent(v.getContext(), RespiratorioActivity.class);
             else if(position==5)
-                intent = new Intent(v.getContext(), RenalActivity.class);
+                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
             else if(position==6)
-                intent = new Intent(v.getContext(), HematologicoActivity.class);
+                intent = new Intent(v.getContext(), RenalActivity.class);
             else if(position==7)
-                intent = new Intent(v.getContext(), EndocrinoActivity.class);
+                intent = new Intent(v.getContext(), HematologicoActivity.class);
             else if(position==8)
-                intent = new Intent(v.getContext(), InfecciosoActivity.class);
+                intent = new Intent(v.getContext(), EndocrinoActivity.class);
             else if(position==9)
+                intent = new Intent(v.getContext(), InfecciosoActivity.class);
+            else if(position==10)
                 intent = new Intent(v.getContext(), MetabolicoActivity.class);
-            intent.putExtra("Position",position);
-            intent.putExtra("idFicha",idCriado);
-            startActivityForResult(intent,position);
+            prepareIntent(position,idCriado, intent);
+            startActivity(intent);
         }
     };
 
@@ -178,9 +180,13 @@ public class FichaActivity extends GenericoActivity {
                 R.drawable.thyroid,
                 R.drawable.cell,
                 R.drawable.exercise,
-                R.drawable.icu_monitor};
+                R.drawable.icu_monitor,
+                R.drawable.sphygmomanometer};
 
-        FichaAdapterModel a = new FichaAdapterModel("Monitor Multiparametrico",covers[9],0);
+        FichaAdapterModel a = new FichaAdapterModel("Dispositivos",covers[10],0);
+        fichaAdapterModelList.add(a);
+
+        a = new FichaAdapterModel("Monitor Multiparametrico",covers[9],0);
         fichaAdapterModelList.add(a);
 
         a = new FichaAdapterModel("Neurologico",covers[0],0);
@@ -216,9 +222,8 @@ public class FichaActivity extends GenericoActivity {
     }
 
     private void sendFichaToServer(final View view){
-        System.out.println(ficha.getNroAtendimento());
-        Ficha fichaToSend = realm.where(Ficha.class).equalTo("NroAtendimento",ficha.getNroAtendimento()).findFirst();
-        Call<Ficha> call = apiService.sendFichaFromAppToServer(fichaToSend.getUser().getToken(),fichaToSend);
+        Ficha fichaToSend = realm.copyFromRealm(realm.where(Ficha.class).equalTo("NroAtendimento",idCriado).findFirst());
+        Call<Ficha> call = apiService.sendFichaFromAppToServer(fichaToSend);
         call.enqueue(new Callback<Ficha>() {
             @Override
             public final void onResponse(@NonNull Call<Ficha> call, @NonNull Response<Ficha> response) {

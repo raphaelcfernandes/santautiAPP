@@ -1,5 +1,6 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,9 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import io.realm.Realm;
+import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.R;
 
@@ -21,16 +25,43 @@ import santauti.app.R;
 public class MonitorMultiparametricoActivity extends GenericoActivity {
     Spinner tracadoEletrocardiograficoSpinner;
     ArrayAdapter<String> adapterTracaoEletrocardiografico;
+    Realm realm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_monitor_multiparametrico);
-        Toolbar tbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tbar);
+
         setToolbar("Monitor Multiparamétrico");
+
         prepareSpinner();
+        prepareNavigationButtons();
+
+        realm = Realm.getDefaultInstance();
+
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), NeurologicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                realm.close();
+
+                finish();
+            }
+        });
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), DispositivoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                finish();
+            }
+        });
     }
+
 
     private void prepareSpinner(){
         String[] tiposTracado={defaultSpinnerString,"Sinusal","Fibrilaćao atrial", "Flutter atrial","Juncional","Idioventricular","Ritmo de marcapasso"};

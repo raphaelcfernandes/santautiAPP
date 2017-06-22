@@ -1,5 +1,6 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -29,7 +30,7 @@ public class InfecciosoActivity extends GenericoActivity {
         setToolbar(getString(R.string.Infeccioso));
 
         realm = Realm.getDefaultInstance();
-
+        prepareNavigationButtons();
         infecciosoSim = (RadioButton)findViewById(R.id.infeccioso_sim);
         infecciosoNao = (RadioButton)findViewById(R.id.infeccioso_nao);
 
@@ -40,6 +41,30 @@ public class InfecciosoActivity extends GenericoActivity {
             else
                 infecciosoNao.setChecked(true);
         }
+
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), MetabolicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), EndocrinoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
 
     }
 

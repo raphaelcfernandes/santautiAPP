@@ -24,5 +24,5 @@ public interface APIService {
     Call<List<Paciente>> getPacientes(@Header("access_token") String token);
 
     @POST("/sendFichaFromAppToServer")
-    Call<Ficha> sendFichaFromAppToServer(@Header("acess_token") String token,@Body Ficha ficha);
+    Call<Ficha> sendFichaFromAppToServer(@Body Ficha ficha);
 }

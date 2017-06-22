@@ -126,5 +126,5 @@
                 android:onClick="hematologicoOnRadioButtonClicked" />
         </RadioGroup>
     </LinearLayout>
-
+    <include layout="@layout/bottom_buttons_navigate_fichas"/>
 </LinearLayout>

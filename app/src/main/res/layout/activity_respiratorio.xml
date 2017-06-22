@@ -63,6 +63,7 @@
             </LinearLayout>
             <include layout="@layout/respiratorio_ventilacao_invasiva"/>
             <include layout="@layout/respiratorio_ventilacao_nao_invasiva"/>
+            <include layout="@layout/bottom_buttons_navigate_fichas"/>
         </LinearLayout>
     </LinearLayout>
 

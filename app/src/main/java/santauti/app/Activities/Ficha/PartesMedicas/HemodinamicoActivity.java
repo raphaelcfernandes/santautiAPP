@@ -1,6 +1,7 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -43,7 +44,7 @@ public class HemodinamicoActivity extends GenericoActivity {
     private Spinner bulhasSpinner;
     private Spinner drogasVasoativasSpinner,soproSpinner,intensidadeSoproSpinner,tipoSoproSpinner;
     private RadioButton hemodinamico_opcional_sim,hemodinamico_opcional_nao;
-    private LinearLayout hemodinamico_opcional_layout,bulhas_layout;
+    private View hemodinamico_opcional_layout,bulhas_layout,tipoSoproLayout,intensidadeSoproLayout;
     private boolean bulhasIsShown=false;
     private MyAnimation myAnimation;
     private List<HemodinamicoAdapterModel> hemodinamicoModelList = new ArrayList<>();
@@ -69,9 +70,11 @@ public class HemodinamicoActivity extends GenericoActivity {
         hemodinamicoAdapter.setOnItemClickListener(onItemClickListener);
         hemodinamico_opcional_nao = (RadioButton)findViewById(R.id.hemodinamico_opcional_nao);
         hemodinamico_opcional_sim = (RadioButton)findViewById(R.id.hemodinamico_opcional_sim);
-        hemodinamico_opcional_layout = (LinearLayout)findViewById(R.id.hemodinamico_opcional_layout);
+        hemodinamico_opcional_layout = findViewById(R.id.hemodinamico_opcional_layout);
         hemodinamico_opcional_layout.setVisibility(View.GONE);
-        bulhas_layout = (LinearLayout)findViewById(R.id.bulhas_layout);
+        bulhas_layout = findViewById(R.id.bulhas_layout);
+        tipoSoproLayout = findViewById(R.id.tipoSopro_layout);
+        intensidadeSoproLayout = findViewById(R.id.intensidade_sopro_layout);
 
         frequenciaCardiaca = (TextInputEditText)findViewById(R.id.hemodinamico_frequencia);
         PAM = (TextInputEditText)findViewById(R.id.pam);
@@ -79,6 +82,7 @@ public class HemodinamicoActivity extends GenericoActivity {
         swan_ganz = (TextInputEditText)findViewById(R.id.swan_ganz);
         myAnimation = new MyAnimation();
         prepareHemodinamicoSpinners();
+        prepareNavigationButtons();
         realm=Realm.getDefaultInstance();
         ficha=getProperFicha();
 
@@ -90,7 +94,6 @@ public class HemodinamicoActivity extends GenericoActivity {
 //                prepareBulhasAritmicoSpinner();
 //            }
 //            spinnerPosition = adapterRitmo.getPosition(ficha.getHemodinamico().getRitmo());
-//            ritmoSpinner.setSelection(spinnerPosition);
 //            spinnerPosition = adapterBulhas.getPosition(ficha.getHemodinamico().getBulhas());
 //            bulhasSpinner.setSelection(spinnerPosition);
 //            myAnimation.slideDownView(HemodinamicoActivity.this,bulhas_layout);
@@ -113,6 +116,48 @@ public class HemodinamicoActivity extends GenericoActivity {
 //            else
 //                hemodinamico_opcional_nao.setChecked(true);
 //        }
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), RespiratorioActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), NeurologicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        soproSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(soproSpinner.getSelectedItem().equals("Sim") && !intensidadeSoproSpinner.isShown() && !tipoSoproSpinner.isShown()){
+                    myAnimation.slideDownView(HemodinamicoActivity.this,intensidadeSoproLayout);
+                    myAnimation.slideDownView(HemodinamicoActivity.this,tipoSoproLayout);
+                }
+                else{
+                    myAnimation.slideUpView(HemodinamicoActivity.this,tipoSoproLayout);
+                    myAnimation.slideUpView(HemodinamicoActivity.this,intensidadeSoproLayout);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     HemodinamicoAdapter.OnItemClickListener onItemClickListener = new HemodinamicoAdapter.OnItemClickListener(){
@@ -160,7 +205,7 @@ public class HemodinamicoActivity extends GenericoActivity {
 
         if(hemodinamico_opcional_sim.isChecked()) {
             if (!isTextInpudEditTextEmpty(PAM) && !isTextInpudEditTextEmpty(PVC) && !isTextInpudEditTextEmpty(swan_ganz))
-            hemodinamico.setOpcionais(true);
+                hemodinamico.setOpcionais(true);
             hemodinamico.setPam(getIntegerFromTextInputEditText(PAM));
             hemodinamico.setPvc(getIntegerFromTextInputEditText(PVC));
             hemodinamico.setSwan_ganz(getIntegerFromTextInputEditText(swan_ganz));
@@ -273,10 +318,10 @@ public class HemodinamicoActivity extends GenericoActivity {
     public void hemodinamicoOpcionalOnRadioButtonClicked(View view){
         switch(view.getId()) {
             case R.id.hemodinamico_opcional_sim:
-                 myAnimation.slideDownView(HemodinamicoActivity.this,hemodinamico_opcional_layout);
+                myAnimation.slideDownView(HemodinamicoActivity.this,hemodinamico_opcional_layout);
                 break;
             case R.id.hemodinamico_opcional_nao:
-                 myAnimation.slideUpView(HemodinamicoActivity.this,hemodinamico_opcional_layout);
+                myAnimation.slideUpView(HemodinamicoActivity.this,hemodinamico_opcional_layout);
                 break;
         }
     }

@@ -121,4 +121,5 @@
                 android:onClick="renalOnRadioButtonClicked" />
         </RadioGroup>
     </LinearLayout>
+    <include layout="@layout/bottom_buttons_navigate_fichas"/>
 </LinearLayout>

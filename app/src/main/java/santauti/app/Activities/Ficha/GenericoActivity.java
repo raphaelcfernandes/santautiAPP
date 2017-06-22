@@ -2,6 +2,7 @@ package santauti.app.Activities.Ficha;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -26,7 +28,10 @@ import santauti.app.R;
  */
 
 public abstract class GenericoActivity extends AppCompatActivity {
-    public String defaultSpinnerString = " ";
+    public String defaultSpinnerString = "Selecione";
+    public Button proxFicha,antFicha;
+    public Intent intent;
+
     @Override
     public void onBackPressed(){
         finish();
@@ -55,6 +60,11 @@ public abstract class GenericoActivity extends AppCompatActivity {
         FichaActivity.adapter.notifyDataSetChanged();
     }
 
+    public final void prepareIntent(int position,int idCriado,Intent intent){
+        intent.putExtra("Position",position);
+        intent.putExtra("idFicha",idCriado);
+    }
+
     public Ficha getProperFicha(){
         Realm realm;
         realm = Realm.getDefaultInstance();
@@ -68,6 +78,7 @@ public abstract class GenericoActivity extends AppCompatActivity {
     public boolean isTextInpudEditTextEmpty(TextInputEditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
+
     public boolean isSpinnerDefault(String string){
         return string.equals(defaultSpinnerString);
     }
@@ -76,4 +87,18 @@ public abstract class GenericoActivity extends AppCompatActivity {
         return Integer.parseInt(textInputEditText.getText().toString());
     }
 
+    public void exitActivityToLeft(){
+        overridePendingTransition(R.anim.enter_from_left, R.anim.exit_out_right);
+    }
+
+    public void exitActivityToRight(){
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_out_left);//(int enterAnimation, int exitAnimation)
+    }
+
+    public void prepareNavigationButtons(){
+        proxFicha = (Button)findViewById(R.id.fichaProxima);
+        antFicha = (Button)findViewById(R.id.fichaAnterior);
+        proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
+        antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
+    }
 }

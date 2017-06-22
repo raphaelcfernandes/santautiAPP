@@ -1,5 +1,6 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Gastrointestinal;
 import santauti.app.Model.Ficha.Renal;
@@ -24,11 +27,13 @@ import santauti.app.R;
  */
 
 public class GastrointestinalActivity extends GenericoActivity {
-    Spinner formatoSpinner,tensaoSpinner,ruidosSpinner;
+    Spinner formatoSpinner,tensaoSpinner,ruidosSpinner,intensidadeSpinner;
     private Realm realm;
     RadioButton vcmPresente,vcmAusente;
-    private ArrayAdapter<String> adapterRuido,adapterFormato,adapterTensao;
+    private ArrayAdapter<String> adapterRuido,adapterFormato,adapterTensao,adapterIntensidade;
     private int spinnerPosition;
+    private View intensidadeRuidoLayout;
+    private MyAnimation myAnimation = new MyAnimation();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +42,10 @@ public class GastrointestinalActivity extends GenericoActivity {
         setToolbar(getString(R.string.GastroIntestinal));
 
         prepareGastrointestinalSpinners();
+        prepareNavigationButtons();
         vcmPresente = (RadioButton)findViewById(R.id.vcm_presente);
         vcmAusente = (RadioButton)findViewById(R.id.vcm_ausente);
+        intensidadeRuidoLayout = findViewById(R.id.intensidade_ruido_layout);
 
         realm = Realm.getDefaultInstance();
 
@@ -58,6 +65,47 @@ public class GastrointestinalActivity extends GenericoActivity {
             spinnerPosition = adapterTensao.getPosition(ficha.getGastrointestinal().getTensao());
             tensaoSpinner.setSelection(spinnerPosition);
         }
+
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), RenalActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), RespiratorioActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        ruidosSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(ruidosSpinner.getSelectedItem().toString().equals("Presente") && !intensidadeRuidoLayout.isShown()){
+                    myAnimation.slideDownView(GastrointestinalActivity.this,intensidadeRuidoLayout);
+                }
+                else{
+                    myAnimation.slideUpView(GastrointestinalActivity.this,intensidadeRuidoLayout);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @Override
@@ -116,9 +164,10 @@ public class GastrointestinalActivity extends GenericoActivity {
     }
 
     private void prepareGastrointestinalSpinners(){
-        String[] ruidos = {defaultSpinnerString,"Aumentado","Presente","Normal","Reduzido","Ausente"};
-        String[] tensao = {defaultSpinnerString,"Hipertenso","Normotenso","Flacido"};
+        String[] ruidos = {defaultSpinnerString,"Presente","Ausente"};
+        String[] tensao = {defaultSpinnerString,"Tenso","Normotenso","Flácido"};
         String[] formato = {defaultSpinnerString,"Plano","Globoso","Semigloboso","Escavado"};
+        String[] intensidade = {defaultSpinnerString,"Aumentado","Normal","Reduzido"};
 
         ruidosSpinner = (Spinner) findViewById(R.id.gastrointestinal_ruidos);
         adapterRuido = new ArrayAdapter<String>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, ruidos){
@@ -179,6 +228,26 @@ public class GastrointestinalActivity extends GenericoActivity {
             }
         };
         formatoSpinner.setAdapter(adapterFormato);
+
+        intensidadeSpinner = (Spinner) findViewById(R.id.intensidade_ruido_spinner);
+        adapterIntensidade = new ArrayAdapter<String>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, intensidade){
+            @Override
+            public boolean isEnabled(int position) {
+                return position != 0;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0)
+                    tv.setTextColor(Color.GRAY);
+                else
+                    tv.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
+        intensidadeSpinner.setAdapter(adapterIntensidade);
     }
 
     public void gastrointestinalOnRadioButtonClicked(View view){

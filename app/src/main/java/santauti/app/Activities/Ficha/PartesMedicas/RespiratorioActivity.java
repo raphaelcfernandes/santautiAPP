@@ -1,22 +1,24 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import io.realm.Realm;
+import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
@@ -39,6 +41,8 @@ public class RespiratorioActivity extends GenericoActivity {
     private Ficha ficha;
     private MyAnimation myAnimation;
     private Handler handler = new Handler();
+
+    private Intent intent;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +51,36 @@ public class RespiratorioActivity extends GenericoActivity {
         setToolbar(getString(R.string.Respiratorio));
         invasivoView = (LinearLayout)findViewById(R.id.ventilacao_invasiva);
         naoInvasivoView = (LinearLayout)findViewById(R.id.ventilacao_nao_invasiva);
-        invasivoView.setVisibility(View.GONE);
-        naoInvasivoView.setVisibility(View.GONE);
 
         invasivo = (RadioButton)findViewById(R.id.respiratorio_invasivo);
         naoInvasivo = (RadioButton)findViewById(R.id.respiratorio_nao_invasivo);
+
+        prepareNavigationButtons();
+
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), GastrointestinalActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), HemodinamicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
         prepareRespiratorioInvasivo();
         prepareRespiratorioNaoInvasivo();
 
