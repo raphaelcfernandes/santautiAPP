@@ -24,16 +24,81 @@ FICHA:
         - Respiratorio -> Layout?
             - Backend ok. Está salvando no banco com a idFicha correto.
 Gastro
-	- Massas paupaveis
-	- visceras paupaveis
+	- Massas paupaveis: sim ou nao
+	- visceras paupaveis: sim ou nao
+	- ruidos hidraero embaixo tensao
+	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter
+	- assit: pequena, media, grande. radioButton
 Dispositivos, criar no app
 Ventilaćao: espontanea, assistida, invasiva
-<<<<<<< HEAD
+
 espontanea = sem aparelho
 minha invavisa = assistida
 
-=======
+
 Criar model para Monitor multiparametrico
->>>>>>> 199cfcd11a26acc802adda528210f2d19be1b526
 
 
+
+Monitor Multiparametro -> Bombas de infusao -> Dispositivos -> Respirador
+Renal -> metabolico -> infeccioso
+
+/*** ADAPTAR TEXTO SPINNER. Como fazer texto quebrar de linha no spinner***/
+
+
+Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
+    - cateter de PIC
+    - balao intra-aortico
+Monitor -> pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria
+Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
+        - Lado do corpo, n melhor nome para o item. Superior e inferior
+        - Delirium, sim ou nao.
+        - Nivel consciencia somente nao sedado
+        - Paresia ou Plegia
+            - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
+        - PIC + PPC + SJO2 -> Monitod
+Hemodinamico: nipride, adicionar drogas vai para bomba de infusao
+    - Pulso ritmico/aritmico
+    - Fonese de bulhas: hiper, normal, hipo
+    - perfusao capilar: boa/ruim
+    - lactato: normal, elevado
+    - Extremidades:
+        - cianotica, acianotica, fria, quente (check box como no deficit motor)
+    - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
+    - frequencia cardiaca -> monitor
+    - PAM + PVC + swan_Ganz -> monitor
+Bomba de infusao
+    - Bomba de infusao
+      - fentanil, propofol, ketamina, midasolan (dormonide), precedex
+      - amiodarona, insulina, hidrocortizona, polimixina, miorinone
+      - velocidade de infusao
+      - dose ml/hr
+Respiratorio:
+    - murmurio vesicular: fisiologico, reduzido
+    - Roncos: sibilos, crepitacoes
+        - crepitacoes: base direita, base esquerda, terco medio direito/esquerda, apice
+Ventilacao:
+    - esponatanea, assistida
+        - Assistida: invasiva, nao invasiva
+            - Invasiva: mecanica (respirador)
+    - mecanica, bpap
+Renal:
+    - Urina: clara escura. debaixo de diurese
+    - Em procedimento dialitico? Em dialise?
+    - hipoabuminemia: sim ou nao
+Infeccioso:
+    - curva termica: febril, afebril, subfebril
+    - marcadores de infeccao: estaveis, em melhora, em piora
+    - antibiotico
+Metabolico:
+    - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
+    - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
+    - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
+Hematologico:
+    - Hemoglobina/hematocrito: Numero pra cada. Marcar:
+    - Plaqueta: numerico
+    - Spinner -> radio Button
+---------------- DADOS ENFERMAGEM ----------------------------
+Hemodinacamente estavel e hemodinacamente instavel
+Gastro
+    - Evacuacoes: ausente, fezes normais, fezes endurecidas, fezes diarreicas

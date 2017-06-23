@@ -58,15 +58,15 @@ public class NeurologicoActivity extends GenericoActivity {
     private View neurologico_opcional_layout;
     private View avaliacaoPupilarLayout;
     private View deficitMotorLado;
-    private View deficitMotorTipo, nivelConsciencia;
+    private View deficitMotorTipo, nivelConsciencia, flutuacaoLayout,inatencaoLayout,pensamentoDesorganizadoLayout,flutuacaoQuestion,inatencaoQuestion,pensamentoQuestion;
     private Realm realm;
     private ImageView avaliacaoPupilarToggleButton;
-    private ImageView sedadoToggleButton;
+    private ImageView sedadoToggleButton, flutuacaoToggleButton, inatencaoToggleButton, pensamentoDesorganizadoToggleButton,deliriumToggleButton;
     private MyAnimation myAnimation;
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NeurologicoAdapter neurologicoAdapter;
-    private int pupilaRotationAngle=0,sedadoRotationAngle=0;
+    private int pupilaRotationAngle=0,sedadoRotationAngle=0,deliriumRotationAngle=0,flutuacaoRotationAngle=0,inatencaoRotationAngle=0,pensamentoRotationAngle=0;
     private TextView diferencaPupilar;
     private ArrayAdapter<String> adapterPupilaDiferenca,adapterPupilaTamanho,adapterPupilaSimetria,adapterPupilaReatividadeLuz,adapterDecifitTipo,adapterDeficitMotor,adapterRass,adapterDecifitLado,adapterNivelConsciencia,adapterAberturaOcular,adapterRespostaVerbal,adapterRespostaMotora,adapterRamsay;
 
@@ -85,6 +85,10 @@ public class NeurologicoActivity extends GenericoActivity {
         deficitMotorLado = findViewById(R.id.ladoDecificitLayout);
         deficitMotorTipo = findViewById(R.id.tipoDecificitLayout);
         nivelConsciencia = findViewById(R.id.nivel_consciencia);
+
+        flutuacaoLayout = findViewById(R.id.flutuacao_layout);
+        inatencaoLayout = findViewById(R.id.inatencao_layout);
+        pensamentoDesorganizadoLayout = findViewById(R.id.pensamento_layout);
 
         /******************************VARIAVEIS LAYOUTS*************************************/
 
@@ -247,6 +251,83 @@ public class NeurologicoActivity extends GenericoActivity {
                 finish();
             }
         });
+
+        deliriumToggleButton = (ImageView)findViewById(R.id.deliriumToggleButton);
+
+        deliriumToggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(flutuacaoLayout.isShown() && inatencaoLayout.isShown() && pensamentoDesorganizadoLayout.isShown()){
+                    myAnimation.slideUpView(NeurologicoActivity.this, flutuacaoLayout);
+                    myAnimation.slideUpView(NeurologicoActivity.this, inatencaoLayout);
+                    myAnimation.slideUpView(NeurologicoActivity.this, pensamentoDesorganizadoLayout);
+                    myAnimation.rotateImageView180(deliriumToggleButton, deliriumRotationAngle);
+                }
+                else {
+                    myAnimation.slideDownView(NeurologicoActivity.this, flutuacaoLayout);
+                    myAnimation.slideDownView(NeurologicoActivity.this, inatencaoLayout);
+                    myAnimation.slideDownView(NeurologicoActivity.this, pensamentoDesorganizadoLayout);
+                    myAnimation.slideDownView(NeurologicoActivity.this, flutuacaoQuestion);
+                    myAnimation.slideDownView(NeurologicoActivity.this, inatencaoQuestion);
+                    myAnimation.slideDownView(NeurologicoActivity.this, pensamentoQuestion);
+
+                    myAnimation.rotateImageView180(deliriumToggleButton, deliriumRotationAngle);
+                    myAnimation.rotateImageView180(flutuacaoToggleButton, flutuacaoRotationAngle);
+                    myAnimation.rotateImageView180(inatencaoToggleButton, inatencaoRotationAngle);
+                    myAnimation.rotateImageView180(pensamentoDesorganizadoToggleButton, pensamentoRotationAngle);
+                }
+            }
+        });
+
+        flutuacaoToggleButton = (ImageView)findViewById(R.id.flutuacaoToggleButton);
+        flutuacaoQuestion = findViewById(R.id.flutuacao_question);
+        flutuacaoToggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(flutuacaoQuestion.isShown()) {
+                    myAnimation.slideUpView(NeurologicoActivity.this,flutuacaoQuestion);
+                    myAnimation.rotateImageView180(flutuacaoToggleButton,flutuacaoRotationAngle);
+                }
+                else {
+                    myAnimation.slideDownView(NeurologicoActivity.this, flutuacaoQuestion);
+                    myAnimation.rotateImageView180(flutuacaoToggleButton,flutuacaoRotationAngle);
+                }
+            }
+        });
+
+        inatencaoToggleButton = (ImageView)findViewById(R.id.inatencaoToggleButton);
+        inatencaoQuestion = findViewById(R.id.inatencao_question);
+        inatencaoToggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(inatencaoQuestion.isShown()) {
+                    myAnimation.slideUpView(NeurologicoActivity.this,inatencaoQuestion);
+                    myAnimation.rotateImageView180(inatencaoToggleButton,inatencaoRotationAngle);
+                }
+                else {
+                    myAnimation.slideDownView(NeurologicoActivity.this, inatencaoQuestion);
+                    myAnimation.rotateImageView180(inatencaoToggleButton,inatencaoRotationAngle);
+                }
+            }
+        });
+
+        pensamentoDesorganizadoToggleButton = (ImageView)findViewById(R.id.pensamentoToggleButton);
+        pensamentoQuestion = findViewById(R.id.pensamento_question);
+        pensamentoDesorganizadoToggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pensamentoQuestion.isShown()){
+                    myAnimation.slideUpView(NeurologicoActivity.this,pensamentoQuestion);
+                    myAnimation.rotateImageView180(pensamentoDesorganizadoToggleButton,pensamentoRotationAngle);
+                }
+                else{
+                    myAnimation.slideDownView(NeurologicoActivity.this, pensamentoQuestion);
+                    myAnimation.rotateImageView180(pensamentoDesorganizadoToggleButton,pensamentoRotationAngle);
+                }
+            }
+        });
+
+
     }
 
     private void prepareDadosPreviamenteSalvos(Ficha ficha) {
@@ -380,7 +461,12 @@ public class NeurologicoActivity extends GenericoActivity {
     }
 
     private void prepareNeurologicoSpinners(){
-        String[] nivelConsciencia = {defaultSpinnerString,"Alerta","Sonolência","Obnubilação","Torpor","Coma"};
+        String[] nivelConsciencia = {defaultSpinnerString,"Vigil - hiperaletar",
+                "Alerta - Acordado e resposta adequadas às perguntas",
+                "Sonolência - Acorda ao chamado, responde às perguntas",
+                "Obnubilação - Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balanćar)",
+                "Torpor - Sonolencia profunda, responde somente a estimulo doloroso",
+                "Coma - Não abre os olhos nem emite sons verbais sob estimulo verbal ou doloroso"};
         String[] ramsay = {defaultSpinnerString,"1 - Combativo","2 - Conduta agressiva","3 - Movimentos despropositados frequentes",
                 "4 - Ansioso","5 - Alerta, Calmo","6 - Sem resposta a estímulo verbal ou físico"};
         String[] rass = {defaultSpinnerString,"+4 - Violento, risco para equipe","+3 - Agressivo verbal, arranca tubos e cateteres",
@@ -420,7 +506,7 @@ public class NeurologicoActivity extends GenericoActivity {
         diferencaPupilarSpinner.setAdapter(adapterPupilaDiferenca);
 
         nivelConscienciaSpinner = (Spinner) findViewById(R.id.material_spinner1);
-        adapterNivelConsciencia = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, nivelConsciencia){
+        adapterNivelConsciencia = new ArrayAdapter<String>(NeurologicoActivity.this,  R.layout.simple_spinner_item, nivelConsciencia){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -438,6 +524,8 @@ public class NeurologicoActivity extends GenericoActivity {
             }
         };
         nivelConscienciaSpinner.setAdapter(adapterNivelConsciencia);
+
+
 
         ramsaySpinner = (Spinner)findViewById(R.id.ramsay_spinner);
         adapterRamsay = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, ramsay){

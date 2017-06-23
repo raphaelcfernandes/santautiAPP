@@ -32,7 +32,7 @@ public class GastrointestinalActivity extends GenericoActivity {
     RadioButton vcmPresente,vcmAusente;
     private ArrayAdapter<String> adapterRuido,adapterFormato,adapterTensao,adapterIntensidade;
     private int spinnerPosition;
-    private View intensidadeRuidoLayout;
+    private View intensidadeRuidoLayout,intensidadeteste,tensaoteste,formatoteste;
     private MyAnimation myAnimation = new MyAnimation();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class GastrointestinalActivity extends GenericoActivity {
         vcmPresente = (RadioButton)findViewById(R.id.vcm_presente);
         vcmAusente = (RadioButton)findViewById(R.id.vcm_ausente);
         intensidadeRuidoLayout = findViewById(R.id.intensidade_ruido_layout);
+
 
         realm = Realm.getDefaultInstance();
 
@@ -259,4 +260,5 @@ public class GastrointestinalActivity extends GenericoActivity {
                 break;
         }
     }
+
 }

@@ -8,12 +8,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nivel_consciencia"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     <Spinner
         android:id="@+id/material_spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColorHint="@color/colorPrimary"
         android:gravity="center"
+        android:nestedScrollingEnabled="true"
         />
 </LinearLayout>
