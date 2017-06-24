@@ -12,7 +12,8 @@
         android:layout_alignParentStart="true"
         android:elevation="8dp"
         android:textColor="@android:color/white"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:backgroundTint="@color/colorPrimary"
+        android:textSize="12sp"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/fichaProxima"
@@ -22,6 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:elevation="8dp"
+        android:textSize="12sp"
         android:textColor="@android:color/white"
         android:backgroundTint="@color/colorPrimary"/>
 </RelativeLayout>

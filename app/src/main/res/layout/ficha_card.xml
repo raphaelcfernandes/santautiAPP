@@ -11,13 +11,12 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
         card_view:cardElevation="8dp"
-        card_view:cardCornerRadius="@dimen/card_album_radius">
+        card_view:cardCornerRadius="@dimen/card_album_radius"
+        style="@style/MyCardViewStyle">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:id="@+id/mainHolder"
             android:orientation="vertical">
 
             <ImageView
@@ -29,7 +28,7 @@
                 android:scaleType="fitXY" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:layout_marginTop="5dp"
                 android:background="#eaeaea">
             </LinearLayout>
@@ -38,13 +37,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/thumbnail"
-                android:paddingBottom="5dp"
-                android:paddingLeft="@dimen/album_title_padding"
-                android:paddingRight="@dimen/album_title_padding"
-                android:paddingTop="@dimen/album_title_padding"
-                android:layout_marginTop="5dp"
+
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/album_title"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
+                android:textSize="12sp"/>
 
         </LinearLayout>
 

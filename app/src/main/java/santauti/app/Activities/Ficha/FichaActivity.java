@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.SharedElementCallback;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import santauti.app.APIServices.APIService;
 import santauti.app.APIServices.RestClient;
+import santauti.app.Activities.Ficha.PartesMedicas.BombaInfusaoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.DispositivoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.GastrointestinalActivity;
@@ -33,6 +35,7 @@ import santauti.app.Activities.Ficha.PartesMedicas.MetabolicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.MonitorMultiparametricoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.NeurologicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.RespiradorActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
 import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Adapters.Ficha.FichaAdapterModel;
@@ -42,7 +45,7 @@ import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 import santauti.app.R;
 
-public class FichaActivity extends GenericoActivity {
+public class FichaActivity extends GenericoActivity{
     private RecyclerView recyclerView;
     public static FichaSectionAdapter adapter;
     public static List<FichaAdapterModel> fichaAdapterModelList;
@@ -58,48 +61,62 @@ public class FichaActivity extends GenericoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha);
         setToolbar(this.getString(R.string.Evolucao));
+
+        /*******************LAYOUT VARIAVEIS*******************************/
         floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
-
-        apiService = RestClient.getClient(FichaActivity.this).create(APIService.class);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        fichaAdapterModelList = new ArrayList<>();
-        prepareFichas();
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int represnta quantos cards terão por grid
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setHasFixedSize(true);
-        adapter.setOnItemClickListener(onItemClickListener);
-        Realm.init(this);
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm.setDefaultConfiguration(realmConfiguration);
-        realm = Realm.getDefaultInstance();
-
-        createNewFicha();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendFichaToServer(view);
             }
         });
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        /*******************LAYOUT VARIAVEIS*******************************/
+
+        /*******************Inicializacao Realm***************************/
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
+        realm = Realm.getDefaultInstance();
+        /*******************Inicializacao Realm***************************/
+
+        /*******************Inicializacao RecyclerView*******************/
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int representa quantos cards terão por grid
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+        /*******************Inicializacao RecyclerView*******************/
+
+        fichaAdapterModelList = new ArrayList<>();
+
+        apiService = RestClient.getClient(FichaActivity.this).create(APIService.class);
+
+        createNewFicha();
+        prepareFichas();
+
     }
 
+    /**
+     * Método para criar um novo Objeto do tipo Model.Ficha
+     */
     private void createNewFicha(){
         int idPaciente = getIntent().getIntExtra("idPaciente",0);
-        realm.beginTransaction();
-
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
         Number currentIdNum = realm.where(Ficha.class).max("NroAtendimento");
         idCriado = currentIdNum == null? 1 : currentIdNum.intValue()+1;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("NroAtendimento",idCriado);
+        editor.apply();
+
+
+        realm.beginTransaction();
         ficha = realm.createObject(Ficha.class,idCriado);
-        //ficha.setNroAtendimento(idCriado);
         Calendar c = Calendar.getInstance();
         ficha.setDataCriado(c.getTime());
 
         User user = realm.createObject(User.class);
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
         user.setRegistro(sharedPref.getInt(getString(R.string.registroMedico),0));
         user.setToken(sharedPref.getString("acess_token",""));
         user.setTipoProfissional(sharedPref.getInt("tipoProfissional",0));
@@ -116,122 +133,149 @@ public class FichaActivity extends GenericoActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("NroAtendimento");
+        editor.apply();
         realm.close();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Realm realm = Realm.getDefaultInstance();
-        final Ficha query = realm.where(Ficha.class).equalTo("NroAtendimento",ficha.getNroAtendimento()).findFirst();
         int i=0;
         for(FichaAdapterModel fichaAdapterModel : fichaAdapterModelList)
             if(fichaAdapterModel.getColor()==1)
                 i++;
-        //if(i==fichaAdapterModelList.size())
-        floatingActionButton.setVisibility(View.VISIBLE);
-
-//        realm.executeTransaction(new Realm.Transaction(){
-//            @Override
-//            public void execute(Realm realm) {
-//                query.deleteAllFromRealm();
-//            }
-//        });
+        if(i==fichaAdapterModelList.size())
+            floatingActionButton.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Seta as cards clicáveis para cada activity
+     */
     FichaSectionAdapter.OnItemClickListener onItemClickListener = new FichaSectionAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View v, int position) {
             if(position==0)
-                intent = new Intent(v.getContext(), DispositivoActivity.class);
-            else if(position==1)
                 intent = new Intent(v.getContext(), MonitorMultiparametricoActivity.class);
+            else if(position==1)
+                intent = new Intent(v.getContext(), BombaInfusaoActivity.class);
             else if(position==2)
-                intent = new Intent(v.getContext(), NeurologicoActivity.class);
+                intent = new Intent(v.getContext(), DispositivoActivity.class);
             else if(position==3)
-                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
+                intent = new Intent(v.getContext(), RespiradorActivity.class);
             else if(position==4)
-                intent = new Intent(v.getContext(), RespiratorioActivity.class);
+                intent = new Intent(v.getContext(), NeurologicoActivity.class);
             else if(position==5)
-                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
+                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
             else if(position==6)
-                intent = new Intent(v.getContext(), RenalActivity.class);
+                intent = new Intent(v.getContext(), RespiratorioActivity.class);
             else if(position==7)
-                intent = new Intent(v.getContext(), HematologicoActivity.class);
+                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
             else if(position==8)
-                intent = new Intent(v.getContext(), EndocrinoActivity.class);
+                intent = new Intent(v.getContext(), RenalActivity.class);
             else if(position==9)
-                intent = new Intent(v.getContext(), InfecciosoActivity.class);
-            else if(position==10)
                 intent = new Intent(v.getContext(), MetabolicoActivity.class);
-            prepareIntent(position,idCriado, intent);
+            else if(position==10)
+                intent = new Intent(v.getContext(), InfecciosoActivity.class);
+            else if(position==11)
+                intent = new Intent(v.getContext(), HematologicoActivity.class);
+            else if(position==12)
+                intent = new Intent(v.getContext(), EndocrinoActivity.class);
+            prepareIntent(position,intent);
             startActivity(intent);
         }
     };
 
+    /**
+     * Método responsável por fazer a lista de fichas na activity
+     */
     private void prepareFichas() {
         int[] covers = new int[]{
+                R.drawable.icu_monitor,
+                R.drawable.hqdefault,
+                R.drawable.sphygmomanometer,
+                R.drawable.respirator,
                 R.drawable.brain,
                 R.drawable.cardiogram,
                 R.drawable.lungs,
                 R.drawable.intestine,
                 R.drawable.kidneys,
-                R.drawable.blood_drop,
-                R.drawable.thyroid,
-                R.drawable.cell,
                 R.drawable.exercise,
-                R.drawable.icu_monitor,
-                R.drawable.sphygmomanometer};
+                R.drawable.cell,
+                R.drawable.blood_drop,
+                R.drawable.thyroid
+        };
 
-        FichaAdapterModel a = new FichaAdapterModel("Dispositivos",covers[10],0);
+        FichaAdapterModel a = new FichaAdapterModel(this.getString(R.string.MonitorMultiparametrico),covers[0],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Monitor Multiparametrico",covers[9],0);
+        a = new FichaAdapterModel(this.getString(R.string.BombaInfusao),covers[1],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Neurologico",covers[0],0);
+        a = new FichaAdapterModel(this.getString(R.string.Dispositivos),covers[2],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Hemodinamico",covers[1],0);
+        a = new FichaAdapterModel(this.getString(R.string.Respirador),covers[3],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Respiratorio", covers[2],0);
+        a = new FichaAdapterModel(this.getString(R.string.Neurologico),covers[4],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Gastrointestinal", covers[3],0);
+        a = new FichaAdapterModel(this.getString(R.string.Hemodinamico),covers[5],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Renal", covers[4],0);
+        a = new FichaAdapterModel(this.getString(R.string.Respiratorio), covers[6],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Hematologico", covers[5],0);
+        a = new FichaAdapterModel(this.getString(R.string.GastroIntestinal), covers[7],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Endocrino", covers[6],0);
+        a = new FichaAdapterModel(this.getString(R.string.Renal), covers[8],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Infeccioso", covers[7],0);
+        a = new FichaAdapterModel(this.getString(R.string.Metabolico), covers[9],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel("Metabolico", covers[8],0);
+        a = new FichaAdapterModel(this.getString(R.string.Infeccioso), covers[10],0);
+        fichaAdapterModelList.add(a);
+
+        a = new FichaAdapterModel(this.getString(R.string.Hematologico), covers[11],0);
+        fichaAdapterModelList.add(a);
+
+        a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[12],0);
         fichaAdapterModelList.add(a);
 
         adapter = new FichaSectionAdapter(this, fichaAdapterModelList);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(onItemClickListener);
 
     }
 
+
+    /**
+     * Envia para o servidor a ficha contendo todas as informacoes pertinentes aos seus campos
+     * envia: Ficha (objeto)
+     * Recebe: http statusCode
+     */
     private void sendFichaToServer(final View view){
         Ficha fichaToSend = realm.copyFromRealm(realm.where(Ficha.class).equalTo("NroAtendimento",idCriado).findFirst());
         Call<Ficha> call = apiService.sendFichaFromAppToServer(fichaToSend);
         call.enqueue(new Callback<Ficha>() {
             @Override
             public final void onResponse(@NonNull Call<Ficha> call, @NonNull Response<Ficha> response) {
-                if(response.isSuccessful())
-                    SnackbarCreator.createText(view, "Perfil sem acesso a esta área");
+                if(response.isSuccessful()) {
+                    SnackbarCreator.createText(view, "Teste");
+                    SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.remove("NroAtendimento");
+                    editor.apply();
+                    finish();
+                }
 
                 else
-                    SnackbarCreator.createText(view, "Usuário e/ou senha incorretos");
+                    SnackbarCreator.createText(view, "Teste");
             }
             @Override
             public void onFailure(@NonNull Call call, @NonNull Throwable t) {
@@ -241,4 +285,5 @@ public class FichaActivity extends GenericoActivity {
 
         });
     }
+
 }

@@ -34,18 +34,25 @@
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:textSize">17sp</item>
-        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-        <!--<item name="colorAccent">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorControlNormal">@color/colorPrimaryDark</item>-->
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
     </style>
 
-
-    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
-
+    <style name="radioButtonStyle" >
+        <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
 
-    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
 
+    <style name="MyCardViewStyle" parent="Theme.AppCompat.Light">
+        <item name="cardCornerRadius">2dp</item>
+        <item name="cardElevation">8dp</item>
+        <item name="contentPaddingBottom">10dp</item>
+        <item name="contentPaddingTop">24dp</item>
+        <item name="contentPaddingLeft">16dp</item>
+        <item name="contentPaddingRight">16dp</item>
+        <item name="cardBackgroundColor">@android:color/white</item>
     </style>
 </resources>

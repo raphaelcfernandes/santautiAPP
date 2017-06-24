@@ -1,8 +1,8 @@
 package santauti.app.Activities.Ficha;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
@@ -12,12 +12,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import io.realm.Realm;
 import santauti.app.Model.Ficha.Ficha;
@@ -60,19 +55,15 @@ public abstract class GenericoActivity extends AppCompatActivity {
         FichaActivity.adapter.notifyDataSetChanged();
     }
 
-    public final void prepareIntent(int position,int idCriado,Intent intent){
+    public final void prepareIntent(int position,Intent intent){
         intent.putExtra("Position",position);
-        intent.putExtra("idFicha",idCriado);
     }
 
     public Ficha getProperFicha(){
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
         Realm realm;
         realm = Realm.getDefaultInstance();
-        return realm.where(Ficha.class).equalTo("NroAtendimento",getFichaId()).findFirst();
-    }
-
-    public int getFichaId(){
-        return getIntent().getIntExtra("idFicha",0);
+        return realm.where(Ficha.class).equalTo("NroAtendimento",sharedPreferences.getInt("NroAtendimento",0)).findFirst();
     }
 
     public boolean isTextInpudEditTextEmpty(TextInputEditText etText) {

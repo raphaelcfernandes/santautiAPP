@@ -70,11 +70,23 @@ public class HematologicoActivity extends GenericoActivity {
             else
                 hemogramaN.setChecked(true);
         }
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), InfecciosoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+           }
+        });
+
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), EndocrinoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();
                 verificaCamposENotificaAdapter();
@@ -82,17 +94,6 @@ public class HematologicoActivity extends GenericoActivity {
             }
         });
 
-        antFicha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(view.getContext(), RenalActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
-                startActivity(intent);
-                exitActivityToLeft();
-                verificaCamposENotificaAdapter();
-                finish();
-            }
-        });
     }
 
     private void prepareHematologicoSpinners(){

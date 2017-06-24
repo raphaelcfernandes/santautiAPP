@@ -20,7 +20,6 @@ import santauti.app.APIServices.RestClient;
 import santauti.app.Activities.Home.HomeActivity;
 import santauti.app.Model.User;
 import santauti.app.R;
-//JSONObject json = new JSONObject(inputStreamAsString);
 
 public class MainActivity extends AppCompatActivity {
     private User user = new User();
@@ -38,9 +37,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText password = (EditText)findViewById(R.id.input_password);
         final Button login = (Button)findViewById(R.id.btn_login);
         findViewById(R.id.login).requestFocus();
-        // -----------------------------------------------------------------------------------------
-
         mainView = findViewById(android.R.id.content);
+        // -----------------------------------------------------------------------------------------
 
         apiService = RestClient.getClient(MainActivity.this).create(APIService.class);
 
@@ -56,14 +54,13 @@ public class MainActivity extends AppCompatActivity {
                 login();
 
                 progressDialog.setIndeterminate(true);
-                progressDialog.setMessage("Autenticando...");
+                progressDialog.setMessage(getString(R.string.autenticando));
                 progressDialog.show();
             }
         });
     }
 
     public void login(){
-
         Call<User> call = apiService.login(user);
         call.enqueue(new Callback<User>() {
             @Override
@@ -77,18 +74,17 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(getString(R.string.acess_token),response.body().getToken());
                     editor.putInt(getString(R.string.registroMedico),response.body().getRegistro());
-                    editor.putInt("tipoProfissional",response.body().getTipoProfissional());
+                    editor.putInt(getString(R.string.tipoProfissional),response.body().getTipoProfissional());
                     editor.apply();
 
-                    //intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
                 }
                 else if(response.code()==200 && response.body().getTipoProfissional()==1)
-                    SnackbarCreator.createText(mainView, "Perfil sem acesso a esta área");
+                    SnackbarCreator.createText(mainView,getString(R.string.perfilSemAcesso));
 
                 else if(response.code()==400)
-                    SnackbarCreator.createText(mainView, "Usuário e/ou senha incorretos");
+                    SnackbarCreator.createText(mainView, getString(R.string.usuarioSenhaIncorreto));
 
                 progressDialog.dismiss();
             }

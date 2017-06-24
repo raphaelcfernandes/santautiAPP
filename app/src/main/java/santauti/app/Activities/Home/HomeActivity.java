@@ -65,11 +65,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         tbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tbar);
         initNavigationDrawer();
-//        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences),Context.MODE_PRIVATE);
-//
-//        System.out.println(sharedPref.getString("acess_token",""));
-//        System.out.println(sharedPref.getInt(getString(R.string.registroMedico),0));
-//        System.out.println(sharedPref.getInt("tipoProfissional",0));
 
         progress = (ProgressBar) findViewById(R.id.progressbar_recycler);
 

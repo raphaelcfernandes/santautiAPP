@@ -42,11 +42,23 @@ public class InfecciosoActivity extends GenericoActivity {
                 infecciosoNao.setChecked(true);
         }
 
-        proxFicha.setOnClickListener(new View.OnClickListener() {
+        antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), MetabolicoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1,intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), HematologicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();
                 verificaCamposENotificaAdapter();
@@ -54,17 +66,7 @@ public class InfecciosoActivity extends GenericoActivity {
             }
         });
 
-        antFicha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(view.getContext(), EndocrinoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
-                startActivity(intent);
-                exitActivityToLeft();
-                verificaCamposENotificaAdapter();
-                finish();
-            }
-        });
+
 
     }
 

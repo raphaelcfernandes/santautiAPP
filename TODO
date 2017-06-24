@@ -23,25 +23,26 @@ FICHA:
             - Editar -> Drogas Vasoativas
         - Respiratorio -> Layout?
             - Backend ok. Está salvando no banco com a idFicha correto.
+
+Criar model para Monitor multiparametrico
+
+
+/*************MUDANĆAS*********************/
+
+
 Gastro
-	- Massas paupaveis: sim ou nao
-	- visceras paupaveis: sim ou nao
-	- ruidos hidraero embaixo tensao
-	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter
+	- VCM -> ok
+	- Massas paupaveis: sim ou nao => ok
+	- visceras paupaveis: sim ou nao => ok
+	- ruidos hidraero -> embaixo tensao => ok
+	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter =>
 	- assit: pequena, media, grande. radioButton
-Dispositivos, criar no app
+	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
 Ventilaćao: espontanea, assistida, invasiva
 
 espontanea = sem aparelho
 minha invavisa = assistida
 
-
-Criar model para Monitor multiparametrico
-
-
-
-Monitor Multiparametro -> Bombas de infusao -> Dispositivos -> Respirador
-Renal -> metabolico -> infeccioso
 
 /*** ADAPTAR TEXTO SPINNER. Como fazer texto quebrar de linha no spinner***/
 

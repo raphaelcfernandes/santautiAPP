@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 
 import io.realm.Realm;
+import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Endocrino;
 import santauti.app.Model.Ficha.Ficha;
@@ -41,23 +43,11 @@ public class EndocrinoActivity extends GenericoActivity {
                 endocrinoN.setChecked(true);
         }
 
-        proxFicha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(view.getContext(), InfecciosoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
-                startActivity(intent);
-                exitActivityToRight();
-                verificaCamposENotificaAdapter();
-                finish();
-            }
-        });
-
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), HematologicoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
                 verificaCamposENotificaAdapter();
@@ -65,6 +55,13 @@ public class EndocrinoActivity extends GenericoActivity {
             }
         });
 
+    }
+
+    @Override
+    public void prepareNavigationButtons() {
+        findViewById(R.id.fichaProxima).setVisibility(View.GONE);
+        antFicha = (Button)findViewById(R.id.fichaAnterior);
+        antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
     }
 
     public int getEndocrinoSelected(){

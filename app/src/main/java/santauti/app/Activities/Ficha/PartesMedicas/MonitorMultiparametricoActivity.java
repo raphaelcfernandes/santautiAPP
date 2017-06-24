@@ -31,7 +31,7 @@ public class MonitorMultiparametricoActivity extends GenericoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor_multiparametrico);
 
-        setToolbar("Monitor Multiparamétrico");
+        setToolbar(getString(R.string.MonitorMultiparametrico));
 
         prepareSpinner();
         prepareNavigationButtons();
@@ -41,8 +41,8 @@ public class MonitorMultiparametricoActivity extends GenericoActivity {
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), NeurologicoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                intent = new Intent(view.getContext(), BombaInfusaoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
                 realm.close();
@@ -50,18 +50,15 @@ public class MonitorMultiparametricoActivity extends GenericoActivity {
                 finish();
             }
         });
-        antFicha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(view.getContext(), DispositivoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
-                startActivity(intent);
-                exitActivityToLeft();
-                finish();
-            }
-        });
     }
 
+    @Override
+    public void prepareNavigationButtons() {
+        proxFicha = (Button)findViewById(R.id.fichaProxima);
+        antFicha = (Button)findViewById(R.id.fichaAnterior);
+        antFicha.setVisibility(View.GONE);
+        proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
+    }
 
     private void prepareSpinner(){
         String[] tiposTracado={defaultSpinnerString,"Sinusal","Fibrilaćao atrial", "Flutter atrial","Juncional","Idioventricular","Ritmo de marcapasso"};

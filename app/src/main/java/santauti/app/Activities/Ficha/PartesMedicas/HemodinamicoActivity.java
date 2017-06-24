@@ -116,11 +116,23 @@ public class HemodinamicoActivity extends GenericoActivity {
 //            else
 //                hemodinamico_opcional_nao.setChecked(true);
 //        }
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), NeurologicoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
+
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), RespiratorioActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)+1, getIntent().getIntExtra("idFicha",0), intent);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
                 verificaCamposENotificaAdapter();
@@ -128,17 +140,6 @@ public class HemodinamicoActivity extends GenericoActivity {
             }
         });
 
-        antFicha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(view.getContext(), NeurologicoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
-                startActivity(intent);
-                exitActivityToLeft();
-                verificaCamposENotificaAdapter();
-                finish();
-            }
-        });
 
         soproSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

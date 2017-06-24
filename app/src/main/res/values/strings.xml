@@ -1,11 +1,15 @@
 <resources>
-    <string name="app_name">Santauti</string>
+    <string name="app_name">SantaUTI</string>
     <string name="login">Login</string>
     <string name="Usuario">Usuario</string>
     <string name="Senha">Senha</string>
     <string name="title_activity_ficha">Evolução</string>
     <string name="title_activity_home">Pacientes</string>
     <string name="action_search">Filtrar</string>
+    <string name="MonitorMultiparametrico">Monitor Multiparamétrico</string>
+    <string name="BombaInfusao">Bomba de Infusão</string>
+    <string name="Dispositivos">Dispositivos</string>
+    <string name="Respirador">Respirador</string>
     <string name="Neurologico">Neurológico</string>
     <string name="Hemodinamico">Hemodinâmico</string>
     <string name="Respiratorio">Respiratório</string>
@@ -18,10 +22,20 @@
     <string name="Evolucao">Evolução</string>
     <string name="nivel_consciencia">Nível de Consciência:</string>
     <string name="escolha_opcao">Selecione um</string>
-    <string name="country_prompt">Choose a country</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
     <string name="sharedPrefecences">SantaUTISharedPreferences</string>
     <string name="acess_token">acess_token</string>
     <string name="registroMedico">registroMedico</string>
+    <string name="tipoProfissional">tipoProfissional</string>
+
+    <!--NORMAL MESSAGES-->
+    <string name="autenticando">Autenticando…</string>
+    <!--NORMAL MESSAGES-->
+
+    <!--ERROR MESSAGES-->
+    <string name="perfilSemAcesso">Perfil sem acesso a esta área</string>
+    <string name="usuarioSenhaIncorreto">Usuário e/ou senha incorretos</string>
+    <!--ERROR MESSAGES-->
+
 </resources>

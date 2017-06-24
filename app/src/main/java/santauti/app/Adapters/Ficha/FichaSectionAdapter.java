@@ -73,7 +73,7 @@ public class FichaSectionAdapter extends RecyclerView.Adapter<FichaSectionAdapte
         holder.title.setText(fichaAdapterModel.getName());
         Glide.with(mContext).load(fichaAdapterModel.getThumbnail()).into(holder.thumbnail);
         if(fichaAdapterModelList.get(position).getColor()==1)
-            holder.cardView.setBackgroundResource(R.color.light_green);
+            holder.cardView.setBackgroundResource(R.drawable.cardview_change_border_color);
     }
 
     @Override

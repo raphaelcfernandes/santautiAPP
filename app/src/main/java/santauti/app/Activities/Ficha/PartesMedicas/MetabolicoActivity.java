@@ -44,24 +44,28 @@ public class MetabolicoActivity extends GenericoActivity {
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), InfecciosoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)-1, getIntent().getIntExtra("idFicha",0), intent);
+                intent = new Intent(view.getContext(), RenalActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
             }
         });
+
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), InfecciosoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
+                startActivity(intent);
+                exitActivityToRight();
+                verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
     }
 
-    @Override
-    public void prepareNavigationButtons() {
-        proxFicha = (Button)findViewById(R.id.fichaProxima);
-        proxFicha.setVisibility(View.GONE);
-        antFicha = (Button)findViewById(R.id.fichaAnterior);
-        antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
-
-    }
 
     @Override
     protected void onDestroy() {

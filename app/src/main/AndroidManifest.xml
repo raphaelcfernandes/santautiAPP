@@ -49,6 +49,8 @@
         </activity>
         <activity android:name=".Activities.Ficha.PartesMedicas.MonitorMultiparametricoActivity" />
         <activity android:name=".Activities.Ficha.PartesMedicas.DispositivoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.BombaInfusaoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.RespiradorActivity" />
     </application>
 
 </manifest>
