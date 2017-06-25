@@ -5,7 +5,6 @@ Geral:
         - NAO SEI SE ESTOU FAZENDO CERTO A CONEXAO SSL ISSO É IMPORTANTE
     /*******************************RELER************************************/
     - Adaptar itens,botoes e todos layout para diferentes padroes e tamanhos de tela
-    - Aplicar transiçoes entre telas
     - Customizar spinner
 HOME:
     - Navigation view n fica transparente no colorPrimaryDark
@@ -30,7 +29,7 @@ Criar model para Monitor multiparametrico
 /*************MUDANĆAS*********************/
 
 
-Gastro
+Gastro -> OK. LAYOUT N ESTA ADAPTANDO...
 	- VCM -> ok
 	- Massas paupaveis: sim ou nao => ok
 	- visceras paupaveis: sim ou nao => ok

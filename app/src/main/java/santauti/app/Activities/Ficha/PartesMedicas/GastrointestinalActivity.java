@@ -1,6 +1,7 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,11 +39,12 @@ public class GastrointestinalActivity extends GenericoActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gastrointestinal);
-        //findViewById(R.id.gastrointestinal_layout).requestFocus();
+        findViewById(R.id.gastrointestinal_layout).requestFocus();
         setToolbar(getString(R.string.GastroIntestinal));
 
         prepareGastrointestinalSpinners();
         prepareNavigationButtons();
+
 //        vcmPresente = (RadioButton)findViewById(R.id.vcm_presente);
 //        vcmAusente = (RadioButton)findViewById(R.id.vcm_ausente);
 //        intensidadeRuidoLayout = findViewById(R.id.intensidade_ruido_layout);
@@ -190,7 +192,7 @@ public class GastrointestinalActivity extends GenericoActivity {
 //            }
 //        };
 //        ruidosSpinner.setAdapter(adapterRuido);
-//
+
         tensaoSpinner = (Spinner) findViewById(R.id.gastrointestinal_tensao);
         adapterTensao = new ArrayAdapter<String>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, tensao){
             @Override
