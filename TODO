@@ -29,18 +29,8 @@ Criar model para Monitor multiparametrico
 /*************MUDANĆAS*********************/
 
 
-Gastro -> OK. LAYOUT N ESTA ADAPTANDO...
-	- VCM -> ok
-	- Massas paupaveis: sim ou nao => ok
-	- visceras paupaveis: sim ou nao => ok
-	- ruidos hidraero -> embaixo tensao => ok
-	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter =>
-	- assit: pequena, media, grande. radioButton
-	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
-Ventilaćao: espontanea, assistida, invasiva
 
-espontanea = sem aparelho
-minha invavisa = assistida
+Ventilaćao: espontanea, assistida, invasiva
 
 
 /*** ADAPTAR TEXTO SPINNER. Como fazer texto quebrar de linha no spinner***/
@@ -49,24 +39,33 @@ minha invavisa = assistida
 Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
     - cateter de PIC
     - balao intra-aortico
-Monitor -> pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria
+Monitor -> ok
+    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria
+Gastro -> OK.
+	- VCM -> ok
+	- Massas paupaveis: sim ou nao => ok
+	- visceras paupaveis: sim ou nao => ok
+	- ruidos hidraero -> embaixo tensao => ok
+	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter =>
+	- assit: pequena, media, grande. radioButton
+	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
 Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
         - Delirium, sim ou nao.
         - Nivel consciencia somente nao sedado
         - Paresia ou Plegia
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
-        - PIC + PPC + SJO2 -> Monitod
+        - PIC + PPC + SJO2 -> Monitor
 Hemodinamico: nipride, adicionar drogas vai para bomba de infusao
-    - Pulso ritmico/aritmico
-    - Fonese de bulhas: hiper, normal, hipo
-    - perfusao capilar: boa/ruim
-    - lactato: normal, elevado
+    - Pulso ritmico/aritmico -> ok
+    - Fonese de bulhas: hiper, normal, hipo -> ok
+    - perfusao capilar: boa/ruim -> ok
+    - lactato: normal, elevado -> ok
     - Extremidades:
         - cianotica, acianotica, fria, quente (check box como no deficit motor)
     - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
-    - frequencia cardiaca -> monitor
-    - PAM + PVC + swan_Ganz -> monitor
+    - frequencia cardiaca -> monitor (OK)
+    - PAM + PVC + swan_Ganz -> monitor (OK)
 Bomba de infusao
     - Bomba de infusao
       - fentanil, propofol, ketamina, midasolan (dormonide), precedex

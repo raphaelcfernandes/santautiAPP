@@ -18,8 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -43,9 +41,8 @@ import santauti.app.R;
 public class HemodinamicoActivity extends GenericoActivity {
     private Spinner bulhasSpinner;
     private Spinner drogasVasoativasSpinner,soproSpinner,intensidadeSoproSpinner,tipoSoproSpinner;
-    private RadioButton hemodinamico_opcional_sim,hemodinamico_opcional_nao;
-    private View hemodinamico_opcional_layout,bulhas_layout,tipoSoproLayout,intensidadeSoproLayout;
-    private boolean bulhasIsShown=false;
+    private View tipoSoproLayout;
+    private View intensidadeSoproLayout;
     private MyAnimation myAnimation;
     private List<HemodinamicoAdapterModel> hemodinamicoModelList = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -61,25 +58,17 @@ public class HemodinamicoActivity extends GenericoActivity {
         findViewById(R.id.hemodinamico_layout).requestFocus();
         setToolbar(getString(R.string.Hemodinamico));
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        hemodinamicoAdapter = new HemodinamicoAdapter(this,hemodinamicoModelList);
-        recyclerView.setAdapter(hemodinamicoAdapter);
+//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+//        hemodinamicoAdapter = new HemodinamicoAdapter(this,hemodinamicoModelList);
+//        recyclerView.setAdapter(hemodinamicoAdapter);
 
-        hemodinamicoAdapter.setOnItemClickListener(onItemClickListener);
-        hemodinamico_opcional_nao = (RadioButton)findViewById(R.id.hemodinamico_opcional_nao);
-        hemodinamico_opcional_sim = (RadioButton)findViewById(R.id.hemodinamico_opcional_sim);
-        hemodinamico_opcional_layout = findViewById(R.id.hemodinamico_opcional_layout);
-        hemodinamico_opcional_layout.setVisibility(View.GONE);
-        bulhas_layout = findViewById(R.id.bulhas_layout);
+       // hemodinamicoAdapter.setOnItemClickListener(onItemClickListener);
         tipoSoproLayout = findViewById(R.id.tipoSopro_layout);
         intensidadeSoproLayout = findViewById(R.id.intensidade_sopro_layout);
 
-        frequenciaCardiaca = (TextInputEditText)findViewById(R.id.hemodinamico_frequencia);
-        PAM = (TextInputEditText)findViewById(R.id.pam);
-        PVC = (TextInputEditText)findViewById(R.id.pvc);
-        swan_ganz = (TextInputEditText)findViewById(R.id.swan_ganz);
+
         myAnimation = new MyAnimation();
         prepareHemodinamicoSpinners();
         prepareNavigationButtons();
@@ -123,7 +112,7 @@ public class HemodinamicoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
-                verificaCamposENotificaAdapter();
+                //verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -135,7 +124,7 @@ public class HemodinamicoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
-                verificaCamposENotificaAdapter();
+                //verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -177,7 +166,7 @@ public class HemodinamicoActivity extends GenericoActivity {
 
     @Override
     public void onBackPressed(){
-        verificaCamposENotificaAdapter();
+        //verificaCamposENotificaAdapter();
         finish();
     }
 
@@ -185,7 +174,7 @@ public class HemodinamicoActivity extends GenericoActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home) {
-            verificaCamposENotificaAdapter();
+            //verificaCamposENotificaAdapter();
             finish();
         }
         return true;
@@ -201,16 +190,7 @@ public class HemodinamicoActivity extends GenericoActivity {
             hemodinamico.setBulhas(bulhasSpinner.getSelectedItem().toString());
             hemodinamico.setFreqCardiaca(Integer.parseInt(frequenciaCardiaca.getText().toString()));
         }
-        if(hemodinamico_opcional_nao.isChecked())
-            hemodinamico.setOpcionais(false);
 
-        if(hemodinamico_opcional_sim.isChecked()) {
-            if (!isTextInpudEditTextEmpty(PAM) && !isTextInpudEditTextEmpty(PVC) && !isTextInpudEditTextEmpty(swan_ganz))
-                hemodinamico.setOpcionais(true);
-            hemodinamico.setPam(getIntegerFromTextInputEditText(PAM));
-            hemodinamico.setPvc(getIntegerFromTextInputEditText(PVC));
-            hemodinamico.setSwan_ganz(getIntegerFromTextInputEditText(swan_ganz));
-        }
 
         for(HemodinamicoAdapterModel h : hemodinamicoModelList){
             HemodinamicoOpcional hemodinamicoOpcional = realm.createObject(HemodinamicoOpcional.class);
@@ -316,16 +296,6 @@ public class HemodinamicoActivity extends GenericoActivity {
 
     }
 
-    public void hemodinamicoOpcionalOnRadioButtonClicked(View view){
-        switch(view.getId()) {
-            case R.id.hemodinamico_opcional_sim:
-                myAnimation.slideDownView(HemodinamicoActivity.this,hemodinamico_opcional_layout);
-                break;
-            case R.id.hemodinamico_opcional_nao:
-                myAnimation.slideUpView(HemodinamicoActivity.this,hemodinamico_opcional_layout);
-                break;
-        }
-    }
 
     public void addDrogaVasoativa(View view) {
         final String[] drogasVasoativaString = {defaultSpinnerString,"Dobutamina","Dopamina","Nitroprussiato de Sodio","Nitroglicerina","Milrinona","Noradrenalina","Adrenalina"};

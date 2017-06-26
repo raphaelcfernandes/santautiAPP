@@ -48,14 +48,12 @@ import santauti.app.R;
  */
 
 public class NeurologicoActivity extends GenericoActivity {
-    private TextInputEditText pic,ppc,sjo2;
     private Spinner nivelConscienciaSpinner,ramsaySpinner,rassSpinner,deficitMotorSpinner;
     private Spinner aberturaOcularSpinner,respostaVerbalSpinner,respostaMotoraSpinner,pupilaReatividadeLuzSpinner;
     private Spinner pupilaSimetriaSpinner,pupilaTamanhoSpinner,tipoDecifitSpinner,ladoDeficitSpinner,diferencaPupilarSpinner;
-    private RadioButton sedado_sim,sedado_nao,opcionalSim,opcionalNao;
+    private RadioButton sedado_sim,sedado_nao;
     private View sedado_sim_layout;
     private View sedado_nao_layout;
-    private View neurologico_opcional_layout;
     private View avaliacaoPupilarLayout;
     private View deficitMotorLado;
     private View deficitMotorTipo, nivelConsciencia, flutuacaoLayout,inatencaoLayout,pensamentoDesorganizadoLayout,flutuacaoQuestion,inatencaoQuestion,pensamentoQuestion;
@@ -79,7 +77,6 @@ public class NeurologicoActivity extends GenericoActivity {
         /******************************VARIAVEIS LAYOUTS*************************************/
         sedado_sim_layout = findViewById(R.id.sedado_sim_layout);
         sedado_nao_layout = findViewById(R.id.sedado_nao_layout);
-        neurologico_opcional_layout = findViewById(R.id.neurologico_opcional_layout);
         avaliacaoPupilarLayout = findViewById(R.id.avaliacaoPupilar);
 
         deficitMotorLado = findViewById(R.id.ladoDecificitLayout);
@@ -95,8 +92,6 @@ public class NeurologicoActivity extends GenericoActivity {
         /******************************VARIAVEIS RADIOBUTTON*********************************/
         sedado_sim = (RadioButton)findViewById(R.id.sedado_sim);
         sedado_nao = (RadioButton)findViewById(R.id.sedado_nao);
-        opcionalSim = (RadioButton)findViewById(R.id.neurologico_opcional_sim);
-        opcionalNao = (RadioButton)findViewById(R.id.neurologico_opcional_nao);
         /******************************VARIAVEIS RADIOBUTTON*********************************/
 
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
@@ -104,9 +99,6 @@ public class NeurologicoActivity extends GenericoActivity {
         avaliacaoPupilarToggleButton = (ImageView)findViewById(R.id.avaliacaoToggleButton);
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
 
-        pic = (TextInputEditText)findViewById(R.id.PIC);
-        ppc = (TextInputEditText)findViewById(R.id.PPC);
-        sjo2 = (TextInputEditText)findViewById(R.id.SjO2);
 
         diferencaPupilar = (TextView)findViewById(R.id.diferencaPupilar);
 
@@ -388,17 +380,6 @@ public class NeurologicoActivity extends GenericoActivity {
             spinnerPosition = adapterDeficitMotor.getPosition("Ausente");
             deficitMotorSpinner.setSelection(spinnerPosition);
         }
-
-        //Opcionais sim
-        if(ficha.getNeurologico().getOpcionais()!=null){
-            opcionalSim.setChecked(true);
-            pic.setText(String.valueOf(ficha.getNeurologico().getOpcionais().getPic()));
-            ppc.setText(String.valueOf(ficha.getNeurologico().getOpcionais().getPpc()));
-            sjo2.setText(String.valueOf(ficha.getNeurologico().getOpcionais().getSjo2()));
-            myAnimation.slideDownView(NeurologicoActivity.this,neurologico_opcional_layout);
-        }
-        else
-            opcionalNao.setChecked(true);
     }
 
     @Override
@@ -443,20 +424,6 @@ public class NeurologicoActivity extends GenericoActivity {
                 }
                 else if(nivelConsciencia.isShown())
                     myAnimation.slideUpView(NeurologicoActivity.this,nivelConsciencia);
-                break;
-        }
-    }
-
-    public void neurologicoOpcionalOnRadioButtonClicked(View view){
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.neurologico_opcional_sim:
-                if(!neurologico_opcional_layout.isShown())
-                    myAnimation.slideDownView(NeurologicoActivity.this,neurologico_opcional_layout);
-                break;
-            case R.id.neurologico_opcional_nao:
-                if(neurologico_opcional_layout.isShown())
-                    myAnimation.slideUpView(NeurologicoActivity.this,neurologico_opcional_layout);
                 break;
         }
     }
@@ -826,19 +793,6 @@ public class NeurologicoActivity extends GenericoActivity {
             neurologico.setDeficitMotor(false);
             deficitMotor=true;
         }
-
-        if(opcionalSim.isChecked()){
-            if(!isTextInpudEditTextEmpty(pic) && !isTextInpudEditTextEmpty(ppc) && !isTextInpudEditTextEmpty(sjo2)) {
-                Opcionais opcionais = realm.createObject(Opcionais.class);
-                opcionais.setPic(getIntegerFromTextInputEditText(pic));
-                opcionais.setPpc(getIntegerFromTextInputEditText(ppc));
-                opcionais.setSjo2(getIntegerFromTextInputEditText(sjo2));
-                neurologico.setOpcionais(opcionais);
-            }
-        }
-
-        if(opcionalNao.isChecked() || (!opcionalSim.isChecked() && !opcionalNao.isChecked()))
-            neurologico.setOpcionais(null);
 
         if(nivelConsciencia && avaliacaoPupilar && (sedadoSim || sedadoNao) && deficitMotor) {
             Ficha r = getProperFicha();

@@ -1,7 +1,6 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -20,7 +18,6 @@ import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Gastrointestinal;
-import santauti.app.Model.Ficha.Renal;
 import santauti.app.R;
 
 /**
@@ -34,7 +31,6 @@ public class GastrointestinalActivity extends GenericoActivity {
     private ArrayAdapter<String> adapterRuido,adapterFormato,adapterTensao,adapterIntensidade;
     private int spinnerPosition;
     private View intensidadeRuidoLayout,intensidadeteste,tensaoteste,formatoteste;
-    private MyAnimation myAnimation = new MyAnimation();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +43,8 @@ public class GastrointestinalActivity extends GenericoActivity {
 
 //        vcmPresente = (RadioButton)findViewById(R.id.vcm_presente);
 //        vcmAusente = (RadioButton)findViewById(R.id.vcm_ausente);
-//        intensidadeRuidoLayout = findViewById(R.id.intensidade_ruido_layout);
-//
-//
-//        realm = Realm.getDefaultInstance();
-//
+        realm = Realm.getDefaultInstance();
+
 //        Ficha ficha = getProperFicha();
 //        if(ficha.getGastrointestinal()!=null){
 //            if(ficha.getGastrointestinal().getVcm()==1)
@@ -68,7 +61,7 @@ public class GastrointestinalActivity extends GenericoActivity {
 //            spinnerPosition = adapterTensao.getPosition(ficha.getGastrointestinal().getTensao());
 //            tensaoSpinner.setSelection(spinnerPosition);
 //        }
-//
+
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,23 +86,6 @@ public class GastrointestinalActivity extends GenericoActivity {
             }
         });
 
-//
-//        ruidosSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                if(ruidosSpinner.getSelectedItem().toString().equals("Presente") && !intensidadeRuidoLayout.isShown()){
-//                    myAnimation.slideDownView(GastrointestinalActivity.this,intensidadeRuidoLayout);
-//                }
-//                else{
-//                    myAnimation.slideUpView(GastrointestinalActivity.this,intensidadeRuidoLayout);
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
     }
 
     @Override
@@ -168,30 +144,9 @@ public class GastrointestinalActivity extends GenericoActivity {
     }
 
     private void prepareGastrointestinalSpinners(){
-//        String[] ruidos = {defaultSpinnerString,"Presente","Ausente"};
         String[] tensao = {defaultSpinnerString,"Tenso","Normotenso","Flácido"};
         String[] formato = {defaultSpinnerString,"Plano","Globoso","Semigloboso","Escavado"};
         String[] intensidade = {defaultSpinnerString,"Aumentado","Normal","Reduzido"};
-//
-//        ruidosSpinner = (Spinner) findViewById(R.id.gastrointestinal_ruidos);
-//        adapterRuido = new ArrayAdapter<String>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, ruidos){
-//            @Override
-//            public boolean isEnabled(int position) {
-//                return position != 0;
-//            }
-//            @Override
-//            public View getDropDownView(int position, View convertView,
-//                                        @NonNull ViewGroup parent) {
-//                View view = super.getDropDownView(position, convertView, parent);
-//                TextView tv = (TextView) view;
-//                if(position == 0)
-//                    tv.setTextColor(Color.GRAY);
-//                else
-//                    tv.setTextColor(Color.BLACK);
-//                return view;
-//            }
-//        };
-//        ruidosSpinner.setAdapter(adapterRuido);
 
         tensaoSpinner = (Spinner) findViewById(R.id.gastrointestinal_tensao);
         adapterTensao = new ArrayAdapter<String>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, tensao){
@@ -212,7 +167,7 @@ public class GastrointestinalActivity extends GenericoActivity {
             }
         };
         tensaoSpinner.setAdapter(adapterTensao);
-//
+
         formatoSpinner = (Spinner) findViewById(R.id.formato_abdome);
         adapterFormato = new ArrayAdapter<String>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, formato){
             @Override
@@ -232,7 +187,7 @@ public class GastrointestinalActivity extends GenericoActivity {
             }
         };
         formatoSpinner.setAdapter(adapterFormato);
-//
+
         intensidadeSpinner = (Spinner) findViewById(R.id.intensidade_ruido_spinner);
         adapterIntensidade = new ArrayAdapter<String>(GastrointestinalActivity.this, android.R.layout.simple_dropdown_item_1line, intensidade){
             @Override
@@ -253,15 +208,4 @@ public class GastrointestinalActivity extends GenericoActivity {
         };
         intensidadeSpinner.setAdapter(adapterIntensidade);
     }
-
-//    public void gastrointestinalOnRadioButtonClicked(View view){
-//        boolean checked = ((RadioButton) view).isChecked();
-//        switch(view.getId()) {
-//            case R.id.vcm_presente:
-//                break;
-//            case R.id.vcm_ausente:
-//                break;
-//        }
-//    }
-
 }

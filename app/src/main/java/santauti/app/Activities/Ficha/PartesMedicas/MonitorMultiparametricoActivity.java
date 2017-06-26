@@ -30,7 +30,7 @@ public class MonitorMultiparametricoActivity extends GenericoActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor_multiparametrico);
-
+        findViewById(R.id.monitor_multiparametrico_layout).requestFocus();
         setToolbar(getString(R.string.MonitorMultiparametrico));
 
         prepareSpinner();

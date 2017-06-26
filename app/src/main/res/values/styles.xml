@@ -29,12 +29,18 @@
         <item name="android:colorButtonNormal">@color/colorPrimaryDark</item>
         <item name="android:colorControlHighlight">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
     </style>
     <style name="TextLabelBlue" parent="TextAppearance.AppCompat">
         <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="android:textColorHint">@android:color/black</item>
         <item name="android:textSize">17sp</item>
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="TextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="radioButtonStyle" >
