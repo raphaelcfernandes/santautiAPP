@@ -52,9 +52,6 @@ public class RespiratorioActivity extends GenericoActivity {
         invasivoView = (LinearLayout)findViewById(R.id.ventilacao_invasiva);
         naoInvasivoView = (LinearLayout)findViewById(R.id.ventilacao_nao_invasiva);
 
-        invasivo = (RadioButton)findViewById(R.id.respiratorio_invasivo);
-        naoInvasivo = (RadioButton)findViewById(R.id.respiratorio_nao_invasivo);
-
         prepareNavigationButtons();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
@@ -255,38 +252,38 @@ public class RespiratorioActivity extends GenericoActivity {
 
     }
 
-    public void respiratorioVentilacaoOnRadioButtonClicked(View view){
-        switch(view.getId()) {
-            case R.id.respiratorio_invasivo:
-                if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioInvasiva()!=null)
-                    preencherInvasivo();
-                if(naoInvasivoView.isShown()) {
-                    myAnimation.slideUpView(this, naoInvasivoView);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            myAnimation.slideDownView(RespiratorioActivity.this, invasivoView);
-                        }
-                    }, 250);
-                }
-                else if(!invasivoView.isShown())
-                    myAnimation.slideDownView(RespiratorioActivity.this, invasivoView);
-                break;
-            case R.id.respiratorio_nao_invasivo:
-                if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioNaoInvasiva()!=null)
-                    preencherNaoInvasivo();
-                if(invasivoView.isShown()) {
-                    myAnimation.slideUpView(this, invasivoView);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            myAnimation.slideDownView(RespiratorioActivity.this, naoInvasivoView);
-                        }
-                    }, 250);
-                }
-                else if(!naoInvasivoView.isShown())
-                    myAnimation.slideDownView(RespiratorioActivity.this, naoInvasivoView);
-                break;
-        }
-    }
+//    public void respiratorioVentilacaoOnRadioButtonClicked(View view){
+//        switch(view.getId()) {
+//            case R.id.respiratorio_invasivo:
+//                if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioInvasiva()!=null)
+//                    preencherInvasivo();
+//                if(naoInvasivoView.isShown()) {
+//                    myAnimation.slideUpView(this, naoInvasivoView);
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            myAnimation.slideDownView(RespiratorioActivity.this, invasivoView);
+//                        }
+//                    }, 250);
+//                }
+//                else if(!invasivoView.isShown())
+//                    myAnimation.slideDownView(RespiratorioActivity.this, invasivoView);
+//                break;
+//            case R.id.respiratorio_nao_invasivo:
+//                if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioNaoInvasiva()!=null)
+//                    preencherNaoInvasivo();
+//                if(invasivoView.isShown()) {
+//                    myAnimation.slideUpView(this, invasivoView);
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            myAnimation.slideDownView(RespiratorioActivity.this, naoInvasivoView);
+//                        }
+//                    }, 250);
+//                }
+//                else if(!naoInvasivoView.isShown())
+//                    myAnimation.slideDownView(RespiratorioActivity.this, naoInvasivoView);
+//                break;
+//        }
+//    }
 }

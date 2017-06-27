@@ -40,7 +40,10 @@ Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
     - cateter de PIC
     - balao intra-aortico
 Monitor -> ok
-    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico?)
+    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico %?) Spo2
+
+Exames: ultimo icone
+
 Gastro -> OK.
 	- VCM -> ok
 	- Massas paupaveis: sim ou nao => ok
@@ -56,7 +59,7 @@ Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no
         - Paresia ou Plegia
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
         - PIC + PPC + SJO2 -> Monitor
-Hemodinamico: nipride (Droga vasoativa?), adicionar drogas vai para bomba de infusao -> ok
+Hemodinamico:, adicionar drogas vai para bomba de infusao -> ok
     - Pulso ritmico/aritmico -> ok
     - Fonese de bulhas: hiper, normal, hipo -> ok
     - perfusao capilar: boa/ruim -> ok
@@ -73,14 +76,34 @@ Bomba de infusao -> ok
       - velocidade de infusao -> ok
       - dose ml/hr -> ok
 Respiratorio:
-    - murmurio vesicular: fisiologico, reduzido
-    - Roncos: sibilos, crepitacoes
-        - crepitacoes: base direita, base esquerda, terco medio direito/esquerda, apice
+    - Via area: tubo orotraquial, traqueostomia, normal -> ok
+        - tubo ou traqueostomia = pressao do cuff
+        - localizacao da canula se tiver entubado
+    - murmurio vesicular:
+        - fisiologico, reduzido
+        - aumentado
+        - = crepitacoes
+    - Uso de oxigenio:
+        - Sim ou nao. + campo numerico (fluxo), sob cateter nasal, em mascara de venturI, em mascara de reinalaćao
+        - mascara de venturI: 28%, 35%, 50%, 70%
+            - cor + percentual (https://lh6.googleusercontent.com/-X2eiiBbwOig/TX-p9SLVclI/AAAAAAAAACA/I-oDrdp5kfs/s1600/mascara.bmp)
+    - Roncos:
+        - = crepitacoes
+    - sibilos:
+        - = crepitacoes
+    - crepitacoes: base direita, base esquerda, terco medio direito/esquerda, apice
 Ventilacao:
-    - esponatanea, assistida
-        - Assistida: invasiva, nao invasiva
-            - Invasiva: mecanica (respirador)
-    - mecanica, bpap
+    - esponatanea, mecanico, bipap
+    - bipap:
+        - Volume
+        - Ipap
+        - EPAP
+        - saturacao
+        - Oxigenio (numerico)
+    - nao invasiva: - invasivo sem a mascara
+    - mecanica:
+        - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
+            - Freq respiratoria 2 campos: paciente e respirador
 Renal:
     - Urina: clara escura. debaixo de diurese
     - Em procedimento dialitico? Em dialise?
