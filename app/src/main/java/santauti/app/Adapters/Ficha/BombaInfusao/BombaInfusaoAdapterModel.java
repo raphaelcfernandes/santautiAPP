@@ -1,22 +1,30 @@
-package santauti.app.Adapters.Ficha.Hemodinamico;
+package santauti.app.Adapters.Ficha.BombaInfusao;
 
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 /**
  * Created by Raphael Fernandes on 14-Jun-17.
  */
 
-public class HemodinamicoAdapterModel {
+public class BombaInfusaoAdapterModel {
     private ImageView deleteIcon;
     private ImageView editIcon;
     private String droga;
     private int dose;
+    private int velInfusao;
 
-    public HemodinamicoAdapterModel(String droga, int dose){
-
+    public BombaInfusaoAdapterModel(String droga, int dose,int velInfusao){
         this.droga=droga;
         this.dose=dose;
+        this.velInfusao=velInfusao;
+    }
+
+    public int getVelInfusao() {
+        return velInfusao;
+    }
+
+    public void setVelInfusao(int velInfusao) {
+        this.velInfusao = velInfusao;
     }
 
     public ImageView getEditIcon() {

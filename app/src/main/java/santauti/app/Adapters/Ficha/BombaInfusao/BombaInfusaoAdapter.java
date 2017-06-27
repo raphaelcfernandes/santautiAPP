@@ -1,7 +1,6 @@
-package santauti.app.Adapters.Ficha.Hemodinamico;
+package santauti.app.Adapters.Ficha.BombaInfusao;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,30 +17,31 @@ import santauti.app.R;
  * Created by Raphael Fernandes on 14-Jun-17.
  */
 
-public class HemodinamicoAdapter extends RecyclerView.Adapter<HemodinamicoAdapter.ViewHolder>{
+public class BombaInfusaoAdapter extends RecyclerView.Adapter<BombaInfusaoAdapter.ViewHolder>{
     private Context context;
-    private List<HemodinamicoAdapterModel> hemodinamicoAdapterModelList;
+    private List<BombaInfusaoAdapterModel> hemodinamicoAdapterModelList;
     private int lastPosition=-1;
     private MyAnimation myAnimation = new MyAnimation();
     private OnItemClickListener mItemClickListener;
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public final TextView droga;
         public final TextView dose;
+        public final TextView velInfusao;
         public final ImageView deleteIcon;
-        public final ImageView editIcon;
+
         public ViewHolder(View itemView) {
             super(itemView);
             droga = (TextView) itemView.findViewById(R.id.droga);
             dose = (TextView)itemView.findViewById(R.id.doseDroga);
+            velInfusao = (TextView)itemView.findViewById(R.id.velocidadeInfusao);
             deleteIcon = (ImageView)itemView.findViewById(R.id.deleteIcon);
-            editIcon = (ImageView)itemView.findViewById(R.id.editIcon);
+
             deleteIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     deleteItem(view,getAdapterPosition());
                 }
             });
-            editIcon.setOnClickListener(this);
         }
         @Override
         public void onClick(View view) {
@@ -54,26 +54,27 @@ public class HemodinamicoAdapter extends RecyclerView.Adapter<HemodinamicoAdapte
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
-    public void setOnItemClickListener(final HemodinamicoAdapter.OnItemClickListener mItemClickListener) {
+    public void setOnItemClickListener(final BombaInfusaoAdapter.OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
-    public HemodinamicoAdapter(Context context, List<HemodinamicoAdapterModel> hemodinamicoAdapterModelList){
+    public BombaInfusaoAdapter(Context context, List<BombaInfusaoAdapterModel> hemodinamicoAdapterModelList){
         this.context=context;
         this.hemodinamicoAdapterModelList = hemodinamicoAdapterModelList;
     }
 
 
     @Override
-    public HemodinamicoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hemodinamico_drogavasoativa_view,parent,false);
+    public BombaInfusaoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bombainfusao_drogavasoativa_view,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final HemodinamicoAdapter.ViewHolder holder, final int position) {
-        HemodinamicoAdapterModel hemodinamicoModel = hemodinamicoAdapterModelList.get(position);
+    public void onBindViewHolder(final BombaInfusaoAdapter.ViewHolder holder, final int position) {
+        BombaInfusaoAdapterModel hemodinamicoModel = hemodinamicoAdapterModelList.get(position);
         holder.dose.setText(String.valueOf(hemodinamicoModel.getDose()));
         holder.droga.setText(hemodinamicoModel.getDroga());
+        holder.velInfusao.setText(String.valueOf(hemodinamicoModel.getVelInfusao()));
         setAnimationNewItem(holder.itemView, position);
     }
 

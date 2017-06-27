@@ -40,7 +40,7 @@ Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
     - cateter de PIC
     - balao intra-aortico
 Monitor -> ok
-    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria
+    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico?)
 Gastro -> OK.
 	- VCM -> ok
 	- Massas paupaveis: sim ou nao => ok
@@ -56,7 +56,7 @@ Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no
         - Paresia ou Plegia
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
         - PIC + PPC + SJO2 -> Monitor
-Hemodinamico: nipride, adicionar drogas vai para bomba de infusao
+Hemodinamico: nipride (Droga vasoativa?), adicionar drogas vai para bomba de infusao -> ok
     - Pulso ritmico/aritmico -> ok
     - Fonese de bulhas: hiper, normal, hipo -> ok
     - perfusao capilar: boa/ruim -> ok
@@ -66,12 +66,12 @@ Hemodinamico: nipride, adicionar drogas vai para bomba de infusao
     - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
     - frequencia cardiaca -> monitor (OK)
     - PAM + PVC + swan_Ganz -> monitor (OK)
-Bomba de infusao
-    - Bomba de infusao
-      - fentanil, propofol, ketamina, midasolan (dormonide), precedex
-      - amiodarona, insulina, hidrocortizona, polimixina, miorinone
-      - velocidade de infusao
-      - dose ml/hr
+Bomba de infusao -> ok
+    -   Bomba de infusao
+      - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
+      - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
+      - velocidade de infusao -> ok
+      - dose ml/hr -> ok
 Respiratorio:
     - murmurio vesicular: fisiologico, reduzido
     - Roncos: sibilos, crepitacoes
