@@ -29,8 +29,6 @@ public class RenalActivity extends GenericoActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);setContentView(R.layout.activity_renal);
         findViewById(R.id.activity_renal).requestFocus();
-        renalS = (RadioButton)findViewById(R.id.renal_sim);
-        renalN = (RadioButton)findViewById(R.id.renal_nao);
         setToolbar(getString(R.string.Renal));
 
         diureseTxt = (TextInputEditText)findViewById(R.id.diurese);
@@ -39,18 +37,18 @@ public class RenalActivity extends GenericoActivity {
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
         ficha=getProperFicha();
-        if(ficha.getRenal()!=null){
-            if(ficha.getRenal().getDiurese()>=0)
-                diureseTxt.setText(String.valueOf(ficha.getRenal().getDiurese()));
-            if(ficha.getRenal().getBalancoHidrico()>=0)
-                balancoHidricoTxt.setText(String.valueOf(ficha.getRenal().getBalancoHidrico()));
-            if(ficha.getRenal().getPeso()>=0)
-                pesoTxt.setText(String.valueOf(ficha.getRenal().getPeso()));
-            if(ficha.getRenal().getDialise()==0)
-                renalN.setChecked(true);
-            else if(ficha.getRenal().getDialise()==1)
-                renalS.setChecked(true);
-        }
+//        if(ficha.getRenal()!=null){
+//            if(ficha.getRenal().getDiurese()>=0)
+//                diureseTxt.setText(String.valueOf(ficha.getRenal().getDiurese()));
+//            if(ficha.getRenal().getBalancoHidrico()>=0)
+//                balancoHidricoTxt.setText(String.valueOf(ficha.getRenal().getBalancoHidrico()));
+//            if(ficha.getRenal().getPeso()>=0)
+//                pesoTxt.setText(String.valueOf(ficha.getRenal().getPeso()));
+//            if(ficha.getRenal().getDialise()==0)
+//                renalN.setChecked(true);
+//            else if(ficha.getRenal().getDialise()==1)
+//                renalS.setChecked(true);
+//        }
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +56,7 @@ public class RenalActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
-                verificaCamposENotificaAdapter();
+               // verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -70,7 +68,7 @@ public class RenalActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
-                verificaCamposENotificaAdapter();
+               // verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -85,7 +83,7 @@ public class RenalActivity extends GenericoActivity {
 
     @Override
     public void onBackPressed(){
-        verificaCamposENotificaAdapter();
+       // verificaCamposENotificaAdapter();
         finish();
     }
 
@@ -126,22 +124,9 @@ public class RenalActivity extends GenericoActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home) {
-            verificaCamposENotificaAdapter();
+            //verificaCamposENotificaAdapter();
             finish();
         }
         return true;
     }
-
-    public void renalOnRadioButtonClicked(View view){
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.renal_sim:
-                SnackbarCreator.camposAPreencher(view);
-                break;
-            case R.id.renal_nao:
-                SnackbarCreator.avaliacaoGeradaAutomaticamente(view);
-                break;
-        }
-    }
-
 }

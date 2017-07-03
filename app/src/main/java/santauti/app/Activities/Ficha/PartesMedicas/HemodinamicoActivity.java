@@ -1,10 +1,12 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Arrays;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
@@ -25,14 +29,12 @@ import santauti.app.R;
  */
 
 public class HemodinamicoActivity extends GenericoActivity {
-    private Spinner bulhasSpinner;
-    private Spinner drogasVasoativasSpinner,soproSpinner,intensidadeSoproSpinner,tipoSoproSpinner;
-    private View tipoSoproLayout;
-    private View intensidadeSoproLayout;
+    private View tipoSoproLayout,intensidadeSoproLayout;
+    private TextView foneseBulhas,tipoSopro,intensidadeSopro;
     private MyAnimation myAnimation;
     private Realm realm;
     private Ficha ficha;
-    private ArrayAdapter<String> adapterBulhas,adapterSopro,adapterIntensidade,adapterTipoSopro;
+    private int foneseBulhasSelection=-1,tipoSoproSelection=-1,intensidadeSoproSelection=-1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +42,19 @@ public class HemodinamicoActivity extends GenericoActivity {
         findViewById(R.id.hemodinamico_layout).requestFocus();
         setToolbar(getString(R.string.Hemodinamico));
 
-
+        /********************VIEWS*******************************/
         tipoSoproLayout = findViewById(R.id.tipoSopro_layout);
         intensidadeSoproLayout = findViewById(R.id.intensidade_sopro_layout);
 
+        foneseBulhas = (TextView)findViewById(R.id.foneseBulhas);
+        tipoSopro = (TextView)findViewById(R.id.tipoSopro);
+        intensidadeSopro = (TextView)findViewById(R.id.intensidadeSopro);
+        /********************VIEWS*******************************/
+
+
 
         myAnimation = new MyAnimation();
-        prepareHemodinamicoSpinners();
+
         prepareNavigationButtons();
         realm=Realm.getDefaultInstance();
         ficha=getProperFicha();
@@ -105,28 +113,24 @@ public class HemodinamicoActivity extends GenericoActivity {
             }
         });
 
+    }
 
-        soproSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(soproSpinner.getSelectedItem().equals("Sim") && !intensidadeSoproSpinner.isShown() && !tipoSoproSpinner.isShown()){
+    public void soproRadioOnClick(View view){
+        switch(view.getId()) {
+            case R.id.simSopro:
+                if(!intensidadeSoproLayout.isShown() && !tipoSoproLayout.isShown()) {
                     myAnimation.slideDownView(HemodinamicoActivity.this,intensidadeSoproLayout);
                     myAnimation.slideDownView(HemodinamicoActivity.this,tipoSoproLayout);
                 }
-                else{
+                break;
+            case R.id.naoSopro:
+                if(intensidadeSoproLayout.isShown() && tipoSoproLayout.isShown()) {
                     myAnimation.slideUpView(HemodinamicoActivity.this,tipoSoproLayout);
                     myAnimation.slideUpView(HemodinamicoActivity.this,intensidadeSoproLayout);
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+                break;
+        }
     }
-
-
 
     @Override
     protected void onDestroy() {
@@ -166,96 +170,105 @@ public class HemodinamicoActivity extends GenericoActivity {
         realm.commitTransaction();
     }
 
-    private void prepareHemodinamicoSpinners(){
-        String[] tipoBulhas = {defaultSpinnerString,"Hiperfonetica","Normofonetica","Hipofonetica"};
-        String[] sopro = {defaultSpinnerString,"Sim","Não"};
-        String[] tipoSopro = {defaultSpinnerString,"FM","FT","FA","IFT"};
-        String[] intensidadeSopro = {defaultSpinnerString,"+1","+2","+3","+4","+5","+6"};
+    public void foneseBulhasOnCLick(View view) {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        bulhasSpinner = (Spinner) findViewById(R.id.hemodinamico_bulhas);
-        adapterBulhas = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, tipoBulhas) {
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        bulhasSpinner.setAdapter(adapterBulhas);
+        builder.setTitle(R.string.FoneseBulhas);
 
-        soproSpinner = (Spinner) findViewById(R.id.hemodinamico_sopro);
-        adapterSopro = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, sopro) {
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        soproSpinner.setAdapter(adapterSopro);
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.foneseBulhas);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, foneseBulhasSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        foneseBulhas.setText(items[which]);
+                        foneseBulhas.setVisibility(View.VISIBLE);
+                        foneseBulhasSelection=which;
+                        dialog.dismiss();
+                    }
+                });
 
-        tipoSoproSpinner = (Spinner) findViewById(R.id.hemodinamico_tipoSpro);
-        adapterTipoSopro = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, tipoSopro) {
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        tipoSoproSpinner.setAdapter(adapterTipoSopro);
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
-        intensidadeSoproSpinner = (Spinner) findViewById(R.id.hemodinamico_intensidade_sopro);
-        adapterIntensidade = new ArrayAdapter<String>(HemodinamicoActivity.this, android.R.layout.simple_dropdown_item_1line, intensidadeSopro) {
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        intensidadeSoproSpinner.setAdapter(adapterIntensidade);
-
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
     }
 
+    public void tipoSoproOnClick(View view) {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
+        builder.setTitle(R.string.TipoSopro);
 
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.tipoSopro);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, tipoSoproSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tipoSopro.setText(items[which]);
+                        tipoSopro.setVisibility(View.VISIBLE);
+                        tipoSoproSelection=which;
+                        dialog.dismiss();
+                    }
+                });
 
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void intensidadeSoproOnClick(View view) {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.IntensidadeSopro);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.intensidadeSopro);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, intensidadeSoproSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        intensidadeSopro.setText(items[which]);
+                        intensidadeSopro.setVisibility(View.VISIBLE);
+                        intensidadeSoproSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
 }

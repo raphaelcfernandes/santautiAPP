@@ -13,37 +13,15 @@ FICHA:
     - CHECAR PQ REALM PRECISA DE deleteRealmIfMigrationNeeded
     - Meu pai sugeriu mostrar as fichas como o feed do FB
     - Itens não estão padronizados em tamanho, disposiçao de texto e cards
-    - Criar layouts:
-        - Neurologico -> Layout?
-            - Dose e sedativo -> Editar
-            - Backend ok. Está salvando no banco com a idFicha correto.
-        - Hemodinamico -> Layout?
-            - Backend ok. Está salvando no banco com a idFicha correto.
-            - Editar -> Drogas Vasoativas
-        - Respiratorio -> Layout?
-            - Backend ok. Está salvando no banco com a idFicha correto.
+    - Snackbar por cima dos botoes
 
-Criar model para Monitor multiparametrico
 
 
 /*************MUDANĆAS*********************/
 
 
 
-Ventilaćao: espontanea, assistida, invasiva
-
-
-/*** ADAPTAR TEXTO SPINNER. Como fazer texto quebrar de linha no spinner***/
-
-
-Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
-    - cateter de PIC
-    - balao intra-aortico
-Monitor -> ok
-    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico %?) Spo2
-
-Exames: ultimo icone
-
+/*****************MUDANÇAS FEITAS**********/
 Gastro -> OK.
 	- VCM -> ok
 	- Massas paupaveis: sim ou nao => ok
@@ -52,6 +30,40 @@ Gastro -> OK.
 	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter =>
 	- assit: pequena, media, grande. radioButton
 	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
+Monitor -> 100% ok
+    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico %) Spo2
+Bomba de infusao -> 100% ok
+    -   Bomba de infusao
+      - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
+      - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
+      - velocidade de infusao -> ok
+      - dose ml/hr -> ok
+Hemodinamico:, adicionar drogas vai para bomba de infusao -> ok
+  - Pulso ritmico/aritmico -> ok
+  - Fonese de bulhas: hiper, normal, hipo -> ok
+  - perfusao capilar: boa/ruim -> ok
+  - lactato: normal, elevado -> ok
+  - Extremidades:
+      - cianotica, acianotica, fria, quente (check box como no deficit motor)
+  - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
+  - frequencia cardiaca -> monitor (OK)
+  - PAM + PVC + swan_Ganz -> monitor (OK)
+Renal: -> 100% ok
+  - Urina: clara escura. debaixo de diurese
+  - Em procedimento dialitico? Em dialise?
+  - hipoabuminemia: sim ou nao
+Metabolico: -> 100% ok
+    - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
+    - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
+    - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
+/*****************MUDANÇAS FEITAS**********/
+
+Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
+    - cateter de PIC
+    - balao intra-aortico
+
+Exames: ultimo icone
+
 Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
         - Delirium, sim ou nao.
@@ -59,22 +71,7 @@ Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no
         - Paresia ou Plegia
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
         - PIC + PPC + SJO2 -> Monitor
-Hemodinamico:, adicionar drogas vai para bomba de infusao -> ok
-    - Pulso ritmico/aritmico -> ok
-    - Fonese de bulhas: hiper, normal, hipo -> ok
-    - perfusao capilar: boa/ruim -> ok
-    - lactato: normal, elevado -> ok
-    - Extremidades:
-        - cianotica, acianotica, fria, quente (check box como no deficit motor)
-    - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
-    - frequencia cardiaca -> monitor (OK)
-    - PAM + PVC + swan_Ganz -> monitor (OK)
-Bomba de infusao -> ok
-    -   Bomba de infusao
-      - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
-      - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
-      - velocidade de infusao -> ok
-      - dose ml/hr -> ok
+
 Respiratorio:
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
         - tubo ou traqueostomia = pressao do cuff
@@ -92,6 +89,7 @@ Respiratorio:
     - sibilos:
         - = crepitacoes
     - crepitacoes: base direita, base esquerda, terco medio direito/esquerda, apice
+
 Ventilacao:
     - esponatanea, mecanico, bipap
     - bipap:
@@ -104,22 +102,17 @@ Ventilacao:
     - mecanica:
         - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
             - Freq respiratoria 2 campos: paciente e respirador
-Renal:
-    - Urina: clara escura. debaixo de diurese
-    - Em procedimento dialitico? Em dialise?
-    - hipoabuminemia: sim ou nao
+
 Infeccioso:
     - curva termica: febril, afebril, subfebril
     - marcadores de infeccao: estaveis, em melhora, em piora
-    - antibiotico
-Metabolico:
-    - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
-    - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
-    - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
+    - antibiotico (quais?)
+
 Hematologico:
     - Hemoglobina/hematocrito: Numero pra cada. Marcar:
     - Plaqueta: numerico
     - Spinner -> radio Button
+    - Hemograma?
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinacamente estavel e hemodinacamente instavel
 Gastro

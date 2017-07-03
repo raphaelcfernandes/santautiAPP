@@ -14,6 +14,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -95,5 +96,14 @@ public abstract class GenericoActivity extends AppCompatActivity {
         antFicha = (Button)findViewById(R.id.fichaAnterior);
         proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
         antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
+    }
+
+    public void ordenaStringSpinner(String[] stringVec){
+        Arrays.sort(stringVec, new Comparator<String>() {
+            @Override
+            public int compare(String s, String t1) {
+                return s.compareTo(t1);
+            }
+        });
     }
 }

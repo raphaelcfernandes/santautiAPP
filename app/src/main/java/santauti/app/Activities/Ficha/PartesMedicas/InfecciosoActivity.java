@@ -1,12 +1,15 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
@@ -22,7 +25,6 @@ public class InfecciosoActivity extends GenericoActivity {
     private Realm realm;
     private int infeccioso;
     RadioButton infecciosoSim,infecciosoNao;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +35,6 @@ public class InfecciosoActivity extends GenericoActivity {
         prepareNavigationButtons();
         infecciosoSim = (RadioButton)findViewById(R.id.infeccioso_sim);
         infecciosoNao = (RadioButton)findViewById(R.id.infeccioso_nao);
-
         if(getInfecciosoSelected()!=-1){
             if(getInfecciosoSelected()==1){
                 infecciosoSim.setChecked(true);
@@ -65,10 +66,8 @@ public class InfecciosoActivity extends GenericoActivity {
                 finish();
             }
         });
-
-
-
     }
+
 
     private int getInfecciosoSelected(){
         Ficha f = getProperFicha();

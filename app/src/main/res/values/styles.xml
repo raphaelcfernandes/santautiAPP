@@ -31,6 +31,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="TextLabelBlue" parent="TextAppearance.AppCompat">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@android:color/black</item>
@@ -40,8 +41,19 @@
 
     <style name="TextStyle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">17sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
+
+
+    <style name="TitleTextStyleForLayoutSelection" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ItemSelectedTextStyleForLayoutSelection" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">15sp</item>
+    </style>
+
 
     <style name="radioButtonStyle" >
         <item name="colorControlActivated">@color/colorPrimary</item>
@@ -60,5 +72,21 @@
         <item name="contentPaddingLeft">16dp</item>
         <item name="contentPaddingRight">16dp</item>
         <item name="cardBackgroundColor">@android:color/white</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--item RadioButton or CheckBox color-->
+
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <!--item text color-->
+        <item name="textColorAlertDialogListItem">@android:color/black</item>
+        <!--buttons color-->
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/background_dialog</item>
+
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

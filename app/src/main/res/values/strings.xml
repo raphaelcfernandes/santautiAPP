@@ -28,6 +28,36 @@
     <string name="acess_token">acess_token</string>
     <string name="registroMedico">registroMedico</string>
     <string name="tipoProfissional">tipoProfissional</string>
+    <string name="Ritmo">Ritmo</string>
+    <string name="GasometriaArterial">Gasometria Arterial</string>
+    <string name="Hidratacao">Hidratação</string>
+    <string name="DisturbioEletrolitico">Disturbio Eletrolítico</string>
+    <string name="AcidoseMetabolica">Acidose Metabólica</string>
+    <string name="FrequenciaCardiaca">Frequência Cardíaca</string>
+    <string name="FrequenciaRespiratoria">Frequencia Respiratória</string>
+    <string name="Temperatura">Temperatura</string>
+    <string name="Capinometria">Capinometria</string>
+    <string name="PAM">PAM</string>
+    <string name="PIC">PIC</string>
+    <string name="PVC">PVC</string>
+    <string name="PPC">PPC</string>
+    <string name="Swanganz">Swan-ganz</string>
+    <string name="SPO2">SPO2</string>
+    <string name="SJO2">SJO2</string>
+    <string name="Diurese">Diurese</string>
+    <string name="PesoKG">Peso (kg)</string>
+    <string name="BalancoHidrico">Balanço Hídrico</string>
+    <string name="Urina">Urina</string>
+    <string name="Clara">Clara</string>
+    <string name="Escura">Escura</string>
+    <string name="EmDialise">Em Diálise?</string>
+    <string name="Sim">Sim</string>
+    <string name="Nao">Não</string>
+    <string name="Hipoabuminemia">Hipoabuminemia</string>
+    <string name="FoneseBulhas">Fonese de Bulhas</string>
+    <string name="Sopro">Sopro</string>
+    <string name="TipoSopro">Tipo do Sopro</string>
+    <string name="IntensidadeSopro">Intensidade do Sopro</string>
 
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
@@ -38,4 +68,76 @@
     <string name="usuarioSenhaIncorreto">Usuário e/ou senha incorretos</string>
     <!--ERROR MESSAGES-->
 
+
+    <!--ARRAYS-->
+    <string-array name="tiposTracado">
+        <item>Sinusal</item>
+        <item>Fibrilação atrial</item>
+        <item>Flutter atrial</item>
+        <item>Juncional</item>
+        <item>Idioventricular</item>
+        <item>Ritmo de marcapasso</item>
+    </string-array>
+
+    <string-array name="rass">
+        <item>\u002b4. Violento, risco para equipe.</item>
+        <item>\u002b3. Agressivo verbal, arranca tubos e cateteres.</item>
+        <item>\u002b2. Movimentos sem coordenaćao frequentes.</item>
+        <item>\u002b1. Ansioso, sem movimentos agressivos.</item>
+        <item>0. Alerta e calmo.</item>
+        <item>\u002d1. Despertar com estímulo verbal, contato visual \u003e 10 s.</item>
+        <item>\u002d2. Despertar com estimulo verbal, contato visual \u003c 10 s.</item>
+        <item>\u002d3. Abertura ocular ao estímulo verbal, sem contato visual.</item>
+        <item>\u002d4. Sem resposta ao estímulo verbal, abertura ocular ao toque.</item>
+        <item>\u002d5. Sem resposta ao estímulo verbal ou físico.</item>
+    </string-array>
+
+    <string-array name="hidratacao">
+        <item>Normo Hidratado</item>
+        <item>Desidratado</item>
+        <item>Hiper Hidratado</item>
+        <item>Edemaciado</item>
+    </string-array>
+
+    <string-array name="disturbioEletrolitico">
+        <item>Hipernatremia</item>
+        <item>Hiponatremia</item>
+        <item>Hipercalemia</item>
+        <item>Hipocalemia</item>
+        <item>Hipermagnesemia</item>
+        <item>Hipomagnesemia</item>
+        <item>Hipofosfatemia</item>
+        <item>Hiperfosfatemia</item>
+    </string-array>
+
+    <string-array name="acidoseMetabolica">
+        <item>Acidose</item>
+        <item>Eucalose (G1)</item>
+        <item>Respiratoria (G2)</item>
+        <item>Compensada</item>
+        <item>Discompensada (G3)</item>
+    </string-array>
+
+    <string-array name="foneseBulhas">
+        <item>Hiperfonetica</item>
+        <item>Normofonetica</item>
+        <item>Hipofonetica</item>
+    </string-array>
+
+    <string-array name="tipoSopro">
+        <item>FM</item>
+        <item>FT</item>
+        <item>FA</item>
+        <item>IFT</item>
+    </string-array>
+
+    <string-array name="intensidadeSopro">
+        <item>+1</item>
+        <item>+2</item>
+        <item>+3</item>
+        <item>+4</item>
+        <item>+5</item>
+        <item>+6</item>
+    </string-array>
+    <!--ARRAYS-->
 </resources>

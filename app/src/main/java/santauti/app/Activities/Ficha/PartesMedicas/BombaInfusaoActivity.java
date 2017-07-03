@@ -94,16 +94,12 @@ public class BombaInfusaoActivity extends GenericoActivity {
 
     public void addDrogaVasoativa(View view) {
 
-        final String[] drogasVasoativaString = new String[]{"Dobutamina", "Dopamina", "Nitroprussiato de Sodio",
+        final String[] drogasVasoativa = new String[]{"Dobutamina", "Dopamina", "Nitroprussiato de Sodio",
                 "Nitroglicerina", "Milrinona", "Noradrenalina", "Adrenalina","Fentanil","Propofol","Ketamina","Midasolan","Precedex",
                 "Amiodarona","Insulina","Hidrocortizona","Polimixina","Miorinone","Nipride"};
 
-        Arrays.sort(drogasVasoativaString, new Comparator<String>() {
-            @Override
-            public int compare(String s, String t1) {
-                return s.compareTo(t1);
-            }
-        });
+        ordenaStringSpinner(drogasVasoativa);
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(BombaInfusaoActivity.this);
         builder.setTitle("Adicionar Droga Vasoativa");
 
@@ -113,24 +109,7 @@ public class BombaInfusaoActivity extends GenericoActivity {
         final TextInputEditText doseDroga = (TextInputEditText) dialogView.findViewById(R.id.dose);
         final TextInputEditText velInfusao = (TextInputEditText)dialogView.findViewById(R.id.velInfusao);
         drogasVasoativasSpinner = (Spinner)dialogView.findViewById(R.id.drogaVasoativa);
-        ArrayAdapter<String> adapterDrogaVasoativas = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, drogasVasoativaString);
-//        {
-//            @Override
-//            public boolean isEnabled(int position) {
-//                return position != 0;
-//            }
-//            @Override
-//            public View getDropDownView(int position, View convertView,
-//                                        @NonNull ViewGroup parent) {
-//                View view = super.getDropDownView(position, convertView, parent);
-//                TextView tv = (TextView) view;
-//                if(position == 0)
-//                    tv.setTextColor(Color.GRAY);
-//                else
-//                    tv.setTextColor(Color.BLACK);
-//                return view;
-//            }
-//        };
+        ArrayAdapter<String> adapterDrogaVasoativas = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, drogasVasoativa);
         drogasVasoativasSpinner.setAdapter(adapterDrogaVasoativas);
 
         builder.setView(dialogView);

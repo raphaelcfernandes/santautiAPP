@@ -12,8 +12,6 @@
 
     <ScrollView
         android:paddingTop="10dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -23,9 +21,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,82 +58,162 @@
                         />
                 </RadioGroup>
             </LinearLayout>
+
+
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="foneseBulhasOnCLick">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fonese de Bulhas: "
-                    style="@style/TextStyle" />
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/hemodinamico_bulhas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
+                    android:text="@string/FoneseBulhas"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sopro: "
-                    style="@style/TextStyle"/>
-                <Spinner
-                    android:id="@+id/hemodinamico_sopro"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    />
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/foneseBulhas"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray">
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
-                android:id="@+id/tipoSopro_layout" android:visibility="gone">
+                android:paddingBottom="10dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tipo do Sopro: "
+                    android:layout_gravity="center"
+                    android:text="@string/Sopro"
                     style="@style/TextStyle"/>
-                <Spinner
-                    android:id="@+id/hemodinamico_tipoSpro"
-                    android:layout_width="fill_parent"
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    />
+                    android:layout_gravity="center|start">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/simSopro"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:gravity="center"
+                        android:text="@string/Sim"
+                        android:theme="@style/radioButtonStyle"
+                        android:onClick="soproRadioOnClick"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/naoSopro"
+                        android:text="@string/Nao"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:theme="@style/radioButtonStyle"
+                        android:onClick="soproRadioOnClick"
+                        />
+                </RadioGroup>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/tipoSopro_layout"
                 android:paddingTop="10dp"
-                android:id="@+id/intensidade_sopro_layout"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="tipoSoproOnClick"
                 android:visibility="gone">
                 <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Intensidade do Sopro: "
-                    style="@style/TextStyle"/>
-                <Spinner
-                    android:id="@+id/hemodinamico_intensidade_sopro"
-                    android:layout_width="fill_parent"
+                    android:text="@string/TipoSopro"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    />
+                    android:visibility="invisible"
+                    android:paddingBottom="10dp"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/tipoSopro"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray">
+                </LinearLayout>
             </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/intensidade_sopro_layout"
+                android:paddingTop="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="intensidadeSoproOnClick"
+                android:visibility="gone">
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/IntensidadeSopro"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:paddingBottom="10dp"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/intensidadeSopro"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray">
+                </LinearLayout>
+            </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="20dp">
+                android:paddingTop="20dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,10 +244,13 @@
                     />
                 </RadioGroup>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -205,7 +290,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -223,7 +310,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin">
                 <RadioGroup
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"

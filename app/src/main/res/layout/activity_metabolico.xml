@@ -1,42 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_metabolico"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="1"
+    android:baselineAligned="false"
     android:orientation="vertical"
-    android:descendantFocusability="beforeDescendants"
+    android:id="@+id/activity_metabolico"
     android:focusableInTouchMode="true"
-    >
-
-    <include layout="@layout/toolbar" />
-
-    <LinearLayout
+    android:descendantFocusability="beforeDescendants">
+    <include layout="@layout/toolbar"/>
+    <ScrollView
+        android:layout_weight="0.9"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/full_name"
-            android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:scrollbars="vertical">
+        <!--Scrollable content here-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/gasometrial_arterial"
-                android:layout_width="match_parent"
+            android:orientation="vertical">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/full_name"
+                android:paddingTop="10dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Gasometria arterial"
-                android:inputType="number" />
+                android:theme="@style/TextLabelBlue"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingBottom="10dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/gasometrial_arterial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/GasometriaArterial"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
 
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-    <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="hidratacaoOnCLick">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Hidratacao"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/hidratacao"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="disturbioEletroliticoOnCLick">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DisturbioEletrolitico"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/disturbioEletrolitico"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="acidoseMetabolicaOnCLick">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/AcidoseMetabolica"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/acidoseMetabolica"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
         <include layout="@layout/bottom_buttons_navigate_fichas"/>
-    </LinearLayout>
+    </RelativeLayout>
+
+
+
 </LinearLayout>

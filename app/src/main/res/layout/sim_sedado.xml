@@ -20,9 +20,7 @@
             android:id="@+id/ramsay_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:textColorHint="@color/colorPrimary"
-            android:gravity="center"
             />
     </LinearLayout>
 
@@ -45,13 +43,11 @@
             android:text="RASS:"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
-        <Spinner
+        <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/rass_spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/escolha_opcao"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
+
             />
     </LinearLayout>
 

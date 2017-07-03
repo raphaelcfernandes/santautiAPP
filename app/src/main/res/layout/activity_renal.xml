@@ -1,125 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:baselineAligned="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/activity_renal"
     android:focusableInTouchMode="true"
-    android:descendantFocusability="beforeDescendants">
+    android:descendantFocusability="beforeDescendants"
+    android:weightSum="1">
     <include layout="@layout/toolbar"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/full_name"
+    <ScrollView
+        android:paddingTop="10dp"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:layout_weight="0.9"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/diurese"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Diurese"
-                android:inputType="number" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/peso"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Peso"
-                android:inputType="number" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/balanco_hidrico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Balanço Hídrico"
-                android:inputType="number" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dialise?"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
+            android:orientation="vertical">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="0dp"
-                android:paddingStart="20dp"
-                android:text="Sim"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <RadioButton
-                android:id="@+id/renal_sim"
+                android:orientation="horizontal">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/diurese"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:hint="@string/Diurese"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/peso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="@string/PesoKG"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/balanco_hidrico"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/BalancoHidrico"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="renalOnRadioButtonClicked" />
-
-            <TextView
+                android:orientation="horizontal"
+                android:layout_gravity="start"
+                android:paddingTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    style="@style/TextStyle"
+                    android:text="@string/Urina"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="12dp"/>
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="132dp"
+                    android:paddingEnd="0dp"
+                    >
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Clara"
+                        android:theme="@style/radioButtonStyle"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Escura"
+                        android:layout_marginStart="5dp"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="0dp"
-                android:paddingStart="20dp"
-                android:text="Não"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <RadioButton
-                android:id="@+id/renal_nao"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    style="@style/TextStyle"
+                    android:text="@string/EmDialise"/>
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    android:paddingStart="95dp"
+                    android:paddingEnd="10dp"
+                    >
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Sim"
+                        android:theme="@style/radioButtonStyle"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Nao"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="renalOnRadioButtonClicked" />
-        </RadioGroup>
-    </LinearLayout>
-    <include layout="@layout/bottom_buttons_navigate_fichas"/>
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    style="@style/TextStyle"
+                    android:layout_marginEnd="50dp"
+                    android:text="@string/Hipoabuminemia"/>
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="10dp"
+                    >
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/Sim"
+                        android:theme="@style/radioButtonStyle"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Nao"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
+        <include layout="@layout/bottom_buttons_navigate_fichas"/>
+    </RelativeLayout>
 </LinearLayout>

@@ -123,14 +123,12 @@ public class HematologicoActivity extends GenericoActivity {
     public void hematologicoProfilaxiaOnRadioButtonClicked(View view){
         switch(view.getId()) {
             case R.id.tromboprofilaxia_sim:
-                SnackbarCreator.camposAPreencher(view);
                 if(!tromboprofilaxia.isShown())
                     myAnimation.slideDownView(this,tromboprofilaxia);
                 break;
             case R.id.tromboprofilaxia_nao:
-                SnackbarCreator.camposAPreencher(view);
                 if(tromboprofilaxia.isShown()) {
-                    myAnimation.slideDownView(this, tromboprofilaxia);
+                    myAnimation.slideUpView(this, tromboprofilaxia);
                 }
                 break;
         }

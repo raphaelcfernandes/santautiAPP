@@ -11,8 +11,6 @@
     <include layout="@layout/toolbar"/>
     <ScrollView
         android:paddingTop="10dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,158 +20,206 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="ritmoOnClick">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Ritmo: "
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-                <Spinner
-                    android:id="@+id/pupila_simetria_diferenca_spinner"
-                    android:layout_width="0dp"
+                    android:text="@string/Ritmo"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    />
+                    android:visibility="invisible"
+                    android:textSize="15sp"
+                    android:id="@+id/ritmo"/>
             </LinearLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:theme="@style/TextLabelBlue">
-                <android.support.design.widget.TextInputEditText
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/FrequenciaRespiratoria"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Frequencia Respiratória"
-                    android:inputType="number" />
-            </android.support.design.widget.TextInputLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/full_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/gasometrial_arterial"
-                        android:layout_width="match_parent"
+                    android:orientation="horizontal">
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/full_name"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="9"
-                        android:hint="Frequencia Cardiaca"
-                        android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
-                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/gasometrial_arterial"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="9"
+                            android:hint="@string/FrequenciaCardiaca"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="4"
-                        android:hint="PAM"
-                        android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="4"
+                            android:hint="@string/PAM"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
-                        android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="6"
-                        android:hint="Temperatura"
-                        android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="6"
+                            android:hint="@string/Temperatura"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/PIC"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="3"
-                        android:hint="PIC"
-                        android:inputType="number" />
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/PIC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:hint="@string/PIC"
+                            android:inputType="number" />
 
-                </android.support.design.widget.TextInputLayout>
+                    </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/PPC"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="3"
-                        android:hint="PPC"
-                        android:inputType="number"
-                        />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/PPC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:hint="@string/PPC"
+                            android:inputType="number"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/pvc"
+                    android:orientation="horizontal">
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="3"
-                        android:hint="PVC"
-                        android:inputType="number"
-                        />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/swan_ganz"
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/pvc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:hint="@string/PVC"
+                            android:inputType="number"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="5"
-                        android:hint="Swan-ganz"
-                        android:inputType="number"
-                        />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/capinometria"
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/swan_ganz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="5"
+                            android:hint="@string/Swanganz"
+                            android:inputType="number"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="6"
-                        android:hint="Capinometria"
-                        android:inputType="number"
-                        />
-                </android.support.design.widget.TextInputLayout>
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/capinometria"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="6"
+                            android:hint="@string/Capinometria"
+                            android:inputType="number"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/spo2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="5"
+                            android:hint="@string/SPO2"
+                            android:inputType="number"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabelBlue">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/sjo2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="6"
+                            android:hint="@string/SJO2"
+                            android:inputType="number"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

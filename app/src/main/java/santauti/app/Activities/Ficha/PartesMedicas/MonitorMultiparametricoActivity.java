@@ -1,17 +1,17 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Arrays;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.FichaActivity;
@@ -24,16 +24,18 @@ import santauti.app.R;
 
 public class MonitorMultiparametricoActivity extends GenericoActivity {
     Spinner tracadoEletrocardiograficoSpinner;
-    ArrayAdapter<String> adapterTracaoEletrocardiografico;
+    ArrayAdapter<CharSequence> adapterTracaoEletrocardiografico;
     Realm realm;
+    private int ritmo=-1;
+    private TextView textView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor_multiparametrico);
         findViewById(R.id.monitor_multiparametrico_layout).requestFocus();
         setToolbar(getString(R.string.MonitorMultiparametrico));
-
-        prepareSpinner();
+        textView = (TextView)findViewById(R.id.ritmo);
+        //prepareSpinner();
         prepareNavigationButtons();
 
         realm = Realm.getDefaultInstance();
@@ -60,28 +62,48 @@ public class MonitorMultiparametricoActivity extends GenericoActivity {
         proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
     }
 
-    private void prepareSpinner(){
-        String[] tiposTracado={defaultSpinnerString,"Sinusal","Fibrilaćao atrial", "Flutter atrial","Juncional","Idioventricular","Ritmo de marcapasso"};
+//    private void prepareSpinner(){
+//        String[] list = getResources().getStringArray(R.array.tiposTracado);
+//        Arrays.sort(list);
+//        tracadoEletrocardiograficoSpinner = (Spinner)findViewById(R.id.pupila_simetria_diferenca_spinner);
+//        adapterTracaoEletrocardiografico = new ArrayAdapter<CharSequence>(MonitorMultiparametricoActivity.this, android.R.layout.simple_dropdown_item_1line, list);
+////        adapterTracaoEletrocardiografico = ArrayAdapter.createFromResource(this,
+////                R.array.tiposTracado, R.layout.custom_spinner_items);
+//        adapterTracaoEletrocardiografico.setDropDownViewResource(R.layout.teste);
+//        tracadoEletrocardiograficoSpinner.setAdapter(adapterTracaoEletrocardiografico);
+//    }
 
-        tracadoEletrocardiograficoSpinner = (Spinner)findViewById(R.id.pupila_simetria_diferenca_spinner);
-        adapterTracaoEletrocardiografico = new ArrayAdapter<String>(MonitorMultiparametricoActivity.this, android.R.layout.simple_dropdown_item_1line, tiposTracado){
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        tracadoEletrocardiograficoSpinner.setAdapter(adapterTracaoEletrocardiografico);
+    public void ritmoOnClick(View view) {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Ritmo);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.tiposTracado);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, ritmo,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        textView.setText(items[which]);
+                        textView.setVisibility(View.VISIBLE);
+                        ritmo=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
     }
-
 }

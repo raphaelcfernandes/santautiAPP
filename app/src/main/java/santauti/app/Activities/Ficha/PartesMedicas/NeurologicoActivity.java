@@ -4,12 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,12 +20,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +35,6 @@ import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Neurologico.NaoSedado;
 import santauti.app.Model.Ficha.Neurologico.Neurologico;
-import santauti.app.Model.Ficha.Neurologico.Opcionais;
 import santauti.app.Model.Ficha.Neurologico.Sedado;
 import santauti.app.Model.Ficha.Neurologico.Sedativo;
 import santauti.app.R;
@@ -67,7 +63,6 @@ public class NeurologicoActivity extends GenericoActivity {
     private int pupilaRotationAngle=0,sedadoRotationAngle=0,deliriumRotationAngle=0,flutuacaoRotationAngle=0,inatencaoRotationAngle=0,pensamentoRotationAngle=0;
     private TextView diferencaPupilar;
     private ArrayAdapter<String> adapterPupilaDiferenca,adapterPupilaTamanho,adapterPupilaSimetria,adapterPupilaReatividadeLuz,adapterDecifitTipo,adapterDeficitMotor,adapterRass,adapterDecifitLado,adapterNivelConsciencia,adapterAberturaOcular,adapterRespostaVerbal,adapterRespostaMotora,adapterRamsay;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -494,9 +489,8 @@ public class NeurologicoActivity extends GenericoActivity {
         nivelConscienciaSpinner.setAdapter(adapterNivelConsciencia);
 
 
-
         ramsaySpinner = (Spinner)findViewById(R.id.ramsay_spinner);
-        adapterRamsay = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, ramsay){
+        adapterRamsay = new ArrayAdapter<String>(NeurologicoActivity.this, R.layout.custom_spinner_items, ramsay){
             @Override
             public boolean isEnabled(int position) {
                 return position != 0;
@@ -515,24 +509,9 @@ public class NeurologicoActivity extends GenericoActivity {
         };
         ramsaySpinner.setAdapter(adapterRamsay);
 
-        rassSpinner = (Spinner)findViewById(R.id.rass_spinner);
-        adapterRass = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, rass){
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
+
+        rassSpinner = (AppCompatSpinner)findViewById(R.id.rass_spinner);
+        adapterRass = new ArrayAdapter<String>(NeurologicoActivity.this, android.R.layout.simple_dropdown_item_1line, rass);
         rassSpinner.setAdapter(adapterRass);
 
         deficitMotorSpinner = (Spinner)findViewById(R.id.deficitMotor_spinner);

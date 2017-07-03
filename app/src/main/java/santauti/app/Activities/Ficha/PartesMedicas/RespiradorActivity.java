@@ -17,7 +17,7 @@ public class RespiradorActivity extends GenericoActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_infeccioso);
+        setContentView(R.layout.activity_renal);
         setToolbar(getString(R.string.Respirador));
         prepareNavigationButtons();
 
@@ -46,4 +46,5 @@ public class RespiradorActivity extends GenericoActivity{
             }
         });
     }
+
 }

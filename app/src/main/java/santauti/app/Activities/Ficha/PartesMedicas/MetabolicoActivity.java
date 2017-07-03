@@ -1,14 +1,21 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.Arrays;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.FichaActivity;
@@ -23,9 +30,9 @@ import santauti.app.R;
 
 public class MetabolicoActivity extends GenericoActivity {
     TextInputEditText gasometrialArterial;
-    private int i=0;
+    private int i=0,gasometriaArterialInput,hidratacaoSelection=-1,disturbioEletroliticoSelection=-1,acidoseMetabolicaSelection=-1;
     private Realm realm;
-    private int gasometriaArterialInput;
+    private TextView hidratacao,disturbioEletrolitico,acidoseMetabolica;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +40,16 @@ public class MetabolicoActivity extends GenericoActivity {
         findViewById(R.id.activity_metabolico).requestFocus();
         setToolbar(this.getString(R.string.Metabolico));
 
+        /********************VIEWS****************************/
+        hidratacao = (TextView)findViewById(R.id.hidratacao);
+        disturbioEletrolitico = (TextView)findViewById(R.id.disturbioEletrolitico);
+        acidoseMetabolica = (TextView)findViewById(R.id.acidoseMetabolica);
+
         gasometrialArterial = (TextInputEditText)findViewById(R.id.gasometrial_arterial);
         gasometrialArterial.addTextChangedListener(textWatcher);
+        /********************VIEWS****************************/
+
+
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
 
@@ -66,6 +81,107 @@ public class MetabolicoActivity extends GenericoActivity {
         });
     }
 
+    public void hidratacaoOnCLick(View view) {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Hidratacao);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.hidratacao);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, hidratacaoSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        hidratacao.setText(items[which]);
+                        hidratacao.setVisibility(View.VISIBLE);
+                        hidratacaoSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void disturbioEletroliticoOnCLick(View view) {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.DisturbioEletrolitico);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.disturbioEletrolitico);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, disturbioEletroliticoSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        disturbioEletrolitico.setText(items[which]);
+                        disturbioEletrolitico.setVisibility(View.VISIBLE);
+                        disturbioEletroliticoSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void acidoseMetabolicaOnCLick(View view) {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.AcidoseMetabolica);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.acidoseMetabolica);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, acidoseMetabolicaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        acidoseMetabolica.setText(items[which]);
+                        acidoseMetabolica.setVisibility(View.VISIBLE);
+                        acidoseMetabolicaSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
 
     @Override
     protected void onDestroy() {
