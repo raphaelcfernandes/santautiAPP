@@ -2,129 +2,171 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants"
+    android:baselineAligned="false">
     <include layout="@layout/toolbar"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tromboprofilaxia?"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="0dp"
-                android:paddingStart="20dp"
-                android:text="Sim"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <RadioButton
-                android:id="@+id/tromboprofilaxia_sim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="hematologicoProfilaxiaOnRadioButtonClicked" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="0dp"
-                android:paddingStart="20dp"
-                android:text="Não"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <RadioButton
-                android:id="@+id/tromboprofilaxia_nao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="hematologicoProfilaxiaOnRadioButtonClicked" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
+    <ScrollView
         android:paddingTop="10dp"
-        android:visibility="gone"
-        android:id="@+id/tromboprofilaxia_layout">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_weight="0.9"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tipo medicamento: "
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-        <Spinner
-            android:id="@+id/tromboprofilaxia_spinner"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            />
-    </LinearLayout>
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingBottom="10dp">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/hematocrito"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:hint="@string/Hematocrito"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/hemoglobina"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:hint="@string/Hemoglobina"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/plaqueta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:hint="@string/Plaqueta"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hemograma?"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/tromboprofilaxia_layout"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:onClick="tromboprofilaxiaOnClick"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/Tromboprofilaxia"
+                        style="@style/TextStyle"/>
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/tromprofilaxiaSwitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:background="@android:color/transparent"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="100dp"
+                        android:theme="@style/MySwitch" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tromboprofilaxia_selected"
+                    android:text="@string/Nao"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="0dp"
-                android:paddingStart="20dp"
-                android:text="Sim"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <RadioButton
-                android:id="@+id/hemograma_sim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="hematologicoOnRadioButtonClicked" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="0dp"
-                android:paddingStart="20dp"
-                android:text="Não"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <RadioButton
-                android:id="@+id/hemograma_nao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="hematologicoOnRadioButtonClicked" />
-        </RadioGroup>
-    </LinearLayout>
-    <include layout="@layout/bottom_buttons_navigate_fichas"/>
+                android:orientation="vertical"
+                android:id="@+id/hemograma_layout"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:onClick="hemogramaOnClick"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/Hemograma"
+                        style="@style/TextStyle"/>
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/hemogramaSwitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:background="@android:color/transparent"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="100dp"
+                        android:theme="@style/MySwitch" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hemograma realizado?"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
+        <include layout="@layout/bottom_buttons_navigate_fichas"/>
+    </RelativeLayout>
 </LinearLayout>

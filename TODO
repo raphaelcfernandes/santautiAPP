@@ -22,7 +22,7 @@ FICHA:
 
 
 /*****************MUDANÇAS FEITAS**********/
-Gastro -> OK.
+Gastro -> OK. (Mudar layout para switch e adaptar corretamente os itens para ficar igual o Android)
 	- VCM -> ok
 	- Massas paupaveis: sim ou nao => ok
 	- visceras paupaveis: sim ou nao => ok
@@ -38,7 +38,7 @@ Bomba de infusao -> 100% ok
       - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
       - velocidade de infusao -> ok
       - dose ml/hr -> ok
-Hemodinamico:, adicionar drogas vai para bomba de infusao -> ok
+Hemodinamico: adicionar drogas vai para bomba de infusao -> 100% ok
   - Pulso ritmico/aritmico -> ok
   - Fonese de bulhas: hiper, normal, hipo -> ok
   - perfusao capilar: boa/ruim -> ok
@@ -56,6 +56,17 @@ Metabolico: -> 100% ok
     - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
     - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
     - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
+
+
+Hematologico: -> ok. Campos para checar
+    - Hemoglobina/hematocrito: Numero pra cada. Marcar? Marcar o que?
+    - Plaqueta: numerico
+    - Spinner -> radio Button
+    - Hemograma? Ter? Sim, nao? o que?
+Infeccioso: -> OK, Campos para checar
+    - curva termica: febril, afebril, subfebril
+    - marcadores de infeccao: estaveis, em melhora, em piora
+    - antibiotico (quais?)
 /*****************MUDANÇAS FEITAS**********/
 
 Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
@@ -74,8 +85,8 @@ Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no
 
 Respiratorio:
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
-        - tubo ou traqueostomia = pressao do cuff
-        - localizacao da canula se tiver entubado
+        - tubo ou traqueostomia = pressao do cuff -> ok
+        - localizacao da canula se tiver entubado -> ok
     - murmurio vesicular:
         - fisiologico, reduzido
         - aumentado
@@ -102,17 +113,6 @@ Ventilacao:
     - mecanica:
         - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
             - Freq respiratoria 2 campos: paciente e respirador
-
-Infeccioso:
-    - curva termica: febril, afebril, subfebril
-    - marcadores de infeccao: estaveis, em melhora, em piora
-    - antibiotico (quais?)
-
-Hematologico:
-    - Hemoglobina/hematocrito: Numero pra cada. Marcar:
-    - Plaqueta: numerico
-    - Spinner -> radio Button
-    - Hemograma?
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinacamente estavel e hemodinacamente instavel
 Gastro

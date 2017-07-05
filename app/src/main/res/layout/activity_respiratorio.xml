@@ -11,74 +11,231 @@
     <include layout="@layout/toolbar"/>
 
     <ScrollView
-        android:paddingStart="16dp"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical">
         <!--Scrollable content here-->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="viasAereasOnClick">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vias aéreas"
-                    style="@style/TextStyle"/>
-                <Spinner
-                    android:id="@+id/vias_aereas"
+                    android:text="@string/ViasAereas"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                </Spinner>
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/viaAerea"/>
             </LinearLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/TextLabelBlue"
-                android:id="@+id/pressaocuff_view"
-                android:visibility="gone">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/pressaocuff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Pressão Cuff"
-                    android:inputType="number"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/TextLabelBlue"
-                android:id="@+id/canula_view"
-                android:visibility="gone">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/canula"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Pressão Cuff"
-                    android:inputType="number"
-                    />
-            </android.support.design.widget.TextInputLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" android:paddingTop="10dp">
+                android:orientation="vertical"
+                android:id="@+id/pressaoCuff_layout"
+                android:visibility="gone"
+                >
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:theme="@style/TextLabelBlue"
+                    android:paddingTop="10dp">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/pressaoCuff"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp"
+                        android:ems="9"
+                        android:hint="@string/PressaoCuff"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/gray">
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/localizacaoCanula_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="localizacaoCanulaOnClick"
+                android:visibility="gone"
+                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Murmurio Vesicular"
-                    style="@style/TextStyle"/>
+                    android:text="@string/LocalizacaoCanula"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/localizacaoCanula"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:onClick="murmurioVesicularOnClick">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/MurmurioVesicular"
+                        style="@style/TitleTextStyleForLayoutSelection"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        style="@style/ItemSelectedTextStyleForLayoutSelection"
+                        android:id="@+id/murmurioVesicular"/>
+                </LinearLayout>
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1px"-->
+                <!--android:background="@color/gray">-->
+                <!--</LinearLayout>-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:paddingTop="10dp"
+                android:onClick="baseMurmurioVesicularOnclick"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Base"
+                    android:paddingStart="@dimen/submenu_left_padding"
+                    android:paddingEnd="@dimen/submenu_right_padding"
+                    style="@style/TitleTextStyleForLayoutSelection"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:paddingStart="@dimen/submenu_left_padding"
+                    android:paddingEnd="@dimen/submenu_right_padding"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/baseMurmurioVesicular"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:paddingTop="10dp"
+                android:onClick="tercoMedioVesicularOnclick"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/TercoMedio"
+                    android:paddingStart="@dimen/submenu_left_padding"
+                    android:paddingEnd="@dimen/submenu_right_padding"
+                    style="@style/TitleTextStyleForLayoutSelection"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:paddingStart="@dimen/submenu_left_padding"
+                    android:paddingEnd="@dimen/submenu_right_padding"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/tercoMedioMurmurioVesicular"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:onClick="apiceMurmurioVesicularOnClick"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="@dimen/submenu_right_padding">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingStart="@dimen/submenu_left_padding"
+                        android:paddingEnd="0dp"
+                        android:text="@string/Apice"
+                        style="@style/TextStyle"/>
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/apiceMurmurioVesicularSwitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:background="@android:color/transparent"
+                        android:theme="@style/MySwitch" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/submenu_left_padding"
+                    android:paddingEnd="@dimen/submenu_right_padding"
+                    android:text="@string/Nao"
+                    android:id="@+id/apiceMurmurioVesicular"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
             </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
 
 
@@ -90,3 +247,17 @@
     </RelativeLayout>
 
 </LinearLayout>
+    <!--Respiratorio:-->
+    <!-- - murmurio vesicular:-->
+    <!-- - fisiologico, reduzido-->
+    <!-- - aumentado-->
+    <!-- - = crepitacoes-->
+    <!-- - Uso de oxigenio:-->
+    <!-- - Sim ou nao. + campo numerico (fluxo), sob cateter nasal, em mascara de venturI, em mascara de reinalaćao-->
+    <!-- - mascara de venturI: 28%, 35%, 50%, 70%-->
+    <!-- - cor + percentual (https://lh6.googleusercontent.com/-X2eiiBbwOig/TX-p9SLVclI/AAAAAAAAACA/I-oDrdp5kfs/s1600/mascara.bmp)-->
+    <!-- - Roncos:-->
+    <!-- - = crepitacoes-->
+    <!-- - sibilos:-->
+    <!-- - = crepitacoes-->
+    <!-- - crepitacoes: base direita, base esquerda, terco medio direito/esquerda, apice-->

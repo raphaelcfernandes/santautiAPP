@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
@@ -23,25 +25,22 @@ import santauti.app.R;
 
 public class InfecciosoActivity extends GenericoActivity {
     private Realm realm;
-    private int infeccioso;
-    RadioButton infecciosoSim,infecciosoNao;
+    private int curvaTermicaSelection=-1,marcadoresInfeccaoSelection=-1;
+    private TextView curvaTermica,marcadoresInfeccao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infeccioso);
         setToolbar(getString(R.string.Infeccioso));
 
+        /*********************VIEWS***********************/
+        curvaTermica = (TextView)findViewById(R.id.curvaTermica);
+        marcadoresInfeccao = (TextView)findViewById(R.id.marcadoresInfeccao);
+        /*********************VIEWS***********************/
+
+
         realm = Realm.getDefaultInstance();
         prepareNavigationButtons();
-        infecciosoSim = (RadioButton)findViewById(R.id.infeccioso_sim);
-        infecciosoNao = (RadioButton)findViewById(R.id.infeccioso_nao);
-        if(getInfecciosoSelected()!=-1){
-            if(getInfecciosoSelected()==1){
-                infecciosoSim.setChecked(true);
-            }
-            else
-                infecciosoNao.setChecked(true);
-        }
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +49,7 @@ public class InfecciosoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1,intent);
                 startActivity(intent);
                 exitActivityToLeft();
-                verificaCamposENotificaAdapter();
+                //verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -62,7 +61,7 @@ public class InfecciosoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();
-                verificaCamposENotificaAdapter();
+                //verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -85,7 +84,7 @@ public class InfecciosoActivity extends GenericoActivity {
 
     @Override
     public void onBackPressed(){
-        verificaCamposENotificaAdapter();
+        //verificaCamposENotificaAdapter();
         finish();
     }
 
@@ -93,38 +92,90 @@ public class InfecciosoActivity extends GenericoActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home) {
-            verificaCamposENotificaAdapter();
+            //verificaCamposENotificaAdapter();
             finish();
         }
         return true;
     }
 
     public void verificaCamposENotificaAdapter(){
-        if(infecciosoSim.isChecked() || infecciosoNao.isChecked()) {
-            realm.beginTransaction();
-            Infeccioso infecc = realm.createObject(Infeccioso.class);
-            infecc.setPacienteComInfeccao(infeccioso);
-            Ficha r = getProperFicha();
-            r.setInfeccioso(infecc);
-            realm.copyToRealmOrUpdate(r);
-            realm.commitTransaction();
-            changeCardColor();
-        }
+//        if(infecciosoSim.isChecked() || infecciosoNao.isChecked()) {
+//            realm.beginTransaction();
+//            Infeccioso infecc = realm.createObject(Infeccioso.class);
+//            infecc.setPacienteComInfeccao(infeccioso);
+//            Ficha r = getProperFicha();
+//            r.setInfeccioso(infecc);
+//            realm.copyToRealmOrUpdate(r);
+//            realm.commitTransaction();
+//            changeCardColor();
+//        }
     }
 
-    public void infecciosoOnRadioButtonClicked(View view){
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.infeccioso_sim:
-                Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                infeccioso=1;
-                break;
-            case R.id.infeccioso_nao:
-                Snackbar.make(view, "Avaliação gerada automaticamente.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                infeccioso=0;
-                break;
-        }
+    public void curvaTermicaOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.CurvaTermica);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.curvaTermica);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, curvaTermicaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        curvaTermica.setText(items[which]);
+                        curvaTermica.setVisibility(View.VISIBLE);
+                        curvaTermicaSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void marcadoresInfeccaoOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.MarcadoresInfeccao);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.marcadoresInfeccao);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, marcadoresInfeccaoSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        marcadoresInfeccao.setText(items[which]);
+                        marcadoresInfeccao.setVisibility(View.VISIBLE);
+                        marcadoresInfeccaoSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
     }
 }

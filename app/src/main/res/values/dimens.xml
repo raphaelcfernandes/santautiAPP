@@ -5,4 +5,6 @@
     <dimen name="card_margin">8dp</dimen>
     <dimen name="card_album_radius">8dp</dimen>
     <dimen name="album_title_padding">10dp</dimen>
+    <dimen name="submenu_left_padding">72dp</dimen>
+    <dimen name="submenu_right_padding">32dp</dimen>
 </resources>

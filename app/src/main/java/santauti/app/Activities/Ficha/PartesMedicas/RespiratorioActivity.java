@@ -1,30 +1,31 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.Arrays;
+
 import io.realm.Realm;
-import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Respiratorio.Respiratorio;
-import santauti.app.Model.Ficha.Respiratorio.RespiratorioInvasiva;
-import santauti.app.Model.Ficha.Respiratorio.RespiratorioNaoInvasiva;
 import santauti.app.R;
 
 /**
@@ -32,25 +33,37 @@ import santauti.app.R;
  */
 
 public class RespiratorioActivity extends GenericoActivity {
-    private TextInputEditText volume,fio2,freqRespiratoria,peep,pressaoCuff,volumeNaoInvasivo,ipap,epap,saturacao;
-    private LinearLayout invasivoView,naoInvasivoView;
-    private Spinner respiratorioSpinner;
-    private RadioButton invasivo,naoInvasivo;
+    private int viasAereasSelection=-1,localizacaoCanulaSelection=-1,murmurioVesicularSelection=-1,baseMurmurioVesicularSelection=-1,tercoMedioMurmurioVesicularSelection=-1;
+    private View pressaoCuff_layout, localizacaoCanula_layout;
+    private TextView viasAerea,localizacaoCanula,murmurioVesicular,baseMurmurioVesicular,tercoMedioMurmurioVesicular,apiceMurmurioVesicular;
+    private SwitchCompat apiceSwitchCompat;
+    private TextInputEditText pressaoCuff;
     private Realm realm;
-    private ArrayAdapter<String> adapterRespiratorio;
     private Ficha ficha;
     private MyAnimation myAnimation;
-    private Handler handler = new Handler();
-
     private Intent intent;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_respiratorio);
         findViewById(R.id.respiratorio_layout).requestFocus();
         setToolbar(getString(R.string.Respiratorio));
-        invasivoView = (LinearLayout)findViewById(R.id.ventilacao_invasiva);
-        naoInvasivoView = (LinearLayout)findViewById(R.id.ventilacao_nao_invasiva);
+
+        /**************************VIEWS**************************/
+        pressaoCuff = (TextInputEditText)findViewById(R.id.pressaoCuff);
+        pressaoCuff_layout = findViewById(R.id.pressaoCuff_layout);
+        localizacaoCanula_layout = findViewById(R.id.localizacaoCanula_layout);
+        apiceSwitchCompat = (SwitchCompat)findViewById(R.id.apiceMurmurioVesicularSwitch);
+        viasAerea = (TextView)findViewById(R.id.viaAerea);
+        localizacaoCanula = (TextView)findViewById(R.id.localizacaoCanula);
+        murmurioVesicular = (TextView)findViewById(R.id.murmurioVesicular);
+        baseMurmurioVesicular = (TextView)findViewById(R.id.baseMurmurioVesicular);
+        tercoMedioMurmurioVesicular = (TextView)findViewById(R.id.tercoMedioMurmurioVesicular);
+        apiceMurmurioVesicular = (TextView)findViewById(R.id.apiceMurmurioVesicular);
+        /**************************VIEWS**************************/
+
 
         prepareNavigationButtons();
 
@@ -79,140 +92,91 @@ public class RespiratorioActivity extends GenericoActivity {
         });
 
 
-        prepareRespiratorioInvasivo();
-        prepareRespiratorioNaoInvasivo();
-
-
         myAnimation = new MyAnimation();
         realm = Realm.getDefaultInstance();
-        ficha = getProperFicha();
-        if(ficha.getRespiratorio()!=null){
-            if(ficha.getRespiratorio().getInvasiva()==1){//Ventilação invasiva
-                preencherInvasivo();
-            }
-            else{//Ventilação não invasiva
-                preencherNaoInvasivo();
-            }
-        }
 
     }
 
-    private void preencherNaoInvasivo(){
-        naoInvasivo.setChecked(true);
-        volumeNaoInvasivo.setText(String.valueOf(ficha.getRespiratorio().getVolume()));
-        ipap.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getIpap()));
-        epap.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getEpap()));
-        saturacao.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioNaoInvasiva().getSaturacao()));
-        myAnimation.slideDownView(this,naoInvasivoView);
-    }
-
-    private void preencherInvasivo(){
-        invasivo.setChecked(true);
-        volume.setText(String.valueOf(ficha.getRespiratorio().getVolume()));
-        fio2.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioInvasiva().getFio2()));
-        freqRespiratoria.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioInvasiva().getFrequenciaRespiratoria()));
-        peep.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioInvasiva().getPeep()));
-        pressaoCuff.setText(String.valueOf(ficha.getRespiratorio().getRespiratorioInvasiva().getPressaoCuff()));
-        int spinnerPosition = adapterRespiratorio.getPosition(ficha.getRespiratorio().getRespiratorioInvasiva().getModoVentilatorio());
-        respiratorioSpinner.setSelection(spinnerPosition);
-        myAnimation.slideDownView(this,invasivoView);
-    }
-
-    private void prepareRespiratorioNaoInvasivo() {
-        volumeNaoInvasivo = (TextInputEditText)findViewById(R.id.respiratorio_volume_naoInvasivo);
-        ipap = (TextInputEditText)findViewById(R.id.respiratorio_IPAP);
-        epap = (TextInputEditText)findViewById(R.id.respiratorio_epap);
-        saturacao = (TextInputEditText)findViewById(R.id.respiratorio_saturacao);
-    }
-
-    private void prepareRespiratorioInvasivo() {
-        volume = (TextInputEditText)findViewById(R.id.respiratorio_volume);
-        fio2 = (TextInputEditText)findViewById(R.id.respiratorio_fio2);
-        freqRespiratoria = (TextInputEditText)findViewById(R.id.freq_respiratoria);
-        peep = (TextInputEditText)findViewById(R.id.respiratorio_peep);
-        pressaoCuff = (TextInputEditText)findViewById(R.id.respiratorio_pressaoCuff);
-        prepareRespiratorioSpinners();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home) {
-            verificaCamposENotificaAdapter();
+            //verificaCamposENotificaAdapter();
             finish();
         }
         return true;
     }
 
     private void verificaCamposENotificaAdapter() {
-        realm.beginTransaction();
-        int i;
-        Respiratorio respiratorio = realm.createObject(Respiratorio.class);
-        if(invasivo.isChecked()){
-            i=0;
-            respiratorio.setInvasiva(1);
-            RespiratorioInvasiva respiratorioInvasiva = realm.createObject(RespiratorioInvasiva.class);
-            if(!isTextInpudEditTextEmpty(volume)){
-                respiratorio.setVolume(Integer.parseInt(volume.getText().toString()));
-                i++;
-            }
-            if(!isTextInpudEditTextEmpty(fio2)){
-                respiratorioInvasiva.setFio2(Integer.parseInt(fio2.getText().toString()));
-                i++;
-            }
-            if(!isTextInpudEditTextEmpty(freqRespiratoria)){
-                respiratorioInvasiva.setFrequenciaRespiratoria(Integer.parseInt(freqRespiratoria.getText().toString()));
-                i++;
-            }
-            if(!isTextInpudEditTextEmpty(peep)){
-                respiratorioInvasiva.setPeep(Integer.parseInt(peep.getText().toString()));
-                i++;
-            }
-            if(!isTextInpudEditTextEmpty(pressaoCuff)){
-                respiratorioInvasiva.setPressaoCuff(Integer.parseInt(pressaoCuff.getText().toString()));
-                i++;
-            }
-            if(!respiratorioSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
-                respiratorioInvasiva.setModoVentilatorio(respiratorioSpinner.getSelectedItem().toString());
-                i++;
-            }
-            if(i==6){
-                respiratorio.setRespiratorioInvasiva(respiratorioInvasiva);
-                Ficha r = getProperFicha();
-                r.setRespiratorio(respiratorio);
-                realm.copyToRealmOrUpdate(r);
-                changeCardColor();
-            }
-        }
-        else if(naoInvasivo.isChecked()){
-            i=0;
-            respiratorio.setInvasiva(0);
-            RespiratorioNaoInvasiva respiratorioNaoInvasiva = realm.createObject(RespiratorioNaoInvasiva.class);
-            if(!isTextInpudEditTextEmpty(volumeNaoInvasivo)){
-                respiratorio.setVolume(Integer.parseInt(volumeNaoInvasivo.getText().toString()));
-                i++;
-            }
-            if(!isTextInpudEditTextEmpty(ipap)){
-                respiratorioNaoInvasiva.setIpap(Integer.parseInt(ipap.getText().toString()));
-                i++;
-            }
-            if(!isTextInpudEditTextEmpty(epap)){
-                respiratorioNaoInvasiva.setEpap(Integer.parseInt(epap.getText().toString()));
-                i++;
-            }
-            if(!isTextInpudEditTextEmpty(saturacao)){
-                respiratorioNaoInvasiva.setSaturacao(Integer.parseInt(saturacao.getText().toString()));
-                i++;
-            }
-            if(i==4){
-                respiratorio.setRespiratorioNaoInvasiva(respiratorioNaoInvasiva);
-                Ficha r = getProperFicha();
-                r.setRespiratorio(respiratorio);
-                realm.copyToRealmOrUpdate(r);
-                changeCardColor();
-            }
-        }
-        realm.commitTransaction();
+//        realm.beginTransaction();
+//        int i;
+//        Respiratorio respiratorio = realm.createObject(Respiratorio.class);
+//        if(invasivo.isChecked()){
+//            i=0;
+//            respiratorio.setInvasiva(1);
+//            RespiratorioInvasiva respiratorioInvasiva = realm.createObject(RespiratorioInvasiva.class);
+//            if(!isTextInpudEditTextEmpty(volume)){
+//                respiratorio.setVolume(Integer.parseInt(volume.getText().toString()));
+//                i++;
+//            }
+//            if(!isTextInpudEditTextEmpty(fio2)){
+//                respiratorioInvasiva.setFio2(Integer.parseInt(fio2.getText().toString()));
+//                i++;
+//            }
+//            if(!isTextInpudEditTextEmpty(freqRespiratoria)){
+//                respiratorioInvasiva.setFrequenciaRespiratoria(Integer.parseInt(freqRespiratoria.getText().toString()));
+//                i++;
+//            }
+//            if(!isTextInpudEditTextEmpty(peep)){
+//                respiratorioInvasiva.setPeep(Integer.parseInt(peep.getText().toString()));
+//                i++;
+//            }
+//            if(!isTextInpudEditTextEmpty(pressaoCuff)){
+//                respiratorioInvasiva.setPressaoCuff(Integer.parseInt(pressaoCuff.getText().toString()));
+//                i++;
+//            }
+//            if(!respiratorioSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
+//                respiratorioInvasiva.setModoVentilatorio(respiratorioSpinner.getSelectedItem().toString());
+//                i++;
+//            }
+//            if(i==6){
+//                respiratorio.setRespiratorioInvasiva(respiratorioInvasiva);
+//                Ficha r = getProperFicha();
+//                r.setRespiratorio(respiratorio);
+//                realm.copyToRealmOrUpdate(r);
+//                changeCardColor();
+//            }
+//        }
+//        else if(naoInvasivo.isChecked()){
+//            i=0;
+//            respiratorio.setInvasiva(0);
+//            RespiratorioNaoInvasiva respiratorioNaoInvasiva = realm.createObject(RespiratorioNaoInvasiva.class);
+//            if(!isTextInpudEditTextEmpty(volumeNaoInvasivo)){
+//                respiratorio.setVolume(Integer.parseInt(volumeNaoInvasivo.getText().toString()));
+//                i++;
+//            }
+//            if(!isTextInpudEditTextEmpty(ipap)){
+//                respiratorioNaoInvasiva.setIpap(Integer.parseInt(ipap.getText().toString()));
+//                i++;
+//            }
+//            if(!isTextInpudEditTextEmpty(epap)){
+//                respiratorioNaoInvasiva.setEpap(Integer.parseInt(epap.getText().toString()));
+//                i++;
+//            }
+//            if(!isTextInpudEditTextEmpty(saturacao)){
+//                respiratorioNaoInvasiva.setSaturacao(Integer.parseInt(saturacao.getText().toString()));
+//                i++;
+//            }
+//            if(i==4){
+//                respiratorio.setRespiratorioNaoInvasiva(respiratorioNaoInvasiva);
+//                Ficha r = getProperFicha();
+//                r.setRespiratorio(respiratorio);
+//                realm.copyToRealmOrUpdate(r);
+//                changeCardColor();
+//            }
+//        }
+//        realm.commitTransaction();
     }
 
     @Override
@@ -227,63 +191,198 @@ public class RespiratorioActivity extends GenericoActivity {
         finish();
     }
 
-    private void prepareRespiratorioSpinners(){
-        String[] modoVentilatorio = {defaultSpinnerString,"A/C,VCV","A/C,PCV","PSV","SIMV"};
+    public void viasAereasOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        respiratorioSpinner = (Spinner) findViewById(R.id.ventilacao_invasiva_spinner);
-        adapterRespiratorio = new ArrayAdapter<String>(RespiratorioActivity.this, android.R.layout.simple_dropdown_item_1line, modoVentilatorio) {
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        respiratorioSpinner.setAdapter(adapterRespiratorio);
+        builder.setTitle(R.string.ViasAereas);
 
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.viasAereas);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, viasAereasSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        viasAerea.setText(items[which]);
+                        viasAerea.setVisibility(View.VISIBLE);
+                        viasAereasSelection=which;
+                        if(!items[which].equals(getResources().getStringArray(R.array.viasAereas)[0])){
+                            if(!localizacaoCanula_layout.isShown() && !pressaoCuff_layout.isShown()) {
+                                myAnimation.slideDownView(getApplicationContext(),localizacaoCanula_layout);
+                                myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
+                            }
+                        }
+                        else{
+                            if(localizacaoCanula_layout.isShown() && pressaoCuff_layout.isShown()) {
+                                myAnimation.slideUpView(getApplicationContext(),pressaoCuff_layout);
+                                myAnimation.slideUpView(getApplicationContext(),localizacaoCanula_layout);
+                            }
+                        }
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
     }
 
-//    public void respiratorioVentilacaoOnRadioButtonClicked(View view){
-//        switch(view.getId()) {
-//            case R.id.respiratorio_invasivo:
-//                if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioInvasiva()!=null)
-//                    preencherInvasivo();
-//                if(naoInvasivoView.isShown()) {
-//                    myAnimation.slideUpView(this, naoInvasivoView);
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            myAnimation.slideDownView(RespiratorioActivity.this, invasivoView);
-//                        }
-//                    }, 250);
-//                }
-//                else if(!invasivoView.isShown())
-//                    myAnimation.slideDownView(RespiratorioActivity.this, invasivoView);
-//                break;
-//            case R.id.respiratorio_nao_invasivo:
-//                if(ficha.getRespiratorio()!=null && ficha.getRespiratorio().getRespiratorioNaoInvasiva()!=null)
-//                    preencherNaoInvasivo();
-//                if(invasivoView.isShown()) {
-//                    myAnimation.slideUpView(this, invasivoView);
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            myAnimation.slideDownView(RespiratorioActivity.this, naoInvasivoView);
-//                        }
-//                    }, 250);
-//                }
-//                else if(!naoInvasivoView.isShown())
-//                    myAnimation.slideDownView(RespiratorioActivity.this, naoInvasivoView);
-//                break;
-//        }
-//    }
+
+    public void localizacaoCanulaOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.LocalizacaoCanula);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.localizacaoCanula);
+        builder.setSingleChoiceItems(items, localizacaoCanulaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        localizacaoCanula.setText(items[which]);
+                        localizacaoCanula.setVisibility(View.VISIBLE);
+                        localizacaoCanulaSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void murmurioVesicularOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.MurmurioVesicular);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.murmurioVesicular);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, murmurioVesicularSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        murmurioVesicular.setText(items[which]);
+                        murmurioVesicular.setVisibility(View.VISIBLE);
+                        murmurioVesicularSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void baseMurmurioVesicularOnclick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Base);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, baseMurmurioVesicularSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        baseMurmurioVesicular.setText(items[which]);
+                        baseMurmurioVesicular.setVisibility(View.VISIBLE);
+                        baseMurmurioVesicularSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void tercoMedioVesicularOnclick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.TercoMedio);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, tercoMedioMurmurioVesicularSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tercoMedioMurmurioVesicular.setText(items[which]);
+                        tercoMedioMurmurioVesicular.setVisibility(View.VISIBLE);
+                        tercoMedioMurmurioVesicularSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void apiceMurmurioVesicularOnClick(View view){
+        if(apiceSwitchCompat.isChecked()){
+            apiceSwitchCompat.setChecked(false);
+            apiceMurmurioVesicular.setText(getString(R.string.Nao));
+        }
+        else{
+            apiceSwitchCompat.setChecked(true);
+            apiceMurmurioVesicular.setText(getString(R.string.Sim));
+        }
+    }
+
+
 }

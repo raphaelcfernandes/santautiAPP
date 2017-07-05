@@ -1,3 +1,6 @@
+<!--STRINGS DEVEM COMEÇAR COM LETRA MAIUSCULA-->
+<!--ARRAYS DEVEM COMEÇAR COM LETRA MINUSCULA-->
+
 <resources>
     <string name="app_name">SantaUTI</string>
     <string name="login">Login</string>
@@ -21,7 +24,6 @@
     <string name="Metabolico">Metabólico</string>
     <string name="Evolucao">Evolução</string>
     <string name="nivel_consciencia">Nível de Consciência:</string>
-    <string name="escolha_opcao">Selecione um</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
     <string name="sharedPrefecences">SantaUTISharedPreferences</string>
@@ -58,6 +60,20 @@
     <string name="Sopro">Sopro</string>
     <string name="TipoSopro">Tipo do Sopro</string>
     <string name="IntensidadeSopro">Intensidade do Sopro</string>
+    <string name="Hematocrito">Hematócrito</string>
+    <string name="Hemoglobina">Hemoglobina</string>
+    <string name="Plaqueta">Plaqueta</string>
+    <string name="Tromboprofilaxia">Tromboprofilaxia</string>
+    <string name="Hemograma">Hemograma</string>
+    <string name="CurvaTermica">Curva Térmica</string>
+    <string name="MarcadoresInfeccao">Marcadores de Infecção</string>
+    <string name="ViasAereas">Via Aéreas</string>
+    <string name="LocalizacaoCanula">Localização da Canula</string>
+    <string name="PressaoCuff">Pressão do Cuff</string>
+    <string name="MurmurioVesicular">Murmúrio Vesicular</string>
+    <string name="Base">Base</string>
+    <string name="TercoMedio">Terço Médio</string>
+    <string name="Apice">Ápice</string>
 
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
@@ -138,6 +154,47 @@
         <item>+4</item>
         <item>+5</item>
         <item>+6</item>
+    </string-array>
+
+    <string-array name="tromboprofilaxia">
+        <item>Heparina Fracionada</item>
+        <item>Heparina Não Fracionada</item>
+    </string-array>
+
+    <string-array name="curvaTermica">
+        <item>Febril</item>
+        <item>Afebril</item>
+        <item>Subfebril</item>
+    </string-array>
+
+    <string-array name="marcadoresInfeccao">
+        <item>Estáveis</item>
+        <item>Em melhora</item>
+        <item>Em piora</item>
+    </string-array>
+
+    <string-array name="viasAereas">
+        <item>Normal</item>
+        <item>Tubo Orotraquial</item>
+        <item>Traqueostomia</item>
+    </string-array>
+
+    <string-array name="localizacaoCanula">
+        <item>Alta</item>
+        <item>Média</item>
+        <item>Baixa</item>
+    </string-array>
+
+    <string-array name="murmurioVesicular">
+        <item>Fisiológico</item>
+        <item>Reduzido</item>
+        <item>Aumentado</item>
+    </string-array>
+    
+    <string-array name="direito_esquerdo_ambos">
+        <item>Direito</item>
+        <item>Esquerdo</item>
+        <item>Ambos</item>
     </string-array>
     <!--ARRAYS-->
 </resources>

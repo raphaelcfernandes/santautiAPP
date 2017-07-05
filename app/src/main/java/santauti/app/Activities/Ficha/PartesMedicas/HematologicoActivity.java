@@ -1,25 +1,19 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Arrays;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Hematologico;
@@ -30,46 +24,44 @@ import santauti.app.R;
  */
 
 public class HematologicoActivity extends GenericoActivity {
-    private Spinner tromboprofilaxiaSpinner;
-    private View tromboprofilaxia;
-    private RadioButton hemogramaS,hemogramaN,tromboprofilaxiaS,tromboprofilaxiaN;
+    private TextView tromboprofilaxiaTextView;
+    private SwitchCompat switchTromboprofilaxia,switchHemograma;
+    private int tromboprofilaSelection=-1;
     private Realm realm;
-    private ArrayAdapter<String> adapterProfilaxia;
-    private MyAnimation myAnimation = new MyAnimation();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hematologico);
-        tromboprofilaxia = findViewById(R.id.tromboprofilaxia_layout);
+
+        tromboprofilaxiaTextView = (TextView)findViewById(R.id.tromboprofilaxia_selected);
+        switchTromboprofilaxia = (SwitchCompat)findViewById(R.id.tromprofilaxiaSwitch);
+        switchHemograma = (SwitchCompat)findViewById(R.id.hemogramaSwitch);
+
         prepareNavigationButtons();
-        hemogramaS = (RadioButton)findViewById(R.id.hemograma_sim);
-        hemogramaN = (RadioButton)findViewById(R.id.hemograma_nao);
-        tromboprofilaxiaS = (RadioButton)findViewById(R.id.tromboprofilaxia_sim);
-        tromboprofilaxiaN = (RadioButton)findViewById(R.id.tromboprofilaxia_nao);
 
         setToolbar(getString(R.string.Hematologico));
 
-        prepareHematologicoSpinners();
 
         realm = Realm.getDefaultInstance();
 
-        Ficha ficha = getProperFicha();
-        if(ficha.getHematologico()!=null){
-            if(ficha.getHematologico().getTromboprofilaxia()==1){
-                tromboprofilaxia.setVisibility(View.VISIBLE);
-                tromboprofilaxiaS.setChecked(true);
-                int spinnerPosition = adapterProfilaxia.getPosition(ficha.getHematologico().getTipoMedicamento());
-                tromboprofilaxiaSpinner.setSelection(spinnerPosition);
-            }
-            else {
-                tromboprofilaxiaN.setChecked(true);
-                tromboprofilaxia.setVisibility(View.GONE);
-            }
-            if(ficha.getHematologico().getHemograma()==1)
-                hemogramaS.setChecked(true);
-            else
-                hemogramaN.setChecked(true);
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getHematologico()!=null){
+//            if(ficha.getHematologico().getTromboprofilaxia()==1){
+//                tromboprofilaxia.setVisibility(View.VISIBLE);
+//                tromboprofilaxiaS.setChecked(true);
+//                int spinnerPosition = adapterProfilaxia.getPosition(ficha.getHematologico().getTipoMedicamento());
+//                tromboprofilaxiaSpinner.setSelection(spinnerPosition);
+//            }
+//            else {
+//                tromboprofilaxiaN.setChecked(true);
+//                tromboprofilaxia.setVisibility(View.GONE);
+//            }
+//            if(ficha.getHematologico().getHemograma()==1)
+//                hemogramaS.setChecked(true);
+//            else
+//                hemogramaN.setChecked(true);
+//        }
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +69,7 @@ public class HematologicoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
-                verificaCamposENotificaAdapter();
+                //verificaCamposENotificaAdapter();
                 finish();
            }
         });
@@ -89,60 +81,11 @@ public class HematologicoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();
-                verificaCamposENotificaAdapter();
+                //verificaCamposENotificaAdapter();
                 finish();
             }
         });
 
-    }
-
-    private void prepareHematologicoSpinners(){
-        String[] nivelConsciencia = {defaultSpinnerString,"Heparina Fracionada","Heparina não Fracionada"};
-
-        tromboprofilaxiaSpinner = (Spinner) findViewById(R.id.tromboprofilaxia_spinner);
-        adapterProfilaxia = new ArrayAdapter<String>(HematologicoActivity.this, android.R.layout.simple_dropdown_item_1line, nivelConsciencia){
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0)
-                    tv.setTextColor(Color.GRAY);
-                else
-                    tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        tromboprofilaxiaSpinner.setAdapter(adapterProfilaxia);
-    }
-
-    public void hematologicoProfilaxiaOnRadioButtonClicked(View view){
-        switch(view.getId()) {
-            case R.id.tromboprofilaxia_sim:
-                if(!tromboprofilaxia.isShown())
-                    myAnimation.slideDownView(this,tromboprofilaxia);
-                break;
-            case R.id.tromboprofilaxia_nao:
-                if(tromboprofilaxia.isShown()) {
-                    myAnimation.slideUpView(this, tromboprofilaxia);
-                }
-                break;
-        }
-    }
-
-    public void hematologicoOnRadioButtonClicked(View view){
-        switch(view.getId()) {
-            case R.id.hemograma_sim:
-                SnackbarCreator.camposAPreencher(view);
-                break;
-            case R.id.hemograma_nao:
-                SnackbarCreator.avaliacaoGeradaAutomaticamente(view);
-                break;
-        }
     }
 
     @Override
@@ -155,7 +98,7 @@ public class HematologicoActivity extends GenericoActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home) {
-            verificaCamposENotificaAdapter();
+            //verificaCamposENotificaAdapter();
             finish();
         }
         return true;
@@ -163,7 +106,7 @@ public class HematologicoActivity extends GenericoActivity {
 
     @Override
     public void onBackPressed(){
-        verificaCamposENotificaAdapter();
+        //verificaCamposENotificaAdapter();
         finish();
     }
 
@@ -171,26 +114,6 @@ public class HematologicoActivity extends GenericoActivity {
         realm.beginTransaction();
         int i=0;
         Hematologico hematologico = realm.createObject(Hematologico.class);
-        if(tromboprofilaxiaS.isChecked()){
-            hematologico.setTromboprofilaxia(1);
-            if(!tromboprofilaxiaSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
-                hematologico.setTipoMedicamento(tromboprofilaxiaSpinner.getSelectedItem().toString());
-                i++;
-            }
-        }
-        if(tromboprofilaxiaN.isChecked()){
-            hematologico.setTromboprofilaxia(0);
-            hematologico.setTipoMedicamento(null);
-            i++;
-        }
-        if(hemogramaS.isChecked()) {
-            hematologico.setHemograma(1);
-            i++;
-        }
-        if(hemogramaN.isChecked()) {
-            hematologico.setHemograma(0);
-            i++;
-        }
 
         if(i==2) {
             Ficha r = getProperFicha();
@@ -199,5 +122,57 @@ public class HematologicoActivity extends GenericoActivity {
             changeCardColor();
         }
         realm.commitTransaction();
+    }
+
+    public void tromboprofilaxiaOnClick(View view){
+        if(switchTromboprofilaxia.isChecked()){
+            tromboprofilaxiaTextView.setText(getString(R.string.Nao));
+            switchTromboprofilaxia.setChecked(false);
+        }
+        else{
+            switchTromboprofilaxia.setChecked(true);
+            showDialog();
+        }
+    }
+
+    public void hemogramaOnClick(View view){
+        if(switchHemograma.isChecked())
+            switchHemograma.setChecked(false);
+        else
+            switchHemograma.setChecked(true);
+    }
+
+    private void showDialog(){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Tromboprofilaxia);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.tromboprofilaxia);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, tromboprofilaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tromboprofilaxiaTextView.setText(items[which]);
+                        tromboprofilaxiaTextView.setVisibility(View.VISIBLE);
+                        tromboprofilaSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
     }
 }
