@@ -2,28 +2,22 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Switch;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
@@ -33,16 +27,20 @@ import santauti.app.R;
  */
 
 public class RespiratorioActivity extends GenericoActivity {
-    private int viasAereasSelection=-1,localizacaoCanulaSelection=-1,murmurioVesicularSelection=-1,baseMurmurioVesicularSelection=-1,tercoMedioMurmurioVesicularSelection=-1;
-    private View pressaoCuff_layout, localizacaoCanula_layout;
-    private TextView viasAerea,localizacaoCanula,murmurioVesicular,baseMurmurioVesicular,tercoMedioMurmurioVesicular,apiceMurmurioVesicular;
-    private SwitchCompat apiceSwitchCompat;
+    private int viasAereasSelection=-1,localizacaoCanulaSelection=-1;
+    private int murmurioVesicularSelection=-1,baseMurmurioVesicularSelection=-1,tercoMedioMurmurioVesicularSelection=-1,usoDeOxigenioSelection=-1,apiceSelection=-1;
+    private View pressaoCuff_layout;
+    private View localizacaoCanula_layout;
+    private View mascaraDeVenturi_layout;
+    private TextView viasAerea,localizacaoCanula,murmurioVesicular;
+    private TextView baseMurmurioVesicular,tercoMedioMurmurioVesicular,apiceMurmurioVesicular, usoDeOxigenioTextView;
+    private SwitchCompat apiceSwitchCompat,usoDeOxigenioSwitchCompat;
     private TextInputEditText pressaoCuff;
     private Realm realm;
     private Ficha ficha;
     private MyAnimation myAnimation;
     private Intent intent;
-
+    private int index;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,15 +53,16 @@ public class RespiratorioActivity extends GenericoActivity {
         pressaoCuff = (TextInputEditText)findViewById(R.id.pressaoCuff);
         pressaoCuff_layout = findViewById(R.id.pressaoCuff_layout);
         localizacaoCanula_layout = findViewById(R.id.localizacaoCanula_layout);
-        apiceSwitchCompat = (SwitchCompat)findViewById(R.id.apiceMurmurioVesicularSwitch);
+        mascaraDeVenturi_layout = findViewById(R.id.mascaVenturi);
+        usoDeOxigenioSwitchCompat = (SwitchCompat)findViewById(R.id.usoDeOxigenioSwitch);
         viasAerea = (TextView)findViewById(R.id.viaAerea);
         localizacaoCanula = (TextView)findViewById(R.id.localizacaoCanula);
         murmurioVesicular = (TextView)findViewById(R.id.murmurioVesicular);
         baseMurmurioVesicular = (TextView)findViewById(R.id.baseMurmurioVesicular);
         tercoMedioMurmurioVesicular = (TextView)findViewById(R.id.tercoMedioMurmurioVesicular);
         apiceMurmurioVesicular = (TextView)findViewById(R.id.apiceMurmurioVesicular);
+        usoDeOxigenioTextView = (TextView)findViewById(R.id.usoDeOxigenioSelected);
         /**************************VIEWS**************************/
-
 
         prepareNavigationButtons();
 
@@ -237,7 +236,6 @@ public class RespiratorioActivity extends GenericoActivity {
         dialog.show();
     }
 
-
     public void localizacaoCanulaOnClick(View view){
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
@@ -374,15 +372,151 @@ public class RespiratorioActivity extends GenericoActivity {
     }
 
     public void apiceMurmurioVesicularOnClick(View view){
-        if(apiceSwitchCompat.isChecked()){
-            apiceSwitchCompat.setChecked(false);
-            apiceMurmurioVesicular.setText(getString(R.string.Nao));
-        }
-        else{
-            apiceSwitchCompat.setChecked(true);
-            apiceMurmurioVesicular.setText(getString(R.string.Sim));
-        }
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Apice);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, apiceSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        apiceMurmurioVesicular.setText(items[which]);
+                        apiceMurmurioVesicular.setVisibility(View.VISIBLE);
+                        apiceSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
     }
 
+    public void usoDeOxigenioMurmurioVesicularOnClick(View view){
+        if(usoDeOxigenioSwitchCompat.isChecked()){
+            usoDeOxigenioTextView.setText(getString(R.string.Nao));
+            usoDeOxigenioSwitchCompat.setChecked(false);
+            myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
+        }
+        else
+            showDialog();
+    }
+
+    private void showDialog(){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.UsoDeOxigenio);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.usoDeOxigenio);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, usoDeOxigenioSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        usoDeOxigenioTextView.setText(items[which]);
+                        usoDeOxigenioTextView.setVisibility(View.VISIBLE);
+                        usoDeOxigenioSelection=which;
+                        usoDeOxigenioSwitchCompat.setChecked(true);
+                        myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
+                        if(items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[1])){
+                            if(!mascaraDeVenturi_layout.isShown()) {
+                                myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
+                            }
+                        }
+                        else{
+                            if(mascaraDeVenturi_layout.isShown()) {
+                                myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
+                            }
+                        }
+                        dialog.dismiss();
+                    }
+                });
+        String positiveText = getString(R.string.Selecionar);
+        builder.setPositiveButton(positiveText,new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(usoDeOxigenioSelection!=-1) {
+                    usoDeOxigenioTextView.setText(items[which]);
+                    usoDeOxigenioTextView.setVisibility(View.VISIBLE);
+                    usoDeOxigenioSelection=which;
+                    usoDeOxigenioSwitchCompat.setChecked(true);
+                    myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
+                    if(items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[1])){
+                        if(!mascaraDeVenturi_layout.isShown()) {
+                            myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
+                        }
+                    }
+                    else{
+                        if(mascaraDeVenturi_layout.isShown()) {
+                            myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
+                        }
+                    }
+                }
+                dialog.dismiss();
+            }
+        });
+        String negativeText = getString(R.string.Cancelar);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void mascaraVenturiOnClick(final View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RespiratorioActivity.this,R.style.MyDialogTheme);
+        builder.setTitle(getString(R.string.MascaraVenturi));
+        LayoutInflater li = LayoutInflater.from(this);
+        View dialogView = li.inflate(R.layout.mascara_venturi_dialog,null);
+
+        final RadioGroup radioGroup = (RadioGroup)findViewById(R.id.mascaraVenturiRadioGroup);
+        dialogView.requestFocus();
+        final TextInputEditText doseDroga = (TextInputEditText) dialogView.findViewById(R.id.dose);
+        final TextInputEditText velInfusao = (TextInputEditText)dialogView.findViewById(R.id.velInfusao);
+
+
+        builder.setView(dialogView);
+        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+
+        final AlertDialog dialog = builder.show();
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+
+
+    }
 
 }

@@ -129,10 +129,8 @@ public class HematologicoActivity extends GenericoActivity {
             tromboprofilaxiaTextView.setText(getString(R.string.Nao));
             switchTromboprofilaxia.setChecked(false);
         }
-        else{
-            switchTromboprofilaxia.setChecked(true);
+        else
             showDialog();
-        }
     }
 
     public void hemogramaOnClick(View view){
@@ -158,11 +156,23 @@ public class HematologicoActivity extends GenericoActivity {
                         tromboprofilaxiaTextView.setText(items[which]);
                         tromboprofilaxiaTextView.setVisibility(View.VISIBLE);
                         tromboprofilaSelection=which;
+                        switchTromboprofilaxia.setChecked(true);
                         dialog.dismiss();
                     }
                 });
-
-        String negativeText = getString(android.R.string.cancel);
+        String positiveText = getString(R.string.Selecionar);
+        builder.setPositiveButton(positiveText,new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(tromboprofilaSelection!=-1) {
+                    tromboprofilaxiaTextView.setText(items[tromboprofilaSelection]);
+                    tromboprofilaxiaTextView.setVisibility(View.VISIBLE);
+                    switchTromboprofilaxia.setChecked(true);
+                }
+                dialog.dismiss();
+            }
+        });
+        String negativeText = getString(R.string.Cancelar);
         builder.setNegativeButton(negativeText,
                 new DialogInterface.OnClickListener() {
                     @Override

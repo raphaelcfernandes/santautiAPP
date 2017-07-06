@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
     android:id="@+id/respiratorio_layout"
@@ -111,34 +112,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="murmurioVesicularOnClick">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:onClick="murmurioVesicularOnClick">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/MurmurioVesicular"
-                        style="@style/TitleTextStyleForLayoutSelection"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/murmurioVesicular"/>
-                </LinearLayout>
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1px"-->
-                <!--android:background="@color/gray">-->
-                <!--</LinearLayout>-->
+                    android:text="@string/MurmurioVesicular"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/murmurioVesicular"/>
             </LinearLayout>
 
             <LinearLayout
@@ -213,20 +204,13 @@
                         android:paddingEnd="0dp"
                         android:text="@string/Apice"
                         style="@style/TextStyle"/>
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/apiceMurmurioVesicularSwitch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:background="@android:color/transparent"
-                        android:theme="@style/MySwitch" />
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/submenu_left_padding"
                     android:paddingEnd="@dimen/submenu_right_padding"
-                    android:text="@string/Nao"
+                    android:visibility="invisible"
                     android:id="@+id/apiceMurmurioVesicular"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"/>
             </LinearLayout>
@@ -235,6 +219,80 @@
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/tromboprofilaxia_layout"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:onClick="usoDeOxigenioMurmurioVesicularOnClick"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/UsoDeOxigenio"
+                        style="@style/TextStyle"/>
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/usoDeOxigenioSwitch"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:background="@android:color/transparent"
+                        android:paddingEnd="20dp"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:paddingStart="100dp"
+                        android:theme="@style/MySwitch" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/usoDeOxigenioSelected"
+                    android:text="@string/Nao"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="mascaraVenturiOnClick"
+                android:id="@+id/mascaVenturi"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/MascaraVenturi"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/mascaraVenturiSelected"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
