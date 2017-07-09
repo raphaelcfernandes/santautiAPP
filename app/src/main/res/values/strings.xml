@@ -71,15 +71,37 @@
     <string name="LocalizacaoCanula">Localização da Canula</string>
     <string name="PressaoCuff">Pressão do Cuff</string>
     <string name="MurmurioVesicular">Murmúrio Vesicular</string>
+    <string name="Sibilos">Sibilos</string>
+    <string name="Crepitacoes">Crepitações</string>
     <string name="Base">Base</string>
+    <string name="BaseRoncos">Base Roncos</string>
+    <string name="BaseMurmurio">Base Murmurio Vesicular</string>
+    <string name="BaseSibilos">Base Sibilos</string>
+    <string name="BaseCrepitacoes">Base Crepitações</string>
     <string name="TercoMedio">Terço Médio</string>
+    <string name="TercoMedioCrepitacoes">Terço Médio Crepitações</string>
+    <string name="TercoMedioSibilos">Terço Médio Sibilos</string>
+    <string name="TercoMedioMurmurioVesicular">Terço Médio Murmurio Vesicular</string>
+    <string name="TercoMedioRoncos">Terço Médio Roncos</string>
     <string name="Apice">Ápice</string>
+    <string name="ApiceCrepitacoes">Ápice Crepitações</string>
+    <string name="ApiceSibilos">Ápice Sibilos</string>
+    <string name="ApiceMurmurioVesicular">Ápice Murmurio Vesicular</string>
+    <string name="ApiceRoncos">Ápice Roncos</string>
     <string name="UsoDeOxigenio">Uso de Oxigênio</string>
     <string name="Fluxo">Fluxo</string>
     <string name="Cancelar">Cancelar</string>
     <string name="Selecionar">Selecionar</string>
     <string name="MascaraVenturi">Máscara de Venturi</string>
-
+    <string name="Roncos">Roncos</string>
+    <string name="AdicionarDispositivo">Adicionar Dispositivo</string>
+    <string name="Ventilacao">Ventilação</string>
+    <string name="Volume">Volume</string>
+    <string name="IPAP">IPAP</string>
+    <string name="EPAP">EPAP</string>
+    <string name="Saturacao">Saturação</string>
+    <string name="Oxigenio">Oxigênio</string>
+    <string name="ModoVentilatorio">Modo Ventilatório</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -203,9 +225,23 @@
     </string-array>
 
     <string-array name="usoDeOxigenio">
-        <item>Sob Cateter Nasal</item>
         <item>Em Máscara de Venturi</item>
         <item>Em Máscara de Reinalação</item>
+        <item>Sob Cateter Nasal</item>
+        <item>Não</item>
+    </string-array>
+
+    <string-array name="ventilacao">
+        <item>Espontânea</item>
+        <item>BIPAP</item>
+        <item>Mecânica</item>
+        <item>Não-invasiva</item>
+    </string-array>
+
+    <string-array name="modoVentilatorio">
+        <item>VCV</item>
+        <item>PCV</item>
+        <item>PSV</item>
     </string-array>
     <!--ARRAYS-->
 </resources>

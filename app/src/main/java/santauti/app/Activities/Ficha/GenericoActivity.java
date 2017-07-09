@@ -1,18 +1,23 @@
 package santauti.app.Activities.Ficha;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Message;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,7 +36,8 @@ public abstract class GenericoActivity extends AppCompatActivity {
     public String defaultSpinnerString = "Selecione";
     public Button proxFicha,antFicha;
     public Intent intent;
-
+    public int itemSelected =-1;
+    public AlertDialog.Builder builder;
     @Override
     public void onBackPressed(){
         finish();
@@ -106,4 +112,39 @@ public abstract class GenericoActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void createDialog(final String title, int selection, final TextView textView, final String[] options){
+        builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(title);
+
+        //list of items
+        Arrays.sort(options);
+        builder.setSingleChoiceItems(options, selection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        textView.setText(options[which]);
+                        textView.setVisibility(View.VISIBLE);
+                        itemSelected=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+
+
+    }
+
 }

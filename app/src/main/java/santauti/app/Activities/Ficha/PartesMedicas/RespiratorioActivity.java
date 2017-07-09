@@ -2,15 +2,19 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.SwitchCompat;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -27,21 +31,20 @@ import santauti.app.R;
  */
 
 public class RespiratorioActivity extends GenericoActivity {
-    private int viasAereasSelection=-1,localizacaoCanulaSelection=-1;
-    private int murmurioVesicularSelection=-1,baseMurmurioVesicularSelection=-1,tercoMedioMurmurioVesicularSelection=-1,usoDeOxigenioSelection=-1,apiceSelection=-1;
+    private int viasAereasSelection=-1,localizacaoCanulaSelection=-1,baseRoncosSelection=-1,tercoMedioRoncosSelection=-1,apiceRoncosSelection=-1;
+    private int murmurioVesicularSelection=-1,baseMurmurioVesicularSelection=-1,baseSibilosSelection=-1;
+    private int mascaraVenturiSelection=-1,tercoMedioMurmurioVesicularSelection=-1,usoDeOxigenioSelection=-1,apiceSelection=-1;
+    private int baseCrepitacoesSelection=-1,tercoMedioCrepitacoesSelection=-1,tercoMedioSibilosSelection=-1,apiceSibilosSelection=-1,apiceCrepitacoesSelection=-1;
     private View pressaoCuff_layout;
     private View localizacaoCanula_layout;
-    private View mascaraDeVenturi_layout;
-    private TextView viasAerea,localizacaoCanula,murmurioVesicular;
-    private TextView baseMurmurioVesicular,tercoMedioMurmurioVesicular,apiceMurmurioVesicular, usoDeOxigenioTextView;
-    private SwitchCompat apiceSwitchCompat,usoDeOxigenioSwitchCompat;
-    private TextInputEditText pressaoCuff;
+    private View mascaraDeVenturi_layout, fluxoOxigenio_layout;
+    private TextView viasAerea,localizacaoCanula,murmurioVesicular,mascaraVenturiSelected,baseRoncos,tercoMedioRoncos,apiceRoncos;
+    private TextView baseMurmurioVesicular,tercoMedioMurmurioVesicular,apiceMurmurioVesicular, usoDeOxigenioTextView,baseSibilos,baseCrepitacoes;
+    private TextView tercoMedioSibilos,tercoMedioCrepitacoes,apiceSibilos,apiceCrepitacoes;
     private Realm realm;
     private Ficha ficha;
     private MyAnimation myAnimation;
     private Intent intent;
-    private int index;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +53,11 @@ public class RespiratorioActivity extends GenericoActivity {
         setToolbar(getString(R.string.Respiratorio));
 
         /**************************VIEWS**************************/
-        pressaoCuff = (TextInputEditText)findViewById(R.id.pressaoCuff);
         pressaoCuff_layout = findViewById(R.id.pressaoCuff_layout);
         localizacaoCanula_layout = findViewById(R.id.localizacaoCanula_layout);
         mascaraDeVenturi_layout = findViewById(R.id.mascaVenturi);
-        usoDeOxigenioSwitchCompat = (SwitchCompat)findViewById(R.id.usoDeOxigenioSwitch);
+        fluxoOxigenio_layout = findViewById(R.id.fluxoOxigenioLayout);
+        mascaraVenturiSelected = (TextView)findViewById(R.id.mascaraVenturiSelected);
         viasAerea = (TextView)findViewById(R.id.viaAerea);
         localizacaoCanula = (TextView)findViewById(R.id.localizacaoCanula);
         murmurioVesicular = (TextView)findViewById(R.id.murmurioVesicular);
@@ -62,6 +65,15 @@ public class RespiratorioActivity extends GenericoActivity {
         tercoMedioMurmurioVesicular = (TextView)findViewById(R.id.tercoMedioMurmurioVesicular);
         apiceMurmurioVesicular = (TextView)findViewById(R.id.apiceMurmurioVesicular);
         usoDeOxigenioTextView = (TextView)findViewById(R.id.usoDeOxigenioSelected);
+        baseRoncos = (TextView)findViewById(R.id.baseRoncos);
+        tercoMedioRoncos = (TextView)findViewById(R.id.tercoMedioRoncos);
+        apiceRoncos = (TextView)findViewById(R.id.apiceRoncos);
+        baseSibilos = (TextView)findViewById(R.id.baseSibilos);
+        baseCrepitacoes = (TextView)findViewById(R.id.baseCrepitacoes);;
+        tercoMedioSibilos = (TextView)findViewById(R.id.tercoMedioSibilos);
+        tercoMedioCrepitacoes = (TextView)findViewById(R.id.tercoMedioCrepitacoes);
+        apiceSibilos = (TextView)findViewById(R.id.apiceSibilos);
+        apiceCrepitacoes = (TextView)findViewById(R.id.apiceCrepitacoes);
         /**************************VIEWS**************************/
 
         prepareNavigationButtons();
@@ -108,74 +120,7 @@ public class RespiratorioActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter() {
-//        realm.beginTransaction();
-//        int i;
-//        Respiratorio respiratorio = realm.createObject(Respiratorio.class);
-//        if(invasivo.isChecked()){
-//            i=0;
-//            respiratorio.setInvasiva(1);
-//            RespiratorioInvasiva respiratorioInvasiva = realm.createObject(RespiratorioInvasiva.class);
-//            if(!isTextInpudEditTextEmpty(volume)){
-//                respiratorio.setVolume(Integer.parseInt(volume.getText().toString()));
-//                i++;
-//            }
-//            if(!isTextInpudEditTextEmpty(fio2)){
-//                respiratorioInvasiva.setFio2(Integer.parseInt(fio2.getText().toString()));
-//                i++;
-//            }
-//            if(!isTextInpudEditTextEmpty(freqRespiratoria)){
-//                respiratorioInvasiva.setFrequenciaRespiratoria(Integer.parseInt(freqRespiratoria.getText().toString()));
-//                i++;
-//            }
-//            if(!isTextInpudEditTextEmpty(peep)){
-//                respiratorioInvasiva.setPeep(Integer.parseInt(peep.getText().toString()));
-//                i++;
-//            }
-//            if(!isTextInpudEditTextEmpty(pressaoCuff)){
-//                respiratorioInvasiva.setPressaoCuff(Integer.parseInt(pressaoCuff.getText().toString()));
-//                i++;
-//            }
-//            if(!respiratorioSpinner.getSelectedItem().toString().equals(defaultSpinnerString)){
-//                respiratorioInvasiva.setModoVentilatorio(respiratorioSpinner.getSelectedItem().toString());
-//                i++;
-//            }
-//            if(i==6){
-//                respiratorio.setRespiratorioInvasiva(respiratorioInvasiva);
-//                Ficha r = getProperFicha();
-//                r.setRespiratorio(respiratorio);
-//                realm.copyToRealmOrUpdate(r);
-//                changeCardColor();
-//            }
-//        }
-//        else if(naoInvasivo.isChecked()){
-//            i=0;
-//            respiratorio.setInvasiva(0);
-//            RespiratorioNaoInvasiva respiratorioNaoInvasiva = realm.createObject(RespiratorioNaoInvasiva.class);
-//            if(!isTextInpudEditTextEmpty(volumeNaoInvasivo)){
-//                respiratorio.setVolume(Integer.parseInt(volumeNaoInvasivo.getText().toString()));
-//                i++;
-//            }
-//            if(!isTextInpudEditTextEmpty(ipap)){
-//                respiratorioNaoInvasiva.setIpap(Integer.parseInt(ipap.getText().toString()));
-//                i++;
-//            }
-//            if(!isTextInpudEditTextEmpty(epap)){
-//                respiratorioNaoInvasiva.setEpap(Integer.parseInt(epap.getText().toString()));
-//                i++;
-//            }
-//            if(!isTextInpudEditTextEmpty(saturacao)){
-//                respiratorioNaoInvasiva.setSaturacao(Integer.parseInt(saturacao.getText().toString()));
-//                i++;
-//            }
-//            if(i==4){
-//                respiratorio.setRespiratorioNaoInvasiva(respiratorioNaoInvasiva);
-//                Ficha r = getProperFicha();
-//                r.setRespiratorio(respiratorio);
-//                realm.copyToRealmOrUpdate(r);
-//                changeCardColor();
-//            }
-//        }
-//        realm.commitTransaction();
+
     }
 
     @Override
@@ -307,7 +252,7 @@ public class RespiratorioActivity extends GenericoActivity {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        builder.setTitle(R.string.Base);
+        builder.setTitle(R.string.BaseMurmurio);
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
@@ -320,6 +265,112 @@ public class RespiratorioActivity extends GenericoActivity {
                         baseMurmurioVesicular.setVisibility(View.VISIBLE);
                         baseMurmurioVesicularSelection=which;
                         dialog.dismiss();
+
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void baseRoncosOnclick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.BaseRoncos);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, baseRoncosSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        baseRoncos.setText(items[which]);
+                        baseRoncos.setVisibility(View.VISIBLE);
+                        baseRoncosSelection=which;
+                        dialog.dismiss();
+
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void baseSibilosOnclick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.BaseSibilos);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, baseSibilosSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        baseSibilos.setText(items[which]);
+                        baseSibilos.setVisibility(View.VISIBLE);
+                        baseSibilosSelection=which;
+                        dialog.dismiss();
+
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void baseCrepitacoesOnclick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.BaseCrepitacoes);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, baseCrepitacoesSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        baseCrepitacoes.setText(items[which]);
+                        baseCrepitacoes.setVisibility(View.VISIBLE);
+                        baseCrepitacoesSelection=which;
+                        dialog.dismiss();
+
                     }
                 });
 
@@ -341,7 +392,7 @@ public class RespiratorioActivity extends GenericoActivity {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        builder.setTitle(R.string.TercoMedio);
+        builder.setTitle(R.string.TercoMedioMurmurioVesicular);
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
@@ -371,11 +422,113 @@ public class RespiratorioActivity extends GenericoActivity {
         dialog.show();
     }
 
+    public void tercoMedioRoncosOnclick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.TercoMedioRoncos);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, tercoMedioRoncosSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tercoMedioRoncos.setText(items[which]);
+                        tercoMedioRoncos.setVisibility(View.VISIBLE);
+                        tercoMedioRoncosSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void tercoMedioSibilosOnclick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.TercoMedioSibilos);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, tercoMedioSibilosSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tercoMedioSibilos.setText(items[which]);
+                        tercoMedioSibilos.setVisibility(View.VISIBLE);
+                        tercoMedioSibilosSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void tercoMedioCrepitacoesOnclick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.TercoMedioCrepitacoes);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, tercoMedioCrepitacoesSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tercoMedioCrepitacoes.setText(items[which]);
+                        tercoMedioCrepitacoes.setVisibility(View.VISIBLE);
+                        tercoMedioCrepitacoesSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
     public void apiceMurmurioVesicularOnClick(View view){
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        builder.setTitle(R.string.Apice);
+        builder.setTitle(R.string.ApiceMurmurioVesicular);
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
@@ -405,72 +558,27 @@ public class RespiratorioActivity extends GenericoActivity {
         dialog.show();
     }
 
-    public void usoDeOxigenioMurmurioVesicularOnClick(View view){
-        if(usoDeOxigenioSwitchCompat.isChecked()){
-            usoDeOxigenioTextView.setText(getString(R.string.Nao));
-            usoDeOxigenioSwitchCompat.setChecked(false);
-            myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
-        }
-        else
-            showDialog();
-    }
-
-    private void showDialog(){
+    public void apiceRoncosOnClick(View view){
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        builder.setTitle(R.string.UsoDeOxigenio);
+        builder.setTitle(R.string.ApiceRoncos);
 
         //list of items
-        final String[] items = getResources().getStringArray(R.array.usoDeOxigenio);
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
         Arrays.sort(items);
-        builder.setSingleChoiceItems(items, usoDeOxigenioSelection,
+        builder.setSingleChoiceItems(items, apiceRoncosSelection,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        usoDeOxigenioTextView.setText(items[which]);
-                        usoDeOxigenioTextView.setVisibility(View.VISIBLE);
-                        usoDeOxigenioSelection=which;
-                        usoDeOxigenioSwitchCompat.setChecked(true);
-                        myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
-                        if(items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[1])){
-                            if(!mascaraDeVenturi_layout.isShown()) {
-                                myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
-                            }
-                        }
-                        else{
-                            if(mascaraDeVenturi_layout.isShown()) {
-                                myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
-                            }
-                        }
+                        apiceRoncos.setText(items[which]);
+                        apiceRoncos.setVisibility(View.VISIBLE);
+                        apiceRoncosSelection=which;
                         dialog.dismiss();
                     }
                 });
-        String positiveText = getString(R.string.Selecionar);
-        builder.setPositiveButton(positiveText,new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(usoDeOxigenioSelection!=-1) {
-                    usoDeOxigenioTextView.setText(items[which]);
-                    usoDeOxigenioTextView.setVisibility(View.VISIBLE);
-                    usoDeOxigenioSelection=which;
-                    usoDeOxigenioSwitchCompat.setChecked(true);
-                    myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
-                    if(items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[1])){
-                        if(!mascaraDeVenturi_layout.isShown()) {
-                            myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
-                        }
-                    }
-                    else{
-                        if(mascaraDeVenturi_layout.isShown()) {
-                            myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
-                        }
-                    }
-                }
-                dialog.dismiss();
-            }
-        });
-        String negativeText = getString(R.string.Cancelar);
+
+        String negativeText = getString(android.R.string.cancel);
         builder.setNegativeButton(negativeText,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -484,27 +592,153 @@ public class RespiratorioActivity extends GenericoActivity {
         dialog.show();
     }
 
+    public void apiceSibilosOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.ApiceSibilos);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, apiceSibilosSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        apiceSibilos.setText(items[which]);
+                        apiceSibilos.setVisibility(View.VISIBLE);
+                        apiceSibilosSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void apiceCrepitacoesOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.ApiceCrepitacoes);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, apiceCrepitacoesSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        apiceCrepitacoes.setText(items[which]);
+                        apiceCrepitacoes.setVisibility(View.VISIBLE);
+                        apiceCrepitacoesSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void usoDeOxigenioOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.UsoDeOxigenio);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.usoDeOxigenio);
+        builder.setSingleChoiceItems(items, usoDeOxigenioSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        usoDeOxigenioTextView.setText(items[which]);
+                        usoDeOxigenioTextView.setVisibility(View.VISIBLE);
+                        usoDeOxigenioSelection=which;
+                        //Caso seja mascara de venturi
+                        if(items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[0])){
+                            if(fluxoOxigenio_layout.isShown())
+                                myAnimation.slideUpView(getApplicationContext(),fluxoOxigenio_layout);
+                            if(!mascaraDeVenturi_layout.isShown())
+                                myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
+                        }
+                        //Mascara de inalaçao ou cateter nasal
+                        else if(items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[1]) ||
+                                items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[2])){
+                            if(mascaraDeVenturi_layout.isShown())
+                                myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
+                            if(!fluxoOxigenio_layout.isShown())
+                                myAnimation.slideDownView(getApplicationContext(),fluxoOxigenio_layout);
+                        }
+                        //Nao
+                        else{
+                            if(mascaraDeVenturi_layout.isShown() || fluxoOxigenio_layout.isShown()){
+                                myAnimation.slideUpView(getApplication(),mascaraDeVenturi_layout);
+                                myAnimation.slideUpView(getApplication(),fluxoOxigenio_layout);
+                            }
+                        }
+                        dialog.dismiss();
+                    }
+
+                });
+        String negativeText = getString(R.string.Cancelar);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
     public void mascaraVenturiOnClick(final View view){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(RespiratorioActivity.this,R.style.MyDialogTheme);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RespiratorioActivity.this);
         builder.setTitle(getString(R.string.MascaraVenturi));
         LayoutInflater li = LayoutInflater.from(this);
         View dialogView = li.inflate(R.layout.mascara_venturi_dialog,null);
 
-        final RadioGroup radioGroup = (RadioGroup)findViewById(R.id.mascaraVenturiRadioGroup);
-        dialogView.requestFocus();
-        final TextInputEditText doseDroga = (TextInputEditText) dialogView.findViewById(R.id.dose);
-        final TextInputEditText velInfusao = (TextInputEditText)dialogView.findViewById(R.id.velInfusao);
+        final RadioGroup rg = (RadioGroup)dialogView.findViewById(R.id.mascaraVenturiRadioGroup);
 
+        rg.check(mascaraVenturiSelection);
 
         builder.setView(dialogView);
-        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.Selecionar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                int selectedRadioButtonID = rg.getCheckedRadioButtonId();
+                RadioButton selectedRadioButton = (RadioButton)rg.findViewById(selectedRadioButtonID);
+                String selectedRadioButtonText = selectedRadioButton.getText().toString();
+                mascaraVenturiSelection = selectedRadioButtonID;
+                mascaraVenturiSelected.setText(selectedRadioButtonText);
+                mascaraVenturiSelected.setVisibility(View.VISIBLE);
             }
         });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.Cancelar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ventilacao_invasiva"
-    android:visibility="gone">
+    android:id="@+id/ventilacao_naoInvasiva"
+    android:visibility="gone"
+    >
     <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:theme="@style/TextLabelBlue">
         <android.support.design.widget.TextInputEditText
             android:id="@+id/respiratorio_volume"
             android:layout_width="match_parent"
@@ -16,28 +19,13 @@
             android:hint="Volume"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Modo ventilatório: "
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-        <Spinner
-            android:id="@+id/ventilacao_invasiva_spinner"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:gravity="center"
-            />
-    </LinearLayout>
+
     <android.support.design.widget.TextInputLayout
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:theme="@style/TextLabelBlue">
         <android.support.design.widget.TextInputEditText
             android:id="@+id/respiratorio_fio2"
             android:layout_width="match_parent"
@@ -47,21 +35,42 @@
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:theme="@style/TextLabelBlue">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/freq_respiratoria"
+            android:id="@+id/freqRespiratoriaPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Frequência Respiratória"
+            android:ems="13"
+            android:hint="Frequência Respiratória Paciente"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:theme="@style/TextLabelBlue">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/freqRespiratoriaRespirador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="14"
+            android:hint="Frequência Respiratória Respirador"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:theme="@style/TextLabelBlue">
         <android.support.design.widget.TextInputEditText
             android:id="@+id/respiratorio_peep"
             android:layout_width="match_parent"
@@ -70,32 +79,5 @@
             android:hint="PEEP"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/respiratorio_pressaoCuff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Pressão Cuff"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>
-    <!--<android.support.design.widget.TextInputLayout-->
-    <!--android:id="@+id/full_name"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp">-->
-
-    <!--<android.support.design.widget.TextInputEditText-->
-    <!--android:id="@+id/gasometrial_arterial"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:ems="10"-->
-    <!--android:hint="Gasometria arterial"-->
-    <!--android:inputType="number" />-->
-
-    <!--</android.support.design.widget.TextInputLayout>-->

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants"
+    android:id="@+id/respiratorio_layout"
+    android:weightSum="1"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+
+    <ScrollView
+        android:layout_weight="0.9"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical">
+        <!--Scrollable content here-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="ventilacaoOnClick">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Ventilacao"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/ventilacao"/>
+            </LinearLayout>
+
+            <!--BIPAP-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/bipap"
+                android:visibility="gone">
+                <android.support.design.widget.TextInputLayout
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/volumeBipap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:hint="@string/Volume"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/IPAP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:hint="@string/IPAP"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/EPAP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:hint="@string/EPAP"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/saturacao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:hint="@string/Saturacao"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/TextLabelBlue">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/oxigenio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:hint="@string/Oxigenio"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <!--BIPAP-->
+
+            <!--Nao-Invasiva-->
+            <include layout="@layout/respirador_mentilacao_nao_invasiva"/>
+            <!--Nao-Invasiva-->
+
+            <!--Mecanico-->
+            <include layout="@layout/respirador_ventilacao_mecanica"/>
+            <!--Mecanico-->
+        </LinearLayout>
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
+        <include layout="@layout/bottom_buttons_navigate_fichas"/>
+    </RelativeLayout>
+
+</LinearLayout>
+    <!-- - esponatanea, mecanico, bipap-->
+    <!-- - bipap:-->
+    <!-- - Volume-->
+    <!-- - Ipap-->
+    <!-- - EPAP-->
+    <!-- - saturacao-->
+    <!-- - Oxigenio (numerico)-->
+    <!-- - nao invasiva: - invasivo sem a mascara-->
+    <!-- - mecanica:-->
+    <!-- - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C-->
+    <!-- - Freq respiratoria 2 campos: paciente e respirador-->

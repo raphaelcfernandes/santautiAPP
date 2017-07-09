@@ -67,21 +67,8 @@ Infeccioso: -> OK, Campos para checar
     - curva termica: febril, afebril, subfebril
     - marcadores de infeccao: estaveis, em melhora, em piora
     - antibiotico (quais?)
-/*****************MUDANÇAS FEITAS**********/
 
-Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
-    - cateter de PIC
-    - balao intra-aortico
 
-Exames: ultimo icone
-
-Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
-        - Lado do corpo, n melhor nome para o item. Superior e inferior
-        - Delirium, sim ou nao.
-        - Nivel consciencia somente nao sedado
-        - Paresia ou Plegia
-            - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
-        - PIC + PPC + SJO2 -> Monitor
 
 Respiratorio:
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
@@ -101,9 +88,11 @@ Respiratorio:
         - = crepitacoes
     - crepitacoes: base direita, base esquerda, terco medio direito/esquerda, apice
 
-Ventilacao:
-    - esponatanea, mecanico, bipap
-    - bipap:
+
+
+Ventilacao: -> Checar invasivo/mecanico. Semelhantes mas sem o modo ventilatorio? Espontaneo possui algo?
+    - espontanea, mecanico, bipap
+    - bipap: -> ok
         - Volume
         - Ipap
         - EPAP
@@ -112,7 +101,24 @@ Ventilacao:
     - nao invasiva: - invasivo sem a mascara
     - mecanica:
         - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
+        - Pressao cuff, retirar daqui? Manter? Pegar valor de Respirador? E se n tiver valor em Respirador?
             - Freq respiratoria 2 campos: paciente e respirador
+/*****************MUDANÇAS FEITAS**********/
+
+Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
+    - cateter de PIC
+    - balao intra-aortico
+
+Exames: ultimo icone
+
+Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
+        - Lado do corpo, n melhor nome para o item. Superior e inferior
+        - Delirium, sim ou nao.
+        - Nivel consciencia somente nao sedado
+        - Paresia ou Plegia
+            - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
+        - PIC + PPC + SJO2 -> Monitor
+
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinacamente estavel e hemodinacamente instavel
 Gastro
