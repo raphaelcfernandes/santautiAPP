@@ -4,58 +4,67 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone">
+    android:visibility="visible">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="ramsayOnClick"
+        >
         <TextView
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ramsay:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-        <Spinner
-            android:id="@+id/ramsay_spinner"
+            android:text="@string/Ramsay"
+            style="@style/TitleTextStyleForLayoutSelection"/>
+        <TextView
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            />
+            android:visibility="invisible"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"
+            android:id="@+id/ramsayTextView"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:background="@color/gray">
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="rassOnClick"
+        >
         <TextView
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RASS:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            />
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/rass_spinner"
-            android:layout_width="match_parent"
+            android:text="@string/RASS"
+            style="@style/TitleTextStyleForLayoutSelection"/>
+        <TextView
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            />
+            android:visibility="invisible"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"
+            android:id="@+id/rassTextView"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:background="@color/gray">
 
     </LinearLayout>

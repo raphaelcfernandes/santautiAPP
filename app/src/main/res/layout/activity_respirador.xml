@@ -43,7 +43,12 @@
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/ventilacao"/>
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray">
+            </LinearLayout>
             <!--BIPAP-->
             <LinearLayout
                 android:layout_width="match_parent"

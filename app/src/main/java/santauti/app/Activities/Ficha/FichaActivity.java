@@ -205,7 +205,8 @@ public class FichaActivity extends GenericoActivity{
                 R.drawable.exercise,
                 R.drawable.cell,
                 R.drawable.blood_drop,
-                R.drawable.thyroid
+                R.drawable.thyroid,
+                R.drawable.x_ray
         };
 
         FichaAdapterModel a = new FichaAdapterModel(this.getString(R.string.MonitorMultiparametrico),covers[0],0);
@@ -245,6 +246,9 @@ public class FichaActivity extends GenericoActivity{
         fichaAdapterModelList.add(a);
 
         a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[12],0);
+        fichaAdapterModelList.add(a);
+
+        a = new FichaAdapterModel("Exames", covers[13],0);
         fichaAdapterModelList.add(a);
 
         adapter = new FichaSectionAdapter(this, fichaAdapterModelList);

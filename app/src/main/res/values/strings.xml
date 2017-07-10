@@ -102,6 +102,9 @@
     <string name="Saturacao">Saturação</string>
     <string name="Oxigenio">Oxigênio</string>
     <string name="ModoVentilatorio">Modo Ventilatório</string>
+    <string name="NivelConsciencia">Nível Consciência</string>
+    <string name="Ramsay">Ramsay</string>
+    <string name="RASS">RASS</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -243,5 +246,25 @@
         <item>PCV</item>
         <item>PSV</item>
     </string-array>
+
+    <string-array name="nivelConsciencia">
+        <item>Vigil \u002d hiperalerta.</item>
+        <item>Alerta \u002d Acordado e resposta adequadas às perguntas.</item>
+        <item>Sonolência \u002d Acorda ao chamado, responde às perguntas.</item>
+        <item>Obnubilação \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
+        <item>Torpor \u002d Sonolencia profunda, responde somente a estimulo doloroso.</item>
+        <item>Coma \u002d Não abre os olhos nem emite sons verbais sob estimulo verbal ou doloroso.</item>
+        <item>Sedado</item>
+    </string-array>
+
+    <string-array name="ramsay">
+        <item>1 \u002d Combativo.</item>
+        <item>2 \u002d Conduta agressiva.</item>
+        <item>3 \u002d Movimentos despropositados frequentes.</item>
+        <item>4 \u002d Ansioso.</item>
+        <item>5 \u002d Alerta, Calmo.</item>
+        <item>6 \u002d Sem resposta a estímulo verbal ou físico</item>
+    </string-array>
+
     <!--ARRAYS-->
 </resources>

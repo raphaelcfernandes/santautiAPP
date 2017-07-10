@@ -143,8 +143,6 @@ public abstract class GenericoActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         // display dialog
         dialog.show();
-
-
     }
 
 }

@@ -51,6 +51,7 @@ public class BombaInfusaoActivity extends GenericoActivity {
         recyclerView.setAdapter(bombaInfusaoAdapter);
 
         bombaInfusaoAdapter.setOnItemClickListener(onItemClickListener);
+
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

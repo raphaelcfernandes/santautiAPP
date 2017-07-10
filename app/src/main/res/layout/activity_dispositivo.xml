@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +19,8 @@
             android:layout_height="wrap_content"
             android:text="@string/AdicionarDispositivo"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:theme="@style/buttonPattern" />
+            android:theme="@style/buttonPattern"
+            android:onClick="addDispositivo"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,3 +46,17 @@
         <include layout="@layout/bottom_buttons_navigate_fichas"/>
     </RelativeLayout>
 </LinearLayout>
+    <!-- - cateter venoso central: sim ou nao + data insercao e retirada-->
+    <!-- - cateter de hemodialise-->
+    <!-- - cateter de PAI:-->
+    <!-- - Dreno de torax-->
+    <!-- - Dreno abdominal-->
+    <!-- - Sonda vesical-->
+    <!-- - Tubo orotraquial-->
+    <!-- - Traqueostomia-->
+    <!-- - gastrostomia-->
+    <!-- - venoclise-->
+    <!-- - sonda enteral-->
+    <!-- - Sonda oroenteral e nasoenteral-->
+    <!-- - sonda orogastrica-->
+    <!-- - sonda nasogastrical-->

@@ -56,7 +56,11 @@ Metabolico: -> 100% ok
     - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
     - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
     - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
+Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo OK
+    - cateter de PIC
+    - balao intra-aortico
 
+Exames: ultimo icone, OK
 
 Hematologico: -> ok. Campos para checar
     - Hemoglobina/hematocrito: Numero pra cada. Marcar? Marcar o que?
@@ -105,11 +109,6 @@ Ventilacao: -> Checar invasivo/mecanico. Semelhantes mas sem o modo ventilatorio
             - Freq respiratoria 2 campos: paciente e respirador
 /*****************MUDANÇAS FEITAS**********/
 
-Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo
-    - cateter de PIC
-    - balao intra-aortico
-
-Exames: ultimo icone
 
 Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
@@ -117,7 +116,6 @@ Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no
         - Nivel consciencia somente nao sedado
         - Paresia ou Plegia
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
-        - PIC + PPC + SJO2 -> Monitor
 
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinacamente estavel e hemodinacamente instavel

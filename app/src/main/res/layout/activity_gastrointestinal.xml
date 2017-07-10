@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3px"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary">
+                android:background="@color/gray">
             </LinearLayout>
             <TableRow
                 android:paddingTop="10dp">
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3px"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary">
+                android:background="@color/gray">
             </LinearLayout>
             <TableRow android:paddingTop="10dp">
                 <TextView android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
                 android:layout_height="3px"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/colorPrimary">
+                android:background="@color/gray">
             </LinearLayout>
             <TableRow>
                 <TextView android:layout_width="wrap_content"
@@ -218,7 +218,7 @@
                 android:layout_height="3px"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/colorPrimary">
+                android:background="@color/gray">
             </LinearLayout>
             <TableRow>
                 <TextView android:layout_width="wrap_content"
@@ -261,7 +261,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3px"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary">
+                android:background="@color/gray">
             </LinearLayout>
             <TableRow>
                 <TextView android:layout_width="wrap_content"
@@ -278,7 +278,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/colorPrimary">
+                android:background="@color/gray">
             </LinearLayout>
             <TableRow android:layout_marginTop="10dp">
                 <TextView android:layout_width="wrap_content"
@@ -321,7 +321,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3px"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary">
+                android:background="@color/gray">
             </LinearLayout>
             <TableRow>
                 <TextView android:layout_width="wrap_content"
@@ -341,7 +341,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/colorPrimary">
+                android:background="@color/gray">
             </LinearLayout>
             <TableRow>
                 <TextView android:layout_width="wrap_content"
