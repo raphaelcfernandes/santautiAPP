@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -34,8 +36,14 @@ public class NeurologicoActivity extends GenericoActivity {
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NeurologicoAdapter neurologicoAdapter;
-    private int nivelConscienciaSelection =-1, rassSelection=-1,ramsaySelection=-1;
-    private TextView nivelConscienciaTextView,rassTextView,ramsayTextView;
+    private int aberturaOcularSoma=0,nivelConscienciaSelection=-1, rassSelection=-1,
+            ramsaySelection=-1,respostaMotoraSelection=-1,respostaVerbalSelection=-1,
+            aberturaOcularSelection=-1,tamanhoPupilaSelection=-1,simetriaPupilaSelection=-1,reatividadeLuzSelection=-1,
+            diferencaPupilaSelection=-1;
+    private TextView nivelConscienciaTextView,rassTextView,ramsayTextView,
+            escalaDeGlasgowTextView,aberturaOcularTextView,respostaVerbalTextView,respostaMotoraTextView,
+            tamanhoPupilaTextView,simetriaPupilaTextView,reatividadeLuzTextView,diferencaPupilaTextView;
+    private View simSedado,comaLayout,diferencaPupilaLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +51,20 @@ public class NeurologicoActivity extends GenericoActivity {
         setToolbar(getString(R.string.Neurologico));
 
         /******************************VARIAVEIS LAYOUTS*************************************/
+        simSedado = findViewById(R.id.sedado_sim_layout);
+        comaLayout = findViewById(R.id.coma_layout);
+        diferencaPupilaLayout = findViewById(R.id.diferencaPupilaLayout);
         nivelConscienciaTextView = (TextView)findViewById(R.id.nivelCosciencia);
         rassTextView = (TextView)findViewById(R.id.rassTextView);
         ramsayTextView = (TextView)findViewById(R.id.ramsayTextView);
+        escalaDeGlasgowTextView = (TextView)findViewById(R.id.escalaDeGlasgow);
+        aberturaOcularTextView = (TextView)findViewById(R.id.aberturaOcular);
+        respostaVerbalTextView = (TextView)findViewById(R.id.respostaVerbal);
+        respostaMotoraTextView = (TextView)findViewById(R.id.respostaMotora);
+        tamanhoPupilaTextView = (TextView)findViewById(R.id.tamanhoPupila);
+        simetriaPupilaTextView = (TextView)findViewById(R.id.simetriaPupila);
+        reatividadeLuzTextView = (TextView)findViewById(R.id.reatividadeLuz);
+        diferencaPupilaTextView = (TextView)findViewById(R.id.diferencaPupila);
         /******************************VARIAVEIS LAYOUTS*************************************/
 
         /******************************VARIAVEIS RADIOBUTTON*********************************/
@@ -55,20 +74,16 @@ public class NeurologicoActivity extends GenericoActivity {
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
 
 
-
-
-//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-//        neurologicoAdapter = new NeurologicoAdapter(this,neurologicoAdapterModelList);
-//        recyclerView.setAdapter(neurologicoAdapter);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        neurologicoAdapter = new NeurologicoAdapter(this,neurologicoAdapterModelList);
+        recyclerView.setAdapter(neurologicoAdapter);
 
         realm = Realm.getDefaultInstance();
         myAnimation = new MyAnimation();
 
         prepareNavigationButtons();
-//        prepareNeurologicoSpinners();
-
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,18 +132,10 @@ public class NeurologicoActivity extends GenericoActivity {
         return true;
     }
 
-
     private void prepareNeurologicoSpinners(){
         String[] deficitMotor = {defaultSpinnerString,"Presente","Ausente"};
         String[] deficitTipo = {defaultSpinnerString,"Paresia","Plegia"};
         String[] deficitLado = {defaultSpinnerString,"Esquerdo","Direito","Ambos os lados"};
-        String[] aberturaOcular = {defaultSpinnerString,"1 - Nenhuma","2 - À dor","3 - À voz","4 - Espontânea"};
-        String[] respostaVerbal = {defaultSpinnerString,"1 - Nenhuma","2 - Palavras incompreensiveis","3 - Palavras inapropriadas","4 - Confusa","5 - Orientada"};
-        String[] respostaMotora = {defaultSpinnerString,"1 - Nenhuma","2 - Extensão anormal","3 - Flexão anormal","4 - Movimento de retirada","5 - Localiza dor","6 - Obedece comandos"};
-        String[] pupilaReatividadeLuz = {defaultSpinnerString,"RFM+","RFM-"};
-        String[] pupilaSimetria = {defaultSpinnerString,"Isocóricas","Anisocóricas"};
-        String[] pupilaTamanho = {defaultSpinnerString,"Miose","Normal","Midríase"};
-        String[] diferencaPupila = {defaultSpinnerString,"Esquerda > Direita","Direita > Esquerda"};
     }
 
     private void verificaCamposENotificaAdapter(){
@@ -272,7 +279,25 @@ public class NeurologicoActivity extends GenericoActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         nivelConscienciaTextView.setText(options[which]);
                         nivelConscienciaTextView.setVisibility(View.VISIBLE);
-                        nivelConscienciaSelection =which;
+                        nivelConscienciaSelection=which;
+                        if(options[which].equals(getResources().getStringArray(R.array.nivelConsciencia)[6]) &&
+                                !simSedado.isShown()){
+                            if(comaLayout.isShown())
+                                comaLayout.setVisibility(View.GONE);
+                            myAnimation.slideDownView(getApplicationContext(),simSedado);
+                        }
+                        if(options[which].equals(getResources().getStringArray(R.array.nivelConsciencia)[5]) &&
+                                !comaLayout.isShown()){
+                            if(simSedado.isShown())
+                                simSedado.setVisibility(View.GONE);
+                            myAnimation.slideDownView(getApplicationContext(),comaLayout);
+                        }
+                        else{
+                            if(comaLayout.isShown())
+                                myAnimation.slideUpView(getApplicationContext(),comaLayout);
+                            if(simSedado.isShown())
+                                myAnimation.slideUpView(getApplicationContext(),simSedado);
+                        }
                         dialog.dismiss();
                     }
                 });
@@ -356,4 +381,245 @@ public class NeurologicoActivity extends GenericoActivity {
         // display dialog
         dialog.show();
     }
+
+    public void respostaMotoraOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.RespostaMotora);
+
+        //list of items
+        final String[] options = getResources().getStringArray(R.array.respostaMotora);
+        Arrays.sort(options);
+        builder.setSingleChoiceItems(options, respostaMotoraSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        respostaMotoraTextView.setText(options[which]);
+                        respostaMotoraTextView.setVisibility(View.VISIBLE);
+                        respostaMotoraSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void respostaVerbalOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.RespostaVerbal);
+
+        //list of items
+        final String[] options = getResources().getStringArray(R.array.respostaVerbal);
+        Arrays.sort(options);
+        builder.setSingleChoiceItems(options, respostaVerbalSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        respostaVerbalTextView.setText(options[which]);
+                        respostaVerbalTextView.setVisibility(View.VISIBLE);
+                        respostaVerbalSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void aberturaOcularOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.AberturaOcular);
+
+        //list of items
+        final String[] options = getResources().getStringArray(R.array.aberturaOcular);
+        Arrays.sort(options);
+        builder.setSingleChoiceItems(options, aberturaOcularSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        aberturaOcularTextView.setText(options[which]);
+                        aberturaOcularTextView.setVisibility(View.VISIBLE);
+                        aberturaOcularSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void tamanhoPupilaOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.TamanhoPupila);
+
+        //list of items
+        final String[] options = getResources().getStringArray(R.array.tamanhoPupila);
+        Arrays.sort(options);
+        builder.setSingleChoiceItems(options, tamanhoPupilaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tamanhoPupilaTextView.setText(options[which]);
+                        tamanhoPupilaTextView.setVisibility(View.VISIBLE);
+                        tamanhoPupilaSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void simetriaPupilaOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.SimetriaPupila);
+
+        //list of items
+        final String[] options = getResources().getStringArray(R.array.simetriaPupila);
+        Arrays.sort(options);
+        builder.setSingleChoiceItems(options, simetriaPupilaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        simetriaPupilaTextView.setText(options[which]);
+                        simetriaPupilaTextView.setVisibility(View.VISIBLE);
+                        simetriaPupilaSelection=which;
+                        if(options[which].equals(getResources().getStringArray(R.array.simetriaPupila)[1]) &&
+                                !diferencaPupilaLayout.isShown())
+                            myAnimation.slideDownView(getApplicationContext(),diferencaPupilaLayout);
+                        else{
+                            if(diferencaPupilaLayout.isShown())
+                                myAnimation.slideUpView(getApplicationContext(),diferencaPupilaLayout);
+                        }
+
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void diferencaPupilaOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.DiferencaPupilar);
+
+        //list of items
+        final String[] options = getResources().getStringArray(R.array.diferencaPupila);
+        Arrays.sort(options);
+        builder.setSingleChoiceItems(options, diferencaPupilaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        diferencaPupilaTextView.setText(options[which]);
+                        diferencaPupilaTextView.setVisibility(View.VISIBLE);
+                        diferencaPupilaSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void reatividadeLuzOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.ReatividadeALuzPupila);
+
+        //list of items
+        final String[] options = getResources().getStringArray(R.array.reatividadeALuz);
+        Arrays.sort(options);
+        builder.setSingleChoiceItems(options, reatividadeLuzSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        reatividadeLuzTextView.setText(options[which]);
+                        reatividadeLuzTextView.setVisibility(View.VISIBLE);
+                        reatividadeLuzSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+
 }

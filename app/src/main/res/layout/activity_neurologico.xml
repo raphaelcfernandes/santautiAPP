@@ -21,7 +21,8 @@
             android:orientation="vertical">
             <include layout="@layout/nivel_consciencia"/>
             <include layout="@layout/sim_sedado"/>
-
+            <include layout="@layout/consciencia_coma"/>
+            <include layout="@layout/avaliacao_pupilar"/>
         </LinearLayout>
 
     </ScrollView>

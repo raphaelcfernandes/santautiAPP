@@ -105,6 +105,15 @@
     <string name="NivelConsciencia">Nível Consciência</string>
     <string name="Ramsay">Ramsay</string>
     <string name="RASS">RASS</string>
+    <string name="EscalaGlasgow">Escala de Glasgow</string>
+    <string name="AberturaOcular">Abertura Ocular</string>
+    <string name="RespostaVerbal">Resposta Verbal</string>
+    <string name="RespostaMotora">Resposta Motora</string>
+    <string name="AvaliacaoPupilar">Avaliação Pupilar</string>
+    <string name="TamanhoPupila">Tamanho</string>
+    <string name="SimetriaPupila">Simetria</string>
+    <string name="ReatividadeALuzPupila">Reatividade a Luz</string>
+    <string name="DiferencaPupilar">Diferença entre Pupilas</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -264,6 +273,51 @@
         <item>4 \u002d Ansioso.</item>
         <item>5 \u002d Alerta, Calmo.</item>
         <item>6 \u002d Sem resposta a estímulo verbal ou físico</item>
+    </string-array>
+
+    <string-array name="aberturaOcular">
+        <item>1 \u002d Nenhuma</item>
+        <item>2 \u002d À dor</item>
+        <item>3 \u002d À voz</item>
+        <item>4 \u002d Espontânea</item>
+    </string-array>
+
+    <string-array name="respostaVerbal">
+        <item>1 \u002d Nenhuma</item>
+        <item>2 \u002d Palavras Incompreensíveis</item>
+        <item>3 \u002d Palavras Inapropriadas</item>
+        <item>4 \u002d Confusa</item>
+        <item>5 \u002d Orientada</item>
+    </string-array>
+
+    <string-array name="respostaMotora">
+        <item>1 \u002d Nenhuma</item>
+        <item>2 \u002d Extensão Anormal.</item>
+        <item>3 \u002d Flexão Anormal.</item>
+        <item>4 \u002d Movimento de Retirada.</item>
+        <item>5 \u002d Localiza Dor.</item>
+        <item>6 \u002d Obedece Comandos.</item>
+    </string-array>
+
+    <string-array name="reatividadeALuz">
+        <item>Reativo</item>
+        <item>Não Reativo</item>
+    </string-array>
+
+    <string-array name="tamanhoPupila">
+        <item>Miose</item>
+        <item>Normal</item>
+        <item>Midríase</item>
+    </string-array>
+
+    <string-array name="simetriaPupila">
+        <item>Isocóricas</item>
+        <item>Anisocóricas</item>
+    </string-array>
+
+    <string-array name="diferencaPupila">
+        <item>Esquerda > Direita</item>
+        <item>Direita > Esquerda</item>
     </string-array>
 
     <!--ARRAYS-->

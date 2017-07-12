@@ -1,101 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/sedado_nao_layout"
+    android:id="@+id/coma_layout"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp"
     android:visibility="gone">
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingTop="10dp"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Escala de Glasgow"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
+            android:text="@string/EscalaGlasgow"
+            style="@style/TitleTextStyleForLayoutSelection"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Abertura Ocular:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            />
-        <Spinner
-            android:id="@+id/aberturaOcular_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textColorHint="@color/colorPrimary"
-            android:gravity="center"
-            />
+            android:visibility="invisible"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"
+            android:id="@+id/escalaDeGlasgow"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/gray">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="aberturaOcularOnClick"
+        android:paddingTop="10dp"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Resposta Verbal:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/AberturaOcular"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/TitleTextStyleForLayoutSelection"
             />
-        <Spinner
-            android:id="@+id/respostaVerbal_spinner"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:gravity="center"
+            android:visibility="invisible"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"
+            android:id="@+id/aberturaOcular"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="respostaVerbalOnClick"
+        android:paddingTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/RespostaVerbal"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/TitleTextStyleForLayoutSelection"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"
+            android:id="@+id/respostaVerbal"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/gray">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="respostaMotoraOnClick">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/submenu_right_padding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="@dimen/submenu_left_padding"
+                android:paddingEnd="0dp"
+                android:text="@string/RespostaMotora"
+                style="@style/TextStyle"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Resposta Motora:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            />
-        <Spinner
-            android:id="@+id/respostaMotora_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textColorHint="@color/colorPrimary"
-            android:gravity="center"
-            />
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            android:visibility="invisible"
+            android:id="@+id/respostaMotora"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray">
     </LinearLayout>
 
 </LinearLayout>

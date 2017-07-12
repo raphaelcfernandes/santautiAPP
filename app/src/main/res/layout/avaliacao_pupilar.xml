@@ -6,25 +6,99 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Avaliação Pupilar"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="@string/AvaliacaoPupilar"
+            style="@style/TitleTextStyleForLayoutSelection"/>
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/avaliacaoToggleButton"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="tamanhoPupilaOnClick"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        >
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:contentDescription="image_desc"
-            android:layout_marginStart="50dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_action_name" />
+            android:text="@string/TamanhoPupila"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/TitleTextStyleForLayoutSelection"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"
+            android:id="@+id/tamanhoPupila"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="simetriaPupilaOnClick"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SimetriaPupila"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/TitleTextStyleForLayoutSelection"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"
+            android:id="@+id/simetriaPupila"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/diferencaPupilaLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="diferencaPupilaOnClick"
+        android:paddingTop="10dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/DiferencaPupilar"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/TitleTextStyleForLayoutSelection"
+            />
+        <TextView
+            android:id="@+id/diferencaPupila"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            style="@style/ItemSelectedTextStyleForLayoutSelection" />
     </LinearLayout>
 
     <LinearLayout
@@ -32,114 +106,38 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="10dp"
-        android:id="@+id/avaliacaoPupilar"
-        android:animateLayoutChanges="true"
-        android:visibility="gone">
-
+        android:paddingBottom="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="reatividadeLuzOnClick">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="10dp">
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/submenu_right_padding">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tamanho"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:layout_gravity="center"
+                android:paddingStart="@dimen/submenu_left_padding"
+                android:paddingEnd="0dp"
+                android:text="@string/ReatividadeALuzPupila"
+                style="@style/TextStyle"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Spinner
-                android:id="@+id/pupila_tamanho_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
-                />
-        </LinearLayout>
+            android:paddingStart="@dimen/submenu_left_padding"
+            android:paddingEnd="@dimen/submenu_right_padding"
+            android:visibility="invisible"
+            android:id="@+id/reatividadeLuz"
+            style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/gray">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Simetria"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/diferencaPupilar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginLeft="110dp"
-                android:fitsSystemWindows="true"
-                android:text="Diferenca de pupilas"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:visibility="gone"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
-            <Spinner
-                android:id="@+id/pupila_simetria_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <Spinner
-                android:id="@+id/pupila_simetria_diferenca_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/gray">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reatividade a Luz"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Spinner
-                android:id="@+id/pupila_reatividade_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-        </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray">
     </LinearLayout>
 
 </LinearLayout>
