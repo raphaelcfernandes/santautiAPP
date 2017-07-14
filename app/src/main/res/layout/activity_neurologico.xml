@@ -23,6 +23,8 @@
             <include layout="@layout/sim_sedado"/>
             <include layout="@layout/consciencia_coma"/>
             <include layout="@layout/avaliacao_pupilar"/>
+            <include layout="@layout/delirium_cam_uti"/>
+            <include layout="@layout/deficit_motor"/>
         </LinearLayout>
 
     </ScrollView>
@@ -34,10 +36,3 @@
         <include layout="@layout/bottom_buttons_navigate_fichas"/>
     </RelativeLayout>
 </LinearLayout>
-<!--Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio-->
-<!-- - Lado do corpo, n melhor nome para o item. Superior e inferior-->
-<!-- - Delirium, sim ou nao.-->
-<!-- - Nivel consciencia somente nao sedado-->
-<!-- - Paresia ou Plegia-->
-<!-- - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)-->
-<!-- - PIC + PPC + SJO2 -> Monitor-->

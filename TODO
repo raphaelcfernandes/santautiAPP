@@ -112,7 +112,7 @@ Ventilacao: -> Checar invasivo/mecanico. Semelhantes mas sem o modo ventilatorio
 
 Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
-        - Delirium, sim ou nao.
+        - Delirium, sim ou nao. -> ok
         - Nivel consciencia somente nao sedado
         - Paresia ou Plegia
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)

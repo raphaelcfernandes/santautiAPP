@@ -77,7 +77,7 @@ public abstract class GenericoActivity extends AppCompatActivity {
         return realm.where(Ficha.class).equalTo("NroAtendimento",sharedPreferences.getInt("NroAtendimento",0)).findFirst();
     }
 
-    public boolean isTextInpudEditTextEmpty(TextInputEditText etText) {
+    public boolean isTextInputEditTextEmpty(TextInputEditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
 

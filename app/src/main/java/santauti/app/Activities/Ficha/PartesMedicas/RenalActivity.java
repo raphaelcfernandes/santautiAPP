@@ -91,15 +91,15 @@ public class RenalActivity extends GenericoActivity {
         realm.beginTransaction();
         int i=0;
         Renal renal = realm.createObject(Renal.class);
-        if(!isTextInpudEditTextEmpty(diureseTxt)) {
+        if(!isTextInputEditTextEmpty(diureseTxt)) {
             renal.setDiurese(Integer.parseInt(diureseTxt.getText().toString()));
             i++;
         }
-        if(!isTextInpudEditTextEmpty(pesoTxt)) {
+        if(!isTextInputEditTextEmpty(pesoTxt)) {
             renal.setPeso(Integer.parseInt(pesoTxt.getText().toString()));
             i++;
         }
-        if(!isTextInpudEditTextEmpty(balancoHidricoTxt)) {
+        if(!isTextInputEditTextEmpty(balancoHidricoTxt)) {
             renal.setBalancoHidrico(Integer.parseInt(balancoHidricoTxt.getText().toString()));
             i++;
         }

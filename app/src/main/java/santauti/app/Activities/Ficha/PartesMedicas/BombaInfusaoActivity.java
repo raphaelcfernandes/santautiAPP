@@ -2,9 +2,7 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
@@ -14,14 +12,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
@@ -117,7 +111,7 @@ public class BombaInfusaoActivity extends GenericoActivity {
         builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(!drogasVasoativasSpinner.getSelectedItem().toString().equals(defaultSpinnerString) && !isTextInpudEditTextEmpty(doseDroga))
+                if(!drogasVasoativasSpinner.getSelectedItem().toString().equals(defaultSpinnerString) && !isTextInputEditTextEmpty(doseDroga))
                     addDataFromDialogIntoAdapter(drogasVasoativasSpinner.getSelectedItem().toString(),
                             Integer.parseInt(doseDroga.getText().toString()),Integer.parseInt(velInfusao.getText().toString()));
             }

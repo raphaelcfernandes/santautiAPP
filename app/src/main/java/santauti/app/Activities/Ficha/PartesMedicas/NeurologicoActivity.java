@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,14 +37,17 @@ public class NeurologicoActivity extends GenericoActivity {
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NeurologicoAdapter neurologicoAdapter;
-    private int aberturaOcularSoma=0,nivelConscienciaSelection=-1, rassSelection=-1,
+    private SwitchCompat deficitMotorSwitch;
+    private int escalaDeGlasgowSoma=0,nivelConscienciaSelection=-1, rassSelection=-1,
             ramsaySelection=-1,respostaMotoraSelection=-1,respostaVerbalSelection=-1,
             aberturaOcularSelection=-1,tamanhoPupilaSelection=-1,simetriaPupilaSelection=-1,reatividadeLuzSelection=-1,
             diferencaPupilaSelection=-1;
     private TextView nivelConscienciaTextView,rassTextView,ramsayTextView,
             escalaDeGlasgowTextView,aberturaOcularTextView,respostaVerbalTextView,respostaMotoraTextView,
-            tamanhoPupilaTextView,simetriaPupilaTextView,reatividadeLuzTextView,diferencaPupilaTextView;
-    private View simSedado,comaLayout,diferencaPupilaLayout;
+            tamanhoPupilaTextView,simetriaPupilaTextView,reatividadeLuzTextView,diferencaPupilaTextView,avaliacaoPupilarTextView,
+            flutuacaoHint1,flutuacaoHint2,pensamentoDesorganizadoHint1,pensamentoDesorganizadoHint2, inatencaoHint1,inatencaoHint2,
+            deficitMotor,paresiaTextView,plegiaTextView;
+    private View simSedado,comaLayout,diferencaPupilaLayout,avaliacaoPupilarItensLayout,escalaGlasgowItensLayout,deliriumItensLayout,deficitMotorItensLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,10 @@ public class NeurologicoActivity extends GenericoActivity {
         simSedado = findViewById(R.id.sedado_sim_layout);
         comaLayout = findViewById(R.id.coma_layout);
         diferencaPupilaLayout = findViewById(R.id.diferencaPupilaLayout);
+        avaliacaoPupilarItensLayout = findViewById(R.id.avaliacaoPupilarItens);
+        escalaGlasgowItensLayout = findViewById(R.id.escalaGlasgowItensLayout);
+        deliriumItensLayout = findViewById(R.id.deliriumItens);
+        deficitMotorItensLayout = findViewById(R.id.deficitMotorItens);
         nivelConscienciaTextView = (TextView)findViewById(R.id.nivelCosciencia);
         rassTextView = (TextView)findViewById(R.id.rassTextView);
         ramsayTextView = (TextView)findViewById(R.id.ramsayTextView);
@@ -65,10 +73,22 @@ public class NeurologicoActivity extends GenericoActivity {
         simetriaPupilaTextView = (TextView)findViewById(R.id.simetriaPupila);
         reatividadeLuzTextView = (TextView)findViewById(R.id.reatividadeLuz);
         diferencaPupilaTextView = (TextView)findViewById(R.id.diferencaPupila);
+        avaliacaoPupilarTextView = (TextView)findViewById(R.id.avaliacaoPupilar);
+        flutuacaoHint1 = (TextView)findViewById(R.id.flutuacaoHint1);
+        flutuacaoHint2 = (TextView)findViewById(R.id.flutuacaoHint2);
+        pensamentoDesorganizadoHint1 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint1);
+        pensamentoDesorganizadoHint2 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint2);
+        inatencaoHint1 = (TextView)findViewById(R.id.inatencaoHint1);
+        inatencaoHint2 = (TextView)findViewById(R.id.inatencaoHint2);
+        deficitMotor = (TextView)findViewById(R.id.deficitMotor);
+        paresiaTextView = (TextView)findViewById(R.id.paresia);
+        plegiaTextView = (TextView)findViewById(R.id.plegia);
         /******************************VARIAVEIS LAYOUTS*************************************/
 
-        /******************************VARIAVEIS RADIOBUTTON*********************************/
-        /******************************VARIAVEIS RADIOBUTTON*********************************/
+        /******************************VARIAVEIS SWTICH*********************************/
+        deficitMotorSwitch = (SwitchCompat)findViewById(R.id.deficitMotorSwitch);
+        /******************************VARIAVEIS SWTICH*********************************/
+
 
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
         /******************************VARIAVEIS TOGGLEBUTTON*******************************/
@@ -130,12 +150,6 @@ public class NeurologicoActivity extends GenericoActivity {
             finish();
         }
         return true;
-    }
-
-    private void prepareNeurologicoSpinners(){
-        String[] deficitMotor = {defaultSpinnerString,"Presente","Ausente"};
-        String[] deficitTipo = {defaultSpinnerString,"Paresia","Plegia"};
-        String[] deficitLado = {defaultSpinnerString,"Esquerdo","Direito","Ambos os lados"};
     }
 
     private void verificaCamposENotificaAdapter(){
@@ -238,7 +252,7 @@ public class NeurologicoActivity extends GenericoActivity {
         builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(!isTextInpudEditTextEmpty(tipoSedativo) && !isTextInpudEditTextEmpty(doseSedativo))
+                if(!isTextInputEditTextEmpty(tipoSedativo) && !isTextInputEditTextEmpty(doseSedativo))
                     addDataFromDialogIntoAdapter(tipoSedativo.getText().toString(),Integer.parseInt(doseSedativo.getText().toString()));
             }
         });
@@ -396,7 +410,13 @@ public class NeurologicoActivity extends GenericoActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         respostaMotoraTextView.setText(options[which]);
                         respostaMotoraTextView.setVisibility(View.VISIBLE);
+                        if(respostaMotoraSelection!=-1 && respostaMotoraSelection!=which){
+                            escalaDeGlasgowSoma = (escalaDeGlasgowSoma - (respostaMotoraSelection+1)) + which+1;
+                        }
+                        else
+                            escalaDeGlasgowSoma+=which+1;
                         respostaMotoraSelection=which;
+                        escalaDeGlasgowTextView.setText(Integer.toString(escalaDeGlasgowSoma));
                         dialog.dismiss();
                     }
                 });
@@ -429,7 +449,13 @@ public class NeurologicoActivity extends GenericoActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         respostaVerbalTextView.setText(options[which]);
                         respostaVerbalTextView.setVisibility(View.VISIBLE);
+                        if(respostaVerbalSelection!=-1 && respostaVerbalSelection!=which){
+                            escalaDeGlasgowSoma = (escalaDeGlasgowSoma - (respostaVerbalSelection+1)) + which+1;
+                        }
+                        else
+                            escalaDeGlasgowSoma+=which+1;
                         respostaVerbalSelection=which;
+                        escalaDeGlasgowTextView.setText(Integer.toString(escalaDeGlasgowSoma));
                         dialog.dismiss();
                     }
                 });
@@ -462,7 +488,13 @@ public class NeurologicoActivity extends GenericoActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         aberturaOcularTextView.setText(options[which]);
                         aberturaOcularTextView.setVisibility(View.VISIBLE);
+                        if(aberturaOcularSelection!=-1 && aberturaOcularSelection!=which){
+                            escalaDeGlasgowSoma = (escalaDeGlasgowSoma - (aberturaOcularSelection+1)) + which+1;
+                        }
+                        else
+                            escalaDeGlasgowSoma+=which+1;
                         aberturaOcularSelection=which;
+                        escalaDeGlasgowTextView.setText(Integer.toString(escalaDeGlasgowSoma));
                         dialog.dismiss();
                     }
                 });
@@ -621,5 +653,186 @@ public class NeurologicoActivity extends GenericoActivity {
         dialog.show();
     }
 
+    public void avaliacaoPupilarOnClick(View view){
+        StringBuilder avaliacaoString = new StringBuilder();
+        if(avaliacaoPupilarItensLayout.isShown()) {
+            myAnimation.slideUpView(getApplicationContext(), avaliacaoPupilarItensLayout);
+            if(tamanhoPupilaTextView.getText().toString().length()>0)
+                avaliacaoString.append("Tamanho: ").append(tamanhoPupilaTextView.getText().toString());
+            if(simetriaPupilaTextView.getText().toString().length()>0)
+                avaliacaoString.append(", Simetria: ").append(simetriaPupilaTextView.getText().toString());
+            if(simetriaPupilaTextView.getText().equals(getResources().getStringArray(R.array.simetriaPupila)[1]))
+                avaliacaoString.append(", Diferença: ").append(diferencaPupilaTextView.getText().toString());
+            if(reatividadeLuzTextView.getText().length()>0)
+                avaliacaoString.append(", Reatividade a Luz: ").append(reatividadeLuzTextView.getText().toString());
+            avaliacaoPupilarTextView.setText(avaliacaoString);
+            avaliacaoPupilarTextView.setVisibility(View.VISIBLE);
+        }
+        else {
+            avaliacaoPupilarTextView.setVisibility(View.GONE);
+            myAnimation.slideDownView(getApplicationContext(), avaliacaoPupilarItensLayout);
+        }
+    }
 
+    public void escalaGlasgowOnClick(View view){
+        if(escalaGlasgowItensLayout.isShown())
+            myAnimation.slideUpView(getApplicationContext(),escalaGlasgowItensLayout);
+        else
+            myAnimation.slideDownView(getApplicationContext(),escalaGlasgowItensLayout);
+    }
+
+    public void flutuacaoOnClick(View view){
+        if(flutuacaoHint1.isShown() && flutuacaoHint2.isShown()){
+            myAnimation.slideUpView(getApplicationContext(),flutuacaoHint1);
+            myAnimation.slideUpView(getApplicationContext(),flutuacaoHint2);
+        }
+        else{
+            flutuacaoHint1.setText(getResources().getString(R.string.FlutuacaoHint1));
+            flutuacaoHint2.setText(getResources().getString(R.string.FlutuacaoHint2));
+            myAnimation.slideDownView(getApplicationContext(),flutuacaoHint1);
+            myAnimation.slideDownView(getApplicationContext(),flutuacaoHint2);
+        }
+    }
+
+    public void pensamentoDesorganizadoOnClick(View view){
+        if(pensamentoDesorganizadoHint1.isShown() && pensamentoDesorganizadoHint2.isShown()){
+            myAnimation.slideUpView(getApplicationContext(),pensamentoDesorganizadoHint1);
+            myAnimation.slideUpView(getApplicationContext(),pensamentoDesorganizadoHint2);
+        }
+        else{
+            pensamentoDesorganizadoHint1.setText(getResources().getString(R.string.PensamentoDesorganizadoHint1));
+            pensamentoDesorganizadoHint2.setText(getResources().getString(R.string.PensamentoDesorganizadoHint2));
+            myAnimation.slideDownView(getApplicationContext(),pensamentoDesorganizadoHint1);
+            myAnimation.slideDownView(getApplicationContext(),pensamentoDesorganizadoHint2);
+        }
+    }
+
+    public void inatencaoOnClick(View view){
+        if(inatencaoHint1.isShown() && inatencaoHint2.isShown()){
+            myAnimation.slideUpView(getApplicationContext(),inatencaoHint1);
+            myAnimation.slideUpView(getApplicationContext(),inatencaoHint2);
+        }
+        else{
+            inatencaoHint1.setText(getResources().getString(R.string.InatencaoHint1));
+            inatencaoHint2.setText(getResources().getString(R.string.InatencaoHint2));
+            myAnimation.slideDownView(getApplicationContext(),inatencaoHint1);
+            myAnimation.slideDownView(getApplicationContext(),inatencaoHint2);
+        }
+    }
+
+    public void deliriumOnClick(View view){
+        if(deliriumItensLayout.isShown())
+            myAnimation.slideUpView(getApplicationContext(),deliriumItensLayout);
+        else
+            myAnimation.slideDownView(getApplicationContext(),deliriumItensLayout);
+    }
+
+    public void deficitMotorOnClick(View view){
+        if(deficitMotorSwitch.isChecked()) {
+            if (deficitMotorItensLayout.isShown())
+                myAnimation.slideUpView(getApplicationContext(), deficitMotorItensLayout);
+            else
+                myAnimation.slideDownView(getApplicationContext(),deficitMotorItensLayout);
+        }
+    }
+
+    public void deficitMotorSwitchOnClick(View view){
+        if(deficitMotorSwitch.isChecked()) {
+            deficitMotor.setText(R.string.Presente);
+            if(!deficitMotorItensLayout.isShown())
+                myAnimation.slideDownView(getApplicationContext(),deficitMotorItensLayout);
+        }
+        else {
+            deficitMotor.setText(R.string.Ausente);
+            if(deficitMotorItensLayout.isShown())
+                myAnimation.slideUpView(getApplicationContext(),deficitMotorItensLayout);
+        }
+    }
+
+    public void paresiaOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
+
+        // Set the dialog title
+        builder.setTitle(R.string.Paresia)
+                .setMultiChoiceItems(R.array.membrosDeficit, null,
+                        new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which,
+                                                boolean isChecked) {
+                                if (isChecked)
+                                    // If the user checked the item, add it to the selected items
+                                    mSelectedItems.add(getResources().getStringArray(R.array.membrosDeficit)[which]);
+                                else if (mSelectedItems.contains(which))
+                                    // Else, if the item is already in the array, remove it
+                                    mSelectedItems.remove(Integer.valueOf(which));
+                            }
+                        })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        getArrayListFromDialog(mSelectedItems,paresiaTextView);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void plegiaOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
+
+        // Set the dialog title
+        builder.setTitle(R.string.Plegia)
+                .setMultiChoiceItems(R.array.membrosDeficit, null,
+                        new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which,
+                                                boolean isChecked) {
+                                if (isChecked)
+                                    // If the user checked the item, add it to the selected items
+                                    mSelectedItems.add(getResources().getStringArray(R.array.membrosDeficit)[which]);
+                                else if (mSelectedItems.contains(which))
+                                    // Else, if the item is already in the array, remove it
+                                    mSelectedItems.remove(Integer.valueOf(which));
+                            }
+                        })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        getArrayListFromDialog(mSelectedItems,plegiaTextView);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+
+    }
+
+    private void getArrayListFromDialog(ArrayList arrayList, TextView textView){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i=0;i<arrayList.size();i++){
+            if(i!=arrayList.size()-1)
+                stringBuilder.append(arrayList.get(i)).append(", ");
+            else
+                stringBuilder.append(arrayList.get(i));
+        }
+        textView.setText(stringBuilder);
+        textView.setVisibility(View.VISIBLE);
+    }
 }

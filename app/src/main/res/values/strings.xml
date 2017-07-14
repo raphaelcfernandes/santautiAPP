@@ -114,6 +114,21 @@
     <string name="SimetriaPupila">Simetria</string>
     <string name="ReatividadeALuzPupila">Reatividade a Luz</string>
     <string name="DiferencaPupilar">Diferença entre Pupilas</string>
+    <string name="Delirium">Delirium</string>
+    <string name="Flutuacao">Flutuação do estado mental</string>
+    <string name="Inatencao">Inatenção</string>
+    <string name="PensamentoDesorganizado">Pensamento Desorganizado</string>
+    <string name="FlutuacaoHint1">Existe evidência de uma mudança aguda do estado mental em relação ao estado basal do paciente?</string>
+    <string name="FlutuacaoHint2">Esse comportamento anormal flutuou nas ultimas 24 horas, ou seja ele pareceu aumentar e diminuir em gravidade com o tempo?</string>
+    <string name="InatencaoHint1">Tem o paciente dificuldade em focar sua atenção?</string>
+    <string name="InatencaoHint2">Está reduzida a sua habilidade em manter ou mudar seu foco de atenção?</string>
+    <string name="PensamentoDesorganizadoHint1">Está o pensamento do paciente desorganizado ou incoerente, como fluxo não lógico ou claro de ideias, conversa irrelevante, ou troca imprevisível entre assuntos diferentes?</string>
+    <string name="PensamentoDesorganizadoHint2">O paciente é capaz de seguir comandos durante toda a entrevista?</string>
+    <string name="DeficitMotor">Déficit Motor</string>
+    <string name="Paresia">Paresia</string>
+    <string name="Plegia">Plegia</string>
+    <string name="Presente">Presente</string>
+    <string name="Ausente">Ausente</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -318,6 +333,18 @@
     <string-array name="diferencaPupila">
         <item>Esquerda > Direita</item>
         <item>Direita > Esquerda</item>
+    </string-array>
+
+    <string-array name="deficitMotor">
+        <item>Presente</item>
+        <item>Ausente</item>
+    </string-array>
+
+    <string-array name="membrosDeficit">
+        <item>Membro Superior Direito</item>
+        <item>Membro Superior Esquerdo</item>
+        <item>Membro Inferior Direito</item>
+        <item>Membro Inferior Esquerdo</item>
     </string-array>
 
     <!--ARRAYS-->
