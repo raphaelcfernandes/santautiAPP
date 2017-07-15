@@ -126,9 +126,12 @@
     <string name="PensamentoDesorganizadoHint2">O paciente é capaz de seguir comandos durante toda a entrevista?</string>
     <string name="DeficitMotor">Déficit Motor</string>
     <string name="Paresia">Paresia</string>
+    <string name="ProporcaoParesia">Proporção de Paresia</string>
     <string name="Plegia">Plegia</string>
+    <string name="ProporcaoPlegia">Proporção de Plegia</string>
     <string name="Presente">Presente</string>
     <string name="Ausente">Ausente</string>
+    <string name="TodosMembros">Todos os membros.</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

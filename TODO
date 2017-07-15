@@ -62,6 +62,16 @@ Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo OK
 
 Exames: ultimo icone, OK
 
+
+Neurologico -> OK
+        - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
+        - Lado do corpo, n melhor nome para o item. Superior e inferior
+        - Delirium, sim ou nao. -> ok
+        - Nivel consciencia somente nao sedado
+        - Paresia ou Plegia
+            - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
+
+
 Hematologico: -> ok. Campos para checar
     - Hemoglobina/hematocrito: Numero pra cada. Marcar? Marcar o que?
     - Plaqueta: numerico
@@ -107,15 +117,11 @@ Ventilacao: -> Checar invasivo/mecanico. Semelhantes mas sem o modo ventilatorio
         - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
         - Pressao cuff, retirar daqui? Manter? Pegar valor de Respirador? E se n tiver valor em Respirador?
             - Freq respiratoria 2 campos: paciente e respirador
+
 /*****************MUDANÇAS FEITAS**********/
 
 
-Neurologico -> Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
-        - Lado do corpo, n melhor nome para o item. Superior e inferior
-        - Delirium, sim ou nao. -> ok
-        - Nivel consciencia somente nao sedado
-        - Paresia ou Plegia
-            - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
+
 
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinacamente estavel e hemodinacamente instavel
