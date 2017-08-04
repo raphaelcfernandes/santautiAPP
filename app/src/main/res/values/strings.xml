@@ -132,6 +132,7 @@
     <string name="Presente">Presente</string>
     <string name="Ausente">Ausente</string>
     <string name="TodosMembros">Todos os membros.</string>
+
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -242,7 +243,7 @@
         <item>Baixa</item>
     </string-array>
 
-    <string-array name="murmurioVesicular">
+    <string-array name="respiratorioIndices">
         <item>Fisiológico</item>
         <item>Reduzido</item>
         <item>Aumentado</item>

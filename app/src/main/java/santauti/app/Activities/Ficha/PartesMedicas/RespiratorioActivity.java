@@ -2,15 +2,10 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,13 +28,13 @@ import santauti.app.R;
 public class RespiratorioActivity extends GenericoActivity {
     private int viasAereasSelection=-1,localizacaoCanulaSelection=-1,baseRoncosSelection=-1,tercoMedioRoncosSelection=-1,apiceRoncosSelection=-1;
     private int murmurioVesicularSelection=-1,baseMurmurioVesicularSelection=-1,baseSibilosSelection=-1;
-    private int mascaraVenturiSelection=-1,tercoMedioMurmurioVesicularSelection=-1,usoDeOxigenioSelection=-1,apiceSelection=-1;
+    private int mascaraVenturiSelection=-1,tercoMedioMurmurioVesicularSelection=-1,usoDeOxigenioSelection=-1,apiceSelection=-1,roncoSelection=-1,sibiloSelection=-1,crepitacoesSelection=-1;
     private int baseCrepitacoesSelection=-1,tercoMedioCrepitacoesSelection=-1,tercoMedioSibilosSelection=-1,apiceSibilosSelection=-1,apiceCrepitacoesSelection=-1;
     private View pressaoCuff_layout;
     private View localizacaoCanula_layout;
     private View mascaraDeVenturi_layout, fluxoOxigenio_layout;
-    private TextView viasAerea,localizacaoCanula,murmurioVesicular,mascaraVenturiSelected,baseRoncos,tercoMedioRoncos,apiceRoncos;
-    private TextView baseMurmurioVesicular,tercoMedioMurmurioVesicular,apiceMurmurioVesicular, usoDeOxigenioTextView,baseSibilos,baseCrepitacoes;
+    private TextView viasAerea,localizacaoCanula,murmurioVesicular,mascaraVenturiSelected,baseRoncos,tercoMedioRoncos,apiceRoncos,roncosTextView,sibilosTextView,crepitacoesTextView;
+    private TextView baseMurmurioVesicular,tercoMedioMurmurioVesicular,apiceMurmurioVesicular,usoDeOxigenioTextView,baseSibilos,baseCrepitacoes;
     private TextView tercoMedioSibilos,tercoMedioCrepitacoes,apiceSibilos,apiceCrepitacoes;
     private Realm realm;
     private Ficha ficha;
@@ -74,6 +69,9 @@ public class RespiratorioActivity extends GenericoActivity {
         tercoMedioCrepitacoes = (TextView)findViewById(R.id.tercoMedioCrepitacoes);
         apiceSibilos = (TextView)findViewById(R.id.apiceSibilos);
         apiceCrepitacoes = (TextView)findViewById(R.id.apiceCrepitacoes);
+        roncosTextView = (TextView)findViewById(R.id.roncosTextView);
+        sibilosTextView = (TextView)findViewById(R.id.sibilosTextView);
+        crepitacoesTextView = (TextView)findViewById(R.id.crepitacoesTextView);
         /**************************VIEWS**************************/
 
         prepareNavigationButtons();
@@ -221,7 +219,7 @@ public class RespiratorioActivity extends GenericoActivity {
         builder.setTitle(R.string.MurmurioVesicular);
 
         //list of items
-        final String[] items = getResources().getStringArray(R.array.murmurioVesicular);
+        final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
         Arrays.sort(items);
         builder.setSingleChoiceItems(items, murmurioVesicularSelection,
                 new DialogInterface.OnClickListener() {
@@ -230,6 +228,108 @@ public class RespiratorioActivity extends GenericoActivity {
                         murmurioVesicular.setText(items[which]);
                         murmurioVesicular.setVisibility(View.VISIBLE);
                         murmurioVesicularSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void roncosOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Roncos);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, roncoSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        roncosTextView.setText(items[which]);
+                        roncosTextView.setVisibility(View.VISIBLE);
+                        roncoSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void sibilosOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Sibilos);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, sibiloSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sibilosTextView.setText(items[which]);
+                        sibilosTextView.setVisibility(View.VISIBLE);
+                        sibiloSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void crepitacoesOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Crepitacoes);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, crepitacoesSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        crepitacoesTextView.setText(items[which]);
+                        crepitacoesTextView.setVisibility(View.VISIBLE);
+                        crepitacoesSelection=which;
                         dialog.dismiss();
                     }
                 });

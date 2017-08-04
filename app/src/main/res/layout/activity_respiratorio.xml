@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
     android:id="@+id/respiratorio_layout"
@@ -108,6 +107,7 @@
                 android:background="@color/gray">
             </LinearLayout>
 
+            <!--Murmurio vesicular-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,6 +156,7 @@
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/baseMurmurioVesicular"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,6 +182,7 @@
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/tercoMedioMurmurioVesicular"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,11 +215,13 @@
                     android:id="@+id/apiceMurmurioVesicular"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+            <!--Murmurio vesicular-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -247,7 +251,7 @@
                     android:id="@+id/usoDeOxigenioSelected"
                     android:visibility="invisible"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"/>
-            </LinearLayout>
+            </LinearLayout> <!--uso Oxigenio-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -307,12 +311,18 @@
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
                 android:background="?attr/selectableItemBackground"
-                android:onClick="murmurioVesicularOnClick">
+                android:onClick="roncosOnClick">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Roncos"
                     style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/roncosTextView"/>
             </LinearLayout>
 
             <LinearLayout
@@ -413,12 +423,18 @@
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
                 android:background="?attr/selectableItemBackground"
-                android:onClick="murmurioVesicularOnClick">
+                android:onClick="sibilosOnClick">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Sibilos"
                     style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/sibilosTextView"/>
             </LinearLayout>
 
             <LinearLayout
@@ -446,6 +462,7 @@
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/baseSibilos"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -518,12 +535,18 @@
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
                 android:background="?attr/selectableItemBackground"
-                android:onClick="murmurioVesicularOnClick">
+                android:onClick="crepitacoesOnClick">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Crepitacoes"
                     style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/crepitacoesTextView"/>
             </LinearLayout>
 
             <LinearLayout
