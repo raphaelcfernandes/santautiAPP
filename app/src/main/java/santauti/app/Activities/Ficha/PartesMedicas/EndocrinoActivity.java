@@ -31,17 +31,17 @@ public class EndocrinoActivity extends GenericoActivity {
         setContentView(R.layout.activity_endocrino);
         setToolbar(getString(R.string.Endocrino));
 
-        endocrinoS = (RadioButton)findViewById(R.id.endocrino_sim);
-        endocrinoN = (RadioButton)findViewById(R.id.endocrino_nao);
+//        endocrinoS = (RadioButton)findViewById(R.id.endocrino_sim);
+//        endocrinoN = (RadioButton)findViewById(R.id.endocrino_nao);
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
 
-        if(getEndocrinoSelected()!=-1){
-            if(getEndocrinoSelected()==1)
-                endocrinoS.setChecked(true);
-            else
-                endocrinoN.setChecked(true);
-        }
+//        if(getEndocrinoSelected()!=-1){
+//            if(getEndocrinoSelected()==1)
+//                endocrinoS.setChecked(true);
+//            else
+//                endocrinoN.setChecked(true);
+//        }
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,15 +54,21 @@ public class EndocrinoActivity extends GenericoActivity {
                 finish();
             }
         });
+        proxFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), ExamesActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
+                startActivity(intent);
+                exitActivityToRight();
+                //verificaCamposENotificaAdapter();
+                finish();
+            }
+        });
 
     }
 
-    @Override
-    public void prepareNavigationButtons() {
-        findViewById(R.id.fichaProxima).setVisibility(View.GONE);
-        antFicha = (Button)findViewById(R.id.fichaAnterior);
-        antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
-    }
+
 
     public int getEndocrinoSelected(){
         Ficha f = getProperFicha();
@@ -73,17 +79,17 @@ public class EndocrinoActivity extends GenericoActivity {
     }
 
     public void endocrinoOnRadioButtonClicked(View view){
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.endocrino_sim:
-                Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                usoInsulinaBombaInfusao=1;
-                break;
-            case R.id.endocrino_nao:
-                usoInsulinaBombaInfusao=0;
-                break;
-        }
+//        boolean checked = ((RadioButton) view).isChecked();
+//        switch(view.getId()) {
+//            case R.id.endocrino_sim:
+//                Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//                usoInsulinaBombaInfusao=1;
+//                break;
+//            case R.id.endocrino_nao:
+//                usoInsulinaBombaInfusao=0;
+//                break;
+//        }
     }
 
     @Override
@@ -103,15 +109,15 @@ public class EndocrinoActivity extends GenericoActivity {
     }
 
     public void verificaCamposENotificaAdapter(){
-        if(endocrinoS.isChecked() || endocrinoN.isChecked()) {
-            realm.beginTransaction();
-            Endocrino endocrino = realm.createObject(Endocrino.class);
-            endocrino.setUsoDeInsulinaBombaInfusao(usoInsulinaBombaInfusao);
-            Ficha r = getProperFicha();
-            r.setEndocrino(endocrino);
-            realm.copyToRealmOrUpdate(r);
-            realm.commitTransaction();
-            changeCardColor();
-        }
+//        if(endocrinoS.isChecked() || endocrinoN.isChecked()) {
+//            realm.beginTransaction();
+//            Endocrino endocrino = realm.createObject(Endocrino.class);
+//            endocrino.setUsoDeInsulinaBombaInfusao(usoInsulinaBombaInfusao);
+//            Ficha r = getProperFicha();
+//            r.setEndocrino(endocrino);
+//            realm.copyToRealmOrUpdate(r);
+//            realm.commitTransaction();
+//            changeCardColor();
+//        }
     }
 }

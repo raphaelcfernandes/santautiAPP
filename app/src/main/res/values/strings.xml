@@ -10,6 +10,8 @@
     <string name="title_activity_home">Pacientes</string>
     <string name="action_search">Filtrar</string>
     <string name="MonitorMultiparametrico">Monitor Multiparamétrico</string>
+    <string name="Exames">Exames</string>
+    <string name="FolhasBalanco">Folhas de Balanćo</string>
     <string name="BombaInfusao">Bomba de Infusão</string>
     <string name="Dispositivos">Dispositivos</string>
     <string name="Respirador">Respirador</string>
@@ -67,7 +69,7 @@
     <string name="Hemograma">Hemograma</string>
     <string name="CurvaTermica">Curva Térmica</string>
     <string name="MarcadoresInfeccao">Marcadores de Infecção</string>
-    <string name="ViasAereas">Via Aéreas</string>
+    <string name="ViasAereas">Vias Aéreas</string>
     <string name="LocalizacaoCanula">Localização da Canula</string>
     <string name="PressaoCuff">Pressão do Cuff</string>
     <string name="MurmurioVesicular">Murmúrio Vesicular</string>
@@ -132,7 +134,10 @@
     <string name="Presente">Presente</string>
     <string name="Ausente">Ausente</string>
     <string name="TodosMembros">Todos os membros.</string>
-
+    <string name="ParametrosRespirador">Paramêtros</string>
+    <string name="UF">UF</string>
+    <string name="TempoHora">Tempo/Hora</string>
+    <string name="Heparina">Heparina</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -167,10 +172,9 @@
     </string-array>
 
     <string-array name="hidratacao">
+        <item>Edemaciado/Hiper Hidratado</item>
         <item>Normo Hidratado</item>
         <item>Desidratado</item>
-        <item>Hiper Hidratado</item>
-        <item>Edemaciado</item>
     </string-array>
 
     <string-array name="disturbioEletrolitico">
@@ -232,8 +236,8 @@
     </string-array>
 
     <string-array name="viasAereas">
-        <item>Normal</item>
-        <item>Tubo Orotraquial</item>
+        <item>Natural</item>
+        <item>Tubo traquial</item>
         <item>Traqueostomia</item>
     </string-array>
 
@@ -247,6 +251,7 @@
         <item>Fisiológico</item>
         <item>Reduzido</item>
         <item>Aumentado</item>
+        <item>Abolido</item>
     </string-array>
     
     <string-array name="direito_esquerdo_ambos">
@@ -263,16 +268,16 @@
     </string-array>
 
     <string-array name="ventilacao">
-        <item>Espontânea</item>
+        <item>Não-invasiva</item>
         <item>BIPAP</item>
         <item>Mecânica</item>
-        <item>Não-invasiva</item>
     </string-array>
 
     <string-array name="modoVentilatorio">
-        <item>VCV</item>
         <item>PCV</item>
+        <item>VCV</item>
         <item>PSV</item>
+        <item>SIMV</item>
     </string-array>
 
     <string-array name="nivelConsciencia">

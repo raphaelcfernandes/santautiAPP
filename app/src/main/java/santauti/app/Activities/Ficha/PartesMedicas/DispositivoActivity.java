@@ -78,7 +78,7 @@ public class DispositivoActivity extends GenericoActivity {
         final String[] drogasVasoativa = new String[]{"Cateter Venoso Central", "Cateter de Hemodialise", "Cateter de PAI",
                 "Dreno de Torax", "Dreno Abdominal", "Sonda Vesical", "Tubo Orotraquial","Traqueostomia",
                 "Gastrostomia","Venoclise","Sonda Enteral","Sonda Oroenteral",
-                "Sonda Nasoenteral","Sonda Orogastrica","Sonda Nasogastrical","Cateter de PIC","Balão Intra-aórtico"};
+                "Sonda Nasoenteral","Sonda Orogastrica","Sonda Nasogastrica","Cateter de PIC","Balão Intra-aórtico"};
 
         ordenaStringSpinner(drogasVasoativa);
 

@@ -29,10 +29,9 @@ import santauti.app.R;
  */
 
 public class MetabolicoActivity extends GenericoActivity {
-    TextInputEditText gasometrialArterial;
-    private int i=0,gasometriaArterialInput,hidratacaoSelection=-1,disturbioEletroliticoSelection=-1,acidoseMetabolicaSelection=-1;
+    private int i=0,hidratacaoSelection=-1;
     private Realm realm;
-    private TextView hidratacao,disturbioEletrolitico,acidoseMetabolica;
+    private TextView hidratacao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +41,13 @@ public class MetabolicoActivity extends GenericoActivity {
 
         /********************VIEWS****************************/
         hidratacao = (TextView)findViewById(R.id.hidratacao);
-        disturbioEletrolitico = (TextView)findViewById(R.id.disturbioEletrolitico);
-        acidoseMetabolica = (TextView)findViewById(R.id.acidoseMetabolica);
-
-        gasometrialArterial = (TextInputEditText)findViewById(R.id.gasometrial_arterial);
-        gasometrialArterial.addTextChangedListener(textWatcher);
         /********************VIEWS****************************/
 
 
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
+        hidratacaoPopUpMenu();
 
-        if(getGasometria()!=-1) {
-            gasometrialArterial.setText(String.valueOf(getGasometria()));
-        }
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +73,7 @@ public class MetabolicoActivity extends GenericoActivity {
         });
     }
 
-    public void hidratacaoOnCLick(View view) {
+    private void hidratacaoPopUpMenu(){
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
@@ -114,74 +106,11 @@ public class MetabolicoActivity extends GenericoActivity {
         // display dialog
         dialog.show();
     }
-
-    public void disturbioEletroliticoOnCLick(View view) {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.DisturbioEletrolitico);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.disturbioEletrolitico);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, disturbioEletroliticoSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        disturbioEletrolitico.setText(items[which]);
-                        disturbioEletrolitico.setVisibility(View.VISIBLE);
-                        disturbioEletroliticoSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+    public void hidratacaoOnCLick(View view) {
+        hidratacaoPopUpMenu();
     }
 
-    public void acidoseMetabolicaOnCLick(View view) {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        builder.setTitle(R.string.AcidoseMetabolica);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.acidoseMetabolica);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, acidoseMetabolicaSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        acidoseMetabolica.setText(items[which]);
-                        acidoseMetabolica.setVisibility(View.VISIBLE);
-                        acidoseMetabolicaSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
 
     @Override
     protected void onDestroy() {
@@ -205,19 +134,7 @@ public class MetabolicoActivity extends GenericoActivity {
         return true;
     }
 
-    private TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
-        @Override
-        public void afterTextChanged(Editable editable) {
-            if(gasometrialArterial.getText().toString().length()>0)
-                gasometriaArterialInput = (Integer.parseInt(gasometrialArterial.getText().toString()));
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-    };
 
     /**
      * Verifica se existe registro da Gasometria previamente. Utilizado para setar o editText caso o usuario tenha retornado a esta ficha
@@ -237,15 +154,15 @@ public class MetabolicoActivity extends GenericoActivity {
      * Atualiza campo Metabolico ou insere novo objeto em Ficha com idFicha
      */
     private void verificaCamposENotificaAdapter(){
-        if(gasometrialArterial.getText().toString().length()>0) {
-            realm.beginTransaction();
-            Metabolico metabolico = realm.createObject(Metabolico.class);
-            metabolico.setGasometriaArterial(gasometriaArterialInput);
-            Ficha r = getProperFicha();
-            r.setMetabolico(metabolico);
-            realm.insertOrUpdate(metabolico);
-            realm.commitTransaction();
-            changeCardColor();
-        }
+//        if(gasometrialArterial.getText().toString().length()>0) {
+//            realm.beginTransaction();
+//            Metabolico metabolico = realm.createObject(Metabolico.class);
+//            metabolico.setGasometriaArterial(gasometriaArterialInput);
+//            Ficha r = getProperFicha();
+//            r.setMetabolico(metabolico);
+//            realm.insertOrUpdate(metabolico);
+//            realm.commitTransaction();
+//            changeCardColor();
+//        }
     }
 }

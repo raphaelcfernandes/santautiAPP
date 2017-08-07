@@ -3,55 +3,55 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/toolbar"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="50dp"
-        android:layout_gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Uso de insulina em bomba de infusão?"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:layout_gravity="center">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sim"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/endocrino_sim"
-                android:onClick="endocrinoOnRadioButtonClicked"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Não"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/endocrino_nao"
-                android:onClick="endocrinoOnRadioButtonClicked"
-                />
-        </RadioGroup>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingTop="50dp"-->
+        <!--android:layout_gravity="center">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Uso de insulina em bomba de infusão?"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:layout_gravity="center">-->
+        <!--<RadioGroup-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Sim"-->
+                <!--android:paddingStart="20dp"-->
+                <!--android:paddingEnd="0dp"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+            <!--<RadioButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/endocrino_sim"-->
+                <!--android:onClick="endocrinoOnRadioButtonClicked"-->
+                <!--/>-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Não"-->
+                <!--android:paddingStart="20dp"-->
+                <!--android:paddingEnd="0dp"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+            <!--<RadioButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/endocrino_nao"-->
+                <!--android:onClick="endocrinoOnRadioButtonClicked"-->
+                <!--/>-->
+        <!--</RadioGroup>-->
+    <!--</LinearLayout>-->
     <include layout="@layout/bottom_buttons_navigate_fichas"/>
 </LinearLayout>

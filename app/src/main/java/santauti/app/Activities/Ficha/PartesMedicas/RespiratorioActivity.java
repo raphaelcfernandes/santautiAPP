@@ -30,7 +30,7 @@ public class RespiratorioActivity extends GenericoActivity {
     private int murmurioVesicularSelection=-1,baseMurmurioVesicularSelection=-1,baseSibilosSelection=-1;
     private int mascaraVenturiSelection=-1,tercoMedioMurmurioVesicularSelection=-1,usoDeOxigenioSelection=-1,apiceSelection=-1,roncoSelection=-1,sibiloSelection=-1,crepitacoesSelection=-1;
     private int baseCrepitacoesSelection=-1,tercoMedioCrepitacoesSelection=-1,tercoMedioSibilosSelection=-1,apiceSibilosSelection=-1,apiceCrepitacoesSelection=-1;
-    private View pressaoCuff_layout;
+    private View pressaoCuff_layout,murmurioVesicularItensLayout,roncosItensLayout,sibilosItensLayout,crepitacoesItensLayout;
     private View localizacaoCanula_layout;
     private View mascaraDeVenturi_layout, fluxoOxigenio_layout;
     private TextView viasAerea,localizacaoCanula,murmurioVesicular,mascaraVenturiSelected,baseRoncos,tercoMedioRoncos,apiceRoncos,roncosTextView,sibilosTextView,crepitacoesTextView;
@@ -52,6 +52,10 @@ public class RespiratorioActivity extends GenericoActivity {
         localizacaoCanula_layout = findViewById(R.id.localizacaoCanula_layout);
         mascaraDeVenturi_layout = findViewById(R.id.mascaVenturi);
         fluxoOxigenio_layout = findViewById(R.id.fluxoOxigenioLayout);
+        roncosItensLayout = findViewById(R.id.roncosItensLayout);
+        sibilosItensLayout = findViewById(R.id.sibilosItensLayout);
+        crepitacoesItensLayout = findViewById(R.id.crepitacoesItensLayout);
+        murmurioVesicularItensLayout = findViewById(R.id.murmurioVesicularItensLayout);
         mascaraVenturiSelected = (TextView)findViewById(R.id.mascaraVenturiSelected);
         viasAerea = (TextView)findViewById(R.id.viaAerea);
         localizacaoCanula = (TextView)findViewById(R.id.localizacaoCanula);
@@ -220,7 +224,6 @@ public class RespiratorioActivity extends GenericoActivity {
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
-        Arrays.sort(items);
         builder.setSingleChoiceItems(items, murmurioVesicularSelection,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -228,6 +231,8 @@ public class RespiratorioActivity extends GenericoActivity {
                         murmurioVesicular.setText(items[which]);
                         murmurioVesicular.setVisibility(View.VISIBLE);
                         murmurioVesicularSelection=which;
+                        if(!murmurioVesicularItensLayout.isShown())
+                            myAnimation.slideDownView(getApplicationContext(),murmurioVesicularItensLayout);
                         dialog.dismiss();
                     }
                 });
@@ -254,7 +259,6 @@ public class RespiratorioActivity extends GenericoActivity {
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
-        Arrays.sort(items);
         builder.setSingleChoiceItems(items, roncoSelection,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -262,6 +266,8 @@ public class RespiratorioActivity extends GenericoActivity {
                         roncosTextView.setText(items[which]);
                         roncosTextView.setVisibility(View.VISIBLE);
                         roncoSelection=which;
+                        if(!roncosItensLayout.isShown())
+                            myAnimation.slideDownView(getApplicationContext(),roncosItensLayout);
                         dialog.dismiss();
                     }
                 });
@@ -288,7 +294,6 @@ public class RespiratorioActivity extends GenericoActivity {
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
-        Arrays.sort(items);
         builder.setSingleChoiceItems(items, sibiloSelection,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -296,6 +301,8 @@ public class RespiratorioActivity extends GenericoActivity {
                         sibilosTextView.setText(items[which]);
                         sibilosTextView.setVisibility(View.VISIBLE);
                         sibiloSelection=which;
+                        if(!sibilosItensLayout.isShown())
+                            myAnimation.slideDownView(getApplicationContext(),sibilosItensLayout);
                         dialog.dismiss();
                     }
                 });
@@ -322,7 +329,6 @@ public class RespiratorioActivity extends GenericoActivity {
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
-        Arrays.sort(items);
         builder.setSingleChoiceItems(items, crepitacoesSelection,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -330,6 +336,8 @@ public class RespiratorioActivity extends GenericoActivity {
                         crepitacoesTextView.setText(items[which]);
                         crepitacoesTextView.setVisibility(View.VISIBLE);
                         crepitacoesSelection=which;
+                        if(!crepitacoesItensLayout.isShown())
+                            myAnimation.slideDownView(getApplicationContext(),crepitacoesItensLayout);
                         dialog.dismiss();
                     }
                 });

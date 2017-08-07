@@ -38,7 +38,7 @@ Bomba de infusao -> 100% ok
       - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
       - velocidade de infusao -> ok
       - dose ml/hr -> ok
-Hemodinamico: adicionar drogas vai para bomba de infusao -> 100% ok
+Hemodinamico: adicionar drogas vai para bomba de infusao, lactato foi para Exame -> 100% ok
   - Pulso ritmico/aritmico -> ok
   - Fonese de bulhas: hiper, normal, hipo -> ok
   - perfusao capilar: boa/ruim -> ok
@@ -51,18 +51,19 @@ Hemodinamico: adicionar drogas vai para bomba de infusao -> 100% ok
 Renal: -> 100% ok
   - Urina: clara escura. debaixo de diurese
   - Em procedimento dialitico? Em dialise?
-  - hipoabuminemia: sim ou nao
-Metabolico: -> 100% ok
+    - UF: sim ou nao
+    - Volume: numerico
+    - Tempo/hora: numerico
+    - Heparina: sim ou nao
+Metabolico: -> 100% ok (Disturbio, acidose e gasometria foram para exame)
     - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
     - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
     - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
 Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo OK
     - cateter de PIC
     - balao intra-aortico
-
-Exames: ultimo icone, OK
-
-
+    - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
+Hematologico: Hematocrito, hemoglobina e plaquetas foram para Exame
 Neurologico -> OK
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
@@ -72,19 +73,35 @@ Neurologico -> OK
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
 
 
-Hematologico: -> ok. Campos para checar
-    - Hemoglobina/hematocrito: Numero pra cada. Marcar? Marcar o que?
-    - Plaqueta: numerico
-    - Spinner -> radio Button
-    - Hemograma? Ter? Sim, nao? o que?
-Infeccioso: -> OK, Campos para checar
-    - curva termica: febril, afebril, subfebril
-    - marcadores de infeccao: estaveis, em melhora, em piora
-    - antibiotico (quais?)
 
 
+Exames:
+    - Eletrólitos: inserćao de dados na mao OU
+                    insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
+        - Potássio: hipo, hipercalemia. Se n marcar = normal
+        - Sódio = hipo, hipernatremia. Se n marcar = normal
+        - Magnesio = hipo, hipermagnesemia. Se n marcar = normal
+        - Fosforo: hipo, hiperfosfatemia. Se n marcar = normal
+        - Calcio: hipo, hipercalcemia. ...
+    - Albumina:
+        - hipo, hiperalbuminemia. ...
+    - PCR:
+        - Estável, Em queda, elevando. Comparativo em relaćao a um periodo anterior.
+    - Gasometria arterial:
+        - Normal, acidose metabolica/respiratoria Compensada/descompensada, alcalose metabolica/respiratoria Compensada/descompensada.
+    - Raio-x torax:
+         - Pneumotorax, atelectasia, infiltrados novos, normal.
+    - Leucograma:
+        - Normal, estável, em melhora, em piora
+    - Funćao hepatica: sim ou nao
+        - sim:
+            - normal, bilirrubinas: normais/elevadas, transaminases: normais/elevadas, FA/GGT: normais/elevadas
+    - Amilase: sim ou nao
+        - sim:
+            - normal, elevada
 
-Respiratorio:
+
+Respiratorio: ->
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
         - tubo ou traqueostomia = pressao do cuff -> ok
         - localizacao da canula se tiver entubado -> ok
@@ -104,8 +121,8 @@ Respiratorio:
 
 
 
-Ventilacao: -> Checar invasivo/mecanico. Semelhantes mas sem o modo ventilatorio? Espontaneo possui algo?
-    - espontanea, mecanico, bipap
+Ventilacao: ->
+    - Espontanea, nao invasiva, bipap, mecanica
     - bipap: -> ok
         - Volume
         - Ipap
@@ -117,6 +134,49 @@ Ventilacao: -> Checar invasivo/mecanico. Semelhantes mas sem o modo ventilatorio
         - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
         - Pressao cuff, retirar daqui? Manter? Pegar valor de Respirador? E se n tiver valor em Respirador?
             - Freq respiratoria 2 campos: paciente e respirador
+
+Infeccioso: ->
+    - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
+    - marcadores de infeccao: estaveis, em melhora, em piora
+    - antibiotico
+        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
+        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
+        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
+        - Amoxicilina-clavulanato,
+
+
+Folhas de balanćo:
+    - Curva glicemica:
+        - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.
+    - evacuaćoes:
+        - Presente
+            - Numero de eventos
+            - aspecto das fezes:
+                - diarreicas, normais, endurecidas
+        - Ausente
+    - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
+        - Volume/ml
+        - aspecto: gastrico, fecaloide, biliar
+    - Nutricao:
+        - Oral, enteral, gastrica
+        - Volume/ml
+
+Nutricional: (depois de metabolico)
+    - ingestao
+         - calorica, proteica, lipidica, carboidratos, balanco hidrogenado
+
+Pele e Mucosas: (apos nutricao)
+    - Pele:
+        - normal, ressecada
+    - ulcera de pressao
+        - presente/ausente
+    - Mucosas:
+        - Normocoradas, hipocoradas, icterico, anicterico
+        - secas, hidratadas, hiperidratadas
+
+Osteomuscular: (depois de pele)
+    - Musculatura:
+        - hiper/hipo/eu trofica, hipo/hiper/eu tonica.
 
 /*****************MUDANÇAS FEITAS**********/
 

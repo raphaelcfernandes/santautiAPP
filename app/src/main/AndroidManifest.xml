@@ -47,6 +47,8 @@
         <activity android:name=".Activities.Ficha.PartesMedicas.DispositivoActivity" />
         <activity android:name=".Activities.Ficha.PartesMedicas.BombaInfusaoActivity" />
         <activity android:name=".Activities.Ficha.PartesMedicas.RespiradorActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.ExamesActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.FolhasBalancoActivity" />
     </application>
 
 

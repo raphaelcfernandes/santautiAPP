@@ -90,13 +90,12 @@ public class BombaInfusaoActivity extends GenericoActivity {
     public void addDrogaVasoativa(View view) {
 
         final String[] drogasVasoativa = new String[]{"Dobutamina", "Dopamina", "Nitroprussiato de Sodio",
-                "Nitroglicerina", "Milrinona", "Noradrenalina", "Adrenalina","Fentanil","Propofol","Ketamina","Midasolan","Precedex",
-                "Amiodarona","Insulina","Hidrocortizona","Polimixina","Miorinone","Nipride"};
+                "Nitroglicerina", "Milrinona", "Noradrenalina", "Adrenalina","Fentanil","Propofol","Ketamina","Midazolam","Precedex",
+                "Amiodarona","Insulina","Hidrocortisona","Polimixina"};
 
         ordenaStringSpinner(drogasVasoativa);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(BombaInfusaoActivity.this);
-        builder.setTitle("Adicionar Droga Vasoativa");
 
         LayoutInflater li = LayoutInflater.from(this);
         View dialogView = li.inflate(R.layout.bombainfusao_dialog,null);

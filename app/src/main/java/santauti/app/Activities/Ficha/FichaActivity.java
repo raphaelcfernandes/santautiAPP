@@ -27,6 +27,8 @@ import santauti.app.APIServices.RestClient;
 import santauti.app.Activities.Ficha.PartesMedicas.BombaInfusaoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.DispositivoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.ExamesActivity;
+import santauti.app.Activities.Ficha.PartesMedicas.FolhasBalancoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.GastrointestinalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.HematologicoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.HemodinamicoActivity;
@@ -183,6 +185,10 @@ public class FichaActivity extends GenericoActivity{
                 intent = new Intent(v.getContext(), HematologicoActivity.class);
             else if(position==12)
                 intent = new Intent(v.getContext(), EndocrinoActivity.class);
+            else if(position==13)
+                intent = new Intent(v.getContext(), FolhasBalancoActivity.class);
+            else if(position==14)
+                intent = new Intent(v.getContext(), ExamesActivity.class);
             prepareIntent(position,intent);
             startActivity(intent);
         }
@@ -246,6 +252,9 @@ public class FichaActivity extends GenericoActivity{
         fichaAdapterModelList.add(a);
 
         a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[12],0);
+        fichaAdapterModelList.add(a);
+
+        a = new FichaAdapterModel("Folhas de Balanćo", covers[13],0);
         fichaAdapterModelList.add(a);
 
         a = new FichaAdapterModel("Exames", covers[13],0);

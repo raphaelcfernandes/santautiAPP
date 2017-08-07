@@ -36,7 +36,6 @@ public class HematologicoActivity extends GenericoActivity {
 
         tromboprofilaxiaTextView = (TextView)findViewById(R.id.tromboprofilaxia_selected);
         switchTromboprofilaxia = (SwitchCompat)findViewById(R.id.tromprofilaxiaSwitch);
-        switchHemograma = (SwitchCompat)findViewById(R.id.hemogramaSwitch);
 
         prepareNavigationButtons();
 
@@ -131,13 +130,6 @@ public class HematologicoActivity extends GenericoActivity {
         }
         else
             showDialog();
-    }
-
-    public void hemogramaOnClick(View view){
-        if(switchHemograma.isChecked())
-            switchHemograma.setChecked(false);
-        else
-            switchHemograma.setChecked(true);
     }
 
     private void showDialog(){

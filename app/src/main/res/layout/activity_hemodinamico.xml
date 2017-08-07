@@ -245,40 +245,6 @@
                 </RadioGroup>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="20dp"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TextStyle"
-                    android:text="Lactato: "
-                    android:layout_gravity="center|start"/>
-                <RadioGroup
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|start">
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:text="Normal"
-                        android:theme="@style/radioButtonStyle"/>
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Elevado"
-                        android:layout_marginStart="10dp"
-                        android:theme="@style/radioButtonStyle"
-                        />
-                </RadioGroup>
-            </LinearLayout>
             <TextView
                 android:paddingTop="10dp"
                 android:layout_width="wrap_content"

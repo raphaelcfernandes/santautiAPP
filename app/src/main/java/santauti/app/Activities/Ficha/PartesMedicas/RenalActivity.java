@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Activities.SnackbarCreator;
+import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Renal;
 import santauti.app.R;
@@ -23,20 +24,22 @@ public class RenalActivity extends GenericoActivity {
     TextInputEditText diureseTxt, pesoTxt, balancoHidricoTxt;
     RadioButton renalS,renalN;
     private int renalChecked;
+    private View dialiseItensLayout;
     private Realm realm;
     private Ficha ficha;
+    private MyAnimation myAnimation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);setContentView(R.layout.activity_renal);
         findViewById(R.id.activity_renal).requestFocus();
         setToolbar(getString(R.string.Renal));
 
-        diureseTxt = (TextInputEditText)findViewById(R.id.diurese);
+        dialiseItensLayout = findViewById(R.id.dialiseItensLayout);
         pesoTxt = (TextInputEditText)findViewById(R.id.peso);
-        balancoHidricoTxt = (TextInputEditText)findViewById(R.id.balanco_hidrico);
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
         ficha=getProperFicha();
+        myAnimation = new MyAnimation();
 //        if(ficha.getRenal()!=null){
 //            if(ficha.getRenal().getDiurese()>=0)
 //                diureseTxt.setText(String.valueOf(ficha.getRenal().getDiurese()));
@@ -56,7 +59,7 @@ public class RenalActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
-               // verificaCamposENotificaAdapter();
+                // verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -68,7 +71,7 @@ public class RenalActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
-               // verificaCamposENotificaAdapter();
+                // verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -83,7 +86,7 @@ public class RenalActivity extends GenericoActivity {
 
     @Override
     public void onBackPressed(){
-       // verificaCamposENotificaAdapter();
+        // verificaCamposENotificaAdapter();
         finish();
     }
 
@@ -128,5 +131,23 @@ public class RenalActivity extends GenericoActivity {
             finish();
         }
         return true;
+    }
+
+    public void dialiseRadioButtonClicked (View view){
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.simDialise:
+                if (checked)
+                    if(!dialiseItensLayout.isShown())
+                        myAnimation.slideDownView(getApplicationContext(),dialiseItensLayout);
+                break;
+            case R.id.naoDialise:
+                if (checked)
+                    if(dialiseItensLayout.isShown())
+                        myAnimation.slideUpView(getApplicationContext(),dialiseItensLayout);
+                break;
+        }
     }
 }
