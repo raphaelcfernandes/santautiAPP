@@ -25,17 +25,14 @@ public class BombaInfusaoAdapter extends RecyclerView.Adapter<BombaInfusaoAdapte
     private OnItemClickListener mItemClickListener;
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public final TextView droga;
-        public final TextView dose;
         public final TextView velInfusao;
         public final ImageView deleteIcon;
 
         public ViewHolder(View itemView) {
             super(itemView);
             droga = (TextView) itemView.findViewById(R.id.droga);
-            dose = (TextView)itemView.findViewById(R.id.doseDroga);
             velInfusao = (TextView)itemView.findViewById(R.id.velocidadeInfusao);
             deleteIcon = (ImageView)itemView.findViewById(R.id.deleteIcon);
-
             deleteIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -72,7 +69,6 @@ public class BombaInfusaoAdapter extends RecyclerView.Adapter<BombaInfusaoAdapte
     @Override
     public void onBindViewHolder(final BombaInfusaoAdapter.ViewHolder holder, final int position) {
         BombaInfusaoAdapterModel hemodinamicoModel = hemodinamicoAdapterModelList.get(position);
-        holder.dose.setText(String.valueOf(hemodinamicoModel.getDose()));
         holder.droga.setText(hemodinamicoModel.getDroga());
         holder.velInfusao.setText(String.valueOf(hemodinamicoModel.getVelInfusao()));
         setAnimationNewItem(holder.itemView, position);

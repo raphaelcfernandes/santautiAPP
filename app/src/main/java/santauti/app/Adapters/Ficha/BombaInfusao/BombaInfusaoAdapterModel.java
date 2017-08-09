@@ -10,12 +10,10 @@ public class BombaInfusaoAdapterModel {
     private ImageView deleteIcon;
     private ImageView editIcon;
     private String droga;
-    private int dose;
     private int velInfusao;
 
-    public BombaInfusaoAdapterModel(String droga, int dose,int velInfusao){
+    public BombaInfusaoAdapterModel(String droga, int velInfusao){
         this.droga=droga;
-        this.dose=dose;
         this.velInfusao=velInfusao;
     }
 
@@ -51,11 +49,4 @@ public class BombaInfusaoAdapterModel {
         this.droga = droga;
     }
 
-    public int getDose() {
-        return dose;
-    }
-
-    public void setDose(int dose) {
-        this.dose = dose;
-    }
 }

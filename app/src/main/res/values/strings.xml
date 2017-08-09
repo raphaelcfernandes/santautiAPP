@@ -11,7 +11,7 @@
     <string name="action_search">Filtrar</string>
     <string name="MonitorMultiparametrico">Monitor Multiparamétrico</string>
     <string name="Exames">Exames</string>
-    <string name="FolhasBalanco">Folhas de Balanćo</string>
+    <string name="FolhasBalanco">Folhas de Balanço</string>
     <string name="BombaInfusao">Bomba de Infusão</string>
     <string name="Dispositivos">Dispositivos</string>
     <string name="Respirador">Respirador</string>
@@ -138,6 +138,13 @@
     <string name="UF">UF</string>
     <string name="TempoHora">Tempo/Hora</string>
     <string name="Heparina">Heparina</string>
+    <string name="Nutricional">Nutricional</string>
+    <string name="PelesMucosas">Peles e Mucosas</string>
+    <string name="OsteoMuscular">Osteomuscular</string>
+    <string name="Ingestao">Ingestão</string>
+    <string name="Pele">Pele</string>
+    <string name="UlceraPressao">Ulcera de Pressão</string>
+    <string name="Mucosas">Mucosas</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -356,5 +363,22 @@
         <item>Membro Inferior Esquerdo</item>
     </string-array>
 
+    <string-array name="ingestao">
+        <item>Calórica</item>
+        <item>Proteica</item>
+        <item>Lipídica</item>
+        <item>Carboidratos</item>
+        <item>Balanço Hidrogenado</item>
+    </string-array>
+
+    <string-array name="mucosas">
+        <item>Normocoradas</item>
+        <item>Hipocoradas</item>
+        <item>Icterico</item>
+        <item>Anicterico</item>
+        <item>Secas</item>
+        <item>Hidratadas</item>
+        <item>Hiperhidratadas</item>
+    </string-array>
     <!--ARRAYS-->
 </resources>

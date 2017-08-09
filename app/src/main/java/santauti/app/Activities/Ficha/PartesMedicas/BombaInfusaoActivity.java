@@ -73,14 +73,13 @@ public class BombaInfusaoActivity extends GenericoActivity {
     BombaInfusaoAdapter.OnItemClickListener onItemClickListener = new BombaInfusaoAdapter.OnItemClickListener(){
         @Override
         public void onItemClick(View view, int position) {//Editar Droga Vasoativa
-            System.out.println(hemodinamicoModelList.get(position).getDose());
             System.out.println(hemodinamicoModelList.get(position).getDroga());
         }
     };
 
-    private void addDataFromDialogIntoAdapter(String droga,int dose,int velInfusao){
+    private void addDataFromDialogIntoAdapter(String droga,int velInfusao){
         if(!droga.equals(defaultSpinnerString)){
-            BombaInfusaoAdapterModel h = new BombaInfusaoAdapterModel(droga,dose,velInfusao);
+            BombaInfusaoAdapterModel h = new BombaInfusaoAdapterModel(droga,velInfusao);
             hemodinamicoModelList.add(h);
             bombaInfusaoAdapter.notifyItemInserted(bombaInfusaoAdapter.getItemCount()-1);
             bombaInfusaoAdapter.notifyDataSetChanged();
@@ -100,7 +99,6 @@ public class BombaInfusaoActivity extends GenericoActivity {
         LayoutInflater li = LayoutInflater.from(this);
         View dialogView = li.inflate(R.layout.bombainfusao_dialog,null);
         dialogView.requestFocus();
-        final TextInputEditText doseDroga = (TextInputEditText) dialogView.findViewById(R.id.dose);
         final TextInputEditText velInfusao = (TextInputEditText)dialogView.findViewById(R.id.velInfusao);
         drogasVasoativasSpinner = (Spinner)dialogView.findViewById(R.id.drogaVasoativa);
         ArrayAdapter<String> adapterDrogaVasoativas = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, drogasVasoativa);
@@ -110,9 +108,8 @@ public class BombaInfusaoActivity extends GenericoActivity {
         builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(!drogasVasoativasSpinner.getSelectedItem().toString().equals(defaultSpinnerString) && !isTextInputEditTextEmpty(doseDroga))
-                    addDataFromDialogIntoAdapter(drogasVasoativasSpinner.getSelectedItem().toString(),
-                            Integer.parseInt(doseDroga.getText().toString()),Integer.parseInt(velInfusao.getText().toString()));
+                if(!isTextInputEditTextEmpty(velInfusao))
+                    addDataFromDialogIntoAdapter(drogasVasoativasSpinner.getSelectedItem().toString(),Integer.parseInt(velInfusao.getText().toString()));
             }
         });
 

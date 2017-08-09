@@ -71,6 +71,22 @@ Neurologico -> OK
         - Nivel consciencia somente nao sedado
         - Paresia ou Plegia
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
+Nutricional: (depois de metabolico),OK
+    - ingestao
+         - calorica, proteica, lipidica, carboidratos, balanco hidrogenado
+Pele e Mucosas: (apos nutricao), OK
+    - Pele:
+        - normal, ressecada
+    - ulcera de pressao
+        - presente/ausente
+    - Mucosas:
+        - Normocoradas, hipocoradas, icterico, anicterico
+        - secas, hidratadas, hiperidratadas
+
+
+
+
+
 
 
 
@@ -145,7 +161,7 @@ Infeccioso: ->
         - Amoxicilina-clavulanato,
 
 
-Folhas de balanćo:
+Folhas de balanćo: activity + layout criado
     - Curva glicemica:
         - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.
     - evacuaćoes:
@@ -161,18 +177,8 @@ Folhas de balanćo:
         - Oral, enteral, gastrica
         - Volume/ml
 
-Nutricional: (depois de metabolico)
-    - ingestao
-         - calorica, proteica, lipidica, carboidratos, balanco hidrogenado
 
-Pele e Mucosas: (apos nutricao)
-    - Pele:
-        - normal, ressecada
-    - ulcera de pressao
-        - presente/ausente
-    - Mucosas:
-        - Normocoradas, hipocoradas, icterico, anicterico
-        - secas, hidratadas, hiperidratadas
+
 
 Osteomuscular: (depois de pele)
     - Musculatura:

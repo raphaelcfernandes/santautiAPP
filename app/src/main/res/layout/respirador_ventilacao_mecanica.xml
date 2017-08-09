@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/ventilacao_mecanica"
-    android:visibility="gone"
+    android:visibility="visible"
      >
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:paddingBottom="10dp"
         android:orientation="vertical"
         android:background="?attr/selectableItemBackground"
-        android:onClick="modoVentilatorioOnClick">
+        android:onClick="parametrosModoVentilatorioOnClick">
         <TextView
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"

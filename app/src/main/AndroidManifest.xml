@@ -36,10 +36,8 @@
         <activity android:name=".Activities.Ficha.PartesMedicas.MetabolicoActivity" />
         <activity
             android:name=".Activities.SplashActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -49,6 +47,9 @@
         <activity android:name=".Activities.Ficha.PartesMedicas.RespiradorActivity" />
         <activity android:name=".Activities.Ficha.PartesMedicas.ExamesActivity" />
         <activity android:name=".Activities.Ficha.PartesMedicas.FolhasBalancoActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.NutricionalActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.PelesMucosasActivity" />
+        <activity android:name=".Activities.Ficha.PartesMedicas.OsteomuscularActivity" />
     </application>
 
 
