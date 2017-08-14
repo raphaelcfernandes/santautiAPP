@@ -22,14 +22,7 @@ FICHA:
 
 
 /*****************MUDANÇAS FEITAS**********/
-Gastro -> OK. (Mudar layout para switch e adaptar corretamente os itens para ficar igual o Android)
-	- VCM -> ok
-	- Massas paupaveis: sim ou nao => ok
-	- visceras paupaveis: sim ou nao => ok
-	- ruidos hidraero -> embaixo tensao => ok
-	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter =>
-	- assit: pequena, media, grande. radioButton
-	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
+
 Monitor -> 100% ok
     - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico %) Spo2
 Bomba de infusao -> 100% ok
@@ -48,13 +41,7 @@ Hemodinamico: adicionar drogas vai para bomba de infusao, lactato foi para Exame
   - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
   - frequencia cardiaca -> monitor (OK)
   - PAM + PVC + swan_Ganz -> monitor (OK)
-Renal: -> 100% ok
-  - Urina: clara escura. debaixo de diurese
-  - Em procedimento dialitico? Em dialise?
-    - UF: sim ou nao
-    - Volume: numerico
-    - Tempo/hora: numerico
-    - Heparina: sim ou nao
+
 Metabolico: -> 100% ok (Disturbio, acidose e gasometria foram para exame)
     - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
     - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
@@ -82,13 +69,35 @@ Pele e Mucosas: (apos nutricao), OK
     - Mucosas:
         - Normocoradas, hipocoradas, icterico, anicterico
         - secas, hidratadas, hiperidratadas
+Osteomuscular: (depois de pele), OK (Checar se está certo o musculatura como ta feito)
+    - Musculatura:
+        - hiper/hipo/eu trofica, hipo/hiper/eu tonica.
 
 
 
+Folhas de balanćo: activity + layout criado. OK (trocar layout para popupmenu)
+    - Curva glicemica:
+        - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.
+    - evacuaćoes:
+        - Presente
+            - Numero de eventos
+            - aspecto das fezes:
+                - diarreicas, normais, endurecidas
+        - Ausente
+    - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
+        - Volume/ml
+        - aspecto: gastrico, fecaloide, biliar
+    - Nutricao:
+        - Oral, enteral, gastrica
+        - Volume/ml
 
-
-
-
+Renal: -> 100% ok
+  - Urina: clara escura. debaixo de diurese
+  - Em procedimento dialitico? Em dialise? -> trocar para padrao com switch
+    - UF: sim ou nao
+    - Volume: numerico
+    - Tempo/hora: numerico
+    - Heparina: sim ou nao
 
 
 Exames:
@@ -116,6 +125,28 @@ Exames:
         - sim:
             - normal, elevada
 
+Infeccioso: ->
+    - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
+    - marcadores de infeccao: estaveis, em melhora, em piora
+    - antibiotico
+        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
+        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
+        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
+        - Amoxicilina-clavulanato,
+
+
+
+
+Gastro -> OK. (Mudar layout para switch e adaptar corretamente os itens para ficar igual o Android)
+	- VCM -> ok
+	- Massas paupaveis: sim ou nao => ok
+	- visceras paupaveis: sim ou nao => ok
+	- ruidos hidraero -> embaixo tensao => ok
+	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter =>
+	- assit: pequena, media, grande. radioButton
+	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
+
+/*****************MUDANÇAS FEITAS**********/
 
 Respiratorio: ->
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
@@ -150,43 +181,6 @@ Ventilacao: ->
         - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
         - Pressao cuff, retirar daqui? Manter? Pegar valor de Respirador? E se n tiver valor em Respirador?
             - Freq respiratoria 2 campos: paciente e respirador
-
-Infeccioso: ->
-    - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
-    - marcadores de infeccao: estaveis, em melhora, em piora
-    - antibiotico
-        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
-        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
-        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
-        - Amoxicilina-clavulanato,
-
-
-Folhas de balanćo: activity + layout criado
-    - Curva glicemica:
-        - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.
-    - evacuaćoes:
-        - Presente
-            - Numero de eventos
-            - aspecto das fezes:
-                - diarreicas, normais, endurecidas
-        - Ausente
-    - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
-        - Volume/ml
-        - aspecto: gastrico, fecaloide, biliar
-    - Nutricao:
-        - Oral, enteral, gastrica
-        - Volume/ml
-
-
-
-
-Osteomuscular: (depois de pele)
-    - Musculatura:
-        - hiper/hipo/eu trofica, hipo/hiper/eu tonica.
-
-/*****************MUDANÇAS FEITAS**********/
-
-
 
 
 ---------------- DADOS ENFERMAGEM ----------------------------

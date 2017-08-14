@@ -23,11 +23,12 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:orientation="vertical"
-            android:background="?attr/selectableItemBackground">
+            android:background="?attr/selectableItemBackground"
+            android:onClick="musculaturaOnClick">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/OsteoMuscular"
+                android:text="@string/Musculatura"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"/>
             <TextView
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/curvaTermica"/>
+                android:id="@+id/musculaturaTextView"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

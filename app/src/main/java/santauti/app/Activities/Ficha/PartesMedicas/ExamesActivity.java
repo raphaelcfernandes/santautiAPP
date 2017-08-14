@@ -6,20 +6,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.PopupMenu;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
 import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Adapters.Ficha.BombaInfusao.BombaInfusaoAdapter;
+import santauti.app.Animation.MyAnimation;
 import santauti.app.R;
 
 /**
@@ -29,7 +31,10 @@ import santauti.app.R;
 public class ExamesActivity extends GenericoActivity{
     TextInputEditText gasometrialArterial;
     private int gasometriaArterialInput,disturbioEletroliticoSelection=-1,acidoseMetabolicaSelection=-1;
-    private TextView disturbioEletrolitico,acidoseMetabolica;
+    private TextView disturbioEletrolitico,acidoseMetabolica,menuPotassio,potassioTextView,magnesioTextView,menuMagnesio,menuFosforo,fosforoTextView;
+    private TextView menuCalcio,calcioTextView,menuAlbumina,albuminaTextView;
+    private View eletrolitoItens;
+    private MyAnimation myAnimation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +44,29 @@ public class ExamesActivity extends GenericoActivity{
 
         disturbioEletrolitico = (TextView)findViewById(R.id.disturbioEletrolitico);
         acidoseMetabolica = (TextView)findViewById(R.id.acidoseMetabolica);
+        menuPotassio = (TextView)findViewById(R.id.menuPotassio);
+        menuMagnesio = (TextView)findViewById(R.id.menuMagnesio);
+        menuFosforo = (TextView)findViewById(R.id.menuFosforo);
+        menuCalcio = (TextView)findViewById(R.id.menuCalcio);
+        menuAlbumina = (TextView)findViewById(R.id.menuAlbumina);
+
+        potassioTextView = (TextView)findViewById(R.id.potassioTextView);
+        magnesioTextView = (TextView)findViewById(R.id.magnesioTextView);
+        fosforoTextView = (TextView)findViewById(R.id.fosforoTextView);
+        calcioTextView = (TextView)findViewById(R.id.calcioTextView);
+        albuminaTextView = (TextView)findViewById(R.id.albuminaTextView);
+        eletrolitoItens = findViewById(R.id.eletrolitosItens);
+
 
         gasometrialArterial = (TextInputEditText)findViewById(R.id.gasometrial_arterial);
         gasometrialArterial.addTextChangedListener(textWatcher);
 
+        myAnimation = new MyAnimation();
+
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), HematologicoActivity.class);
+                intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
@@ -61,6 +81,7 @@ public class ExamesActivity extends GenericoActivity{
         antFicha = (Button)findViewById(R.id.fichaAnterior);
         antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
     }
+
     public void disturbioEletroliticoOnCLick(View view) {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
@@ -142,4 +163,142 @@ public class ExamesActivity extends GenericoActivity{
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
     };
+
+    public void potassioOnClick(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuPotassio, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_potassio, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.hipercalemia:
+                        potassioTextView.setText(item.getTitle());
+                        break;
+                    case R.id.normal:
+                        potassioTextView.setText(item.getTitle());
+                        break;
+                    case R.id.hipocalemia:
+                        potassioTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    public void magnesioOnClick(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuMagnesio, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_magnesio, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.hipermagnesemia:
+                        magnesioTextView.setText(item.getTitle());
+                        break;
+                    case R.id.normal:
+                        magnesioTextView.setText(item.getTitle());
+                        break;
+                    case R.id.hipomagnesemia:
+                        magnesioTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    public void fosforoOnClick(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuFosforo, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_fosforo, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.hiperfosfatemia:
+                        fosforoTextView.setText(item.getTitle());
+                        break;
+                    case R.id.normal:
+                        fosforoTextView.setText(item.getTitle());
+                        break;
+                    case R.id.hipofosfatemia:
+                        fosforoTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    public void calcioOnClick(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuCalcio, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_calcio, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.hipercalcemia:
+                        calcioTextView.setText(item.getTitle());
+                        break;
+                    case R.id.normal:
+                        calcioTextView.setText(item.getTitle());
+                        break;
+                    case R.id.hipocalcemia:
+                        calcioTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    public void albuminaOnClick(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuAlbumina, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_albumina, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.hiperalbuminemia:
+                        albuminaTextView.setText(item.getTitle());
+                        break;
+                    case R.id.normal:
+                        albuminaTextView.setText(item.getTitle());
+                        break;
+                    case R.id.hipoalbuminemia:
+                        albuminaTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+
+    public void eletrolitosOnCLick(View view){
+        if(eletrolitoItens.isShown())
+            myAnimation.slideUpView(getApplicationContext(),eletrolitoItens);
+        else
+            myAnimation.slideDownView(getApplicationContext(),eletrolitoItens);
+    }
 }

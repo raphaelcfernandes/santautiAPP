@@ -145,4 +145,5 @@ public abstract class GenericoActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
 }

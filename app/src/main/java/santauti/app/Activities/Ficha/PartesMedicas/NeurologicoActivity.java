@@ -676,8 +676,10 @@ public class NeurologicoActivity extends GenericoActivity {
                 avaliacaoString.append(", Diferença: ").append(diferencaPupilaTextView.getText().toString());
             if(reatividadeLuzTextView.getText().length()>0)
                 avaliacaoString.append(", Reatividade a Luz: ").append(reatividadeLuzTextView.getText().toString());
-            avaliacaoPupilarTextView.setText(avaliacaoString);
-            avaliacaoPupilarTextView.setVisibility(View.VISIBLE);
+            if(avaliacaoString.length()!=0) {
+                avaliacaoPupilarTextView.setText(avaliacaoString);
+                avaliacaoPupilarTextView.setVisibility(View.VISIBLE);
+            }
         }
         else {
             avaliacaoPupilarTextView.setVisibility(View.GONE);

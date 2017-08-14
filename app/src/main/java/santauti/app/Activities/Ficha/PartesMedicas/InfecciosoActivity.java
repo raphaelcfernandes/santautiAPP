@@ -44,7 +44,7 @@ public class InfecciosoActivity extends GenericoActivity {
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), MetabolicoActivity.class);
+                intent = new Intent(view.getContext(), OsteomuscularActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1,intent);
                 startActivity(intent);
                 exitActivityToLeft();

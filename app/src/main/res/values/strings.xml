@@ -6,6 +6,7 @@
     <string name="login">Login</string>
     <string name="Usuario">Usuario</string>
     <string name="Senha">Senha</string>
+    <string name="Normal">Normal</string>
     <string name="title_activity_ficha">Evolução</string>
     <string name="title_activity_home">Pacientes</string>
     <string name="action_search">Filtrar</string>
@@ -99,6 +100,7 @@
     <string name="AdicionarDispositivo">Adicionar Dispositivo</string>
     <string name="Ventilacao">Ventilação</string>
     <string name="Volume">Volume</string>
+    <string name="VolumeMl">Volume/ml</string>
     <string name="IPAP">IPAP</string>
     <string name="EPAP">EPAP</string>
     <string name="Saturacao">Saturação</string>
@@ -145,6 +147,31 @@
     <string name="Pele">Pele</string>
     <string name="UlceraPressao">Ulcera de Pressão</string>
     <string name="Mucosas">Mucosas</string>
+    <string name="Musculatura">Musculatura</string>
+    <string name="CurvaGlicemica">Curva Glicêmica</string>
+    <string name="Evacuacoes">Evacuações</string>
+    <string name="AspectoFezes">Aspecto das Fezes</string>
+    <string name="NumeroEventos">Número de Eventos</string>
+    <string name="Nutricao">Nutrição</string>
+    <string name="Eletrolitos">Eletrólitos</string>
+    <string name="Potassio">Potássio</string>
+    <string name="Sodio">Sódio</string>
+    <string name="Magnesio">Magnésio</string>
+    <string name="Fosforo">Fósforo</string>
+    <string name="Calcio">Cálcio</string>
+    <string name="Albumina">Albumina</string>
+    <string name="Hipocalemia">Hipocalemia</string>
+    <string name="Hipercalemia">Hipercalemia</string>
+    <string name="Hiponatremia">Hiponatremia</string>
+    <string name="Hipernatremia">Hipernatremia</string>
+    <string name="Hipomagnesemia">Hipomagnesemia</string>
+    <string name="Hipermagnesemia">Hipermagnesemia</string>
+    <string name="Hipofosfatemia">Hipofosfatemia</string>
+    <string name="Hiperfosfatemia">Hiperfosfatemia</string>
+    <string name="Hipocalcemia">Hipocalcemia</string>
+    <string name="Hipercalcemia">Hipercalcemia</string>
+    <string name="Hipoalbuminemia">Hipoalbuminemia</string>
+    <string name="Hiperalbuminemia">Hiperalbuminemia</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -379,6 +406,33 @@
         <item>Secas</item>
         <item>Hidratadas</item>
         <item>Hiperhidratadas</item>
+    </string-array>
+    
+    <string-array name="musculatura">
+        <item>Hipertrofica</item>
+        <item>Hipotrofica</item>
+        <item>Eutrofica</item>
+        <item>Hipertonica</item>
+        <item>Hipotonica</item>
+        <item>Eutonica</item>
+    </string-array>
+
+    <string-array name="curvaGlicemica">
+        <item>Normoglicemia</item>
+        <item>Eventos de Hipoglicemia</item>
+        <item>Eventos de Hiperglicemia</item>
+    </string-array>
+
+    <string-array name="aspectoFezes">
+        <item>Diarreicas</item>
+        <item>Normais</item>
+        <item>Endurecidas</item>
+    </string-array>
+
+    <string-array name="nutricao">
+        <item>Oral</item>
+        <item>Enteral</item>
+        <item>Gastrica</item>
     </string-array>
     <!--ARRAYS-->
 </resources>
