@@ -4,19 +4,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.widget.SwitchCompat;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import santauti.app.Activities.Ficha.FichaActivity;
@@ -29,12 +27,15 @@ import santauti.app.R;
  */
 
 public class ExamesActivity extends GenericoActivity{
-    TextInputEditText gasometrialArterial;
-    private int gasometriaArterialInput,disturbioEletroliticoSelection=-1,acidoseMetabolicaSelection=-1;
+    private int disturbioEletroliticoSelection=-1,acidoseMetabolicaSelection=-1, raioxToraxSelection =-1,leucogramaSelection=-1,funcaoHepaticaSelection=-1;
     private TextView disturbioEletrolitico,acidoseMetabolica,menuPotassio,potassioTextView,magnesioTextView,menuMagnesio,menuFosforo,fosforoTextView;
-    private TextView menuCalcio,calcioTextView,menuAlbumina,albuminaTextView;
-    private View eletrolitoItens;
+    private TextView menuCalcio,calcioTextView,menuAlbumina,albuminaTextView,pcrTextView,gasometriaArterialMetabolicoTextView,
+            gasometriaArterialRespiratorioTextView,gasometriaArterialTextView,raioxToraxTextView,leucogramaTextView,funcaoHepaticaTextView,amilaseTextView;
+    private View eletrolitoItens, pcrLayout,gasometrialArterialItensLayout,amilaseLayout;
     private MyAnimation myAnimation;
+    private boolean[] gasometriaArterialMetabolico = new boolean[4],gasometriaArterialRespiratorio = new boolean[4];
+    private SwitchCompat gasometriaArterialSwitch,funcaoHepaticaSwitch,amilaseSwitch;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class ExamesActivity extends GenericoActivity{
         menuFosforo = (TextView)findViewById(R.id.menuFosforo);
         menuCalcio = (TextView)findViewById(R.id.menuCalcio);
         menuAlbumina = (TextView)findViewById(R.id.menuAlbumina);
+        pcrTextView = (TextView)findViewById(R.id.pcrTextView);
 
         potassioTextView = (TextView)findViewById(R.id.potassioTextView);
         magnesioTextView = (TextView)findViewById(R.id.magnesioTextView);
@@ -56,11 +58,19 @@ public class ExamesActivity extends GenericoActivity{
         calcioTextView = (TextView)findViewById(R.id.calcioTextView);
         albuminaTextView = (TextView)findViewById(R.id.albuminaTextView);
         eletrolitoItens = findViewById(R.id.eletrolitosItens);
-
-
-        gasometrialArterial = (TextInputEditText)findViewById(R.id.gasometrial_arterial);
-        gasometrialArterial.addTextChangedListener(textWatcher);
-
+        pcrLayout = findViewById(R.id.pcrLayout);
+        gasometriaArterialSwitch = (SwitchCompat)findViewById(R.id.gasometriaArterialSwitch);
+        gasometrialArterialItensLayout = findViewById(R.id.gasometriaArterialItens);
+        gasometriaArterialMetabolicoTextView = (TextView)findViewById(R.id.metabolicoGasometriaTextView);
+        gasometriaArterialRespiratorioTextView = (TextView)findViewById(R.id.respiratorioGasometriaTextView);
+        gasometriaArterialTextView = (TextView)findViewById(R.id.gasometriaArterialTextView);
+        raioxToraxTextView = (TextView)findViewById(R.id.raioxToraxTextView);
+        leucogramaTextView = (TextView)findViewById(R.id.leucogramaTextView);
+        funcaoHepaticaTextView = (TextView)findViewById(R.id.funcaoHepaticaTextView);
+        funcaoHepaticaSwitch = (SwitchCompat)findViewById(R.id.funcaoHepaticaSwitch);
+        amilaseTextView = (TextView)findViewById(R.id.amilaseTextView);
+        amilaseSwitch = (SwitchCompat)findViewById(R.id.amilaseSwitch);
+        amilaseLayout = findViewById(R.id.amilaseLayout);
         myAnimation = new MyAnimation();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +85,7 @@ public class ExamesActivity extends GenericoActivity{
         });
 
     }
+
     @Override
     public void prepareNavigationButtons() {
         findViewById(R.id.fichaProxima).setVisibility(View.GONE);
@@ -149,20 +160,6 @@ public class ExamesActivity extends GenericoActivity{
         // display dialog
         dialog.show();
     }
-
-    private TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            if(gasometrialArterial.getText().toString().length()>0)
-                gasometriaArterialInput = (Integer.parseInt(gasometrialArterial.getText().toString()));
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-    };
 
     public void potassioOnClick(View view){
         PopupMenu popupMenu = new PopupMenu(view.getContext(), menuPotassio, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
@@ -268,6 +265,100 @@ public class ExamesActivity extends GenericoActivity{
         popupMenu.show();
     }
 
+    public void pcrOnCLick (View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), pcrLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_pcr, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.elevando:
+                        pcrTextView.setText(item.getTitle());
+                        break;
+                    case R.id.estavel:
+                        pcrTextView.setText(item.getTitle());
+                        break;
+                    case R.id.emQueda:
+                        pcrTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    public void raioxToraxOnCLick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.RaioxTorax);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.raioxTorax);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, raioxToraxSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        raioxToraxTextView.setText(items[which]);
+                        raioxToraxTextView.setVisibility(View.VISIBLE);
+                        raioxToraxSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void leucogramaOnCLick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Leucograma);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.leucograma);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, leucogramaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        leucogramaTextView.setText(items[which]);
+                        leucogramaTextView.setVisibility(View.VISIBLE);
+                        leucogramaSelection=which;
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
     public void albuminaOnClick(View view){
         PopupMenu popupMenu = new PopupMenu(view.getContext(), menuAlbumina, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
         popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_albumina, popupMenu.getMenu());
@@ -294,11 +385,195 @@ public class ExamesActivity extends GenericoActivity{
         popupMenu.show();
     }
 
-
     public void eletrolitosOnCLick(View view){
         if(eletrolitoItens.isShown())
             myAnimation.slideUpView(getApplicationContext(),eletrolitoItens);
         else
             myAnimation.slideDownView(getApplicationContext(),eletrolitoItens);
+    }
+
+    public void gasometriaArterialOnClick(View view) {
+        StringBuilder gasometriaArterial = new StringBuilder();
+        if(gasometriaArterialSwitch.isChecked()) {
+            if (gasometrialArterialItensLayout.isShown()) {
+                myAnimation.slideUpView(getApplicationContext(), gasometrialArterialItensLayout);
+                for (int i = 0; i < gasometriaArterialMetabolico.length; i++)
+                    if (gasometriaArterialMetabolico[i])
+                        gasometriaArterial.append(getResources().getStringArray(R.array.gasometriaArterialMetabolico)[i]).append(", ");
+                for (int i = 0; i < gasometriaArterialRespiratorio.length; i++)
+                    if (gasometriaArterialRespiratorio[i])
+                        gasometriaArterial.append(getResources().getStringArray(R.array.gasometriaArterialRespiratorio)[i]).append(", ");
+                gasometriaArterialTextView.setText(gasometriaArterial.substring(0,gasometriaArterial.length()-2));
+                gasometriaArterialTextView.setVisibility(View.VISIBLE);
+            }
+            else {
+                myAnimation.slideDownView(getApplicationContext(), gasometrialArterialItensLayout);
+                gasometriaArterialTextView.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    public void gasometriaArterialSwitchOnClick(View view){
+        if(gasometriaArterialSwitch.isChecked()) {
+            gasometriaArterialTextView.setVisibility(View.INVISIBLE);
+            if(!gasometrialArterialItensLayout.isShown())
+                myAnimation.slideDownView(getApplicationContext(),gasometrialArterialItensLayout);
+        }
+        else {
+            gasometriaArterialTextView.setText(R.string.Normal);
+            gasometriaArterialTextView.setVisibility(View.VISIBLE);
+            if(gasometrialArterialItensLayout.isShown())
+                myAnimation.slideUpView(getApplicationContext(),gasometrialArterialItensLayout);
+        }
+    }
+
+    public void metabolicoOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
+
+        // Set the dialog title
+        builder.setTitle(R.string.Metabolico);
+        final String[] items = getResources().getStringArray(R.array.gasometriaArterialMetabolico);
+        builder.setMultiChoiceItems(items, gasometriaArterialMetabolico,
+                new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        if (isChecked)
+                            gasometriaArterialMetabolico[which]=true;
+                        else
+                            gasometriaArterialMetabolico[which]=false;
+                    }
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        setTextViewFromDialogMultipleText(gasometriaArterialMetabolico,gasometriaArterialMetabolicoTextView,items);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void respiratorioOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
+
+        // Set the dialog title
+        builder.setTitle(R.string.Respiratorio);
+        final String[] items = getResources().getStringArray(R.array.gasometriaArterialRespiratorio);
+        builder.setMultiChoiceItems(items, gasometriaArterialRespiratorio,
+                new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        if (isChecked)
+                            gasometriaArterialRespiratorio[which]=true;
+                        else
+                            gasometriaArterialRespiratorio[which]=false;
+                    }
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        setTextViewFromDialogMultipleText(gasometriaArterialRespiratorio,gasometriaArterialRespiratorioTextView,items);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void funcaoHepaticaOnClick(View view){
+        if(!funcaoHepaticaSwitch.isChecked())
+            funcaoHepaticaDialog();
+        else{
+            funcaoHepaticaTextView.setText(getString(R.string.Nao));
+            funcaoHepaticaSwitch.setChecked(false);
+        }
+    }
+
+    private void funcaoHepaticaDialog(){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.FuncaoHepatica);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.funcaoHepatica);
+        Arrays.sort(items);
+        builder.setSingleChoiceItems(items, funcaoHepaticaSelection,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        funcaoHepaticaTextView.setText(items[which]);
+                        funcaoHepaticaTextView.setVisibility(View.VISIBLE);
+                        funcaoHepaticaSelection=which;
+                        funcaoHepaticaSwitch.setChecked(true);
+                        dialog.dismiss();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void amilaseOnClick(View view){
+        if(!amilaseSwitch.isChecked())
+            amilaseDialog(view);
+        else{
+            amilaseTextView.setText(getString(R.string.Nao));
+            amilaseSwitch.setChecked(false);
+        }
+    }
+
+    private void amilaseDialog(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), amilaseLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_amilase, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.normal:
+                        amilaseTextView.setText(item.getTitle());
+                        amilaseSwitch.setChecked(true);
+                        break;
+                    case R.id.elevada:
+                        amilaseTextView.setText(item.getTitle());
+                        amilaseSwitch.setChecked(true);
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
     }
 }

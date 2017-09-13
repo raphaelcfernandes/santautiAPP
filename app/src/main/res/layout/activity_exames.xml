@@ -20,10 +20,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+
+            <include layout="@layout/gasometria_arterial"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:orientation="horizontal">
@@ -54,23 +59,13 @@
                         />
                 </RadioGroup>
             </LinearLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/full_name"
-                android:paddingTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/TextLabelBlue"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingBottom="10dp">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/gasometrial_arterial"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/GasometriaArterial"
-                    android:inputType="number" />
-            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -197,6 +192,52 @@
                             android:text="@string/Sodio" />
                     </LinearLayout>
                 </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/amilaseLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="amilaseOnClick"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="0dp"
+                        android:layout_marginEnd="240dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Amilase"
+                        style="@style/TitleTextStyleForLayoutSelection"/>
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/amilaseSwitch"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:clickable="false"
+                        android:theme="@style/MySwitch"/>
+                </LinearLayout>
+                <TextView
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Nao"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/amilaseTextView"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -378,6 +419,144 @@
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pcrLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="pcrOnCLick">
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/PCR"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/pcrTextView"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/raioxToraxLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="raioxToraxOnCLick">
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/RaioxTorax"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/raioxToraxTextView"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="leucogramaOnCLick">
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Leucograma"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/leucogramaTextView"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="funcaoHepaticaOnClick"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="0dp"
+                        android:layout_marginEnd="160dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FuncaoHepatica"
+                        style="@style/TitleTextStyleForLayoutSelection"/>
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/funcaoHepaticaSwitch"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:clickable="false"
+                        android:theme="@style/MySwitch"/>
+                </LinearLayout>
+                <TextView
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Nao"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/funcaoHepaticaTextView"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

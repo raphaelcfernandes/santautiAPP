@@ -172,6 +172,19 @@
     <string name="Hipercalcemia">Hipercalcemia</string>
     <string name="Hipoalbuminemia">Hipoalbuminemia</string>
     <string name="Hiperalbuminemia">Hiperalbuminemia</string>
+    <string name="PCR">PCR</string>
+    <string name="Estavel">Estável</string>
+    <string name="EmQueda">Em Queda</string>
+    <string name="Elevando">Elevando</string>
+    <string name="Antibiotico">Antibióticos</string>
+    <string name="RaioxTorax">Raio-x Torax</string>
+    <string name="Pneumotorax">Pneumotorax</string>
+    <string name="Atelectasia">Atelectasia</string>
+    <string name="InfiltradosNovos">Infiltrados Novos</string>
+    <string name="Leucograma">Leucograma</string>
+    <string name="FuncaoHepatica">Função Hepática</string>
+    <string name="Amilase">Amilase</string>
+    <string name="Elevada">Elevada</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -287,7 +300,7 @@
         <item>Aumentado</item>
         <item>Abolido</item>
     </string-array>
-    
+
     <string-array name="direito_esquerdo_ambos">
         <item>Direito</item>
         <item>Esquerdo</item>
@@ -407,7 +420,7 @@
         <item>Hidratadas</item>
         <item>Hiperhidratadas</item>
     </string-array>
-    
+
     <string-array name="musculatura">
         <item>Hipertrofica</item>
         <item>Hipotrofica</item>
@@ -433,6 +446,72 @@
         <item>Oral</item>
         <item>Enteral</item>
         <item>Gastrica</item>
+    </string-array>
+
+    <string-array name="antibioticos">
+        <item>Ceftriaxone</item>
+        <item>Azitromicina</item>
+        <item>Cefepime</item>
+        <item>Neropenem</item>
+        <item>Ertapenem</item>
+        <item>Citrofloxacim</item>
+        <item>Levofloxacim</item>
+        <item>Fluconasol</item>
+        <item>Polimixina</item>
+        <item>Moxiflaxicino</item>
+        <item>Tigeciclina</item>
+        <item>Vancomicina</item>
+        <item>Teicoplanina</item>
+        <item>Metronidazol</item>
+        <item>Pipe-tazo</item>
+        <item>Imipenem</item>
+        <item>Oxacilina</item>
+        <item>Clindamicina</item>
+        <item>Daptomicina</item>
+        <item>Linezolida</item>
+        <item>Equinocandina</item>
+        <item>Cefazolina</item>
+        <item>Cefalexina</item>
+        <item>Amoxicilina-clavulanato</item>
+    </string-array>
+
+    <string-array name="gasometriaArterialRespiratorio">
+        <item>Acidose Respiratoria Compensada</item>
+        <item>Acidose Respiratoria Descompensada</item>
+        <item>Alcalose Respiratoria Compensada</item>
+        <item>Alcalose Respiratoria Descompensada</item>
+    </string-array>
+
+    <string-array name="gasometriaArterialMetabolico">
+        <item>Acidose Metabolica Compensada</item>
+        <item>Acidose Metabolica Descompensada</item>
+        <item>Alcalose Metabolica Compensada</item>
+        <item>Alcalose Metabolica Descompensada</item>
+    </string-array>
+
+    <string-array name="raioxTorax">
+        Pneumotorax, atelectasia, infiltrados novos, normal.
+        <item>Pneumotorax</item>
+        <item>Atelectasia</item>
+        <item>Infiltrados Novos</item>
+        <item>Normal</item>
+    </string-array>
+
+    <string-array name="leucograma">
+        <item>Normal</item>
+        <item>Estável</item>
+        <item>Em Melhora</item>
+        <item>Em Piora</item>
+    </string-array>
+
+    <string-array name="funcaoHepatica">
+        <item>Normal</item>
+        <item>Bilirrubinas Normais</item>
+        <item>Bilirrubinas Elevadas</item>
+        <item>Transaminases Normais</item>
+        <item>Transaminases Elevadas</item>
+        <item>FA/GGT Normais</item>
+        <item>FA/GGT Elevadas</item>
     </string-array>
     <!--ARRAYS-->
 </resources>

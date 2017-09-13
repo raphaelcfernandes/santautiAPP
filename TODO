@@ -99,8 +99,17 @@ Renal: -> 100% ok
     - Tempo/hora: numerico
     - Heparina: sim ou nao
 
+Infeccioso: -> OK.
+    - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
+    - marcadores de infeccao: estaveis, em melhora, em piora
+    - antibiotico
+        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
+        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
+        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
+        - Amoxicilina-clavulanato,
 
-Exames:
+
+Exames: Checar OK
     - Eletrólitos: inserćao de dados na mao OU
                     insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
         - Potássio: hipo, hipercalemia. Se n marcar = normal
@@ -118,24 +127,12 @@ Exames:
          - Pneumotorax, atelectasia, infiltrados novos, normal.
     - Leucograma:
         - Normal, estável, em melhora, em piora
-    - Funćao hepatica: sim ou nao
+    - Funćao hepatica: sim ou nao (Uma opçao ou varias ao mesmo tempo?)
         - sim:
             - normal, bilirrubinas: normais/elevadas, transaminases: normais/elevadas, FA/GGT: normais/elevadas
     - Amilase: sim ou nao
         - sim:
             - normal, elevada
-
-Infeccioso: ->
-    - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
-    - marcadores de infeccao: estaveis, em melhora, em piora
-    - antibiotico
-        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
-        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
-        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
-        - Amoxicilina-clavulanato,
-
-
-
 
 Gastro -> OK. (Mudar layout para switch e adaptar corretamente os itens para ficar igual o Android)
 	- VCM -> ok

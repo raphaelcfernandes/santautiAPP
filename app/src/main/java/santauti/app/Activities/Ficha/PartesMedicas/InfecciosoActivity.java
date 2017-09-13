@@ -4,19 +4,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Infeccioso;
 import santauti.app.R;
 
 /**
@@ -27,6 +26,8 @@ public class InfecciosoActivity extends GenericoActivity {
     private Realm realm;
     private int marcadoresInfeccaoSelection=-1;
     private TextView marcadoresInfeccao;
+    private boolean[] antibioticos = new boolean[24];
+    private TextView antibioticoTextView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +36,8 @@ public class InfecciosoActivity extends GenericoActivity {
 
         /*********************VIEWS***********************/
         marcadoresInfeccao = (TextView)findViewById(R.id.marcadoresInfeccao);
+        antibioticoTextView = (TextView)findViewById(R.id.antibioticoTextView);
         /*********************VIEWS***********************/
-
 
         realm = Realm.getDefaultInstance();
         prepareNavigationButtons();
@@ -138,6 +139,43 @@ public class InfecciosoActivity extends GenericoActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    public void antibioticoOnClick(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
+
+        // Set the dialog title
+        builder.setTitle(R.string.Antibiotico);
+        final String[] items = getResources().getStringArray(R.array.antibioticos);
+        Arrays.sort(items);
+        builder.setMultiChoiceItems(items, antibioticos,
+                new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        if (isChecked)
+                            antibioticos[which]=true;
+                        else
+                            antibioticos[which]=false;
+                    }
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        setTextViewFromDialogMultipleText(antibioticos,antibioticoTextView,items);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
                     }
                 });
 
