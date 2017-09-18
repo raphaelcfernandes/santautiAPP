@@ -26,7 +26,6 @@
     <string name="Infeccioso">Infeccioso</string>
     <string name="Metabolico">Metabólico</string>
     <string name="Evolucao">Evolução</string>
-    <string name="nivel_consciencia">Nível de Consciência:</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
     <string name="sharedPrefecences">SantaUTISharedPreferences</string>
@@ -49,25 +48,23 @@
     <string name="Swanganz">Swan-ganz</string>
     <string name="SPO2">SPO2</string>
     <string name="SJO2">SJO2</string>
-    <string name="Diurese">Diurese</string>
     <string name="PesoKG">Peso (kg)</string>
-    <string name="BalancoHidrico">Balanço Hídrico</string>
     <string name="Urina">Urina</string>
     <string name="Clara">Clara</string>
     <string name="Escura">Escura</string>
     <string name="EmDialise">Em Diálise?</string>
     <string name="Sim">Sim</string>
     <string name="Nao">Não</string>
-    <string name="Hipoabuminemia">Hipoabuminemia</string>
     <string name="FoneseBulhas">Fonese de Bulhas</string>
     <string name="Sopro">Sopro</string>
+    <string name="Pulso">Pulso</string>
+    <string name="PerfusaoCapilar">Perfusão Capilar</string>
     <string name="TipoSopro">Tipo do Sopro</string>
     <string name="IntensidadeSopro">Intensidade do Sopro</string>
     <string name="Hematocrito">Hematócrito</string>
     <string name="Hemoglobina">Hemoglobina</string>
     <string name="Plaqueta">Plaqueta</string>
     <string name="Tromboprofilaxia">Tromboprofilaxia</string>
-    <string name="Hemograma">Hemograma</string>
     <string name="CurvaTermica">Curva Térmica</string>
     <string name="MarcadoresInfeccao">Marcadores de Infecção</string>
     <string name="ViasAereas">Vias Aéreas</string>
@@ -77,20 +74,11 @@
     <string name="Sibilos">Sibilos</string>
     <string name="Crepitacoes">Crepitações</string>
     <string name="Base">Base</string>
-    <string name="BaseRoncos">Base Roncos</string>
     <string name="BaseMurmurio">Base Murmurio Vesicular</string>
-    <string name="BaseSibilos">Base Sibilos</string>
-    <string name="BaseCrepitacoes">Base Crepitações</string>
     <string name="TercoMedio">Terço Médio</string>
-    <string name="TercoMedioCrepitacoes">Terço Médio Crepitações</string>
-    <string name="TercoMedioSibilos">Terço Médio Sibilos</string>
     <string name="TercoMedioMurmurioVesicular">Terço Médio Murmurio Vesicular</string>
-    <string name="TercoMedioRoncos">Terço Médio Roncos</string>
     <string name="Apice">Ápice</string>
-    <string name="ApiceCrepitacoes">Ápice Crepitações</string>
-    <string name="ApiceSibilos">Ápice Sibilos</string>
     <string name="ApiceMurmurioVesicular">Ápice Murmurio Vesicular</string>
-    <string name="ApiceRoncos">Ápice Roncos</string>
     <string name="UsoDeOxigenio">Uso de Oxigênio</string>
     <string name="Fluxo">Fluxo</string>
     <string name="Cancelar">Cancelar</string>
@@ -98,7 +86,6 @@
     <string name="MascaraVenturi">Máscara de Venturi</string>
     <string name="Roncos">Roncos</string>
     <string name="AdicionarDispositivo">Adicionar Dispositivo</string>
-    <string name="Ventilacao">Ventilação</string>
     <string name="Volume">Volume</string>
     <string name="VolumeMl">Volume/ml</string>
     <string name="IPAP">IPAP</string>
@@ -135,7 +122,6 @@
     <string name="ProporcaoPlegia">Proporção de Plegia</string>
     <string name="Presente">Presente</string>
     <string name="Ausente">Ausente</string>
-    <string name="TodosMembros">Todos os membros.</string>
     <string name="ParametrosRespirador">Paramêtros</string>
     <string name="UF">UF</string>
     <string name="TempoHora">Tempo/Hora</string>
@@ -162,8 +148,6 @@
     <string name="Albumina">Albumina</string>
     <string name="Hipocalemia">Hipocalemia</string>
     <string name="Hipercalemia">Hipercalemia</string>
-    <string name="Hiponatremia">Hiponatremia</string>
-    <string name="Hipernatremia">Hipernatremia</string>
     <string name="Hipomagnesemia">Hipomagnesemia</string>
     <string name="Hipermagnesemia">Hipermagnesemia</string>
     <string name="Hipofosfatemia">Hipofosfatemia</string>
@@ -178,14 +162,11 @@
     <string name="Elevando">Elevando</string>
     <string name="Antibiotico">Antibióticos</string>
     <string name="RaioxTorax">Raio-x Torax</string>
-    <string name="Pneumotorax">Pneumotorax</string>
-    <string name="Atelectasia">Atelectasia</string>
-    <string name="InfiltradosNovos">Infiltrados Novos</string>
     <string name="Leucograma">Leucograma</string>
     <string name="FuncaoHepatica">Função Hepática</string>
     <string name="Amilase">Amilase</string>
     <string name="Elevada">Elevada</string>
-    <string name="TemporoEspacial">Orientacao Temporo Espacial</string>
+    <string name="TemporoEspacial">Orientação Temporo Espacial</string>
     <string name="Orientado">Orientado</string>
     <string name="Desorientado">Desorientado</string>
     <string name="Miose">Miose</string>
@@ -196,6 +177,24 @@
     <string name="DireitaMesquerda">Direita > Esquerda</string>
     <string name="Reativo">Reativo</string>
     <string name="NaoReativo">Não Reativo</string>
+    <string name="Nenhum">Nenhum</string>
+    <string name="Hiperfonetica">Hiperfonetica</string>
+    <string name="Normofonetica">Normofonetica</string>
+    <string name="Hipofonetica">Hipofonetica</string>
+    <string name="Cianotica">Cianótica</string>
+    <string name="Acianotica">Acianótica</string>
+    <string name="Fria">Fria</string>
+    <string name="Quente">Quente</string>
+    <string name="Extremidades">Extremidades</string>
+    <string name="FM">FM</string>
+    <string name="FT">FT</string>
+    <string name="FA">FA</string>
+    <string name="Natural">Natural</string>
+    <string name="TuboTraquial">Tubo Traquial</string>
+    <string name="Traqueostomia">Traqueostomia</string>
+    <string name="Alta">Alta</string>
+    <string name="Media">Média</string>
+    <string name="Baixa">Baixa</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -254,19 +253,6 @@
         <item>Discompensada (G3)</item>
     </string-array>
 
-    <string-array name="foneseBulhas">
-        <item>Hiperfonetica</item>
-        <item>Normofonetica</item>
-        <item>Hipofonetica</item>
-    </string-array>
-
-    <string-array name="tipoSopro">
-        <item>FM</item>
-        <item>FT</item>
-        <item>FA</item>
-        <item>IFT</item>
-    </string-array>
-
     <string-array name="intensidadeSopro">
         <item>+1</item>
         <item>+2</item>
@@ -291,18 +277,6 @@
         <item>Estáveis</item>
         <item>Em melhora</item>
         <item>Em piora</item>
-    </string-array>
-
-    <string-array name="viasAereas">
-        <item>Natural</item>
-        <item>Tubo traquial</item>
-        <item>Traqueostomia</item>
-    </string-array>
-
-    <string-array name="localizacaoCanula">
-        <item>Alta</item>
-        <item>Média</item>
-        <item>Baixa</item>
     </string-array>
 
     <string-array name="respiratorioIndices">
@@ -384,11 +358,6 @@
     <string-array name="simetriaPupila">
         <item>Isocóricas</item>
         <item>Anisocóricas</item>
-    </string-array>
-
-    <string-array name="deficitMotor">
-        <item>Presente</item>
-        <item>Ausente</item>
     </string-array>
 
     <string-array name="membrosDeficit">
@@ -508,6 +477,44 @@
     <string-array name="desorientado">
         <item>No Espaco</item>
         <item>No Tempo</item>
+    </string-array>
+
+    <string-array name="dispositivos">
+        <item>Cateter Venoso Central</item>
+        <item>Cateter de PAI</item>
+        <item>Dreno de Torax</item>
+        <item>Dreno Abdominal</item>
+        <item>Sonda Vesical</item>
+        <item>Tubo Orotraquial</item>
+        <item>Traqueostomia</item>
+        <item>Gastrostomia</item>
+        <item>Venoclise</item>
+        <item>Sonda Enteral</item>
+        <item>Sonda Oroenteral</item>
+        <item>Sonda Nasoenteral</item>
+        <item>Sonda Orogastrica</item>
+        <item>Sonda Nasogastrica</item>
+        <item>Cateter de PIC</item>
+        <item>Balão Intra-aórtico</item>
+    </string-array>
+
+    <string-array name="crepitacoes">
+        <item>Ápice</item>
+        <item>Base Direita</item>
+        <item>Base Esquerda</item>
+        <item>Terço Médio Direito</item>
+        <item>Terço Médio Esquerdo</item>
+    </string-array>
+
+    <string-array name="murmurioVesicular">
+        <item>Aumentado</item>
+        <item>Ápice</item>
+        <item>Base Direita</item>
+        <item>Base Esquerda</item>
+        <item>Fisiológico</item>
+        <item>Reduzido</item>
+        <item>Terço Médio Direito</item>
+        <item>Terço Médio Esquerdo</item>
     </string-array>
     <!--ARRAYS-->
 </resources>

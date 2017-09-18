@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.PopupMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
@@ -26,16 +28,14 @@ import santauti.app.R;
  */
 
 public class RespiratorioActivity extends GenericoActivity {
-    private int viasAereasSelection=-1,localizacaoCanulaSelection=-1,baseRoncosSelection=-1,tercoMedioRoncosSelection=-1,apiceRoncosSelection=-1;
-    private int murmurioVesicularSelection=-1,baseMurmurioVesicularSelection=-1,baseSibilosSelection=-1;
-    private int mascaraVenturiSelection=-1,tercoMedioMurmurioVesicularSelection=-1,usoDeOxigenioSelection=-1,apiceSelection=-1,roncoSelection=-1,sibiloSelection=-1,crepitacoesSelection=-1;
-    private int baseCrepitacoesSelection=-1,tercoMedioCrepitacoesSelection=-1,tercoMedioSibilosSelection=-1,apiceSibilosSelection=-1,apiceCrepitacoesSelection=-1;
-    private View pressaoCuff_layout,murmurioVesicularItensLayout,roncosItensLayout,sibilosItensLayout,crepitacoesItensLayout;
+    private boolean[] roncos=new boolean[5],sibilos=new boolean[5],crepitacoes=new boolean[5],murmurioVesicular = new boolean[8];
+    private int mascaraVenturiSelection=-1,usoDeOxigenioSelection=-1;
+    private View pressaoCuff_layout;
     private View localizacaoCanula_layout;
     private View mascaraDeVenturi_layout, fluxoOxigenio_layout;
-    private TextView viasAerea,localizacaoCanula,murmurioVesicular,mascaraVenturiSelected,baseRoncos,tercoMedioRoncos,apiceRoncos,roncosTextView,sibilosTextView,crepitacoesTextView;
-    private TextView baseMurmurioVesicular,tercoMedioMurmurioVesicular,apiceMurmurioVesicular,usoDeOxigenioTextView,baseSibilos,baseCrepitacoes;
-    private TextView tercoMedioSibilos,tercoMedioCrepitacoes,apiceSibilos,apiceCrepitacoes;
+    private TextView viasAereasTextView, localizacaoCanulaTextView, murmurioVesicularTextView,mascaraVenturiSelected,roncosTextView,sibilosTextView,crepitacoesTextView;
+    private TextView usoDeOxigenioTextView;
+    private TextView menuViasAereas,menuLocalizacaoCanula;
     private Realm realm;
     private Ficha ficha;
     private MyAnimation myAnimation;
@@ -52,30 +52,16 @@ public class RespiratorioActivity extends GenericoActivity {
         localizacaoCanula_layout = findViewById(R.id.localizacaoCanula_layout);
         mascaraDeVenturi_layout = findViewById(R.id.mascaVenturi);
         fluxoOxigenio_layout = findViewById(R.id.fluxoOxigenioLayout);
-        roncosItensLayout = findViewById(R.id.roncosItensLayout);
-        sibilosItensLayout = findViewById(R.id.sibilosItensLayout);
-        crepitacoesItensLayout = findViewById(R.id.crepitacoesItensLayout);
-        murmurioVesicularItensLayout = findViewById(R.id.murmurioVesicularItensLayout);
         mascaraVenturiSelected = (TextView)findViewById(R.id.mascaraVenturiSelected);
-        viasAerea = (TextView)findViewById(R.id.viaAerea);
-        localizacaoCanula = (TextView)findViewById(R.id.localizacaoCanula);
-        murmurioVesicular = (TextView)findViewById(R.id.murmurioVesicular);
-        baseMurmurioVesicular = (TextView)findViewById(R.id.baseMurmurioVesicular);
-        tercoMedioMurmurioVesicular = (TextView)findViewById(R.id.tercoMedioMurmurioVesicular);
-        apiceMurmurioVesicular = (TextView)findViewById(R.id.apiceMurmurioVesicular);
+        viasAereasTextView = (TextView)findViewById(R.id.visaAereasTextView);
+        localizacaoCanulaTextView = (TextView)findViewById(R.id.localizacaoCanulaTextView);
+        murmurioVesicularTextView = (TextView)findViewById(R.id.murmurioVesicular);
         usoDeOxigenioTextView = (TextView)findViewById(R.id.usoDeOxigenioSelected);
-        baseRoncos = (TextView)findViewById(R.id.baseRoncos);
-        tercoMedioRoncos = (TextView)findViewById(R.id.tercoMedioRoncos);
-        apiceRoncos = (TextView)findViewById(R.id.apiceRoncos);
-        baseSibilos = (TextView)findViewById(R.id.baseSibilos);
-        baseCrepitacoes = (TextView)findViewById(R.id.baseCrepitacoes);;
-        tercoMedioSibilos = (TextView)findViewById(R.id.tercoMedioSibilos);
-        tercoMedioCrepitacoes = (TextView)findViewById(R.id.tercoMedioCrepitacoes);
-        apiceSibilos = (TextView)findViewById(R.id.apiceSibilos);
-        apiceCrepitacoes = (TextView)findViewById(R.id.apiceCrepitacoes);
         roncosTextView = (TextView)findViewById(R.id.roncosTextView);
         sibilosTextView = (TextView)findViewById(R.id.sibilosTextView);
         crepitacoesTextView = (TextView)findViewById(R.id.crepitacoesTextView);
+        menuViasAereas = (TextView)findViewById(R.id.menuViasAereas);
+        menuLocalizacaoCanula = (TextView)findViewById(R.id.menuLocalizacaoCanula);
         /**************************VIEWS**************************/
 
         prepareNavigationButtons();
@@ -138,111 +124,92 @@ public class RespiratorioActivity extends GenericoActivity {
     }
 
     public void viasAereasOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.ViasAereas);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.viasAereas);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, viasAereasSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        viasAerea.setText(items[which]);
-                        viasAerea.setVisibility(View.VISIBLE);
-                        viasAereasSelection=which;
-                        if(!items[which].equals(getResources().getStringArray(R.array.viasAereas)[0])){
-                            if(!localizacaoCanula_layout.isShown() && !pressaoCuff_layout.isShown()) {
-                                myAnimation.slideDownView(getApplicationContext(),localizacaoCanula_layout);
-                                myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
-                            }
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuViasAereas, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_vias_aereas, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.natural:
+                        viasAereasTextView.setText(item.getTitle());
+                        if(localizacaoCanula_layout.isShown() && pressaoCuff_layout.isShown()){
+                            myAnimation.slideUpView(getApplicationContext(),localizacaoCanula_layout);
+                            myAnimation.slideUpView(getApplicationContext(),pressaoCuff_layout);
                         }
-                        else{
-                            if(localizacaoCanula_layout.isShown() && pressaoCuff_layout.isShown()) {
-                                myAnimation.slideUpView(getApplicationContext(),pressaoCuff_layout);
-                                myAnimation.slideUpView(getApplicationContext(),localizacaoCanula_layout);
-                            }
+                        break;
+                    case R.id.tuboTraquial:
+                        viasAereasTextView.setText(item.getTitle());
+                        if(!localizacaoCanula_layout.isShown() && !pressaoCuff_layout.isShown()){
+                            myAnimation.slideDownView(getApplicationContext(),localizacaoCanula_layout);
+                            myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
                         }
-                        dialog.dismiss();
-                    }
-                });
+                        break;
+                    case R.id.traqueoostomia:
+                        viasAereasTextView.setText(item.getTitle());
+                        if(!localizacaoCanula_layout.isShown() && !pressaoCuff_layout.isShown()){
+                            myAnimation.slideDownView(getApplicationContext(),localizacaoCanula_layout);
+                            myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
+                        }
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
 
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        popupMenu.show();
     }
 
     public void localizacaoCanulaOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuLocalizacaoCanula, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_localizacao_canula, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.alta:
+                        localizacaoCanulaTextView.setText(item.getTitle());
+                        break;
+                    case R.id.media:
+                        localizacaoCanulaTextView.setText(item.getTitle());
+                        break;
+                    case R.id.baixa:
+                        localizacaoCanulaTextView.setText(item.getTitle());
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
 
-        builder.setTitle(R.string.LocalizacaoCanula);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.localizacaoCanula);
-        builder.setSingleChoiceItems(items, localizacaoCanulaSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        localizacaoCanula.setText(items[which]);
-                        localizacaoCanula.setVisibility(View.VISIBLE);
-                        localizacaoCanulaSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        popupMenu.show();
     }
 
     public void murmurioVesicularOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
 
+        // Set the dialog title
         builder.setTitle(R.string.MurmurioVesicular);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
-        builder.setSingleChoiceItems(items, murmurioVesicularSelection,
-                new DialogInterface.OnClickListener() {
+        final String[] items = getResources().getStringArray(R.array.murmurioVesicular);
+        builder.setMultiChoiceItems(items, murmurioVesicular,
+                new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        murmurioVesicular.setText(items[which]);
-                        murmurioVesicular.setVisibility(View.VISIBLE);
-                        murmurioVesicularSelection=which;
-                        if(!murmurioVesicularItensLayout.isShown())
-                            myAnimation.slideDownView(getApplicationContext(),murmurioVesicularItensLayout);
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        murmurioVesicular[which]=isChecked;
                     }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int id) {
+                        setTextViewFromDialogMultipleText(murmurioVesicular,murmurioVesicularTextView,items);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
                     }
                 });
 
@@ -252,32 +219,30 @@ public class RespiratorioActivity extends GenericoActivity {
     }
 
     public void roncosOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
 
+        // Set the dialog title
         builder.setTitle(R.string.Roncos);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
-        builder.setSingleChoiceItems(items, roncoSelection,
-                new DialogInterface.OnClickListener() {
+        final String[] items = getResources().getStringArray(R.array.crepitacoes);
+        builder.setMultiChoiceItems(items, roncos,
+                new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        roncosTextView.setText(items[which]);
-                        roncosTextView.setVisibility(View.VISIBLE);
-                        roncoSelection=which;
-                        if(!roncosItensLayout.isShown())
-                            myAnimation.slideDownView(getApplicationContext(),roncosItensLayout);
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        roncos[which]=isChecked;
                     }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int id) {
+                        setTextViewFromDialogMultipleText(roncos,roncosTextView,items);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
                     }
                 });
 
@@ -287,32 +252,30 @@ public class RespiratorioActivity extends GenericoActivity {
     }
 
     public void sibilosOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
 
+        // Set the dialog title
         builder.setTitle(R.string.Sibilos);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
-        builder.setSingleChoiceItems(items, sibiloSelection,
-                new DialogInterface.OnClickListener() {
+        final String[] items = getResources().getStringArray(R.array.crepitacoes);
+        builder.setMultiChoiceItems(items, sibilos,
+                new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        sibilosTextView.setText(items[which]);
-                        sibilosTextView.setVisibility(View.VISIBLE);
-                        sibiloSelection=which;
-                        if(!sibilosItensLayout.isShown())
-                            myAnimation.slideDownView(getApplicationContext(),sibilosItensLayout);
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        sibilos[which]=isChecked;
                     }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int id) {
+                        setTextViewFromDialogMultipleText(sibilos,sibilosTextView,items);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
                     }
                 });
 
@@ -322,444 +285,30 @@ public class RespiratorioActivity extends GenericoActivity {
     }
 
     public void crepitacoesOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        final ArrayList mSelectedItems = new ArrayList();
 
+        // Set the dialog title
         builder.setTitle(R.string.Crepitacoes);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.respiratorioIndices);
-        builder.setSingleChoiceItems(items, crepitacoesSelection,
-                new DialogInterface.OnClickListener() {
+        final String[] items = getResources().getStringArray(R.array.crepitacoes);
+        builder.setMultiChoiceItems(items, crepitacoes,
+                new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        crepitacoesTextView.setText(items[which]);
-                        crepitacoesTextView.setVisibility(View.VISIBLE);
-                        crepitacoesSelection=which;
-                        if(!crepitacoesItensLayout.isShown())
-                            myAnimation.slideDownView(getApplicationContext(),crepitacoesItensLayout);
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        crepitacoes[which]=isChecked;
                     }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int id) {
+                        setTextViewFromDialogMultipleText(crepitacoes,crepitacoesTextView,items);
                     }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void baseMurmurioVesicularOnclick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.BaseMurmurio);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, baseMurmurioVesicularSelection,
-                new DialogInterface.OnClickListener() {
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        baseMurmurioVesicular.setText(items[which]);
-                        baseMurmurioVesicular.setVisibility(View.VISIBLE);
-                        baseMurmurioVesicularSelection=which;
-                        dialog.dismiss();
-
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void baseRoncosOnclick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.BaseRoncos);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, baseRoncosSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        baseRoncos.setText(items[which]);
-                        baseRoncos.setVisibility(View.VISIBLE);
-                        baseRoncosSelection=which;
-                        dialog.dismiss();
-
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void baseSibilosOnclick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.BaseSibilos);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, baseSibilosSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        baseSibilos.setText(items[which]);
-                        baseSibilos.setVisibility(View.VISIBLE);
-                        baseSibilosSelection=which;
-                        dialog.dismiss();
-
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void baseCrepitacoesOnclick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.BaseCrepitacoes);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, baseCrepitacoesSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        baseCrepitacoes.setText(items[which]);
-                        baseCrepitacoes.setVisibility(View.VISIBLE);
-                        baseCrepitacoesSelection=which;
-                        dialog.dismiss();
-
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void tercoMedioVesicularOnclick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.TercoMedioMurmurioVesicular);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, tercoMedioMurmurioVesicularSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        tercoMedioMurmurioVesicular.setText(items[which]);
-                        tercoMedioMurmurioVesicular.setVisibility(View.VISIBLE);
-                        tercoMedioMurmurioVesicularSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void tercoMedioRoncosOnclick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.TercoMedioRoncos);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, tercoMedioRoncosSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        tercoMedioRoncos.setText(items[which]);
-                        tercoMedioRoncos.setVisibility(View.VISIBLE);
-                        tercoMedioRoncosSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void tercoMedioSibilosOnclick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.TercoMedioSibilos);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, tercoMedioSibilosSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        tercoMedioSibilos.setText(items[which]);
-                        tercoMedioSibilos.setVisibility(View.VISIBLE);
-                        tercoMedioSibilosSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void tercoMedioCrepitacoesOnclick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.TercoMedioCrepitacoes);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, tercoMedioCrepitacoesSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        tercoMedioCrepitacoes.setText(items[which]);
-                        tercoMedioCrepitacoes.setVisibility(View.VISIBLE);
-                        tercoMedioCrepitacoesSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void apiceMurmurioVesicularOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.ApiceMurmurioVesicular);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, apiceSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        apiceMurmurioVesicular.setText(items[which]);
-                        apiceMurmurioVesicular.setVisibility(View.VISIBLE);
-                        apiceSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void apiceRoncosOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.ApiceRoncos);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, apiceRoncosSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        apiceRoncos.setText(items[which]);
-                        apiceRoncos.setVisibility(View.VISIBLE);
-                        apiceRoncosSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void apiceSibilosOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.ApiceSibilos);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, apiceSibilosSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        apiceSibilos.setText(items[which]);
-                        apiceSibilos.setVisibility(View.VISIBLE);
-                        apiceSibilosSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void apiceCrepitacoesOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.ApiceCrepitacoes);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.direito_esquerdo_ambos);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, apiceCrepitacoesSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        apiceCrepitacoes.setText(items[which]);
-                        apiceCrepitacoes.setVisibility(View.VISIBLE);
-                        apiceCrepitacoesSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int id) {
                     }
                 });
 

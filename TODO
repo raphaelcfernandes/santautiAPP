@@ -12,46 +12,44 @@ HOME:
 FICHA:
     - CHECAR PQ REALM PRECISA DE deleteRealmIfMigrationNeeded
     - Meu pai sugeriu mostrar as fichas como o feed do FB
-    - Itens não estão padronizados em tamanho, disposiçao de texto e cards
     - Snackbar por cima dos botoes
 
 
 
 /*************MUDANĆAS*********************/
 
-
-
-/*****************MUDANÇAS FEITAS**********/
-
-Monitor -> 100% ok
+Monitor:
     - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico %) Spo2
-Bomba de infusao -> 100% ok
+      - frequencia cardiaca -> monitor (OK)
+      - PAM + PVC + swan_Ganz -> monitor (OK)
+
+Bomba de infusao:
     -   Bomba de infusao
       - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
       - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
       - velocidade de infusao -> ok
       - dose ml/hr -> ok
-Hemodinamico: adicionar drogas vai para bomba de infusao, lactato foi para Exame -> tirar IFT
+
+Hemodinamico: OK
   - Pulso ritmico/aritmico -> ok
   - Fonese de bulhas: hiper, normal, hipo -> ok
   - perfusao capilar: boa/ruim -> ok
-  - lactato: normal, elevado -> ok
   - Extremidades:
       - cianotica, acianotica, fria, quente (4 općoes diferentes)
   - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
-  - frequencia cardiaca -> monitor (OK)
-  - PAM + PVC + swan_Ganz -> monitor (OK)
 
-Metabolico: -> 100% ok (Disturbio, acidose e gasometria foram para exame)
+Metabolico:
     - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
-    - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
-    - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
-Dispositivo -> APENAS o que ta vendo, n insere nem remove dispositivo OK
+
+
+Dispositivo:
     - cateter de PIC
     - balao intra-aortico
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
+
 Hematologico: Hematocrito, hemoglobina e plaquetas foram para Exame
-Neurologico -> OK
+
+Neurologico:
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
         - Delirium, sim ou nao. -> ok
@@ -62,12 +60,12 @@ Neurologico -> OK
             - orientado, desorientado
                 - DESORIENTADO:
                     - Tempo e espaco. (multiplo)
-Nutricional: (depois de metabolico),OK
+Nutricional:
     - ingestao
          - calorica, proteica, lipidica, carboidratos, balanco hidrogenado
      - Albumina:
              - hipo, hiperalbuminemia. ...
-Pele e Mucosas: (apos nutricao), OK
+Pele e Mucosas:
     - Pele:
         - normal, ressecada
     - ulcera de pressao
@@ -75,13 +73,14 @@ Pele e Mucosas: (apos nutricao), OK
     - Mucosas: multipla općoes
         - Normocoradas, hipocoradas, icterico, anicterico
         - secas, hidratadas, hiperidratadas
+
 Osteomuscular: (depois de pele), OK (Checar se está certo o musculatura como ta feito)
     - Musculatura:
         - hiper/hipo/eu trofica, hipo/hiper/eu tonica.
 
 
 
-Folhas de balanćo: activity + layout criado. OK (trocar layout para popupmenu)
+Folhas de balanćo:
     - Curva glicemica:
         - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.
     - evacuaćoes:
@@ -97,7 +96,7 @@ Folhas de balanćo: activity + layout criado. OK (trocar layout para popupmenu)
         - Oral, enteral, gastrica
         - Volume/ml
 
-Renal: -> 100% ok
+Renal:
   - Urina: clara escura. debaixo de diurese
   - Em procedimento dialitico? Em dialise? -> trocar para padrao com switch
     - UF: sim ou nao
@@ -105,7 +104,7 @@ Renal: -> 100% ok
     - Tempo/hora: numerico
     - Heparina: sim ou nao
 
-Infeccioso: ->
+Infeccioso:
     - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
     - marcadores de infeccao: estaveis, em melhora, em piora
     - antibiotico/antivirais/antifungicos
@@ -123,6 +122,9 @@ Exames:
         - Magnesio = hipo, hipermagnesemia. Se n marcar = normal
         - Fosforo: hipo, hiperfosfatemia. Se n marcar = normal
         - Calcio: hipo, hipercalcemia. ...
+    - lactato: normal, elevado -> ok
+    - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
+        - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
     - Albumina: -> nutricional
         - hipo, hiperalbuminemia. ...
     - PCR:
@@ -141,7 +143,7 @@ Exames:
         - sim:
             - normal, elevada
 
-Gastro -> (Mudar layout para switch e adaptar corretamente os itens para ficar igual o Android)
+Gastro:
 	- Massas paupaveis: sim ou nao => ok
 	- visceras paupaveis: sim ou nao => ok
 	- ruidos hidroaereos
@@ -156,11 +158,11 @@ Endocrino:
      -
 /*****************MUDANÇAS FEITAS**********/
 
-Respiratorio: -> corrigir roncos/sibilos/crepitacoes
+Respiratorio: -> Checar
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
         - tubo ou traqueostomia = pressao do cuff -> ok
         - localizacao da canula se tiver entubado -> ok
-    - murmurio vesicular: -> OK
+    - murmurio vesicular: -> Checar
         - fisiologico, reduzido
         - aumentado
         - = crepitacoes

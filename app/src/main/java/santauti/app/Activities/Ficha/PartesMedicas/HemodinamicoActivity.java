@@ -2,17 +2,13 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.PopupMenu;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -30,11 +26,12 @@ import santauti.app.R;
 
 public class HemodinamicoActivity extends GenericoActivity {
     private View tipoSoproLayout,intensidadeSoproLayout;
-    private TextView foneseBulhas,tipoSopro,intensidadeSopro;
+    private TextView foneseBulhasTextview, tipoSoproTextView,intensidadeSopro,menuFoneseBulhas,menuExtremidades,extremidadesTextView,menuTipoSopro;
     private MyAnimation myAnimation;
     private Realm realm;
     private Ficha ficha;
-    private int foneseBulhasSelection=-1,tipoSoproSelection=-1,intensidadeSoproSelection=-1;
+    private int intensidadeSoproSelection=-1;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +43,13 @@ public class HemodinamicoActivity extends GenericoActivity {
         tipoSoproLayout = findViewById(R.id.tipoSopro_layout);
         intensidadeSoproLayout = findViewById(R.id.intensidade_sopro_layout);
 
-        foneseBulhas = (TextView)findViewById(R.id.foneseBulhas);
-        tipoSopro = (TextView)findViewById(R.id.tipoSopro);
+        foneseBulhasTextview = (TextView)findViewById(R.id.foneseBulhasTextView);
+        tipoSoproTextView = (TextView)findViewById(R.id.tipoSoproTextView);
         intensidadeSopro = (TextView)findViewById(R.id.intensidadeSopro);
+        menuFoneseBulhas = (TextView)findViewById(R.id.menuFoneseBulhas);
+        menuExtremidades = (TextView)findViewById(R.id.menuExtremidades);
+        extremidadesTextView = (TextView)findViewById(R.id.extremidadesTextView);
+        menuTipoSopro = (TextView)findViewById(R.id.tipoSoproTextView);
         /********************VIEWS*******************************/
 
 
@@ -171,71 +172,53 @@ public class HemodinamicoActivity extends GenericoActivity {
     }
 
     public void foneseBulhasOnCLick(View view) {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuFoneseBulhas, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_fonese_bulhas, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.hiperfonetica:
+                        foneseBulhasTextview.setText(item.getTitle());
+                        break;
+                    case R.id.normofonetica:
+                        foneseBulhasTextview.setText(item.getTitle());
+                        break;
+                    case R.id.hipofonetica:
+                        foneseBulhasTextview.setText(item.getTitle());
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
 
-        builder.setTitle(R.string.FoneseBulhas);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.foneseBulhas);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, foneseBulhasSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        foneseBulhas.setText(items[which]);
-                        foneseBulhas.setVisibility(View.VISIBLE);
-                        foneseBulhasSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        popupMenu.show();
     }
 
     public void tipoSoproOnClick(View view) {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), tipoSoproLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_tipo_sopro, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.FA:
+                        tipoSoproTextView.setText(item.getTitle());
+                        break;
+                    case R.id.FM:
+                        tipoSoproTextView.setText(item.getTitle());
+                        break;
+                    case R.id.FT:
+                        tipoSoproTextView.setText(item.getTitle());
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
 
-        builder.setTitle(R.string.TipoSopro);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.tipoSopro);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, tipoSoproSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        tipoSopro.setText(items[which]);
-                        tipoSopro.setVisibility(View.VISIBLE);
-                        tipoSoproSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        popupMenu.show();
     }
 
     public void intensidadeSoproOnClick(View view) {
@@ -270,5 +253,32 @@ public class HemodinamicoActivity extends GenericoActivity {
         AlertDialog dialog = builder.create();
         // display dialog
         dialog.show();
+    }
+
+    public void extremidadesOnCLick(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuExtremidades, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_extremidades, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.Acianotica:
+                        extremidadesTextView.setText(item.getTitle());
+                        break;
+                    case R.id.Cianotica:
+                        extremidadesTextView.setText(item.getTitle());
+                        break;
+                    case R.id.Fria:
+                        extremidadesTextView.setText(item.getTitle());
+                    case R.id.Quente:
+                        extremidadesTextView.setText(item.getTitle());
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
     }
 }

@@ -30,7 +30,7 @@ import santauti.app.R;
 
 public class RestClient{
 
-    static final String BASE_URL = "https://192.168.1.12:8080/#";
+    static final String BASE_URL = "https://192.168.1.3:8080/#";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(Context context) {

@@ -31,6 +31,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:onClick="viasAereasOnClick">
                 <TextView
+                    android:id="@+id/menuViasAereas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ViasAereas"
@@ -38,15 +39,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/viaAerea"/>
+                    android:id="@+id/visaAereasTextView"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,6 +92,7 @@
                 android:visibility="gone"
                 >
                 <TextView
+                    android:id="@+id/menuLocalizacaoCanula"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/LocalizacaoCanula"
@@ -97,9 +100,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/localizacaoCanula"/>
+                    android:id="@+id/localizacaoCanulaTextView"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -129,97 +132,6 @@
                     android:visibility="invisible"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/murmurioVesicular"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:id="@+id/murmurioVesicularItensLayout">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:onClick="baseMurmurioVesicularOnclick"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Base"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/baseMurmurioVesicular"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:onClick="tercoMedioVesicularOnclick"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TercoMedio"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/tercoMedioMurmurioVesicular"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:onClick="apiceMurmurioVesicularOnClick"
-                    android:background="?attr/selectableItemBackground">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="@dimen/submenu_right_padding">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingStart="@dimen/submenu_left_padding"
-                            android:paddingEnd="0dp"
-                            android:text="@string/Apice"
-                            style="@style/TextStyle"/>
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        android:visibility="invisible"
-                        android:id="@+id/apiceMurmurioVesicular"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"/>
-                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -332,95 +244,6 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/roncosItensLayout"
-                android:orientation="vertical"
-                android:visibility="gone">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:onClick="baseRoncosOnclick"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Base"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/baseRoncos"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:onClick="tercoMedioRoncosOnclick"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TercoMedio"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/tercoMedioRoncos"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:onClick="apiceRoncosOnClick"
-                    android:background="?attr/selectableItemBackground">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="@dimen/submenu_right_padding">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingStart="@dimen/submenu_left_padding"
-                            android:paddingEnd="0dp"
-                            android:text="@string/Apice"
-                            style="@style/TextStyle"/>
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        android:visibility="invisible"
-                        android:id="@+id/apiceRoncos"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
@@ -448,95 +271,6 @@
                     android:visibility="invisible"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/sibilosTextView"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/sibilosItensLayout"
-                android:visibility="gone">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:onClick="baseSibilosOnclick"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Base"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/baseSibilos"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:onClick="tercoMedioSibilosOnclick"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TercoMedio"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/tercoMedioSibilos"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:onClick="apiceSibilosOnClick"
-                    android:background="?attr/selectableItemBackground">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="@dimen/submenu_right_padding">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingStart="@dimen/submenu_left_padding"
-                            android:paddingEnd="0dp"
-                            android:text="@string/Apice"
-                            style="@style/TextStyle"/>
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        android:visibility="invisible"
-                        android:id="@+id/apiceSibilos"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"/>
-                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -568,103 +302,13 @@
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/crepitacoesTextView"/>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/crepitacoesItensLayout"
-                android:orientation="vertical"
-                android:visibility="gone">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:onClick="baseCrepitacoesOnclick"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Base"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/baseCrepitacoes"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingTop="10dp"
-                    android:onClick="tercoMedioCrepitacoesOnclick"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TercoMedio"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/tercoMedioCrepitacoes"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:onClick="apiceCrepitacoesOnClick"
-                    android:background="?attr/selectableItemBackground">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="@dimen/submenu_right_padding">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingStart="@dimen/submenu_left_padding"
-                            android:paddingEnd="0dp"
-                            android:text="@string/Apice"
-                            style="@style/TextStyle"/>
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        android:visibility="invisible"
-                        android:id="@+id/apiceCrepitacoes"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"/>
-                </LinearLayout>
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
             <!--CREPITACOES-->
+
         </LinearLayout>
     </ScrollView>
 
