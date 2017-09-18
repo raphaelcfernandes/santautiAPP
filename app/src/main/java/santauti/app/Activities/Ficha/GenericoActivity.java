@@ -151,25 +151,18 @@ public abstract class GenericoActivity extends AppCompatActivity {
      * @param textView aonde será inserido os itens escolhidos
      * @param items vetor ORDENADO ordem alfabética marcado por itens selecionados por @param array
      */
-    public void setTextViewFromDialogMultipleText(boolean[] array, TextView textView,String[] items){
+    public int setTextViewFromDialogMultipleText(boolean[] array, TextView textView,String[] items){
         StringBuilder stringBuilder = new StringBuilder();
         int i,total=0;
-        for(i=0;i<array.length;i++)
-            if (array[i])
-                total++;
-        for (i = 0; i < array.length; i++) {
+        for (i = 0; i < array.length; i++)
             if (array[i]) {
-                total--;
-                if (total == 0) {
-                    stringBuilder.append(items[i]);
-                }
-                else {
-                    stringBuilder.append(items[i]).append(", ");
-                }
+                total++;
+                stringBuilder.append(items[i]).append(", ");
             }
-        }
-        textView.setText(stringBuilder);
+        if(total>0)
+            textView.setText(stringBuilder.substring(0,stringBuilder.length()-2));
         if(!textView.isShown())
             textView.setVisibility(View.VISIBLE);
+        return total;
     }
 }

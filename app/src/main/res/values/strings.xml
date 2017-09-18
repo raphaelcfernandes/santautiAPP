@@ -41,7 +41,7 @@
     <string name="FrequenciaCardiaca">Frequência Cardíaca</string>
     <string name="FrequenciaRespiratoria">Frequencia Respiratória</string>
     <string name="Temperatura">Temperatura</string>
-    <string name="Capinometria">Capinometria</string>
+    <string name="Capnometria">Capnometria</string>
     <string name="PAM">PAM</string>
     <string name="PIC">PIC</string>
     <string name="PVC">PVC</string>
@@ -185,6 +185,17 @@
     <string name="FuncaoHepatica">Função Hepática</string>
     <string name="Amilase">Amilase</string>
     <string name="Elevada">Elevada</string>
+    <string name="TemporoEspacial">Orientacao Temporo Espacial</string>
+    <string name="Orientado">Orientado</string>
+    <string name="Desorientado">Desorientado</string>
+    <string name="Miose">Miose</string>
+    <string name="Midriase">Midriase</string>
+    <string name="Isocoricas">Isocóricas</string>
+    <string name="Anisocoricas">Anisocóricas</string>
+    <string name="EsquerdaMdireita">Esquerda > Direita</string>
+    <string name="DireitaMesquerda">Direita > Esquerda</string>
+    <string name="Reativo">Reativo</string>
+    <string name="NaoReativo">Não Reativo</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -328,13 +339,13 @@
     </string-array>
 
     <string-array name="nivelConsciencia">
-        <item>Vigil \u002d hiperalerta.</item>
-        <item>Alerta \u002d Acordado e resposta adequadas às perguntas.</item>
-        <item>Sonolência \u002d Acorda ao chamado, responde às perguntas.</item>
-        <item>Obnubilação \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
-        <item>Torpor \u002d Sonolencia profunda, responde somente a estimulo doloroso.</item>
-        <item>Coma \u002d Não abre os olhos nem emite sons verbais sob estimulo verbal ou doloroso.</item>
-        <item>Sedado</item>
+        <item>VIGIL \u002d hiperalerta.</item>
+        <item>ALERTA \u002d Acordado e resposta adequadas às perguntas.</item>
+        <item>SONOLÊNCIA \u002d Acorda ao chamado, responde às perguntas.</item>
+        <item>OBNUBILACÃO \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
+        <item>TORPOR \u002d Sonolencia profunda, responde somente a estimulo doloroso.</item>
+        <item>COMA \u002d Não abre os olhos nem emite sons verbais sob estimulo verbal ou doloroso.</item>
+        <item>SEDADO</item>
     </string-array>
 
     <string-array name="ramsay">
@@ -370,25 +381,9 @@
         <item>6 \u002d Obedece Comandos.</item>
     </string-array>
 
-    <string-array name="reatividadeALuz">
-        <item>Reativo</item>
-        <item>Não Reativo</item>
-    </string-array>
-
-    <string-array name="tamanhoPupila">
-        <item>Miose</item>
-        <item>Normal</item>
-        <item>Midríase</item>
-    </string-array>
-
     <string-array name="simetriaPupila">
         <item>Isocóricas</item>
         <item>Anisocóricas</item>
-    </string-array>
-
-    <string-array name="diferencaPupila">
-        <item>Esquerda > Direita</item>
-        <item>Direita > Esquerda</item>
     </string-array>
 
     <string-array name="deficitMotor">
@@ -475,14 +470,11 @@
         <item>Amoxicilina-clavulanato</item>
     </string-array>
 
-    <string-array name="gasometriaArterialRespiratorio">
+    <string-array name="gasometriaArterial">
         <item>Acidose Respiratoria Compensada</item>
         <item>Acidose Respiratoria Descompensada</item>
         <item>Alcalose Respiratoria Compensada</item>
         <item>Alcalose Respiratoria Descompensada</item>
-    </string-array>
-
-    <string-array name="gasometriaArterialMetabolico">
         <item>Acidose Metabolica Compensada</item>
         <item>Acidose Metabolica Descompensada</item>
         <item>Alcalose Metabolica Compensada</item>
@@ -505,13 +497,17 @@
     </string-array>
 
     <string-array name="funcaoHepatica">
-        <item>Normal</item>
         <item>Bilirrubinas Normais</item>
         <item>Bilirrubinas Elevadas</item>
         <item>Transaminases Normais</item>
         <item>Transaminases Elevadas</item>
         <item>FA/GGT Normais</item>
         <item>FA/GGT Elevadas</item>
+    </string-array>
+
+    <string-array name="desorientado">
+        <item>No Espaco</item>
+        <item>No Tempo</item>
     </string-array>
     <!--ARRAYS-->
 </resources>

@@ -57,7 +57,7 @@ public class EndocrinoActivity extends GenericoActivity {
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), ExamesActivity.class);
+                intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();

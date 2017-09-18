@@ -24,6 +24,8 @@
 
             <include layout="@layout/gasometria_arterial"/>
 
+            <include layout="@layout/funcao_hepatica"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,14 +222,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/Amilase"
                         style="@style/TitleTextStyleForLayoutSelection"/>
-                    <android.support.v7.widget.SwitchCompat
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/amilaseSwitch"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
-                        android:clickable="false"
-                        android:theme="@style/MySwitch"/>
                 </LinearLayout>
                 <TextView
                     android:visibility="visible"
@@ -505,51 +499,6 @@
                     android:visibility="visible"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/leucogramaTextView"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray">
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="funcaoHepaticaOnClick"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="0dp"
-                        android:layout_marginEnd="160dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/FuncaoHepatica"
-                        style="@style/TitleTextStyleForLayoutSelection"/>
-                    <android.support.v7.widget.SwitchCompat
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/funcaoHepaticaSwitch"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
-                        android:clickable="false"
-                        android:theme="@style/MySwitch"/>
-                </LinearLayout>
-                <TextView
-                    android:visibility="visible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Nao"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:paddingEnd="0dp"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/funcaoHepaticaTextView"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="0dp"
             style="@style/ItemSelectedTextStyleForLayoutSelection"
@@ -34,6 +34,7 @@
         android:orientation="vertical"
         android:id="@+id/avaliacaoPupilarItens"
         android:visibility="gone">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,21 +45,22 @@
             android:paddingBottom="10dp"
             >
             <TextView
+                android:id="@+id/menuTamanhoPupila"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="60dp"
                 android:text="@string/TamanhoPupila"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:layout_marginStart="@dimen/submenu_left_padding"
                 style="@style/TitleTextStyleForLayoutSelection"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingStart="@dimen/submenu_left_padding"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/tamanhoPupila"/>
+                android:id="@+id/tamanhoPupilaTextView"/>
         </LinearLayout>
 
         <LinearLayout
@@ -71,21 +73,22 @@
             android:onClick="simetriaPupilaOnClick"
             >
             <TextView
+                android:id="@+id/menuSimetriaPupila"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="60dp"
                 android:text="@string/SimetriaPupila"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:layout_marginStart="@dimen/submenu_left_padding"
                 style="@style/TitleTextStyleForLayoutSelection"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingStart="@dimen/submenu_left_padding"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/simetriaPupila"/>
+                android:id="@+id/simetriaPupilaTextView"/>
         </LinearLayout>
 
         <LinearLayout
@@ -100,18 +103,19 @@
             android:visibility="gone"
             >
             <TextView
+                android:id="@+id/menuDiferencaPupilas"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="60dp"
                 android:text="@string/DiferencaPupilar"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:layout_marginStart="@dimen/submenu_left_padding"
                 style="@style/TitleTextStyleForLayoutSelection"
                 />
             <TextView
-                android:id="@+id/diferencaPupila"
+                android:id="@+id/diferencaPupilaTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingStart="@dimen/submenu_left_padding"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 style="@style/ItemSelectedTextStyleForLayoutSelection" />
@@ -132,21 +136,21 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="@dimen/submenu_right_padding">
                 <TextView
+                    android:id="@+id/menuReatividadeLuz"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingStart="@dimen/submenu_left_padding"
-                    android:paddingEnd="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="60dp"
                     android:text="@string/ReatividadeALuzPupila"
-                    style="@style/TextStyle"/>
+                    android:layout_marginStart="@dimen/submenu_left_padding"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/submenu_left_padding"
                 android:paddingEnd="@dimen/submenu_right_padding"
-                android:visibility="gone"
-                android:id="@+id/reatividadeLuz"
+                android:visibility="visible"
+                android:id="@+id/reatividadeLuzTextView"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"/>
         </LinearLayout>
 

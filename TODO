@@ -31,13 +31,13 @@ Bomba de infusao -> 100% ok
       - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
       - velocidade de infusao -> ok
       - dose ml/hr -> ok
-Hemodinamico: adicionar drogas vai para bomba de infusao, lactato foi para Exame -> 100% ok
+Hemodinamico: adicionar drogas vai para bomba de infusao, lactato foi para Exame -> tirar IFT
   - Pulso ritmico/aritmico -> ok
   - Fonese de bulhas: hiper, normal, hipo -> ok
   - perfusao capilar: boa/ruim -> ok
   - lactato: normal, elevado -> ok
   - Extremidades:
-      - cianotica, acianotica, fria, quente (check box como no deficit motor)
+      - cianotica, acianotica, fria, quente (4 općoes diferentes)
   - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
   - frequencia cardiaca -> monitor (OK)
   - PAM + PVC + swan_Ganz -> monitor (OK)
@@ -58,15 +58,21 @@ Neurologico -> OK
         - Nivel consciencia somente nao sedado
         - Paresia ou Plegia
             - Mono plegia/paresia,Para-paresia/plegia, Mparesia/plegia, tetra paresia/plegia (proporcionada ou desprorpocionada)
+        - Temporo espacial:
+            - orientado, desorientado
+                - DESORIENTADO:
+                    - Tempo e espaco. (multiplo)
 Nutricional: (depois de metabolico),OK
     - ingestao
          - calorica, proteica, lipidica, carboidratos, balanco hidrogenado
+     - Albumina:
+             - hipo, hiperalbuminemia. ...
 Pele e Mucosas: (apos nutricao), OK
     - Pele:
         - normal, ressecada
     - ulcera de pressao
         - presente/ausente
-    - Mucosas:
+    - Mucosas: multipla općoes
         - Normocoradas, hipocoradas, icterico, anicterico
         - secas, hidratadas, hiperidratadas
 Osteomuscular: (depois de pele), OK (Checar se está certo o musculatura como ta feito)
@@ -99,17 +105,17 @@ Renal: -> 100% ok
     - Tempo/hora: numerico
     - Heparina: sim ou nao
 
-Infeccioso: -> OK.
+Infeccioso: ->
     - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
     - marcadores de infeccao: estaveis, em melhora, em piora
-    - antibiotico
+    - antibiotico/antivirais/antifungicos
         - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
         - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
         - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
         - Amoxicilina-clavulanato,
 
 
-Exames: Checar OK
+Exames:
     - Eletrólitos: inserćao de dados na mao OU
                     insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
         - Potássio: hipo, hipercalemia. Se n marcar = normal
@@ -117,35 +123,40 @@ Exames: Checar OK
         - Magnesio = hipo, hipermagnesemia. Se n marcar = normal
         - Fosforo: hipo, hiperfosfatemia. Se n marcar = normal
         - Calcio: hipo, hipercalcemia. ...
-    - Albumina:
+    - Albumina: -> nutricional
         - hipo, hiperalbuminemia. ...
     - PCR:
         - Estável, Em queda, elevando. Comparativo em relaćao a um periodo anterior.
-    - Gasometria arterial:
+    - Gasometria arterial: (apenas uma)
         - Normal, acidose metabolica/respiratoria Compensada/descompensada, alcalose metabolica/respiratoria Compensada/descompensada.
+        - Acidose/alcalose mista
     - Raio-x torax:
-         - Pneumotorax, atelectasia, infiltrados novos, normal.
+         - Pneumotorax, atelectasia, infiltrado intersticinal, infiltrado alveolar, normal.
     - Leucograma:
         - Normal, estável, em melhora, em piora
-    - Funćao hepatica: sim ou nao (Uma opçao ou varias ao mesmo tempo?)
+    - Funćao hepatica:
         - sim:
             - normal, bilirrubinas: normais/elevadas, transaminases: normais/elevadas, FA/GGT: normais/elevadas
     - Amilase: sim ou nao
         - sim:
             - normal, elevada
 
-Gastro -> OK. (Mudar layout para switch e adaptar corretamente os itens para ficar igual o Android)
-	- VCM -> ok
+Gastro -> (Mudar layout para switch e adaptar corretamente os itens para ficar igual o Android)
 	- Massas paupaveis: sim ou nao => ok
 	- visceras paupaveis: sim ou nao => ok
-	- ruidos hidraero -> embaixo tensao => ok
-	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter =>
+	- ruidos hidroaereos
+	    - Ausente, reduzido, aumentado
+	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter => foi para peles e mucosas
 	- assit: pequena, media, grande. radioButton
 	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
 
+Endocrino:
+     - glicemias:
+        - normais, picos de hiperglicemia
+     -
 /*****************MUDANÇAS FEITAS**********/
 
-Respiratorio: ->
+Respiratorio: -> corrigir roncos/sibilos/crepitacoes
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
         - tubo ou traqueostomia = pressao do cuff -> ok
         - localizacao da canula se tiver entubado -> ok

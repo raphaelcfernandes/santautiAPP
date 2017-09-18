@@ -27,14 +27,24 @@ import santauti.app.R;
  */
 
 public class ExamesActivity extends GenericoActivity{
-    private int disturbioEletroliticoSelection=-1,acidoseMetabolicaSelection=-1, raioxToraxSelection =-1,leucogramaSelection=-1,funcaoHepaticaSelection=-1;
+    private int disturbioEletroliticoSelection=-1;
+    private int acidoseMetabolicaSelection=-1;
+    private int raioxToraxSelection =-1;
+    private int leucogramaSelection=-1;
     private TextView disturbioEletrolitico,acidoseMetabolica,menuPotassio,potassioTextView,magnesioTextView,menuMagnesio,menuFosforo,fosforoTextView;
-    private TextView menuCalcio,calcioTextView,menuAlbumina,albuminaTextView,pcrTextView,gasometriaArterialMetabolicoTextView,
-            gasometriaArterialRespiratorioTextView,gasometriaArterialTextView,raioxToraxTextView,leucogramaTextView,funcaoHepaticaTextView,amilaseTextView;
-    private View eletrolitoItens, pcrLayout,gasometrialArterialItensLayout,amilaseLayout;
+    private TextView menuCalcio;
+    private TextView calcioTextView;
+    private TextView menuAlbumina;
+    private TextView albuminaTextView;
+    private TextView pcrTextView;
+    private TextView raioxToraxTextView;
+    private TextView leucogramaTextView;
+    private TextView funcaoHepaticaTextView;
+    private TextView amilaseTextView;
+    private TextView gasometriaArterialTextView;
+    private View eletrolitoItens, pcrLayout,amilaseLayout;
     private MyAnimation myAnimation;
-    private boolean[] gasometriaArterialMetabolico = new boolean[4],gasometriaArterialRespiratorio = new boolean[4];
-    private SwitchCompat gasometriaArterialSwitch,funcaoHepaticaSwitch,amilaseSwitch;
+    private boolean[] gasometriaArterial = new boolean[8],funcaoHepatica = new boolean[6];
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,17 +69,11 @@ public class ExamesActivity extends GenericoActivity{
         albuminaTextView = (TextView)findViewById(R.id.albuminaTextView);
         eletrolitoItens = findViewById(R.id.eletrolitosItens);
         pcrLayout = findViewById(R.id.pcrLayout);
-        gasometriaArterialSwitch = (SwitchCompat)findViewById(R.id.gasometriaArterialSwitch);
-        gasometrialArterialItensLayout = findViewById(R.id.gasometriaArterialItens);
-        gasometriaArterialMetabolicoTextView = (TextView)findViewById(R.id.metabolicoGasometriaTextView);
-        gasometriaArterialRespiratorioTextView = (TextView)findViewById(R.id.respiratorioGasometriaTextView);
-        gasometriaArterialTextView = (TextView)findViewById(R.id.gasometriaArterialTextView);
         raioxToraxTextView = (TextView)findViewById(R.id.raioxToraxTextView);
         leucogramaTextView = (TextView)findViewById(R.id.leucogramaTextView);
+        gasometriaArterialTextView = (TextView)findViewById(R.id.gasometriaArterialTextView);
         funcaoHepaticaTextView = (TextView)findViewById(R.id.funcaoHepaticaTextView);
-        funcaoHepaticaSwitch = (SwitchCompat)findViewById(R.id.funcaoHepaticaSwitch);
         amilaseTextView = (TextView)findViewById(R.id.amilaseTextView);
-        amilaseSwitch = (SwitchCompat)findViewById(R.id.amilaseSwitch);
         amilaseLayout = findViewById(R.id.amilaseLayout);
         myAnimation = new MyAnimation();
 
@@ -393,99 +397,29 @@ public class ExamesActivity extends GenericoActivity{
     }
 
     public void gasometriaArterialOnClick(View view) {
-        StringBuilder gasometriaArterial = new StringBuilder();
-        if(gasometriaArterialSwitch.isChecked()) {
-            if (gasometrialArterialItensLayout.isShown()) {
-                myAnimation.slideUpView(getApplicationContext(), gasometrialArterialItensLayout);
-                for (int i = 0; i < gasometriaArterialMetabolico.length; i++)
-                    if (gasometriaArterialMetabolico[i])
-                        gasometriaArterial.append(getResources().getStringArray(R.array.gasometriaArterialMetabolico)[i]).append(", ");
-                for (int i = 0; i < gasometriaArterialRespiratorio.length; i++)
-                    if (gasometriaArterialRespiratorio[i])
-                        gasometriaArterial.append(getResources().getStringArray(R.array.gasometriaArterialRespiratorio)[i]).append(", ");
-                gasometriaArterialTextView.setText(gasometriaArterial.substring(0,gasometriaArterial.length()-2));
-                gasometriaArterialTextView.setVisibility(View.VISIBLE);
-            }
-            else {
-                myAnimation.slideDownView(getApplicationContext(), gasometrialArterialItensLayout);
-                gasometriaArterialTextView.setVisibility(View.INVISIBLE);
-            }
-        }
-    }
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-    public void gasometriaArterialSwitchOnClick(View view){
-        if(gasometriaArterialSwitch.isChecked()) {
-            gasometriaArterialTextView.setVisibility(View.INVISIBLE);
-            if(!gasometrialArterialItensLayout.isShown())
-                myAnimation.slideDownView(getApplicationContext(),gasometrialArterialItensLayout);
-        }
-        else {
-            gasometriaArterialTextView.setText(R.string.Normal);
-            gasometriaArterialTextView.setVisibility(View.VISIBLE);
-            if(gasometrialArterialItensLayout.isShown())
-                myAnimation.slideUpView(getApplicationContext(),gasometrialArterialItensLayout);
-        }
-    }
+        builder.setTitle(R.string.GasometriaArterial);
 
-    public void metabolicoOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        final ArrayList mSelectedItems = new ArrayList();
-
-        // Set the dialog title
-        builder.setTitle(R.string.Metabolico);
-        final String[] items = getResources().getStringArray(R.array.gasometriaArterialMetabolico);
-        builder.setMultiChoiceItems(items, gasometriaArterialMetabolico,
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.gasometriaArterial);
+        Arrays.sort(items);
+        builder.setMultiChoiceItems(items, gasometriaArterial,
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which,
                                         boolean isChecked) {
-                        if (isChecked)
-                            gasometriaArterialMetabolico[which]=true;
-                        else
-                            gasometriaArterialMetabolico[which]=false;
+                        gasometriaArterial[which]=isChecked;
                     }
                 })
                 // Set the action buttons
                 .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        setTextViewFromDialogMultipleText(gasometriaArterialMetabolico,gasometriaArterialMetabolicoTextView,items);
-                    }
-                })
-                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void respiratorioOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        final ArrayList mSelectedItems = new ArrayList();
-
-        // Set the dialog title
-        builder.setTitle(R.string.Respiratorio);
-        final String[] items = getResources().getStringArray(R.array.gasometriaArterialRespiratorio);
-        builder.setMultiChoiceItems(items, gasometriaArterialRespiratorio,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which,
-                                        boolean isChecked) {
-                        if (isChecked)
-                            gasometriaArterialRespiratorio[which]=true;
-                        else
-                            gasometriaArterialRespiratorio[which]=false;
-                    }
-                })
-                // Set the action buttons
-                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        setTextViewFromDialogMultipleText(gasometriaArterialRespiratorio,gasometriaArterialRespiratorioTextView,items);
+                        if(setTextViewFromDialogMultipleText(gasometriaArterial,gasometriaArterialTextView,items)==0){
+                            gasometriaArterialTextView.setText(getString(R.string.Normal));
+                        }
                     }
                 })
                 .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
@@ -500,12 +434,7 @@ public class ExamesActivity extends GenericoActivity{
     }
 
     public void funcaoHepaticaOnClick(View view){
-        if(!funcaoHepaticaSwitch.isChecked())
-            funcaoHepaticaDialog();
-        else{
-            funcaoHepaticaTextView.setText(getString(R.string.Nao));
-            funcaoHepaticaSwitch.setChecked(false);
-        }
+        funcaoHepaticaDialog();
     }
 
     private void funcaoHepaticaDialog(){
@@ -517,24 +446,26 @@ public class ExamesActivity extends GenericoActivity{
         //list of items
         final String[] items = getResources().getStringArray(R.array.funcaoHepatica);
         Arrays.sort(items);
-        builder.setSingleChoiceItems(items, funcaoHepaticaSelection,
-                new DialogInterface.OnClickListener() {
+        builder.setMultiChoiceItems(items, funcaoHepatica,
+                new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        funcaoHepaticaTextView.setText(items[which]);
-                        funcaoHepaticaTextView.setVisibility(View.VISIBLE);
-                        funcaoHepaticaSelection=which;
-                        funcaoHepaticaSwitch.setChecked(true);
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        funcaoHepatica[which]=isChecked;
                     }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialog, int id) {
+                        if(setTextViewFromDialogMultipleText(funcaoHepatica,funcaoHepaticaTextView,items)==0){
+                            funcaoHepaticaTextView.setText(getString(R.string.Normal));
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
                     }
                 });
 
@@ -544,12 +475,7 @@ public class ExamesActivity extends GenericoActivity{
     }
 
     public void amilaseOnClick(View view){
-        if(!amilaseSwitch.isChecked())
-            amilaseDialog(view);
-        else{
-            amilaseTextView.setText(getString(R.string.Nao));
-            amilaseSwitch.setChecked(false);
-        }
+        amilaseDialog(view);
     }
 
     private void amilaseDialog(View view){
@@ -561,12 +487,12 @@ public class ExamesActivity extends GenericoActivity{
                 switch (item.getItemId()) {
                     case R.id.normal:
                         amilaseTextView.setText(item.getTitle());
-                        amilaseSwitch.setChecked(true);
                         break;
                     case R.id.elevada:
                         amilaseTextView.setText(item.getTitle());
-                        amilaseSwitch.setChecked(true);
                         break;
+                    case R.id.nao:
+                        amilaseTextView.setText(item.getTitle());
                     default:
                         return false;
                 }

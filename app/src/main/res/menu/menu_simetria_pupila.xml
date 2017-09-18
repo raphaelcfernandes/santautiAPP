@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/isocoricas"
+        android:title="@string/Isocoricas">
+    </item>
+    <item android:id="@+id/anisocoricas"
+        android:title="@string/Anisocoricas">
+    </item>
+</menu>

@@ -9,7 +9,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:background="?attr/selectableItemBackground"
-        android:onClick="gasometriaArterialOnClick"
+        android:onClick="funcaoHepaticaOnClick"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 android:layout_marginEnd="160dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/GasometriaArterial"
+                android:text="@string/FuncaoHepatica"
                 style="@style/TitleTextStyleForLayoutSelection"/>
         </LinearLayout>
         <TextView
@@ -32,7 +32,7 @@
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="0dp"
             style="@style/ItemSelectedTextStyleForLayoutSelection"
-            android:id="@+id/gasometriaArterialTextView"/>
+            android:id="@+id/funcaoHepaticaTextView"/>
     </LinearLayout>
 
     <LinearLayout

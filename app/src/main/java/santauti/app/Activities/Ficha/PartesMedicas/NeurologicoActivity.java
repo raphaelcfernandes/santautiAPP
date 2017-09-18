@@ -48,10 +48,12 @@ public class NeurologicoActivity extends GenericoActivity {
             escalaDeGlasgowTextView,aberturaOcularTextView,respostaVerbalTextView,respostaMotoraTextView,
             tamanhoPupilaTextView,simetriaPupilaTextView,reatividadeLuzTextView,diferencaPupilaTextView,avaliacaoPupilarTextView,
             flutuacaoHint1,flutuacaoHint2,pensamentoDesorganizadoHint1,pensamentoDesorganizadoHint2, inatencaoHint1,inatencaoHint2,
-            deficitMotor,paresiaTextView,plegiaTextView,proporcaoParesiaTextView, proporcaoPlegiaTextView,menuProporcaoParesia,menuProporcaoPlegia;
-    private boolean[] paresia = new boolean[4],plegia = new boolean[4];
+            deficitMotor,paresiaTextView,plegiaTextView,proporcaoParesiaTextView, proporcaoPlegiaTextView,menuProporcaoParesia,menuProporcaoPlegia,
+            temporoEspacialTextView,desorientadoTextView,menuTamanhoPupila,menuSimetriaPupila,menuDiferencaPupilas,menuReatividadeLuz;
+    private boolean[] paresia = new boolean[4],plegia = new boolean[4],desorientado = new boolean[2];
     private View simSedado,comaLayout,diferencaPupilaLayout,avaliacaoPupilarItensLayout,escalaGlasgowItensLayout,
-            deliriumItensLayout,deficitMotorItensLayout,proporcaoParesiaLayout,proporcaoPlegiaLayout;
+            deliriumItensLayout,deficitMotorItensLayout,proporcaoParesiaLayout,proporcaoPlegiaLayout,
+            temporoEspacialLayout,desorientadoLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +78,10 @@ public class NeurologicoActivity extends GenericoActivity {
         aberturaOcularTextView = (TextView)findViewById(R.id.aberturaOcular);
         respostaVerbalTextView = (TextView)findViewById(R.id.respostaVerbal);
         respostaMotoraTextView = (TextView)findViewById(R.id.respostaMotora);
-        tamanhoPupilaTextView = (TextView)findViewById(R.id.tamanhoPupila);
-        simetriaPupilaTextView = (TextView)findViewById(R.id.simetriaPupila);
-        reatividadeLuzTextView = (TextView)findViewById(R.id.reatividadeLuz);
-        diferencaPupilaTextView = (TextView)findViewById(R.id.diferencaPupila);
+        tamanhoPupilaTextView = (TextView)findViewById(R.id.tamanhoPupilaTextView);
+        simetriaPupilaTextView = (TextView)findViewById(R.id.simetriaPupilaTextView);
+        reatividadeLuzTextView = (TextView)findViewById(R.id.reatividadeLuzTextView);
+        diferencaPupilaTextView = (TextView)findViewById(R.id.diferencaPupilaTextView);
         avaliacaoPupilarTextView = (TextView)findViewById(R.id.avaliacaoPupilar);
         flutuacaoHint1 = (TextView)findViewById(R.id.flutuacaoHint1);
         flutuacaoHint2 = (TextView)findViewById(R.id.flutuacaoHint2);
@@ -93,6 +95,14 @@ public class NeurologicoActivity extends GenericoActivity {
         proporcaoParesiaTextView = (TextView)findViewById(R.id.proporcaoParesia);
         proporcaoPlegiaTextView = (TextView)findViewById(R.id.proporcaoPlegia);
         menuProporcaoPlegia = (TextView)findViewById(R.id.menuProporcaoPlegia);
+        temporoEspacialLayout = findViewById(R.id.temporoEspacialLayout);
+        temporoEspacialTextView = (TextView)findViewById(R.id.temporoEspacialTextView);
+        desorientadoLayout = findViewById(R.id.desorientadoLayout);
+        desorientadoTextView = (TextView)findViewById(R.id.desorientadoTextView);
+        menuTamanhoPupila = (TextView)findViewById(R.id.menuTamanhoPupila);
+        menuSimetriaPupila = (TextView)findViewById(R.id.menuSimetriaPupila);
+        menuDiferencaPupilas = (TextView)findViewById(R.id.menuDiferencaPupilas);
+        menuReatividadeLuz = (TextView)findViewById(R.id.menuReatividadeLuz);
         /******************************VARIAVEIS LAYOUTS*************************************/
 
         /******************************VARIAVEIS SWTICH*********************************/
@@ -297,7 +307,7 @@ public class NeurologicoActivity extends GenericoActivity {
 
         //list of items
         final String[] options = getResources().getStringArray(R.array.nivelConsciencia);
-        Arrays.sort(options);
+//        Arrays.sort(options);
         builder.setSingleChoiceItems(options, nivelConscienciaSelection,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -311,15 +321,15 @@ public class NeurologicoActivity extends GenericoActivity {
                                 comaLayout.setVisibility(View.GONE);
                             myAnimation.slideDownView(getApplicationContext(),simSedado);
                         }
-                        if(options[which].equals(getResources().getStringArray(R.array.nivelConsciencia)[5]) &&
-                                !comaLayout.isShown()){
-                            if(simSedado.isShown())
-                                simSedado.setVisibility(View.GONE);
-                            myAnimation.slideDownView(getApplicationContext(),comaLayout);
-                        }
+//                        if(options[which].equals(getResources().getStringArray(R.array.nivelConsciencia)[5]) &&
+//                                !comaLayout.isShown()){
+//                            if(simSedado.isShown())
+//                                simSedado.setVisibility(View.GONE);
+//                            myAnimation.slideDownView(getApplicationContext(),comaLayout);
+//                        }
                         else{
-                            if(comaLayout.isShown())
-                                myAnimation.slideUpView(getApplicationContext(),comaLayout);
+//                            if(comaLayout.isShown())
+//                                myAnimation.slideUpView(getApplicationContext(),comaLayout);
                             if(simSedado.isShown())
                                 myAnimation.slideUpView(getApplicationContext(),simSedado);
                         }
@@ -525,143 +535,102 @@ public class NeurologicoActivity extends GenericoActivity {
     }
 
     public void tamanhoPupilaOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuTamanhoPupila, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_tamanho_pupila, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.miose:
+                        tamanhoPupilaTextView.setText(item.getTitle());
+                        break;
+                    case R.id.normal:
+                        tamanhoPupilaTextView.setText(item.getTitle());
+                        break;
+                    case R.id.midriase:
+                        tamanhoPupilaTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
 
-        builder.setTitle(R.string.TamanhoPupila);
-
-        //list of items
-        final String[] options = getResources().getStringArray(R.array.tamanhoPupila);
-        Arrays.sort(options);
-        builder.setSingleChoiceItems(options, tamanhoPupilaSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        tamanhoPupilaTextView.setText(options[which]);
-                        tamanhoPupilaTextView.setVisibility(View.VISIBLE);
-                        tamanhoPupilaSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        popupMenu.show();
     }
 
     public void simetriaPupilaOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.SimetriaPupila);
-
-        //list of items
-        final String[] options = getResources().getStringArray(R.array.simetriaPupila);
-        Arrays.sort(options);
-        builder.setSingleChoiceItems(options, simetriaPupilaSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        simetriaPupilaTextView.setText(options[which]);
-                        simetriaPupilaTextView.setVisibility(View.VISIBLE);
-                        simetriaPupilaSelection=which;
-                        if(options[which].equals(getResources().getStringArray(R.array.simetriaPupila)[1]) &&
-                                !diferencaPupilaLayout.isShown())
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuSimetriaPupila, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_simetria_pupila, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.anisocoricas:
+                        simetriaPupilaTextView.setText(item.getTitle());
+                        if(!diferencaPupilaLayout.isShown())
                             myAnimation.slideDownView(getApplicationContext(),diferencaPupilaLayout);
-                        else{
-                            if(diferencaPupilaLayout.isShown())
-                                myAnimation.slideUpView(getApplicationContext(),diferencaPupilaLayout);
-                        }
+                        break;
+                    case R.id.isocoricas:
+                        simetriaPupilaTextView.setText(item.getTitle());
+                        if(diferencaPupilaLayout.isShown())
+                            myAnimation.slideUpView(getApplicationContext(),diferencaPupilaLayout);
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
 
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        popupMenu.show();
     }
 
     public void diferencaPupilaOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuDiferencaPupilas, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_diferenca_pupila, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.esquerdaMdireita:
+                        diferencaPupilaTextView.setText(item.getTitle());
+                        break;
+                    case R.id.direitaMesquerda:
+                        diferencaPupilaTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
 
-        builder.setTitle(R.string.DiferencaPupilar);
-
-        //list of items
-        final String[] options = getResources().getStringArray(R.array.diferencaPupila);
-        Arrays.sort(options);
-        builder.setSingleChoiceItems(options, diferencaPupilaSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        diferencaPupilaTextView.setText(options[which]);
-                        diferencaPupilaTextView.setVisibility(View.VISIBLE);
-                        diferencaPupilaSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        popupMenu.show();
     }
 
     public void reatividadeLuzOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuReatividadeLuz, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_reatividade_luz_pupila, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.reativo:
+                        reatividadeLuzTextView.setText(item.getTitle());
+                        break;
+                    case R.id.naoReativo:
+                        reatividadeLuzTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
 
-        builder.setTitle(R.string.ReatividadeALuzPupila);
-
-        //list of items
-        final String[] options = getResources().getStringArray(R.array.reatividadeALuz);
-        Arrays.sort(options);
-        builder.setSingleChoiceItems(options, reatividadeLuzSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        reatividadeLuzTextView.setText(options[which]);
-                        reatividadeLuzTextView.setVisibility(View.VISIBLE);
-                        reatividadeLuzSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        popupMenu.show();
     }
 
     public void avaliacaoPupilarOnClick(View view){
@@ -907,5 +876,66 @@ public class NeurologicoActivity extends GenericoActivity {
         textView.setText(stringBuilder);
         if(!textView.isShown())
             textView.setVisibility(View.VISIBLE);
+    }
+
+    public void temporoEspacialOnCLick(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), temporoEspacialLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_temporo_espacial, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.orientado:
+                        temporoEspacialTextView.setText(item.getTitle());
+                        if(desorientadoLayout.isShown())
+                            myAnimation.slideUpView(getApplicationContext(),desorientadoLayout);
+                        break;
+                    case R.id.desorientado:
+                        temporoEspacialTextView.setText(item.getTitle());
+                        if(!desorientadoLayout.isShown())
+                            myAnimation.slideDownView(getApplicationContext(),desorientadoLayout);
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    public void desorientadoOnClick(View view){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+
+        builder.setTitle(R.string.Desorientado);
+
+        //list of items
+        final String[] items = getResources().getStringArray(R.array.desorientado);
+        builder.setMultiChoiceItems(items, desorientado,
+                new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which,
+                                        boolean isChecked) {
+                        desorientado[which]=isChecked;
+                    }
+                })
+                // Set the action buttons
+                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        setTextViewFromDialogMultipleText(desorientado,desorientadoTextView,items);
+                    }
+                })
+                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
     }
 }
