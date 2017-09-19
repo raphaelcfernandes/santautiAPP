@@ -26,7 +26,7 @@ Monitor:
       - frequencia cardiaca -> monitor (OK)
       - PAM + PVC + swan_Ganz -> monitor (OK)
 
-Bomba de infusao:
+Bomba de infusao: memoria + editar velocidade de infusao para registros antigos
     -   Bomba de infusao
       - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
       - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
