@@ -44,12 +44,10 @@ public class HemodinamicoActivity extends GenericoActivity {
         intensidadeSoproLayout = findViewById(R.id.intensidade_sopro_layout);
 
         foneseBulhasTextview = (TextView)findViewById(R.id.foneseBulhasTextView);
-        tipoSoproTextView = (TextView)findViewById(R.id.tipoSoproTextView);
         intensidadeSopro = (TextView)findViewById(R.id.intensidadeSopro);
         menuFoneseBulhas = (TextView)findViewById(R.id.menuFoneseBulhas);
         menuExtremidades = (TextView)findViewById(R.id.menuExtremidades);
         extremidadesTextView = (TextView)findViewById(R.id.extremidadesTextView);
-        menuTipoSopro = (TextView)findViewById(R.id.tipoSoproTextView);
         /********************VIEWS*******************************/
 
 
@@ -196,30 +194,6 @@ public class HemodinamicoActivity extends GenericoActivity {
         popupMenu.show();
     }
 
-    public void tipoSoproOnClick(View view) {
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), tipoSoproLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_tipo_sopro, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.FA:
-                        tipoSoproTextView.setText(item.getTitle());
-                        break;
-                    case R.id.FM:
-                        tipoSoproTextView.setText(item.getTitle());
-                        break;
-                    case R.id.FT:
-                        tipoSoproTextView.setText(item.getTitle());
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
 
     public void intensidadeSoproOnClick(View view) {
         AlertDialog.Builder builder =

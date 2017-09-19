@@ -27,6 +27,7 @@ import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapter;
 import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapterModel;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.Neurologico.Neurologico;
 import santauti.app.R;
 
 /**
@@ -40,20 +41,32 @@ public class NeurologicoActivity extends GenericoActivity {
     private RecyclerView recyclerView;
     private NeurologicoAdapter neurologicoAdapter;
     private SwitchCompat deficitMotorSwitch;
-    private int escalaDeGlasgowSoma=0,nivelConscienciaSelection=-1, rassSelection=-1,
-            ramsaySelection=-1,respostaMotoraSelection=-1,respostaVerbalSelection=-1,
-            aberturaOcularSelection=-1,tamanhoPupilaSelection=-1,simetriaPupilaSelection=-1,reatividadeLuzSelection=-1,
-            diferencaPupilaSelection=-1;
-    private TextView nivelConscienciaTextView,rassTextView,ramsayTextView,
-            escalaDeGlasgowTextView,aberturaOcularTextView,respostaVerbalTextView,respostaMotoraTextView,
-            tamanhoPupilaTextView,simetriaPupilaTextView,reatividadeLuzTextView,diferencaPupilaTextView,avaliacaoPupilarTextView,
-            flutuacaoHint1,flutuacaoHint2,pensamentoDesorganizadoHint1,pensamentoDesorganizadoHint2, inatencaoHint1,inatencaoHint2,
-            deficitMotor,paresiaTextView,plegiaTextView,proporcaoParesiaTextView, proporcaoPlegiaTextView,menuProporcaoParesia,menuProporcaoPlegia,
-            temporoEspacialTextView,desorientadoTextView,menuTamanhoPupila,menuSimetriaPupila,menuDiferencaPupilas,menuReatividadeLuz;
-    private boolean[] paresia = new boolean[4],plegia = new boolean[4],desorientado = new boolean[2];
-    private View simSedado,comaLayout,diferencaPupilaLayout,avaliacaoPupilarItensLayout,escalaGlasgowItensLayout,
-            deliriumItensLayout,deficitMotorItensLayout,proporcaoParesiaLayout,proporcaoPlegiaLayout,
-            temporoEspacialLayout,desorientadoLayout;
+    private int escalaDeGlasgowSoma=0;
+    private int nivelConscienciaSelection=-1;
+    private int rassSelection=-1;
+    private int ramsaySelection=-1;
+    private int respostaMotoraSelection=-1;
+    private int respostaVerbalSelection=-1;
+    private int aberturaOcularSelection=-1;
+    private View avaliacaoPupilarItensLayout;
+    private TextView nivelConscienciaTextView;
+    private TextView rassTextView;
+    private TextView ramsayTextView;
+    private TextView escalaDeGlasgowTextView;
+    private TextView aberturaOcularTextView;
+    private TextView respostaVerbalTextView;
+    private TextView respostaMotoraTextView;
+    private TextView avaliacaoPupilarTextView;
+    private TextView flutuacaoHint1;
+    private TextView flutuacaoHint2;
+    private TextView pensamentoDesorganizadoHint1;
+    private TextView pensamentoDesorganizadoHint2;
+    private TextView inatencaoHint1;
+    private TextView inatencaoHint2;
+    private TextView deficitMotor;
+    private TextView temporoEspacialTextView;
+    private View simSedado,comaLayout,diferencaPupilaLayout,escalaGlasgowItensLayout,
+            deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +77,9 @@ public class NeurologicoActivity extends GenericoActivity {
         simSedado = findViewById(R.id.sedado_sim_layout);
         comaLayout = findViewById(R.id.coma_layout);
         diferencaPupilaLayout = findViewById(R.id.diferencaPupilaLayout);
-        avaliacaoPupilarItensLayout = findViewById(R.id.avaliacaoPupilarItens);
         escalaGlasgowItensLayout = findViewById(R.id.escalaGlasgowItensLayout);
         deliriumItensLayout = findViewById(R.id.deliriumItens);
         deficitMotorItensLayout = findViewById(R.id.deficitMotorItens);
-        proporcaoParesiaLayout = findViewById(R.id.proporcaoParesiaLayout);
-        proporcaoPlegiaLayout = findViewById(R.id.proporcaoPlegiaLayout);
-        menuProporcaoParesia = (TextView) findViewById(R.id.menuProporcao);
         nivelConscienciaTextView = (TextView)findViewById(R.id.nivelCosciencia);
         rassTextView = (TextView)findViewById(R.id.rassTextView);
         ramsayTextView = (TextView)findViewById(R.id.ramsayTextView);
@@ -78,11 +87,6 @@ public class NeurologicoActivity extends GenericoActivity {
         aberturaOcularTextView = (TextView)findViewById(R.id.aberturaOcular);
         respostaVerbalTextView = (TextView)findViewById(R.id.respostaVerbal);
         respostaMotoraTextView = (TextView)findViewById(R.id.respostaMotora);
-        tamanhoPupilaTextView = (TextView)findViewById(R.id.tamanhoPupilaTextView);
-        simetriaPupilaTextView = (TextView)findViewById(R.id.simetriaPupilaTextView);
-        reatividadeLuzTextView = (TextView)findViewById(R.id.reatividadeLuzTextView);
-        diferencaPupilaTextView = (TextView)findViewById(R.id.diferencaPupilaTextView);
-        avaliacaoPupilarTextView = (TextView)findViewById(R.id.avaliacaoPupilar);
         flutuacaoHint1 = (TextView)findViewById(R.id.flutuacaoHint1);
         flutuacaoHint2 = (TextView)findViewById(R.id.flutuacaoHint2);
         pensamentoDesorganizadoHint1 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint1);
@@ -90,19 +94,10 @@ public class NeurologicoActivity extends GenericoActivity {
         inatencaoHint1 = (TextView)findViewById(R.id.inatencaoHint1);
         inatencaoHint2 = (TextView)findViewById(R.id.inatencaoHint2);
         deficitMotor = (TextView)findViewById(R.id.deficitMotor);
-        paresiaTextView = (TextView)findViewById(R.id.paresia);
-        plegiaTextView = (TextView)findViewById(R.id.plegia);
-        proporcaoParesiaTextView = (TextView)findViewById(R.id.proporcaoParesia);
-        proporcaoPlegiaTextView = (TextView)findViewById(R.id.proporcaoPlegia);
-        menuProporcaoPlegia = (TextView)findViewById(R.id.menuProporcaoPlegia);
         temporoEspacialLayout = findViewById(R.id.temporoEspacialLayout);
         temporoEspacialTextView = (TextView)findViewById(R.id.temporoEspacialTextView);
         desorientadoLayout = findViewById(R.id.desorientadoLayout);
-
-        menuTamanhoPupila = (TextView)findViewById(R.id.menuTamanhoPupila);
-        menuSimetriaPupila = (TextView)findViewById(R.id.menuSimetriaPupila);
-        menuDiferencaPupilas = (TextView)findViewById(R.id.menuDiferencaPupilas);
-        menuReatividadeLuz = (TextView)findViewById(R.id.menuReatividadeLuz);
+        avaliacaoPupilarItensLayout = findViewById(R.id.avaliacaoPupilarItensLayout);
         /******************************VARIAVEIS LAYOUTS*************************************/
 
         /******************************VARIAVEIS SWTICH*********************************/
@@ -534,126 +529,32 @@ public class NeurologicoActivity extends GenericoActivity {
         dialog.show();
     }
 
-    public void tamanhoPupilaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuTamanhoPupila, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_tamanho_pupila, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.miose:
-                        tamanhoPupilaTextView.setText(item.getTitle());
-                        break;
-                    case R.id.normal:
-                        tamanhoPupilaTextView.setText(item.getTitle());
-                        break;
-                    case R.id.midriase:
-                        tamanhoPupilaTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-    public void simetriaPupilaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuSimetriaPupila, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_simetria_pupila, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.anisocoricas:
-                        simetriaPupilaTextView.setText(item.getTitle());
-                        if(!diferencaPupilaLayout.isShown())
-                            myAnimation.slideDownView(getApplicationContext(),diferencaPupilaLayout);
-                        break;
-                    case R.id.isocoricas:
-                        simetriaPupilaTextView.setText(item.getTitle());
-                        if(diferencaPupilaLayout.isShown())
-                            myAnimation.slideUpView(getApplicationContext(),diferencaPupilaLayout);
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-    public void diferencaPupilaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuDiferencaPupilas, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_diferenca_pupila, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.esquerdaMdireita:
-                        diferencaPupilaTextView.setText(item.getTitle());
-                        break;
-                    case R.id.direitaMesquerda:
-                        diferencaPupilaTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-    public void reatividadeLuzOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuReatividadeLuz, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_reatividade_luz_pupila, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.reativo:
-                        reatividadeLuzTextView.setText(item.getTitle());
-                        break;
-                    case R.id.naoReativo:
-                        reatividadeLuzTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
     public void avaliacaoPupilarOnClick(View view){
         StringBuilder avaliacaoString = new StringBuilder();
-        if(avaliacaoPupilarItensLayout.isShown()) {
+        if(avaliacaoPupilarItensLayout.isShown()){
             myAnimation.slideUpView(getApplicationContext(), avaliacaoPupilarItensLayout);
-            if(tamanhoPupilaTextView.getText().toString().length()>0)
-                avaliacaoString.append("Tamanho: ").append(tamanhoPupilaTextView.getText().toString());
-            if(simetriaPupilaTextView.getText().toString().length()>0)
-                avaliacaoString.append(", Simetria: ").append(simetriaPupilaTextView.getText().toString());
-            if(simetriaPupilaTextView.getText().equals(getResources().getStringArray(R.array.simetriaPupila)[1]))
-                avaliacaoString.append(", Diferença: ").append(diferencaPupilaTextView.getText().toString());
-            if(reatividadeLuzTextView.getText().length()>0)
-                avaliacaoString.append(", Reatividade a Luz: ").append(reatividadeLuzTextView.getText().toString());
-            if(avaliacaoString.length()!=0) {
-                avaliacaoPupilarTextView.setText(avaliacaoString);
-                avaliacaoPupilarTextView.setVisibility(View.VISIBLE);
-            }
         }
-        else {
-            avaliacaoPupilarTextView.setVisibility(View.GONE);
+        else
             myAnimation.slideDownView(getApplicationContext(), avaliacaoPupilarItensLayout);
-        }
+//        if(avaliacaoPupilarItensLayout.isShown()) {
+//            myAnimation.slideUpView(getApplicationContext(), avaliacaoPupilarItensLayout);
+//            if(tamanhoPupilaTextView.getText().toString().length()>0)
+//                avaliacaoString.append("Tamanho: ").append(tamanhoPupilaTextView.getText().toString());
+//            if(simetriaPupilaTextView.getText().toString().length()>0)
+//                avaliacaoString.append(", Simetria: ").append(simetriaPupilaTextView.getText().toString());
+//            if(simetriaPupilaTextView.getText().equals(getResources().getStringArray(R.array.simetriaPupila)[1]))
+//                avaliacaoString.append(", Diferença: ").append(diferencaPupilaTextView.getText().toString());
+//            if(reatividadeLuzTextView.getText().length()>0)
+//                avaliacaoString.append(", Reatividade a Luz: ").append(reatividadeLuzTextView.getText().toString());
+//            if(avaliacaoString.length()!=0) {
+//                avaliacaoPupilarTextView.setText(avaliacaoString);
+//                avaliacaoPupilarTextView.setVisibility(View.VISIBLE);
+//            }
+//        }
+//        else {
+//            avaliacaoPupilarTextView.setVisibility(View.GONE);
+//            myAnimation.slideDownView(getApplicationContext(), avaliacaoPupilarItensLayout);
+//        }
     }
 
     public void escalaGlasgowOnClick(View view){
@@ -731,153 +632,6 @@ public class NeurologicoActivity extends GenericoActivity {
         }
     }
 
-    public void paresiaOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        final ArrayList mSelectedItems = new ArrayList();
-
-        // Set the dialog title
-        builder.setTitle(R.string.Paresia)
-                .setMultiChoiceItems(R.array.membrosDeficit, paresia,
-                        new DialogInterface.OnMultiChoiceClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which,
-                                                boolean isChecked) {
-                                if (isChecked)
-                                    paresia[which]=true;
-                                else
-                                    paresia[which]=false;
-                            }
-                        })
-                // Set the action buttons
-                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        setTextViewFromDialogDeficitMotor(paresia,paresiaTextView, proporcaoParesiaLayout);
-                    }
-                })
-                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void plegiaOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        final ArrayList mSelectedItems = new ArrayList();
-
-        // Set the dialog title
-        builder.setTitle(R.string.Plegia)
-                .setMultiChoiceItems(R.array.membrosDeficit, plegia,
-                        new DialogInterface.OnMultiChoiceClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which,
-                                                boolean isChecked) {
-                                if (isChecked)
-                                    plegia[which]=true;
-                                else
-                                    plegia[which]=false;
-                            }
-                        })
-                // Set the action buttons
-                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        setTextViewFromDialogDeficitMotor(plegia,plegiaTextView,proporcaoPlegiaLayout);
-                    }
-                })
-                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-
-    }
-
-    public void proporcaoParesiaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuProporcaoParesia, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_proporcionada_desprorpocionada, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.MnuOpc1:
-                        proporcaoParesiaTextView.setText(item.getTitle());
-                        break;
-                    case R.id.MnuOpc2:
-                        proporcaoParesiaTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-
-    }
-
-    public void proporcaoPlegiaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuProporcaoPlegia, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_proporcionada_desprorpocionada, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.MnuOpc1:
-                        proporcaoPlegiaTextView.setText(item.getTitle());
-                        break;
-                    case R.id.MnuOpc2:
-                        proporcaoPlegiaTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-
-    }
-
-    private void setTextViewFromDialogDeficitMotor(boolean[] array, TextView textView,View viewToShow){
-        StringBuilder stringBuilder = new StringBuilder();
-        int i,total=0;
-        for(i=0;i<array.length;i++)
-            if(array[i])
-                total++;
-        if(total==0 && viewToShow.isShown())
-            myAnimation.slideUpView(getApplicationContext(),viewToShow);
-        else{
-            for (i = 0; i < array.length; i++) {
-                if (array[i]) {
-                    total--;
-                    if (total == 0) {
-                        stringBuilder.append(getResources().getStringArray(R.array.membrosDeficit)[i]);
-                    }
-                    else {
-                        stringBuilder.append(getResources().getStringArray(R.array.membrosDeficit)[i]).append(", ");
-                    }
-                }
-            }
-            if(!viewToShow.isShown())
-                myAnimation.slideDownView(getApplicationContext(),viewToShow);
-        }
-        textView.setText(stringBuilder);
-        if(!textView.isShown())
-            textView.setVisibility(View.VISIBLE);
-    }
-
     public void temporoEspacialOnCLick(View view){
         PopupMenu popupMenu = new PopupMenu(view.getContext(), temporoEspacialLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
         popupMenu.getMenuInflater().inflate(R.menu.menu_temporo_espacial, popupMenu.getMenu());
@@ -903,6 +657,19 @@ public class NeurologicoActivity extends GenericoActivity {
         });
 
         popupMenu.show();
+    }
+
+    public void simetriaOnClick(View view){
+        switch(view.getId()) {
+            case R.id.anisocoricas:
+                if(!diferencaPupilaLayout.isShown())
+                    myAnimation.slideDownView(NeurologicoActivity.this,diferencaPupilaLayout);
+                break;
+            case R.id.isocoricas:
+                if(diferencaPupilaLayout.isShown())
+                    myAnimation.slideUpView(NeurologicoActivity.this,diferencaPupilaLayout);
+                break;
+        }
     }
 
 }

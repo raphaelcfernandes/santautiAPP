@@ -110,7 +110,7 @@
                             android:layout_height="wrap_content"
                             android:ems="6"
                             android:hint="@string/Temperatura"
-                            android:inputType="number" />
+                            android:inputType="number|numberDecimal" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout

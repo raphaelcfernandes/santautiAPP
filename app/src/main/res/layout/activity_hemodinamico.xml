@@ -149,8 +149,6 @@
                 android:id="@+id/tipoSopro_layout"
                 android:paddingTop="10dp"
                 android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="tipoSoproOnClick"
                 android:visibility="gone">
                 <TextView
                     android:id="@+id/menuTipoSopro"
@@ -160,15 +158,38 @@
                     android:layout_height="wrap_content"
                     android:text="@string/TipoSopro"
                     style="@style/TitleTextStyleForLayoutSelection"/>
-                <TextView
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                <RadioGroup
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:paddingBottom="10dp"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/tipoSoproTextView"/>
+                    android:layout_gravity="center|start"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/FA"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FM"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FT"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1px"

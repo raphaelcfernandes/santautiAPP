@@ -50,114 +50,155 @@
         android:orientation="vertical"
         android:id="@+id/deficitMotorItens"
         android:visibility="gone">
-        <LinearLayout
-            android:paddingTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="paresiaOnClick"
-            android:paddingBottom="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Paresia"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/TitleTextStyleForLayoutSelection"
-                />
-            <TextView
-                android:visibility="invisible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/paresia"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/proporcaoParesiaLayout"
-            android:paddingTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="proporcaoParesiaOnClick"
-            android:paddingBottom="10dp"
-            android:visibility="gone">
-            <TextView
-                android:id="@+id/menuProporcao"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="60dp"
-                android:text="@string/ProporcaoParesia"
-                android:layout_marginStart="@dimen/submenu_left_padding"
-                style="@style/TitleTextStyleForLayoutSelection"
-                />
-            <TextView
-                android:visibility="visible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/proporcaoParesia"/>
-        </LinearLayout>
 
         <LinearLayout
             android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="plegiaOnClick"
-            android:paddingBottom="10dp">
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="0dp">
             <TextView
+                android:paddingStart="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:paddingEnd="150dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Plegia"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/TitleTextStyleForLayoutSelection"
-                />
+                android:text="M.S.E"/>
             <TextView
-                android:visibility="invisible"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/plegia"/>
+                android:text="M.S.D"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="0dp"
+            android:paddingTop="5dp">
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/simSopro"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/Paresia"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/naoSopro"
+                    android:text="@string/Plegia"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:paddingStart="40dp">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/Paresia"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Plegia"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/proporcaoPlegiaLayout"
             android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="proporcaoPlegiaOnClick"
-            android:paddingBottom="10dp"
-            android:visibility="gone">
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin">
             <TextView
-                android:id="@+id/menuProporcaoPlegia"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="60dp"
-                android:text="@string/ProporcaoPlegia"
-                android:layout_marginStart="@dimen/submenu_left_padding"
-                style="@style/TitleTextStyleForLayoutSelection"
-                />
-            <TextView
-                android:visibility="visible"
+                android:paddingStart="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:paddingEnd="155dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/proporcaoPlegia"/>
+                android:text="M.I.E"/>
+            <TextView
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M.I.D"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="0dp"
+            android:paddingTop="5dp">
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/Paresia"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Plegia"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:paddingStart="40dp">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/Paresia"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Plegia"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
         </LinearLayout>
 
     </LinearLayout>
