@@ -23,6 +23,7 @@ public class RespiradorActivity extends GenericoActivity{
     private TextView ventilacao,modoVentilatorio;
     private View bipap,mecanico,naoInvasivo;
     private MyAnimation myAnimation;
+    private View respiradorLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +32,10 @@ public class RespiradorActivity extends GenericoActivity{
         prepareNavigationButtons();
         /****************************VIEWS*****************************/
         bipap = findViewById(R.id.bipap);
-        ventilacao = (TextView)findViewById(R.id.ventilacao);
         mecanico = findViewById(R.id.ventilacao_mecanica);
         modoVentilatorio = (TextView)findViewById(R.id.modoVentilatorio);
         naoInvasivo = findViewById(R.id.ventilacao_naoInvasiva);
+        respiradorLayout = findViewById(R.id.respiradorLayout);
         /****************************VIEWS*****************************/
 
         myAnimation = new MyAnimation();
@@ -61,11 +62,7 @@ public class RespiradorActivity extends GenericoActivity{
                 finish();
             }
         });
-        createPopupModoVentilatorio();
-    }
-
-    public void ventilacaoOnClick(View view){
-        createPopupModoVentilatorio();
+        //createPopupModoVentilatorio();
     }
 
     public void parametrosModoVentilatorioOnClick(View view){
@@ -101,58 +98,43 @@ public class RespiradorActivity extends GenericoActivity{
         dialog.show();
     }
 
-    private void createPopupModoVentilatorio(){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        builder.setTitle(R.string.ModoVentilatorio);
+    public void emVentilacaoOnClick(View view){
+        switch(view.getId()) {
+            case R.id.simVentilacao:
+                if(!respiradorLayout.isShown())
+                    myAnimation.slideDownView(getApplicationContext(),respiradorLayout);
+                break;
+            case R.id.naoVentilacao:
+                if(respiradorLayout.isShown())
+                    myAnimation.slideUpView(getApplicationContext(),respiradorLayout);
+                break;
+        }
+    }
 
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.ventilacao);
-        //Arrays.sort(items);
-        builder.setSingleChoiceItems(items, ventilacaoSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ventilacao.setText(items[which]);
-                        ventilacao.setVisibility(View.VISIBLE);
-                        ventilacaoSelection=which;
-                        if(items[which].equals(getResources().getStringArray(R.array.ventilacao)[1]) && !bipap.isShown()) {
-                            if(mecanico.isShown())
-                                mecanico.setVisibility(View.GONE);
-                            if(naoInvasivo.isShown())
-                                naoInvasivo.setVisibility(View.GONE);
-                            bipap.setVisibility(View.VISIBLE);
-                        }
-                        if(items[which].equals(getResources().getStringArray(R.array.ventilacao)[2]) && !mecanico.isShown()){
-                            if(bipap.isShown())
-                                bipap.setVisibility(View.GONE);
-                            if(naoInvasivo.isShown())
-                                naoInvasivo.setVisibility(View.GONE);
-                            mecanico.setVisibility(View.VISIBLE);
-                        }
-                        if(items[which].equals(getResources().getStringArray(R.array.ventilacao)[0]) && !naoInvasivo.isShown()){
-                            if(bipap.isShown())
-                                bipap.setVisibility(View.GONE);
-                            if(mecanico.isShown())
-                                mecanico.setVisibility(View.GONE);
-                            naoInvasivo.setVisibility(View.VISIBLE);
-                        }
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(R.string.Cancelar);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+    public void modoVentilatorioOnClick(View view){
+        switch(view.getId()) {
+            case R.id.naoInvasivoModoVentilatorio:
+                if(bipap.isShown())
+                    bipap.setVisibility(View.GONE);
+                if(mecanico.isShown())
+                    mecanico.setVisibility(View.GONE);
+                naoInvasivo.setVisibility(View.VISIBLE);
+                break;
+            case R.id.bipapModoVentilatorio:
+                if(mecanico.isShown())
+                    mecanico.setVisibility(View.GONE);
+                if(naoInvasivo.isShown())
+                    naoInvasivo.setVisibility(View.GONE);
+                bipap.setVisibility(View.VISIBLE);
+                break;
+            case R.id.mecanicaModoVentilatorio:
+                if(bipap.isShown())
+                    bipap.setVisibility(View.GONE);
+                if(naoInvasivo.isShown())
+                    naoInvasivo.setVisibility(View.GONE);
+                mecanico.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 }

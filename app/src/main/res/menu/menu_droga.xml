@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/adrenalina"
+        android:title="@string/Adrenalina">
+    </item>
+    <item android:id="@+id/amiodarona"
+        android:title="@string/Amiodarona">
+    </item>
+    <item android:id="@+id/dobutamina"
+        android:title="@string/Dobutamina">
+    </item>
+    <item android:id="@+id/dopamina"
+        android:title="@string/Dopamina">
+    </item>
+    <item android:id="@+id/fentanil"
+        android:title="@string/Fentanil">
+    </item>
+    <item android:id="@+id/hidrocortisona"
+        android:title="@string/Hidrocortisona">
+    </item>
+    <item android:id="@+id/insulina"
+        android:title="@string/Insulina">
+    </item>
+    <item android:id="@+id/ketamina"
+        android:title="@string/Ketamina">
+    </item>
+    <item android:id="@+id/midozalam"
+        android:title="@string/Midozalam">
+    </item>
+    <item android:id="@+id/milrinona"
+        android:title="@string/Milrinona">
+    </item>
+    <item android:id="@+id/nitroglicerina"
+        android:title="@string/Nitroglicerina">
+    </item>
+    <item android:id="@+id/nitroprussioatoDeSodio"
+        android:title="@string/NitroprussiatoDeSodio">
+    </item>
+    <item android:id="@+id/noradrenalina"
+        android:title="@string/Noradrenalina">
+    </item>
+    <item android:id="@+id/polimixina"
+        android:title="@string/Polimixina">
+    </item>
+    <item android:id="@+id/precedex"
+        android:title="@string/Precedex">
+    </item>
+    <item android:id="@+id/propofol"
+        android:title="@string/Propofol">
+    </item>
+</menu>

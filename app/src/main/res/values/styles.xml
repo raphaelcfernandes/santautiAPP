@@ -89,4 +89,8 @@
 
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="CheckBox">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 </resources>

@@ -98,7 +98,7 @@ public class NeurologicoActivity extends GenericoActivity {
         temporoEspacialLayout = findViewById(R.id.temporoEspacialLayout);
         temporoEspacialTextView = (TextView)findViewById(R.id.temporoEspacialTextView);
         desorientadoLayout = findViewById(R.id.desorientadoLayout);
-        desorientadoTextView = (TextView)findViewById(R.id.desorientadoTextView);
+
         menuTamanhoPupila = (TextView)findViewById(R.id.menuTamanhoPupila);
         menuSimetriaPupila = (TextView)findViewById(R.id.menuSimetriaPupila);
         menuDiferencaPupilas = (TextView)findViewById(R.id.menuDiferencaPupilas);
@@ -905,37 +905,4 @@ public class NeurologicoActivity extends GenericoActivity {
         popupMenu.show();
     }
 
-    public void desorientadoOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.Desorientado);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.desorientado);
-        builder.setMultiChoiceItems(items, desorientado,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which,
-                                        boolean isChecked) {
-                        desorientado[which]=isChecked;
-                    }
-                })
-                // Set the action buttons
-                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        setTextViewFromDialogMultipleText(desorientado,desorientadoTextView,items);
-                    }
-                })
-                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
 }

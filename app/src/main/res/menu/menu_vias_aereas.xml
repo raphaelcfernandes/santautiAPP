@@ -5,7 +5,7 @@
         android:title="@string/Natural">
     </item>
     <item android:id="@+id/tuboTraquial"
-        android:title="@string/TuboTraquial">
+        android:title="@string/TuboTraqueal">
     </item>
     <item android:id="@+id/traqueoostomia"
         android:title="@string/Traqueostomia">

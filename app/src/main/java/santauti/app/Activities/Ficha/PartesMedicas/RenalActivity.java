@@ -30,7 +30,8 @@ public class RenalActivity extends GenericoActivity {
     private MyAnimation myAnimation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);setContentView(R.layout.activity_renal);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_renal);
         findViewById(R.id.activity_renal).requestFocus();
         setToolbar(getString(R.string.Renal));
 

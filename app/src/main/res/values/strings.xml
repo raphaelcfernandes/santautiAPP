@@ -46,8 +46,8 @@
     <string name="PVC">PVC</string>
     <string name="PPC">PPC</string>
     <string name="Swanganz">Swan-ganz</string>
-    <string name="SPO2">SPO2</string>
-    <string name="SJO2">SJO2</string>
+    <string name="SPO2">SPO2 (%)</string>
+    <string name="SJO2">SJO2 (%)</string>
     <string name="PesoKG">Peso (kg)</string>
     <string name="Urina">Urina</string>
     <string name="Clara">Clara</string>
@@ -190,11 +190,35 @@
     <string name="FT">FT</string>
     <string name="FA">FA</string>
     <string name="Natural">Natural</string>
-    <string name="TuboTraquial">Tubo Traquial</string>
+    <string name="TuboTraqueal">Tubo Traqueal</string>
     <string name="Traqueostomia">Traqueostomia</string>
     <string name="Alta">Alta</string>
     <string name="Media">Média</string>
     <string name="Baixa">Baixa</string>
+    <string name="NoTempo">No Tempo</string>
+    <string name="NoEspaco">No Espaço</string>
+    <string name="EstaVentilacaoMecanica">Está em Ventilação Mecânica?</string>
+    <string name="NaoInvasiva">Não-invasiva</string>
+    <string name="BIPAP">BIPAP</string>
+    <string name="Mecanica">Mecânica</string>
+    <string name="Droga">Droga</string>
+    <string name="Adrenalina">Adrenalina </string>
+    <string name="Dobutamina">Dobutamina</string>
+    <string name="Dopamina">Dopamina</string>
+    <string name="NitroprussiatoDeSodio">Nitroprussiato de Sodio</string>
+    <string name="Nitroglicerina">Nitroglicerina</string>
+    <string name="Milrinona">Milrinona </string>
+    <string name="Noradrenalina">Noradrenalina</string>
+    <string name="Fentanil">Fentanil </string>
+    <string name="Propofol">Propofol </string>
+    <string name="Ketamina">Ketamina</string>
+    <string name="Midozalam"> Midazolam </string>
+    <string name="Precedex">Precedex </string>
+    <string name="Amiodarona">Amiodarona</string>
+    <string name="Insulina"> Insulina</string>
+    <string name="Hidrocortisona">Hidrocortisona</string>
+    <string name="Polimixina">Polimixina</string>
+
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -297,12 +321,6 @@
         <item>Em Máscara de Reinalação</item>
         <item>Sob Cateter Nasal</item>
         <item>Não</item>
-    </string-array>
-
-    <string-array name="ventilacao">
-        <item>Não-invasiva</item>
-        <item>BIPAP</item>
-        <item>Mecânica</item>
     </string-array>
 
     <string-array name="modoVentilatorio">
@@ -481,21 +499,18 @@
 
     <string-array name="dispositivos">
         <item>Cateter Venoso Central</item>
-        <item>Cateter de PAI</item>
-        <item>Dreno de Torax</item>
-        <item>Dreno Abdominal</item>
+        <item>Venoclise</item>
         <item>Sonda Vesical</item>
-        <item>Tubo Orotraquial</item>
+        <item>Sonda Enteral</item>
+        <item>Sonda Gastrica</item>
+        <item>Cateter de PAI</item>
+        <item>Tubo Orotraqueal</item>
         <item>Traqueostomia</item>
         <item>Gastrostomia</item>
-        <item>Venoclise</item>
-        <item>Sonda Enteral</item>
-        <item>Sonda Oroenteral</item>
-        <item>Sonda Nasoenteral</item>
-        <item>Sonda Orogastrica</item>
-        <item>Sonda Nasogastrica</item>
         <item>Cateter de PIC</item>
-        <item>Balão Intra-aórtico</item>
+        <item>Dreno Abdominal</item>
+        <item>Dreno de Torax</item>
+        <item>Balão Intra-Aórtico</item>
     </string-array>
 
     <string-array name="crepitacoes">
@@ -516,5 +531,8 @@
         <item>Terço Médio Direito</item>
         <item>Terço Médio Esquerdo</item>
     </string-array>
+
+
+
     <!--ARRAYS-->
 </resources>

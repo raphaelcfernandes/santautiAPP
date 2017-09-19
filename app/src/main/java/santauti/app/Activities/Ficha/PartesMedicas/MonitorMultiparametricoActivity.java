@@ -62,17 +62,6 @@ public class MonitorMultiparametricoActivity extends GenericoActivity {
         proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
     }
 
-//    private void prepareSpinner(){
-//        String[] list = getResources().getStringArray(R.array.tiposTracado);
-//        Arrays.sort(list);
-//        tracadoEletrocardiograficoSpinner = (Spinner)findViewById(R.id.pupila_simetria_diferenca_spinner);
-//        adapterTracaoEletrocardiografico = new ArrayAdapter<CharSequence>(MonitorMultiparametricoActivity.this, android.R.layout.simple_dropdown_item_1line, list);
-////        adapterTracaoEletrocardiografico = ArrayAdapter.createFromResource(this,
-////                R.array.tiposTracado, R.layout.custom_spinner_items);
-//        adapterTracaoEletrocardiografico.setDropDownViewResource(R.layout.teste);
-//        tracadoEletrocardiograficoSpinner.setAdapter(adapterTracaoEletrocardiografico);
-//    }
-
     public void ritmoOnClick(View view) {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
@@ -81,7 +70,6 @@ public class MonitorMultiparametricoActivity extends GenericoActivity {
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.tiposTracado);
-        Arrays.sort(items);
         builder.setSingleChoiceItems(items, ritmo,
                 new DialogInterface.OnClickListener() {
                     @Override

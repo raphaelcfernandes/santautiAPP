@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="0dp"
             style="@style/ItemSelectedTextStyleForLayoutSelection"

@@ -65,7 +65,6 @@ public class DispositivoActivity extends GenericoActivity {
         // Set the dialog title
         builder.setTitle(R.string.AdicionarDispositivo);
         final String[] items = getResources().getStringArray(R.array.dispositivos);
-        Arrays.sort(items);
         builder.setMultiChoiceItems(items, dispositivos,
                 new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
