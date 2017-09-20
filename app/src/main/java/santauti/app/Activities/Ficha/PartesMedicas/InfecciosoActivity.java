@@ -33,7 +33,7 @@ public class InfecciosoActivity extends GenericoActivity {
         setToolbar(getString(R.string.Infeccioso));
 
         /*********************VIEWS***********************/
-        antibioticoTextView = (TextView)findViewById(R.id.antibioticoTextView);
+        //antibioticoTextView = (TextView)findViewById(R.id.antibioticoTextView);
         /*********************VIEWS***********************/
 
         realm = Realm.getDefaultInstance();

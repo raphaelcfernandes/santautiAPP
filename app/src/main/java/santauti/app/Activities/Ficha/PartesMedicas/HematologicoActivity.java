@@ -34,8 +34,8 @@ public class HematologicoActivity extends GenericoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hematologico);
 
-        tromboprofilaxiaTextView = (TextView)findViewById(R.id.tromboprofilaxia_selected);
-        switchTromboprofilaxia = (SwitchCompat)findViewById(R.id.tromprofilaxiaSwitch);
+//        tromboprofilaxiaTextView = (TextView)findViewById(R.id.tromboprofilaxia_selected);
+//        switchTromboprofilaxia = (SwitchCompat)findViewById(R.id.tromprofilaxiaSwitch);
 
         prepareNavigationButtons();
 

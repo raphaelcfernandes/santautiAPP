@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,7 +41,6 @@ public class NeurologicoActivity extends GenericoActivity {
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NeurologicoAdapter neurologicoAdapter;
-    private SwitchCompat deficitMotorSwitch;
     private int escalaDeGlasgowSoma=0;
     private int nivelConscienciaSelection=-1;
     private int rassSelection=-1;
@@ -67,6 +67,7 @@ public class NeurologicoActivity extends GenericoActivity {
     private TextView temporoEspacialTextView;
     private View simSedado,comaLayout,diferencaPupilaLayout,escalaGlasgowItensLayout,
             deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout;
+    private CheckBox checkboxDeficitMotor;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,12 +102,12 @@ public class NeurologicoActivity extends GenericoActivity {
         /******************************VARIAVEIS LAYOUTS*************************************/
 
         /******************************VARIAVEIS SWTICH*********************************/
-        deficitMotorSwitch = (SwitchCompat)findViewById(R.id.deficitMotorSwitch);
+
         /******************************VARIAVEIS SWTICH*********************************/
 
 
         /******************************VARIAVEIS CHECKBOX*******************************/
-
+        checkboxDeficitMotor = (CheckBox)findViewById(R.id.checkboxDeficitMotor);
         /******************************VARIAVEIS CHECKBOX*******************************/
 
 
@@ -611,24 +612,15 @@ public class NeurologicoActivity extends GenericoActivity {
     }
 
     public void deficitMotorOnClick(View view){
-        if(deficitMotorSwitch.isChecked()) {
-            if (deficitMotorItensLayout.isShown())
-                myAnimation.slideUpView(getApplicationContext(), deficitMotorItensLayout);
-            else
-                myAnimation.slideDownView(getApplicationContext(),deficitMotorItensLayout);
-        }
-    }
-
-    public void deficitMotorSwitchOnClick(View view){
-        if(deficitMotorSwitch.isChecked()) {
-            deficitMotor.setText(R.string.Presente);
-            if(!deficitMotorItensLayout.isShown())
-                myAnimation.slideDownView(getApplicationContext(),deficitMotorItensLayout);
+        if(checkboxDeficitMotor.isChecked()) {
+            myAnimation.slideUpView(getApplicationContext(), deficitMotorItensLayout);
+            deficitMotor.setText(getString(R.string.Ausente));
+            checkboxDeficitMotor.setChecked(false);
         }
         else {
-            deficitMotor.setText(R.string.Ausente);
-            if(deficitMotorItensLayout.isShown())
-                myAnimation.slideUpView(getApplicationContext(),deficitMotorItensLayout);
+            myAnimation.slideDownView(getApplicationContext(), deficitMotorItensLayout);
+            deficitMotor.setText(getString(R.string.Presente));
+            checkboxDeficitMotor.setChecked(true);
         }
     }
 

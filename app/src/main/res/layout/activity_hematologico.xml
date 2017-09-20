@@ -25,35 +25,44 @@
                 android:id="@+id/tromboprofilaxia_layout"
                 android:paddingBottom="10dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:onClick="tromboprofilaxiaOnClick"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/Tromboprofilaxia"
-                        style="@style/TextStyle"/>
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/tromprofilaxiaSwitch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:background="@android:color/transparent"
-                        android:paddingEnd="20dp"
-                        android:paddingStart="100dp"
-                        android:theme="@style/MySwitch" />
-                </LinearLayout>
+                android:paddingEnd="@dimen/activity_horizontal_margin">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tromboprofilaxia_selected"
-                    android:text="@string/Nao"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+                    android:text="@string/Tromboprofilaxia"
+                    style="@style/TextStyle"/>
+                <RadioGroup
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:text="Heparina Fracionada"
+                        android:paddingEnd="5dp"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Nao"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        android:paddingEnd="10dp"
+                        />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:text="Heparina Nao Fracionada"
+                        android:theme="@style/radioButtonStyle" />
+                </RadioGroup>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

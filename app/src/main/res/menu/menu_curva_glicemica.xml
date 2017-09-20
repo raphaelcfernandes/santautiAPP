@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/eventoHipoglicemia"
+        android:title="@string/EventosHipoglicemia">
+    </item>
+    <item android:id="@+id/eventoHiperglicemia"
+        android:title="@string/EventosHiperglicemia">
+    </item>
+    <item android:id="@+id/normoglicemia"
+        android:title="@string/Normoglicemia">
+    </item>
+</menu>

@@ -236,6 +236,18 @@
     <string name="EmMelhora">Em Melhora</string>
     <string name="EmPiora">Em Piora</string>
     <string name="Estaveis">Estáveis</string>
+    <string name="Afebril">Afebril</string>
+    <string name="Febril">Febril</string>
+    <string name="Subfebril">Subfebril</string>
+    <string name="EventosHipoglicemia">Eventos de Hipoglicemia</string>
+    <string name="EventosHiperglicemia">Eventos de Hiperglicemia</string>
+    <string name="Normoglicemia">Normoglicemia</string>
+    <string name="Enteral">Enteral</string>
+    <string name="Gastrica">Gastrica</string>
+    <string name="Oral">Oral</string>
+    <string name="FezesDiarreicas">Diarreicas</string>
+    <string name="FezesEndurecidas">Endurecidas</string>
+    <string name="FezesNormais">Normais</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
