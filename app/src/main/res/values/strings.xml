@@ -218,7 +218,11 @@
     <string name="Insulina"> Insulina</string>
     <string name="Hidrocortisona">Hidrocortisona</string>
     <string name="Polimixina">Polimixina</string>
-
+    <string name="FormatoAbdome">Formato Abdome</string>
+    <string name="Tensao">Tensão</string>
+    <string name="RuidosHidroaereos">Ruídos Hidroaereos</string>
+    <string name="MassasPalpaveis">Massas Palpáveis</string>
+    <string name="ViscerasPalpaveis">Visceras Palpáveis</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

@@ -1,13 +1,21 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,24 +30,26 @@ import santauti.app.R;
  * Created by raphael on 6/20/17.
  */
 
-public class MonitorMultiparametricoActivity extends GenericoActivity {
-    Spinner tracadoEletrocardiograficoSpinner;
-    ArrayAdapter<CharSequence> adapterTracaoEletrocardiografico;
+public class MonitorMultiparametricoActivity extends GenericoActivity{
     Realm realm;
     private int ritmo=-1;
     private TextView textView;
+    private LinearLayout mainLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor_multiparametrico);
-        findViewById(R.id.monitor_multiparametrico_layout).requestFocus();
+        mainLayout = (LinearLayout)findViewById(R.id.monitor_multiparametrico_layout);
+        mainLayout.requestFocus();
+
         setToolbar(getString(R.string.MonitorMultiparametrico));
         textView = (TextView)findViewById(R.id.ritmo);
         //prepareSpinner();
         prepareNavigationButtons();
 
-        realm = Realm.getDefaultInstance();
 
+
+        realm = Realm.getDefaultInstance();
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,4 +104,5 @@ public class MonitorMultiparametricoActivity extends GenericoActivity {
         // display dialog
         dialog.show();
     }
+
 }

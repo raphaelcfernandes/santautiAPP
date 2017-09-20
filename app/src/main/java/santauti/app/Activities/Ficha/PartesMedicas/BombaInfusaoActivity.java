@@ -43,6 +43,7 @@ public class BombaInfusaoActivity extends GenericoActivity implements View.OnTou
         setContentView(R.layout.activity_bomba_infusao);
         findViewById(R.id.activity_bomba_infusao).requestFocus();
         findViewById(R.id.activity_bomba_infusao).setOnTouchListener(this);
+
         setToolbar(getString(R.string.BombaInfusao));
         prepareNavigationButtons();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
