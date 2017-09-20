@@ -19,25 +19,42 @@
             android:id="@+id/peleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="peleOnClick">
+            android:orientation="vertical">
             <TextView
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pele"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"/>
-            <TextView
+            <RadioGroup
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:paddingTop="5dp"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/peleTextView"/>
+                android:paddingBottom="5dp">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:text="@string/Normal"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Ressecada"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,6 +63,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
@@ -55,31 +74,38 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
-                <TextView
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:paddingEnd="0dp"
-                    android:layout_marginEnd="170dp"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/UlceraPressao"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
-                <android.support.v7.widget.SwitchCompat
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/UlceraPressao"
+                        style="@style/TextStyle"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="0dp"
-                    android:clickable="false"
-                    android:id="@+id/ulceraPressaoSwitch"
-                    android:theme="@style/MySwitch"/>
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/checkboxUlceraPressao"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="end"
+                        style="@style/CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false" />
+                </RelativeLayout>
             </LinearLayout>
             <TextView
-                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Ausente"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:visibility="visible"
+                android:text="@string/Nao"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/ulceraTextView"/>
         </LinearLayout>

@@ -10,6 +10,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -22,10 +23,10 @@ import santauti.app.R;
  */
 
 public class PelesMucosasActivity extends GenericoActivity{
-    private SwitchCompat ulceraSwitch;
-    private TextView ulceraPressaoTextView,peleTextView,mucosasTextView;
+    private TextView ulceraPressaoTextView,mucosasTextView;
     private View peleLayout;
     private int mucosasSelection=-1;
+    private CheckBox checkboxUlceraPressao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,9 @@ public class PelesMucosasActivity extends GenericoActivity{
         prepareNavigationButtons();
 
         ulceraPressaoTextView = (TextView)findViewById(R.id.ulceraTextView);
-        ulceraSwitch = (SwitchCompat)findViewById(R.id.ulceraPressaoSwitch);
-        peleTextView = (TextView)findViewById(R.id.peleTextView);
         peleLayout = findViewById(R.id.peleLayout);
         mucosasTextView = (TextView)findViewById(R.id.mucosasTextView);
-
+        checkboxUlceraPressao = (CheckBox)findViewById(R.id.checkboxUlceraPressao);
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,37 +62,14 @@ public class PelesMucosasActivity extends GenericoActivity{
     }
 
     public void ulceraPressaoOnClick(View view){
-        if(ulceraSwitch.isChecked()) {
-            ulceraSwitch.setChecked(false);
-            ulceraPressaoTextView.setText(getString(R.string.Ausente));
+        if(checkboxUlceraPressao.isChecked()){
+            ulceraPressaoTextView.setText(getString(R.string.Nao));
+            checkboxUlceraPressao.setChecked(false);
         }
-        else {
-            ulceraPressaoTextView.setText(getString(R.string.Presente));
-            ulceraSwitch.setChecked(true);
+        else{
+            ulceraPressaoTextView.setText(getString(R.string.Sim));
+            checkboxUlceraPressao.setChecked(true);
         }
-    }
-
-    public void peleOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), peleLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_pele, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.MnuOpc1:
-                        peleTextView.setText(item.getTitle());
-                        break;
-                    case R.id.MnuOpc2:
-                        peleTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
     }
 
     public void mucosasOnClick(View view){

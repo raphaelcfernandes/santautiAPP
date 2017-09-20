@@ -41,18 +41,7 @@ public class RenalActivity extends GenericoActivity {
         realm = Realm.getDefaultInstance();
         ficha=getProperFicha();
         myAnimation = new MyAnimation();
-//        if(ficha.getRenal()!=null){
-//            if(ficha.getRenal().getDiurese()>=0)
-//                diureseTxt.setText(String.valueOf(ficha.getRenal().getDiurese()));
-//            if(ficha.getRenal().getBalancoHidrico()>=0)
-//                balancoHidricoTxt.setText(String.valueOf(ficha.getRenal().getBalancoHidrico()));
-//            if(ficha.getRenal().getPeso()>=0)
-//                pesoTxt.setText(String.valueOf(ficha.getRenal().getPeso()));
-//            if(ficha.getRenal().getDialise()==0)
-//                renalN.setChecked(true);
-//            else if(ficha.getRenal().getDialise()==1)
-//                renalS.setChecked(true);
-//        }
+
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

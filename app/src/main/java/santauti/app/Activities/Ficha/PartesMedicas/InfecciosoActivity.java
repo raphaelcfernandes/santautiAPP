@@ -24,8 +24,6 @@ import santauti.app.R;
 
 public class InfecciosoActivity extends GenericoActivity {
     private Realm realm;
-    private int marcadoresInfeccaoSelection=-1;
-    private TextView marcadoresInfeccao;
     private boolean[] antibioticos = new boolean[24];
     private TextView antibioticoTextView;
     @Override
@@ -35,7 +33,6 @@ public class InfecciosoActivity extends GenericoActivity {
         setToolbar(getString(R.string.Infeccioso));
 
         /*********************VIEWS***********************/
-        marcadoresInfeccao = (TextView)findViewById(R.id.marcadoresInfeccao);
         antibioticoTextView = (TextView)findViewById(R.id.antibioticoTextView);
         /*********************VIEWS***********************/
 
@@ -109,42 +106,6 @@ public class InfecciosoActivity extends GenericoActivity {
 //            realm.commitTransaction();
 //            changeCardColor();
 //        }
-    }
-
-
-
-    public void marcadoresInfeccaoOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.MarcadoresInfeccao);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.marcadoresInfeccao);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, marcadoresInfeccaoSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        marcadoresInfeccao.setText(items[which]);
-                        marcadoresInfeccao.setVisibility(View.VISIBLE);
-                        marcadoresInfeccaoSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
     }
 
     public void antibioticoOnClick(View view){

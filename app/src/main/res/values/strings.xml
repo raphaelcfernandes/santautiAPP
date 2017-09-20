@@ -223,6 +223,19 @@
     <string name="RuidosHidroaereos">Ruídos Hidroaereos</string>
     <string name="MassasPalpaveis">Massas Palpáveis</string>
     <string name="ViscerasPalpaveis">Visceras Palpáveis</string>
+    <string name="BaseDireita">Base Direita</string>
+    <string name="BaseEsquerda">Base Esquerda</string>
+    <string name="TercoMedioDireito">Terço Médio Direito</string>
+    <string name="TercoMedioEsquerdo">Terço Médio Esquerdo</string>
+    <string name="Reduzido">Reduzido</string>
+    <string name="Fisiologico">Fisiológico</string>
+    <string name="Aumentado">Aumentado</string>
+    <string name="Glicemia">Glicemia</string>
+    <string name="PicosGlicemia">Picos de Glicemia</string>
+    <string name="Ressecada">Ressecada</string>
+    <string name="EmMelhora">Em Melhora</string>
+    <string name="EmPiora">Em Piora</string>
+    <string name="Estaveis">Estáveis</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

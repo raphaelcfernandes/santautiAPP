@@ -60,12 +60,13 @@ Neurologico:
             - orientado, desorientado
                 - DESORIENTADO:
                     - Tempo e espaco. (multiplo)
-Nutricional:
+Nutricional: acho que está ok
     - ingestao
          - calorica, proteica, lipidica, carboidratos, balanco hidrogenado
      - Albumina:
              - hipo, hiperalbuminemia. ...
-Pele e Mucosas:
+
+Pele e Mucosas: acho que está ok
     - Pele:
         - normal, ressecada
     - ulcera de pressao
@@ -74,7 +75,7 @@ Pele e Mucosas:
         - Normocoradas, hipocoradas, icterico, anicterico
         - secas, hidratadas, hiperidratadas
 
-Osteomuscular: (depois de pele), OK (Checar se está certo o musculatura como ta feito)
+Osteomuscular: acho que está OK (depois de pele), (Checar se está certo o musculatura como ta feito)
     - Musculatura:
         - hiper/hipo/eu trofica, hipo/hiper/eu tonica.
 
@@ -143,7 +144,7 @@ Exames:
         - sim:
             - normal, elevada
 
-Gastro:
+Gastro: acho que está ok
 	- Massas paupaveis: sim ou nao => ok
 	- visceras paupaveis: sim ou nao => ok
 	- ruidos hidroaereos
@@ -152,13 +153,13 @@ Gastro:
 	- assit: pequena, media, grande. radioButton
 	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
 
-Endocrino:
+Endocrino: acho que está ok
      - glicemias:
         - normais, picos de hiperglicemia
      -
 /*****************MUDANÇAS FEITAS**********/
 
-Respiratorio: -> Checar
+Respiratorio: -> acho que está ok
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
         - tubo ou traqueostomia = pressao do cuff -> ok
         - localizacao da canula se tiver entubado -> ok

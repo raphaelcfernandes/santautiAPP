@@ -112,7 +112,6 @@
                         android:text="@string/Hipofonetica"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
-
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
