@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
@@ -17,6 +18,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -56,7 +60,7 @@ public class NeurologicoActivity extends GenericoActivity {
     private TextView aberturaOcularTextView;
     private TextView respostaVerbalTextView;
     private TextView respostaMotoraTextView;
-    private TextView avaliacaoPupilarTextView;
+    private TextView inatencaoTextView;
     private TextView flutuacaoHint1;
     private TextView flutuacaoHint2;
     private TextView pensamentoDesorganizadoHint1;
@@ -64,10 +68,12 @@ public class NeurologicoActivity extends GenericoActivity {
     private TextView inatencaoHint1;
     private TextView inatencaoHint2;
     private TextView deficitMotor;
-    private TextView temporoEspacialTextView;
+    private TextView flutuacaoTextView,pensamentoTextView;
     private View simSedado,comaLayout,diferencaPupilaLayout,escalaGlasgowItensLayout,
             deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout;
-    private CheckBox checkboxDeficitMotor;
+    private CheckBox checkboxDeficitMotor,checkboxFlutuacao,checkBoxInatencao,checkBoxPensamento;
+    private AppCompatRadioButton paresiaMSE,plegiaMSE,orientado,desorientado;
+    private boolean checked=false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,24 +96,57 @@ public class NeurologicoActivity extends GenericoActivity {
         respostaMotoraTextView = (TextView)findViewById(R.id.respostaMotora);
         flutuacaoHint1 = (TextView)findViewById(R.id.flutuacaoHint1);
         flutuacaoHint2 = (TextView)findViewById(R.id.flutuacaoHint2);
+        flutuacaoHint1.setText(getResources().getString(R.string.FlutuacaoHint1));
+        flutuacaoHint2.setText(getResources().getString(R.string.FlutuacaoHint2));
         pensamentoDesorganizadoHint1 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint1);
         pensamentoDesorganizadoHint2 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint2);
         inatencaoHint1 = (TextView)findViewById(R.id.inatencaoHint1);
         inatencaoHint2 = (TextView)findViewById(R.id.inatencaoHint2);
         deficitMotor = (TextView)findViewById(R.id.deficitMotor);
         temporoEspacialLayout = findViewById(R.id.temporoEspacialLayout);
-        temporoEspacialTextView = (TextView)findViewById(R.id.temporoEspacialTextView);
         desorientadoLayout = findViewById(R.id.desorientadoLayout);
         avaliacaoPupilarItensLayout = findViewById(R.id.avaliacaoPupilarItensLayout);
+        flutuacaoTextView = (TextView)findViewById(R.id.flutuacaoTextView);
+        inatencaoTextView = (TextView)findViewById(R.id.inatencaoTextView);
+        pensamentoTextView = (TextView)findViewById(R.id.pensamentoTextView);
+
         /******************************VARIAVEIS LAYOUTS*************************************/
 
-        /******************************VARIAVEIS SWTICH*********************************/
+        /******************************VARIAVEIS RADIOBUTTON*********************************/
+        paresiaMSE = (AppCompatRadioButton)findViewById(R.id.paresiaMSE);
+        plegiaMSE = (AppCompatRadioButton)findViewById(R.id.plegiaMSE);
+        orientado = (AppCompatRadioButton)findViewById(R.id.orientado);
+        desorientado = (AppCompatRadioButton)findViewById(R.id.desorientado);
 
-        /******************************VARIAVEIS SWTICH*********************************/
+        /******************************VARIAVEIS RADIOBUTTON*********************************/
 
 
         /******************************VARIAVEIS CHECKBOX*******************************/
         checkboxDeficitMotor = (CheckBox)findViewById(R.id.checkboxDeficitMotor);
+
+        checkboxFlutuacao = (CheckBox)findViewById(R.id.checkboxFlutuacao);
+        checkboxFlutuacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setTextFromCheckBox(checkboxFlutuacao,flutuacaoTextView);
+            }
+        });
+
+        checkBoxInatencao = (CheckBox)findViewById(R.id.checkboxInatencao);
+        checkBoxInatencao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setTextFromCheckBox(checkBoxInatencao,inatencaoTextView);
+            }
+        });
+
+        checkBoxPensamento = (CheckBox)findViewById(R.id.checkboxPensamento);
+        checkBoxPensamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setTextFromCheckBox(checkBoxPensamento,pensamentoTextView);
+            }
+        });
         /******************************VARIAVEIS CHECKBOX*******************************/
 
 
@@ -147,6 +186,14 @@ public class NeurologicoActivity extends GenericoActivity {
         });
     }
 
+
+
+    private void setTextFromCheckBox(CheckBox checkbox,TextView textview){
+        if(checkbox.isChecked())
+            textview.setText(getString(R.string.Sim));
+        else
+            textview.setText(getString(R.string.Nao));
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -313,8 +360,6 @@ public class NeurologicoActivity extends GenericoActivity {
                         nivelConscienciaSelection=which;
                         if(options[which].equals(getResources().getStringArray(R.array.nivelConsciencia)[6]) &&
                                 !simSedado.isShown()){
-                            if(comaLayout.isShown())
-                                comaLayout.setVisibility(View.GONE);
                             myAnimation.slideDownView(getApplicationContext(),simSedado);
                         }
 //                        if(options[which].equals(getResources().getStringArray(R.array.nivelConsciencia)[5]) &&
@@ -571,8 +616,6 @@ public class NeurologicoActivity extends GenericoActivity {
             myAnimation.slideUpView(getApplicationContext(),flutuacaoHint2);
         }
         else{
-            flutuacaoHint1.setText(getResources().getString(R.string.FlutuacaoHint1));
-            flutuacaoHint2.setText(getResources().getString(R.string.FlutuacaoHint2));
             myAnimation.slideDownView(getApplicationContext(),flutuacaoHint1);
             myAnimation.slideDownView(getApplicationContext(),flutuacaoHint2);
         }
@@ -625,30 +668,17 @@ public class NeurologicoActivity extends GenericoActivity {
     }
 
     public void temporoEspacialOnCLick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), temporoEspacialLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_temporo_espacial, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.orientado:
-                        temporoEspacialTextView.setText(item.getTitle());
-                        if(desorientadoLayout.isShown())
-                            myAnimation.slideUpView(getApplicationContext(),desorientadoLayout);
-                        break;
-                    case R.id.desorientado:
-                        temporoEspacialTextView.setText(item.getTitle());
-                        if(!desorientadoLayout.isShown())
-                            myAnimation.slideDownView(getApplicationContext(),desorientadoLayout);
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
+        switch(view.getId()) {
+            case R.id.desorientado:
+                if(!desorientadoLayout.isShown())
+                    myAnimation.slideDownView(getApplicationContext(),desorientadoLayout);
+                break;
+            case R.id.orientado:
+                if(desorientadoLayout.isShown())
+                    myAnimation.slideUpView(getApplicationContext(),desorientadoLayout);
+                break;
+        }
 
-        popupMenu.show();
     }
 
     public void simetriaOnClick(View view){

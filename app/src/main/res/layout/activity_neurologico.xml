@@ -30,9 +30,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="temporoEspacialOnCLick">
+                android:orientation="vertical">
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="0dp"
@@ -40,14 +38,35 @@
                     android:layout_height="wrap_content"
                     android:text="@string/TemporoEspacial"
                     style="@style/TitleTextStyleForLayoutSelection"/>
-                <TextView
-                    android:paddingStart="@dimen/activity_horizontal_margin"
+                <RadioGroup
+                    android:paddingStart="10dp"
                     android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/temporoEspacialTextView"/>
+                    android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:onClick="temporoEspacialOnCLick"
+                        android:id="@+id/orientado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:text="@string/Orientado"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:onClick="temporoEspacialOnCLick"
+                        android:id="@+id/desorientado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Desorientado"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout

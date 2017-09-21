@@ -26,41 +26,58 @@
         android:orientation="vertical"
         android:id="@+id/deliriumItens"
         android:visibility="gone">
+        <!--Flutuacao-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="?attr/selectableItemBackground"
             android:onClick="flutuacaoOnClick"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Flutuacao"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        style="@style/TitleTextStyleForLayoutSelection"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/checkboxFlutuacao"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        style="@style/CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+            <TextView
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Flutuacao"
-                    android:paddingStart="@dimen/submenu_left_padding"
-                    android:paddingEnd="@dimen/submenu_right_padding"
-                    style="@style/TitleTextStyleForLayoutSelection"
-                    />
-                <android.support.v7.widget.SwitchCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="0dp"
-                    android:clickable="true"
-                    android:theme="@style/MySwitch"/>
-            </LinearLayout>
+                android:text="@string/Nao"
+                android:paddingBottom="5dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"
+                android:id="@+id/flutuacaoTextView"/>
             <TextView
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/flutuacaoHint1"
                 android:paddingBottom="7dp"/>
@@ -68,46 +85,64 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/flutuacaoHint2"/>
         </LinearLayout>
-
+        <!--Inatencao-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:orientation="vertical"
             android:background="?attr/selectableItemBackground"
             android:onClick="inatencaoOnClick"
             android:paddingBottom="10dp">
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Inatencao"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        style="@style/TitleTextStyleForLayoutSelection"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/checkboxInatencao"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        style="@style/CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+            <TextView
+                android:paddingBottom="5dp"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Inatencao"
-                    android:layout_marginEnd="150dp"
-                    android:paddingStart="@dimen/submenu_left_padding"
-                    android:paddingEnd="@dimen/submenu_right_padding"
-                    style="@style/TitleTextStyleForLayoutSelection"
-                    />
-                <android.support.v7.widget.SwitchCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:theme="@style/MySwitch"/>
-            </LinearLayout>
+                android:text="@string/Nao"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"
+                android:id="@+id/inatencaoTextView"/>
             <TextView
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/inatencaoHint1"
                 android:paddingBottom="7dp"/>
@@ -115,12 +150,12 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/inatencaoHint2"/>
         </LinearLayout>
-
+        <!--Pensamento-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -129,33 +164,49 @@
             android:onClick="pensamentoDesorganizadoOnClick"
             android:paddingBottom="10dp">
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingEnd="@dimen/activity_horizontal_margin">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/PensamentoDesorganizado"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        style="@style/TitleTextStyleForLayoutSelection"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/checkboxPensamento"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        style="@style/CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+            <TextView
+                android:paddingBottom="5dp"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/PensamentoDesorganizado"
-                    android:paddingStart="@dimen/submenu_left_padding"
-                    android:paddingEnd="@dimen/submenu_right_padding"
-                    style="@style/TitleTextStyleForLayoutSelection"
-                    />
-                <android.support.v7.widget.SwitchCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="0dp"
-                    android:clickable="true"
-                    android:theme="@style/MySwitch"/>
-            </LinearLayout>
+                android:text="@string/Nao"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"
+                android:id="@+id/pensamentoTextView"/>
             <TextView
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/pensamentoDesorganizadoHint1"
                 android:paddingBottom="7dp"/>
@@ -163,8 +214,8 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/pensamentoDesorganizadoHint2"/>
         </LinearLayout>

@@ -31,18 +31,12 @@ public class ExamesActivity extends GenericoActivity{
     private int acidoseMetabolicaSelection=-1;
     private int raioxToraxSelection =-1;
     private int leucogramaSelection=-1;
-    private TextView disturbioEletrolitico,acidoseMetabolica,menuPotassio,potassioTextView,magnesioTextView,menuMagnesio,menuFosforo,fosforoTextView;
-    private TextView menuCalcio;
-    private TextView calcioTextView;
-    private TextView menuAlbumina;
-    private TextView albuminaTextView;
-    private TextView pcrTextView;
+    private TextView disturbioEletrolitico,acidoseMetabolica;
     private TextView raioxToraxTextView;
     private TextView leucogramaTextView;
     private TextView funcaoHepaticaTextView;
-    private TextView amilaseTextView;
     private TextView gasometriaArterialTextView;
-    private View eletrolitoItens, pcrLayout,amilaseLayout;
+    private View eletrolitoItens;
     private MyAnimation myAnimation;
     private boolean[] gasometriaArterial = new boolean[8],funcaoHepatica = new boolean[6];
 
@@ -55,26 +49,12 @@ public class ExamesActivity extends GenericoActivity{
 
         disturbioEletrolitico = (TextView)findViewById(R.id.disturbioEletrolitico);
         acidoseMetabolica = (TextView)findViewById(R.id.acidoseMetabolica);
-        menuPotassio = (TextView)findViewById(R.id.menuPotassio);
-        menuMagnesio = (TextView)findViewById(R.id.menuMagnesio);
-        menuFosforo = (TextView)findViewById(R.id.menuFosforo);
-        menuCalcio = (TextView)findViewById(R.id.menuCalcio);
-        menuAlbumina = (TextView)findViewById(R.id.menuAlbumina);
-        pcrTextView = (TextView)findViewById(R.id.pcrTextView);
-
-        potassioTextView = (TextView)findViewById(R.id.potassioTextView);
-        magnesioTextView = (TextView)findViewById(R.id.magnesioTextView);
-        fosforoTextView = (TextView)findViewById(R.id.fosforoTextView);
-        calcioTextView = (TextView)findViewById(R.id.calcioTextView);
-        albuminaTextView = (TextView)findViewById(R.id.albuminaTextView);
         eletrolitoItens = findViewById(R.id.eletrolitosItens);
-        pcrLayout = findViewById(R.id.pcrLayout);
         raioxToraxTextView = (TextView)findViewById(R.id.raioxToraxTextView);
         leucogramaTextView = (TextView)findViewById(R.id.leucogramaTextView);
         gasometriaArterialTextView = (TextView)findViewById(R.id.gasometriaArterialTextView);
         funcaoHepaticaTextView = (TextView)findViewById(R.id.funcaoHepaticaTextView);
-        amilaseTextView = (TextView)findViewById(R.id.amilaseTextView);
-        amilaseLayout = findViewById(R.id.amilaseLayout);
+
         myAnimation = new MyAnimation();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
@@ -165,136 +145,6 @@ public class ExamesActivity extends GenericoActivity{
         dialog.show();
     }
 
-    public void potassioOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuPotassio, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_potassio, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.hipercalemia:
-                        potassioTextView.setText(item.getTitle());
-                        break;
-                    case R.id.normal:
-                        potassioTextView.setText(item.getTitle());
-                        break;
-                    case R.id.hipocalemia:
-                        potassioTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-    public void magnesioOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuMagnesio, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_magnesio, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.hipermagnesemia:
-                        magnesioTextView.setText(item.getTitle());
-                        break;
-                    case R.id.normal:
-                        magnesioTextView.setText(item.getTitle());
-                        break;
-                    case R.id.hipomagnesemia:
-                        magnesioTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-    public void fosforoOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuFosforo, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_fosforo, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.hiperfosfatemia:
-                        fosforoTextView.setText(item.getTitle());
-                        break;
-                    case R.id.normal:
-                        fosforoTextView.setText(item.getTitle());
-                        break;
-                    case R.id.hipofosfatemia:
-                        fosforoTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-    public void calcioOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuCalcio, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_calcio, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.hipercalcemia:
-                        calcioTextView.setText(item.getTitle());
-                        break;
-                    case R.id.normal:
-                        calcioTextView.setText(item.getTitle());
-                        break;
-                    case R.id.hipocalcemia:
-                        calcioTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-    public void pcrOnCLick (View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), pcrLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_pcr, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.elevando:
-                        pcrTextView.setText(item.getTitle());
-                        break;
-                    case R.id.estavel:
-                        pcrTextView.setText(item.getTitle());
-                        break;
-                    case R.id.emQueda:
-                        pcrTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
     public void raioxToraxOnCLick(View view){
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(this, R.style.MyDialogTheme);
@@ -361,32 +211,6 @@ public class ExamesActivity extends GenericoActivity{
         AlertDialog dialog = builder.create();
         // display dialog
         dialog.show();
-    }
-
-    public void albuminaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuAlbumina, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_eletrolitos_albumina, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.hiperalbuminemia:
-                        albuminaTextView.setText(item.getTitle());
-                        break;
-                    case R.id.normal:
-                        albuminaTextView.setText(item.getTitle());
-                        break;
-                    case R.id.hipoalbuminemia:
-                        albuminaTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
     }
 
     public void eletrolitosOnCLick(View view){
@@ -474,32 +298,4 @@ public class ExamesActivity extends GenericoActivity{
         dialog.show();
     }
 
-    public void amilaseOnClick(View view){
-        amilaseDialog(view);
-    }
-
-    private void amilaseDialog(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), amilaseLayout, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_amilase, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.normal:
-                        amilaseTextView.setText(item.getTitle());
-                        break;
-                    case R.id.elevada:
-                        amilaseTextView.setText(item.getTitle());
-                        break;
-                    case R.id.nao:
-                        amilaseTextView.setText(item.getTitle());
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
 }

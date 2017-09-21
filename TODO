@@ -50,7 +50,7 @@ Dispositivo: acho que está ok
 Hematologico: acho que está ok
     - Hematocrito, hemoglobina e plaquetas foram para Exame
 
-Neurologico: permitir que usuario desmarque radio button
+Neurologico: acho que está ok -> (permitir que usuario desmarque radio button -> Ainda n sei como) Editar e Remover Sedativo
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
         - Delirium, sim ou nao. -> ok
@@ -116,7 +116,7 @@ Infeccioso: acho q está ok
         - Amoxicilina-clavulanato,
 
 
-Exames:
+Exames: acho que está ok
     - Eletrólitos: inserćao de dados na mao OU
                     insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
         - Potássio: hipo, hipercalemia. Se n marcar = normal

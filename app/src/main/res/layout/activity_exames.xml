@@ -95,6 +95,7 @@
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -122,6 +123,7 @@
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,11 +158,13 @@
                         android:hint="@string/Hemoglobina"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
+
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/plaqueta"
                         android:layout_width="match_parent"
@@ -173,8 +177,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:onClick="potassioOnClick"
                     android:orientation="vertical"
                     android:paddingBottom="10dp">
 
@@ -207,8 +209,6 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="amilaseOnClick"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -223,15 +223,38 @@
                         android:text="@string/Amilase"
                         style="@style/TitleTextStyleForLayoutSelection"/>
                 </LinearLayout>
-                <TextView
-                    android:visibility="visible"
+                <RadioGroup
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Nao"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:paddingEnd="0dp"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/amilaseTextView"/>
+                    android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:text="@string/Elevada"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Normal"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:gravity="center"
+                        android:text="@string/Nao"
+                        android:theme="@style/radioButtonStyle" />
+                </RadioGroup>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -255,7 +278,6 @@
                     android:text="@string/Eletrolitos"
                     style="@style/TitleTextStyleForLayoutSelection"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -267,27 +289,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:onClick="potassioOnClick"
                     android:paddingBottom="10dp">
                     <TextView
-                        android:id="@+id/menuPotassio"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="60dp"
                         android:text="@string/Potassio"
-                        android:layout_marginStart="@dimen/submenu_left_padding"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="0dp"
                         style="@style/TitleTextStyleForLayoutSelection"
                         />
-                    <TextView
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
+                    <RadioGroup
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:paddingTop="5dp"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        android:text="@string/Normal"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/potassioTextView"/>
+                        android:paddingBottom="5dp">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingStart="0dp"
+                            android:text="@string/Hipercalemia"
+                            android:theme="@style/radioButtonStyle" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Normal"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:gravity="center"
+                            android:text="@string/Hipocalemia"
+                            android:theme="@style/radioButtonStyle" />
+                    </RadioGroup>
                 </LinearLayout>
                 <!--Potassio-->
 
@@ -296,27 +339,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:onClick="magnesioOnClick"
                     android:paddingBottom="10dp">
                     <TextView
                         android:id="@+id/menuMagnesio"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="60dp"
                         android:text="@string/Magnesio"
-                        android:layout_marginStart="@dimen/submenu_left_padding"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
                         style="@style/TitleTextStyleForLayoutSelection"
                         />
-                    <TextView
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
+                    <RadioGroup
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:paddingTop="5dp"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        android:text="@string/Normal"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/magnesioTextView"/>
+                        android:paddingBottom="5dp">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingStart="0dp"
+                            android:text="@string/Hipermagnesemia"
+                            android:theme="@style/radioButtonStyle" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Normal"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:gravity="center"
+                            android:text="@string/Hipomagnesemia"
+                            android:theme="@style/radioButtonStyle" />
+                    </RadioGroup>
                 </LinearLayout>
                 <!--Magnesio-->
 
@@ -325,27 +389,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:onClick="fosforoOnClick"
                     android:paddingBottom="10dp">
                     <TextView
                         android:id="@+id/menuFosforo"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="60dp"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
                         android:text="@string/Fosforo"
-                        android:layout_marginStart="@dimen/submenu_left_padding"
                         style="@style/TitleTextStyleForLayoutSelection"
                         />
-                    <TextView
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
+                    <RadioGroup
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:paddingTop="5dp"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        android:text="@string/Normal"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/fosforoTextView"/>
+                        android:paddingBottom="5dp">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingStart="0dp"
+                            android:text="@string/Hiperfosfatemia"
+                            android:theme="@style/radioButtonStyle" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Normal"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:gravity="center"
+                            android:text="@string/Hipofosfatemia"
+                            android:theme="@style/radioButtonStyle" />
+                    </RadioGroup>
                 </LinearLayout>
                 <!--Fosforo-->
 
@@ -354,58 +439,51 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:onClick="calcioOnClick"
                     android:paddingBottom="10dp">
                     <TextView
                         android:id="@+id/menuCalcio"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="60dp"
                         android:text="@string/Calcio"
-                        android:layout_marginStart="@dimen/submenu_left_padding"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
                         style="@style/TitleTextStyleForLayoutSelection"
                         />
-                    <TextView
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
+                    <RadioGroup
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:paddingTop="5dp"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        android:text="@string/Normal"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/calcioTextView"/>
+                        android:paddingBottom="5dp">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingStart="0dp"
+                            android:text="@string/Hipercalcemia"
+                            android:theme="@style/radioButtonStyle" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Normal"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:gravity="center"
+                            android:text="@string/Hipocalcemia"
+                            android:theme="@style/radioButtonStyle" />
+                    </RadioGroup>
                 </LinearLayout>
                 <!--Calcio-->
 
-                <!--Albumina-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground"
-                    android:onClick="albuminaOnClick"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:id="@+id/menuAlbumina"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="60dp"
-                        android:text="@string/Albumina"
-                        android:layout_marginStart="@dimen/submenu_left_padding"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                    <TextView
-                        android:paddingStart="@dimen/submenu_left_padding"
-                        android:paddingEnd="@dimen/submenu_right_padding"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        android:text="@string/Normal"
-                        style="@style/ItemSelectedTextStyleForLayoutSelection"
-                        android:id="@+id/albuminaTextView"/>
-                </LinearLayout>
-                <!--Albumina-->
             </LinearLayout>
 
             <LinearLayout
@@ -415,14 +493,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/pcrLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="pcrOnCLick">
+                android:orientation="vertical">
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="0dp"
@@ -430,20 +505,100 @@
                     android:layout_height="wrap_content"
                     android:text="@string/PCR"
                     style="@style/TitleTextStyleForLayoutSelection"/>
-                <TextView
-                    android:paddingStart="@dimen/activity_horizontal_margin"
+                <RadioGroup
+                    android:paddingStart="10dp"
                     android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/pcrTextView"/>
+                    android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:text="@string/Estavel"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Elevando"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:gravity="center"
+                        android:text="@string/EmQueda"
+                        android:theme="@style/radioButtonStyle" />
+                </RadioGroup>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+
+            <!--Albumina-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+                <TextView
+                    android:id="@+id/menuAlbumina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:text="@string/Albumina"
+                    style="@style/TitleTextStyleForLayoutSelection"
+                    />
+                <RadioGroup
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:text="@string/Hipercalcemia"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Normal"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:gravity="center"
+                        android:text="@string/Hipocalcemia"
+                        android:theme="@style/radioButtonStyle" />
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+            <!--Albumina-->
 
             <LinearLayout
                 android:id="@+id/raioxToraxLayout"
