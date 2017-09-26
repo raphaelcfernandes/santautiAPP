@@ -3,13 +3,13 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.PopupMenu;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -26,14 +26,14 @@ import santauti.app.R;
  */
 
 public class HemodinamicoActivity extends GenericoActivity {
-    private View tipoSoproLayout,intensidadeSoproLayout;
-    private TextView intensidadeSopro,menuFoneseBulhas,menuExtremidades,extremidadesTextView,soproTextView;
+    private View tipoSoproLayout,intensidadeSoproLayout,extremidadesLayout;
+    private TextView intensidadeSopro,soproTextView;
     private CheckBox checkboxSopro;
     private MyAnimation myAnimation;
     private Realm realm;
     private Ficha ficha;
     private int intensidadeSoproSelection=-1;
-
+    private RadioGroup extremidadesRadioGroup;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +46,11 @@ public class HemodinamicoActivity extends GenericoActivity {
         intensidadeSoproLayout = findViewById(R.id.intensidade_sopro_layout);
 
         intensidadeSopro = (TextView)findViewById(R.id.intensidadeSopro);
-        menuFoneseBulhas = (TextView)findViewById(R.id.menuFoneseBulhas);
-        menuExtremidades = (TextView)findViewById(R.id.menuExtremidades);
-        extremidadesTextView = (TextView)findViewById(R.id.extremidadesTextView);
         checkboxSopro = (CheckBox)findViewById(R.id.checkboxSopro);
         soproTextView = (TextView)findViewById(R.id.soproTextView);
+
+        extremidadesRadioGroup = (RadioGroup)findViewById(R.id.extremidadesRadioGroup);
+
         /********************VIEWS*******************************/
 
 
@@ -89,13 +89,13 @@ public class HemodinamicoActivity extends GenericoActivity {
 
     public void soproOnClick(View view){
         if(checkboxSopro.isChecked()){
-            soproTextView.setText(getString(R.string.Nao));
+            //soproTextView.setText(getString(R.string.Nao));
             myAnimation.slideUpView(HemodinamicoActivity.this,tipoSoproLayout);
             myAnimation.slideUpView(HemodinamicoActivity.this,intensidadeSoproLayout);
             checkboxSopro.setChecked(false);
         }
         else{
-            soproTextView.setText(getString(R.string.Sim));
+            //soproTextView.setText(getString(R.string.Sim));
             if(!intensidadeSoproLayout.isShown() && !tipoSoproLayout.isShown()) {
                 myAnimation.slideDownView(HemodinamicoActivity.this,intensidadeSoproLayout);
                 myAnimation.slideDownView(HemodinamicoActivity.this,tipoSoproLayout);
@@ -175,32 +175,5 @@ public class HemodinamicoActivity extends GenericoActivity {
         AlertDialog dialog = builder.create();
         // display dialog
         dialog.show();
-    }
-
-    public void extremidadesOnCLick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuExtremidades, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_extremidades, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.Acianotica:
-                        extremidadesTextView.setText(item.getTitle());
-                        break;
-                    case R.id.Cianotica:
-                        extremidadesTextView.setText(item.getTitle());
-                        break;
-                    case R.id.Fria:
-                        extremidadesTextView.setText(item.getTitle());
-                    case R.id.Quente:
-                        extremidadesTextView.setText(item.getTitle());
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
     }
 }

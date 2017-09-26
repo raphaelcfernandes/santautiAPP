@@ -31,7 +31,7 @@
                     android:id="@+id/menuFoneseBulhas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Glicemia"
+                    android:text="@string/Glicemias"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
                     android:paddingStart="10dp"
@@ -56,7 +56,7 @@
                         android:onClick="viasAereasOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/PicosGlicemia"
+                        android:text="@string/PicosHiperglicemias"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"

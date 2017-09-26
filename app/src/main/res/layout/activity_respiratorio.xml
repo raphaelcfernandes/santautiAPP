@@ -34,6 +34,7 @@
                     android:text="@string/ViasAereas"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
+                    android:id="@+id/viasAereasOnClick"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingTop="5dp"
@@ -387,6 +388,15 @@
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioEsquerdo"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Ausente"/>
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -440,6 +450,15 @@
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioEsquerdo"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Ausente"/>
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -492,6 +511,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioEsquerdo"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Ausente"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

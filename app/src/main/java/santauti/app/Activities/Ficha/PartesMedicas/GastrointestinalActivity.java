@@ -127,22 +127,22 @@ public class GastrointestinalActivity extends GenericoActivity {
 
     public void massasPalpaveisOnClick(View view){
         if(massasPalpaveisCheckBox.isChecked()){
-            massasPalpaveisTextView.setText(getString(R.string.Nao));
+            //massasPalpaveisTextView.setText(getString(R.string.Nao));
             massasPalpaveisCheckBox.setChecked(false);
         }
         else{
-            massasPalpaveisTextView.setText(getString(R.string.Sim));
+            //massasPalpaveisTextView.setText(getString(R.string.Sim));
             massasPalpaveisCheckBox.setChecked(true);
         }
     }
 
     public void viscerasPalpaveisOnClick(View view){
         if(viscerasPalpaveisCheckBox.isChecked()){
-            viscerasPalpaveisTextView.setText(getString(R.string.Nao));
+            //viscerasPalpaveisTextView.setText(getString(R.string.Nao));
             viscerasPalpaveisCheckBox.setChecked(false);
         }
         else{
-            viscerasPalpaveisTextView.setText(getString(R.string.Sim));
+            //viscerasPalpaveisTextView.setText(getString(R.string.Sim));
             viscerasPalpaveisCheckBox.setChecked(true);
         }
     }

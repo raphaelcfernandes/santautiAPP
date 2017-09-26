@@ -14,37 +14,63 @@
         android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+        <TextView
             android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="musculaturaOnClick">
-            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Musculatura"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"/>
+        <LinearLayout
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin">
+            <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Musculatura"
-                android:textColor="@android:color/black"
-                android:textSize="17sp"/>
-            <TextView
+                android:text="Hipertrofica"
+                android:layout_marginEnd="72dp"/>
+            <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/musculaturaTextView"/>
+                android:text="Hipotrofica"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray">
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eutrofica"
+                android:layout_marginEnd="90dp"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hipertonica"/>
         </LinearLayout>
-
-
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hipotonica"
+                android:layout_marginEnd="79dp"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eutonica"/>
+        </LinearLayout>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"

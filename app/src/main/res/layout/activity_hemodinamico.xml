@@ -162,7 +162,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="invisible"
                     android:text="@string/Nao"
                     style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/soproTextView"/>
@@ -217,6 +217,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/FT"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FP"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
@@ -316,21 +324,77 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="extremidadesOnCLick">
+                android:background="?attr/selectableItemBackground">
                 <TextView
                     android:id="@+id/menuExtremidades"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Extremidades"
                     style="@style/TitleTextStyleForLayoutSelection"/>
-                <TextView
+                <RadioGroup
+                    android:id="@+id/extremidadesRadioGroup"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/acianotica"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/Acianotica"
+                        android:theme="@style/radioButtonStyle"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/cianotica"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Cianotica"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/extremidadesTextView"/>
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+                    <RadioGroup
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/Fria"
+                            android:theme="@style/radioButtonStyle"/>
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Normal"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Quente"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                    </RadioGroup>
+                </LinearLayout>
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"

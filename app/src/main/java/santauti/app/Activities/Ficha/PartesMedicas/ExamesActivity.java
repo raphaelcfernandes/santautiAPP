@@ -46,8 +46,7 @@ public class ExamesActivity extends GenericoActivity{
         setContentView(R.layout.activity_exames);
         setToolbar(getString(R.string.Exames));
         prepareNavigationButtons();
-
-        disturbioEletrolitico = (TextView)findViewById(R.id.disturbioEletrolitico);
+        
         acidoseMetabolica = (TextView)findViewById(R.id.acidoseMetabolica);
         eletrolitoItens = findViewById(R.id.eletrolitosItens);
         raioxToraxTextView = (TextView)findViewById(R.id.raioxToraxTextView);
@@ -153,7 +152,6 @@ public class ExamesActivity extends GenericoActivity{
 
         //list of items
         final String[] items = getResources().getStringArray(R.array.raioxTorax);
-        Arrays.sort(items);
         builder.setSingleChoiceItems(items, raioxToraxSelection,
                 new DialogInterface.OnClickListener() {
                     @Override

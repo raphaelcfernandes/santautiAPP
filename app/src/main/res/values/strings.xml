@@ -63,7 +63,7 @@
     <string name="IntensidadeSopro">Intensidade do Sopro</string>
     <string name="Hematocrito">Hematócrito</string>
     <string name="Hemoglobina">Hemoglobina</string>
-    <string name="Plaqueta">Plaqueta</string>
+    <string name="Plaquetas">Plaquetas</string>
     <string name="Tromboprofilaxia">Tromboprofilaxia</string>
     <string name="CurvaTermica">Curva Térmica</string>
     <string name="MarcadoresInfeccao">Marcadores de Infecção</string>
@@ -189,6 +189,7 @@
     <string name="FM">FM</string>
     <string name="FT">FT</string>
     <string name="FA">FA</string>
+    <string name="FP">FP</string>
     <string name="Natural">Natural</string>
     <string name="TuboTraqueal">Tubo Traqueal</string>
     <string name="Traqueostomia">Traqueostomia</string>
@@ -230,8 +231,8 @@
     <string name="Reduzido">Reduzido</string>
     <string name="Fisiologico">Fisiológico</string>
     <string name="Aumentado">Aumentado</string>
-    <string name="Glicemia">Glicemia</string>
-    <string name="PicosGlicemia">Picos de Glicemia</string>
+    <string name="Glicemias">Glicemias</string>
+    <string name="PicosHiperglicemias">Picos de Hiperglicemias</string>
     <string name="Ressecada">Ressecada</string>
     <string name="EmMelhora">Em Melhora</string>
     <string name="EmPiora">Em Piora</string>
@@ -248,6 +249,18 @@
     <string name="FezesDiarreicas">Diarreicas</string>
     <string name="FezesEndurecidas">Endurecidas</string>
     <string name="FezesNormais">Normais</string>
+    <string name="Dieta">Dieta</string>
+    <string name="Parenteral">Parenteral</string>
+    <string name="AceitacaoTolerancia">Aceitacao/Tolerancia</string>
+    <string name="Boa">Boa</string>
+    <string name="Ruim">Ruim</string>
+    <string name="Anicterico">Anicterico</string>
+    <string name="Hidratadas">Hidratadas</string>
+    <string name="Hiperhidratadas">Hiperhidratadas</string>
+    <string name="Hipocoradas">Hipocoradas</string>
+    <string name="Icterico">Icterico</string>
+    <string name="Normocoradas">Normocoradas</string>
+    <string name="Secas">Secas</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -498,11 +511,10 @@
     </string-array>
 
     <string-array name="raioxTorax">
-        Pneumotorax, atelectasia, infiltrados novos, normal.
+        <item>Normal</item>
         <item>Pneumotorax</item>
         <item>Atelectasia</item>
         <item>Infiltrados Novos</item>
-        <item>Normal</item>
     </string-array>
 
     <string-array name="leucograma">

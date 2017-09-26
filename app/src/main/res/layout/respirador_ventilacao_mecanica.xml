@@ -30,6 +30,12 @@
             android:id="@+id/modoVentilatorio"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray">
+    </LinearLayout>
+
     <android.support.design.widget.TextInputLayout
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"

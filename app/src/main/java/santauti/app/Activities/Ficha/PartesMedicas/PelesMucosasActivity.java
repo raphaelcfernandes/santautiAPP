@@ -23,9 +23,6 @@ import santauti.app.R;
  */
 
 public class PelesMucosasActivity extends GenericoActivity{
-    private TextView ulceraPressaoTextView,mucosasTextView;
-    private View peleLayout;
-    private int mucosasSelection=-1;
     private CheckBox checkboxUlceraPressao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,9 +31,6 @@ public class PelesMucosasActivity extends GenericoActivity{
         setToolbar(getString(R.string.PelesMucosas));
         prepareNavigationButtons();
 
-        ulceraPressaoTextView = (TextView)findViewById(R.id.ulceraTextView);
-        peleLayout = findViewById(R.id.peleLayout);
-        mucosasTextView = (TextView)findViewById(R.id.mucosasTextView);
         checkboxUlceraPressao = (CheckBox)findViewById(R.id.checkboxUlceraPressao);
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,46 +57,12 @@ public class PelesMucosasActivity extends GenericoActivity{
 
     public void ulceraPressaoOnClick(View view){
         if(checkboxUlceraPressao.isChecked()){
-            ulceraPressaoTextView.setText(getString(R.string.Nao));
+            //ulceraPressaoTextView.setText(getString(R.string.Nao));
             checkboxUlceraPressao.setChecked(false);
         }
         else{
-            ulceraPressaoTextView.setText(getString(R.string.Sim));
+            //ulceraPressaoTextView.setText(getString(R.string.Sim));
             checkboxUlceraPressao.setChecked(true);
         }
-    }
-
-    public void mucosasOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.Mucosas);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.mucosas);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, mucosasSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mucosasTextView.setText(items[which]);
-                        mucosasTextView.setVisibility(View.VISIBLE);
-                        mucosasSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(R.string.Cancelar);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
     }
 }

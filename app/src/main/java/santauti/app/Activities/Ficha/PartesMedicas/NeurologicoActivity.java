@@ -60,15 +60,12 @@ public class NeurologicoActivity extends GenericoActivity {
     private TextView aberturaOcularTextView;
     private TextView respostaVerbalTextView;
     private TextView respostaMotoraTextView;
-    private TextView inatencaoTextView;
     private TextView flutuacaoHint1;
     private TextView flutuacaoHint2;
     private TextView pensamentoDesorganizadoHint1;
     private TextView pensamentoDesorganizadoHint2;
     private TextView inatencaoHint1;
     private TextView inatencaoHint2;
-    private TextView deficitMotor;
-    private TextView flutuacaoTextView,pensamentoTextView;
     private View simSedado,comaLayout,diferencaPupilaLayout,escalaGlasgowItensLayout,
             deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout;
     private CheckBox checkboxDeficitMotor,checkboxFlutuacao,checkBoxInatencao,checkBoxPensamento;
@@ -96,19 +93,13 @@ public class NeurologicoActivity extends GenericoActivity {
         respostaMotoraTextView = (TextView)findViewById(R.id.respostaMotora);
         flutuacaoHint1 = (TextView)findViewById(R.id.flutuacaoHint1);
         flutuacaoHint2 = (TextView)findViewById(R.id.flutuacaoHint2);
-        flutuacaoHint1.setText(getResources().getString(R.string.FlutuacaoHint1));
-        flutuacaoHint2.setText(getResources().getString(R.string.FlutuacaoHint2));
         pensamentoDesorganizadoHint1 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint1);
         pensamentoDesorganizadoHint2 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint2);
         inatencaoHint1 = (TextView)findViewById(R.id.inatencaoHint1);
         inatencaoHint2 = (TextView)findViewById(R.id.inatencaoHint2);
-        deficitMotor = (TextView)findViewById(R.id.deficitMotor);
         temporoEspacialLayout = findViewById(R.id.temporoEspacialLayout);
         desorientadoLayout = findViewById(R.id.desorientadoLayout);
         avaliacaoPupilarItensLayout = findViewById(R.id.avaliacaoPupilarItensLayout);
-        flutuacaoTextView = (TextView)findViewById(R.id.flutuacaoTextView);
-        inatencaoTextView = (TextView)findViewById(R.id.inatencaoTextView);
-        pensamentoTextView = (TextView)findViewById(R.id.pensamentoTextView);
 
         /******************************VARIAVEIS LAYOUTS*************************************/
 
@@ -125,28 +116,6 @@ public class NeurologicoActivity extends GenericoActivity {
         checkboxDeficitMotor = (CheckBox)findViewById(R.id.checkboxDeficitMotor);
 
         checkboxFlutuacao = (CheckBox)findViewById(R.id.checkboxFlutuacao);
-        checkboxFlutuacao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setTextFromCheckBox(checkboxFlutuacao,flutuacaoTextView);
-            }
-        });
-
-        checkBoxInatencao = (CheckBox)findViewById(R.id.checkboxInatencao);
-        checkBoxInatencao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setTextFromCheckBox(checkBoxInatencao,inatencaoTextView);
-            }
-        });
-
-        checkBoxPensamento = (CheckBox)findViewById(R.id.checkboxPensamento);
-        checkBoxPensamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setTextFromCheckBox(checkBoxPensamento,pensamentoTextView);
-            }
-        });
         /******************************VARIAVEIS CHECKBOX*******************************/
 
 
@@ -627,8 +596,6 @@ public class NeurologicoActivity extends GenericoActivity {
             myAnimation.slideUpView(getApplicationContext(),pensamentoDesorganizadoHint2);
         }
         else{
-            pensamentoDesorganizadoHint1.setText(getResources().getString(R.string.PensamentoDesorganizadoHint1));
-            pensamentoDesorganizadoHint2.setText(getResources().getString(R.string.PensamentoDesorganizadoHint2));
             myAnimation.slideDownView(getApplicationContext(),pensamentoDesorganizadoHint1);
             myAnimation.slideDownView(getApplicationContext(),pensamentoDesorganizadoHint2);
         }
@@ -640,8 +607,6 @@ public class NeurologicoActivity extends GenericoActivity {
             myAnimation.slideUpView(getApplicationContext(),inatencaoHint2);
         }
         else{
-            inatencaoHint1.setText(getResources().getString(R.string.InatencaoHint1));
-            inatencaoHint2.setText(getResources().getString(R.string.InatencaoHint2));
             myAnimation.slideDownView(getApplicationContext(),inatencaoHint1);
             myAnimation.slideDownView(getApplicationContext(),inatencaoHint2);
         }
@@ -657,12 +622,12 @@ public class NeurologicoActivity extends GenericoActivity {
     public void deficitMotorOnClick(View view){
         if(checkboxDeficitMotor.isChecked()) {
             myAnimation.slideUpView(getApplicationContext(), deficitMotorItensLayout);
-            deficitMotor.setText(getString(R.string.Ausente));
+            //deficitMotor.setText(getString(R.string.Ausente));
             checkboxDeficitMotor.setChecked(false);
         }
         else {
             myAnimation.slideDownView(getApplicationContext(), deficitMotorItensLayout);
-            deficitMotor.setText(getString(R.string.Presente));
+            //deficitMotor.setText(getString(R.string.Presente));
             checkboxDeficitMotor.setChecked(true);
         }
     }

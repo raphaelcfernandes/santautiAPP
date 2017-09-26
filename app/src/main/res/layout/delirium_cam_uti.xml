@@ -25,7 +25,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/deliriumItens"
-        android:visibility="gone">
+        android:visibility="visible">
+
         <!--Flutuacao-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,29 +68,23 @@
                 android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Nao"
-                android:paddingBottom="5dp"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/flutuacaoTextView"/>
-            <TextView
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/flutuacaoHint1"
-                android:paddingBottom="7dp"/>
+                android:paddingBottom="7dp"
+                android:text="@string/FlutuacaoHint1"/>
             <TextView
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/flutuacaoHint2"/>
+                android:id="@+id/flutuacaoHint2"
+                android:text="@string/FlutuacaoHint2"/>
         </LinearLayout>
+
         <!--Inatencao-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,32 +124,26 @@
                 </RelativeLayout>
             </LinearLayout>
             <TextView
-                android:paddingBottom="5dp"
                 android:visibility="visible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Nao"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/inatencaoTextView"/>
-            <TextView
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/inatencaoHint1"
-                android:paddingBottom="7dp"/>
+                android:paddingBottom="7dp"
+                android:text="@string/InatencaoHint1"/>
             <TextView
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/inatencaoHint2"/>
+                android:id="@+id/inatencaoHint2"
+                android:text="@string/InatencaoHint2"/>
         </LinearLayout>
+
         <!--Pensamento-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -193,25 +182,18 @@
                 </RelativeLayout>
             </LinearLayout>
             <TextView
-                android:paddingBottom="5dp"
                 android:visibility="visible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Nao"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/pensamentoTextView"/>
-            <TextView
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/pensamentoDesorganizadoHint1"
-                android:paddingBottom="7dp"/>
+                android:paddingBottom="7dp"
+                android:text="@string/PensamentoDesorganizadoHint1"/>
             <TextView
-                android:visibility="gone"
+                android:text="@string/PensamentoDesorganizadoHint2"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -220,10 +202,6 @@
                 android:id="@+id/pensamentoDesorganizadoHint2"/>
         </LinearLayout>
 
-
-
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -231,6 +209,5 @@
         android:layout_height="1px"
         android:background="@color/gray">
     </LinearLayout>
-
 
 </LinearLayout>

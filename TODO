@@ -66,8 +66,12 @@ Nutricional: acho que está ok
          - calorica, proteica, lipidica, carboidratos, balanco hidrogenado
      - Albumina:
              - hipo, hiperalbuminemia. ...
+     - Dieta:
+        - enteral e/ou oral e/ou parenteral
+    - aceitacao/tolerancia:
+        - boa ruim media
 
-Pele e Mucosas: acho que está ok
+Pele e Mucosas: dps de endocrino
     - Pele:
         - normal, ressecada
     - ulcera de pressao
@@ -76,7 +80,7 @@ Pele e Mucosas: acho que está ok
         - Normocoradas, hipocoradas, icterico, anicterico
         - secas, hidratadas, hiperidratadas
 
-Osteomuscular: acho que está OK (depois de pele), (Checar se está certo o musculatura como ta feito)
+Osteomuscular: dps de endocrino
     - Musculatura:
         - hiper/hipo/eu trofica, hipo/hiper/eu tonica.
 
@@ -92,7 +96,7 @@ Folhas de balanćo: acho que está ok. Jogar Focus para os edit text quadno sele
                 - diarreicas, normais, endurecidas
         - Ausente
     - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
-        - Volume/ml
+        - Volume/mlpa
         - aspecto: gastrico, fecaloide, biliar
     - Nutricao:
         - Oral, enteral, gastrica
@@ -106,7 +110,8 @@ Renal: acho que está ok
     - Tempo/hora: numerico
     - Heparina: sim ou nao
 
-Infeccioso: acho q está ok
+Infeccioso: após metabolico
+    - Curva glicemica -> Endocrino
     - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
     - marcadores de infeccao: estaveis, em melhora, em piora
     - antibiotico/antivirais/antifungicos
@@ -156,7 +161,7 @@ Gastro: acho que está ok
 
 Endocrino: acho que está ok
      - glicemias:
-        - normais, picos de hiperglicemia
+        - normais, picos de hiperglicemia,
      -
 /*****************MUDANÇAS FEITAS**********/
 

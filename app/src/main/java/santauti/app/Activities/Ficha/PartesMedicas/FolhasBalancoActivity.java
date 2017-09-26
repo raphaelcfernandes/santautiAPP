@@ -100,11 +100,11 @@ public class FolhasBalancoActivity extends GenericoActivity {
         if(checkboxEvacuacoes.isChecked()) {
             myAnimation.slideUpView(getApplicationContext(), evacuacoesItens);
             checkboxEvacuacoes.setChecked(false);
-            evacuacoesTextView.setText(getString(R.string.Ausente));
+            //evacuacoesTextView.setText(getString(R.string.Ausente));
         }
         else {
             checkboxEvacuacoes.setChecked(true);
-            evacuacoesTextView.setText(getString(R.string.Presente));
+            //evacuacoesTextView.setText(getString(R.string.Presente));
             myAnimation.slideDownView(getApplicationContext(), evacuacoesItens);
         }
 

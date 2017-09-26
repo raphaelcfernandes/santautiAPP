@@ -27,10 +27,8 @@ public class NutricionalActivity extends GenericoActivity {
         setContentView(R.layout.activity_nutricional);
         setToolbar(getString(R.string.Nutricional));
 
-        ingestaoTextView = (TextView)findViewById(R.id.ingestao);
-
         prepareNavigationButtons();
-        createPopupIngestao();
+        //createPopupIngestao();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
