@@ -1,27 +1,17 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AlertDialog;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.widget.PopupMenu;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.Arrays;
-
 import io.realm.Realm;
-import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.R;
 
 /**
@@ -29,9 +19,9 @@ import santauti.app.R;
  */
 
 public class MetabolicoActivity extends GenericoActivity {
-    private int i=0,hidratacaoSelection=-1;
+    private int i=0;
     private Realm realm;
-    private TextView hidratacao;
+    private TextView hidratacaoTextView,hidratacaoMenu;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +30,14 @@ public class MetabolicoActivity extends GenericoActivity {
         setToolbar(this.getString(R.string.Metabolico));
 
         /********************VIEWS****************************/
-        hidratacao = (TextView)findViewById(R.id.hidratacao);
+        hidratacaoTextView = (TextView)findViewById(R.id.hidratacaoTextView);
+        hidratacaoMenu = (TextView)findViewById(R.id.hidratacaoMenu);
         /********************VIEWS****************************/
 
 
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
-        hidratacaoPopUpMenu();
+
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +54,7 @@ public class MetabolicoActivity extends GenericoActivity {
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), NutricionalActivity.class);
+                intent = new Intent(view.getContext(), InfecciosoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
@@ -73,42 +64,34 @@ public class MetabolicoActivity extends GenericoActivity {
         });
     }
 
-    private void hidratacaoPopUpMenu(){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
-        builder.setTitle(R.string.Hidratacao);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.hidratacao);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, hidratacaoSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        hidratacao.setText(items[which]);
-                        hidratacao.setVisibility(View.VISIBLE);
-                        hidratacaoSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
     public void hidratacaoOnCLick(View view) {
-        hidratacaoPopUpMenu();
+
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), hidratacaoMenu, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_hidratacao, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.normoHidratado:
+                        hidratacaoTextView.setText(item.getTitle());
+                        break;
+                    case R.id.edemaciado:
+                        hidratacaoTextView.setText(item.getTitle());
+                        break;
+                    case R.id.desidratado:
+                        hidratacaoTextView.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
     }
+
 
 
 

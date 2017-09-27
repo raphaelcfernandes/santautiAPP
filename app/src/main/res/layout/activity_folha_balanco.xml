@@ -74,36 +74,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="curvaGlicemicaOnClick">
-            <TextView
-                android:id="@+id/menuCurvaGlicemica"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/CurvaGlicemica"
-                android:textColor="@android:color/black"
-                android:textSize="17sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
-                android:id="@+id/curvaGlicemica"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray">
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"

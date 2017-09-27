@@ -4,10 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.PopupMenu;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.FichaActivity;
@@ -22,27 +27,19 @@ import santauti.app.R;
  */
 
 public class EndocrinoActivity extends GenericoActivity {
-    private int usoInsulinaBombaInfusao;
     private Realm realm;
-    private RadioButton endocrinoS,endocrinoN;
+    private TextView menuCurvaGlicemica,curvaGlicemica;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_endocrino);
         setToolbar(getString(R.string.Endocrino));
 
-//        endocrinoS = (RadioButton)findViewById(R.id.endocrino_sim);
-//        endocrinoN = (RadioButton)findViewById(R.id.endocrino_nao);
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
 
-//        if(getEndocrinoSelected()!=-1){
-//            if(getEndocrinoSelected()==1)
-//                endocrinoS.setChecked(true);
-//            else
-//                endocrinoN.setChecked(true);
-//        }
-
+        menuCurvaGlicemica = (TextView)findViewById(R.id.menuCurvaGlicemica);
+        curvaGlicemica = (TextView)findViewById(R.id.curvaGlicemica);
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +54,7 @@ public class EndocrinoActivity extends GenericoActivity {
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
+                intent = new Intent(view.getContext(), PelesMucosasActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();
@@ -68,29 +65,6 @@ public class EndocrinoActivity extends GenericoActivity {
 
     }
 
-
-
-    public int getEndocrinoSelected(){
-        Ficha f = getProperFicha();
-        if(f.getEndocrino()!=null)
-            return f.getEndocrino().getUsoDeInsulinaBombaInfusao();
-        else
-            return -1;
-    }
-
-    public void endocrinoOnRadioButtonClicked(View view){
-//        boolean checked = ((RadioButton) view).isChecked();
-//        switch(view.getId()) {
-//            case R.id.endocrino_sim:
-//                Snackbar.make(view, "Você terá campos a preencher na webpage.", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//                usoInsulinaBombaInfusao=1;
-//                break;
-//            case R.id.endocrino_nao:
-//                usoInsulinaBombaInfusao=0;
-//                break;
-//        }
-    }
 
     @Override
     public void onBackPressed(){
@@ -119,5 +93,30 @@ public class EndocrinoActivity extends GenericoActivity {
 //            realm.commitTransaction();
 //            changeCardColor();
 //        }
+    }
+    public void curvaGlicemicaOnClick(View view){
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuCurvaGlicemica, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_curva_glicemica, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.eventoHipoglicemia:
+                        curvaGlicemica.setText(item.getTitle());
+                        break;
+                    case R.id.normoglicemia:
+                        curvaGlicemica.setText(item.getTitle());
+                        break;
+                    case R.id.eventoHiperglicemia:
+                        curvaGlicemica.setText(item.getTitle());
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        popupMenu.show();
     }
 }

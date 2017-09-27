@@ -10,24 +10,58 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:orientation="vertical"
-        android:background="?attr/selectableItemBackground"
-        android:onClick="parametrosModoVentilatorioOnClick">
+        android:orientation="vertical">
         <TextView
+            android:id="@+id/menuParametros"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ParametrosRespirador"
             style="@style/TitleTextStyleForLayoutSelection"/>
-        <TextView
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
+        <RadioGroup
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
-            style="@style/ItemSelectedTextStyleForLayoutSelection"
-            android:id="@+id/modoVentilatorio"/>
+            android:layout_gravity="center|start"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginEnd="20dp"
+                android:text="@string/PCV"
+                android:theme="@style/radioButtonStyle"/>
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/VCV"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:theme="@style/radioButtonStyle"
+                />
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/PSV"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:theme="@style/radioButtonStyle"
+                />
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SIMV"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:theme="@style/radioButtonStyle"
+                />
+        </RadioGroup>
     </LinearLayout>
 
     <LinearLayout

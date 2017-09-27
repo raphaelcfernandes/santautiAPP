@@ -183,20 +183,20 @@ public class FichaActivity extends GenericoActivity{
             else if(position==9)
                 intent = new Intent(v.getContext(), MetabolicoActivity.class);
             else if(position==10)
-                intent = new Intent(v.getContext(), NutricionalActivity.class);
-            else if(position==11)
-                intent = new Intent(v.getContext(), PelesMucosasActivity.class);
-            else if(position==12)
-                intent = new Intent(v.getContext(), OsteomuscularActivity.class);
-            else if(position==13)
                 intent = new Intent(v.getContext(), InfecciosoActivity.class);
-            else if(position==14)
+            else if(position==11)//Nutricional
+                intent = new Intent(v.getContext(), NutricionalActivity.class);
+            else if(position==12)//Hematologico
                 intent = new Intent(v.getContext(), HematologicoActivity.class);
-            else if(position==15)
+            else if(position==13)//Endcrino
                 intent = new Intent(v.getContext(), EndocrinoActivity.class);
-            else if(position==16)
+            else if(position==14)//Peles Mucosas
+                intent = new Intent(v.getContext(), PelesMucosasActivity.class);
+            else if(position==15)//Osteomuscular
+                intent = new Intent(v.getContext(), OsteomuscularActivity.class);
+            else if(position==16)//Folhas
                 intent = new Intent(v.getContext(), FolhasBalancoActivity.class);
-            else if(position==17)
+            else if(position==17)//Exames
                 intent = new Intent(v.getContext(), ExamesActivity.class);
             prepareIntent(position,intent);
             startActivity(intent);
@@ -218,12 +218,12 @@ public class FichaActivity extends GenericoActivity{
                 R.drawable.intestine,
                 R.drawable.kidneys,
                 R.drawable.exercise,
-                R.drawable.nutrition,
-                R.drawable.peles_mucosas,
-                R.drawable.osteomuscular,
                 R.drawable.cell,
+                R.drawable.nutrition,
                 R.drawable.blood_drop,
                 R.drawable.thyroid,
+                R.drawable.peles_mucosas,
+                R.drawable.osteomuscular,
                 R.drawable.folhas_balanco,
                 R.drawable.x_ray
         };
@@ -258,22 +258,22 @@ public class FichaActivity extends GenericoActivity{
         a = new FichaAdapterModel(this.getString(R.string.Metabolico), covers[9],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Nutricional), covers[10],0);
+        a = new FichaAdapterModel(this.getString(R.string.Infeccioso), covers[10],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.PelesMucosas), covers[11],0);
+        a = new FichaAdapterModel(this.getString(R.string.Nutricional), covers[11],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.OsteoMuscular), covers[12],0);
+        a = new FichaAdapterModel(this.getString(R.string.Hematologico), covers[12],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Infeccioso), covers[13],0);
+        a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[13],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Hematologico), covers[14],0);
+        a = new FichaAdapterModel(this.getString(R.string.PelesMucosas), covers[14],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[15],0);
+        a = new FichaAdapterModel(this.getString(R.string.OsteoMuscular), covers[15],0);
         fichaAdapterModelList.add(a);
 
         a = new FichaAdapterModel(this.getString(R.string.FolhasBalanco), covers[16],0);

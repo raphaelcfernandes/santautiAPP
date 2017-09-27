@@ -24,8 +24,6 @@ import santauti.app.R;
  */
 
 public class FolhasBalancoActivity extends GenericoActivity {
-    private int aspectoFezesSelection =-1;
-    private TextView menuCurvaGlicemica,curvaGlicemica,evacuacoesTextView,aspectoFezesTextView;
     private View evacuacoesItens,volumeNutricao;
     private MyAnimation myAnimation;
     private CheckBox checkboxEvacuacoes;
@@ -37,19 +35,15 @@ public class FolhasBalancoActivity extends GenericoActivity {
         prepareNavigationButtons();
         myAnimation = new MyAnimation();
 
-        //curvaTermica = (TextView)findViewById(R.id.curvaTermica);
-        curvaGlicemica = (TextView)findViewById(R.id.curvaGlicemica);
-        evacuacoesTextView = (TextView)findViewById(R.id.evacuacoesTextView);
         evacuacoesItens = findViewById(R.id.evacuacoesItens);
-        //aspectoFezesTextView = (TextView)findViewById(R.id.aspectoFezes);
         volumeNutricao = findViewById(R.id.volumeNutricao);
-        //nutricaoTextView = (TextView)findViewById(R.id.nutricaoTextView);
-        menuCurvaGlicemica = (TextView)findViewById(R.id.menuCurvaGlicemica);
+
+
         checkboxEvacuacoes = (CheckBox)findViewById(R.id.checkboxEvacuacoes);
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), EndocrinoActivity.class);
+                intent = new Intent(view.getContext(), OsteomuscularActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
@@ -68,32 +62,6 @@ public class FolhasBalancoActivity extends GenericoActivity {
             }
         });
 
-    }
-
-    public void curvaGlicemicaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuCurvaGlicemica, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_curva_glicemica, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.eventoHipoglicemia:
-                        curvaGlicemica.setText(item.getTitle());
-                        break;
-                    case R.id.normoglicemia:
-                        curvaGlicemica.setText(item.getTitle());
-                        break;
-                    case R.id.eventoHiperglicemia:
-                        curvaGlicemica.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
     }
 
     public void evacuacoesOnClick(View view){

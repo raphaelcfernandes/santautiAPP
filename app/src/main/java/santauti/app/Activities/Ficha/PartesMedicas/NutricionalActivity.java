@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.Arrays;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Model.Ficha.Hematologico;
 import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.R;
 
@@ -33,7 +34,7 @@ public class NutricionalActivity extends GenericoActivity {
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), MetabolicoActivity.class);
+                intent = new Intent(view.getContext(), InfecciosoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
@@ -44,7 +45,7 @@ public class NutricionalActivity extends GenericoActivity {
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), PelesMucosasActivity.class);
+                intent = new Intent(view.getContext(), HematologicoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();

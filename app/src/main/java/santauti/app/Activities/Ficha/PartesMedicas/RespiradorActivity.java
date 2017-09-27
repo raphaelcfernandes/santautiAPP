@@ -33,7 +33,6 @@ public class RespiradorActivity extends GenericoActivity{
         /****************************VIEWS*****************************/
         bipap = findViewById(R.id.bipap);
         mecanico = findViewById(R.id.ventilacao_mecanica);
-        modoVentilatorio = (TextView)findViewById(R.id.modoVentilatorio);
         naoInvasivo = findViewById(R.id.ventilacao_naoInvasiva);
         respiradorLayout = findViewById(R.id.respiradorLayout);
         /****************************VIEWS*****************************/
@@ -64,40 +63,6 @@ public class RespiradorActivity extends GenericoActivity{
         });
         //createPopupModoVentilatorio();
     }
-
-    public void parametrosModoVentilatorioOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.ParametrosRespirador);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.modoVentilatorio);
-        builder.setSingleChoiceItems(items, modoVentilatorioSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        modoVentilatorio.setText(items[which]);
-                        modoVentilatorio.setVisibility(View.VISIBLE);
-                        modoVentilatorioSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(R.string.Cancelar);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
 
     public void emVentilacaoOnClick(View view){
         switch(view.getId()) {

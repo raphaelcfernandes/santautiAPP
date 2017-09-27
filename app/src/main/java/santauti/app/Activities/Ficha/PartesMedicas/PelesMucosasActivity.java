@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.Arrays;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Model.Ficha.Endocrino;
 import santauti.app.R;
 
 /**
@@ -35,7 +36,7 @@ public class PelesMucosasActivity extends GenericoActivity{
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), NutricionalActivity.class);
+                intent = new Intent(view.getContext(), EndocrinoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();

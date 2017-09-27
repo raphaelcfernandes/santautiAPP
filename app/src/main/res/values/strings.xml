@@ -233,6 +233,7 @@
     <string name="Aumentado">Aumentado</string>
     <string name="Glicemias">Glicemias</string>
     <string name="PicosHiperglicemias">Picos de Hiperglicemias</string>
+    <string name="PicosHipoglicemias">Picos de Hipoglicemias</string>
     <string name="Ressecada">Ressecada</string>
     <string name="EmMelhora">Em Melhora</string>
     <string name="EmPiora">Em Piora</string>
@@ -261,6 +262,13 @@
     <string name="Icterico">Icterico</string>
     <string name="Normocoradas">Normocoradas</string>
     <string name="Secas">Secas</string>
+    <string name="PCV">PCV</string>
+    <string name="VCV">VCV</string>
+    <string name="PSV">PSV</string>
+    <string name="SIMV">SIMV</string>
+    <string name="Desidratado">Desidratado</string>
+    <string name="EdemaciadoHiperHidratado">Edemaciado/Hiper Hidratado</string>
+    <string name="NormoHidratado">Normo Hidratado</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
