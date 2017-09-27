@@ -141,11 +141,6 @@
                 android:id="@+id/dispositivosTextView"
                 style="@style/ItemSelectedTextStyleForLayoutSelection" />
         </LinearLayout>
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1px"-->
-        <!--android:background="@color/gray">-->
-        <!--</LinearLayout>-->
     </LinearLayout>
 
     <RelativeLayout

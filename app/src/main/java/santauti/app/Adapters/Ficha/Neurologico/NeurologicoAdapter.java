@@ -23,18 +23,36 @@ public class NeurologicoAdapter extends RecyclerView.Adapter<NeurologicoAdapter.
     private List<NeurologicoAdapterModel> neurologicoAdapterModelList;
     private int lastPosition=-1;
     private MyAnimation myAnimation = new MyAnimation();
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView tipoSedativo;
-        public final TextView doseSedativo;
-        public final ImageView deleteIcon;
-        public final ImageView editIcon;
-        public ViewHolder(View itemView) {
+    class ViewHolder extends RecyclerView.ViewHolder {
+        final TextView tipoSedativo;
+        final TextView doseSedativo;
+        final ImageView deleteIcon;
+        final ImageView editIcon;
+        ViewHolder(View itemView) {
             super(itemView);
             tipoSedativo = (TextView) itemView.findViewById(R.id.tipoSedativo_neurologico_recycler_view);
             doseSedativo = (TextView)itemView.findViewById(R.id.doseSedativo_neurologico_recycler_view);
             deleteIcon = (ImageView)itemView.findViewById(R.id.deleteIcon_neurologico_recycler_view);
-            editIcon = (ImageView)itemView.findViewById(R.id.editIcon_neurologico__recycler_view);
+            editIcon = (ImageView)itemView.findViewById(R.id.editIcon_neurologico_recycler_view);
+            deleteIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    deleteItem(view,getAdapterPosition());
+                }
+            });
         }
+    }
+
+    private void setAnimationExcludeItem(View view) {
+        myAnimation.slideOutRight(context, view);
+        lastPosition = getItemCount() - 1;
+    }
+
+    private void deleteItem(View view,int position){
+        neurologicoAdapterModelList.remove(position);
+        setAnimationExcludeItem(view);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position,neurologicoAdapterModelList.size());
     }
 
     @Override

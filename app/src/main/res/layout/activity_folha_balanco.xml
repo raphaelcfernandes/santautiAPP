@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_folha_balanco"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
@@ -146,6 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:onClick="aspectoFezesOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -154,6 +155,7 @@
                         android:text="@string/FezesDiarreicas"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:onClick="aspectoFezesOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
@@ -161,6 +163,7 @@
                         android:text="@string/FezesEndurecidas"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:onClick="aspectoFezesOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
@@ -176,7 +179,7 @@
                 android:paddingEnd="0dp"
                 android:theme="@style/TextLabelBlue">
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/peso"
+                    android:id="@+id/numeroEventos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="8"

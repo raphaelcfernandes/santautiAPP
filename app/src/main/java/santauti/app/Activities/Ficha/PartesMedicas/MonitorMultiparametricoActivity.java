@@ -41,7 +41,7 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         setContentView(R.layout.activity_monitor_multiparametrico);
         mainLayout = (LinearLayout)findViewById(R.id.monitor_multiparametrico_layout);
         mainLayout.requestFocus();
-
+        setupUI(mainLayout);
         setToolbar(getString(R.string.MonitorMultiparametrico));
         textView = (TextView)findViewById(R.id.ritmo);
         //prepareSpinner();

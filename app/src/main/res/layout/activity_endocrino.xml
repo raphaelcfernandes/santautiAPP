@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
-    android:id="@+id/respiratorio_layout"
+    android:id="@+id/respiratorio_activity"
     android:weightSum="1"
     android:baselineAligned="false"
     android:orientation="vertical">

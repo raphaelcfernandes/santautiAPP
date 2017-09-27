@@ -36,7 +36,7 @@ public class RespiradorActivity extends GenericoActivity{
         naoInvasivo = findViewById(R.id.ventilacao_naoInvasiva);
         respiradorLayout = findViewById(R.id.respiradorLayout);
         /****************************VIEWS*****************************/
-
+        setupUI(findViewById(R.id.respirador_activity));
         myAnimation = new MyAnimation();
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override

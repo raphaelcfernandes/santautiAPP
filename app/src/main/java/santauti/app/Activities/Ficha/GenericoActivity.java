@@ -16,9 +16,12 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -26,6 +29,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import io.realm.Realm;
+import santauti.app.Activities.Ficha.PartesMedicas.FolhasBalancoActivity;
 import santauti.app.Adapters.Home.HomeModel;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
@@ -44,6 +48,28 @@ public abstract class GenericoActivity extends AppCompatActivity {
     public void onBackPressed(){
         finish();
     }
+
+    public void setupUI(View view) {
+
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(GenericoActivity.this);
+                    return false;
+                }
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setupUI(innerView);
+            }
+        }
+    }
+
 
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -106,15 +132,6 @@ public abstract class GenericoActivity extends AppCompatActivity {
         antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
     }
 
-    public void ordenaStringSpinner(String[] stringVec){
-        Arrays.sort(stringVec, new Comparator<String>() {
-            @Override
-            public int compare(String s, String t1) {
-                return s.compareTo(t1);
-            }
-        });
-    }
-
     public void createDialog(final String title, int selection, final TextView textView, final String[] options){
         builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
@@ -167,6 +184,7 @@ public abstract class GenericoActivity extends AppCompatActivity {
             textView.setVisibility(View.VISIBLE);
         return total;
     }
+
     public void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) activity.getSystemService(

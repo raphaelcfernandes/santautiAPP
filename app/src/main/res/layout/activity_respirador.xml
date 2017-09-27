@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
-    android:id="@+id/respiratorio_layout"
+    android:id="@+id/respirador_activity"
     android:weightSum="1"
     android:baselineAligned="false"
     android:orientation="vertical">

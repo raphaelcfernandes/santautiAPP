@@ -269,6 +269,21 @@
     <string name="Desidratado">Desidratado</string>
     <string name="EdemaciadoHiperHidratado">Edemaciado/Hiper Hidratado</string>
     <string name="NormoHidratado">Normo Hidratado</string>
+    <string name="Pneumotorax">Pneumotorax</string>
+    <string name="Atelectasia">Atelectasia</string>
+    <string name="InfiltradosNovos">InfiltradosNovos</string>
+    <string name="Acidose">Acidose</string>
+    <string name="Alcalose">Alcalose</string>
+    <string name="Respiratoria">Respiratoria</string>
+    <string name="Metabolica">Metabólica</string>
+    <string name="Compensada">Compensada</string>
+    <string name="Descompensada">Descompensada</string>
+    <string name="BilirrubinasElevadas">Bilirrubinas Elevadas</string>
+    <string name="BilirrubinasNormais">Bilirrubinas Normais</string>
+    <string name="FAGGTElevadas">FA/GGT Elevadas</string>
+    <string name="FAGGTNormais">FA/GGT Normais</string>
+    <string name="TransaminasesElevadas">Transaminases Elevadas</string>
+    <string name="TransaminasesNormais">Transaminases Normais</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -317,14 +332,6 @@
         <item>Hipomagnesemia</item>
         <item>Hipofosfatemia</item>
         <item>Hiperfosfatemia</item>
-    </string-array>
-
-    <string-array name="acidoseMetabolica">
-        <item>Acidose</item>
-        <item>Eucalose (G1)</item>
-        <item>Respiratoria (G2)</item>
-        <item>Compensada</item>
-        <item>Discompensada (G3)</item>
     </string-array>
 
     <string-array name="intensidadeSopro">
@@ -532,14 +539,6 @@
         <item>Em Piora</item>
     </string-array>
 
-    <string-array name="funcaoHepatica">
-        <item>Bilirrubinas Normais</item>
-        <item>Bilirrubinas Elevadas</item>
-        <item>Transaminases Normais</item>
-        <item>Transaminases Elevadas</item>
-        <item>FA/GGT Normais</item>
-        <item>FA/GGT Elevadas</item>
-    </string-array>
 
     <string-array name="desorientado">
         <item>No Espaco</item>

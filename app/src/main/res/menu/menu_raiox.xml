@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/normal"
+        android:title="@string/Normal">
+    </item>
+    <item android:id="@+id/pneumotorax"
+        android:title="@string/Pneumotorax">
+    </item>
+    <item android:id="@+id/atelectasia"
+        android:title="@string/Atelectasia">
+    </item>
+    <item android:id="@+id/infiltradosNovos"
+        android:title="@string/InfiltradosNovos">
+    </item>
+</menu>

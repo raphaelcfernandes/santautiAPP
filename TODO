@@ -17,9 +17,7 @@ FICHA:
 
 Como fazer radio button em diferente layout e obedecer as marcaçoes
 /*************MUDANĆAS*********************/
-
-
-Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - acho que está ok
+Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - acho que está ok/ Editar
     -   Bomba de infusao
       - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
       - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
@@ -38,7 +36,8 @@ Neurologico: acho que está ok -> (permitir que usuario desmarque radio button -
                 - DESORIENTADO:
                     - Tempo e espaco. (multiplo)
 
-Exames: acho que está ok
+/*****************MUDANÇAS FEITAS**********/
+Exames: OK
     - Eletrólitos: inserćao de dados na mao OU
                     insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
         - Potássio: hipo, hipercalemia. Se n marcar = normal
@@ -48,7 +47,10 @@ Exames: acho que está ok
         - Calcio: hipo, hipercalcemia. ...
     - lactato: normal, elevado -> ok
     - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
-        - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
+    - acidose metabolica:
+        - Acidose ou Alcalose
+            - Metabolica ou respiratoria
+            - Compensada ou Descompensada
     - Albumina: -> nutricional
         - hipo, hiperalbuminemia. ...
     - PCR:
@@ -66,10 +68,10 @@ Exames: acho que está ok
     - Amilase: sim ou nao
         - sim:
             - normal, elevada
-/*****************MUDANÇAS FEITAS**********/
+
 Metabolico: OK
     - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
-    
+
 Respirador: -> OK
     - Espontanea, nao invasiva, bipap, mecanica
     - bipap: -> ok
