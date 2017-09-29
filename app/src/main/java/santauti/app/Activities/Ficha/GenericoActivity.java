@@ -16,9 +16,14 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -26,6 +31,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import io.realm.Realm;
+import santauti.app.Activities.Ficha.PartesMedicas.FolhasBalancoActivity;
 import santauti.app.Adapters.Home.HomeModel;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
@@ -43,6 +49,40 @@ public abstract class GenericoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         finish();
+    }
+
+    public void setupUI(View view) {
+
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(GenericoActivity.this);
+                    return false;
+                }
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setupUI(innerView);
+            }
+        }
+    }
+
+    public String getStringOfRadioButtonSelectedFromRadioGroup(RadioGroup radioGroup){
+        int idx = radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
+        RadioButton r = (RadioButton)radioGroup.getChildAt(idx);
+        if(r!=null)
+            return r.getText().toString();
+        else
+            return null;
+    }
+
+    public int getIndexOfRadioButtonFromRadioGroup(RadioGroup radioGroup){
+        return radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -83,10 +123,6 @@ public abstract class GenericoActivity extends AppCompatActivity {
         return etText.getText().toString().trim().length() == 0;
     }
 
-    public boolean isSpinnerDefault(String string){
-        return string.equals(defaultSpinnerString);
-    }
-
     public int getIntegerFromTextInputEditText(TextInputEditText textInputEditText){
         return Integer.parseInt(textInputEditText.getText().toString());
     }
@@ -104,15 +140,6 @@ public abstract class GenericoActivity extends AppCompatActivity {
         antFicha = (Button)findViewById(R.id.fichaAnterior);
         proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
         antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
-    }
-
-    public void ordenaStringSpinner(String[] stringVec){
-        Arrays.sort(stringVec, new Comparator<String>() {
-            @Override
-            public int compare(String s, String t1) {
-                return s.compareTo(t1);
-            }
-        });
     }
 
     public void createDialog(final String title, int selection, final TextView textView, final String[] options){
@@ -167,6 +194,7 @@ public abstract class GenericoActivity extends AppCompatActivity {
             textView.setVisibility(View.VISIBLE);
         return total;
     }
+
     public void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) activity.getSystemService(

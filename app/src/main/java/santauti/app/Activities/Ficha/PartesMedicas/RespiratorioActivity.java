@@ -6,16 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.PopupMenu;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
@@ -44,9 +40,9 @@ public class RespiratorioActivity extends GenericoActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_respiratorio);
-        findViewById(R.id.respiratorio_layout).requestFocus();
+        findViewById(R.id.respiratorio_activity).requestFocus();
         setToolbar(getString(R.string.Respiratorio));
-
+        setupUI(findViewById(R.id.respiratorio_activity));
         /**************************VIEWS**************************/
         pressaoCuff_layout = findViewById(R.id.pressaoCuff_layout);
         localizacaoCanula_layout = findViewById(R.id.localizacaoCanula_layout);

@@ -52,7 +52,6 @@ public class BombaInfusaoActivity extends GenericoActivity implements View.OnTou
         bombaInfusaoAdapter = new BombaInfusaoAdapter(this,hemodinamicoModelList);
         recyclerView.setAdapter(bombaInfusaoAdapter);
         velInfusao = (TextInputEditText)findViewById(R.id.velInfusao);
-        bombaInfusaoAdapter.setOnItemClickListener(onItemClickListener);
         inserirLayout = findViewById(R.id.inserirLayout);
         drogaVasoativaTextView = (TextView)findViewById(R.id.drogaVasoativaTextView);
         menuDrogaVasoativa = (TextView)findViewById(R.id.menuDrogaVasoativa);
@@ -80,13 +79,6 @@ public class BombaInfusaoActivity extends GenericoActivity implements View.OnTou
         });
 
     }
-
-    BombaInfusaoAdapter.OnItemClickListener onItemClickListener = new BombaInfusaoAdapter.OnItemClickListener(){
-        @Override
-        public void onItemClick(View view, int position) {//Editar Droga Vasoativa
-            System.out.println(hemodinamicoModelList.get(position).getDroga());
-        }
-    };
 
     public void drogaOnClick(View view){
         PopupMenu popupMenu = new PopupMenu(view.getContext(), menuDrogaVasoativa, Gravity.START, R.attr.actionOverflowMenuStyle, 0);

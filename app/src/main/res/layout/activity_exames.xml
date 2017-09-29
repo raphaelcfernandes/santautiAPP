@@ -5,7 +5,7 @@
     android:weightSum="1"
     android:baselineAligned="false"
     android:orientation="vertical"
-    android:id="@+id/gastrointestinal_layout"
+    android:id="@+id/exames_activity"
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants">
 
@@ -75,20 +75,75 @@
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="acidoseMetabolicaOnCLick">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/AcidoseMetabolica"
                     style="@style/TitleTextStyleForLayoutSelection"/>
-                <TextView
+                <RadioGroup
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/acidoseMetabolica"/>
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="50dp"
+                        android:text="@string/Acidose"
+                        android:theme="@style/radioButtonStyle"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Alcalose"
+                        android:layout_marginStart="10dp"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:paddingEnd="30dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/Metabolica"
+                        android:theme="@style/radioButtonStyle"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Respiratoria"
+                        android:layout_marginStart="10dp"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:paddingEnd="18dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/Compensada"
+                        android:theme="@style/radioButtonStyle"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Descompensada"
+                        android:layout_marginStart="10dp"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -582,6 +637,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:onClick="raioxToraxOnCLick">
                 <TextView
+                    android:id="@+id/raioxMenu"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="0dp"
                     android:layout_width="wrap_content"
@@ -612,6 +668,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:onClick="leucogramaOnCLick">
                 <TextView
+                    android:id="@+id/leucogramaMenu"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="0dp"
                     android:layout_width="wrap_content"

@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:focusableInTouchMode="true"
     android:descendantFocusability="beforeDescendants"
-    android:id="@+id/respiratorio_layout"
+    android:id="@+id/respirador_activity"
     android:weightSum="1"
     android:baselineAligned="false"
     android:orientation="vertical">
@@ -95,51 +95,44 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ModoVentilatorio"
                         style="@style/TitleTextStyleForLayoutSelection"/>
-                    <LinearLayout
-                        android:paddingTop="10dp"
+                    <RadioGroup
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <RadioGroup
-                            android:orientation="horizontal"
+                        android:layout_gravity="center|start">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:onClick="modoVentilatorioOnClick"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center|start">
-                            <android.support.v7.widget.AppCompatRadioButton
-                                android:onClick="modoVentilatorioOnClick"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:id="@+id/naoInvasivoModoVentilatorio"
-                                android:layout_marginEnd="20dp"
-                                android:text="@string/NaoInvasiva"
-                                android:theme="@style/radioButtonStyle"/>
-                            <android.support.v7.widget.AppCompatRadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/BIPAP"
-                                android:gravity="center"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="5dp"
-                                android:id="@+id/bipapModoVentilatorio"
-                                android:onClick="modoVentilatorioOnClick"
-                                android:theme="@style/radioButtonStyle"
-                                />
-                            <android.support.v7.widget.AppCompatRadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/Mecanica"
-                                android:gravity="center"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="20dp"
-                                android:id="@+id/mecanicaModoVentilatorio"
-                                android:onClick="modoVentilatorioOnClick"
-                                android:theme="@style/radioButtonStyle"
-                                />
-                        </RadioGroup>
-
-                    </LinearLayout>
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:id="@+id/naoInvasivoModoVentilatorio"
+                            android:layout_marginEnd="20dp"
+                            android:text="@string/NaoInvasiva"
+                            android:theme="@style/radioButtonStyle"/>
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/BIPAP"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:id="@+id/bipapModoVentilatorio"
+                            android:onClick="modoVentilatorioOnClick"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Mecanica"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:id="@+id/mecanicaModoVentilatorio"
+                            android:onClick="modoVentilatorioOnClick"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                    </RadioGroup>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

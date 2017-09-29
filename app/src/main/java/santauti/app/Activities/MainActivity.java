@@ -17,11 +17,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import santauti.app.APIServices.APIService;
 import santauti.app.APIServices.RestClient;
+import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Activities.Home.HomeActivity;
 import santauti.app.Model.User;
 import santauti.app.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends GenericoActivity {
     private User user = new User();
     APIService apiService;
     ProgressDialog progressDialog;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         final Button login = (Button)findViewById(R.id.btn_login);
         findViewById(R.id.login).requestFocus();
         mainView = findViewById(android.R.id.content);
+        setupUI(findViewById(R.id.main_activity));
         // -----------------------------------------------------------------------------------------
 
         apiService = RestClient.getClient(MainActivity.this).create(APIService.class);

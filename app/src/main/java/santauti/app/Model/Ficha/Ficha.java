@@ -47,6 +47,16 @@ public class Ficha extends RealmObject implements Serializable{
     private Neurologico neurologico;
     @SerializedName("hemodinamico")
     private Hemodinamico hemodinamico;
+    @SerializedName("monitorMultiparametrico")
+    private MonitorMultiparametrico monitorMultiparametrico;
+
+    public MonitorMultiparametrico getMonitorMultiparametrico() {
+        return monitorMultiparametrico;
+    }
+
+    public void setMonitorMultiparametrico(MonitorMultiparametrico monitorMultiparametrico) {
+        this.monitorMultiparametrico = monitorMultiparametrico;
+    }
 
     public Hemodinamico getHemodinamico() {
         return hemodinamico;

@@ -34,7 +34,7 @@ public class RenalActivity extends GenericoActivity {
         setContentView(R.layout.activity_renal);
         findViewById(R.id.activity_renal).requestFocus();
         setToolbar(getString(R.string.Renal));
-
+        setupUI(findViewById(R.id.activity_renal));
         dialiseItensLayout = findViewById(R.id.dialiseItensLayout);
         pesoTxt = (TextInputEditText)findViewById(R.id.peso);
         prepareNavigationButtons();

@@ -26,14 +26,11 @@ import santauti.app.R;
  */
 
 public class HemodinamicoActivity extends GenericoActivity {
-    private View tipoSoproLayout,intensidadeSoproLayout,extremidadesLayout;
-    private TextView intensidadeSopro,soproTextView;
+    private View tipoSoproLayout,intensidadeSoproLayout;
     private CheckBox checkboxSopro;
     private MyAnimation myAnimation;
     private Realm realm;
     private Ficha ficha;
-    private int intensidadeSoproSelection=-1;
-    private RadioGroup extremidadesRadioGroup;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +41,7 @@ public class HemodinamicoActivity extends GenericoActivity {
         /********************VIEWS*******************************/
         tipoSoproLayout = findViewById(R.id.tipoSopro_layout);
         intensidadeSoproLayout = findViewById(R.id.intensidade_sopro_layout);
-
-        intensidadeSopro = (TextView)findViewById(R.id.intensidadeSopro);
         checkboxSopro = (CheckBox)findViewById(R.id.checkboxSopro);
-        soproTextView = (TextView)findViewById(R.id.soproTextView);
-
-        extremidadesRadioGroup = (RadioGroup)findViewById(R.id.extremidadesRadioGroup);
-
         /********************VIEWS*******************************/
 
 
@@ -140,40 +131,5 @@ public class HemodinamicoActivity extends GenericoActivity {
             changeCardColor();
         }
         realm.commitTransaction();
-    }
-
-
-    public void intensidadeSoproOnClick(View view) {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.IntensidadeSopro);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.intensidadeSopro);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, intensidadeSoproSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        intensidadeSopro.setText(items[which]);
-                        intensidadeSopro.setVisibility(View.VISIBLE);
-                        intensidadeSoproSelection=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
     }
 }

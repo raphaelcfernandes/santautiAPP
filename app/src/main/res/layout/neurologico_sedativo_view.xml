@@ -21,7 +21,7 @@
             android:layout_height="20dp"
             android:layout_marginStart="10dp" />
         <ImageView
-            android:id="@+id/editIcon_neurologico__recycler_view"
+            android:id="@+id/editIcon_neurologico_recycler_view"
             android:layout_width="20dp"
             android:src="@drawable/ic_edit_black_24dp"
             android:layout_height="20dp"

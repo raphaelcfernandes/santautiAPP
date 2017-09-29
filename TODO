@@ -15,14 +15,11 @@ FICHA:
     - Snackbar por cima dos botoes
 
 
-
+Como fazer radio button em diferente layout e obedecer as marcaçoes
 /*************MUDANĆAS*********************/
-
-Monitor:
-    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico %) Spo2
-      - frequencia cardiaca -> monitor (OK)
-      - PAM + PVC + swan_Ganz -> monitor (OK)
-
+Hematológico: Salvando.
+Monitor: Salvando.
+/*****************MUDANÇAS FEITAS**********/
 Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - acho que está ok
     -   Bomba de infusao
       - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
@@ -30,27 +27,7 @@ Bomba de infusao: memoria + editar velocidade de infusao para registros antigos 
       - velocidade de infusao -> ok
       - dose ml/hr -> ok
 
-Hemodinamico: acho que está OK
-  - Pulso ritmico/aritmico -> ok
-  - Fonese de bulhas: hiper, normal, hipo -> ok
-  - perfusao capilar: boa/ruim -> ok
-  - Extremidades:
-      - cianotica, acianotica, fria, quente (4 općoes diferentes)
-  - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
-
-Metabolico: acho que está OK
-    - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
-
-
-Dispositivo: acho que está ok
-    - cateter de PIC
-    - balao intra-aortico
-    - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
-
-Hematologico: acho que está ok
-    - Hematocrito, hemoglobina e plaquetas foram para Exame
-
-Neurologico: acho que está ok -> (permitir que usuario desmarque radio button -> Ainda n sei como) Editar e Remover Sedativo
+Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei como)
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
         - Delirium, sim ou nao. -> ok
@@ -61,67 +38,8 @@ Neurologico: acho que está ok -> (permitir que usuario desmarque radio button -
             - orientado, desorientado
                 - DESORIENTADO:
                     - Tempo e espaco. (multiplo)
-Nutricional: acho que está ok
-    - ingestao
-         - calorica, proteica, lipidica, carboidratos, balanco hidrogenado
-     - Albumina:
-             - hipo, hiperalbuminemia. ...
-     - Dieta:
-        - enteral e/ou oral e/ou parenteral
-    - aceitacao/tolerancia:
-        - boa ruim media
 
-Pele e Mucosas: dps de endocrino
-    - Pele:
-        - normal, ressecada
-    - ulcera de pressao
-        - presente/ausente
-    - Mucosas: multipla općoes
-        - Normocoradas, hipocoradas, icterico, anicterico
-        - secas, hidratadas, hiperidratadas
-
-Osteomuscular: dps de endocrino
-    - Musculatura:
-        - hiper/hipo/eu trofica, hipo/hiper/eu tonica.
-
-
-
-Folhas de balanćo: acho que está ok. Jogar Focus para os edit text quadno selecionado os campos. Exemplo: após escolher nutriçao
-    - Curva glicemica:
-        - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.
-    - evacuaćoes:
-        - Presente
-            - Numero de eventos
-            - aspecto das fezes:
-                - diarreicas, normais, endurecidas
-        - Ausente
-    - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
-        - Volume/mlpa
-        - aspecto: gastrico, fecaloide, biliar
-    - Nutricao:
-        - Oral, enteral, gastrica
-        - Volume/ml
-
-Renal: acho que está ok
-  - Urina: clara escura. debaixo de diurese
-  - Em procedimento dialitico? Em dialise? -> trocar para padrao com switch
-    - UF: sim ou nao
-    - Volume: numerico
-    - Tempo/hora: numerico
-    - Heparina: sim ou nao
-
-Infeccioso: após metabolico
-    - Curva glicemica -> Endocrino
-    - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
-    - marcadores de infeccao: estaveis, em melhora, em piora
-    - antibiotico/antivirais/antifungicos
-        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
-        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
-        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
-        - Amoxicilina-clavulanato,
-
-
-Exames: acho que está ok
+Exames: OK
     - Eletrólitos: inserćao de dados na mao OU
                     insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
         - Potássio: hipo, hipercalemia. Se n marcar = normal
@@ -131,7 +49,10 @@ Exames: acho que está ok
         - Calcio: hipo, hipercalcemia. ...
     - lactato: normal, elevado -> ok
     - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
-        - acidose metabolica: acidose, eucalose (G1), metabolica, respiratoria (G2), compensada, discompensada (G3)
+    - acidose metabolica:
+        - Acidose ou Alcalose
+            - Metabolica ou respiratoria
+            - Compensada ou Descompensada
     - Albumina: -> nutricional
         - hipo, hiperalbuminemia. ...
     - PCR:
@@ -150,22 +71,59 @@ Exames: acho que está ok
         - sim:
             - normal, elevada
 
-Gastro: acho que está ok
-	- Massas paupaveis: sim ou nao => ok
-	- visceras paupaveis: sim ou nao => ok
-	- ruidos hidroaereos
-	    - Ausente, reduzido, aumentado
-	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter => foi para peles e mucosas
-	- assit: pequena, media, grande. radioButton
-	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
+Metabolico: OK
+    - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
+
+Respirador: -> OK
+    - Espontanea, nao invasiva, bipap, mecanica
+    - bipap: -> ok
+        - Volume
+        - Ipap
+        - EPAP
+        - saturacao
+        - Oxigenio (numerico)
+    - nao invasiva: - invasivo sem a mascara
+    - mecanica:
+        - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
+        - Pressao cuff, retirar daqui? Manter? Pegar valor de Respirador? E se n tiver valor em Respirador?
+            - Freq respiratoria 2 campos: paciente e respirador
+
+Infeccioso: OK
+    - Curva glicemica -> Endocrino
+    - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
+    - marcadores de infeccao: estaveis, em melhora, em piora
+    - antibiotico/antivirais/antifungicos
+        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
+        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
+        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
+        - Amoxicilina-clavulanato,
+
+Osteomuscular: OK
+    - Musculatura:
+        - hiper/hipo/eu trofica, hipo/hiper/eu tonica.
 
 Endocrino: acho que está ok
      - glicemias:
-        - normais, picos de hiperglicemia,
-     -
-/*****************MUDANÇAS FEITAS**********/
+        - normais, picos de hiperglicemia, picos de hipoglicemia
 
-Respiratorio: -> acho que está ok
+Pele e Mucosas: OK
+    - Pele:
+        - normal, ressecada
+    - ulcera de pressao
+        - presente/ausente
+    - Mucosas: multipla općoes
+        - Normocoradas, hipocoradas, icterico, anicterico
+        - secas, hidratadas, hiperidratadas
+
+Renal: OK
+  - Urina: clara escura. debaixo de diurese
+  - Em procedimento dialitico? Em dialise? -> trocar para padrao com switch
+    - UF: sim ou nao
+    - Volume: numerico
+    - Tempo/hora: numerico
+    - Heparina: sim ou nao
+
+Respiratorio: -> OK
     - Via area: tubo orotraquial, traqueostomia, normal -> ok
         - tubo ou traqueostomia = pressao do cuff -> ok
         - localizacao da canula se tiver entubado -> ok
@@ -183,22 +141,49 @@ Respiratorio: -> acho que está ok
         - = crepitacoes
     - crepitacoes: base direita, base esquerda, terco medio direito/esquerda, apice
 
+Nutricional: OK
+     - Dieta:
+        - enteral e/ou oral e/ou parenteral
+    - aceitacao/tolerancia:
+        - boa ruim media
 
+Hemodinamico: OK
+  - Pulso ritmico/aritmico -> ok
+  - Fonese de bulhas: hiper, normal, hipo -> ok
+  - perfusao capilar: boa/ruim -> ok
+  - Extremidades:
+      - cianotica, acianotica, fria, quente (4 općoes diferentes)
+  - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
 
-Ventilacao: ->
-    - Espontanea, nao invasiva, bipap, mecanica
-    - bipap: -> ok
-        - Volume
-        - Ipap
-        - EPAP
-        - saturacao
-        - Oxigenio (numerico)
-    - nao invasiva: - invasivo sem a mascara
-    - mecanica:
-        - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
-        - Pressao cuff, retirar daqui? Manter? Pegar valor de Respirador? E se n tiver valor em Respirador?
-            - Freq respiratoria 2 campos: paciente e respirador
+Dispositivo: OK
+    - cateter de PIC
+    - balao intra-aortico
+    - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
 
+Gastro: OK
+	- Massas paupaveis: sim ou nao => ok
+	- visceras paupaveis: sim ou nao => ok
+	- ruidos hidroaereos
+	    - Ausente, reduzido, aumentado
+	- ictericia: +1, +2 , +3, +4, ou n marcar nada = n ter => foi para peles e mucosas
+	- assit: pequena, media, grande. radioButton
+	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
+
+Folhas de balanćo: OK. Jogar Focus para os edit text quadno selecionado os campos. Exemplo: após escolher nutriçao
+    - Curva glicemica:
+        - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.
+    - evacuaćoes:
+        - Presente
+            - Numero de eventos
+            - aspecto das fezes:
+                - diarreicas, normais, endurecidas
+        - Ausente
+    - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
+        - Volume/mlpa
+        - aspecto: gastrico, fecaloide, biliar
+    - Nutricao:
+        - Oral, enteral, gastrica
+        - Volume/ml
 
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinacamente estavel e hemodinacamente instavel
