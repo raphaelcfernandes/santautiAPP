@@ -22,6 +22,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -70,6 +72,18 @@ public abstract class GenericoActivity extends AppCompatActivity {
         }
     }
 
+    public String getStringOfRadioButtonSelectedFromRadioGroup(RadioGroup radioGroup){
+        int idx = radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
+        RadioButton r = (RadioButton)radioGroup.getChildAt(idx);
+        if(r!=null)
+            return r.getText().toString();
+        else
+            return null;
+    }
+
+    public int getIndexOfRadioButtonFromRadioGroup(RadioGroup radioGroup){
+        return radioGroup.indexOfChild(findViewById(radioGroup.getCheckedRadioButtonId()));
+    }
 
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -107,10 +121,6 @@ public abstract class GenericoActivity extends AppCompatActivity {
 
     public boolean isTextInputEditTextEmpty(TextInputEditText etText) {
         return etText.getText().toString().trim().length() == 0;
-    }
-
-    public boolean isSpinnerDefault(String string){
-        return string.equals(defaultSpinnerString);
     }
 
     public int getIntegerFromTextInputEditText(TextInputEditText textInputEditText){

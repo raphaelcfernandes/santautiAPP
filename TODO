@@ -17,14 +17,17 @@ FICHA:
 
 Como fazer radio button em diferente layout e obedecer as marcaçoes
 /*************MUDANĆAS*********************/
-Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - acho que está ok/ Editar
+Hematológico: Salvando.
+Monitor: Salvando.
+/*****************MUDANÇAS FEITAS**********/
+Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - acho que está ok
     -   Bomba de infusao
       - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
       - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
       - velocidade de infusao -> ok
       - dose ml/hr -> ok
 
-Neurologico: acho que está ok -> (permitir que usuario desmarque radio button -> Ainda n sei como) Editar e Remover Sedativo
+Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei como)
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Lado do corpo, n melhor nome para o item. Superior e inferior
         - Delirium, sim ou nao. -> ok
@@ -36,7 +39,6 @@ Neurologico: acho que está ok -> (permitir que usuario desmarque radio button -
                 - DESORIENTADO:
                     - Tempo e espaco. (multiplo)
 
-/*****************MUDANÇAS FEITAS**********/
 Exames: OK
     - Eletrólitos: inserćao de dados na mao OU
                     insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
@@ -144,11 +146,6 @@ Nutricional: OK
         - enteral e/ou oral e/ou parenteral
     - aceitacao/tolerancia:
         - boa ruim media
-
-Monitor: OK
-    - pegar de hemodinamico opcionais e colocar aqui (primeiro card), capinometria (numerico %) Spo2
-      - frequencia cardiaca -> monitor (OK)
-      - PAM + PVC + swan_Ganz -> monitor (OK)
 
 Hemodinamico: OK
   - Pulso ritmico/aritmico -> ok

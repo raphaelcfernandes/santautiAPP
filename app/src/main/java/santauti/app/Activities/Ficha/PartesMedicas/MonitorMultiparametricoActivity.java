@@ -1,29 +1,25 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AlertDialog;
-import android.view.MotionEvent;
+import android.support.v7.widget.ListPopupWindow;
+import android.text.InputFilter;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.Arrays;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Animation.InputFilterMin;
+import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.MonitorMultiparametrico;
 import santauti.app.R;
 
 /**
@@ -32,9 +28,10 @@ import santauti.app.R;
 
 public class MonitorMultiparametricoActivity extends GenericoActivity{
     Realm realm;
-    private int ritmo=-1;
-    private TextView textView;
+    private TextView ritmoTextView,ritmoMenu;
     private LinearLayout mainLayout;
+    private TextInputEditText freqRespiratoria,freqCardiaca,PAM,temperatura,PIC,PPC,PVC,swan_ganz;
+    private TextInputEditText capnometria,spo2,sjo2;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +40,40 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         mainLayout.requestFocus();
         setupUI(mainLayout);
         setToolbar(getString(R.string.MonitorMultiparametrico));
-        textView = (TextView)findViewById(R.id.ritmo);
-        //prepareSpinner();
+
+        /******************************TEXTVIEW*************************************/
+        ritmoTextView = (TextView)findViewById(R.id.ritmo);
+        ritmoMenu = (TextView)findViewById(R.id.ritmoMenu);
+        /******************************TEXTVIEW*************************************/
+
+        /*****************************TEXTINPUTEDITTEXT****************************/
+        freqRespiratoria = (TextInputEditText)findViewById(R.id.freqRespiratoria);
+        freqRespiratoria.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        freqCardiaca = (TextInputEditText)findViewById(R.id.freqCardiaca);
+        freqCardiaca.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        PAM = (TextInputEditText)findViewById(R.id.pam);
+        PAM.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        temperatura = (TextInputEditText)findViewById(R.id.temperatura);
+        PIC = (TextInputEditText)findViewById(R.id.PIC);
+        PIC.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        PPC = (TextInputEditText)findViewById(R.id.PPC);
+        PPC.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        PVC = (TextInputEditText)findViewById(R.id.PVC);
+        PVC.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        swan_ganz = (TextInputEditText)findViewById(R.id.swan_ganz);
+        swan_ganz.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        capnometria = (TextInputEditText)findViewById(R.id.capnometria);
+        capnometria.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        spo2 = (TextInputEditText)findViewById(R.id.spo2);
+        spo2.setFilters(new InputFilter[]{ new InputFilterMin(0)});
+        sjo2 = (TextInputEditText)findViewById(R.id.sjo2);
+        sjo2.setFilters(new InputFilter[]{ new InputFilterMin(0)});
+        /*****************************TEXTINPUTEDITTEXT****************************/
+
         prepareNavigationButtons();
 
-
-
         realm = Realm.getDefaultInstance();
+
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,10 +82,11 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
                 startActivity(intent);
                 exitActivityToRight();
                 realm.close();
-
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
+        setMonitorMultiparametricoFromDatabase();
     }
 
     @Override
@@ -72,37 +97,136 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
     }
 
-    public void ritmoOnClick(View view) {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.Ritmo);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.tiposTracado);
-        builder.setSingleChoiceItems(items, ritmo,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        textView.setText(items[which]);
-                        textView.setVisibility(View.VISIBLE);
-                        ritmo=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+    private void setMonitorMultiparametricoFromDatabase(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getMonitorMultiparametrico()!=null) {
+            MonitorMultiparametrico monitorMultiparametrico = ficha.getMonitorMultiparametrico();
+            if(monitorMultiparametrico.getRitmo()!=null)
+                ritmoTextView.setText(monitorMultiparametrico.getRitmo());
+            if(monitorMultiparametrico.getFrequenciaRespiratoria()>0)
+                freqRespiratoria.setText(Integer.toString(monitorMultiparametrico.getFrequenciaRespiratoria()));
+            if(monitorMultiparametrico.getFrequenciaCardiaca()>0)
+                freqCardiaca.setText(Integer.toString(monitorMultiparametrico.getFrequenciaCardiaca()));
+            if(monitorMultiparametrico.getPAM()>0)
+                PAM.setText(Integer.toString(monitorMultiparametrico.getPAM()));
+            if(monitorMultiparametrico.getTemperatura()>0)
+                temperatura.setText(Float.toString(monitorMultiparametrico.getTemperatura()));
+            if(monitorMultiparametrico.getPic()>0)
+                PIC.setText(Integer.toString(monitorMultiparametrico.getPic()));
+            if(monitorMultiparametrico.getPpc()>0)
+                PPC.setText(Integer.toString(monitorMultiparametrico.getPpc()));
+            if(monitorMultiparametrico.getPvc()>0)
+                PVC.setText(Integer.toString(monitorMultiparametrico.getPvc()));
+            if(monitorMultiparametrico.getSwanGanz()>0)
+                swan_ganz.setText(Integer.toString(monitorMultiparametrico.getSwanGanz()));
+            if(monitorMultiparametrico.getCapnometria()>0)
+                capnometria.setText(Integer.toString(monitorMultiparametrico.getCapnometria()));
+            if(monitorMultiparametrico.getSpo2()>=0)
+                spo2.setText(Integer.toString(monitorMultiparametrico.getSpo2()));
+            if(monitorMultiparametrico.getSjo2()>=0)
+                sjo2.setText(Integer.toString(monitorMultiparametrico.getSjo2()));
+        }
     }
 
+    public void ritmoOnClick(View view) {
+        final ListPopupWindow listPopupWindow = new ListPopupWindow(
+                MonitorMultiparametricoActivity.this,null,R.attr.actionOverflowMenuStyle,0);
+        listPopupWindow.setAdapter(new ArrayAdapter<>(
+                MonitorMultiparametricoActivity.this,
+                R.layout.list_item, getResources().getStringArray(R.array.tiposTracado)));
+        listPopupWindow.setAnchorView(ritmoMenu);
+        listPopupWindow.setWidth(700);
+        listPopupWindow.setHeight(1050);
+        listPopupWindow.setModal(true);
+        listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ritmoTextView.setText(getResources().getStringArray(R.array.tiposTracado)[i]);
+                listPopupWindow.dismiss();
+            }
+        });
+        listPopupWindow.show();
+    }
+
+    private void verificaCamposENotificaAdapter(){
+        int i=0;
+        realm.beginTransaction();
+        Ficha r = getProperFicha();
+        MonitorMultiparametrico monitorMultiparametrico = realm.createObject(MonitorMultiparametrico.class);
+        if(ritmoTextView.getText().length()>0) {
+            monitorMultiparametrico.setRitmo(ritmoTextView.getText().toString());
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(freqRespiratoria)) {
+            monitorMultiparametrico.setFrequenciaRespiratoria(getIntegerFromTextInputEditText(freqRespiratoria));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(freqCardiaca)) {
+            monitorMultiparametrico.setFrequenciaCardiaca(getIntegerFromTextInputEditText(freqCardiaca));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(PAM)) {
+            monitorMultiparametrico.setPAM(getIntegerFromTextInputEditText(PAM));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(temperatura)) {
+            monitorMultiparametrico.setTemperatura(Float.parseFloat(temperatura.getText().toString()));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(PIC)){
+            monitorMultiparametrico.setPic(getIntegerFromTextInputEditText(PIC));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(PPC)) {
+            monitorMultiparametrico.setPpc(getIntegerFromTextInputEditText(PPC));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(PVC)) {
+            monitorMultiparametrico.setPvc(getIntegerFromTextInputEditText(PVC));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(swan_ganz)) {
+            monitorMultiparametrico.setSwanGanz(getIntegerFromTextInputEditText(swan_ganz));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(capnometria)) {
+            monitorMultiparametrico.setCapnometria(getIntegerFromTextInputEditText(capnometria));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(spo2)){
+            monitorMultiparametrico.setSpo2(getIntegerFromTextInputEditText(spo2));
+            i++;
+        }
+        if(!isTextInputEditTextEmpty(sjo2)){
+            monitorMultiparametrico.setSjo2(getIntegerFromTextInputEditText(sjo2));
+            i++;
+        }
+        r.setMonitorMultiparametrico(monitorMultiparametrico);
+        realm.copyToRealmOrUpdate(r);
+        if(i==12)
+            changeCardColor();
+        realm.commitTransaction();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home) {
+            verificaCamposENotificaAdapter();
+            finish();
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed(){
+        verificaCamposENotificaAdapter();
+        finish();
+    }
 }

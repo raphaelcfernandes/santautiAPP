@@ -284,6 +284,8 @@
     <string name="FAGGTNormais">FA/GGT Normais</string>
     <string name="TransaminasesElevadas">Transaminases Elevadas</string>
     <string name="TransaminasesNormais">Transaminases Normais</string>
+    <string name="HeparinaFracionada">Heparina Fracionada</string>
+    <string name="HeparinaNaoFracionada">Heparina Não Fracionada</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

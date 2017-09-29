@@ -1,6 +1,10 @@
 package santauti.app.Adapters.Ficha.Neurologico;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +44,53 @@ public class NeurologicoAdapter extends RecyclerView.Adapter<NeurologicoAdapter.
                     deleteItem(view,getAdapterPosition());
                 }
             });
+            editIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editItem(v,getAdapterPosition());
+                }
+            });
         }
+    }
+
+    private void editItem(View view, final int position){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        builder.setTitle("Editar Sedativo");
+
+        LayoutInflater li = LayoutInflater.from(view.getContext());
+        View dialogView = li.inflate(R.layout.neurologico_dialog_sedativo,null);
+        dialogView.requestFocus();
+        final TextInputEditText doseSedativo = (TextInputEditText) dialogView.findViewById(R.id.doseSedativo);
+        final TextInputEditText tipoSedativo = (TextInputEditText) dialogView.findViewById(R.id.tipoSedativo);
+
+        doseSedativo.setText(Integer.toString(neurologicoAdapterModelList.get(position).getDoseSedativo()));
+        tipoSedativo.setText(neurologicoAdapterModelList.get(position).getTipoSedativo());
+        builder.setView(dialogView);
+        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(tipoSedativo.length()>0 && doseSedativo.length()>0)
+                    addDataFromDialogIntoAdapter(tipoSedativo.getText().toString(),Integer.parseInt(doseSedativo.getText().toString()),position);
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+
+        final AlertDialog dialog = builder.show();
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(view.getContext(),R.color.colorPrimaryDark));
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(view.getContext(),R.color.colorPrimaryDark));
+    }
+
+    private void addDataFromDialogIntoAdapter(String droga,int dose,int position){
+        neurologicoAdapterModelList.get(position).setDoseSedativo(dose);
+        neurologicoAdapterModelList.get(position).setTipoSedativo(droga);
+        notifyDataSetChanged();
     }
 
     private void setAnimationExcludeItem(View view) {

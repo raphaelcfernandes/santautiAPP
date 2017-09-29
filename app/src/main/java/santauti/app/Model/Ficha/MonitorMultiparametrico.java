@@ -13,16 +13,44 @@ import io.realm.RealmObject;
 public class MonitorMultiparametrico extends RealmObject implements Serializable {
     @SerializedName("ritmo")
     private String ritmo;
-    @SerializedName("freqCardiaca")
-    private int freqCardiaca;
-    @SerializedName("pressaoArterial")
-    private int pressaoArterial;
-    @SerializedName("saturacaoo2")
-    private int saturacaoO2;
-    @SerializedName("freqRespiratoria")
-    private int freqRespiratoria;
+    @SerializedName("frequenciaRespiratoria")
+    private int frequenciaRespiratoria;
+    @SerializedName("frequenciaCardiaca")
+    private int frequenciaCardiaca;
+    @SerializedName("pam")
+    private int PAM;
     @SerializedName("temperatura")
-    private int temperatura;
+    private float temperatura;
+    @SerializedName("pic")
+    private int pic;
+    @SerializedName("ppc")
+    private int ppc;
+    @SerializedName("pvc")
+    private int pvc;
+    @SerializedName("swanGanz")
+    private int swanGanz;
+    @SerializedName("capnometria")
+    private int capnometria;
+    @SerializedName("spo2")
+    private int spo2=-1;
+    @SerializedName("sjo2")
+    private int sjo2=-1;
+
+    public int getSpo2() {
+        return spo2;
+    }
+
+    public void setSpo2(int spo2) {
+        this.spo2 = spo2;
+    }
+
+    public int getSjo2() {
+        return sjo2;
+    }
+
+    public void setSjo2(int sjo2) {
+        this.sjo2 = sjo2;
+    }
 
     public String getRitmo() {
         return ritmo;
@@ -32,43 +60,75 @@ public class MonitorMultiparametrico extends RealmObject implements Serializable
         this.ritmo = ritmo;
     }
 
-    public int getFreqCardiaca() {
-        return freqCardiaca;
+    public int getFrequenciaRespiratoria() {
+        return frequenciaRespiratoria;
     }
 
-    public void setFreqCardiaca(int freqCardiaca) {
-        this.freqCardiaca = freqCardiaca;
+    public void setFrequenciaRespiratoria(int frequenciaRespiratoria) {
+        this.frequenciaRespiratoria = frequenciaRespiratoria;
     }
 
-    public int getPressaoArterial() {
-        return pressaoArterial;
+    public int getFrequenciaCardiaca() {
+        return frequenciaCardiaca;
     }
 
-    public void setPressaoArterial(int pressaoArterial) {
-        this.pressaoArterial = pressaoArterial;
+    public void setFrequenciaCardiaca(int frequenciaCardiaca) {
+        this.frequenciaCardiaca = frequenciaCardiaca;
     }
 
-    public int getSaturacaoO2() {
-        return saturacaoO2;
+    public int getPAM() {
+        return PAM;
     }
 
-    public void setSaturacaoO2(int saturacaoO2) {
-        this.saturacaoO2 = saturacaoO2;
+    public void setPAM(int PAM) {
+        this.PAM = PAM;
     }
 
-    public int getFreqRespiratoria() {
-        return freqRespiratoria;
-    }
-
-    public void setFreqRespiratoria(int freqRespiratoria) {
-        this.freqRespiratoria = freqRespiratoria;
-    }
-
-    public int getTemperatura() {
+    public float getTemperatura() {
         return temperatura;
     }
 
-    public void setTemperatura(int temperatura) {
+    public void setTemperatura(float temperatura) {
         this.temperatura = temperatura;
+    }
+
+    public int getPic() {
+        return pic;
+    }
+
+    public void setPic(int pic) {
+        this.pic = pic;
+    }
+
+    public int getPpc() {
+        return ppc;
+    }
+
+    public void setPpc(int ppc) {
+        this.ppc = ppc;
+    }
+
+    public int getPvc() {
+        return pvc;
+    }
+
+    public void setPvc(int pvc) {
+        this.pvc = pvc;
+    }
+
+    public int getSwanGanz() {
+        return swanGanz;
+    }
+
+    public void setSwanGanz(int swanGanz) {
+        this.swanGanz = swanGanz;
+    }
+
+    public int getCapnometria() {
+        return capnometria;
+    }
+
+    public void setCapnometria(int capnometria) {
+        this.capnometria = capnometria;
     }
 }

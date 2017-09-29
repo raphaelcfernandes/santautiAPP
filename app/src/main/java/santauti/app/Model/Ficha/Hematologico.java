@@ -11,34 +11,14 @@ import io.realm.RealmObject;
  */
 
 public class Hematologico extends RealmObject implements Serializable{
-    @SerializedName("tipoMedicamento")
-    private String tipoMedicamento;
     @SerializedName("tromboprofilaxia")
-    private int tromboprofilaxia;
-    @SerializedName("hemograma")
-    private int hemograma;
+    private String tromboprofilaxia;
 
-    public String getTipoMedicamento() {
-        return tipoMedicamento;
-    }
-
-    public void setTipoMedicamento(String tipoMedicamento) {
-        this.tipoMedicamento = tipoMedicamento;
-    }
-
-    public int getTromboprofilaxia() {
+    public String getTromboprofilaxia() {
         return tromboprofilaxia;
     }
 
-    public void setTromboprofilaxia(int tromboprofilaxia) {
+    public void setTromboprofilaxia(String tromboprofilaxia) {
         this.tromboprofilaxia = tromboprofilaxia;
-    }
-
-    public int getHemograma() {
-        return hemograma;
-    }
-
-    public void setHemograma(int hemograma) {
-        this.hemograma = hemograma;
     }
 }
