@@ -46,7 +46,7 @@ public class ExamesActivity extends GenericoActivity{
         setContentView(R.layout.activity_exames);
         setToolbar(getString(R.string.Exames));
         prepareNavigationButtons();
-        
+
         acidoseMetabolica = (TextView)findViewById(R.id.acidoseMetabolica);
         eletrolitoItens = findViewById(R.id.eletrolitosItens);
         raioxToraxTextView = (TextView)findViewById(R.id.raioxToraxTextView);
