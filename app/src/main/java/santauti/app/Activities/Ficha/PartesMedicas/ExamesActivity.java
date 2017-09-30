@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -34,10 +35,10 @@ public class ExamesActivity extends GenericoActivity{
     private TextView leucogramaTextView;
     private TextView funcaoHepaticaTextView;
     private TextView gasometriaArterialTextView;
-    private View eletrolitoItens;
+    private View eletrolitoItens,amilaseItens;
     private MyAnimation myAnimation;
-    private boolean[] gasometriaArterial = new boolean[8],funcaoHepatica = new boolean[6];
-
+    private boolean[] gasometriaArterial = new boolean[8];
+    private CheckBox checkboxAmilase;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,17 @@ public class ExamesActivity extends GenericoActivity{
         gasometriaArterialTextView = (TextView)findViewById(R.id.gasometriaArterialTextView);
         raioxMenu = (TextView)findViewById(R.id.raioxMenu);
         leucogramaMenu = (TextView)findViewById(R.id.leucogramaMenu);
+        amilaseItens = findViewById(R.id.amilaseItens);
+        checkboxAmilase = (CheckBox)findViewById(R.id.checkboxAmilase);
+        checkboxAmilase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!checkboxAmilase.isChecked())
+                    myAnimation.slideUpView(getApplicationContext(), amilaseItens);
+                else
+                    myAnimation.slideDownView(getApplicationContext(), amilaseItens);
+            }
+        });
         myAnimation = new MyAnimation();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +78,15 @@ public class ExamesActivity extends GenericoActivity{
 
     }
 
+
+    public void amilaseOnClick (View view){
+        if(amilaseItens.isShown())
+            myAnimation.slideUpView(getApplicationContext(),amilaseItens);
+        else {
+            if(checkboxAmilase.isChecked())
+                myAnimation.slideDownView(getApplicationContext(), amilaseItens);
+        }
+    }
     @Override
     public void prepareNavigationButtons() {
         findViewById(R.id.fichaProxima).setVisibility(View.GONE);
@@ -97,11 +118,11 @@ public class ExamesActivity extends GenericoActivity{
 
     public void leucogramaOnCLick(View view){
         final ListPopupWindow listPopupWindow = new ListPopupWindow(
-                ExamesActivity.this);
+                ExamesActivity.this,null,R.attr.actionOverflowMenuStyle,0);
         listPopupWindow.setAdapter(new ArrayAdapter<>(
                 ExamesActivity.this,
                 R.layout.list_item, getResources().getStringArray(R.array.leucograma)));
-        listPopupWindow.setAnchorView(leucogramaTextView);
+        listPopupWindow.setAnchorView(leucogramaMenu);
         listPopupWindow.setWidth(700);
         listPopupWindow.setHeight(700);
         listPopupWindow.setModal(true);

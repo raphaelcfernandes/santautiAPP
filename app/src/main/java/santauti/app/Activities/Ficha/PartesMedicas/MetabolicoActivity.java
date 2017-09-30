@@ -21,7 +21,6 @@ import santauti.app.R;
 public class MetabolicoActivity extends GenericoActivity {
     private int i=0;
     private Realm realm;
-    private TextView hidratacaoTextView,hidratacaoMenu;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +29,6 @@ public class MetabolicoActivity extends GenericoActivity {
         setToolbar(this.getString(R.string.Metabolico));
 
         /********************VIEWS****************************/
-        hidratacaoTextView = (TextView)findViewById(R.id.hidratacaoTextView);
-        hidratacaoMenu = (TextView)findViewById(R.id.hidratacaoMenu);
         /********************VIEWS****************************/
 
 
@@ -63,36 +60,6 @@ public class MetabolicoActivity extends GenericoActivity {
             }
         });
     }
-
-
-    public void hidratacaoOnCLick(View view) {
-
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), hidratacaoMenu, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_hidratacao, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.normoHidratado:
-                        hidratacaoTextView.setText(item.getTitle());
-                        break;
-                    case R.id.edemaciado:
-                        hidratacaoTextView.setText(item.getTitle());
-                        break;
-                    case R.id.desidratado:
-                        hidratacaoTextView.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-
 
 
     @Override

@@ -32,7 +32,7 @@
                     android:id="@+id/menuFoneseBulhas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/FormatoAbdome"
+                    android:text="Formato Abdominal"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
                     android:paddingStart="10dp"
@@ -91,7 +91,7 @@
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Tensao"
+                    android:text="Tensao Abdominal"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
                     android:paddingStart="10dp"
@@ -146,7 +146,7 @@
                     android:text="@string/RuidosHidroaereos"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
-                    android:paddingStart="10dp"
+                    android:paddingStart="5dp"
                     android:paddingEnd="0dp"
                     android:paddingTop="5dp"
                     android:orientation="horizontal"
@@ -159,12 +159,12 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:paddingStart="0dp"
-                        android:text="Aumentado"
+                        android:text="Aumentados"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Normal"
+                        android:text="@string/Normais"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
@@ -174,7 +174,15 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
                         android:gravity="center"
-                        android:text="Reduzido"
+                        android:text="Reduzidos"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:text="@string/Ausente"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
 
@@ -205,6 +213,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:text="@string/Ausente"
+                        android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

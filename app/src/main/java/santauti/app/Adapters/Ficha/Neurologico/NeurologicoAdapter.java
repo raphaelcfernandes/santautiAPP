@@ -66,7 +66,7 @@ public class NeurologicoAdapter extends RecyclerView.Adapter<NeurologicoAdapter.
         doseSedativo.setText(Integer.toString(neurologicoAdapterModelList.get(position).getDoseSedativo()));
         tipoSedativo.setText(neurologicoAdapterModelList.get(position).getTipoSedativo());
         builder.setView(dialogView);
-        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(tipoSedativo.length()>0 && doseSedativo.length()>0)

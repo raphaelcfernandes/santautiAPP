@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SwitchCompat;
@@ -33,8 +34,9 @@ import santauti.app.R;
 public class FolhasBalancoActivity extends GenericoActivity {
     private View evacuacoesItens,volumeNutricao;
     private MyAnimation myAnimation;
-    private CheckBox checkboxEvacuacoes;
+    private CheckBox checkboxEvacuacoes,checkboxGastrica,checkboxEnteral,checkboxOral,checkBoxEndurecidas,checkBoxDiarreicas,checkBoxNormais;
     private TextInputEditText numeroEventos;
+    private TextInputLayout enteral,oral,gastrica,endurecidas,normais,diarreicas;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +46,84 @@ public class FolhasBalancoActivity extends GenericoActivity {
         myAnimation = new MyAnimation();
 
         evacuacoesItens = findViewById(R.id.evacuacoesItens);
-        volumeNutricao = findViewById(R.id.volumeNutricao);
-        numeroEventos = (TextInputEditText)findViewById(R.id.numeroEventos);
 
         checkboxEvacuacoes = (CheckBox)findViewById(R.id.checkboxEvacuacoes);
+        checkboxEvacuacoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!checkboxEvacuacoes.isChecked())
+                    myAnimation.slideUpView(getApplicationContext(), evacuacoesItens);
+                else
+                    myAnimation.slideDownView(getApplicationContext(), evacuacoesItens);
+            }
+        });
+        enteral = (TextInputLayout)findViewById(R.id.volumeNutricaoEnteral);
+        oral = (TextInputLayout)findViewById(R.id.volumeNutricaoOral);
+        gastrica = (TextInputLayout)findViewById(R.id.volumeNutricaoGastrica);
+        endurecidas = (TextInputLayout)findViewById(R.id.eventosEndurecidas);
+        normais = (TextInputLayout)findViewById(R.id.eventosNormais);
+        diarreicas = (TextInputLayout)findViewById(R.id.eventosDiarreicas);
+        checkBoxEndurecidas = (CheckBox)findViewById(R.id.checkboxEndurecidas);
+        checkBoxEndurecidas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(endurecidas.isShown())
+                    endurecidas.setVisibility(View.GONE);
+                else
+                    endurecidas.setVisibility(View.VISIBLE);
+            }
+        });
+        checkBoxDiarreicas = (CheckBox)findViewById(R.id.checkboxDiarreicas);
+        checkBoxDiarreicas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(diarreicas.isShown())
+                    diarreicas.setVisibility(View.GONE);
+                else
+                    diarreicas.setVisibility(View.VISIBLE);
+            }
+        });
+        checkBoxNormais = (CheckBox)findViewById(R.id.checkBoxNormais);
+        checkBoxNormais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(normais.isShown())
+                    normais.setVisibility(View.GONE);
+                else
+                    normais.setVisibility(View.VISIBLE);
+            }
+        });
+        checkboxGastrica = (CheckBox)findViewById(R.id.checkboxGastrica);
+        checkboxGastrica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(gastrica.isShown())
+                    gastrica.setVisibility(View.GONE);
+                else
+                    gastrica.setVisibility(View.VISIBLE);
+            }
+        });
+        checkboxEnteral = (CheckBox)findViewById(R.id.checkBoxEnteral);
+        checkboxEnteral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(enteral.isShown())
+                    enteral.setVisibility(View.GONE);
+                else
+                    enteral.setVisibility(View.VISIBLE);
+            }
+        });
+        checkboxOral = (CheckBox)findViewById(R.id.checkBoxOral);
+        checkboxOral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(oral.isShown())
+                    oral.setVisibility(View.GONE);
+                else
+                    oral.setVisibility(View.VISIBLE);
+            }
+        });
+
         setupUI(findViewById(R.id.activity_folha_balanco));
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,15 +159,11 @@ public class FolhasBalancoActivity extends GenericoActivity {
     }
 
     public void evacuacoesOnClick(View view){
-        if(checkboxEvacuacoes.isChecked()) {
+        if(evacuacoesItens.isShown())
             myAnimation.slideUpView(getApplicationContext(), evacuacoesItens);
-            checkboxEvacuacoes.setChecked(false);
-        }
-        else {
-            checkboxEvacuacoes.setChecked(true);
+        else
+        if(checkboxEvacuacoes.isChecked())
             myAnimation.slideDownView(getApplicationContext(), evacuacoesItens);
-        }
-
     }
 
     public void nutricaoOnClick(View view){

@@ -56,7 +56,7 @@
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="132dp"
+                    android:paddingStart="70dp"
                     android:paddingEnd="0dp"
                     >
                     <android.support.v7.widget.AppCompatRadioButton
@@ -68,6 +68,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Escura"
+                        android:layout_marginStart="5dp"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hematuria"
                         android:layout_marginStart="5dp"
                         android:theme="@style/radioButtonStyle"
                         />

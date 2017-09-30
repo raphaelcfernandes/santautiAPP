@@ -178,14 +178,15 @@
     <string name="Reativo">Reativo</string>
     <string name="NaoReativo">Não Reativo</string>
     <string name="Nenhum">Nenhum</string>
-    <string name="Hiperfonetica">Hiperfonetica</string>
-    <string name="Normofonetica">Normofonetica</string>
-    <string name="Hipofonetica">Hipofonetica</string>
-    <string name="Cianotica">Cianótica</string>
-    <string name="Acianotica">Acianótica</string>
-    <string name="Fria">Fria</string>
-    <string name="Quente">Quente</string>
+    <string name="Hiperfonetica">Hiperfoneticas</string>
+    <string name="Normofonetica">Normofoneticas</string>
+    <string name="Hipofonetica">Hipofoneticas</string>
+    <string name="Cianotica">Cianóticas</string>
+    <string name="Acianotica">Acianóticas</string>
+    <string name="Fria">Frias</string>
+    <string name="Quente">Quentes</string>
     <string name="Extremidades">Extremidades</string>
+    <string name="Normais">Normais</string>
     <string name="FM">FM</string>
     <string name="FT">FT</string>
     <string name="FA">FA</string>
@@ -255,11 +256,11 @@
     <string name="AceitacaoTolerancia">Aceitacao/Tolerancia</string>
     <string name="Boa">Boa</string>
     <string name="Ruim">Ruim</string>
-    <string name="Anicterico">Anicterico</string>
+    <string name="Anictericas">Anictericas</string>
     <string name="Hidratadas">Hidratadas</string>
     <string name="Hiperhidratadas">Hiperhidratadas</string>
     <string name="Hipocoradas">Hipocoradas</string>
-    <string name="Icterico">Icterico</string>
+    <string name="Ictericas">Ictericas</string>
     <string name="Normocoradas">Normocoradas</string>
     <string name="Secas">Secas</string>
     <string name="PCV">PCV</string>
@@ -267,7 +268,7 @@
     <string name="PSV">PSV</string>
     <string name="SIMV">SIMV</string>
     <string name="Desidratado">Desidratado</string>
-    <string name="EdemaciadoHiperHidratado">Edemaciado/Hiper Hidratado</string>
+    <string name="Edemaciado">Edemaciado</string>
     <string name="NormoHidratado">Normo Hidratado</string>
     <string name="Pneumotorax">Pneumotorax</string>
     <string name="Atelectasia">Atelectasia</string>
@@ -286,6 +287,9 @@
     <string name="TransaminasesNormais">Transaminases Normais</string>
     <string name="HeparinaFracionada">Heparina Fracionada</string>
     <string name="HeparinaNaoFracionada">Heparina Não Fracionada</string>
+    <string name="Tonus">Tonus</string>
+    <string name="Trofismo">Trofismo</string>
+    <string name="Elevadas">Elevadas</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

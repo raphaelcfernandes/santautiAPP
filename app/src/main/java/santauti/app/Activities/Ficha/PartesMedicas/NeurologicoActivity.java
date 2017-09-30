@@ -64,7 +64,7 @@ public class NeurologicoActivity extends GenericoActivity {
     private TextView flutuacaoHint2;
     private TextView pensamentoDesorganizadoHint1;
     private TextView pensamentoDesorganizadoHint2;
-    private TextView inatencaoHint1;
+    private TextView inatencaoHint1,textoAjudaPensamento,textoAjudaInatencao,textoAjudaFlutuacao;
     private TextView inatencaoHint2;
     private View simSedado,comaLayout,diferencaPupilaLayout,escalaGlasgowItensLayout,
             deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout;
@@ -100,7 +100,9 @@ public class NeurologicoActivity extends GenericoActivity {
         temporoEspacialLayout = findViewById(R.id.temporoEspacialLayout);
         desorientadoLayout = findViewById(R.id.desorientadoLayout);
         avaliacaoPupilarItensLayout = findViewById(R.id.avaliacaoPupilarItensLayout);
-
+        textoAjudaFlutuacao = (TextView)findViewById(R.id.textoAjudaFlutuacao);
+        textoAjudaInatencao = (TextView)findViewById(R.id.textoAjudaInatencao);
+        textoAjudaPensamento = (TextView)findViewById(R.id.textoAjudaPensamento);
         /******************************VARIAVEIS LAYOUTS*************************************/
 
         /******************************VARIAVEIS RADIOBUTTON*********************************/
@@ -114,16 +116,24 @@ public class NeurologicoActivity extends GenericoActivity {
 
         /******************************VARIAVEIS CHECKBOX*******************************/
         checkboxDeficitMotor = (CheckBox)findViewById(R.id.checkboxDeficitMotor);
-
+        checkboxDeficitMotor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!checkboxDeficitMotor.isChecked())
+                    myAnimation.slideUpView(getApplicationContext(), deficitMotorItensLayout);
+                else
+                    myAnimation.slideDownView(getApplicationContext(), deficitMotorItensLayout);
+            }
+        });
         checkboxFlutuacao = (CheckBox)findViewById(R.id.checkboxFlutuacao);
         /******************************VARIAVEIS CHECKBOX*******************************/
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        neurologicoAdapter = new NeurologicoAdapter(this,neurologicoAdapterModelList);
-        recyclerView.setAdapter(neurologicoAdapter);
+//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+//        neurologicoAdapter = new NeurologicoAdapter(this,neurologicoAdapterModelList);
+//        recyclerView.setAdapter(neurologicoAdapter);
 
         realm = Realm.getDefaultInstance();
         myAnimation = new MyAnimation();
@@ -583,10 +593,12 @@ public class NeurologicoActivity extends GenericoActivity {
         if(flutuacaoHint1.isShown() && flutuacaoHint2.isShown()){
             myAnimation.slideUpView(getApplicationContext(),flutuacaoHint1);
             myAnimation.slideUpView(getApplicationContext(),flutuacaoHint2);
+            myAnimation.slideUpView(getApplicationContext(),textoAjudaFlutuacao);
         }
         else{
             myAnimation.slideDownView(getApplicationContext(),flutuacaoHint1);
             myAnimation.slideDownView(getApplicationContext(),flutuacaoHint2);
+            myAnimation.slideDownView(getApplicationContext(),textoAjudaFlutuacao);
         }
     }
 
@@ -594,8 +606,10 @@ public class NeurologicoActivity extends GenericoActivity {
         if(pensamentoDesorganizadoHint1.isShown() && pensamentoDesorganizadoHint2.isShown()){
             myAnimation.slideUpView(getApplicationContext(),pensamentoDesorganizadoHint1);
             myAnimation.slideUpView(getApplicationContext(),pensamentoDesorganizadoHint2);
+            myAnimation.slideUpView(getApplicationContext(),textoAjudaPensamento);
         }
         else{
+            myAnimation.slideDownView(getApplicationContext(),textoAjudaPensamento);
             myAnimation.slideDownView(getApplicationContext(),pensamentoDesorganizadoHint1);
             myAnimation.slideDownView(getApplicationContext(),pensamentoDesorganizadoHint2);
         }
@@ -603,10 +617,12 @@ public class NeurologicoActivity extends GenericoActivity {
 
     public void inatencaoOnClick(View view){
         if(inatencaoHint1.isShown() && inatencaoHint2.isShown()){
+            myAnimation.slideUpView(getApplicationContext(),textoAjudaInatencao);
             myAnimation.slideUpView(getApplicationContext(),inatencaoHint1);
             myAnimation.slideUpView(getApplicationContext(),inatencaoHint2);
         }
         else{
+            myAnimation.slideDownView(getApplicationContext(),textoAjudaInatencao);
             myAnimation.slideDownView(getApplicationContext(),inatencaoHint1);
             myAnimation.slideDownView(getApplicationContext(),inatencaoHint2);
         }
@@ -620,15 +636,11 @@ public class NeurologicoActivity extends GenericoActivity {
     }
 
     public void deficitMotorOnClick(View view){
-        if(checkboxDeficitMotor.isChecked()) {
-            myAnimation.slideUpView(getApplicationContext(), deficitMotorItensLayout);
-            //deficitMotor.setText(getString(R.string.Ausente));
-            checkboxDeficitMotor.setChecked(false);
-        }
+        if(deficitMotorItensLayout.isShown())
+            myAnimation.slideUpView(getApplicationContext(),deficitMotorItensLayout);
         else {
-            myAnimation.slideDownView(getApplicationContext(), deficitMotorItensLayout);
-            //deficitMotor.setText(getString(R.string.Presente));
-            checkboxDeficitMotor.setChecked(true);
+            if(checkboxDeficitMotor.isChecked())
+                myAnimation.slideDownView(getApplicationContext(), deficitMotorItensLayout);
         }
     }
 

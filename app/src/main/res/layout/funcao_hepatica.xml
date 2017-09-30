@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,73 +24,74 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             android:paddingTop="10dp">
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:text="Bilirribunas"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin">
-                <CheckBox
+                style="@style/TitleTextStyleForLayoutSelection"
+                android:textSize="15sp"/>
+                <RadioGroup
+                    android:paddingStart="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/BilirrubinasElevadas"
-                    android:layout_marginEnd="3dp"/>
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/BilirrubinasNormais"/>
-            </LinearLayout>
-            <LinearLayout
-                android:paddingTop="10dp"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Normais"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Elevadas"/>
+                </RadioGroup>
+
+            <TextView
+                android:paddingTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:text="FA/GGT"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/FAGGTElevadas"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="20dp"
-                    />
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/TransaminasesElevadas"/>
-            </LinearLayout>
-            <LinearLayout
-                android:paddingTop="10dp"
+                style="@style/TitleTextStyleForLayoutSelection"
+                android:textSize="15sp"/>
+            <RadioGroup
+                android:paddingTop="5dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin">
-                <CheckBox
+                android:orientation="horizontal">
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="25dp"
-                    android:text="@string/FAGGTNormais" />
-                <CheckBox
+                    android:text="@string/Normais"/>
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/TransaminasesNormais"/>
-            </LinearLayout>
-            <LinearLayout
-                android:paddingTop="10dp"
+                    android:text="@string/Elevadas"/>
+            </RadioGroup>
+            <TextView
+                android:paddingTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:text="Transaminases"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin">
-                <CheckBox
+                style="@style/TitleTextStyleForLayoutSelection"
+                android:textSize="15sp"/>
+            <RadioGroup
+                android:paddingTop="5dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="25dp"
-                    android:text="@string/Normal" />
-            </LinearLayout>
+                    android:text="@string/Normais"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Elevadas"/>
+            </RadioGroup>
         </LinearLayout>
 
     </LinearLayout>

@@ -65,6 +65,13 @@
                 </RelativeLayout>
             </LinearLayout>
             <TextView
+                android:id="@+id/textoAjudaFlutuacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Texto de ajuda"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+            <TextView
                 android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,6 +131,13 @@
                 </RelativeLayout>
             </LinearLayout>
             <TextView
+                android:id="@+id/textoAjudaInatencao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Texto de ajuda"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+            <TextView
                 android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -181,6 +195,13 @@
                         android:layout_height="wrap_content" />
                 </RelativeLayout>
             </LinearLayout>
+            <TextView
+                android:id="@+id/textoAjudaPensamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Texto de ajuda"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
             <TextView
                 android:visibility="visible"
                 android:layout_width="wrap_content"

@@ -343,34 +343,81 @@
                 android:background="@color/gray">
             </LinearLayout>
 
+
             <!--RONCOS-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:orientation="vertical"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:onClick="roncosOnClick"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/Roncos"
+                            style="@style/TextStyle"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/checkboxRoncos"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="end"
+                            style="@style/CheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false" />
+                    </RelativeLayout>
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Roncos"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
+                    android:visibility="invisible"
+                    android:text="@string/Nao"
+                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                    android:id="@+id/massasPalpaveisTextView"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/roncosItensLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
                 <LinearLayout
                     android:paddingTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <CheckBox
+                        android:id="@+id/roncosApice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
                     <CheckBox
+                        android:id="@+id/roncosBaseDireita"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
                     <CheckBox
+                        android:id="@+id/roncosBaseEsquerda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseEsquerda"/>
@@ -379,23 +426,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <CheckBox
+                        android:id="@+id/roncosTercoMedioDireito"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioDireito"/>
                     <CheckBox
+                        android:id="@+id/roncosTercoMedioEsquerdo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioEsquerdo"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Ausente"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -413,7 +454,8 @@
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -427,28 +469,28 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/Ausente"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseEsquerda"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioDireito"/>
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TercoMedioEsquerdo"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -457,7 +499,7 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Ausente"/>
+                        android:text="@string/TercoMedioEsquerdo"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -475,7 +517,8 @@
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -489,28 +532,28 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/Ausente"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseEsquerda"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioDireito"/>
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TercoMedioEsquerdo"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -519,7 +562,7 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Ausente"/>
+                        android:text="@string/TercoMedioEsquerdo"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

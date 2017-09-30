@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ import santauti.app.R;
 public class RespiratorioActivity extends GenericoActivity {
     private int mascaraVenturiSelection=-1,usoDeOxigenioSelection=-1;
     private View pressaoCuff_layout,murmurioVesicularItensLayout;
-    private View localizacaoCanula_layout;
+    private View localizacaoCanula_layout,roncosItensLayout;
     private View mascaraDeVenturi_layout, fluxoOxigenio_layout;
     private TextView murmurioVesicularTextView;
     private TextView mascaraVenturiSelected;
@@ -36,6 +37,7 @@ public class RespiratorioActivity extends GenericoActivity {
     private MyAnimation myAnimation;
     private Intent intent;
     private RadioButton viasAereasNatural,viasAereasTubo,viasAereasTraqueostomia,murmurioVesicularReduzido,murmurioVesicularFisiologico,murmurioVesicularAumentado;
+    private CheckBox checkboxRoncos;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,17 @@ public class RespiratorioActivity extends GenericoActivity {
         murmurioVesicularFisiologico = (RadioButton)findViewById(R.id.murmurioVesicularFisiologico);
         murmurioVesicularAumentado = (RadioButton)findViewById(R.id.murmurioVesicularAumentado);
         murmurioVesicularItensLayout = findViewById(R.id.murmursioVesicularItens);
+        roncosItensLayout = findViewById(R.id.roncosItensLayout);
+        checkboxRoncos = (CheckBox)findViewById(R.id.checkboxRoncos);
+        checkboxRoncos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!checkboxRoncos.isChecked())
+                    myAnimation.slideUpView(getApplicationContext(), roncosItensLayout);
+                else
+                    myAnimation.slideDownView(getApplicationContext(), roncosItensLayout);
+            }
+        });
         /**************************VIEWS**************************/
 
         prepareNavigationButtons();
@@ -89,6 +102,14 @@ public class RespiratorioActivity extends GenericoActivity {
         myAnimation = new MyAnimation();
         realm = Realm.getDefaultInstance();
 
+    }
+
+    public void roncosOnClick(View view){
+        if(roncosItensLayout.isShown())
+            myAnimation.slideUpView(getApplicationContext(),roncosItensLayout);
+        else
+            if(checkboxRoncos.isChecked())
+                myAnimation.slideDownView(getApplicationContext(),roncosItensLayout);
     }
 
 

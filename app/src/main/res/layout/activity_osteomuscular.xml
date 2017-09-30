@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
@@ -23,54 +24,87 @@
             android:text="@string/Musculatura"
             android:textColor="@android:color/black"
             android:textSize="17sp"/>
-        <LinearLayout
+        <TextView
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Tonus"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:paddingStart="@dimen/activity_horizontal_margin"/>
+        <RadioGroup
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
             android:paddingTop="5dp"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
-            <CheckBox
+            android:paddingBottom="5dp">
+            <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hipertrofica"
-                android:layout_marginEnd="72dp"/>
-            <CheckBox
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:text="Hipertrofico"
+                android:theme="@style/radioButtonStyle" />
+            <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hipotrofica"/>
-        </LinearLayout>
-        <LinearLayout
+                android:text="Normotrofico"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:theme="@style/radioButtonStyle"
+                />
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:gravity="center"
+                android:text="Hipotrofico"
+                android:theme="@style/radioButtonStyle" />
+        </RadioGroup>
+
+        <TextView
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/Trofismo"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:paddingStart="@dimen/activity_horizontal_margin"/>
+        <RadioGroup
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:paddingTop="5dp"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Eutrofica"
-                android:layout_marginEnd="90dp"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hipertonica"/>
-        </LinearLayout>
-        <LinearLayout
-            android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
-            <CheckBox
+            android:paddingBottom="5dp">
+            <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hipotonica"
-                android:layout_marginEnd="79dp"/>
-            <CheckBox
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingStart="0dp"
+                android:text="Hipertonico"
+                android:theme="@style/radioButtonStyle" />
+            <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Eutonica"/>
-        </LinearLayout>
+                android:text="Normotonico"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:theme="@style/radioButtonStyle"
+                />
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:gravity="center"
+                android:text="Hipotonico"
+                android:theme="@style/radioButtonStyle" />
+        </RadioGroup>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"

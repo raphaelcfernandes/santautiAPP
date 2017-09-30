@@ -122,59 +122,94 @@
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="mucosasOnClick">
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Mucosas"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"/>
-            <LinearLayout
-                android:paddingTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <CheckBox
+            <RadioGroup
+                android:paddingEnd="0dp"
+                android:paddingTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp">
+                <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Anicterico"/>
-                <CheckBox
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:text="@string/Anictericas"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Hidratadas"/>
-                <CheckBox
+                    android:text="@string/Ictericas"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
+
+            <RadioGroup
+                android:paddingEnd="0dp"
+                android:paddingTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp">
+                <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Hiperhidratadas"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <CheckBox
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:text="@string/Hipocoradas"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Hipocoradas"/>
-                <CheckBox
+                    android:text="@string/Normocoradas"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
+            <RadioGroup
+                android:paddingEnd="0dp"
+                android:paddingTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp">
+                <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Icterico"/>
-                <CheckBox
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingStart="0dp"
+                    android:text="@string/Hidratadas"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Normocoradas"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <CheckBox
+                    android:text="@string/Secas"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+                <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Secas"/>
-            </LinearLayout>
+                    android:text="@string/Hiperhidratadas"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

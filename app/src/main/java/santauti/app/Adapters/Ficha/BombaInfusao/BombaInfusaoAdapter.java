@@ -96,7 +96,7 @@ public class BombaInfusaoAdapter extends RecyclerView.Adapter<BombaInfusaoAdapte
         final TextInputEditText velInfusao = (TextInputEditText) dialogView.findViewById(R.id.velInfusaoDialog);
         velInfusao.setText(Integer.toString(hemodinamicoAdapterModelList.get(position).getVelInfusao()));
         builder.setView(dialogView);
-        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(velInfusao.length()>0)

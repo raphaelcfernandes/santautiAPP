@@ -42,6 +42,21 @@ public class HemodinamicoActivity extends GenericoActivity {
         tipoSoproLayout = findViewById(R.id.tipoSopro_layout);
         intensidadeSoproLayout = findViewById(R.id.intensidade_sopro_layout);
         checkboxSopro = (CheckBox)findViewById(R.id.checkboxSopro);
+        checkboxSopro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!checkboxSopro.isChecked()){
+                    myAnimation.slideUpView(HemodinamicoActivity.this,tipoSoproLayout);
+                    myAnimation.slideUpView(HemodinamicoActivity.this,intensidadeSoproLayout);
+                }
+                else{
+                    if(!intensidadeSoproLayout.isShown() && !tipoSoproLayout.isShown()) {
+                        myAnimation.slideDownView(HemodinamicoActivity.this,intensidadeSoproLayout);
+                        myAnimation.slideDownView(HemodinamicoActivity.this,tipoSoproLayout);
+                    }
+                }
+            }
+        });
         /********************VIEWS*******************************/
 
 
@@ -79,19 +94,15 @@ public class HemodinamicoActivity extends GenericoActivity {
     }
 
     public void soproOnClick(View view){
-        if(checkboxSopro.isChecked()){
-            //soproTextView.setText(getString(R.string.Nao));
+        if(tipoSoproLayout.isShown() && intensidadeSoproLayout.isShown()){
             myAnimation.slideUpView(HemodinamicoActivity.this,tipoSoproLayout);
             myAnimation.slideUpView(HemodinamicoActivity.this,intensidadeSoproLayout);
-            checkboxSopro.setChecked(false);
         }
         else{
-            //soproTextView.setText(getString(R.string.Sim));
-            if(!intensidadeSoproLayout.isShown() && !tipoSoproLayout.isShown()) {
-                myAnimation.slideDownView(HemodinamicoActivity.this,intensidadeSoproLayout);
-                myAnimation.slideDownView(HemodinamicoActivity.this,tipoSoproLayout);
+            if(checkboxSopro.isChecked()) {
+                myAnimation.slideDownView(HemodinamicoActivity.this, intensidadeSoproLayout);
+                myAnimation.slideDownView(HemodinamicoActivity.this, tipoSoproLayout);
             }
-            checkboxSopro.setChecked(true);
         }
     }
 
