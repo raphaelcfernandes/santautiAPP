@@ -16,14 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical">
+
+
+        <!--CURVA TERMICA-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:orientation="vertical">
-            <!--android:background="?attr/selectableItemBackground"-->
-            <!--android:onClick="curvaTermicaOnClick">-->
             <TextView
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -70,7 +71,10 @@
             android:layout_height="1px"
             android:background="@color/gray">
         </LinearLayout>
+        <!--CURVA TERMICA-->
 
+
+        <!--EVACUAÇOES-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,9 +88,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
                     <TextView
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="0dp"
@@ -95,20 +96,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/Evacuacoes"
                         style="@style/TitleTextStyleForLayoutSelection"/>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
                     <android.support.v7.widget.AppCompatCheckBox
-                        android:id="@+id/checkboxEvacuacoes"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:gravity="end"
+                        android:id="@+id/checkboxEvacuacoes"
                         style="@style/CheckBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="false" />
-                </RelativeLayout>
             </LinearLayout>
             <TextView
                 android:visibility="invisible"
@@ -124,7 +118,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/evacuacoesItens"
-            android:visibility="gone"
+            android:visibility="visible"
             android:paddingStart="@dimen/activity_horizontal_margin">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -137,7 +131,7 @@
                     android:id="@+id/checkboxDiarreicas"/>
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/eventosDiarreicas"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
@@ -162,7 +156,7 @@
                     android:id="@+id/checkboxEndurecidas"/>
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/eventosEndurecidas"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
@@ -187,7 +181,7 @@
                     android:id="@+id/checkBoxNormais"/>
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/eventosNormais"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
@@ -208,6 +202,8 @@
             android:layout_height="1px"
             android:background="@color/gray">
         </LinearLayout>
+        <!--EVACUAÇOES-->
+
 
         <!--NUTRICAO-->
         <LinearLayout
@@ -227,10 +223,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                >
                 <CheckBox
+                    android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/Enteral"
                     android:id="@+id/checkBoxEnteral"/>
                 <android.support.design.widget.TextInputLayout
@@ -239,7 +238,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="40dp"
+                    android:paddingStart="50dp"
                     android:theme="@style/TextLabelBlue">
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
@@ -255,7 +254,8 @@
                 android:orientation="horizontal">
                 <CheckBox
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
                     android:text="@string/Gastrica"
                     android:id="@+id/checkboxGastrica"/>
                 <android.support.design.widget.TextInputLayout
@@ -264,7 +264,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="40dp"
+                    android:paddingStart="42dp"
                     android:theme="@style/TextLabelBlue">
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
@@ -279,8 +279,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <CheckBox
+                    android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/Oral"
                     android:id="@+id/checkBoxOral"/>
                 <android.support.design.widget.TextInputLayout
@@ -289,7 +290,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="40dp"
+                    android:paddingStart="70dp"
                     android:theme="@style/TextLabelBlue">
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
@@ -300,13 +301,14 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/gray">
         </LinearLayout>
         <!--NUTRICAO-->
+
+
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
