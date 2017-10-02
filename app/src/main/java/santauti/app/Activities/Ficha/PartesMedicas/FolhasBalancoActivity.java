@@ -51,10 +51,11 @@ public class FolhasBalancoActivity extends GenericoActivity {
         checkboxEvacuacoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!checkboxEvacuacoes.isChecked())
+                if(evacuacoesItens.isShown())
                     myAnimation.slideUpView(getApplicationContext(), evacuacoesItens);
                 else
-                    myAnimation.slideDownView(getApplicationContext(), evacuacoesItens);
+                    if(checkboxEvacuacoes.isChecked())
+                        myAnimation.slideDownView(getApplicationContext(), evacuacoesItens);
             }
         });
         enteral = (TextInputLayout)findViewById(R.id.volumeNutricaoEnteral);

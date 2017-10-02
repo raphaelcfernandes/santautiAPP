@@ -17,9 +17,16 @@ public class Gastrointestinal extends RealmObject implements Serializable {
     private String tensao;
     @SerializedName("ruidos")
     private String ruidos;
-    @SerializedName("vcm")
-    private int vcm;
+    @SerializedName("ascite")
+    private String ascite;
+    @SerializedName("massasPalpaveis")
+    private boolean massasPalpaveis=false;
+    @SerializedName("viscerasPalpaveis")
+    private boolean viscerasPalpaveis=false;
 
+    public boolean checkObject(){
+        return getRuidos()!=null && getFormato()!=null && getTensao()!=null && getAscite()!=null;
+    }
     public String getFormato() {
         return formato;
     }
@@ -44,11 +51,27 @@ public class Gastrointestinal extends RealmObject implements Serializable {
         this.ruidos = ruidos;
     }
 
-    public int getVcm() {
-        return vcm;
+    public String getAscite() {
+        return ascite;
     }
 
-    public void setVcm(int vcm) {
-        this.vcm = vcm;
+    public void setAscite(String ascite) {
+        this.ascite = ascite;
+    }
+
+    public boolean isMassasPalpaveis() {
+        return massasPalpaveis;
+    }
+
+    public void setMassasPalpaveis(boolean massasPalpaveis) {
+        this.massasPalpaveis = massasPalpaveis;
+    }
+
+    public boolean isViscerasPalpaveis() {
+        return viscerasPalpaveis;
+    }
+
+    public void setViscerasPalpaveis(boolean viscerasPalpaveis) {
+        this.viscerasPalpaveis = viscerasPalpaveis;
     }
 }

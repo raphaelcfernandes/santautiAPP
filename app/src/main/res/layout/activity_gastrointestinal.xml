@@ -19,7 +19,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/gastroIntestinalItens">
 
             <LinearLayout
                 android:layout_height="wrap_content"
@@ -29,10 +30,86 @@
                 android:orientation="vertical">
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:id="@+id/menuFoneseBulhas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Formato Abdominal"
+                    android:text="@string/FormatoAbdominal"
+                    style="@style/TitleTextStyleForLayoutSelection"/>
+                <RadioGroup
+                    android:id="@+id/formatoAbdominalGroup1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/formatoPlano"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/Plano"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/formatoGloboso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Globoso"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+                <RadioGroup
+                    android:id="@+id/formatoAbdominalGroup2"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/formatoSemigloboso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:gravity="center"
+                        android:text="@string/Semigloboso"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/formatoEscavado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:gravity="center"
+                        android:text="@string/Escavado"
+                        android:theme="@style/radioButtonStyle" />
+                </RadioGroup>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray">
+            </LinearLayout>
+
+            <!--Tensao Abdominal-->
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/TensaoAbdominal"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
                     android:paddingStart="10dp"
@@ -47,13 +124,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:paddingStart="0dp"
-                        android:text="Plano"
+                        android:text="@string/Tenso"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Globoso"
+                        android:text="@string/Normotenso"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
@@ -63,14 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
                         android:gravity="center"
-                        android:text="Semigloboso"
-                        android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:gravity="center"
-                        android:text="Escavado"
+                        android:text="@string/Flacido"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
 
@@ -80,7 +149,9 @@
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+            <!--Tensao Abdominal-->
 
+            <!--Ruidos Hidroaereos-->
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -89,79 +160,30 @@
                 android:orientation="vertical">
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tensao Abdominal"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
-                <RadioGroup
-                    android:paddingStart="10dp"
-                    android:paddingEnd="0dp"
-                    android:paddingTop="5dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingStart="0dp"
-                        android:text="Tenso"
-                        android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Normotenso"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:theme="@style/radioButtonStyle"
-                        />
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:gravity="center"
-                        android:text="Flacido"
-                        android:theme="@style/radioButtonStyle" />
-                </RadioGroup>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray">
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:orientation="vertical">
-                <TextView
-                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/RuidosHidroaereos"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
-                    android:paddingStart="5dp"
+                    android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingTop="5dp"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
+                    android:paddingBottom="5dp"
+                    android:id="@+id/ruidosGroup1">
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/ruidosAumentados"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:paddingStart="0dp"
-                        android:text="Aumentados"
+                        android:text="@string/Aumentados"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/ruidosNormais"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Normais"
@@ -169,20 +191,33 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
+                </RadioGroup>
+                <RadioGroup
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:id="@+id/ruidosGroup2">
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/ruidosReduzidos"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="0dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
                         android:gravity="center"
-                        android:text="Reduzidos"
+                        android:text="@string/Reduzidos"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/ruidosAusentes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:paddingStart="0dp"
-                        android:text="@string/Ausente"
+                        android:text="@string/Ausentes"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
 
@@ -192,7 +227,9 @@
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+            <!--Ruidos Hidroaereos-->
 
+            <!--ASCITE-->
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -200,10 +237,12 @@
                 android:paddingBottom="10dp"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/asciteTextView"
                     android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ascite"
+                    android:text="@string/Ascite"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
                     android:paddingStart="10dp"
@@ -218,7 +257,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:paddingStart="0dp"
                         android:text="@string/Ausente"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
@@ -226,13 +264,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:paddingStart="0dp"
-                        android:text="Pequena"
+                        android:text="@string/Pequena"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Média"
+                        android:text="@string/Media"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
@@ -242,7 +279,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
                         android:gravity="center"
-                        android:text="Grande"
+                        android:text="@string/Grande"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
 
@@ -252,121 +289,87 @@
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+            <!--ASCITE-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+            <!--Massas Palpaveis-->
+            <RelativeLayout
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="20dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:onClick="massasPalpaveisOnClick"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/MassasPalpaveis"
-                            style="@style/TextStyle"
-                            />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/checkboxMassasPalpaveis"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            style="@style/CheckBox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="false" />
-                    </RelativeLayout>
-                </LinearLayout>
+                android:background="?attr/selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/massasPalpaveisTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    android:text="@string/Nao"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/massasPalpaveisTextView"/>
-            </LinearLayout>
+                    android:layout_gravity="center"
+                    android:text="@string/MassasPalpaveis"
+                    style="@style/TextStyle"
+                    android:layout_centerVertical="true"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_centerVertical="true"
+                    android:id="@+id/checkboxMassasPalpaveis"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false" />
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+            <!--Massas Palpaveis-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <!--Visceras Palpaveis-->
+            <RelativeLayout
                 android:orientation="vertical"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="20dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:onClick="viscerasPalpaveisOnClick"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/ViscerasPalpaveis"
-                            style="@style/TextStyle"
-                            />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/checkboxViscerasPalpaveis"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            style="@style/CheckBox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="false" />
-                    </RelativeLayout>
-                </LinearLayout>
+                android:background="?attr/selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    android:text="@string/Nao"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/viscerasPalpaveisTextView"/>
-            </LinearLayout>
+                    android:layout_centerVertical="true"
+                    android:text="@string/ViscerasPalpaveis"
+                    style="@style/TextStyle"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkboxViscerasPalpaveis"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="end"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false" />
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+            <!--Visceras Palpaveis-->
+
         </LinearLayout>
     </ScrollView>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1">
         <include layout="@layout/bottom_buttons_navigate_fichas"/>
     </RelativeLayout>
-
-
 </LinearLayout>
 

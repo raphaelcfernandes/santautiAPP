@@ -36,6 +36,12 @@ public class MonitorMultiparametrico extends RealmObject implements Serializable
     @SerializedName("sjo2")
     private int sjo2=-1;
 
+    public boolean checkObject(){
+        return getRitmo()!=null && getFrequenciaRespiratoria()>0 && getFrequenciaCardiaca()>0 &&
+                getPAM()>0 && getPvc()>0 && getPpc()>0 && getPic()>0 && getTemperatura()>0.0 &&
+                getSwanGanz()>0 && getCapnometria()>0 && getSpo2() >=0 && getSjo2()>=0;
+    }
+
     public int getSpo2() {
         return spo2;
     }

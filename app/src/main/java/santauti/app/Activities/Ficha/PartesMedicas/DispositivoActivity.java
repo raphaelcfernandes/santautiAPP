@@ -1,20 +1,20 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Model.Ficha.Dispositivos;
+import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -24,15 +24,14 @@ import santauti.app.R;
 public class DispositivoActivity extends GenericoActivity {
     private boolean[] dispositivos = new boolean[16];
     private TextView dispositivosTextView;
+    private Realm realm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dispositivo);
         setToolbar("Dispositivos");
         prepareNavigationButtons();
-
-        dispositivosTextView = (TextView)findViewById(R.id.dispositivosTextView);
-
+        realm = Realm.getDefaultInstance();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +40,7 @@ public class DispositivoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0) - 1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
-                //verificaCamposENotificaAdapter();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -53,46 +52,80 @@ public class DispositivoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0) + 1, intent);
                 startActivity(intent);
                 exitActivityToRight();
-                //verificaCamposENotificaAdapter();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
+        setDispositivosFromDataBase();
     }
-    public void dispositivosOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        final ArrayList mSelectedItems = new ArrayList();
 
-        // Set the dialog title
-        builder.setTitle(R.string.AdicionarDispositivo);
-        final String[] items = getResources().getStringArray(R.array.dispositivos);
-        builder.setMultiChoiceItems(items, dispositivos,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which,
-                                        boolean isChecked) {
-                        if (isChecked)
-                            dispositivos[which]=true;
-                        else
-                            dispositivos[which]=false;
+    private void setDispositivosFromDataBase() {
+        Ficha ficha = getProperFicha();
+        if (ficha.getDispositivos() != null) {
+            LinearLayout layout= (LinearLayout)findViewById(R.id.dispositivos);
+            for (RealmString realmString : ficha.getDispositivos().getNomeDispositivos()) {
+                for(int i=0;i<layout.getChildCount();i++){
+                    View v = layout.getChildAt(i);
+                    for(int j=0;j<((RelativeLayout) v).getChildCount();j++) {
+                        View view = ((RelativeLayout) v).getChildAt(j);
+                        CheckBox cb = (CheckBox)view;
+                        if(!cb.isChecked() && cb.getText().toString().equals(realmString.getName()))
+                            cb.setChecked(true);
                     }
-                })
-                // Set the action buttons
-                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        if(setTextViewFromDialogMultipleText(dispositivos,dispositivosTextView,items)==0)
-                            dispositivosTextView.setText(getString(R.string.Nenhum));
-                    }
-                })
-                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
+                }
+            }
+        }
+    }
 
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home) {
+            verificaCamposENotificaAdapter();
+            finish();
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed(){
+        verificaCamposENotificaAdapter();
+        finish();
+    }
+
+    private void verificaCamposENotificaAdapter(){
+        realm.beginTransaction();
+        Dispositivos dispositivos = realm.createObject(Dispositivos.class);
+        Ficha r = getProperFicha();
+        r.setDispositivos(dispositivos);
+        LinearLayout layout= (LinearLayout)findViewById(R.id.dispositivos);
+        for(int i=0;i<layout.getChildCount();i++){
+            View v = layout.getChildAt(i);
+            if(v instanceof RelativeLayout){
+                for(int j=0;j<((RelativeLayout) v).getChildCount();j++) {
+                    View view = ((RelativeLayout) v).getChildAt(j);
+                    if(view instanceof CheckBox){
+                        CheckBox cb = (CheckBox)view;
+                        if(cb.isChecked()) {
+                            RealmString realmString = realm.createObject(RealmString.class);
+                            realmString.setName(cb.getText().toString());
+                            dispositivos.getNomeDispositivos().add(realmString);
+                        }
+                    }
+                }
+            }
+        }
+        r.setDispositivos(dispositivos);
+        realm.copyToRealmOrUpdate(r);
+        changeCardColor();
+        realm.commitTransaction();
     }
 
 }

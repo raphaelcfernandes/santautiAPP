@@ -6,141 +6,160 @@
     android:weightSum="1">
     <include layout="@layout/toolbar"/>
     <LinearLayout
+        android:id="@+id/dispositivos"
         android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:paddingTop="10dp">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="0dp">
             <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/balaoIntraAortico"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cateter Venoso Central"
-                android:layout_marginEnd="30dp"/>
+                android:text="@string/BalaoIntraAortico"
+                android:layout_marginEnd="10dp"/>
             <CheckBox
+                android:layout_toEndOf="@id/balaoIntraAortico"
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/sondaEnteral"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Venoclise"/>
-        </LinearLayout>
-        <LinearLayout
+                android:text="@string/SondaEnteral" />
+        </RelativeLayout>
+        <RelativeLayout
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
             <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/cateterPAI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sonda Vesical"
-                android:layout_marginEnd="85dp"/>
+                android:text="@string/CateterPAI"
+                android:layout_marginEnd="10dp"/>
             <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:layout_toEndOf="@id/cateterPAI"
+                android:id="@+id/sondaGastrica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sonda Enteral"/>
-        </LinearLayout>
-        <LinearLayout
+                android:text="@string/SondaGastrica"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
             <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/cateterPIC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sonda Gastrica"
-                android:layout_marginEnd="79dp"/>
+                android:text="@string/CateterPIC"
+                android:layout_marginEnd="10dp"/>
             <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/sondaVesical"
+                android:layout_toEndOf="@id/cateterPIC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cateter de PAI"/>
-        </LinearLayout>
-        <LinearLayout
+                android:text="@string/SondaVesical"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
             <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/cateterVenosoCentral"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tubo Orotraqueal"
-                android:layout_marginEnd="65dp"/>
+                android:text="@string/CateterVenosoCentral"
+                android:layout_marginEnd="10dp"/>
             <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/traqueostomia"
+                android:layout_toEndOf="@id/cateterVenosoCentral"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Traqueostomia"/>
-        </LinearLayout>
-        <LinearLayout
+        </RelativeLayout>
+        <RelativeLayout
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gastrostomia"
-                android:layout_marginEnd="89dp"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cateter de PIC"/>
-        </LinearLayout>
-        <LinearLayout
-            android:paddingTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dreno Abdominal"
-                android:layout_marginEnd="65dp"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dreno de Torax"/>
-        </LinearLayout>
-        <LinearLayout
-            android:paddingTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Balão Intra-Aórtico"
-                android:layout_marginEnd="85dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
+            <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/drenoAbdominal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/DrenoAbdominal"
+                android:paddingEnd="10dp"
+                android:paddingStart="0dp"/>
+            <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:layout_toEndOf="@id/drenoAbdominal"
+                android:id="@+id/tuboOrotraqueal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TuboOrotraqueal"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="dispositivosOnClick">
-            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
+            <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:paddingStart="0dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/drenoTorax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Dispositivos"
-                style="@style/TitleTextStyleForLayoutSelection"/>
-            <TextView
+                android:text="@string/DrenoTorax"/>
+            <CheckBox
+                android:layout_toEndOf="@id/drenoTorax"
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/venoclise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:id="@+id/dispositivosTextView"
-                style="@style/ItemSelectedTextStyleForLayoutSelection" />
-        </LinearLayout>
+                android:text="@string/Venoclise"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
+            <CheckBox
+                android:theme="@style/CheckBoxStyle"
+                android:id="@+id/gastrostomia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Gastrostomia"
+                android:layout_marginEnd="85dp"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
@@ -150,17 +169,3 @@
         <include layout="@layout/bottom_buttons_navigate_fichas"/>
     </RelativeLayout>
 </LinearLayout>
-    <!-- - cateter venoso central: sim ou nao + data insercao e retirada-->
-    <!-- - cateter de hemodialise-->
-    <!-- - cateter de PAI:-->
-    <!-- - Dreno de torax-->
-    <!-- - Dreno abdominal-->
-    <!-- - Sonda vesical-->
-    <!-- - Tubo orotraquial-->
-    <!-- - Traqueostomia-->
-    <!-- - gastrostomia-->
-    <!-- - venoclise-->
-    <!-- - sonda enteral-->
-    <!-- - Sonda oroenteral e nasoenteral-->
-    <!-- - sonda orogastrica-->
-    <!-- - sonda nasogastrical-->

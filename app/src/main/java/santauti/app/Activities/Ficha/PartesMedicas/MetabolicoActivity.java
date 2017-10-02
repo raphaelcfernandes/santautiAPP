@@ -3,15 +3,14 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.PopupMenu;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.RadioGroup;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.R;
 
 /**
@@ -21,6 +20,7 @@ import santauti.app.R;
 public class MetabolicoActivity extends GenericoActivity {
     private int i=0;
     private Realm realm;
+    private RadioGroup hidratacao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +28,15 @@ public class MetabolicoActivity extends GenericoActivity {
         findViewById(R.id.activity_metabolico).requestFocus();
         setToolbar(this.getString(R.string.Metabolico));
 
-        /********************VIEWS****************************/
-        /********************VIEWS****************************/
+        /********************RADIOGROUP****************************/
+        hidratacao = (RadioGroup)findViewById(R.id.hidratacaoRadioGroup);
+        /********************RADIOGROUP****************************/
+
 
 
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
-
+        setMetabolicoFromDataBase();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +64,19 @@ public class MetabolicoActivity extends GenericoActivity {
     }
 
 
+    private void setMetabolicoFromDataBase(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getMetabolico()!=null){
+            if(ficha.getMetabolico().getHidratacao().equals(getString(R.string.NormoHidratado)))
+                hidratacao.check(R.id.normoHidratado);
+            else if(ficha.getMetabolico().getHidratacao().equals(getString(R.string.Edemaciado)))
+                hidratacao.check(R.id.edemaciado);
+            else if(ficha.getMetabolico().getHidratacao().equals(getString(R.string.Desidratado)))
+                hidratacao.check(R.id.desidratado);
+        }
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -84,35 +99,21 @@ public class MetabolicoActivity extends GenericoActivity {
         return true;
     }
 
-
-
     /**
-     * Verifica se existe registro da Gasometria previamente. Utilizado para setar o editText caso o usuario tenha retornado a esta ficha
-     * Caso nao exista registro, editText ficará vazio à espera de new input.
-     * @return valor da gasometria preenchido pelo usuario previamente, ou retorna -1 se nao foi preenchido
-     */
-    private int getGasometria(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getMetabolico()!=null)
-            return ficha.getMetabolico().getGasometriaArterial();
-        else
-            return -1;
-    }
-
-    /**
-     * Verifica se o editText foi preenchido, APENAS irá colorir o card se ele tiver sido preenchido
-     * Atualiza campo Metabolico ou insere novo objeto em Ficha com idFicha
+     * Verifica se algum radio button foi selecionado
+     *
      */
     private void verificaCamposENotificaAdapter(){
-//        if(gasometrialArterial.getText().toString().length()>0) {
-//            realm.beginTransaction();
-//            Metabolico metabolico = realm.createObject(Metabolico.class);
-//            metabolico.setGasometriaArterial(gasometriaArterialInput);
-//            Ficha r = getProperFicha();
-//            r.setMetabolico(metabolico);
-//            realm.insertOrUpdate(metabolico);
-//            realm.commitTransaction();
-//            changeCardColor();
-//        }
+        realm.beginTransaction();
+        Metabolico metabolico = realm.createObject(Metabolico.class);
+        String hidratacaoStr = getStringOfRadioButtonSelectedFromRadioGroup(hidratacao);
+        if(hidratacaoStr!=null) {
+            Ficha r = getProperFicha();
+            metabolico.setHidratacao(hidratacaoStr);
+            r.setMetabolico(metabolico);
+            realm.copyToRealmOrUpdate(r);
+            changeCardColor();
+        }
+        realm.commitTransaction();
     }
 }

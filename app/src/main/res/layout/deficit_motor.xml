@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        android:paddingStart="0dp"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:background="?attr/selectableItemBackground"
         android:onClick="deficitMotorOnClick"
@@ -37,7 +38,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:gravity="end"
-                    style="@style/CheckBox"
+                    android:theme="@style/CheckBoxStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="false" />

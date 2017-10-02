@@ -196,6 +196,7 @@
     <string name="Traqueostomia">Traqueostomia</string>
     <string name="Alta">Alta</string>
     <string name="Media">Média</string>
+    <string name="Grande">Grande</string>
     <string name="Baixa">Baixa</string>
     <string name="NoTempo">No Tempo</string>
     <string name="NoEspaco">No Espaço</string>
@@ -290,6 +291,33 @@
     <string name="Tonus">Tonus</string>
     <string name="Trofismo">Trofismo</string>
     <string name="Elevadas">Elevadas</string>
+    <string name="CateterVenosoCentral">Cateter Venoso Central</string>
+    <string name="Venoclise">Venóclise</string>
+    <string name="SondaVesical">Sonda Vesical</string>
+    <string name="SondaEnteral">Sonda Enteral</string>
+    <string name="SondaGastrica">Sonda Gastrica</string>
+    <string name="CateterPAI">Cateter de PAI</string>
+    <string name="TuboOrotraqueal">Tubo Orotraqueal</string>
+    <string name="Gastrostomia">Gastrostomia</string>
+    <string name="CateterPIC">Cateter de PIC</string>
+    <string name="DrenoAbdominal">Dreno Abdominal</string>
+    <string name="DrenoTorax">Dreno de Torax</string>
+    <string name="BalaoIntraAortico">Balão Intra-Aórtico</string>
+    <string name="Ascite">Ascite</string>
+    <string name="Pequena">Pequena</string>
+    <string name="Aumentados">Aumentados</string>
+    <string name="Reduzidos">Reduzidos</string>
+    <string name="Ausentes">Ausentes</string>
+    <string name="Tenso">Tenso</string>
+    <string name="Normotenso">Normotenso</string>
+    <string name="Flacido">Flácido</string>
+    <string name="TensaoAbdominal">Tensão Abdominal</string>
+    <string name="Plano">Plano</string>
+    <string name="Globoso">Globoso</string>
+    <string name="Semigloboso">Semigloboso</string>
+    <string name="Escavado">Escavado</string>
+    <string name="FormatoAbdominal">Formato Abdominal</string>
+
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

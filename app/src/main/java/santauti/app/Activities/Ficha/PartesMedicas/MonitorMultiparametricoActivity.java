@@ -149,61 +149,36 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
     }
 
     private void verificaCamposENotificaAdapter(){
-        int i=0;
         realm.beginTransaction();
         Ficha r = getProperFicha();
         MonitorMultiparametrico monitorMultiparametrico = realm.createObject(MonitorMultiparametrico.class);
-        if(ritmoTextView.getText().length()>0) {
+        if(ritmoTextView.getText().length()>0)
             monitorMultiparametrico.setRitmo(ritmoTextView.getText().toString());
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(freqRespiratoria)) {
+        if(!isTextInputEditTextEmpty(freqRespiratoria))
             monitorMultiparametrico.setFrequenciaRespiratoria(getIntegerFromTextInputEditText(freqRespiratoria));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(freqCardiaca)) {
+        if(!isTextInputEditTextEmpty(freqCardiaca))
             monitorMultiparametrico.setFrequenciaCardiaca(getIntegerFromTextInputEditText(freqCardiaca));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(PAM)) {
+        if(!isTextInputEditTextEmpty(PAM))
             monitorMultiparametrico.setPAM(getIntegerFromTextInputEditText(PAM));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(temperatura)) {
+        if(!isTextInputEditTextEmpty(temperatura))
             monitorMultiparametrico.setTemperatura(Float.parseFloat(temperatura.getText().toString()));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(PIC)){
+        if(!isTextInputEditTextEmpty(PIC))
             monitorMultiparametrico.setPic(getIntegerFromTextInputEditText(PIC));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(PPC)) {
+        if(!isTextInputEditTextEmpty(PPC))
             monitorMultiparametrico.setPpc(getIntegerFromTextInputEditText(PPC));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(PVC)) {
+        if(!isTextInputEditTextEmpty(PVC))
             monitorMultiparametrico.setPvc(getIntegerFromTextInputEditText(PVC));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(swan_ganz)) {
+        if(!isTextInputEditTextEmpty(swan_ganz))
             monitorMultiparametrico.setSwanGanz(getIntegerFromTextInputEditText(swan_ganz));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(capnometria)) {
+        if(!isTextInputEditTextEmpty(capnometria))
             monitorMultiparametrico.setCapnometria(getIntegerFromTextInputEditText(capnometria));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(spo2)){
+        if(!isTextInputEditTextEmpty(spo2))
             monitorMultiparametrico.setSpo2(getIntegerFromTextInputEditText(spo2));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(sjo2)){
+        if(!isTextInputEditTextEmpty(sjo2))
             monitorMultiparametrico.setSjo2(getIntegerFromTextInputEditText(sjo2));
-            i++;
-        }
         r.setMonitorMultiparametrico(monitorMultiparametrico);
         realm.copyToRealmOrUpdate(r);
-        if(i==12)
+        if(monitorMultiparametrico.checkObject())
             changeCardColor();
         realm.commitTransaction();
     }

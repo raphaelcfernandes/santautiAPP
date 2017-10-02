@@ -11,14 +11,14 @@ import io.realm.RealmObject;
  */
 
 public class Metabolico extends RealmObject implements Serializable{
-    @SerializedName("gasometriaArterial")
-    private int gasometriaArterial;
+    @SerializedName("hidratacao")
+    private String hidratacao;
 
-    public int getGasometriaArterial() {
-        return gasometriaArterial;
+    public String getHidratacao() {
+        return hidratacao;
     }
 
-    public void setGasometriaArterial(int gasometriaArterial) {
-        this.gasometriaArterial = gasometriaArterial;
+    public void setHidratacao(String hidratacao) {
+        this.hidratacao = hidratacao;
     }
 }

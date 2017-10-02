@@ -18,7 +18,10 @@ FICHA:
 Como fazer radio button em diferente layout e obedecer as marcaçoes
 /*************MUDANĆAS*********************/
 Hematológico: Salvando.
-Monitor: Salvando.
+Monitor Multiparamétrico: Salvando.
+Metabolico: Salvando.
+Dispositivos: Salvando.
+    - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
 /*****************MUDANÇAS FEITAS**********/
 Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - colocar td em uma tela só, retirar recycler view
     -   Bomba de infusao
@@ -70,9 +73,6 @@ Exames: PRIMEIRO ICONE
     - Amilase: sim ou nao
         - sim:
             - normal, elevada
-
-Metabolico: OK
-    - Hidratacao: normo hidradata, desidratado, hiper hidratado / edemaciado
 
 Respirador: -> OK
     - Espontanea, nao invasiva, bipap, mecanica
@@ -159,11 +159,6 @@ Hemodinamico: OK
       - cianotica, acianotica, fria, quente (4 općoes diferentes)
   - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
 
-Dispositivo: OK
-    - cateter de PIC
-    - balao intra-aortico
-    - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
-
 Gastro:
 	- Massas paupaveis: sim ou nao => ok
 	    - Hip. direito, Epigastrio, hip. esquerdo, flanco direito, nesogastrio, flanco esquerdo, fossa iliaca direita, hipogastrio, fossa iliaca esquerda
@@ -171,7 +166,6 @@ Gastro:
 	    - Hip. direito, Epigastrio, hip. esquerdo, flanco direito, nesogastrio, flanco esquerdo, fossa iliaca direita, hipogastrio, fossa iliaca esquerda
 	- ruidos hidroaereos
 	    - Ausente, reduzido, aumentado
-	- ictericia: ausente ou poder desmarcar +1, +2 , +3, +4, ou n marcar nada = n ter => foi para peles e mucosas
 	- assit: pequena, media, grande. radioButton
 	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
 

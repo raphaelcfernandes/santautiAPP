@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/NoEspaco"
-                        android:theme="@style/CheckBox"/>
+                        android:theme="@style/CheckBoxStyle"/>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -28,17 +28,18 @@ import santauti.app.R;
  * Created by raphael on 8/6/17.
  */
 
-public class ExamesActivity extends GenericoActivity{
-    private int acidoseMetabolicaSelection=-1;
-    private TextView raioxMenu,acidoseMetabolica,leucogramaMenu;
+public class ExamesActivity extends GenericoActivity {
+    private int acidoseMetabolicaSelection = -1;
+    private TextView raioxMenu, acidoseMetabolica, leucogramaMenu;
     private TextView raioxToraxTextView;
     private TextView leucogramaTextView;
     private TextView funcaoHepaticaTextView;
     private TextView gasometriaArterialTextView;
-    private View eletrolitoItens,amilaseItens;
+    private View eletrolitoItens, amilaseItens;
     private MyAnimation myAnimation;
     private boolean[] gasometriaArterial = new boolean[8];
     private CheckBox checkboxAmilase;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,17 +48,16 @@ public class ExamesActivity extends GenericoActivity{
         prepareNavigationButtons();
         setupUI(findViewById(R.id.exames_activity));
         eletrolitoItens = findViewById(R.id.eletrolitosItens);
-        raioxToraxTextView = (TextView)findViewById(R.id.raioxToraxTextView);
-        leucogramaTextView = (TextView)findViewById(R.id.leucogramaTextView);
-        gasometriaArterialTextView = (TextView)findViewById(R.id.gasometriaArterialTextView);
-        raioxMenu = (TextView)findViewById(R.id.raioxMenu);
-        leucogramaMenu = (TextView)findViewById(R.id.leucogramaMenu);
+        raioxToraxTextView = (TextView) findViewById(R.id.raioxToraxTextView);
+        leucogramaTextView = (TextView) findViewById(R.id.leucogramaTextView);
+        raioxMenu = (TextView) findViewById(R.id.raioxMenu);
+        leucogramaMenu = (TextView) findViewById(R.id.leucogramaMenu);
         amilaseItens = findViewById(R.id.amilaseItens);
-        checkboxAmilase = (CheckBox)findViewById(R.id.checkboxAmilase);
+        checkboxAmilase = (CheckBox) findViewById(R.id.checkboxAmilase);
         checkboxAmilase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!checkboxAmilase.isChecked())
+                if (!checkboxAmilase.isChecked())
                     myAnimation.slideUpView(getApplicationContext(), amilaseItens);
                 else
                     myAnimation.slideDownView(getApplicationContext(), amilaseItens);
@@ -69,7 +69,7 @@ public class ExamesActivity extends GenericoActivity{
             @Override
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
+                prepareIntent(getIntent().getIntExtra("Position", 0) - 1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
                 finish();
@@ -79,23 +79,24 @@ public class ExamesActivity extends GenericoActivity{
     }
 
 
-    public void amilaseOnClick (View view){
-        if(amilaseItens.isShown())
-            myAnimation.slideUpView(getApplicationContext(),amilaseItens);
+    public void amilaseOnClick(View view) {
+        if (amilaseItens.isShown())
+            myAnimation.slideUpView(getApplicationContext(), amilaseItens);
         else {
-            if(checkboxAmilase.isChecked())
+            if (checkboxAmilase.isChecked())
                 myAnimation.slideDownView(getApplicationContext(), amilaseItens);
         }
     }
+
     @Override
     public void prepareNavigationButtons() {
         findViewById(R.id.fichaProxima).setVisibility(View.GONE);
-        antFicha = (Button)findViewById(R.id.fichaAnterior);
-        antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
+        antFicha = (Button) findViewById(R.id.fichaAnterior);
+        antFicha.setText("< " + FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0) - 1).getName());
     }
 
 
-    public void raioxToraxOnCLick(View view){
+    public void raioxToraxOnCLick(View view) {
         final ListPopupWindow listPopupWindow = new ListPopupWindow(
                 ExamesActivity.this);
         listPopupWindow.setAdapter(new ArrayAdapter<>(
@@ -116,9 +117,9 @@ public class ExamesActivity extends GenericoActivity{
 
     }
 
-    public void leucogramaOnCLick(View view){
+    public void leucogramaOnCLick(View view) {
         final ListPopupWindow listPopupWindow = new ListPopupWindow(
-                ExamesActivity.this,null,R.attr.actionOverflowMenuStyle,0);
+                ExamesActivity.this, null, R.attr.actionOverflowMenuStyle, 0);
         listPopupWindow.setAdapter(new ArrayAdapter<>(
                 ExamesActivity.this,
                 R.layout.list_item, getResources().getStringArray(R.array.leucograma)));
@@ -136,48 +137,11 @@ public class ExamesActivity extends GenericoActivity{
         listPopupWindow.show();
     }
 
-    public void eletrolitosOnCLick(View view){
-        if(eletrolitoItens.isShown())
-            myAnimation.slideUpView(getApplicationContext(),eletrolitoItens);
+    public void eletrolitosOnCLick(View view) {
+        if (eletrolitoItens.isShown())
+            myAnimation.slideUpView(getApplicationContext(), eletrolitoItens);
         else
-            myAnimation.slideDownView(getApplicationContext(),eletrolitoItens);
-    }
-
-    public void gasometriaArterialOnClick(View view) {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.GasometriaArterial);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.gasometriaArterial);
-        Arrays.sort(items);
-        builder.setMultiChoiceItems(items, gasometriaArterial,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which,
-                                        boolean isChecked) {
-                        gasometriaArterial[which]=isChecked;
-                    }
-                })
-                // Set the action buttons
-                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        if(setTextViewFromDialogMultipleText(gasometriaArterial,gasometriaArterialTextView,items)==0){
-                            gasometriaArterialTextView.setText(getString(R.string.Normal));
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+            myAnimation.slideDownView(getApplicationContext(), eletrolitoItens);
     }
 
 }
