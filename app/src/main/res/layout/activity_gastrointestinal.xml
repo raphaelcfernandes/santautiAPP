@@ -112,6 +112,7 @@
                     android:text="@string/TensaoAbdominal"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
+                    android:id="@+id/tensaoAbdominal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingTop="5dp"
@@ -245,6 +246,7 @@
                     android:text="@string/Ascite"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
+                    android:id="@+id/asciteRadioGroup"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingTop="5dp"
@@ -320,13 +322,15 @@
                     android:layout_height="wrap_content"
                     android:clickable="false" />
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
             <!--Massas Palpaveis-->
-
+            <include layout="@layout/massas_visceras_palpaveis"
+                android:id="@+id/massasPalpaveisItensLayout"/>
             <!--Visceras Palpaveis-->
             <RelativeLayout
                 android:orientation="vertical"
@@ -355,6 +359,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false" />
             </RelativeLayout>
+            <include layout="@layout/massas_visceras_palpaveis"
+                android:id="@+id/viscerasPalpaveisItensLayout"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"

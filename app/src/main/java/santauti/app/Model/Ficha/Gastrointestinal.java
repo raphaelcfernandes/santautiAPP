@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
+import santauti.app.Model.Ficha.RealmObjects.RealmString;
 
 /**
  * Created by Raphael Fernandes on 29-May-17.
@@ -20,9 +22,10 @@ public class Gastrointestinal extends RealmObject implements Serializable {
     @SerializedName("ascite")
     private String ascite;
     @SerializedName("massasPalpaveis")
-    private boolean massasPalpaveis=false;
+    private RealmList<RealmString> massasPalpaveis;
     @SerializedName("viscerasPalpaveis")
-    private boolean viscerasPalpaveis=false;
+    private RealmList<RealmString> viscerasPalpaveis;
+
 
     public boolean checkObject(){
         return getRuidos()!=null && getFormato()!=null && getTensao()!=null && getAscite()!=null;
@@ -59,19 +62,19 @@ public class Gastrointestinal extends RealmObject implements Serializable {
         this.ascite = ascite;
     }
 
-    public boolean isMassasPalpaveis() {
+    public RealmList<RealmString> getMassasPalpaveis() {
         return massasPalpaveis;
     }
 
-    public void setMassasPalpaveis(boolean massasPalpaveis) {
+    public void setMassasPalpaveis(RealmList<RealmString> massasPalpaveis) {
         this.massasPalpaveis = massasPalpaveis;
     }
 
-    public boolean isViscerasPalpaveis() {
+    public RealmList<RealmString> getViscerasPalpaveis() {
         return viscerasPalpaveis;
     }
 
-    public void setViscerasPalpaveis(boolean viscerasPalpaveis) {
+    public void setViscerasPalpaveis(RealmList<RealmString> viscerasPalpaveis) {
         this.viscerasPalpaveis = viscerasPalpaveis;
     }
 }

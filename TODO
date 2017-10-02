@@ -161,9 +161,9 @@ Hemodinamico: OK
 
 Gastro:
 	- Massas paupaveis: sim ou nao => ok
-	    - Hip. direito, Epigastrio, hip. esquerdo, flanco direito, nesogastrio, flanco esquerdo, fossa iliaca direita, hipogastrio, fossa iliaca esquerda
+	    - Hipocondrio direito, Epigastrio, hip. esquerdo, flanco direito, nesogastrio, flanco esquerdo, fossa iliaca direita, hipogastrio, fossa iliaca esquerda
 	- visceras paupaveis: sim ou nao => ok
-	    - Hip. direito, Epigastrio, hip. esquerdo, flanco direito, nesogastrio, flanco esquerdo, fossa iliaca direita, hipogastrio, fossa iliaca esquerda
+	    - Hipocondrio direito, Epigastrio, hip. esquerdo, flanco direito, nesogastrio, flanco esquerdo, fossa iliaca direita, hipogastrio, fossa iliaca esquerda
 	- ruidos hidroaereos
 	    - Ausente, reduzido, aumentado
 	- assit: pequena, media, grande. radioButton
