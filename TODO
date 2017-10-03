@@ -22,6 +22,7 @@ Monitor Multiparamétrico: Salvando.
 Metabolico: Salvando.
 Dispositivos: Salvando.
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
+Gastro: Salvando.
 /*****************MUDANÇAS FEITAS**********/
 Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - colocar td em uma tela só, retirar recycler view
     -   Bomba de infusao
@@ -159,15 +160,7 @@ Hemodinamico: OK
       - cianotica, acianotica, fria, quente (4 općoes diferentes)
   - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
 
-Gastro:
-	- Massas paupaveis: sim ou nao => ok
-	    - Hipocondrio direito, Epigastrio, hip. esquerdo, flanco direito, nesogastrio, flanco esquerdo, fossa iliaca direita, hipogastrio, fossa iliaca esquerda
-	- visceras paupaveis: sim ou nao => ok
-	    - Hipocondrio direito, Epigastrio, hip. esquerdo, flanco direito, nesogastrio, flanco esquerdo, fossa iliaca direita, hipogastrio, fossa iliaca esquerda
-	- ruidos hidroaereos
-	    - Ausente, reduzido, aumentado
-	- assit: pequena, media, grande. radioButton
-	- Formato (ok), intensidade, tensao (ok), ruidos (ok)
+
 
 Folhas de balanćo: Evacuacoes mostrando menu desaparecendo qndo clica no checkbox e menu ja escondido. Neurologico deficit motor n está
     Segundo icone

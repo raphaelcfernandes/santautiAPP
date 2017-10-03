@@ -14,7 +14,8 @@
         android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"
+        android:id="@+id/teste">
         <!--Scrollable content here-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -299,10 +300,10 @@
                 android:paddingBottom="20dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:onClick="massasPalpaveisOnClick"
-                android:background="?attr/selectableItemBackground"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/massasPalpaveis"
+                android:background="?attr/selectableItemBackground">
                 <TextView
                     android:id="@+id/massasPalpaveisTextView"
                     android:layout_width="wrap_content"
@@ -322,15 +323,125 @@
                     android:layout_height="wrap_content"
                     android:clickable="false" />
             </RelativeLayout>
-
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:id="@+id/massasPalpaveisItensLayout"
+                android:visibility="gone">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/epigastrio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Epigastrio"
+                        android:theme="@style/CheckBoxStyle"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="82dp"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/flancoDireito"
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/epigastrio"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FlancoDireito"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_centerVertical="true"
+                        android:id="@+id/flancoEsquerdo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FlancoEsquerdo"
+                        android:theme="@style/CheckBoxStyle"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="40dp"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/fossaIliacaDireita"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/flancoEsquerdo"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/CheckBoxStyle"
+                        android:text="@string/FossaIliacaDireita"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_centerVertical="true"
+                        android:id="@+id/fossaIliacaEsquerda"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FossaIliacaEsquerda"
+                        android:theme="@style/CheckBoxStyle"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="10dp"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:id="@+id/hipocondrioDireito"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/fossaIliacaEsquerda"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/HipocondrioDireito"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_centerVertical="true"
+                        android:id="@+id/hipocondrioEsquerdo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/HipocondrioEsquerdo"
+                        android:theme="@style/CheckBoxStyle"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="8dp"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:id="@+id/hipogastrico"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/hipocondrioEsquerdo"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Hipogastrio"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_centerVertical="true"
+                        android:id="@+id/nesogastrio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Nesogastrio"
+                        android:theme="@style/CheckBoxStyle"/>
+                </RelativeLayout>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
             <!--Massas Palpaveis-->
-            <include layout="@layout/massas_visceras_palpaveis"
-                android:id="@+id/massasPalpaveisItensLayout"/>
+
             <!--Visceras Palpaveis-->
             <RelativeLayout
                 android:orientation="vertical"
@@ -338,10 +449,11 @@
                 android:paddingBottom="20dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:onClick="viscerasPalpaveisOnClick"
-                android:background="?attr/selectableItemBackground"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/viscerasPalpaveis"
+                android:background="?attr/selectableItemBackground"
+                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -359,8 +471,118 @@
                     android:layout_height="wrap_content"
                     android:clickable="false" />
             </RelativeLayout>
-            <include layout="@layout/massas_visceras_palpaveis"
-                android:id="@+id/viscerasPalpaveisItensLayout"/>
+            <LinearLayout
+                android:id="@+id/viscerasPalpaveisItensLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:visibility="gone">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@id/epigastrio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Epigastrio"
+                        android:theme="@style/CheckBoxStyle"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="82dp"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@id/flancoDireito"
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/epigastrio"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FlancoDireito"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_centerVertical="true"
+                        android:id="@id/flancoEsquerdo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FlancoEsquerdo"
+                        android:theme="@style/CheckBoxStyle"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="40dp"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@id/fossaIliacaDireita"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/flancoEsquerdo"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/CheckBoxStyle"
+                        android:text="@string/FossaIliacaDireita"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_centerVertical="true"
+                        android:id="@id/fossaIliacaEsquerda"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FossaIliacaEsquerda"
+                        android:theme="@style/CheckBoxStyle"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="10dp"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:id="@id/hipocondrioDireito"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/fossaIliacaEsquerda"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/HipocondrioDireito"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_centerVertical="true"
+                        android:id="@id/hipocondrioEsquerdo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/HipocondrioEsquerdo"
+                        android:theme="@style/CheckBoxStyle"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="8dp"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:id="@id/hipogastrico"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/hipocondrioEsquerdo"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Hipogastrio"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_centerVertical="true"
+                        android:id="@id/nesogastrio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Nesogastrio"
+                        android:theme="@style/CheckBoxStyle"/>
+                </RelativeLayout>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"

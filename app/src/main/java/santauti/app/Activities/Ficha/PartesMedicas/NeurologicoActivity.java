@@ -280,48 +280,6 @@ public class NeurologicoActivity extends GenericoActivity {
 //        realm.commitTransaction();
     }
 
-    public void addSedativo(View view){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(NeurologicoActivity.this);
-        builder.setTitle("Adicionar Sedativo");
-
-        LayoutInflater li = LayoutInflater.from(this);
-        View dialogView = li.inflate(R.layout.neurologico_dialog_sedativo,null);
-        dialogView.requestFocus();
-        final TextInputEditText doseSedativo = (TextInputEditText) dialogView.findViewById(R.id.doseSedativo);
-        final TextInputEditText tipoSedativo = (TextInputEditText) dialogView.findViewById(R.id.tipoSedativo);
-
-
-        builder.setView(dialogView);
-        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(!isTextInputEditTextEmpty(tipoSedativo) && !isTextInputEditTextEmpty(doseSedativo))
-                    addDataFromDialogIntoAdapter(tipoSedativo.getText().toString(),Integer.parseInt(doseSedativo.getText().toString()));
-            }
-        });
-
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-
-        final AlertDialog dialog = builder.show();
-        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
-    }
-
-    private void addDataFromDialogIntoAdapter(String droga,int dose){
-        if(!droga.equals(defaultSpinnerString)){
-            NeurologicoAdapterModel neurologicoAdapterModel = new NeurologicoAdapterModel(droga,dose);
-            neurologicoAdapterModelList.add(neurologicoAdapterModel);
-            neurologicoAdapter.notifyItemInserted(neurologicoAdapter.getItemCount()-1);
-            neurologicoAdapter.notifyDataSetChanged();
-        }
-    }
-
     public void nivelConscienciaOnClick(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
 
