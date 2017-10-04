@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.CheckBox;
+import android.widget.RadioGroup;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Activities.SnackbarCreator;
-import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Renal;
 import santauti.app.R;
@@ -21,13 +21,11 @@ import santauti.app.R;
  */
 
 public class RenalActivity extends GenericoActivity {
-    TextInputEditText diureseTxt, pesoTxt, balancoHidricoTxt;
-    RadioButton renalS,renalN;
-    private int renalChecked;
-    private View dialiseItensLayout;
+    private TextInputEditText volumeDialise, peso, tempoDialise;
+    private View dialiseItensLayout, emDialise;
     private Realm realm;
-    private Ficha ficha;
-    private MyAnimation myAnimation;
+    private CheckBox checkboxEmDialise,ufCheckBox;
+    private RadioGroup urinaRadioGroup;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +33,49 @@ public class RenalActivity extends GenericoActivity {
         findViewById(R.id.activity_renal).requestFocus();
         setToolbar(getString(R.string.Renal));
         setupUI(findViewById(R.id.activity_renal));
-        dialiseItensLayout = findViewById(R.id.dialiseItensLayout);
-        pesoTxt = (TextInputEditText)findViewById(R.id.peso);
         prepareNavigationButtons();
+
         realm = Realm.getDefaultInstance();
-        ficha=getProperFicha();
-        myAnimation = new MyAnimation();
+
+        /**************************TEXTINPUTEDITTEXT*******************/
+        peso = (TextInputEditText)findViewById(R.id.peso);
+        volumeDialise = (TextInputEditText)findViewById(R.id.volumeDialise);
+        tempoDialise = (TextInputEditText)findViewById(R.id.tempoDialise);
+        /**************************TEXTINPUTEDITTEXT*******************/
+
+        /**************************CHECKBOX*****************************/
+        ufCheckBox = (CheckBox)findViewById(R.id.ufCheckbox);
+        checkboxEmDialise = (CheckBox)findViewById(R.id.checkboxEmDialise);
+        checkboxEmDialise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checkboxEmDialise.isChecked())
+                    dialiseItensLayout.setVisibility(View.GONE);
+                else
+                    dialiseItensLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        /**************************CHECKBOX*****************************/
+
+        /**************************VIEW*********************************/
+        dialiseItensLayout = findViewById(R.id.dialiseItensLayout);
+        emDialise = findViewById(R.id.emDialise);
+        emDialise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkboxEmDialise.isChecked()) {
+                    if(dialiseItensLayout.isShown())
+                        dialiseItensLayout.setVisibility(View.GONE);
+                    else
+                        dialiseItensLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        /**************************VIEW*********************************/
+
+        /**************************RADIOGROUP***************************/
+        urinaRadioGroup = (RadioGroup)findViewById(R.id.urinaRadioGroup);
+        /**************************RADIOGROUP***************************/
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +84,7 @@ public class RenalActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
-                // verificaCamposENotificaAdapter();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -61,11 +96,43 @@ public class RenalActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
-                // verificaCamposENotificaAdapter();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
 
+        setRenalFromDatabase();
+    }
+
+
+    private void setRenalFromDatabase(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getRenal()!=null){
+            Renal renal = ficha.getRenal();
+            if(renal.getPeso()>0)
+                peso.setText(Integer.toString(renal.getPeso()));
+            if(renal.getUrina()!=null){
+                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.urinaRadioGroup);
+                for(int i=0;i<radioGroup.getChildCount();i++) {
+                    View v = radioGroup.getChildAt(i);
+                    AppCompatRadioButton appCompatRadioButton = (AppCompatRadioButton)v;
+                    if(appCompatRadioButton.getText().toString().equals(renal.getUrina())) {
+                        appCompatRadioButton.setChecked(true);
+                        break;
+                    }
+                }
+            }
+            if(renal.isDialise()){
+                checkboxEmDialise.setChecked(true);
+                dialiseItensLayout.setVisibility(View.VISIBLE);
+                if(renal.isUF())
+                    ufCheckBox.setChecked(true);
+                if(renal.getVolume()>0)
+                    volumeDialise.setText(Integer.toString(renal.getVolume()));
+                if(renal.getTempo()>0)
+                    tempoDialise.setText(Integer.toString(renal.getTempo()));
+            }
+        }
     }
 
     @Override
@@ -76,68 +143,41 @@ public class RenalActivity extends GenericoActivity {
 
     @Override
     public void onBackPressed(){
-        // verificaCamposENotificaAdapter();
+        verificaCamposENotificaAdapter();
         finish();
     }
 
     private void verificaCamposENotificaAdapter() {
         realm.beginTransaction();
-        int i=0;
         Renal renal = realm.createObject(Renal.class);
-        if(!isTextInputEditTextEmpty(diureseTxt)) {
-            renal.setDiurese(Integer.parseInt(diureseTxt.getText().toString()));
-            i++;
+        if(!isTextInputEditTextEmpty(peso))
+            renal.setPeso(Integer.parseInt(peso.getText().toString()));
+        if(urinaRadioGroup.getCheckedRadioButtonId()!=-1)
+            renal.setUrina(getStringOfRadioButtonSelectedFromRadioGroup(urinaRadioGroup));
+        if(checkboxEmDialise.isChecked()){
+            renal.setDialise(true);
+            if(ufCheckBox.isChecked())
+                renal.setUF(true);
+            if(!isTextInputEditTextEmpty(volumeDialise))
+                renal.setVolume(Integer.parseInt(volumeDialise.getText().toString()));
+            if(!isTextInputEditTextEmpty(tempoDialise))
+                renal.setTempo(Integer.parseInt(tempoDialise.getText().toString()));
         }
-        if(!isTextInputEditTextEmpty(pesoTxt)) {
-            renal.setPeso(Integer.parseInt(pesoTxt.getText().toString()));
-            i++;
-        }
-        if(!isTextInputEditTextEmpty(balancoHidricoTxt)) {
-            renal.setBalancoHidrico(Integer.parseInt(balancoHidricoTxt.getText().toString()));
-            i++;
-        }
-        if(renalS.isChecked()) {
-            renal.setDialise(1);
-            i++;
-        }
-        if(renalN.isChecked()) {
-            renal.setDialise(0);
-            i++;
-        }
-        if(i==4) {
-            Ficha r = getProperFicha();
-            r.setRenal(renal);
-            realm.copyToRealmOrUpdate(r);
-            changeCardColor();
-        }
+        Ficha r = getProperFicha();
+        r.setRenal(renal);
+        realm.copyToRealmOrUpdate(r);
         realm.commitTransaction();
+        if(renal.checkObject())
+            changeCardColorToGreen();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home) {
-            //verificaCamposENotificaAdapter();
+            verificaCamposENotificaAdapter();
             finish();
         }
         return true;
-    }
-
-    public void dialiseRadioButtonClicked (View view){
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.simDialise:
-                if (checked)
-                    if(!dialiseItensLayout.isShown())
-                        myAnimation.slideDownView(getApplicationContext(),dialiseItensLayout);
-                break;
-            case R.id.naoDialise:
-                if (checked)
-                    if(dialiseItensLayout.isShown())
-                        myAnimation.slideUpView(getApplicationContext(),dialiseItensLayout);
-                break;
-        }
     }
 }

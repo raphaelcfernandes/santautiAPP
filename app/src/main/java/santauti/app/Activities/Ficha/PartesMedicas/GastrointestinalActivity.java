@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -14,7 +13,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Gastrointestinal;
@@ -47,7 +45,7 @@ public class GastrointestinalActivity extends GenericoActivity {
                     massasPalpaveisItensLayout.setVisibility(View.VISIBLE);
             }
         });
-        viscerasPalpaveisCheckBox = (CheckBox) findViewById(R.id.checkboxViscerasPalpaveis);
+        viscerasPalpaveisCheckBox = (CheckBox) findViewById(R.id.checkboxEmDialise);
         viscerasPalpaveisCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +70,7 @@ public class GastrointestinalActivity extends GenericoActivity {
             }
         });
         viscerasPalpaveisItensLayout = findViewById(R.id.viscerasPalpaveisItensLayout);
-        viscerasPalpaveis = findViewById(R.id.viscerasPalpaveis);
+        viscerasPalpaveis = findViewById(R.id.emDialise);
         viscerasPalpaveis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -246,7 +244,7 @@ public class GastrointestinalActivity extends GenericoActivity {
         r.setGastrointestinal(gastrointestinal);
         realm.copyToRealmOrUpdate(r);
         if (gastrointestinal.checkObject())
-            changeCardColor();
+            changeCardColorToGreen();
         realm.commitTransaction();
     }
 
@@ -273,47 +271,19 @@ public class GastrointestinalActivity extends GenericoActivity {
                 viscerasPalpaveisCheckBox.setChecked(true);
                 viscerasPalpaveisItensLayout.setVisibility(View.VISIBLE);
             }
-            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.gastroIntestinalItens);
-            for(int i=0;i<linearLayout.getChildCount();i++) {
-                View v = linearLayout.getChildAt(i);
-                if (v instanceof LinearLayout) {
-                    for (int j = 0; j < ((LinearLayout) v).getChildCount(); j++) {
-                        View view = ((LinearLayout) v).getChildAt(j);
-                        if (view instanceof RadioGroup) {
-                            for (int k = 0; k < ((RadioGroup) view).getChildCount(); k++) {
-                                View view1 = ((RadioGroup)view).getChildAt(k);
-                                AppCompatRadioButton appCompatRadioButton = (AppCompatRadioButton)view1;
-                                if(appCompatRadioButton.getText().toString().equals(gastrointestinal.getAscite())
-                                        || appCompatRadioButton.getText().toString().equals(gastrointestinal.getFormato())
-                                        || appCompatRadioButton.getText().toString().equals(gastrointestinal.getRuidos())
-                                        || appCompatRadioButton.getText().toString().equals(gastrointestinal.getTensao()))
-                                    appCompatRadioButton.setChecked(true);
-                            }
-                        }
-                    }
-                }
-            }
+            if(gastrointestinal.getFormato()!=null)
+                setRadioButtonFromIdAndDatabase(R.id.formato,gastrointestinal.getFormato());
+            if(gastrointestinal.getRuidos()!=null)
+                setRadioButtonFromIdAndDatabase(R.id.ruidos,gastrointestinal.getRuidos());
+            if(gastrointestinal.getTensao()!=null)
+                setRadioButtonFromIdAndDatabase(R.id.tensao,gastrointestinal.getTensao());
+            if(gastrointestinal.getAscite()!=null)
+                setRadioButtonFromIdAndDatabase(R.id.ascite,gastrointestinal.getAscite());
             if(!gastrointestinal.getViscerasPalpaveis().isEmpty())
-                preencheCheckBoxMassasOuViscerasById(R.id.viscerasPalpaveisItensLayout,gastrointestinal.getViscerasPalpaveis());
+                preencheCheckboxes(R.id.viscerasPalpaveisItensLayout,gastrointestinal.getViscerasPalpaveis());
             if(!gastrointestinal.getMassasPalpaveis().isEmpty())
-                preencheCheckBoxMassasOuViscerasById(R.id.massasPalpaveisItensLayout,gastrointestinal.getMassasPalpaveis());
+                preencheCheckboxes(R.id.massasPalpaveisItensLayout,gastrointestinal.getMassasPalpaveis());
         }
     }
 
-    private void preencheCheckBoxMassasOuViscerasById(int id, RealmList<RealmString> realmStrings){
-        for(RealmString realmString : realmStrings){
-            LinearLayout linearLayout = (LinearLayout) findViewById(id);
-            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                View v = linearLayout.getChildAt(i);
-                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
-                    View view = ((RelativeLayout) v).getChildAt(k);
-                    if (view instanceof AppCompatCheckBox) {
-                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                        if (cb.getText().toString().equals(realmString.getName()))
-                            cb.setChecked(true);
-                    }
-                }
-            }
-        }
-    }
 }

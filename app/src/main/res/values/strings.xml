@@ -33,10 +33,7 @@
     <string name="registroMedico">registroMedico</string>
     <string name="tipoProfissional">tipoProfissional</string>
     <string name="Ritmo">Ritmo</string>
-    <string name="GasometriaArterial">Gasometria Arterial</string>
     <string name="Hidratacao">Hidratação</string>
-    <string name="DisturbioEletrolitico">Disturbio Eletrolítico</string>
-    <string name="AcidoseMetabolica">Acidose Metabólica</string>
     <string name="FrequenciaCardiaca">Frequência Cardíaca</string>
     <string name="FrequenciaRespiratoria">Frequencia Respiratória</string>
     <string name="Temperatura">Temperatura</string>
@@ -73,19 +70,13 @@
     <string name="MurmurioVesicular">Murmúrio Vesicular</string>
     <string name="Sibilos">Sibilos</string>
     <string name="Crepitacoes">Crepitações</string>
-    <string name="Base">Base</string>
-    <string name="BaseMurmurio">Base Murmurio Vesicular</string>
-    <string name="TercoMedio">Terço Médio</string>
-    <string name="TercoMedioMurmurioVesicular">Terço Médio Murmurio Vesicular</string>
     <string name="Apice">Ápice</string>
-    <string name="ApiceMurmurioVesicular">Ápice Murmurio Vesicular</string>
     <string name="UsoDeOxigenio">Uso de Oxigênio</string>
     <string name="Fluxo">Fluxo</string>
     <string name="Cancelar">Cancelar</string>
     <string name="Selecionar">Selecionar</string>
     <string name="MascaraVenturi">Máscara de Venturi</string>
     <string name="Roncos">Roncos</string>
-    <string name="AdicionarDispositivo">Adicionar Dispositivo</string>
     <string name="Volume">Volume</string>
     <string name="VolumeMl">Volume/ml</string>
     <string name="IPAP">IPAP</string>
@@ -117,26 +108,20 @@
     <string name="PensamentoDesorganizadoHint2">O paciente é capaz de seguir comandos durante toda a entrevista?</string>
     <string name="DeficitMotor">Déficit Motor</string>
     <string name="Paresia">Paresia</string>
-    <string name="ProporcaoParesia">Proporção de Paresia</string>
     <string name="Plegia">Plegia</string>
-    <string name="ProporcaoPlegia">Proporção de Plegia</string>
-    <string name="Presente">Presente</string>
     <string name="Ausente">Ausente</string>
     <string name="ParametrosRespirador">Paramêtros</string>
     <string name="UF">UF</string>
     <string name="TempoHora">Tempo/Hora</string>
-    <string name="Heparina">Heparina</string>
     <string name="Nutricional">Nutricional</string>
     <string name="PelesMucosas">Peles e Mucosas</string>
     <string name="OsteoMuscular">Osteomuscular</string>
-    <string name="Ingestao">Ingestão</string>
     <string name="Pele">Pele</string>
-    <string name="UlceraPressao">Ulcera de Pressão</string>
+    <string name="UlceraPressao">Ulcera por Pressão</string>
     <string name="Mucosas">Mucosas</string>
     <string name="Musculatura">Musculatura</string>
     <string name="CurvaGlicemica">Curva Glicêmica</string>
     <string name="Evacuacoes">Evacuações</string>
-    <string name="AspectoFezes">Aspecto das Fezes</string>
     <string name="NumeroEventos">Número de Eventos</string>
     <string name="Nutricao">Nutrição</string>
     <string name="Eletrolitos">Eletrólitos</string>
@@ -177,7 +162,6 @@
     <string name="DireitaMesquerda">Direita > Esquerda</string>
     <string name="Reativo">Reativo</string>
     <string name="NaoReativo">Não Reativo</string>
-    <string name="Nenhum">Nenhum</string>
     <string name="Hiperfonetica">Hiperfoneticas</string>
     <string name="Normofonetica">Normofoneticas</string>
     <string name="Hipofonetica">Hipofoneticas</string>
@@ -221,8 +205,6 @@
     <string name="Insulina"> Insulina</string>
     <string name="Hidrocortisona">Hidrocortisona</string>
     <string name="Polimixina">Polimixina</string>
-    <string name="FormatoAbdome">Formato Abdome</string>
-    <string name="Tensao">Tensão</string>
     <string name="RuidosHidroaereos">Ruídos Hidroaereos</string>
     <string name="MassasPalpaveis">Massas Palpáveis</string>
     <string name="ViscerasPalpaveis">Visceras Palpáveis</string>
@@ -233,12 +215,8 @@
     <string name="Reduzido">Reduzido</string>
     <string name="Fisiologico">Fisiológico</string>
     <string name="Aumentado">Aumentado</string>
-    <string name="Glicemias">Glicemias</string>
-    <string name="PicosHiperglicemias">Picos de Hiperglicemias</string>
-    <string name="PicosHipoglicemias">Picos de Hipoglicemias</string>
     <string name="Ressecada">Ressecada</string>
     <string name="EmMelhora">Em Melhora</string>
-    <string name="EmPiora">Em Piora</string>
     <string name="Estaveis">Estáveis</string>
     <string name="Afebril">Afebril</string>
     <string name="Febril">Febril</string>
@@ -271,21 +249,12 @@
     <string name="Desidratado">Desidratado</string>
     <string name="Edemaciado">Edemaciado</string>
     <string name="NormoHidratado">Normo Hidratado</string>
-    <string name="Pneumotorax">Pneumotorax</string>
-    <string name="Atelectasia">Atelectasia</string>
-    <string name="InfiltradosNovos">InfiltradosNovos</string>
     <string name="Acidose">Acidose</string>
     <string name="Alcalose">Alcalose</string>
     <string name="Respiratoria">Respiratoria</string>
     <string name="Metabolica">Metabólica</string>
     <string name="Compensada">Compensada</string>
     <string name="Descompensada">Descompensada</string>
-    <string name="BilirrubinasElevadas">Bilirrubinas Elevadas</string>
-    <string name="BilirrubinasNormais">Bilirrubinas Normais</string>
-    <string name="FAGGTElevadas">FA/GGT Elevadas</string>
-    <string name="FAGGTNormais">FA/GGT Normais</string>
-    <string name="TransaminasesElevadas">Transaminases Elevadas</string>
-    <string name="TransaminasesNormais">Transaminases Normais</string>
     <string name="HeparinaFracionada">Heparina Fracionada</string>
     <string name="HeparinaNaoFracionada">Heparina Não Fracionada</string>
     <string name="Tonus">Tonus</string>
@@ -326,7 +295,35 @@
     <string name="FossaIliacaDireita">Fossa Iliaca Direita</string>
     <string name="FossaIliacaEsquerda">Fossa Iliaca Esquerda</string>
     <string name="Hipogastrio">Hipogastrio</string>
-
+    <string name="Hipertrofico">Hipertrofico</string>
+    <string name="Normotrofico">Normotrofico</string>
+    <string name="Hipotrofico">Hipotrofico</string>
+    <string name="Hipertonico">Hipertonico</string>
+    <string name="Normotonico">Normotonico</string>
+    <string name="Hipotonico">Hipotonico</string>
+    <string name="Hematuria">Hematuria</string>
+    <string name="Sinusal">Sinusal</string>
+    <string name="FibrilacaoAtrial">Fibrilação Atrial</string>
+    <string name="FlutterAtrial">Flutter Atrial</string>
+    <string name="Juncional">Juncional</string>
+    <string name="Idioventricular">Idioventricular</string>
+    <string name="RitmoMarcapasso">Ritmo de Marcapasso</string>
+    <string name="EmMascaraVenturi">Em Máscara de Venturi</string>
+    <string name="EmMascaraReinalacao">Em Máscara de Reinalação</string>
+    <string name="SobCateterNasal">Sob Cateter Nasal</string>
+    <string name="Percent24">24% (azul)</string>
+    <string name="Percent28">28% (amarelo)</string>
+    <string name="Percent31">31% (branco)</string>
+    <string name="Percent35">35% (verde)</string>
+    <string name="Percent40">40% (rosa)</string>
+    <string name="Percent50">50% (laranja)</string>
+    <string name="Ictericia">Icterícia</string>
+    <string name="Sacra">Sacra</string>
+    <string name="Calcaneo">Calcâneo</string>
+    <string name="Nadegas">Nádegas</string>
+    <string name="Trocanteres">Trocanteres</string>
+    <string name="Cotovelos">Cotovelos</string>
+    <string name="Tronco">Tronco</string>
 
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
@@ -339,14 +336,6 @@
 
 
     <!--ARRAYS-->
-    <string-array name="tiposTracado">
-        <item>Sinusal</item>
-        <item>Fibrilação atrial</item>
-        <item>Flutter atrial</item>
-        <item>Juncional</item>
-        <item>Idioventricular</item>
-        <item>Ritmo de marcapasso</item>
-    </string-array>
 
     <string-array name="rass">
         <item>\u002b4. Violento, risco para equipe.</item>
@@ -359,76 +348,6 @@
         <item>\u002d3. Abertura ocular ao estímulo verbal, sem contato visual.</item>
         <item>\u002d4. Sem resposta ao estímulo verbal, abertura ocular ao toque.</item>
         <item>\u002d5. Sem resposta ao estímulo verbal ou físico.</item>
-    </string-array>
-
-    <string-array name="hidratacao">
-        <item>Edemaciado/Hiper Hidratado</item>
-        <item>Normo Hidratado</item>
-        <item>Desidratado</item>
-    </string-array>
-
-    <string-array name="disturbioEletrolitico">
-        <item>Hipernatremia</item>
-        <item>Hiponatremia</item>
-        <item>Hipercalemia</item>
-        <item>Hipocalemia</item>
-        <item>Hipermagnesemia</item>
-        <item>Hipomagnesemia</item>
-        <item>Hipofosfatemia</item>
-        <item>Hiperfosfatemia</item>
-    </string-array>
-
-    <string-array name="intensidadeSopro">
-        <item>+1</item>
-        <item>+2</item>
-        <item>+3</item>
-        <item>+4</item>
-        <item>+5</item>
-        <item>+6</item>
-    </string-array>
-
-    <string-array name="tromboprofilaxia">
-        <item>Heparina Fracionada</item>
-        <item>Heparina Não Fracionada</item>
-    </string-array>
-
-    <string-array name="curvaTermica">
-        <item>Febril</item>
-        <item>Afebril</item>
-        <item>Subfebril</item>
-    </string-array>
-
-    <string-array name="marcadoresInfeccao">
-        <item>Estáveis</item>
-        <item>Em melhora</item>
-        <item>Em piora</item>
-    </string-array>
-
-    <string-array name="respiratorioIndices">
-        <item>Fisiológico</item>
-        <item>Reduzido</item>
-        <item>Aumentado</item>
-        <item>Abolido</item>
-    </string-array>
-
-    <string-array name="direito_esquerdo_ambos">
-        <item>Direito</item>
-        <item>Esquerdo</item>
-        <item>Ambos</item>
-    </string-array>
-
-    <string-array name="usoDeOxigenio">
-        <item>Em Máscara de Venturi</item>
-        <item>Em Máscara de Reinalação</item>
-        <item>Sob Cateter Nasal</item>
-        <item>Não</item>
-    </string-array>
-
-    <string-array name="modoVentilatorio">
-        <item>PCV</item>
-        <item>VCV</item>
-        <item>PSV</item>
-        <item>SIMV</item>
     </string-array>
 
     <string-array name="nivelConsciencia">
@@ -474,63 +393,6 @@
         <item>6 \u002d Obedece Comandos.</item>
     </string-array>
 
-    <string-array name="simetriaPupila">
-        <item>Isocóricas</item>
-        <item>Anisocóricas</item>
-    </string-array>
-
-    <string-array name="membrosDeficit">
-        <item>Membro Superior Direito</item>
-        <item>Membro Superior Esquerdo</item>
-        <item>Membro Inferior Direito</item>
-        <item>Membro Inferior Esquerdo</item>
-    </string-array>
-
-    <string-array name="ingestao">
-        <item>Calórica</item>
-        <item>Proteica</item>
-        <item>Lipídica</item>
-        <item>Carboidratos</item>
-        <item>Balanço Hidrogenado</item>
-    </string-array>
-
-    <string-array name="mucosas">
-        <item>Normocoradas</item>
-        <item>Hipocoradas</item>
-        <item>Icterico</item>
-        <item>Anicterico</item>
-        <item>Secas</item>
-        <item>Hidratadas</item>
-        <item>Hiperhidratadas</item>
-    </string-array>
-
-    <string-array name="musculatura">
-        <item>Hipertrofica</item>
-        <item>Hipotrofica</item>
-        <item>Eutrofica</item>
-        <item>Hipertonica</item>
-        <item>Hipotonica</item>
-        <item>Eutonica</item>
-    </string-array>
-
-    <string-array name="curvaGlicemica">
-        <item>Normoglicemia</item>
-        <item>Eventos de Hipoglicemia</item>
-        <item>Eventos de Hiperglicemia</item>
-    </string-array>
-
-    <string-array name="aspectoFezes">
-        <item>Diarreicas</item>
-        <item>Normais</item>
-        <item>Endurecidas</item>
-    </string-array>
-
-    <string-array name="nutricao">
-        <item>Oral</item>
-        <item>Enteral</item>
-        <item>Gastrica</item>
-    </string-array>
-
     <string-array name="antibioticos">
         <item>Ceftriaxone</item>
         <item>Azitromicina</item>
@@ -558,17 +420,6 @@
         <item>Amoxicilina-clavulanato</item>
     </string-array>
 
-    <string-array name="gasometriaArterial">
-        <item>Acidose Respiratoria Compensada</item>
-        <item>Acidose Respiratoria Descompensada</item>
-        <item>Alcalose Respiratoria Compensada</item>
-        <item>Alcalose Respiratoria Descompensada</item>
-        <item>Acidose Metabolica Compensada</item>
-        <item>Acidose Metabolica Descompensada</item>
-        <item>Alcalose Metabolica Compensada</item>
-        <item>Alcalose Metabolica Descompensada</item>
-    </string-array>
-
     <string-array name="raioxTorax">
         <item>Normal</item>
         <item>Pneumotorax</item>
@@ -582,48 +433,6 @@
         <item>Em Melhora</item>
         <item>Em Piora</item>
     </string-array>
-
-
-    <string-array name="desorientado">
-        <item>No Espaco</item>
-        <item>No Tempo</item>
-    </string-array>
-
-    <string-array name="dispositivos">
-        <item>Cateter Venoso Central</item>
-        <item>Venoclise</item>
-        <item>Sonda Vesical</item>
-        <item>Sonda Enteral</item>
-        <item>Sonda Gastrica</item>
-        <item>Cateter de PAI</item>
-        <item>Tubo Orotraqueal</item>
-        <item>Traqueostomia</item>
-        <item>Gastrostomia</item>
-        <item>Cateter de PIC</item>
-        <item>Dreno Abdominal</item>
-        <item>Dreno de Torax</item>
-        <item>Balão Intra-Aórtico</item>
-    </string-array>
-
-    <string-array name="crepitacoes">
-        <item>Ápice</item>
-        <item>Base Direita</item>
-        <item>Base Esquerda</item>
-        <item>Terço Médio Direito</item>
-        <item>Terço Médio Esquerdo</item>
-    </string-array>
-
-    <string-array name="murmurioVesicular">
-        <item>Aumentado</item>
-        <item>Ápice</item>
-        <item>Base Direita</item>
-        <item>Base Esquerda</item>
-        <item>Fisiológico</item>
-        <item>Reduzido</item>
-        <item>Terço Médio Direito</item>
-        <item>Terço Médio Esquerdo</item>
-    </string-array>
-
 
 
     <!--ARRAYS-->

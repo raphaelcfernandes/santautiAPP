@@ -1,23 +1,25 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.RealmObjects.RealmString;
+import santauti.app.Model.Ficha.Respiratorio;
 import santauti.app.R;
 
 /**
@@ -25,19 +27,19 @@ import santauti.app.R;
  */
 
 public class RespiratorioActivity extends GenericoActivity {
-    private int mascaraVenturiSelection=-1,usoDeOxigenioSelection=-1;
     private View pressaoCuff_layout,murmurioVesicularItensLayout;
-    private View localizacaoCanula_layout,roncosItensLayout;
+    private View roncosItensLayout,sibilosItensLayout,crepitacoesItensLayout;
     private View mascaraDeVenturi_layout, fluxoOxigenio_layout;
-    private TextView murmurioVesicularTextView;
-    private TextView mascaraVenturiSelected;
-    private TextView usoDeOxigenioTextView;
     private Realm realm;
     private Ficha ficha;
     private MyAnimation myAnimation;
     private Intent intent;
-    private RadioButton viasAereasNatural,viasAereasTubo,viasAereasTraqueostomia,murmurioVesicularReduzido,murmurioVesicularFisiologico,murmurioVesicularAumentado;
-    private CheckBox checkboxRoncos;
+    private RadioButton viasAereasNatural,viasAereasTubo,viasAereasTraqueostomia,murmurioVesicularReduzido,
+            murmurioVesicularFisiologico,murmurioVesicularAumentado,emMascaraVenturi,sobCateterNasal,emMascaraReinalacao,usoOxigenioNao;
+    private RadioButton r24,r28,r31,r35,r40,r50;
+    private CheckBox checkboxRoncos,checkboxCrepitacoes,checkboxSibilos;
+    private RadioGroup usoOxigenioRadioGroup1,usoOxigenioRadioGroup2,mascaraVenturiRadioGroup1,mascaraVenturiRadioGroup2;
+    private TextInputEditText pressaoCuff,fluxoOxigenio;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,30 +49,144 @@ public class RespiratorioActivity extends GenericoActivity {
         setupUI(findViewById(R.id.respiratorio_activity));
         /**************************VIEWS**************************/
         pressaoCuff_layout = findViewById(R.id.pressaoCuff_layout);
-        localizacaoCanula_layout = findViewById(R.id.localizacaoCanula_layout);
         mascaraDeVenturi_layout = findViewById(R.id.mascaVenturi);
         fluxoOxigenio_layout = findViewById(R.id.fluxoOxigenioLayout);
-        mascaraVenturiSelected = (TextView)findViewById(R.id.mascaraVenturiSelected);
-        usoDeOxigenioTextView = (TextView)findViewById(R.id.usoDeOxigenioSelected);
-        viasAereasNatural = (RadioButton)findViewById(R.id.viasAereasNatural);
-        viasAereasTubo = (RadioButton)findViewById(R.id.viasAereasTubo);
-        viasAereasTraqueostomia = (RadioButton)findViewById(R.id.viasAereasTraqueostomia);
-        murmurioVesicularReduzido = (RadioButton)findViewById(R.id.murmurioVesicularReduzido);
-        murmurioVesicularFisiologico = (RadioButton)findViewById(R.id.murmurioVesicularFisiologico);
-        murmurioVesicularAumentado = (RadioButton)findViewById(R.id.murmurioVesicularAumentado);
         murmurioVesicularItensLayout = findViewById(R.id.murmursioVesicularItens);
         roncosItensLayout = findViewById(R.id.roncosItensLayout);
+        sibilosItensLayout = findViewById(R.id.sibilosItensLayout);
+        crepitacoesItensLayout = findViewById(R.id.crepitacoesItensLayout);
+        /**************************VIEWS**************************/
+
+        /*************************RADIOGROUP**********************/
+        usoOxigenioRadioGroup1 = (RadioGroup)findViewById(R.id.usoOxigenioRadioGroup1);
+        usoOxigenioRadioGroup2 = (RadioGroup)findViewById(R.id.usoOxigenioRadioGroup2);
+        mascaraVenturiRadioGroup1 = (RadioGroup)findViewById(R.id.mascaraVenturiRadioGroup1);
+        mascaraVenturiRadioGroup2 = (RadioGroup)findViewById(R.id.mascaraVenturiRadioGroup2);
+        /*************************RADIOGROUP**********************/
+
+        /**************************RADIOBUTTON*********************/
+        viasAereasNatural = (RadioButton)findViewById(R.id.viasAereasNatural);
+        viasAereasNatural.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pressaoCuff_layout.isShown())
+                    myAnimation.slideUpView(getApplicationContext(),pressaoCuff_layout);
+            }
+        });
+        viasAereasTubo = (RadioButton)findViewById(R.id.viasAereasTubo);
+        viasAereasTubo.setOnClickListener(showPressaoCuffELocalizacaoCanula);
+        viasAereasTraqueostomia = (RadioButton)findViewById(R.id.viasAereasTraqueostomia);
+        viasAereasTraqueostomia.setOnClickListener(showPressaoCuffELocalizacaoCanula);
+        murmurioVesicularReduzido = (RadioButton)findViewById(R.id.murmurioVesicularReduzido);
+        murmurioVesicularReduzido.setOnClickListener(showMurmurioVesicular);
+        murmurioVesicularFisiologico = (RadioButton)findViewById(R.id.murmurioVesicularFisiologico);
+        murmurioVesicularFisiologico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(murmurioVesicularItensLayout.isShown())
+                    myAnimation.slideUpView(getApplicationContext(),murmurioVesicularItensLayout);
+            }
+        });
+        murmurioVesicularAumentado = (RadioButton)findViewById(R.id.murmurioVesicularAumentado);
+        murmurioVesicularAumentado.setOnClickListener(showMurmurioVesicular);
+        emMascaraVenturi = (RadioButton)findViewById(R.id.emMascaraVenturi);
+        emMascaraVenturi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fluxoOxigenio_layout.isShown())
+                    fluxoOxigenio_layout.setVisibility(View.GONE);
+                if(!mascaraDeVenturi_layout.isShown())
+                    myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
+                if(usoOxigenioRadioGroup2.getCheckedRadioButtonId()!=-1)
+                    usoOxigenioRadioGroup2.clearCheck();
+            }
+        });
+        emMascaraReinalacao = (RadioButton)findViewById(R.id.emMascaraReinalacao);
+        emMascaraReinalacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mascaraDeVenturi_layout.isShown())
+                    mascaraDeVenturi_layout.setVisibility(View.GONE);
+                if(!fluxoOxigenio_layout.isShown())
+                    myAnimation.slideDownView(getApplicationContext(),fluxoOxigenio_layout);
+                if(usoOxigenioRadioGroup1.getCheckedRadioButtonId()!=-1)
+                    usoOxigenioRadioGroup1.clearCheck();
+            }
+        });
+        sobCateterNasal = (RadioButton)findViewById(R.id.sobCateterNasal);
+        sobCateterNasal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mascaraDeVenturi_layout.isShown())
+                    mascaraDeVenturi_layout.setVisibility(View.GONE);
+                if(!fluxoOxigenio_layout.isShown())
+                    myAnimation.slideDownView(getApplicationContext(),fluxoOxigenio_layout);
+                if(usoOxigenioRadioGroup2.getCheckedRadioButtonId()!=-1)
+                    usoOxigenioRadioGroup2.clearCheck();
+            }
+        });
+        usoOxigenioNao = (RadioButton)findViewById(R.id.usoOxigenioNao);
+        usoOxigenioNao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mascaraDeVenturi_layout.isShown())
+                    myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
+                if(fluxoOxigenio_layout.isShown())
+                    myAnimation.slideUpView(getApplicationContext(),fluxoOxigenio_layout);
+                if(usoOxigenioRadioGroup1.getCheckedRadioButtonId()!=-1)
+                    usoOxigenioRadioGroup1.clearCheck();
+            }
+        });
+        r24 = (RadioButton)findViewById(R.id.r24);
+        r24.setOnClickListener(clearCheckMascaraVenturiRadioGroup2);
+        r28 = (RadioButton)findViewById(R.id.r28);
+        r28.setOnClickListener(clearCheckMascaraVenturiRadioGroup2);
+        r31 = (RadioButton)findViewById(R.id.r31);
+        r31.setOnClickListener(clearCheckMascaraVenturiRadioGroup2);
+        r35 = (RadioButton)findViewById(R.id.r35);
+        r35.setOnClickListener(clearCheckMascaraVenturiRadioGroup1);
+        r40 = (RadioButton)findViewById(R.id.r40);
+        r40.setOnClickListener(clearCheckMascaraVenturiRadioGroup1);
+        r50 = (RadioButton)findViewById(R.id.r50);
+        r50.setOnClickListener(clearCheckMascaraVenturiRadioGroup1);
+        /**************************RADIOBUTTON*********************/
+
+        /**************************TEXTINPUTEDITTEXT***************/
+        pressaoCuff = (TextInputEditText)findViewById(R.id.pressaoCuff);
+        fluxoOxigenio = (TextInputEditText)findViewById(R.id.fluxoOxigenio);
+        /**************************TEXTINPUTEDITTEXT***************/
+        /**************************CHECKBOX************************/
+        checkboxSibilos = (CheckBox)findViewById(R.id.checkboxSibilos);
+        checkboxSibilos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checkboxSibilos.isChecked() && sibilosItensLayout.isShown())
+                    myAnimation.slideUpView(getApplicationContext(),sibilosItensLayout);
+                if(checkboxSibilos.isChecked() && !sibilosItensLayout.isShown())
+                    myAnimation.slideDownView(getApplicationContext(), sibilosItensLayout);
+            }
+        });
+        checkboxCrepitacoes = (CheckBox)findViewById(R.id.checkboxCrepitacoes);
+        checkboxCrepitacoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checkboxCrepitacoes.isChecked() && crepitacoesItensLayout.isShown())
+                    myAnimation.slideUpView(getApplicationContext(),crepitacoesItensLayout);
+                if(checkboxCrepitacoes.isChecked() && !crepitacoesItensLayout.isShown())
+                    myAnimation.slideDownView(getApplicationContext(), crepitacoesItensLayout);
+            }
+        });
         checkboxRoncos = (CheckBox)findViewById(R.id.checkboxRoncos);
         checkboxRoncos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!checkboxRoncos.isChecked())
+                if(!checkboxRoncos.isChecked() && roncosItensLayout.isShown())
                     myAnimation.slideUpView(getApplicationContext(), roncosItensLayout);
-                else
+                if(checkboxRoncos.isChecked() && !roncosItensLayout.isShown())
                     myAnimation.slideDownView(getApplicationContext(), roncosItensLayout);
             }
         });
-        /**************************VIEWS**************************/
+        /**************************CHECKBOX************************/
 
         prepareNavigationButtons();
 
@@ -101,30 +217,227 @@ public class RespiratorioActivity extends GenericoActivity {
 
         myAnimation = new MyAnimation();
         realm = Realm.getDefaultInstance();
+        setRespiratorioFromDataBase();
+    }
 
+    private View.OnClickListener clearCheckMascaraVenturiRadioGroup2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(mascaraVenturiRadioGroup2.getCheckedRadioButtonId()!=-1)
+                mascaraVenturiRadioGroup2.clearCheck();
+        }
+    };
+
+    private View.OnClickListener clearCheckMascaraVenturiRadioGroup1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(mascaraVenturiRadioGroup1.getCheckedRadioButtonId()!=-1)
+                mascaraVenturiRadioGroup1.clearCheck();
+        }
+    };
+    private View.OnClickListener showPressaoCuffELocalizacaoCanula = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(!pressaoCuff_layout.isShown())
+                myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
+        }
+    };
+
+    private View.OnClickListener showMurmurioVesicular = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(!murmurioVesicularItensLayout.isShown())
+                myAnimation.slideDownView(getApplicationContext(),murmurioVesicularItensLayout);
+        }
+    };
+
+    private void setRespiratorioFromDataBase(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getRespiratorio()!=null){
+            Respiratorio respiratorio = ficha.getRespiratorio();
+            if(respiratorio.getViasAereas()!=null) {
+                setRadioButtonFromIdAndDatabase(R.id.viasAereas, respiratorio.getViasAereas());
+                if(!respiratorio.getViasAereas().equals(getString(R.string.Natural))){
+                    myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
+                    if(respiratorio.getPressaoCuff()>0)
+                        pressaoCuff.setText(Integer.toString(respiratorio.getPressaoCuff()));
+                    if(respiratorio.getLocalizacaoCanula()!=null)
+                        setRadioButtonFromIdAndDatabase(R.id.pressaoCuff_layout,respiratorio.getLocalizacaoCanula());
+
+                }
+            }
+            if(respiratorio.getMurmurioVesicular()!=null){
+                setRadioButtonFromIdAndDatabase(R.id.murmurioVesicular,respiratorio.getMurmurioVesicular());
+                if(!respiratorio.getMurmurioVesicular().equals(getString(R.string.Fisiologico))){
+                    myAnimation.slideDownView(getApplicationContext(),murmurioVesicularItensLayout);
+                    preencheCheckboxes(R.id.murmursioVesicularItens,respiratorio.getLocalizacaoMurmurioVesicular());
+                }
+            }
+            if(respiratorio.getUsoOxigenio()!=null ){
+                setRadioButtonFromIdAndDatabase(R.id.usoOxigenio,respiratorio.getUsoOxigenio());
+                if(!respiratorio.getUsoOxigenio().equals(getString(R.string.Nao))){
+                    if(respiratorio.getUsoOxigenio().equals(getString(R.string.EmMascaraVenturi))){
+                        myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
+                        if(respiratorio.getMascaraVenturi()==24)
+                            r24.setChecked(true);
+                        else if(respiratorio.getMascaraVenturi()==28)
+                            r28.setChecked(true);
+                        else if(respiratorio.getMascaraVenturi()==31)
+                            r31.setChecked(true);
+                        else if(respiratorio.getMascaraVenturi()==35)
+                            r35.setChecked(true);
+                        else if(respiratorio.getMascaraVenturi()==40)
+                            r40.setChecked(true);
+                        else if(respiratorio.getMascaraVenturi()==50)
+                            r50.setChecked(true);
+                    }
+                    else{
+                        myAnimation.slideDownView(getApplicationContext(),fluxoOxigenio_layout);
+                        if(respiratorio.getFluxo()>0)
+                            fluxoOxigenio.setText(Integer.toString(respiratorio.getFluxo()));
+                    }
+                }
+            }
+            if(!respiratorio.getRoncos().isEmpty())
+                abreLayoutMarcaCheckboxEPreenche(checkboxRoncos,roncosItensLayout,R.id.roncosItensLayout,respiratorio.getRoncos());
+            if(!respiratorio.getSibilos().isEmpty())
+                abreLayoutMarcaCheckboxEPreenche(checkboxSibilos,sibilosItensLayout,R.id.sibilosItensLayout,respiratorio.getSibilos());
+            if(!respiratorio.getCrepitacoes().isEmpty())
+                abreLayoutMarcaCheckboxEPreenche(checkboxCrepitacoes,crepitacoesItensLayout,R.id.crepitacoesItensLayout,respiratorio.getCrepitacoes());
+        }
     }
 
     public void roncosOnClick(View view){
         if(roncosItensLayout.isShown())
             myAnimation.slideUpView(getApplicationContext(),roncosItensLayout);
         else
-            if(checkboxRoncos.isChecked())
-                myAnimation.slideDownView(getApplicationContext(),roncosItensLayout);
+        if(checkboxRoncos.isChecked())
+            myAnimation.slideDownView(getApplicationContext(),roncosItensLayout);
     }
 
+    public void sibilosOnClick(View view){
+        if(sibilosItensLayout.isShown())
+            myAnimation.slideUpView(getApplicationContext(),sibilosItensLayout);
+        else
+        if(checkboxSibilos.isChecked())
+            myAnimation.slideDownView(getApplicationContext(),sibilosItensLayout);
+    }
+
+    public void crepitacoesOnClick(View view){
+        if(crepitacoesItensLayout.isShown())
+            myAnimation.slideUpView(getApplicationContext(),crepitacoesItensLayout);
+        else
+        if(checkboxCrepitacoes.isChecked())
+            myAnimation.slideDownView(getApplicationContext(),crepitacoesItensLayout);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home) {
-            //verificaCamposENotificaAdapter();
+            verificaCamposENotificaAdapter();
             finish();
         }
         return true;
     }
 
     private void verificaCamposENotificaAdapter() {
+        realm.beginTransaction();
+        RadioGroup viasAereasRadioGroup = (RadioGroup)findViewById(R.id.viasAereasRadioGroup);
+        RadioGroup localizacaoCanula = (RadioGroup)findViewById(R.id.localizacaoCanula);
+        RadioGroup murmurioVesicular = (RadioGroup)findViewById(R.id.murmurioVesicularRadioGroup);
+        TextInputEditText pressaoCuff = (TextInputEditText)findViewById(R.id.pressaoCuff);
+        TextInputEditText fluxoOxigenio = (TextInputEditText)findViewById(R.id.fluxoOxigenio);
+        Respiratorio respiratorio = realm.createObject(Respiratorio.class);
+        if(viasAereasRadioGroup.getCheckedRadioButtonId()!=-1){
+            if(getStringOfRadioButtonSelectedFromRadioGroup(viasAereasRadioGroup).equals(getString(R.string.Natural)))
+                respiratorio.setViasAereas(getString(R.string.Natural));
+            else {
+                respiratorio.setViasAereas(getStringOfRadioButtonSelectedFromRadioGroup(viasAereasRadioGroup));
+                if(!isTextInputEditTextEmpty(pressaoCuff))
+                    respiratorio.setPressaoCuff(Integer.parseInt(pressaoCuff.getText().toString()));
+                if(localizacaoCanula.getCheckedRadioButtonId()!=-1)
+                    respiratorio.setLocalizacaoCanula(getStringOfRadioButtonSelectedFromRadioGroup(localizacaoCanula));
+            }
+        }
+        if(murmurioVesicular.getCheckedRadioButtonId()!=-1){
+            if(getStringOfRadioButtonSelectedFromRadioGroup(murmurioVesicular).equals(getString(R.string.Fisiologico)))
+                respiratorio.setMurmurioVesicular(getString(R.string.Fisiologico));
+            else{
+                respiratorio.setMurmurioVesicular(getStringOfRadioButtonSelectedFromRadioGroup(murmurioVesicular));
+                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.murmursioVesicularItens);
+                for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                    View v = linearLayout.getChildAt(i);
+                    if(v instanceof RelativeLayout){
+                        for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+                            View view = ((RelativeLayout) v).getChildAt(k);
+                            if (view instanceof AppCompatCheckBox) {
+                                AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                                if (cb.isChecked()) {
+                                    RealmString realmString = realm.createObject(RealmString.class);
+                                    realmString.setName(cb.getText().toString());
+                                    respiratorio.getLocalizacaoMurmurioVesicular().add(realmString);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(usoOxigenioRadioGroup1.getCheckedRadioButtonId()!=-1){
+            respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1));
+            if(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1).equals(getString(R.string.EmMascaraVenturi))){
+                if(mascaraVenturiRadioGroup1.getCheckedRadioButtonId()!=-1){
+                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent24)))
+                        respiratorio.setMascaraVenturi(24);
+                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent28)))
+                        respiratorio.setMascaraVenturi(28);
+                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent31)))
+                        respiratorio.setMascaraVenturi(31);
+                }
+                else if(mascaraVenturiRadioGroup2.getCheckedRadioButtonId()!=-1){
+                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent35)))
+                        respiratorio.setMascaraVenturi(35);
+                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent40)))
+                        respiratorio.setMascaraVenturi(40);
+                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent50)))
+                        respiratorio.setMascaraVenturi(50);
+                }
+            }
+            else{
+                respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1));
+                if(!isTextInputEditTextEmpty(fluxoOxigenio))
+                    respiratorio.setFluxo(Integer.parseInt(fluxoOxigenio.getText().toString()));
+            }
+        }
+        else if(usoOxigenioRadioGroup2.getCheckedRadioButtonId()!=-1){
+            respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup2));
+            if(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup2).equals(getString(R.string.EmMascaraReinalacao)) &&
+                    !isTextInputEditTextEmpty(fluxoOxigenio))
+                respiratorio.setFluxo(Integer.parseInt(fluxoOxigenio.getText().toString()));
+        }
+        if(checkboxRoncos.isChecked()){
+            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.roncosItensLayout);
+            for(RealmString realmString : realmStrings)
+                respiratorio.getRoncos().add(realmString);
+        }
+        if(checkboxSibilos.isChecked()){
+            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.sibilosItensLayout);
+            for(RealmString realmString : realmStrings)
+                respiratorio.getSibilos().add(realmString);
+        }
+        if(checkboxCrepitacoes.isChecked()){
+            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.crepitacoesItensLayout);
+            for(RealmString realmString : realmStrings)
+                respiratorio.getCrepitacoes().add(realmString);
+        }
 
+        Ficha r = getProperFicha();
+        r.setRespiratorio(respiratorio);
+        realm.copyToRealmOrUpdate(r);
+        realm.commitTransaction();
+        if(respiratorio.checkObject())
+            changeCardColorToGreen();
     }
 
     @Override
@@ -137,141 +450,6 @@ public class RespiratorioActivity extends GenericoActivity {
     public void onBackPressed(){
         verificaCamposENotificaAdapter();
         finish();
-    }
-
-    public void viasAereasOnClick(View view){
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.viasAereasNatural:
-                if(localizacaoCanula_layout.isShown() && pressaoCuff_layout.isShown()){
-                    myAnimation.slideUpView(getApplicationContext(),localizacaoCanula_layout);
-                    myAnimation.slideUpView(getApplicationContext(),pressaoCuff_layout);
-                }
-                break;
-            case R.id.viasAereasTraqueostomia:
-                if(!localizacaoCanula_layout.isShown() && !pressaoCuff_layout.isShown()) {
-                    myAnimation.slideDownView(getApplicationContext(),localizacaoCanula_layout);
-                    myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
-                }
-            case R.id.viasAereasTubo:
-                if(!localizacaoCanula_layout.isShown() && !pressaoCuff_layout.isShown()){
-                    myAnimation.slideDownView(getApplicationContext(),localizacaoCanula_layout);
-                    myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
-                }
-                break;
-        }
-
-    }
-
-    public void murmurioVesicularOnClick(View view){
-        switch(view.getId()) {
-            case R.id.murmurioVesicularReduzido:
-                if(!murmurioVesicularItensLayout.isShown())
-                    myAnimation.slideDownView(getApplicationContext(),murmurioVesicularItensLayout);
-                break;
-            case R.id.murmurioVesicularFisiologico:
-                if(murmurioVesicularItensLayout.isShown())
-                    myAnimation.slideUpView(getApplicationContext(),murmurioVesicularItensLayout);
-                break;
-            case R.id.murmurioVesicularAumentado:
-                if(!murmurioVesicularItensLayout.isShown())
-                    myAnimation.slideDownView(getApplicationContext(),murmurioVesicularItensLayout);
-                break;
-        }
-    }
-
-    public void usoDeOxigenioOnClick(View view){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(R.string.UsoDeOxigenio);
-
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.usoDeOxigenio);
-        builder.setSingleChoiceItems(items, usoDeOxigenioSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        usoDeOxigenioTextView.setText(items[which]);
-                        usoDeOxigenioTextView.setVisibility(View.VISIBLE);
-                        usoDeOxigenioSelection=which;
-                        //Caso seja mascara de venturi
-                        if(items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[0])){
-                            if(fluxoOxigenio_layout.isShown())
-                                myAnimation.slideUpView(getApplicationContext(),fluxoOxigenio_layout);
-                            if(!mascaraDeVenturi_layout.isShown())
-                                myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
-                        }
-                        //Mascara de inalaçao ou cateter nasal
-                        else if(items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[1]) ||
-                                items[which].equals(getResources().getStringArray(R.array.usoDeOxigenio)[2])){
-                            if(mascaraDeVenturi_layout.isShown())
-                                myAnimation.slideUpView(getApplicationContext(),mascaraDeVenturi_layout);
-                            if(!fluxoOxigenio_layout.isShown())
-                                myAnimation.slideDownView(getApplicationContext(),fluxoOxigenio_layout);
-                        }
-                        //Nao
-                        else{
-                            if(mascaraDeVenturi_layout.isShown() || fluxoOxigenio_layout.isShown()){
-                                myAnimation.slideUpView(getApplication(),mascaraDeVenturi_layout);
-                                myAnimation.slideUpView(getApplication(),fluxoOxigenio_layout);
-                            }
-                        }
-                        dialog.dismiss();
-                    }
-
-                });
-        String negativeText = getString(R.string.Cancelar);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
-    public void mascaraVenturiOnClick(final View view){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(RespiratorioActivity.this);
-        builder.setTitle(getString(R.string.MascaraVenturi));
-        LayoutInflater li = LayoutInflater.from(this);
-        View dialogView = li.inflate(R.layout.mascara_venturi_dialog,null);
-
-        final RadioGroup rg = (RadioGroup)dialogView.findViewById(R.id.mascaraVenturiRadioGroup);
-
-        rg.check(mascaraVenturiSelection);
-
-        builder.setView(dialogView);
-        builder.setPositiveButton(getString(R.string.Selecionar), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int selectedRadioButtonID = rg.getCheckedRadioButtonId();
-                RadioButton selectedRadioButton = (RadioButton)rg.findViewById(selectedRadioButtonID);
-                String selectedRadioButtonText = selectedRadioButton.getText().toString();
-                mascaraVenturiSelection = selectedRadioButtonID;
-                mascaraVenturiSelected.setText(selectedRadioButtonText);
-                mascaraVenturiSelected.setVisibility(View.VISIBLE);
-            }
-        });
-
-        builder.setNegativeButton(getString(R.string.Cancelar), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-
-        final AlertDialog dialog = builder.show();
-        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
-
-
     }
 
 }

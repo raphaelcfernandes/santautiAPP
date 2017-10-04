@@ -3,23 +3,15 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.PopupMenu;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import io.realm.Realm;
-import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Endocrino;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Infeccioso;
 import santauti.app.R;
 
 /**
@@ -28,7 +20,8 @@ import santauti.app.R;
 
 public class EndocrinoActivity extends GenericoActivity {
     private Realm realm;
-    private TextView menuCurvaGlicemica,curvaGlicemica;
+    private RadioButton normoGlicemia,eventosHipoglicemia,eventosHiperglicemia;
+    private RadioGroup curvaGlicemicaRadioGroup1,curvaGlicemicaRadioGroup2;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +31,32 @@ public class EndocrinoActivity extends GenericoActivity {
         prepareNavigationButtons();
         realm = Realm.getDefaultInstance();
 
-        menuCurvaGlicemica = (TextView)findViewById(R.id.menuCurvaGlicemica);
-        curvaGlicemica = (TextView)findViewById(R.id.curvaGlicemica);
+        /***********************RADIOGROUP**********************************/
+        curvaGlicemicaRadioGroup1 = (RadioGroup)findViewById(R.id.curvaGlicemicaRadioGroup1);
+        curvaGlicemicaRadioGroup2 = (RadioGroup)findViewById(R.id.curvaGlicemicaRadioGroup2);
+        /***********************RADIOGROUP**********************************/
+
+        /***********************RADIOBUTTON********************************/
+        normoGlicemia = (RadioButton)findViewById(R.id.normoGlicemia);
+        normoGlicemia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {curvaGlicemicaRadioGroup2.clearCheck();
+            }
+        });
+        eventosHipoglicemia = (RadioButton)findViewById(R.id.eventosHipoglicemia);
+        eventosHipoglicemia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {curvaGlicemicaRadioGroup1.clearCheck();
+            }
+        });
+        eventosHiperglicemia = (RadioButton)findViewById(R.id.eventosHiperglicemia);
+        eventosHiperglicemia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {curvaGlicemicaRadioGroup2.clearCheck();
+            }
+        });
+        /***********************RADIOBUTTON********************************/
+
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,13 +75,19 @@ public class EndocrinoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();
-                //verificaCamposENotificaAdapter();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
 
+        setEndocrinoFromDatabase();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
 
     @Override
     public void onBackPressed(){
@@ -83,40 +106,27 @@ public class EndocrinoActivity extends GenericoActivity {
     }
 
     public void verificaCamposENotificaAdapter(){
-//        if(endocrinoS.isChecked() || endocrinoN.isChecked()) {
-//            realm.beginTransaction();
-//            Endocrino endocrino = realm.createObject(Endocrino.class);
-//            endocrino.setUsoDeInsulinaBombaInfusao(usoInsulinaBombaInfusao);
-//            Ficha r = getProperFicha();
-//            r.setEndocrino(endocrino);
-//            realm.copyToRealmOrUpdate(r);
-//            realm.commitTransaction();
-//            changeCardColor();
-//        }
-    }
-    public void curvaGlicemicaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuCurvaGlicemica, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_curva_glicemica, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.eventoHipoglicemia:
-                        curvaGlicemica.setText(item.getTitle());
-                        break;
-                    case R.id.normoglicemia:
-                        curvaGlicemica.setText(item.getTitle());
-                        break;
-                    case R.id.eventoHiperglicemia:
-                        curvaGlicemica.setText(item.getTitle());
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
+        String curvaGlicemica = null;
+        if(curvaGlicemicaRadioGroup1.getCheckedRadioButtonId()!=-1)
+            curvaGlicemica = getStringOfRadioButtonSelectedFromRadioGroup(curvaGlicemicaRadioGroup1);
+        else if(curvaGlicemicaRadioGroup2.getCheckedRadioButtonId()!=-1)
+            curvaGlicemica = getStringOfRadioButtonSelectedFromRadioGroup(curvaGlicemicaRadioGroup2);
 
-        popupMenu.show();
+        if(curvaGlicemica!=null) {
+            realm.beginTransaction();
+            Endocrino endocrino = realm.createObject(Endocrino.class);
+            endocrino.setCurvaGlicemia(curvaGlicemica);
+            Ficha r = getProperFicha();
+            r.setEndocrino(endocrino);
+            realm.copyToRealmOrUpdate(r);
+            realm.commitTransaction();
+            changeCardColorToGreen();
+        }
+    }
+
+    private void setEndocrinoFromDatabase(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getEndocrino()!=null)
+            setRadioButtonFromIdAndDatabase(R.id.curvaGlicemica,ficha.getEndocrino().getCurvaGlicemia());
     }
 }

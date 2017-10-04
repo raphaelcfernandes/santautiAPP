@@ -28,7 +28,7 @@ public class Gastrointestinal extends RealmObject implements Serializable {
 
 
     public boolean checkObject(){
-        return getRuidos()!=null && getFormato()!=null && getTensao()!=null && getAscite()!=null;
+        return ruidos!=null && formato!=null && tensao!=null && ascite!=null;
     }
     public String getFormato() {
         return formato;

@@ -4,15 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import io.realm.Realm;
 import santauti.app.Activities.Ficha.FichaActivity;
@@ -28,10 +27,11 @@ import santauti.app.R;
 
 public class MonitorMultiparametricoActivity extends GenericoActivity{
     Realm realm;
-    private TextView ritmoTextView,ritmoMenu;
     private LinearLayout mainLayout;
     private TextInputEditText freqRespiratoria,freqCardiaca,PAM,temperatura,PIC,PPC,PVC,swan_ganz;
     private TextInputEditText capnometria,spo2,sjo2;
+    private RadioGroup ritmoRadioGroup1,ritmoRadioGroup2,ritmoRadioGroup3;
+    private RadioButton sinusal,fibrilacaoAtrial,flutterAtrial,juncional,idioventricular,ritmoMarcapasso;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +41,35 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         setupUI(mainLayout);
         setToolbar(getString(R.string.MonitorMultiparametrico));
 
-        /******************************TEXTVIEW*************************************/
-        ritmoTextView = (TextView)findViewById(R.id.ritmo);
-        ritmoMenu = (TextView)findViewById(R.id.ritmoMenu);
-        /******************************TEXTVIEW*************************************/
+        /*****************************RADIOGROUP***********************************/
+        ritmoRadioGroup1 = (RadioGroup)findViewById(R.id.ritmoRadioGroup1);
+        ritmoRadioGroup2 = (RadioGroup)findViewById(R.id.ritmoRadioGroup2);
+        ritmoRadioGroup3 = (RadioGroup)findViewById(R.id.ritmoRadioGroup3);
+        /*****************************RADIOGROUP***********************************/
+
+        /*****************************RADIOBUTTON**********************************/
+        sinusal = (RadioButton)findViewById(R.id.sinusal);
+        sinusal.setOnClickListener(ritmoOnClickListenerGroup1);
+        fibrilacaoAtrial = (RadioButton)findViewById(R.id.fibrilacaoAtrial);
+        fibrilacaoAtrial.setOnClickListener(ritmoOnClickListenerGroup1);
+        flutterAtrial = (RadioButton)findViewById(R.id.flutterAtrial);
+        flutterAtrial.setOnClickListener(ritmoOnClickListenerGroup1);
+        juncional = (RadioButton)findViewById(R.id.juncional);
+        juncional.setOnClickListener(ritmoOnClickListenterGroup2);
+        idioventricular = (RadioButton)findViewById(R.id.idioventricular);
+        idioventricular.setOnClickListener(ritmoOnClickListenterGroup2);
+        ritmoMarcapasso = (RadioButton)findViewById(R.id.ritmoMarcapasso);
+        ritmoMarcapasso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ritmoRadioGroup1.getCheckedRadioButtonId()!=-1)
+                    ritmoRadioGroup1.clearCheck();
+                if(ritmoRadioGroup2.getCheckedRadioButtonId()!=-1)
+                    ritmoRadioGroup2.clearCheck();
+            }
+        });
+        /*****************************RADIOBUTTON**********************************/
+
 
         /*****************************TEXTINPUTEDITTEXT****************************/
         freqRespiratoria = (TextInputEditText)findViewById(R.id.freqRespiratoria);
@@ -89,6 +114,26 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         setMonitorMultiparametricoFromDatabase();
     }
 
+    private View.OnClickListener ritmoOnClickListenerGroup1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(ritmoRadioGroup2.getCheckedRadioButtonId()!=-1)
+                ritmoRadioGroup2.clearCheck();
+            if(ritmoRadioGroup3.getCheckedRadioButtonId()!=-1)
+                ritmoRadioGroup3.clearCheck();
+        }
+    };
+
+    private View.OnClickListener ritmoOnClickListenterGroup2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(ritmoRadioGroup1.getCheckedRadioButtonId()!=-1)
+                ritmoRadioGroup1.clearCheck();
+            if(ritmoRadioGroup3.getCheckedRadioButtonId()!=-1)
+                ritmoRadioGroup3.clearCheck();
+        }
+    };
+
     @Override
     public void prepareNavigationButtons() {
         proxFicha = (Button)findViewById(R.id.fichaProxima);
@@ -102,7 +147,7 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         if(ficha.getMonitorMultiparametrico()!=null) {
             MonitorMultiparametrico monitorMultiparametrico = ficha.getMonitorMultiparametrico();
             if(monitorMultiparametrico.getRitmo()!=null)
-                ritmoTextView.setText(monitorMultiparametrico.getRitmo());
+                setRadioButtonFromIdAndDatabase(R.id.ritmo,monitorMultiparametrico.getRitmo());
             if(monitorMultiparametrico.getFrequenciaRespiratoria()>0)
                 freqRespiratoria.setText(Integer.toString(monitorMultiparametrico.getFrequenciaRespiratoria()));
             if(monitorMultiparametrico.getFrequenciaCardiaca()>0)
@@ -128,32 +173,23 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         }
     }
 
-    public void ritmoOnClick(View view) {
-        final ListPopupWindow listPopupWindow = new ListPopupWindow(
-                MonitorMultiparametricoActivity.this,null,R.attr.actionOverflowMenuStyle,0);
-        listPopupWindow.setAdapter(new ArrayAdapter<>(
-                MonitorMultiparametricoActivity.this,
-                R.layout.list_item, getResources().getStringArray(R.array.tiposTracado)));
-        listPopupWindow.setAnchorView(ritmoMenu);
-        listPopupWindow.setWidth(700);
-        listPopupWindow.setHeight(1050);
-        listPopupWindow.setModal(true);
-        listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ritmoTextView.setText(getResources().getStringArray(R.array.tiposTracado)[i]);
-                listPopupWindow.dismiss();
-            }
-        });
-        listPopupWindow.show();
-    }
-
     private void verificaCamposENotificaAdapter(){
         realm.beginTransaction();
         Ficha r = getProperFicha();
         MonitorMultiparametrico monitorMultiparametrico = realm.createObject(MonitorMultiparametrico.class);
-        if(ritmoTextView.getText().length()>0)
-            monitorMultiparametrico.setRitmo(ritmoTextView.getText().toString());
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.ritmo);
+        for(int i=0;i<linearLayout.getChildCount();i++) {
+            View v = linearLayout.getChildAt(i);
+            if (v instanceof RadioGroup) {
+                for (int k = 0; k < ((RadioGroup) v).getChildCount(); k++) {
+                    View view1 = ((RadioGroup)v).getChildAt(k);
+                    AppCompatRadioButton appCompatRadioButton = (AppCompatRadioButton)view1;
+                    if(appCompatRadioButton.isChecked()) {
+                        monitorMultiparametrico.setRitmo(appCompatRadioButton.getText().toString());
+                    }
+                }
+            }
+        }
         if(!isTextInputEditTextEmpty(freqRespiratoria))
             monitorMultiparametrico.setFrequenciaRespiratoria(getIntegerFromTextInputEditText(freqRespiratoria));
         if(!isTextInputEditTextEmpty(freqCardiaca))
@@ -179,7 +215,7 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         r.setMonitorMultiparametrico(monitorMultiparametrico);
         realm.copyToRealmOrUpdate(r);
         if(monitorMultiparametrico.checkObject())
-            changeCardColor();
+            changeCardColorToGreen();
         realm.commitTransaction();
     }
 

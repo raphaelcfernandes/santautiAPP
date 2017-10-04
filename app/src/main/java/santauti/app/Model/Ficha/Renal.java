@@ -11,21 +11,65 @@ import io.realm.RealmObject;
  */
 
 public class Renal extends RealmObject implements Serializable{
-    @SerializedName("diurese")
-    private int diurese;
+    @SerializedName("urina")
+    private String urina;
     @SerializedName("peso")
     private int peso;
-    @SerializedName("balancoHidrico")
-    private int balancoHidrico;
     @SerializedName("dialise")
-    private int dialise;
+    private boolean dialise;
+    @SerializedName("UF")
+    private boolean UF;
+    @SerializedName("volume")
+    private int volume;
+    @SerializedName("tempo")
+    private int tempo;
 
-    public int getDiurese() {
-        return diurese;
+    public boolean checkObject(){
+        if(isDialise()){
+            return peso>0 && urina!=null && volume>0 && tempo>0;
+        }
+        else
+            return peso>0 && urina!=null;
     }
 
-    public void setDiurese(int diurese) {
-        this.diurese = diurese;
+    public String getUrina() {
+        return urina;
+    }
+
+    public void setUrina(String urina) {
+        this.urina = urina;
+    }
+
+    public boolean isDialise() {
+        return dialise;
+    }
+
+    public void setDialise(boolean dialise) {
+        this.dialise = dialise;
+    }
+
+    public boolean isUF() {
+        return UF;
+    }
+
+    public void setUF(boolean UF) {
+        this.UF = UF;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public int getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(int tempo) {
+        this.tempo = tempo;
     }
 
     public int getPeso() {
@@ -36,19 +80,4 @@ public class Renal extends RealmObject implements Serializable{
         this.peso = peso;
     }
 
-    public int getBalancoHidrico() {
-        return balancoHidrico;
-    }
-
-    public void setBalancoHidrico(int balancoHidrico) {
-        this.balancoHidrico = balancoHidrico;
-    }
-
-    public int getDialise() {
-        return dialise;
-    }
-
-    public void setDialise(int dialise) {
-        this.dialise = dialise;
-    }
 }

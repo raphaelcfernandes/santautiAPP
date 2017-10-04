@@ -22,26 +22,81 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="ritmoOnClick">
+                android:id="@+id/ritmo">
                 <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:id="@+id/ritmoMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Ritmo"
                     android:textColor="@android:color/black"
                     android:textSize="17sp"/>
-                <TextView
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:textSize="15sp"
-                    android:id="@+id/ritmo"/>
+                    android:id="@+id/ritmoRadioGroup1">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/sinusal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Sinusal"
+                        android:theme="@style/radioButtonStyle"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:theme="@style/radioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/FibrilacaoAtrial"
+                        android:id="@+id/fibrilacaoAtrial"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:theme="@style/radioButtonStyle"
+                        android:id="@+id/flutterAtrial"
+                        android:text="@string/FlutterAtrial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RadioGroup>
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ritmoRadioGroup2">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/juncional"
+                        android:theme="@style/radioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Juncional"/>
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:theme="@style/radioButtonStyle"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Idioventricular"
+                        android:id="@+id/idioventricular"/>
+                </RadioGroup>
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ritmoRadioGroup3">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:theme="@style/radioButtonStyle"
+                        android:id="@+id/ritmoMarcapasso"
+                        android:text="@string/RitmoMarcapasso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RadioGroup>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

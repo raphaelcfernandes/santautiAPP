@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import io.realm.Realm;
@@ -20,7 +21,8 @@ import santauti.app.R;
 public class MetabolicoActivity extends GenericoActivity {
     private int i=0;
     private Realm realm;
-    private RadioGroup hidratacao;
+    private RadioGroup hidratacaoRadioGroup1,hidratacaoRadioGroup2;
+    private RadioButton normoHidratado, edemaciado, desidratado;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +31,30 @@ public class MetabolicoActivity extends GenericoActivity {
         setToolbar(this.getString(R.string.Metabolico));
 
         /********************RADIOGROUP****************************/
-        hidratacao = (RadioGroup)findViewById(R.id.hidratacaoRadioGroup);
+        hidratacaoRadioGroup1 = (RadioGroup)findViewById(R.id.hidratacaoRadioGroup1);
+        hidratacaoRadioGroup2 = (RadioGroup)findViewById(R.id.hidratacaoRadioGroup2);
         /********************RADIOGROUP****************************/
+
+        /*******************RADIOBUTTON****************************/
+        normoHidratado = (RadioButton)findViewById(R.id.normoHidratado);
+        normoHidratado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {hidratacaoRadioGroup2.clearCheck();
+            }
+        });
+        edemaciado = (RadioButton)findViewById(R.id.edemaciado);
+        edemaciado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {hidratacaoRadioGroup2.clearCheck();
+            }
+        });
+        desidratado = (RadioButton)findViewById(R.id.desidratado);
+        desidratado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {hidratacaoRadioGroup1.clearCheck();
+            }
+        });
+        /*******************RADIOBUTTON****************************/
 
 
 
@@ -66,14 +90,8 @@ public class MetabolicoActivity extends GenericoActivity {
 
     private void setMetabolicoFromDataBase(){
         Ficha ficha = getProperFicha();
-        if(ficha.getMetabolico()!=null){
-            if(ficha.getMetabolico().getHidratacao().equals(getString(R.string.NormoHidratado)))
-                hidratacao.check(R.id.normoHidratado);
-            else if(ficha.getMetabolico().getHidratacao().equals(getString(R.string.Edemaciado)))
-                hidratacao.check(R.id.edemaciado);
-            else if(ficha.getMetabolico().getHidratacao().equals(getString(R.string.Desidratado)))
-                hidratacao.check(R.id.desidratado);
-        }
+        if(ficha.getMetabolico()!=null)
+            setRadioButtonFromIdAndDatabase(R.id.hidratacao,ficha.getMetabolico().getHidratacao());
     }
 
 
@@ -104,16 +122,20 @@ public class MetabolicoActivity extends GenericoActivity {
      *
      */
     private void verificaCamposENotificaAdapter(){
-        realm.beginTransaction();
-        Metabolico metabolico = realm.createObject(Metabolico.class);
-        String hidratacaoStr = getStringOfRadioButtonSelectedFromRadioGroup(hidratacao);
+        String hidratacaoStr = null;
+        if(hidratacaoRadioGroup1.getCheckedRadioButtonId()!=-1)
+            hidratacaoStr = getStringOfRadioButtonSelectedFromRadioGroup(hidratacaoRadioGroup1);
+        else if(hidratacaoRadioGroup2.getCheckedRadioButtonId()!=-1)
+            hidratacaoStr = getStringOfRadioButtonSelectedFromRadioGroup(hidratacaoRadioGroup2);
         if(hidratacaoStr!=null) {
+            realm.beginTransaction();
+            Metabolico metabolico = realm.createObject(Metabolico.class);
             Ficha r = getProperFicha();
             metabolico.setHidratacao(hidratacaoStr);
             r.setMetabolico(metabolico);
             realm.copyToRealmOrUpdate(r);
-            changeCardColor();
+            changeCardColorToGreen();
+            realm.commitTransaction();
         }
-        realm.commitTransaction();
     }
 }

@@ -28,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/formato">
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -104,7 +105,8 @@
                 android:layout_width="match_parent"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/tensao">
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -159,7 +161,8 @@
                 android:layout_width="match_parent"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/ruidos">
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -237,7 +240,8 @@
                 android:layout_width="match_parent"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/ascite">
                 <TextView
                     android:id="@+id/asciteTextView"
                     android:paddingStart="@dimen/activity_horizontal_margin"
@@ -320,8 +324,7 @@
                     android:gravity="end"
                     android:theme="@style/CheckBoxStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false" />
+                    android:layout_height="wrap_content" />
             </RelativeLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -451,7 +454,7 @@
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/viscerasPalpaveis"
+                android:id="@+id/emDialise"
                 android:background="?attr/selectableItemBackground"
                 >
                 <TextView
@@ -462,14 +465,13 @@
                     style="@style/TextStyle"
                     />
                 <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/checkboxViscerasPalpaveis"
+                    android:id="@+id/checkboxEmDialise"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:gravity="end"
                     android:theme="@style/CheckBoxStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false" />
+                    android:layout_height="wrap_content" />
             </RelativeLayout>
             <LinearLayout
                 android:id="@+id/viscerasPalpaveisItensLayout"

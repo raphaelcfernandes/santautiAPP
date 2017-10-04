@@ -104,7 +104,7 @@ public class InfecciosoActivity extends GenericoActivity {
 //            r.setInfeccioso(infecc);
 //            realm.copyToRealmOrUpdate(r);
 //            realm.commitTransaction();
-//            changeCardColor();
+//            changeCardColorToGreen();
 //        }
     }
 

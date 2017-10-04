@@ -8,9 +8,7 @@ import java.util.Date;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import santauti.app.Model.Ficha.Hemodinamico.Hemodinamico;
-import santauti.app.Model.Ficha.Hemodinamico.HemodinamicoOpcional;
 import santauti.app.Model.Ficha.Neurologico.Neurologico;
-import santauti.app.Model.Ficha.Respiratorio.Respiratorio;
 import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 
@@ -51,6 +49,36 @@ public class Ficha extends RealmObject implements Serializable{
     private MonitorMultiparametrico monitorMultiparametrico;
     @SerializedName("dispositivos")
     private Dispositivos dispositivos;
+    @SerializedName("osteomuscular")
+    private Osteomuscular osteomuscular;
+    @SerializedName("nutricional")
+    private Nutricional nutricional;
+    @SerializedName("pelesMucosas")
+    private PelesMucosas pelesMucosas;
+
+    public PelesMucosas getPelesMucosas() {
+        return pelesMucosas;
+    }
+
+    public void setPelesMucosas(PelesMucosas pelesMucosas) {
+        this.pelesMucosas = pelesMucosas;
+    }
+
+    public Nutricional getNutricional() {
+        return nutricional;
+    }
+
+    public void setNutricional(Nutricional nutricional) {
+        this.nutricional = nutricional;
+    }
+
+    public Osteomuscular getOsteomuscular() {
+        return osteomuscular;
+    }
+
+    public void setOsteomuscular(Osteomuscular osteomuscular) {
+        this.osteomuscular = osteomuscular;
+    }
 
     public Dispositivos getDispositivos() {
         return dispositivos;

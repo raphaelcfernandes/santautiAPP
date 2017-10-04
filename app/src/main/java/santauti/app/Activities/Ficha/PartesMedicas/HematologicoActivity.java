@@ -88,7 +88,7 @@ public class HematologicoActivity extends GenericoActivity {
             hematologico.setTromboprofilaxia(tromboprofilaxiaStr);
             r.setHematologico(hematologico);
             realm.copyToRealmOrUpdate(r);
-            changeCardColor();
+            changeCardColorToGreen();
         }
         realm.commitTransaction();
     }

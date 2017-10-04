@@ -20,21 +20,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <!--VIAS AEREAS-->
             <LinearLayout
+                android:id="@+id/viasAereas"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="5dp"
                 android:orientation="vertical">
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="0dp"
                     android:id="@+id/menuFoneseBulhas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ViasAereas"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
-                    android:id="@+id/viasAereasOnClick"
+                    android:id="@+id/viasAereasRadioGroup"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingTop="5dp"
@@ -44,17 +48,16 @@
                     android:paddingBottom="5dp">
                     <android.support.v7.widget.AppCompatRadioButton
                         android:id="@+id/viasAereasNatural"
-                        android:onClick="viasAereasOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
                         android:text="@string/Natural"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
                         android:id="@+id/viasAereasTubo"
-                        android:onClick="viasAereasOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TuboTraqueal"
@@ -64,7 +67,6 @@
                         />
                     <android.support.v7.widget.AppCompatRadioButton
                         android:id="@+id/viasAereasTraqueostomia"
-                        android:onClick="viasAereasOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
@@ -72,29 +74,25 @@
                         android:text="@string/Traqueostomia"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
-
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray">
-            </LinearLayout>
+            <!--VIAS AEREAS-->
 
+            <!--PRESSAO CUFF-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/pressaoCuff_layout"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:theme="@style/TextLabelBlue"
-                    android:paddingTop="10dp">
+                    android:paddingTop="5dp">
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/pressaoCuff"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="4dp"
@@ -102,33 +100,17 @@
                         android:hint="@string/PressaoCuff"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="2px"
-                    android:background="@color/gray">
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/localizacaoCanula_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="localizacaoCanulaOnClick"
-                android:visibility="gone"
-                >
                 <TextView
+                    android:paddingTop="5dp"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:id="@+id/menuLocalizacaoCanula"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/LocalizacaoCanula"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
+                    android:id="@+id/localizacaoCanula"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingTop="5dp"
@@ -137,16 +119,13 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp">
                     <android.support.v7.widget.AppCompatRadioButton
-                        android:onClick="viasAereasOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:paddingStart="0dp"
                         android:text="@string/Alta"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
-                        android:onClick="viasAereasOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Media"
@@ -155,7 +134,6 @@
                         android:theme="@style/radioButtonStyle"
                         />
                     <android.support.v7.widget.AppCompatRadioButton
-                        android:onClick="viasAereasOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
@@ -169,37 +147,40 @@
                 android:layout_height="1px"
                 android:background="@color/gray">
             </LinearLayout>
+            <!--PRESSAO CUFF-->
 
             <!--Murmurio vesicular-->
             <LinearLayout
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:id="@+id/murmurioVesicular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:orientation="vertical">
                 <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/MurmurioVesicular"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
+                    android:id="@+id/murmurioVesicularRadioGroup"
                     android:paddingTop="5dp"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
+                    android:paddingBottom="5dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp">
                     <android.support.v7.widget.AppCompatRadioButton
                         android:id="@+id/murmurioVesicularReduzido"
-                        android:onClick="murmurioVesicularOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Reduzido"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
                         android:id="@+id/murmurioVesicularFisiologico"
-                        android:onClick="murmurioVesicularOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Fisiologico"
@@ -209,7 +190,6 @@
                         />
                     <android.support.v7.widget.AppCompatRadioButton
                         android:id="@+id/murmurioVesicularAumentado"
-                        android:onClick="murmurioVesicularOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
@@ -217,44 +197,56 @@
                         android:text="@string/Aumentado"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:visibility="gone"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
                     android:id="@+id/murmursioVesicularItens">
-                    <LinearLayout
+                    <RelativeLayout
                         android:paddingTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <CheckBox
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:theme="@style/CheckBoxStyle"
+                            android:id="@+id/apice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/Apice"/>
-                        <CheckBox
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:theme="@style/CheckBoxStyle"
+                            android:layout_toEndOf="@id/apice"
+                            android:id="@+id/BaseDireita"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/BaseDireita"/>
-                        <CheckBox
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:theme="@style/CheckBoxStyle"
+                            android:layout_toEndOf="@id/BaseDireita"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/BaseEsquerda"/>
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <CheckBox
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:theme="@style/CheckBoxStyle"
+                            android:id="@+id/tercoMedioDireito"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/TercoMedioDireito"/>
-                        <CheckBox
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:theme="@style/CheckBoxStyle"
+                            android:layout_toEndOf="@id/tercoMedioDireito"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/TercoMedioEsquerdo"/>
-                    </LinearLayout>
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -264,72 +256,168 @@
             </LinearLayout>
             <!--Murmurio vesicular-->
 
+            <!--uso Oxigenio-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/tromboprofilaxia_layout"
+                android:id="@+id/usoOxigenio"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:onClick="usoDeOxigenioOnClick"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:paddingBottom="10dp">
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
+                    android:text="@string/UsoDeOxigenio"
+                    style="@style/TextStyle"/>
+                <RadioGroup
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:id="@+id/usoOxigenioRadioGroup1">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/emMascaraVenturi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/UsoDeOxigenio"
-                        style="@style/TextStyle"/>
-                </LinearLayout>
-                <TextView
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:text="@string/EmMascaraVenturi"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/sobCateterNasal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/SobCateterNasal"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+                <RadioGroup
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usoDeOxigenioSelected"
-                    android:visibility="invisible"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"/>
-            </LinearLayout> <!--uso Oxigenio-->
+                    android:paddingBottom="5dp"
+                    android:id="@+id/usoOxigenioRadioGroup2">
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/emMascaraReinalacao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:text="@string/EmMascaraReinalacao"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/usoOxigenioNao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Nao"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+            <!--uso Oxigenio-->
 
+            <!--MASCARA VENTURI-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:orientation="vertical"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="mascaraVenturiOnClick"
                 android:id="@+id/mascaVenturi"
                 android:visibility="gone"
-                >
+                android:paddingBottom="10dp">
                 <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/submenu_right_padding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/MascaraVenturi"
                     style="@style/TitleTextStyleForLayoutSelection"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/mascaraVenturiSelected"/>
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:id="@+id/mascaraVenturiRadioGroup1"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/r24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Percent24"
+                        android:textColor="@color/colorPrimary"
+                        android:theme="@style/radioButtonStyle" />
+                    <RadioButton
+                        android:id="@+id/r28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Percent28"
+                        android:textColor="#ffe23d"
+                        android:theme="@style/radioButtonStyle"/>
+                    <RadioButton
+                        android:id="@+id/r31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Percent31"
+                        android:theme="@style/radioButtonStyle"/>
+                </RadioGroup>
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:id="@+id/mascaraVenturiRadioGroup2"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/r35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Percent35"
+                        android:textColor="#1fcc00"
+                        android:theme="@style/radioButtonStyle"/>
+                    <RadioButton
+                        android:id="@+id/r40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Percent40"
+                        android:textColor="#fc84ec"
+                        android:theme="@style/radioButtonStyle" />
+                    <RadioButton
+                        android:id="@+id/r50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Percent50"
+                        android:textColor="#ff910b"
+                        android:theme="@style/radioButtonStyle" />
+
+                </RadioGroup>
+
             </LinearLayout>
+            <!--MASCARA VENTURI-->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingStart="@dimen/submenu_left_padding"
-                android:paddingEnd="@dimen/submenu_right_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:theme="@style/TextLabelBlue"
                 android:id="@+id/fluxoOxigenioLayout"
                 android:visibility="gone">
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/fluxoOxigenio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="6"
@@ -345,53 +433,33 @@
 
 
             <!--RONCOS-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+            <RelativeLayout
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="20dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/roncos"
                 android:onClick="roncosOnClick"
                 android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/Roncos"
-                            style="@style/TextStyle"
-                            />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/checkboxRoncos"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            style="@style/CheckBoxStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="false" />
-                    </RelativeLayout>
-                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    android:text="@string/Nao"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/massasPalpaveisTextView"/>
-            </LinearLayout>
+                    android:layout_gravity="center"
+                    style="@style/TextStyle"
+                    android:layout_centerVertical="true"
+                    android:text="@string/Roncos"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_centerVertical="true"
+                    android:id="@+id/checkboxRoncos"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
             <LinearLayout
                 android:id="@+id/roncosItensLayout"
                 android:layout_width="match_parent"
@@ -401,43 +469,50 @@
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
                 android:visibility="gone">
-                <LinearLayout
+                <RelativeLayout
                     android:paddingTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
                         android:id="@+id/roncosApice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@id/roncosApice"
                         android:id="@+id/roncosBaseDireita"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@id/roncosBaseDireita"
                         android:id="@+id/roncosBaseEsquerda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseEsquerda"/>
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
                         android:id="@+id/roncosTercoMedioDireito"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioDireito"/>
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@id/roncosTercoMedioDireito"
                         android:id="@+id/roncosTercoMedioEsquerdo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioEsquerdo"/>
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -447,60 +522,86 @@
             <!--RONCOS-->
 
             <!--SIBILOS-->
+            <RelativeLayout
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/sibilos"
+                android:onClick="sibilosOnClick"
+                android:background="?attr/selectableItemBackground">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/TextStyle"
+                    android:layout_centerVertical="true"
+                    android:text="@string/Sibilos"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_centerVertical="true"
+                    android:id="@+id/checkboxSibilos"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
             <LinearLayout
+                android:id="@+id/sibilosItensLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
                 android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Sibilos"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
-                <LinearLayout
+                <RelativeLayout
                     android:paddingTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Ausente"/>
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:id="@+id/sibilosApice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@id/sibilosApice"
+                        android:id="@+id/sibilosBaseDireita"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@id/sibilosBaseDireita"
+                        android:id="@+id/sibilosBaseEsquerda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseEsquerda"/>
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TercoMedioDireito"/>
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:id="@+id/sibilosTercoMedioDireito"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/TercoMedioDireito"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@+id/sibilosTercoMedioDireito"
+                        android:id="@+id/sibilosTercoMedioEsquerdo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioEsquerdo"/>
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -510,60 +611,86 @@
             <!--SIBILOS-->
 
             <!--CREPITACOES-->
+            <RelativeLayout
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/crepitacoes"
+                android:onClick="crepitacoesOnClick"
+                android:background="?attr/selectableItemBackground">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/TextStyle"
+                    android:layout_centerVertical="true"
+                    android:text="@string/Crepitacoes"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_centerVertical="true"
+                    android:id="@+id/checkboxCrepitacoes"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
             <LinearLayout
+                android:id="@+id/crepitacoesItensLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
                 android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Crepitacoes"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
-                <LinearLayout
+                <RelativeLayout
                     android:paddingTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Ausente"/>
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:id="@+id/crepitacoesApice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@id/crepitacoesApice"
+                        android:id="@+id/crepitacoesBaseDireita"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@id/crepitacoesBaseDireita"
+                        android:id="@+id/crepitacoesBaseEsquerda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseEsquerda"/>
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TercoMedioDireito"/>
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:id="@+id/crepitacoesTercoMedioDireito"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/TercoMedioDireito"/>
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:theme="@style/CheckBoxStyle"
+                        android:layout_toEndOf="@id/crepitacoesTercoMedioDireito"
+                        android:id="@+id/crepitacoesTercoMedioEsquerdo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioEsquerdo"/>
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

@@ -275,7 +275,7 @@ public class NeurologicoActivity extends GenericoActivity {
 //            Ficha r = getProperFicha();
 //            r.setNeurologico(neurologico);
 //            realm.copyToRealmOrUpdate(r);
-//            changeCardColor();
+//            changeCardColorToGreen();
 //        }
 //        realm.commitTransaction();
     }

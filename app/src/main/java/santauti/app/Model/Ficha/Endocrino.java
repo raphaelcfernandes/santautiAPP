@@ -11,14 +11,15 @@ import io.realm.RealmObject;
  */
 
 public class Endocrino extends RealmObject implements Serializable {
-    @SerializedName("usoInsulinaBombaInfusao")
-    private int usoDeInsulinaBombaInfusao;
+    @SerializedName("curvaGlicemia")
+    private String curvaGlicemia;
 
-    public int getUsoDeInsulinaBombaInfusao() {
-        return usoDeInsulinaBombaInfusao;
+    public String getCurvaGlicemia() {
+        return curvaGlicemia;
     }
 
-    public void setUsoDeInsulinaBombaInfusao(int usoDeInsulinaBombaInfusao) {
-        this.usoDeInsulinaBombaInfusao = usoDeInsulinaBombaInfusao;
+    public void setCurvaGlicemia(String curvaGlicemia) {
+        this.curvaGlicemia = curvaGlicemia;
     }
 }
+

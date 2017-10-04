@@ -15,14 +15,29 @@ FICHA:
     - Snackbar por cima dos botoes
 
 
-Como fazer radio button em diferente layout e obedecer as marcaçoes
+Descolorir card caso algum item tenha sido descelecionado (Funcionando -> Peles e Mucosas)
+    Distribuir essa funcionalidade para os outros cards que possuem o mesmo esquema.
+        -
 /*************MUDANĆAS*********************/
-Hematológico: Salvando.
+Hematológico: Salvando. (corrigir layout, simples).
 Monitor Multiparamétrico: Salvando.
 Metabolico: Salvando.
 Dispositivos: Salvando.
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
-Gastro: Salvando.
+Gastro: Salvando. (Corrigir slide de checkbox -> estilo do Respiratorio)
+Endocrino: Salvando.
+Osteomuscular: Salvando.
+Nutricional: Salvando.
+Renal: Salvando. (Corrigir slide de checkbox -> estilo do Respiratorio)
+Respiratorio: Salvando.
+    mascara de venturI: 28%, 35%, 50%, 70%
+        - cor + percentual (https://lh6.googleusercontent.com/-X2eiiBbwOig/TX-p9SLVclI/AAAAAAAAACA/I-oDrdp5kfs/s1600/mascara.bmp)
+Pele e Mucosas: Salvando.
+    - ulcera de pressao
+        - presente/ausente
+        - presente:
+            - Sacral, calcamio (direito/esquerdo)
+            - sacra, calcâneo, nádegas, trocânteres, cotovelos e tronco.
 /*****************MUDANÇAS FEITAS**********/
 Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - colocar td em uma tela só, retirar recycler view
     -   Bomba de infusao
@@ -98,59 +113,6 @@ Infeccioso: retirar antibiotico que ta aqui e la de bomba de infusao
         - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
         - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
         - Amoxicilina-clavulanato,
-
-Osteomuscular:
-    - Tonus:
-        - hiper, normo, hipo
-    - Trofismo
-        - tropifco, hiper, hipo, normo
-
-Endocrino: acho que está ok
-     - glicemias:
-        - normais, picos de hiperglicemia, picos de hipoglicemia
-
-Pele e Mucosas:
-    - Pele:
-        - normal, ressecada
-    - ulcera de pressao
-        - presente/ausente
-        - presente:
-            - Sacral, calcamio (direito/esquerdo)
-    - Mucosas: multipla općoes
-        - Normocoradas, hipocoradas, icterico, anicterico
-        - secas, hidratadas, hiperidratadas
-
-Renal: OK
-  - Urina: clara escura, hematurea
-  - Em procedimento dialitico? Em dialise? -> trocar para padrao com switch
-    - UF: sim ou nao
-    - Volume: numerico
-    - Tempo/hora: numerico
-    - Heparina: sim ou nao
-
-Respiratorio: -> CORRIGIR: RONCOS, SIBILOS, CREPITACOES
-    - Via area: tubo orotraquial, traqueostomia, normal -> ok
-        - tubo ou traqueostomia = pressao do cuff -> ok
-        - localizacao da canula se tiver entubado -> ok
-    - murmurio vesicular: -> Checar
-        - fisiologico, reduzido
-        - aumentado
-        - = crepitacoes
-    - Uso de oxigenio:
-        - Sim ou nao. + campo numerico (fluxo), sob cateter nasal, em mascara de venturI, em mascara de reinalaćao
-        - mascara de venturI: 28%, 35%, 50%, 70%
-            - cor + percentual (https://lh6.googleusercontent.com/-X2eiiBbwOig/TX-p9SLVclI/AAAAAAAAACA/I-oDrdp5kfs/s1600/mascara.bmp)
-    - Roncos:
-        - = crepitacoes
-    - sibilos:
-        - = crepitacoes
-    - crepitacoes: base direita, base esquerda, terco medio direito/esquerda, apice
-
-Nutricional: OK
-     - Dieta:
-        - enteral e/ou oral e/ou parenteral
-    - aceitacao/tolerancia:
-        - boa ruim media
 
 Hemodinamico: OK
   - Pulso ritmico/aritmico -> ok

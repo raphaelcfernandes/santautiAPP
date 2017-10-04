@@ -11,6 +11,8 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -21,9 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -31,9 +36,12 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import santauti.app.Activities.Ficha.PartesMedicas.FolhasBalancoActivity;
 import santauti.app.Adapters.Home.HomeModel;
+import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -103,9 +111,18 @@ public abstract class GenericoActivity extends AppCompatActivity {
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
-    public void changeCardColor(){
-        FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
-        FichaActivity.adapter.notifyDataSetChanged();
+    public void changeCardColorToGreen(){
+        if(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position",0)).getColor()==0) {
+            FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
+            FichaActivity.adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void setColorDefault(){
+        if(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position",0)).getColor()==1) {
+            FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(0);
+            FichaActivity.adapter.notifyDataSetChanged();
+        }
     }
 
     public final void prepareIntent(int position,Intent intent){
@@ -201,5 +218,69 @@ public abstract class GenericoActivity extends AppCompatActivity {
                         Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public void setRadioButtonFromIdAndDatabase(int id,String stringFromDatabase){
+        LinearLayout linearLayout = (LinearLayout)findViewById(id);
+        for(int i=0;i<linearLayout.getChildCount();i++) {
+            View v = linearLayout.getChildAt(i);
+            if (v instanceof RadioGroup) {
+                for (int k = 0; k < ((RadioGroup) v).getChildCount(); k++) {
+                    View view1 = ((RadioGroup)v).getChildAt(k);
+                    AppCompatRadioButton appCompatRadioButton = (AppCompatRadioButton)view1;
+                    if(appCompatRadioButton.getText().toString().equals(stringFromDatabase))
+                        appCompatRadioButton.setChecked(true);
+                }
+            }
+        }
+    }
+
+    public void preencheCheckboxes(int id, RealmList<RealmString> realmStrings){
+        for(RealmString realmString : realmStrings){
+            LinearLayout linearLayout = (LinearLayout) findViewById(id);
+            for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                View v = linearLayout.getChildAt(i);
+                if (v instanceof RelativeLayout) {
+                    for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+                        View view = ((RelativeLayout) v).getChildAt(k);
+                        if (view instanceof AppCompatCheckBox) {
+                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                            if (cb.getText().toString().equals(realmString.getName()))
+                                cb.setChecked(true);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public RealmList<RealmString> getCheckBoxesPreenchidos(int id){
+        Realm realm = Realm.getDefaultInstance();
+        RealmList<RealmString> realmStrings = new RealmList<>();
+        LinearLayout linearLayout = (LinearLayout) findViewById(id);
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            View v = linearLayout.getChildAt(i);
+            if(v instanceof RelativeLayout){
+                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+                    View view = ((RelativeLayout) v).getChildAt(k);
+                    if (view instanceof AppCompatCheckBox) {
+                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                        if (cb.isChecked()) {
+                            RealmString realmString = realm.createObject(RealmString.class);
+                            realmString.setName(cb.getText().toString());
+                            realmStrings.add(realmString);
+                        }
+                    }
+                }
+            }
+        }
+        return realmStrings;
+    }
+
+    public void abreLayoutMarcaCheckboxEPreenche(CheckBox checkbox, View view,int id,RealmList<RealmString> realmStrings){
+        checkbox.setChecked(true);
+        MyAnimation myAnimation = new MyAnimation();
+        myAnimation.slideDownView(getApplicationContext(),view);
+        preencheCheckboxes(id,realmStrings);
     }
 }

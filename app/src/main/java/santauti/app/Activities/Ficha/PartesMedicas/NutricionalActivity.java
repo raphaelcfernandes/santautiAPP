@@ -1,18 +1,21 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
-import java.util.Arrays;
-
+import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Model.Ficha.Hematologico;
-import santauti.app.Model.Ficha.Metabolico;
+import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.Nutricional;
+import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -20,16 +23,27 @@ import santauti.app.R;
  */
 
 public class NutricionalActivity extends GenericoActivity {
-    private int ingestaoSelection=-1;
-    private TextView ingestaoTextView;
+    private Realm realm;
+    private CheckBox dietaOral, dietaEnteral, dietaParenteral;
+    private RadioGroup aceitacaoRadioGroup;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nutricional);
         setToolbar(getString(R.string.Nutricional));
+        realm = Realm.getDefaultInstance();
 
         prepareNavigationButtons();
-        //createPopupIngestao();
+
+        /*****************************CHECKBOX**************************/
+        dietaEnteral = (CheckBox)findViewById(R.id.dietaEnteral);
+        dietaOral = (CheckBox)findViewById(R.id.dietaOral);
+        dietaParenteral = (CheckBox)findViewById(R.id.dietaParenteral);
+        /*****************************CHECKBOX**************************/
+
+        /****************************RADIOGROUP*************************/
+        aceitacaoRadioGroup = (RadioGroup)findViewById(R.id.aceitacaoRadioGroup);
+        /****************************RADIOGROUP*************************/
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +52,7 @@ public class NutricionalActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -49,46 +64,74 @@ public class NutricionalActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
 
-    }
-    public void ingestaoOnClick(View view){
-        createPopupIngestao();
+        setNutricionalFromDatabase();
     }
 
-    private void createPopupIngestao(){
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(this, R.style.MyDialogTheme);
+    private void setNutricionalFromDatabase(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getNutricional()!=null){
+            if(!ficha.getNutricional().getDieta().isEmpty()){
+                preencheCheckboxes(R.id.dieta,ficha.getNutricional().getDieta());
+            }
+            if(ficha.getNutricional().getAceitacao()!=null)
+                setRadioButtonFromIdAndDatabase(R.id.aceitacao,ficha.getNutricional().getAceitacao());
+        }
+    }
 
-        builder.setTitle(R.string.Ingestao);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
 
-        //list of items
-        final String[] items = getResources().getStringArray(R.array.ingestao);
-        Arrays.sort(items);
-        builder.setSingleChoiceItems(items, ingestaoSelection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ingestaoTextView.setText(items[which]);
-                        ingestaoTextView.setVisibility(View.VISIBLE);
-                        ingestaoSelection=which;
-                        dialog.dismiss();
+    @Override
+    public void onBackPressed(){
+        verificaCamposENotificaAdapter();
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home) {
+            verificaCamposENotificaAdapter();
+            finish();
+        }
+        return true;
+    }
+
+    private void verificaCamposENotificaAdapter(){
+        realm.beginTransaction();
+        Nutricional nutricional = realm.createObject(Nutricional.class);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.dieta);
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            View v = linearLayout.getChildAt(i);
+            if(v instanceof RelativeLayout) {
+                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+                    View view = ((RelativeLayout) v).getChildAt(k);
+                    if (view instanceof AppCompatCheckBox) {
+                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                        if (cb.isChecked()) {
+                            RealmString realmString = realm.createObject(RealmString.class);
+                            realmString.setName(cb.getText().toString());
+                            nutricional.getDieta().add(realmString);
+                        }
                     }
-                });
-
-        String negativeText = getString(R.string.Cancelar);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+                }
+            }
+        }
+        if(aceitacaoRadioGroup.getCheckedRadioButtonId()!=-1)
+            nutricional.setAceitacao(getStringOfRadioButtonSelectedFromRadioGroup(aceitacaoRadioGroup));
+        Ficha r = getProperFicha();
+        r.setNutricional(nutricional);
+        realm.copyToRealmOrUpdate(r);
+        realm.commitTransaction();
+        if(nutricional.checkObject())
+            changeCardColorToGreen();
     }
 }

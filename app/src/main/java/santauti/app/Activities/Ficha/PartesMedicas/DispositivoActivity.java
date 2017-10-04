@@ -124,7 +124,7 @@ public class DispositivoActivity extends GenericoActivity {
         }
         r.setDispositivos(dispositivos);
         realm.copyToRealmOrUpdate(r);
-        changeCardColor();
+        changeCardColorToGreen();
         realm.commitTransaction();
     }
 
