@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioGroup;
 
 import io.realm.Realm;
+import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Osteomuscular;
@@ -45,18 +47,15 @@ public class OsteomuscularActivity extends GenericoActivity {
             }
         });
 
-        proxFicha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
-                startActivity(intent);
-                exitActivityToRight();
-                verificaCamposENotificaAdapter();
-                finish();
-            }
-        });
         setOsteomuscularFromDatabase();
+    }
+
+    @Override
+    public void prepareNavigationButtons() {
+        proxFicha = (Button)findViewById(R.id.fichaProxima);
+        antFicha = (Button)findViewById(R.id.fichaAnterior);
+        proxFicha.setVisibility(View.GONE);
+        antFicha.setText("< " + FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0) - 1).getName());
     }
 
     private void setOsteomuscularFromDatabase(){
@@ -70,6 +69,7 @@ public class OsteomuscularActivity extends GenericoActivity {
 
     }
 
+
     private void verificaCamposENotificaAdapter(){
         realm.beginTransaction();
         Osteomuscular osteomuscular = realm.createObject(Osteomuscular.class);
@@ -78,15 +78,14 @@ public class OsteomuscularActivity extends GenericoActivity {
         if(musculaturaTrofismoRadioGroup.getCheckedRadioButtonId()!=-1)
             osteomuscular.setTrofismoMuscular(getStringOfRadioButtonSelectedFromRadioGroup(musculaturaTrofismoRadioGroup));
 
-        if(osteomuscular.getTrofismoMuscular()!=null || osteomuscular.getTonusMuscular()!=null){
-            Ficha r = getProperFicha();
-            r.setOsteomuscular(osteomuscular);
-            realm.copyToRealmOrUpdate(r);
-            realm.commitTransaction();
-        }
+        Ficha r = getProperFicha();
+        r.setOsteomuscular(osteomuscular);
+        realm.copyToRealmOrUpdate(r);
+        realm.commitTransaction();
         if(osteomuscular.checkObject())
             changeCardColorToGreen();
-
+        else
+            setCardColorToDefault();
     }
 
     @Override

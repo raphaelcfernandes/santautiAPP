@@ -182,7 +182,7 @@ public class PelesMucosasActivity extends GenericoActivity{
         if(pelesMucosas.checkObject())
             changeCardColorToGreen();
         else
-            setColorDefault();
+            setCardColorToDefault();
     }
 
     @Override

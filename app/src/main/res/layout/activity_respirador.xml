@@ -12,68 +12,64 @@
     <include layout="@layout/toolbar"/>
 
     <ScrollView
-        android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="0.9"
         android:scrollbars="vertical">
         <!--Scrollable content here-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingTop="10dp"
+                android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:paddingTop="10dp">
+
                 <TextView
+                    style="@style/TitleTextStyleForLayoutSelection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/EstaVentilacaoMecanica"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
-                <LinearLayout
-                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:text="@string/EstaVentilacaoMecanica" />
+
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <RadioGroup
-                        android:orientation="horizontal"
+                    android:orientation="horizontal"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="10dp">
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/simVentilacao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center|start">
-                        <android.support.v7.widget.AppCompatRadioButton
-                            android:onClick="emVentilacaoOnClick"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:id="@+id/simVentilacao"
-                            android:layout_marginEnd="75dp"
-                            android:text="@string/Sim"
-                            android:theme="@style/radioButtonStyle"/>
-                        <android.support.v7.widget.AppCompatRadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Nao"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="5dp"
-                            android:id="@+id/naoVentilacao"
-                            android:onClick="emVentilacaoOnClick"
-                            android:theme="@style/radioButtonStyle"
-                            />
-                    </RadioGroup>
+                        android:gravity="center"
+                        android:onClick="emVentilacaoOnClick"
+                        android:text="@string/Sim"
+                        android:theme="@style/radioButtonStyle" />
 
-                </LinearLayout>
-
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/naoVentilacao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:onClick="emVentilacaoOnClick"
+                        android:text="@string/Nao"
+                        android:theme="@style/radioButtonStyle" />
+                </RadioGroup>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray">
+
             </LinearLayout>
 
             <LinearLayout
@@ -85,135 +81,146 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:paddingTop="10dp"
+                    android:orientation="vertical"
                     android:paddingBottom="10dp"
-                    android:orientation="vertical">
+                    android:paddingTop="10dp">
                     <TextView
+                        style="@style/TitleTextStyleForLayoutSelection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/ModoVentilatorio"
-                        style="@style/TitleTextStyleForLayoutSelection"/>
+                        android:paddingBottom="5dp"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:text="@string/ModoVentilatorio" />
                     <RadioGroup
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center|start">
+                        android:orientation="horizontal"
+                        android:paddingEnd="0dp"
+                        android:paddingStart="10dp">
+
                         <android.support.v7.widget.AppCompatRadioButton
-                            android:onClick="modoVentilatorioOnClick"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
                             android:id="@+id/naoInvasivoModoVentilatorio"
-                            android:layout_marginEnd="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="modoVentilatorioOnClick"
                             android:text="@string/NaoInvasiva"
-                            android:theme="@style/radioButtonStyle"/>
+                            android:theme="@style/radioButtonStyle" />
+
                         <android.support.v7.widget.AppCompatRadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/BIPAP"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="5dp"
                             android:id="@+id/bipapModoVentilatorio"
-                            android:onClick="modoVentilatorioOnClick"
-                            android:theme="@style/radioButtonStyle"
-                            />
-                        <android.support.v7.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/Mecanica"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="20dp"
-                            android:id="@+id/mecanicaModoVentilatorio"
                             android:onClick="modoVentilatorioOnClick"
-                            android:theme="@style/radioButtonStyle"
-                            />
+                            android:text="@string/BIPAP"
+                            android:theme="@style/radioButtonStyle" />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/mecanicaModoVentilatorio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="modoVentilatorioOnClick"
+                            android:text="@string/Mecanica"
+                            android:theme="@style/radioButtonStyle" />
                     </RadioGroup>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="3px"
+                    android:layout_height="1dp"
                     android:background="@color/gray">
+
                 </LinearLayout>
 
                 <!--BIPAP-->
                 <LinearLayout
+                    android:id="@+id/bipap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:id="@+id/bipap"
                     android:visibility="gone">
-                    <android.support.design.widget.TextInputLayout
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/volumeBipap"
-                            android:layout_width="match_parent"
+                        android:orientation="horizontal">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:ems="6"
-                            android:hint="@string/Volume"
-                            android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/IPAP"
-                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:paddingEnd="@dimen/activity_horizontal_margin"
+                            android:paddingStart="@dimen/activity_horizontal_margin"
+                            android:theme="@style/TextLabelBlue">
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/volumeBipap"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="6"
+                                android:hint="@string/Volume"
+                                android:inputType="number" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:ems="6"
-                            android:hint="@string/IPAP"
-                            android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                            android:layout_marginTop="10dp"
+                            android:paddingEnd="@dimen/activity_horizontal_margin"
+                            android:paddingStart="@dimen/activity_horizontal_margin"
+                            android:theme="@style/TextLabelBlue">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/IPAP"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="6"
+                                android:hint="@string/IPAP"
+                                android:inputType="number" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/EPAP"
-                            android:layout_width="match_parent"
+                        android:orientation="horizontal">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:ems="6"
-                            android:hint="@string/EPAP"
-                            android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/saturacao"
-                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:paddingEnd="@dimen/activity_horizontal_margin"
+                            android:paddingStart="@dimen/activity_horizontal_margin"
+                            android:theme="@style/TextLabelBlue">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/EPAP"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="6"
+                                android:hint="@string/EPAP"
+                                android:inputType="number" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:ems="6"
-                            android:hint="@string/Saturacao"
-                            android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                            android:layout_marginTop="10dp"
+                            android:paddingEnd="@dimen/activity_horizontal_margin"
+                            android:paddingStart="@dimen/activity_horizontal_margin"
+                            android:theme="@style/TextLabelBlue">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/saturacao"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="6"
+                                android:hint="@string/Saturacao"
+                                android:inputType="number" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
                     <android.support.design.widget.TextInputLayout
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
                         android:theme="@style/TextLabelBlue">
+
                         <android.support.design.widget.TextInputEditText
                             android:id="@+id/oxigenio"
                             android:layout_width="match_parent"
@@ -226,11 +233,11 @@
                 <!--BIPAP-->
 
                 <!--Nao-Invasiva-->
-                <include layout="@layout/respirador_mentilacao_nao_invasiva"/>
+                <include layout="@layout/respirador_mentilacao_nao_invasiva" />
                 <!--Nao-Invasiva-->
 
                 <!--Mecanico-->
-                <include layout="@layout/respirador_ventilacao_mecanica"/>
+                <include layout="@layout/respirador_ventilacao_mecanica" />
                 <!--Mecanico-->
             </LinearLayout>
         </LinearLayout>

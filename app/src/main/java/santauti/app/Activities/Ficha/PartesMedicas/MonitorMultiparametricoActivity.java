@@ -99,6 +99,17 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
 
         realm = Realm.getDefaultInstance();
 
+        antFicha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
+                prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
+                startActivity(intent);
+                exitActivityToLeft();
+                finish();
+            }
+        });
+
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,8 +117,6 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
-                realm.close();
-                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -133,14 +142,6 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
                 ritmoRadioGroup3.clearCheck();
         }
     };
-
-    @Override
-    public void prepareNavigationButtons() {
-        proxFicha = (Button)findViewById(R.id.fichaProxima);
-        antFicha = (Button)findViewById(R.id.fichaAnterior);
-        antFicha.setVisibility(View.GONE);
-        proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
-    }
 
     private void setMonitorMultiparametricoFromDatabase(){
         Ficha ficha = getProperFicha();

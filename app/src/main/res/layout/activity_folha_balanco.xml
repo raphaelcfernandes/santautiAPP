@@ -69,7 +69,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="1dp"
             android:background="@color/gray">
         </LinearLayout>
         <!--CURVA TERMICA-->
@@ -202,7 +202,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="1dp"
             android:background="@color/gray">
         </LinearLayout>
         <!--EVACUAÇOES-->
@@ -306,7 +306,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="1dp"
             android:background="@color/gray">
         </LinearLayout>
         <!--NUTRICAO-->

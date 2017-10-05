@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Dispositivos;
 import santauti.app.Model.Ficha.Ficha;
@@ -61,20 +62,8 @@ public class DispositivoActivity extends GenericoActivity {
 
     private void setDispositivosFromDataBase() {
         Ficha ficha = getProperFicha();
-        if (ficha.getDispositivos() != null) {
-            LinearLayout layout= (LinearLayout)findViewById(R.id.dispositivos);
-            for (RealmString realmString : ficha.getDispositivos().getNomeDispositivos()) {
-                for(int i=0;i<layout.getChildCount();i++){
-                    View v = layout.getChildAt(i);
-                    for(int j=0;j<((RelativeLayout) v).getChildCount();j++) {
-                        View view = ((RelativeLayout) v).getChildAt(j);
-                        CheckBox cb = (CheckBox)view;
-                        if(!cb.isChecked() && cb.getText().toString().equals(realmString.getName()))
-                            cb.setChecked(true);
-                    }
-                }
-            }
-        }
+        if (ficha.getDispositivos() != null && !ficha.getDispositivos().getNomeDispositivos().isEmpty())
+            preencheCheckboxes(R.id.dispositivos,ficha.getDispositivos().getNomeDispositivos());
     }
 
 
@@ -104,28 +93,13 @@ public class DispositivoActivity extends GenericoActivity {
         realm.beginTransaction();
         Dispositivos dispositivos = realm.createObject(Dispositivos.class);
         Ficha r = getProperFicha();
-        r.setDispositivos(dispositivos);
-        LinearLayout layout= (LinearLayout)findViewById(R.id.dispositivos);
-        for(int i=0;i<layout.getChildCount();i++){
-            View v = layout.getChildAt(i);
-            if(v instanceof RelativeLayout){
-                for(int j=0;j<((RelativeLayout) v).getChildCount();j++) {
-                    View view = ((RelativeLayout) v).getChildAt(j);
-                    if(view instanceof CheckBox){
-                        CheckBox cb = (CheckBox)view;
-                        if(cb.isChecked()) {
-                            RealmString realmString = realm.createObject(RealmString.class);
-                            realmString.setName(cb.getText().toString());
-                            dispositivos.getNomeDispositivos().add(realmString);
-                        }
-                    }
-                }
-            }
-        }
+        RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.dispositivos);
+        for(RealmString realmString : realmStrings)
+            dispositivos.getNomeDispositivos().add(realmString);
         r.setDispositivos(dispositivos);
         realm.copyToRealmOrUpdate(r);
-        changeCardColorToGreen();
         realm.commitTransaction();
+        changeCardColorToGreen();
     }
 
 }

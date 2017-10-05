@@ -118,7 +118,7 @@ public abstract class GenericoActivity extends AppCompatActivity {
         }
     }
 
-    public void setColorDefault(){
+    public void setCardColorToDefault(){
         if(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position",0)).getColor()==1) {
             FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(0);
             FichaActivity.adapter.notifyDataSetChanged();
@@ -157,38 +157,6 @@ public abstract class GenericoActivity extends AppCompatActivity {
         antFicha = (Button)findViewById(R.id.fichaAnterior);
         proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
         antFicha.setText("< "+FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)-1).getName());
-    }
-
-    public void createDialog(final String title, int selection, final TextView textView, final String[] options){
-        builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-
-        builder.setTitle(title);
-
-        //list of items
-        Arrays.sort(options);
-        builder.setSingleChoiceItems(options, selection,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        textView.setText(options[which]);
-                        textView.setVisibility(View.VISIBLE);
-                        itemSelected=which;
-                        dialog.dismiss();
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
     }
 
     /**

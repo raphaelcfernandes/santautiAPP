@@ -13,9 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
+import santauti.app.Model.Ficha.Infeccioso;
+import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -24,17 +27,11 @@ import santauti.app.R;
 
 public class InfecciosoActivity extends GenericoActivity {
     private Realm realm;
-    private boolean[] antibioticos = new boolean[24];
-    private TextView antibioticoTextView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infeccioso);
         setToolbar(getString(R.string.Infeccioso));
-
-        /*********************VIEWS***********************/
-        //antibioticoTextView = (TextView)findViewById(R.id.antibioticoTextView);
-        /*********************VIEWS***********************/
 
         realm = Realm.getDefaultInstance();
         prepareNavigationButtons();
@@ -46,7 +43,7 @@ public class InfecciosoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1,intent);
                 startActivity(intent);
                 exitActivityToLeft();
-                //verificaCamposENotificaAdapter();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -58,19 +55,17 @@ public class InfecciosoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();
-                //verificaCamposENotificaAdapter();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
+        setInfecciosoFromDataBase();
     }
 
-
-    private int getInfecciosoSelected(){
-        Ficha f = getProperFicha();
-        if(f.getInfeccioso()!=null)
-            return f.getInfeccioso().getPacienteComInfeccao();
-        else
-            return -1;
+    private void setInfecciosoFromDataBase(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getInfeccioso()!=null && !ficha.getInfeccioso().getAntibioticos().isEmpty())
+            preencheCheckboxes(R.id.antibioticos,ficha.getInfeccioso().getAntibioticos());
     }
 
     @Override
@@ -81,7 +76,7 @@ public class InfecciosoActivity extends GenericoActivity {
 
     @Override
     public void onBackPressed(){
-        //verificaCamposENotificaAdapter();
+        verificaCamposENotificaAdapter();
         finish();
     }
 
@@ -89,59 +84,22 @@ public class InfecciosoActivity extends GenericoActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == android.R.id.home) {
-            //verificaCamposENotificaAdapter();
+            verificaCamposENotificaAdapter();
             finish();
         }
         return true;
     }
 
     public void verificaCamposENotificaAdapter(){
-//        if(infecciosoSim.isChecked() || infecciosoNao.isChecked()) {
-//            realm.beginTransaction();
-//            Infeccioso infecc = realm.createObject(Infeccioso.class);
-//            infecc.setPacienteComInfeccao(infeccioso);
-//            Ficha r = getProperFicha();
-//            r.setInfeccioso(infecc);
-//            realm.copyToRealmOrUpdate(r);
-//            realm.commitTransaction();
-//            changeCardColorToGreen();
-//        }
-    }
-
-    public void antibioticoOnClick(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        final ArrayList mSelectedItems = new ArrayList();
-
-        // Set the dialog title
-        builder.setTitle(R.string.Antibiotico);
-        final String[] items = getResources().getStringArray(R.array.antibioticos);
-        Arrays.sort(items);
-        builder.setMultiChoiceItems(items, antibioticos,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which,
-                                        boolean isChecked) {
-                        if (isChecked)
-                            antibioticos[which]=true;
-                        else
-                            antibioticos[which]=false;
-                    }
-                })
-                // Set the action buttons
-                .setPositiveButton(R.string.Selecionar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        setTextViewFromDialogMultipleText(antibioticos,antibioticoTextView,items);
-                    }
-                })
-                .setNegativeButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
+        realm.beginTransaction();
+        Ficha ficha = getProperFicha();
+        Infeccioso infeccioso = realm.createObject(Infeccioso.class);
+        RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.antibioticos);
+        for(RealmString realmString : realmStrings)
+            infeccioso.getAntibioticos().add(realmString);
+        ficha.setInfeccioso(infeccioso);
+        realm.copyToRealmOrUpdate(ficha);
+        changeCardColorToGreen();
+        realm.commitTransaction();
     }
 }

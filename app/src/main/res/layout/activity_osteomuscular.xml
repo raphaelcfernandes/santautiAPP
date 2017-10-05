@@ -69,6 +69,11 @@
                 android:text="@string/Hipotrofico"
                 android:theme="@style/radioButtonStyle" />
         </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray">
+        </LinearLayout>
         <TextView
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
@@ -112,7 +117,13 @@
                 android:text="@string/Hipotonico"
                 android:theme="@style/radioButtonStyle" />
         </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray">
+        </LinearLayout>
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

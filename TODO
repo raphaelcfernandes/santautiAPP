@@ -19,7 +19,7 @@ Descolorir card caso algum item tenha sido descelecionado (Funcionando -> Peles 
     Distribuir essa funcionalidade para os outros cards que possuem o mesmo esquema.
         -
 /*************MUDANĆAS*********************/
-Hematológico: Salvando. (corrigir layout, simples).
+Hematológico: Salvando.
 Monitor Multiparamétrico: Salvando.
 Metabolico: Salvando.
 Dispositivos: Salvando.
@@ -38,6 +38,14 @@ Pele e Mucosas: Salvando.
         - presente:
             - Sacral, calcamio (direito/esquerdo)
             - sacra, calcâneo, nádegas, trocânteres, cotovelos e tronco.
+Hemodinamico: Salvando.
+  - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
+Infeccioso: retirar antibiotico que ta aqui e la de bomba de infusao (Polimixina) Salvando.
+    - antibiotico/antivirais/antifungicos
+        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
+        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
+        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
+        - Amoxicilina-clavulanato,
 /*****************MUDANÇAS FEITAS**********/
 Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - colocar td em uma tela só, retirar recycler view
     -   Bomba de infusao
@@ -58,7 +66,7 @@ Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei c
                 - DESORIENTADO:
                     - Tempo e espaco. (multiplo)
 
-Exames: PRIMEIRO ICONE
+Exames:
     - Eletrólitos: inserćao de dados na mao OU
                     insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
         - Potássio: hipo, hipercalemia. Se n marcar = normal
@@ -104,27 +112,7 @@ Respirador: -> OK
         - Pressao cuff, retirar daqui? Manter? Pegar valor de Respirador? E se n tiver valor em Respirador?
             - Freq respiratoria 2 campos: paciente e respirador
 
-Infeccioso: retirar antibiotico que ta aqui e la de bomba de infusao
-    - Curva glicemica -> Endocrino
-    - curva termica: febril, afebril, subfebril. -> foi para folhas de balanćo
-    - marcadores de infeccao: estaveis, em melhora, em piora
-    - antibiotico/antivirais/antifungicos
-        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
-        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
-        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
-        - Amoxicilina-clavulanato,
-
-Hemodinamico: OK
-  - Pulso ritmico/aritmico -> ok
-  - Fonese de bulhas: hiper, normal, hipo -> ok
-  - perfusao capilar: boa/ruim -> ok
-  - Extremidades:
-      - cianotica, acianotica, fria, quente (4 općoes diferentes)
-  - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
-
-
-
-Folhas de balanćo: Evacuacoes mostrando menu desaparecendo qndo clica no checkbox e menu ja escondido. Neurologico deficit motor n está
+Folhas de balanćo:
     Segundo icone
     - Curva glicemica:
         - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.

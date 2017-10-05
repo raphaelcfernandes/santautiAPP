@@ -20,45 +20,34 @@
             android:text="@string/ParametrosRespirador"
             style="@style/TitleTextStyleForLayoutSelection"/>
         <RadioGroup
+            android:paddingTop="5dp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin">
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp">
             <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginEnd="20dp"
                 android:text="@string/PCV"
                 android:theme="@style/radioButtonStyle"/>
             <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/VCV"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
                 android:theme="@style/radioButtonStyle"
                 />
             <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/PSV"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
                 android:theme="@style/radioButtonStyle"
                 />
             <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/SIMV"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
                 android:theme="@style/radioButtonStyle"
                 />
         </RadioGroup>
@@ -66,24 +55,59 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="1dp"
         android:background="@color/gray">
     </LinearLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/TextLabelBlue">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/respiratorio_fio2"
-            android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+        <android.support.design.widget.TextInputLayout
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="FiO2 (%)"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
+            android:theme="@style/TextLabelBlue">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/respiratorio_fio2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:hint="FiO2 (%)"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/TextLabelBlue">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/respiratorio_peep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:hint="PEEP"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:theme="@style/TextLabelBlue">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/respiratorio_volume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:hint="Volume"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
     <android.support.design.widget.TextInputLayout
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -114,34 +138,5 @@
             android:hint="Frequência Respiratória Respirador"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:theme="@style/TextLabelBlue">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/respiratorio_peep"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="PEEP"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:theme="@style/TextLabelBlue">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/respiratorio_volume"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Volume"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
+
 </LinearLayout>

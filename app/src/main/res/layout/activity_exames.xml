@@ -100,8 +100,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray"></LinearLayout>
+                android:layout_height="1dp"
+                android:background="@color/gray">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,7 +135,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray"></LinearLayout>
 
             <LinearLayout
@@ -189,7 +191,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray"></LinearLayout>
 
             <LinearLayout
@@ -232,7 +234,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray"></LinearLayout>
 
             <LinearLayout
@@ -475,7 +477,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray">
             </LinearLayout>
 
@@ -525,7 +527,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray"></LinearLayout>
 
             <LinearLayout
@@ -608,7 +610,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray"></LinearLayout>
 
 
@@ -666,7 +668,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray"></LinearLayout>
 
             <!--Albumina-->
@@ -724,7 +726,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray"></LinearLayout>
             <!--Albumina-->
 
@@ -759,7 +761,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray"></LinearLayout>
 
 

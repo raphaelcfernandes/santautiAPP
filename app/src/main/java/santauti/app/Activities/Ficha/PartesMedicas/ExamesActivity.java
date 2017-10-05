@@ -65,13 +65,15 @@ public class ExamesActivity extends GenericoActivity {
         });
         myAnimation = new MyAnimation();
 
-        antFicha.setOnClickListener(new View.OnClickListener() {
+        proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
-                prepareIntent(getIntent().getIntExtra("Position", 0) - 1, intent);
+                prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
-                exitActivityToLeft();
+                exitActivityToRight();
+//                realm.close();
+//                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -90,9 +92,10 @@ public class ExamesActivity extends GenericoActivity {
 
     @Override
     public void prepareNavigationButtons() {
-        findViewById(R.id.fichaProxima).setVisibility(View.GONE);
-        antFicha = (Button) findViewById(R.id.fichaAnterior);
-        antFicha.setText("< " + FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0) - 1).getName());
+        proxFicha = (Button)findViewById(R.id.fichaProxima);
+        antFicha = (Button)findViewById(R.id.fichaAnterior);
+        antFicha.setVisibility(View.GONE);
+        proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
     }
 
 

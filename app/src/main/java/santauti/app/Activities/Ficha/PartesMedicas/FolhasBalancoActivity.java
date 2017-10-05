@@ -25,6 +25,7 @@ import java.util.Arrays;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.MonitorMultiparametrico;
 import santauti.app.R;
 
 /**
@@ -129,7 +130,7 @@ public class FolhasBalancoActivity extends GenericoActivity {
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), OsteomuscularActivity.class);
+                intent = new Intent(view.getContext(), ExamesActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
@@ -140,7 +141,7 @@ public class FolhasBalancoActivity extends GenericoActivity {
         proxFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), ExamesActivity.class);
+                intent = new Intent(view.getContext(), MonitorMultiparametricoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
@@ -150,15 +151,6 @@ public class FolhasBalancoActivity extends GenericoActivity {
 
     }
 
-    public void aspectoFezesOnClick(View view){
-        if(numeroEventos.length()==0) {
-            numeroEventos.requestFocus();
-            final InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext()
-                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.showSoftInput(numeroEventos, InputMethodManager.SHOW_IMPLICIT);
-        }
-    }
-
     public void evacuacoesOnClick(View view){
         if(evacuacoesItens.isShown())
             myAnimation.slideUpView(getApplicationContext(), evacuacoesItens);
@@ -166,14 +158,4 @@ public class FolhasBalancoActivity extends GenericoActivity {
         if(checkboxEvacuacoes.isChecked())
             myAnimation.slideDownView(getApplicationContext(), evacuacoesItens);
     }
-
-    public void nutricaoOnClick(View view){
-        switch(view.getId()) {
-            default:
-                if(!volumeNutricao.isShown())
-                    myAnimation.slideDownView(getApplicationContext(),volumeNutricao);
-                break;
-        }
-    }
-
 }

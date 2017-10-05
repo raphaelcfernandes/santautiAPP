@@ -163,41 +163,41 @@ public class FichaActivity extends GenericoActivity{
         @Override
         public void onItemClick(View v, int position) {
             if(position==0)
-                intent = new Intent(v.getContext(), MonitorMultiparametricoActivity.class);
-            else if(position==1)
-                intent = new Intent(v.getContext(), BombaInfusaoActivity.class);
-            else if(position==2)
-                intent = new Intent(v.getContext(), DispositivoActivity.class);
-            else if(position==3)
-                intent = new Intent(v.getContext(), RespiradorActivity.class);
-            else if(position==4)
-                intent = new Intent(v.getContext(), NeurologicoActivity.class);
-            else if(position==5)
-                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
-            else if(position==6)
-                intent = new Intent(v.getContext(), RespiratorioActivity.class);
-            else if(position==7)
-                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
-            else if(position==8)
-                intent = new Intent(v.getContext(), RenalActivity.class);
-            else if(position==9)
-                intent = new Intent(v.getContext(), MetabolicoActivity.class);
-            else if(position==10)
-                intent = new Intent(v.getContext(), InfecciosoActivity.class);
-            else if(position==11)//Nutricional
-                intent = new Intent(v.getContext(), NutricionalActivity.class);
-            else if(position==12)//Hematologico
-                intent = new Intent(v.getContext(), HematologicoActivity.class);
-            else if(position==13)//Endcrino
-                intent = new Intent(v.getContext(), EndocrinoActivity.class);
-            else if(position==14)//Peles Mucosas
-                intent = new Intent(v.getContext(), PelesMucosasActivity.class);
-            else if(position==15)//Osteomuscular
-                intent = new Intent(v.getContext(), OsteomuscularActivity.class);
-            else if(position==16)//Folhas
-                intent = new Intent(v.getContext(), FolhasBalancoActivity.class);
-            else if(position==17)//Exames
                 intent = new Intent(v.getContext(), ExamesActivity.class);
+            else if(position==1)
+                intent = new Intent(v.getContext(), FolhasBalancoActivity.class);
+            else if(position==2)
+                intent = new Intent(v.getContext(), MonitorMultiparametricoActivity.class);
+            else if(position==3)
+                intent = new Intent(v.getContext(), BombaInfusaoActivity.class);
+            else if(position==4)
+                intent = new Intent(v.getContext(), DispositivoActivity.class);
+            else if(position==5)
+                intent = new Intent(v.getContext(), RespiradorActivity.class);
+            else if(position==6)
+                intent = new Intent(v.getContext(), NeurologicoActivity.class);
+            else if(position==7)
+                intent = new Intent(v.getContext(), HemodinamicoActivity.class);
+            else if(position==8)
+                intent = new Intent(v.getContext(), RespiratorioActivity.class);
+            else if(position==9)
+                intent = new Intent(v.getContext(), GastrointestinalActivity.class);
+            else if(position==10)
+                intent = new Intent(v.getContext(), RenalActivity.class);
+            else if(position==11)
+                intent = new Intent(v.getContext(), MetabolicoActivity.class);
+            else if(position==12)
+                intent = new Intent(v.getContext(), InfecciosoActivity.class);
+            else if(position==13)
+                intent = new Intent(v.getContext(), NutricionalActivity.class);
+            else if(position==14)
+                intent = new Intent(v.getContext(), HematologicoActivity.class);
+            else if(position==15)
+                intent = new Intent(v.getContext(), EndocrinoActivity.class);
+            else if(position==16)
+                intent = new Intent(v.getContext(), PelesMucosasActivity.class);
+            else if(position==17)
+                intent = new Intent(v.getContext(), OsteomuscularActivity.class);
             prepareIntent(position,intent);
             startActivity(intent);
         }
@@ -208,6 +208,8 @@ public class FichaActivity extends GenericoActivity{
      */
     private void prepareFichas() {
         int[] covers = new int[]{
+                R.drawable.x_ray,
+                R.drawable.folhas_balanco,
                 R.drawable.icu_monitor,
                 R.drawable.hqdefault,
                 R.drawable.sphygmomanometer,
@@ -223,63 +225,61 @@ public class FichaActivity extends GenericoActivity{
                 R.drawable.blood_drop,
                 R.drawable.thyroid,
                 R.drawable.peles_mucosas,
-                R.drawable.osteomuscular,
-                R.drawable.folhas_balanco,
-                R.drawable.x_ray
+                R.drawable.osteomuscular
         };
 
-        FichaAdapterModel a = new FichaAdapterModel(this.getString(R.string.MonitorMultiparametrico),covers[0],0);
+        FichaAdapterModel a = new FichaAdapterModel(this.getString(R.string.Exames), covers[0],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.BombaInfusao),covers[1],0);
+        a = new FichaAdapterModel(this.getString(R.string.FolhasBalanco), covers[1],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Dispositivos),covers[2],0);
+        a = new FichaAdapterModel(this.getString(R.string.MonitorMultiparametrico),covers[2],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Respirador),covers[3],0);
+        a = new FichaAdapterModel(this.getString(R.string.BombaInfusao),covers[3],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Neurologico),covers[4],0);
+        a = new FichaAdapterModel(this.getString(R.string.Dispositivos),covers[4],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Hemodinamico),covers[5],0);
+        a = new FichaAdapterModel(this.getString(R.string.Respirador),covers[5],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Respiratorio), covers[6],0);
+        a = new FichaAdapterModel(this.getString(R.string.Neurologico),covers[6],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.GastroIntestinal), covers[7],0);
+        a = new FichaAdapterModel(this.getString(R.string.Hemodinamico),covers[7],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Renal), covers[8],0);
+        a = new FichaAdapterModel(this.getString(R.string.Respiratorio), covers[8],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Metabolico), covers[9],0);
+        a = new FichaAdapterModel(this.getString(R.string.GastroIntestinal), covers[9],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Infeccioso), covers[10],0);
+        a = new FichaAdapterModel(this.getString(R.string.Renal), covers[10],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Nutricional), covers[11],0);
+        a = new FichaAdapterModel(this.getString(R.string.Metabolico), covers[11],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Hematologico), covers[12],0);
+        a = new FichaAdapterModel(this.getString(R.string.Infeccioso), covers[12],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[13],0);
+        a = new FichaAdapterModel(this.getString(R.string.Nutricional), covers[13],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.PelesMucosas), covers[14],0);
+        a = new FichaAdapterModel(this.getString(R.string.Hematologico), covers[14],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.OsteoMuscular), covers[15],0);
+        a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[15],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.FolhasBalanco), covers[16],0);
+        a = new FichaAdapterModel(this.getString(R.string.PelesMucosas), covers[16],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.Exames), covers[17],0);
+        a = new FichaAdapterModel(this.getString(R.string.OsteoMuscular), covers[17],0);
         fichaAdapterModelList.add(a);
 
         adapter = new FichaSectionAdapter(this, fichaAdapterModelList);

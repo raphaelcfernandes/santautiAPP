@@ -7,7 +7,6 @@ import java.util.Date;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import santauti.app.Model.Ficha.Hemodinamico.Hemodinamico;
 import santauti.app.Model.Ficha.Neurologico.Neurologico;
 import santauti.app.Model.Paciente;
 import santauti.app.Model.User;

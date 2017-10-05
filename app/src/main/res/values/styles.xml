@@ -103,6 +103,6 @@
     </style>
 
     <style name="CheckBoxStyle">
-        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>w
     </style>
 </resources>

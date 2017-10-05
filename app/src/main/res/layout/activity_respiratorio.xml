@@ -144,7 +144,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray">
             </LinearLayout>
             <!--PRESSAO CUFF-->
@@ -251,7 +251,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray">
             </LinearLayout>
             <!--Murmurio vesicular-->
@@ -427,7 +427,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray">
             </LinearLayout>
 
@@ -516,7 +516,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray">
             </LinearLayout>
             <!--RONCOS-->
@@ -605,7 +605,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray">
             </LinearLayout>
             <!--SIBILOS-->
@@ -694,7 +694,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:background="@color/gray">
             </LinearLayout>
             <!--CREPITACOES-->

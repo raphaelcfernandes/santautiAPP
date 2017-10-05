@@ -145,7 +145,7 @@
     <string name="Estavel">Estável</string>
     <string name="EmQueda">Em Queda</string>
     <string name="Elevando">Elevando</string>
-    <string name="Antibiotico">Antibióticos</string>
+    <string name="AntibioticoAntiviraisAntifungicos">Antibióticos/Antivirais/Antifungicos</string>
     <string name="RaioxTorax">Raio-x Torax</string>
     <string name="Leucograma">Leucograma</string>
     <string name="FuncaoHepatica">Função Hepática</string>
@@ -324,6 +324,32 @@
     <string name="Trocanteres">Trocanteres</string>
     <string name="Cotovelos">Cotovelos</string>
     <string name="Tronco">Tronco</string>
+    <string name="Ritmico">Ritmico</string>
+    <string name="Aritmico">Aritmico</string>
+    <string name="Regular">Regular</string>
+    <string name="AmoxicilinaClavulanato">Amoxicilina-clavulanato</string>
+    <string name="Azitromicina">Azitromicina</string>
+    <string name="Cefalexina">Cefalexina</string>
+    <string name="Cefazolina">Cefazolina</string>
+    <string name="Cefepime">Cefepime</string>
+    <string name="Ceftriaxone">Ceftriaxone</string>
+    <string name="Ciprofloxacino">Ciprofloxacino</string>
+    <string name="Clindamicina">Clindamicina</string>
+    <string name="Equinocandina">Equinocandina</string>
+    <string name="Daptomicina">Daptomicina</string>
+    <string name="Ertapenem">Ertapenem</string>
+    <string name="Fluconazol">Fluconazol</string>
+    <string name="Imipenem">Imipenem</string>
+    <string name="Levofloxacino">Levofloxacino</string>
+    <string name="Linezolida">Linezolida</string>
+    <string name="Metronidazol">Metronidazol</string>
+    <string name="Moxiflaxicino">Moxiflaxicino</string>
+    <string name="Meropenem">Meropenem</string>
+    <string name="Oxacilina">Oxacilina</string>
+    <string name="PipeTazo">Pipe-tazo</string>
+    <string name="Teicoplanina">Teicoplanina</string>
+    <string name="Tigeciclina">Tigeciclina</string>
+    <string name="Vancomicina">Vancomicina</string>
 
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
@@ -391,33 +417,6 @@
         <item>4 \u002d Movimento de Retirada.</item>
         <item>5 \u002d Localiza Dor.</item>
         <item>6 \u002d Obedece Comandos.</item>
-    </string-array>
-
-    <string-array name="antibioticos">
-        <item>Ceftriaxone</item>
-        <item>Azitromicina</item>
-        <item>Cefepime</item>
-        <item>Neropenem</item>
-        <item>Ertapenem</item>
-        <item>Citrofloxacim</item>
-        <item>Levofloxacim</item>
-        <item>Fluconasol</item>
-        <item>Polimixina</item>
-        <item>Moxiflaxicino</item>
-        <item>Tigeciclina</item>
-        <item>Vancomicina</item>
-        <item>Teicoplanina</item>
-        <item>Metronidazol</item>
-        <item>Pipe-tazo</item>
-        <item>Imipenem</item>
-        <item>Oxacilina</item>
-        <item>Clindamicina</item>
-        <item>Daptomicina</item>
-        <item>Linezolida</item>
-        <item>Equinocandina</item>
-        <item>Cefazolina</item>
-        <item>Cefalexina</item>
-        <item>Amoxicilina-clavulanato</item>
     </string-array>
 
     <string-array name="raioxTorax">
