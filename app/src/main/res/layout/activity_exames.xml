@@ -61,7 +61,7 @@
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/plaqueta"
+                        android:id="@+id/plaquetas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="5"
@@ -82,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:id="@+id/leucograma">
                 <TextView
                     android:id="@+id/leucogramaMenu"
                     style="@style/TitleTextStyleForLayoutSelection"
@@ -92,6 +93,7 @@
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:text="@string/Leucograma" />
                 <RadioGroup
+                    android:id="@+id/leucogramaRadioGroup1"
                     android:paddingTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,20 +101,22 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
                     <RadioButton
+                        android:id="@+id/leucogramaNormal"
                         android:theme="@style/radioButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Normal"
                         />
                     <RadioButton
+                        android:id="@+id/leucogramaEstavel"
                         android:theme="@style/radioButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Estavel"
                         />
-
                 </RadioGroup>
                 <RadioGroup
+                    android:id="@+id/leucogramaRadioGroup2"
                     android:paddingTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -120,12 +124,14 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
                     <RadioButton
+                        android:id="@+id/leucogramaEmMelhora"
                         android:theme="@style/radioButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/EmMelhora"
                         />
                     <RadioButton
+                        android:id="@+id/leucogramaEmPiora"
                         android:theme="@style/radioButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -147,8 +153,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp">
-
+                android:paddingTop="10dp"
+                android:id="@+id/pcrLinearLayout">
                 <TextView
                     style="@style/TitleTextStyleForLayoutSelection"
                     android:layout_width="wrap_content"
@@ -156,8 +162,8 @@
                     android:paddingEnd="0dp"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:text="@string/PCR" />
-
                 <RadioGroup
+                    android:id="@+id/pcr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -165,19 +171,16 @@
                     android:paddingEnd="0dp"
                     android:paddingStart="10dp"
                     android:paddingTop="5dp">
-
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Estavel"
                         android:theme="@style/radioButtonStyle" />
-
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Elevando"
                         android:theme="@style/radioButtonStyle" />
-
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -206,6 +209,7 @@
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/ureia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="6"
@@ -218,6 +222,7 @@
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/creatinina"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="6"
@@ -257,11 +262,11 @@
                 android:visibility="visible">
                 <!--Potassio-->
                 <LinearLayout
+                    android:id="@+id/potassioLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingBottom="10dp">
-
                     <TextView
                         style="@style/TitleTextStyleForLayoutSelection"
                         android:layout_width="wrap_content"
@@ -270,8 +275,8 @@
                         android:paddingEnd="0dp"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:text="@string/Potassio" />
-
                     <RadioGroup
+                        android:id="@+id/potassio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -312,8 +317,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="10dp">
-
+                    android:paddingBottom="10dp"
+                    android:id="@+id/magnesioLinearLayout">
                     <TextView
                         android:id="@+id/menuMagnesio"
                         style="@style/TitleTextStyleForLayoutSelection"
@@ -324,6 +329,7 @@
                         android:text="@string/Magnesio" />
 
                     <RadioGroup
+                        android:id="@+id/magnesio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -362,7 +368,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="10dp">
+                    android:paddingBottom="10dp"
+                    android:id="@+id/fosforoLinearLayout">
 
                     <TextView
                         android:id="@+id/menuFosforo"
@@ -374,6 +381,7 @@
                         android:text="@string/Fosforo" />
 
                     <RadioGroup
+                        android:id="@+id/fosforo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -415,8 +423,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="10dp">
-
+                    android:paddingBottom="10dp"
+                    android:id="@+id/calcioLinearLayout">
                     <TextView
                         android:id="@+id/menuCalcio"
                         style="@style/TitleTextStyleForLayoutSelection"
@@ -425,8 +433,8 @@
                         android:paddingEnd="@dimen/activity_horizontal_margin"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:text="@string/Calcio" />
-
                     <RadioGroup
+                        android:id="@+id/calcio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -480,7 +488,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:id="@+id/lactatoLinearLayout">
                 <TextView
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:paddingStart="@dimen/activity_horizontal_margin"
@@ -490,6 +499,7 @@
                     android:layout_gravity="center|start"
                     android:text="@string/Lactato" />
                 <RadioGroup
+                    android:id="@+id/lactato"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|start"
@@ -521,7 +531,6 @@
                 android:paddingBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ulceraPressao"
                 android:onClick="amilaseOnClick"
                 android:background="?attr/selectableItemBackground"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -544,33 +553,37 @@
                     android:layout_height="wrap_content" />
             </RelativeLayout>
 
-            <RadioGroup
-                android:paddingBottom="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="0dp"
-                android:orientation="horizontal"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/amilaseItens"
-                android:visibility="gone">
-                <RadioButton
+                android:orientation="vertical"
+                android:id="@+id/amilaseLinearLayout">
+                <RadioGroup
+                    android:paddingBottom="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Elevada"
-                    android:theme="@style/radioButtonStyle" />
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Normal"
-                    android:theme="@style/radioButtonStyle"
-                    />
-            </RadioGroup>
-
-
+                    android:id="@+id/amilaseItens"
+                    android:visibility="gone">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Elevada"
+                        android:theme="@style/radioButtonStyle" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Normal"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+            </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray" />
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
 
 
             <LinearLayout
@@ -578,7 +591,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:id="@+id/marcadoresInfeccaoLinearLayout">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -588,6 +602,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="17sp" />
                 <RadioGroup
+                    android:id="@+id/marcadoresInfeccao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -626,7 +641,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                    android:id="@+id/albuminaLinearLayout">
 
                 <TextView
                     android:id="@+id/menuAlbumina"
@@ -638,6 +654,7 @@
                     android:text="@string/Albumina" />
 
                 <RadioGroup
+                    android:id="@+id/albuminaRadioGroup1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -645,22 +662,23 @@
                     android:paddingEnd="0dp"
                     android:paddingStart="10dp"
                     android:paddingTop="5dp">
-
                     <RadioButton
+                        android:id="@+id/hiperalbuminemia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/Hiperalbuminemia"
                         android:theme="@style/radioButtonStyle" />
-
                     <RadioButton
+                        android:id="@+id/albuminaNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Normal"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
                 <RadioGroup
+                    android:id="@+id/albuminaRadioGroup2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -669,13 +687,13 @@
                     android:paddingStart="10dp"
                     android:paddingTop="5dp">
                     <RadioButton
+                        android:id="@+id/hipoalbuminemia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Hipoalbuminemia"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -707,17 +725,20 @@
                     android:paddingTop="5dp"
                     android:id="@+id/raioxToraxRadioGroup1">
                     <RadioButton
+                        android:id="@+id/raioxNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Normal"
                         android:theme="@style/radioButtonStyle" />
                     <RadioButton
+                        android:id="@+id/pneumotorax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Pneumotorax"
                         android:theme="@style/radioButtonStyle" />
 
                     <RadioButton
+                        android:id="@+id/actelectasia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Actelectasia"
@@ -733,6 +754,7 @@
                     android:paddingTop="5dp"
                     android:id="@+id/raioxToraxRadioGroup2">
                     <RadioButton
+                        android:id="@+id/infiltradosNovos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/InfiltradosNovos"

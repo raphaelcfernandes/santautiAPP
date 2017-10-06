@@ -152,8 +152,8 @@ public class FichaActivity extends GenericoActivity{
         for(FichaAdapterModel fichaAdapterModel : fichaAdapterModelList)
             if(fichaAdapterModel.getColor()==1)
                 i++;
-//        if(i==fichaAdapterModelList.size())
-//            floatingActionButton.setVisibility(View.VISIBLE);
+        if(i==fichaAdapterModelList.size())
+            floatingActionButton.setVisibility(View.VISIBLE);
     }
 
     /**

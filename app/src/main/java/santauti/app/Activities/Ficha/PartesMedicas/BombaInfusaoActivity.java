@@ -122,6 +122,7 @@ public class BombaInfusaoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -133,6 +134,7 @@ public class BombaInfusaoActivity extends GenericoActivity {
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
                 startActivity(intent);
                 exitActivityToRight();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });

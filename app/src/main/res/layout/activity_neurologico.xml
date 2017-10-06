@@ -39,6 +39,7 @@
                     android:text="@string/TemporoEspacial"
                     style="@style/TitleTextStyleForLayoutSelection"/>
                 <RadioGroup
+                    android:id="@+id/orientacaoTemporoEspacial"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingTop="5dp"
@@ -53,7 +54,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:paddingStart="0dp"
                         android:text="@string/Orientado"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
@@ -73,28 +73,28 @@
                 android:id="@+id/desorientadoLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:background="?attr/selectableItemBackground"
                 android:orientation="vertical"
                 android:visibility="gone">
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <CheckBox
-                        android:layout_marginEnd="50dp"
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/noEspaco"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/NoEspaco"
                         android:theme="@style/CheckBoxStyle"/>
-                    <CheckBox
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:layout_toEndOf="@id/noEspaco"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/NoTempo"/>
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -102,7 +102,6 @@
                 android:layout_height="1dp"
                 android:background="@color/gray">
             </LinearLayout>
-
 
             <include layout="@layout/deficit_motor"/>
             <LinearLayout

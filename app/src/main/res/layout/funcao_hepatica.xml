@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,77 +22,104 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:paddingTop="10dp">
+            android:paddingTop="10dp"
+            android:id="@+id/bilirrubinasLinearLayout">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bilirribunas"
+                android:text="@string/Bilirrubinas"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                style="@style/TitleTextStyleForLayoutSelection"
-                android:textSize="15sp"/>
-                <RadioGroup
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Normais"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Elevadas"/>
-                </RadioGroup>
-
-            <TextView
-                android:paddingTop="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="FA/GGT"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"
                 style="@style/TitleTextStyleForLayoutSelection"
                 android:textSize="15sp"/>
             <RadioGroup
-                android:paddingTop="5dp"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:id="@+id/bilirrubinas"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RadioButton
+                    android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Normais"/>
                 <RadioButton
+                    android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Elevadas"/>
             </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/faggtLinearLayout">
             <TextView
                 android:paddingTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Transaminases"
+                android:text="@string/FAGGT"
                 android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"
                 style="@style/TitleTextStyleForLayoutSelection"
                 android:textSize="15sp"/>
             <RadioGroup
+                android:id="@+id/faggt"
                 android:paddingTop="5dp"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RadioButton
+                    android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Normais"/>
                 <RadioButton
+                    android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Elevadas"/>
             </RadioGroup>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/transaminasesLinearLayout">
+            <TextView
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Transaminases"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"
+                style="@style/TitleTextStyleForLayoutSelection"
+                android:textSize="15sp"/>
+            <RadioGroup
+                android:id="@+id/transaminases"
+                android:paddingTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Normais"/>
+                <RadioButton
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Elevadas"/>
+            </RadioGroup>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -102,3 +128,4 @@
         android:background="@color/gray">
     </LinearLayout>
 </LinearLayout>
+

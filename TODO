@@ -52,6 +52,10 @@ Folhas de balanćo: Salvando.
     - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
         - Volume/mlpa
         - aspecto: gastrico, fecaloide, biliar
+Exames: Ssalvando.
+    - Gasometria arterial: Opcional?
+        - Normal, acidose metabolica/respiratoria Compensada/descompensada, alcalose metabolica/respiratoria Compensada/descompensada.
+        - Acidose/alcalose mista
 /*****************MUDANÇAS FEITAS**********/
 
 Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei como).
@@ -65,38 +69,6 @@ Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei c
             - orientado, desorientado
                 - DESORIENTADO:
                     - Tempo e espaco. (multiplo)
-
-Exames:
-    - Eletrólitos: inserćao de dados na mao OU
-                    insere valor numerico segundo a folha de exames da UTI e o sistema analisa se é hiper ou hipo (Ver)
-        - Potássio: hipo, hipercalemia. Se n marcar = normal
-        - Sódio = hipo, hipernatremia. Se n marcar = normal
-        - Magnesio = hipo, hipermagnesemia. Se n marcar = normal
-        - Fosforo: hipo, hiperfosfatemia. Se n marcar = normal
-        - Calcio: hipo, hipercalcemia. ...
-    - lactato: normal, elevado -> ok
-    - Disturbio eletrolitico: hipernatremia, hiponatremia, hipercalemia, hipocalemia, hipermagnesemia, hipomagnesemia, hipofosfatemia, hiperfosfatemia checkbox
-    - acidose metabolica:
-        - Acidose ou Alcalose
-            - Metabolica ou respiratoria
-            - Compensada ou Descompensada
-    - Albumina: -> nutricional
-        - hipo, hiperalbuminemia. ...
-    - PCR:
-        - Estável, Em queda, elevando. Comparativo em relaćao a um periodo anterior.
-    - Gasometria arterial: (apenas uma)
-        - Normal, acidose metabolica/respiratoria Compensada/descompensada, alcalose metabolica/respiratoria Compensada/descompensada.
-        - Acidose/alcalose mista
-    - Raio-x torax:
-         - Pneumotorax, atelectasia, infiltrado intersticinal, infiltrado alveolar, normal.
-    - Leucograma:
-        - Normal, estável, em melhora, em piora
-    - Funćao hepatica:
-        - sim:
-            - normal, bilirrubinas: normais/elevadas, transaminases: normais/elevadas, FA/GGT: normais/elevadas
-    - Amilase: sim ou nao
-        - sim:
-            - normal, elevada
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinacamente estavel e hemodinacamente instavel
 Gastro

@@ -360,6 +360,16 @@
     <string name="Pneumotorax">Pneumotorax</string>
     <string name="Actelectasia">Actelectasia</string>
     <string name="InfiltradosNovos">Infiltrados Novos</string>
+    <string name="Mista">Mista</string>
+    <string name="Bilirrubinas">Bilirrubinas</string>
+    <string name="FAGGT">FA/GGT</string>
+    <string name="Transaminases">Transaminases</string>
+    <string name="MSE">M.S.E</string>
+    <string name="MSD">M.S.D</string>
+    <string name="MIE">M.I.E</string>
+    <string name="MID">M.I.D</string>
+    <string name="Inexistente">Inexistente</string>
+    <string name="Sedado">SEDADO</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -392,7 +402,7 @@
         <item>OBNUBILACÃO \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
         <item>TORPOR \u002d Sonolencia profunda, responde somente a estimulo doloroso.</item>
         <item>COMA \u002d Não abre os olhos nem emite sons verbais sob estimulo verbal ou doloroso.</item>
-        <item>SEDADO</item>
+        <item>SEDADO </item>
     </string-array>
 
     <string-array name="ramsay">
@@ -426,20 +436,6 @@
         <item>4 \u002d Movimento de Retirada.</item>
         <item>5 \u002d Localiza Dor.</item>
         <item>6 \u002d Obedece Comandos.</item>
-    </string-array>
-
-    <string-array name="raioxTorax">
-        <item>Normal</item>
-        <item>Pneumotorax</item>
-        <item>Atelectasia</item>
-        <item>Infiltrados Novos</item>
-    </string-array>
-
-    <string-array name="leucograma">
-        <item>Normal</item>
-        <item>Estável</item>
-        <item>Em Melhora</item>
-        <item>Em Piora</item>
     </string-array>
 
 

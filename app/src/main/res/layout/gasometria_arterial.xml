@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
-
         <TextView
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
@@ -17,73 +17,102 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/GasometriaArterial" />
-
-        <RadioGroup
-            android:paddingTop="10dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingEnd="50dp"
-                android:paddingStart="0dp"
-                android:text="@string/Acidose"
-                android:theme="@style/radioButtonStyle" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/Alcalose"
-                android:theme="@style/radioButtonStyle" />
-        </RadioGroup>
-
-        <RadioGroup
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
-            android:paddingEnd="0dp">
-            <RadioButton
+            android:id="@+id/gasometriaArterialAcidoseLinearLayout">
+            <RadioGroup
+                android:paddingTop="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingEnd="30dp"
-                android:paddingStart="0dp"
-                android:text="@string/Metabolica"
-                android:theme="@style/radioButtonStyle" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/Respiratoria"
-                android:theme="@style/radioButtonStyle" />
-        </RadioGroup>
-
-        <RadioGroup
+                android:orientation="horizontal"
+                android:id="@+id/gasometriaArterialAcidoseRadioGroup">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingEnd="50dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/Acidose"
+                    android:theme="@style/radioButtonStyle" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/Alcalose"
+                    android:theme="@style/radioButtonStyle" />
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
-            android:paddingEnd="0dp">
-            <RadioButton
+            android:id="@+id/gasometriaArterialMetabolicaLinearLayout">
+            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingEnd="18dp"
-                android:paddingStart="0dp"
-                android:text="@string/Compensada"
-                android:theme="@style/radioButtonStyle" />
-            <RadioButton
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:id="@+id/gasometriaArterialMetabolicaRespiratoriaRadioGroup">
+                <RadioButton
+                    android:id="@+id/gasometriaArterialMetabolica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingEnd="30dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/Metabolica"
+                    android:theme="@style/radioButtonStyle" />
+                <RadioButton
+                    android:id="@+id/gasometriaArterialRespiratoria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/Respiratoria"
+                    android:theme="@style/radioButtonStyle"
+                    android:paddingEnd="20dp"/>
+                <RadioButton
+                    android:theme="@style/radioButtonStyle"
+                    android:id="@+id/gasometriaMista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Mista"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/gasometriaArterialCompensadaLinearLayout">
+            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/Descompensada"
-                android:theme="@style/radioButtonStyle" />
-        </RadioGroup>
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:id="@+id/gasometriaArterialCompensadaDescompensada">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingEnd="18dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/Compensada"
+                    android:theme="@style/radioButtonStyle" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/Descompensada"
+                    android:theme="@style/radioButtonStyle" />
+            </RadioGroup>
+            </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

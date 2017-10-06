@@ -9,7 +9,6 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import santauti.app.Model.Ficha.BombaInfusao.BombaInfusao;
 import santauti.app.Model.Ficha.FolhasBalanco.FolhasBalanco;
-import santauti.app.Model.Ficha.Neurologico.Neurologico;
 import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 
@@ -62,6 +61,16 @@ public class Ficha extends RealmObject implements Serializable{
     private BombaInfusao bombaInfusao;
     @SerializedName("folhasBalanco")
     private FolhasBalanco folhasBalanco;
+    @SerializedName("exames")
+    private Exames exames;
+
+    public Exames getExames() {
+        return exames;
+    }
+
+    public void setExames(Exames exames) {
+        this.exames = exames;
+    }
 
     public FolhasBalanco getFolhasBalanco() {
         return folhasBalanco;

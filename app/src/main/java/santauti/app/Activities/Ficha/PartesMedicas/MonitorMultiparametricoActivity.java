@@ -106,6 +106,7 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
                 startActivity(intent);
                 exitActivityToLeft();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -117,6 +118,7 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
                 startActivity(intent);
                 exitActivityToRight();
+                verificaCamposENotificaAdapter();
                 finish();
             }
         });
@@ -215,9 +217,9 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
             monitorMultiparametrico.setSjo2(getIntegerFromTextInputEditText(sjo2));
         r.setMonitorMultiparametrico(monitorMultiparametrico);
         realm.copyToRealmOrUpdate(r);
+        realm.commitTransaction();
         if(monitorMultiparametrico.checkObject())
             changeCardColorToGreen();
-        realm.commitTransaction();
     }
 
     @Override

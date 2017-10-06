@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/AberturaOcular"
-                android:paddingStart="@dimen/submenu_left_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 style="@style/TitleTextStyleForLayoutSelection"
                 />
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                android:paddingStart="@dimen/submenu_left_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/aberturaOcular"/>
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/RespostaVerbal"
-                android:paddingStart="@dimen/submenu_left_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 style="@style/TitleTextStyleForLayoutSelection"
                 />
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                android:paddingStart="@dimen/submenu_left_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/respostaVerbal"/>
@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="@dimen/submenu_left_padding"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="0dp"
                     android:text="@string/RespostaMotora"
                     style="@style/TextStyle"/>
@@ -110,7 +110,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/submenu_left_padding"
+                android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 android:visibility="invisible"
                 android:id="@+id/respostaMotora"
@@ -120,7 +120,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="1dp"
         android:background="@color/gray">
     </LinearLayout>
 
