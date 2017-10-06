@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/parametros">
         <TextView
             android:id="@+id/menuParametros"
             android:paddingStart="@dimen/activity_horizontal_margin"
@@ -26,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
             android:paddingStart="10dp"
-            android:paddingEnd="0dp">
+            android:paddingEnd="0dp"
+            android:id="@+id/parametrosRadioGroup">
             <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,7 +73,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/TextLabelBlue">
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/respiratorio_fio2"
+                android:id="@+id/respiratorioFio2Mecanico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -85,7 +87,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/TextLabelBlue">
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/respiratorio_peep"
+                android:id="@+id/respiratorioPeepMecanico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -99,7 +101,7 @@
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:theme="@style/TextLabelBlue">
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/respiratorio_volume"
+                android:id="@+id/respiratorioVolumeMecanico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -116,7 +118,7 @@
         android:layout_marginTop="10dp"
         android:theme="@style/TextLabelBlue">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/freqRespiratoriaPaciente"
+            android:id="@+id/freqRespiratoriaPacienteMecanico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="13"
@@ -131,7 +133,7 @@
         android:layout_marginTop="10dp"
         android:theme="@style/TextLabelBlue">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/freqRespiratoriaRespirador"
+            android:id="@+id/freqRespiratoriaRespiradorMecanico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="14"

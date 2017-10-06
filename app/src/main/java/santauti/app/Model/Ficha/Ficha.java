@@ -7,6 +7,8 @@ import java.util.Date;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import santauti.app.Model.Ficha.BombaInfusao.BombaInfusao;
+import santauti.app.Model.Ficha.FolhasBalanco.FolhasBalanco;
 import santauti.app.Model.Ficha.Neurologico.Neurologico;
 import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
@@ -54,6 +56,36 @@ public class Ficha extends RealmObject implements Serializable{
     private Nutricional nutricional;
     @SerializedName("pelesMucosas")
     private PelesMucosas pelesMucosas;
+    @SerializedName("respirador")
+    private Respirador respirador;
+    @SerializedName("bombaInfusao")
+    private BombaInfusao bombaInfusao;
+    @SerializedName("folhasBalanco")
+    private FolhasBalanco folhasBalanco;
+
+    public FolhasBalanco getFolhasBalanco() {
+        return folhasBalanco;
+    }
+
+    public void setFolhasBalanco(FolhasBalanco folhasBalanco) {
+        this.folhasBalanco = folhasBalanco;
+    }
+
+    public BombaInfusao getBombaInfusao() {
+        return bombaInfusao;
+    }
+
+    public void setBombaInfusao(BombaInfusao bombaInfusao) {
+        this.bombaInfusao = bombaInfusao;
+    }
+
+    public Respirador getRespirador() {
+        return respirador;
+    }
+
+    public void setRespirador(Respirador respirador) {
+        this.respirador = respirador;
+    }
 
     public PelesMucosas getPelesMucosas() {
         return pelesMucosas;

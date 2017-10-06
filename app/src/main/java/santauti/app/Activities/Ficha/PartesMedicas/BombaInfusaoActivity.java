@@ -3,58 +3,117 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
+import io.realm.Realm;
+import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Adapters.Ficha.BombaInfusao.BombaInfusaoAdapter;
-import santauti.app.Adapters.Ficha.BombaInfusao.BombaInfusaoAdapterModel;
+import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.BombaInfusao.BombaInfusao;
+import santauti.app.Model.Ficha.BombaInfusao.BombaInfusaoItens;
+import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
 
 /**
  * Created by raphael on 6/23/17.
  */
 
-public class BombaInfusaoActivity extends GenericoActivity implements View.OnTouchListener {
-    private RecyclerView recyclerView;
-    private BombaInfusaoAdapter bombaInfusaoAdapter;
-    private List<BombaInfusaoAdapterModel> hemodinamicoModelList = new ArrayList<>();
-    private TextInputEditText velInfusao;
-    private View inserirLayout;
-    private TextView drogaVasoativaTextView,menuDrogaVasoativa;
-
+public class BombaInfusaoActivity extends GenericoActivity {
+    private AppCompatCheckBox adrenalina,amiodarona,dobutamina,dopamina,fentanil,hidrocortisona,insulina,
+            ketamina,midozalam,milrinona,nitroglicerina,nitroprussiatoDeSodio,noradrenalina,precedex,propofol;
+    private Realm realm = Realm.getDefaultInstance();
+    private MyAnimation myAnimation = new MyAnimation();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bomba_infusao);
-        findViewById(R.id.activity_bomba_infusao).requestFocus();
-        findViewById(R.id.activity_bomba_infusao).setOnTouchListener(this);
 
         setToolbar(getString(R.string.BombaInfusao));
         prepareNavigationButtons();
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        bombaInfusaoAdapter = new BombaInfusaoAdapter(this,hemodinamicoModelList);
-        recyclerView.setAdapter(bombaInfusaoAdapter);
-        velInfusao = (TextInputEditText)findViewById(R.id.velInfusao);
-        inserirLayout = findViewById(R.id.inserirLayout);
-        drogaVasoativaTextView = (TextView)findViewById(R.id.drogaVasoativaTextView);
-        menuDrogaVasoativa = (TextView)findViewById(R.id.menuDrogaVasoativa);
+        setupUI(findViewById(R.id.bombaInfusaoLayout));
+
+        /**************************CHECKBOX**************************/
+        adrenalina = (AppCompatCheckBox)findViewById(R.id.checkBoxAdrenalina);
+        adrenalina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.adrenalinaTextInputLayout);}
+        });
+        amiodarona = (AppCompatCheckBox)findViewById(R.id.checkboxAmiodarona);
+        amiodarona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.amiodaronaTextInputLayout);}
+        });
+        dopamina = (AppCompatCheckBox)findViewById(R.id.checkboxDopamina);
+        dopamina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.dopaminaTextInputLayout); }
+        });
+        dobutamina = (AppCompatCheckBox)findViewById(R.id.checkboxDobutamina);
+        dobutamina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.dobutaminaTextInputLayout);}
+        });
+        fentanil = (AppCompatCheckBox)findViewById(R.id.checkboxFentanil);
+        fentanil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.fentanilTextInputLayout); }
+        });
+        hidrocortisona = (AppCompatCheckBox)findViewById(R.id.checkboxHidrocortisona);
+        hidrocortisona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.hidrocortisonaTextInputLayout);}
+        });
+        insulina = (AppCompatCheckBox)findViewById(R.id.checkboxInsulina);
+        insulina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.insulinaTextInputLayout);     }
+        });
+        ketamina = (AppCompatCheckBox)findViewById(R.id.checkboxKetamina);
+        ketamina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.ketaminaTextInputLayout);}
+        });
+        midozalam = (AppCompatCheckBox)findViewById(R.id.checkboxMidazolam);
+        midozalam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.midozalamTextInputLayout);}
+        });
+        milrinona = (AppCompatCheckBox)findViewById(R.id.checkboxMilrinona);
+        milrinona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.milrinonaTextInputLayout);}
+        });
+        nitroglicerina = (AppCompatCheckBox)findViewById(R.id.checkboxNitrogelicerina);
+        nitroglicerina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.nitroglicerinaTextInputLayout);}
+        });
+        nitroprussiatoDeSodio = (AppCompatCheckBox)findViewById(R.id.checkboxNitroprussiatoDeSodio);
+        nitroprussiatoDeSodio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.nitroprussiatoDeSodioTextInputLayout);}});
+        noradrenalina = (AppCompatCheckBox)findViewById(R.id.checkboxNoradrenalina);
+        noradrenalina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.noradrenalinaTextInputLayout);}
+        });
+        precedex = (AppCompatCheckBox)findViewById(R.id.checkboxPrecedex);
+        precedex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.precedexTextInputLayout);}
+        });
+        propofol = (AppCompatCheckBox)findViewById(R.id.checkboxPropofol);
+        propofol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {showTextInputEditText(R.id.propofolTextInputLayout);}
+        });
+        /**************************CHECKBOX**************************/
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,50 +136,95 @@ public class BombaInfusaoActivity extends GenericoActivity implements View.OnTou
                 finish();
             }
         });
-
+        setBombaInfusaoFromDatabase();
     }
 
-    public void drogaOnClick(View view){
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), menuDrogaVasoativa, Gravity.START, R.attr.actionOverflowMenuStyle, 0);
-        popupMenu.getMenuInflater().inflate(R.menu.menu_droga, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                drogaVasoativaTextView.setText(item.getTitle());
-                if(!inserirLayout.isShown())
-                    inserirLayout.setVisibility(View.VISIBLE);
-                return false;
+    private void setBombaInfusaoFromDatabase(){
+        Ficha ficha = getProperFicha();
+        if(ficha.getBombaInfusao()!=null && !ficha.getBombaInfusao().getBombaInfusaoItens().isEmpty()){
+            RealmList<BombaInfusaoItens> bombaInfusaoItens = ficha.getBombaInfusao().getBombaInfusaoItens();
+            HashMap<String,Integer> bombaInfusaoItensHashMap = new HashMap<>();
+            for(BombaInfusaoItens bombaInfusaoItem : bombaInfusaoItens)
+                bombaInfusaoItensHashMap.put(bombaInfusaoItem.getDroga(),bombaInfusaoItem.getVelocidade());
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
+            for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                View v = linearLayout.getChildAt(i);
+                if(v instanceof LinearLayout){
+                    for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+                        View view = ((LinearLayout) v).getChildAt(k);
+                        if (view instanceof AppCompatCheckBox) {
+                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                            if (bombaInfusaoItensHashMap.containsKey(cb.getText().toString())){
+                                k++;
+                                cb.setChecked(true);
+                                view = ((LinearLayout)v).getChildAt(k);
+                                view.setVisibility(View.VISIBLE);
+                                ((TextInputLayout) view).getEditText().
+                                        setText(Integer.toString(bombaInfusaoItensHashMap.get(cb.getText().toString())));
+                            }
+                        }
+                    }
+                }
             }
-        });
-
-        popupMenu.show();
-    }
-
-    private void addDataFromDialogIntoAdapter(String droga,int velInfusao){
-        if(!droga.equals(defaultSpinnerString)){
-            BombaInfusaoAdapterModel h = new BombaInfusaoAdapterModel(droga,velInfusao);
-            hemodinamicoModelList.add(h);
-            bombaInfusaoAdapter.notifyItemInserted(bombaInfusaoAdapter.getItemCount()-1);
-            bombaInfusaoAdapter.notifyDataSetChanged();
         }
     }
 
-    public void addDrogaVasoativa(View view) {
-        if(velInfusao.getText().length()>0) {
-            addDataFromDialogIntoAdapter(drogaVasoativaTextView.getText().toString(), Integer.parseInt(velInfusao.getText().toString()));
-            velInfusao.setText("");
-            velInfusao.clearFocus();
-            hideSoftKeyboard(BombaInfusaoActivity.this);
-            inserirLayout.setVisibility(View.GONE);
-            drogaVasoativaTextView.setText("");
-        }
+    private void showTextInputEditText(int id){
+        if(!findViewById(id).isShown())
+            myAnimation.slideDownView(getApplicationContext(),findViewById(id));
+        else if(findViewById(id).isShown())
+            myAnimation.slideUpView(getApplicationContext(),findViewById(id));
     }
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        hideSoftKeyboard(BombaInfusaoActivity.this);
-        if(velInfusao.isFocused())
-            velInfusao.clearFocus();
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
+
+    @Override
+    public void onBackPressed(){
+        verificaCamposENotificaAdapter();
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == android.R.id.home) {
+            verificaCamposENotificaAdapter();
+            finish();
+        }
         return true;
+    }
+
+    public void verificaCamposENotificaAdapter(){
+        realm.beginTransaction();
+        BombaInfusao bombaInfusao = realm.createObject(BombaInfusao.class);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            View v = linearLayout.getChildAt(i);
+            if(v instanceof LinearLayout){
+                for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+                    View view = ((LinearLayout) v).getChildAt(k);
+                    if (view instanceof AppCompatCheckBox) {
+                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                        if (cb.isChecked()) {
+                            k++;
+                            view = ((LinearLayout)v).getChildAt(k);
+                            BombaInfusaoItens bombaInfusaoItens = realm.createObject(BombaInfusaoItens.class);
+                            bombaInfusaoItens.setDroga(cb.getText().toString());
+                            bombaInfusaoItens.setVelocidade(Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
+                            bombaInfusao.getBombaInfusaoItens().add(bombaInfusaoItens);
+                        }
+                    }
+                }
+            }
+        }
+        Ficha ficha = getProperFicha();
+        ficha.setBombaInfusao(bombaInfusao);
+        realm.copyToRealmOrUpdate(ficha);
+        realm.commitTransaction();
+        changeCardColorToGreen();
     }
 }

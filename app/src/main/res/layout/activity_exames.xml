@@ -26,14 +26,12 @@
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingStart="@dimen/activity_horizontal_margin">
-
+                android:paddingStart="10dp">
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
-
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/hematocrito"
                         android:layout_width="match_parent"
@@ -46,10 +44,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
-
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/hemoglobina"
                         android:layout_width="match_parent"
@@ -64,40 +60,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
-
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/plaqueta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ems="6"
+                        android:ems="5"
                         android:hint="@string/Plaquetas"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp">
-
-                        <TextView
-                            style="@style/TitleTextStyleForLayoutSelection"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="@dimen/submenu_right_padding"
-                            android:paddingStart="@dimen/submenu_left_padding"
-                            android:text="@string/Sodio" />
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -105,15 +76,13 @@
 
             </LinearLayout>
 
+            <!--LEUCOGRAMA-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="leucogramaOnCLick"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
-
                 <TextView
                     android:id="@+id/leucogramaMenu"
                     style="@style/TitleTextStyleForLayoutSelection"
@@ -122,22 +91,57 @@
                     android:paddingEnd="0dp"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:text="@string/Leucograma" />
-
-                <TextView
-                    android:id="@+id/leucogramaTextView"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:paddingTop="5dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="0dp"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:visibility="visible" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp">
+                    <RadioButton
+                        android:theme="@style/radioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Normal"
+                        />
+                    <RadioButton
+                        android:theme="@style/radioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Estavel"
+                        />
 
+                </RadioGroup>
+                <RadioGroup
+                    android:paddingTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp">
+                    <RadioButton
+                        android:theme="@style/radioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/EmMelhora"
+                        />
+                    <RadioButton
+                        android:theme="@style/radioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/EmPiora"
+                        />
+                </RadioGroup>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"></LinearLayout>
+                android:background="@color/gray">
 
+            </LinearLayout>
+            <!--LEUCOGRAMA-->
+
+            <!--PCR-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,37 +166,32 @@
                     android:paddingStart="10dp"
                     android:paddingTop="5dp">
 
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingStart="0dp"
                         android:text="@string/Estavel"
                         android:theme="@style/radioButtonStyle" />
 
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
                         android:text="@string/Elevando"
                         android:theme="@style/radioButtonStyle" />
 
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:gravity="center"
                         android:text="@string/EmQueda"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"></LinearLayout>
+                android:background="@color/gray">
+
+            </LinearLayout>
+            <!--PCR-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -201,41 +200,37 @@
                 android:paddingBottom="10dp"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingStart="@dimen/activity_horizontal_margin">
-
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
-
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="6"
-                        android:hint="Ureia"
+                        android:hint="@string/Ureia"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
-
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginTop="10dp"
                     android:theme="@style/TextLabelBlue">
-
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="6"
-                        android:hint="Creatinina"
+                        android:hint="@string/Creatinina"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"></LinearLayout>
+                android:background="@color/gray">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -243,9 +238,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:onClick="eletrolitosOnCLick"
                 android:orientation="vertical"
-                android:paddingBottom="30dp"
+                android:paddingBottom="20dp"
                 android:paddingTop="10dp">
-
                 <TextView
                     style="@style/TitleTextStyleForLayoutSelection"
                     android:layout_width="wrap_content"
@@ -260,7 +254,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
                 <!--Potassio-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -286,16 +280,15 @@
                         android:paddingStart="10dp"
                         android:paddingTop="5dp">
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:paddingStart="0dp"
                             android:text="@string/Hipercalemia"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -303,7 +296,7 @@
                             android:text="@string/Normal"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|center"
@@ -339,16 +332,15 @@
                         android:paddingStart="10dp"
                         android:paddingTop="5dp">
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:paddingStart="0dp"
                             android:text="@string/Hipermagnesemia"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -356,11 +348,9 @@
                             android:text="@string/Normal"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start|center"
-                            android:gravity="center"
                             android:text="@string/Hipomagnesemia"
                             android:theme="@style/radioButtonStyle" />
                     </RadioGroup>
@@ -392,7 +382,7 @@
                         android:paddingStart="10dp"
                         android:paddingTop="5dp">
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -401,7 +391,7 @@
                             android:text="@string/Hiperfosfatemia"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -409,7 +399,7 @@
                             android:text="@string/Normal"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|center"
@@ -445,7 +435,7 @@
                         android:paddingStart="10dp"
                         android:paddingTop="5dp">
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -454,7 +444,7 @@
                             android:text="@string/Hipercalcemia"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -462,7 +452,7 @@
                             android:text="@string/Normal"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|center"
@@ -474,7 +464,6 @@
                 <!--Calcio-->
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -489,38 +478,34 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingTop="10dp">
-
                 <TextView
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
                     style="@style/TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|start"
-                    android:text="Lactato: " />
-
+                    android:text="@string/Lactato" />
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|start"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.AppCompatRadioButton
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp">
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:text="Normal"
+                        android:text="@string/Normal"
                         android:theme="@style/radioButtonStyle" />
-
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="Elevado"
+                        android:layout_height="match_parent"
+                        android:text="@string/Elevado"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
             </LinearLayout>
@@ -528,81 +513,55 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"></LinearLayout>
+                android:background="@color/gray" />
 
-            <LinearLayout
+            <RelativeLayout
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:background="?attr/selectableItemBackground"
+                android:id="@+id/ulceraPressao"
                 android:onClick="amilaseOnClick"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:paddingStart="@dimen/activity_horizontal_margin"
-                            android:paddingEnd="0dp"
-                            android:layout_marginEnd="210dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Amilase"
-                            style="@style/TitleTextStyleForLayoutSelection"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/checkboxAmilase"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="end"
-                            style="@style/CheckBoxStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="false" />
-                    </RelativeLayout>
-                </LinearLayout>
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                >
                 <TextView
-                    android:visibility="invisible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Ausente"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
-                    android:id="@+id/deficitMotor"/>
-            </LinearLayout>
+                    android:layout_centerVertical="true"
+                    android:text="@string/Amilase"
+                    style="@style/TextStyle"
+                    />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkboxAmilase"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="end"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
             <RadioGroup
                 android:paddingBottom="10dp"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
                 android:id="@+id/amilaseItens"
                 android:visibility="gone">
-                <android.support.v7.widget.AppCompatRadioButton
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/paresiaMSE"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:text="@string/Elevada"
                     android:theme="@style/radioButtonStyle" />
-                <android.support.v7.widget.AppCompatRadioButton
+                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/plegiaMSE"
                     android:text="@string/Normal"
-                    android:gravity="center"
-                    android:layout_gravity="center"
                     android:theme="@style/radioButtonStyle"
                     />
             </RadioGroup>
@@ -611,7 +570,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"></LinearLayout>
+                android:background="@color/gray" />
 
 
             <LinearLayout
@@ -620,7 +579,6 @@
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -629,7 +587,6 @@
                     android:text="@string/MarcadoresInfeccao"
                     android:textColor="@android:color/black"
                     android:textSize="17sp" />
-
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -638,29 +595,19 @@
                     android:paddingEnd="0dp"
                     android:paddingStart="10dp"
                     android:paddingTop="5dp">
-
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingStart="0dp"
                         android:text="@string/Estaveis"
                         android:theme="@style/radioButtonStyle" />
-
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
                         android:text="@string/EmMelhora"
                         android:theme="@style/radioButtonStyle" />
-
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:gravity="center"
                         android:text="@string/EmQueda"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
@@ -669,7 +616,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"></LinearLayout>
+                android:background="@color/gray">
+
+            </LinearLayout>
 
             <!--Albumina-->
             <LinearLayout
@@ -697,28 +646,31 @@
                     android:paddingStart="10dp"
                     android:paddingTop="5dp">
 
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:paddingStart="0dp"
                         android:text="@string/Hiperalbuminemia"
                         android:theme="@style/radioButtonStyle" />
 
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
                         android:text="@string/Normal"
                         android:theme="@style/radioButtonStyle" />
-
-                    <android.support.v7.widget.AppCompatRadioButton
+                </RadioGroup>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp">
+                    <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:gravity="center"
                         android:text="@string/Hipoalbuminemia"
                         android:theme="@style/radioButtonStyle" />
                 </RadioGroup>
@@ -733,13 +685,10 @@
             <LinearLayout
                 android:id="@+id/raioxToraxLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="raioxToraxOnCLick"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
-
                 <TextView
                     android:id="@+id/raioxMenu"
                     style="@style/TitleTextStyleForLayoutSelection"
@@ -748,15 +697,47 @@
                     android:paddingEnd="0dp"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:text="@string/RaioxTorax" />
-
-                <TextView
-                    android:id="@+id/raioxToraxTextView"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
                     android:paddingEnd="0dp"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:visibility="visible" />
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:id="@+id/raioxToraxRadioGroup1">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Normal"
+                        android:theme="@style/radioButtonStyle" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Pneumotorax"
+                        android:theme="@style/radioButtonStyle" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Actelectasia"
+                        android:theme="@style/radioButtonStyle" />
+                </RadioGroup>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:id="@+id/raioxToraxRadioGroup2">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/InfiltradosNovos"
+                        android:theme="@style/radioButtonStyle" />
+                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout

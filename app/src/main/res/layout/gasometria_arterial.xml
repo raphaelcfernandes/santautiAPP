@@ -8,32 +8,32 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="10dp"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingTop="10dp">
 
         <TextView
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
             style="@style/TitleTextStyleForLayoutSelection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gasometria Arterial" />
+            android:text="@string/GasometriaArterial" />
 
         <RadioGroup
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatRadioButton
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
                 android:paddingEnd="50dp"
                 android:paddingStart="0dp"
                 android:text="@string/Acidose"
                 android:theme="@style/radioButtonStyle" />
-
-            <android.support.v7.widget.AppCompatRadioButton
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -44,19 +44,18 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatRadioButton
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp">
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
                 android:paddingEnd="30dp"
                 android:paddingStart="0dp"
                 android:text="@string/Metabolica"
                 android:theme="@style/radioButtonStyle" />
-
-            <android.support.v7.widget.AppCompatRadioButton
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -67,19 +66,18 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatRadioButton
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp">
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
                 android:paddingEnd="18dp"
                 android:paddingStart="0dp"
                 android:text="@string/Compensada"
                 android:theme="@style/radioButtonStyle" />
-
-            <android.support.v7.widget.AppCompatRadioButton
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

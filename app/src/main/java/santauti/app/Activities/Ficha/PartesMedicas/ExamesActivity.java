@@ -48,8 +48,6 @@ public class ExamesActivity extends GenericoActivity {
         prepareNavigationButtons();
         setupUI(findViewById(R.id.exames_activity));
         eletrolitoItens = findViewById(R.id.eletrolitosItens);
-        raioxToraxTextView = (TextView) findViewById(R.id.raioxToraxTextView);
-        leucogramaTextView = (TextView) findViewById(R.id.leucogramaTextView);
         raioxMenu = (TextView) findViewById(R.id.raioxMenu);
         leucogramaMenu = (TextView) findViewById(R.id.leucogramaMenu);
         amilaseItens = findViewById(R.id.amilaseItens);
@@ -96,48 +94,6 @@ public class ExamesActivity extends GenericoActivity {
         antFicha = (Button)findViewById(R.id.fichaAnterior);
         antFicha.setVisibility(View.GONE);
         proxFicha.setText(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)+1).getName()+" >");
-    }
-
-
-    public void raioxToraxOnCLick(View view) {
-        final ListPopupWindow listPopupWindow = new ListPopupWindow(
-                ExamesActivity.this);
-        listPopupWindow.setAdapter(new ArrayAdapter<>(
-                ExamesActivity.this,
-                R.layout.list_item, getResources().getStringArray(R.array.raioxTorax)));
-        listPopupWindow.setAnchorView(raioxToraxTextView);
-        listPopupWindow.setWidth(700);
-        listPopupWindow.setHeight(700);
-        listPopupWindow.setModal(true);
-        listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                raioxToraxTextView.setText(getResources().getStringArray(R.array.raioxTorax)[i]);
-                listPopupWindow.dismiss();
-            }
-        });
-        listPopupWindow.show();
-
-    }
-
-    public void leucogramaOnCLick(View view) {
-        final ListPopupWindow listPopupWindow = new ListPopupWindow(
-                ExamesActivity.this, null, R.attr.actionOverflowMenuStyle, 0);
-        listPopupWindow.setAdapter(new ArrayAdapter<>(
-                ExamesActivity.this,
-                R.layout.list_item, getResources().getStringArray(R.array.leucograma)));
-        listPopupWindow.setAnchorView(leucogramaMenu);
-        listPopupWindow.setWidth(700);
-        listPopupWindow.setHeight(700);
-        listPopupWindow.setModal(true);
-        listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                leucogramaTextView.setText(getResources().getStringArray(R.array.leucograma)[i]);
-                listPopupWindow.dismiss();
-            }
-        });
-        listPopupWindow.show();
     }
 
     public void eletrolitosOnCLick(View view) {

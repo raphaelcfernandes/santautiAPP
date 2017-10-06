@@ -40,19 +40,19 @@ Pele e Mucosas: Salvando.
             - sacra, calcâneo, nádegas, trocânteres, cotovelos e tronco.
 Hemodinamico: Salvando.
   - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
-Infeccioso: retirar antibiotico que ta aqui e la de bomba de infusao (Polimixina) Salvando.
+Infeccioso: Salvando.
     - antibiotico/antivirais/antifungicos
         - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
         - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
         - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
         - Amoxicilina-clavulanato,
+Respirador: Salvando.
+Bomba de infusao: Salvando.
+Folhas de balanćo: Salvando.
+    - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
+        - Volume/mlpa
+        - aspecto: gastrico, fecaloide, biliar
 /*****************MUDANÇAS FEITAS**********/
-Bomba de infusao: memoria + editar velocidade de infusao para registros antigos  - colocar td em uma tela só, retirar recycler view
-    -   Bomba de infusao
-      - fentanil, propofol, ketamina, midasolan (dormonide), precedex -> Ok
-      - amiodarona, insulina, hidrocortizona, polimixina, miorinone -> ok
-      - velocidade de infusao -> ok
-      - dose ml/hr -> ok
 
 Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei como).
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
@@ -97,41 +97,6 @@ Exames:
     - Amilase: sim ou nao
         - sim:
             - normal, elevada
-
-Respirador: -> OK
-    - Espontanea, nao invasiva, bipap, mecanica
-    - bipap: -> ok
-        - Volume
-        - Ipap
-        - EPAP
-        - saturacao
-        - Oxigenio (numerico)
-    - nao invasiva: - invasivo sem a mascara
-    - mecanica:
-        - Modo: IGUAL de respiratorio invasivo - SIMV e sem A/C
-        - Pressao cuff, retirar daqui? Manter? Pegar valor de Respirador? E se n tiver valor em Respirador?
-            - Freq respiratoria 2 campos: paciente e respirador
-
-Folhas de balanćo:
-    Segundo icone
-    - Curva glicemica:
-        - Normoglicemia, eventos de hipoglicemia, eventos de hiperglicemia.
-    - evacuaćoes:
-        - Presente
-            - Numero de eventos
-            - aspecto das fezes:
-                - diarreicas + numero vezes
-                - normais + numero vezes
-                - endurecidas + numero vezes
-        - Ausente
-    - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
-        - Volume/mlpa
-        - aspecto: gastrico, fecaloide, biliar
-    - Nutricao:
-        - Oral + Volume/ml
-        - enteral + Volume/ml
-        - gastrica + volume/ml
-
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinacamente estavel e hemodinacamente instavel
 Gastro
