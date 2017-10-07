@@ -20,14 +20,24 @@ public class FolhasBalanco extends RealmObject implements Serializable {
     private RealmList<Evacuacoes> evacuacoesList;
     @SerializedName("nutricao")
     private RealmList<Nutricao> nutricao;
+    @SerializedName("hemodinamicamente")
+    private String hemodinamicamente;
 
     public boolean checkObject(){
         if(evacuacoesFlag){
-            return !evacuacoesList.isEmpty() && curvaTermica!=null && !nutricao.isEmpty();
+            return !evacuacoesList.isEmpty() && curvaTermica!=null && !nutricao.isEmpty() && hemodinamicamente!=null;
         }
         else{
-            return curvaTermica!=null && !nutricao.isEmpty();
+            return curvaTermica!=null && !nutricao.isEmpty() && hemodinamicamente!=null;
         }
+    }
+
+    public String getHemodinamicamente() {
+        return hemodinamicamente;
+    }
+
+    public void setHemodinamicamente(String hemodinamicamente) {
+        this.hemodinamicamente = hemodinamicamente;
     }
 
     public String getCurvaTermica() {

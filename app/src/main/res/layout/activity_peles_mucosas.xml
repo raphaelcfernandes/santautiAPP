@@ -112,7 +112,7 @@
                         android:id="@+id/sacra"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Sacra"
+                        android:text="@string/Sacral"
                         android:theme="@style/CheckBoxStyle"
                         android:paddingStart="0dp"
                         android:paddingEnd="82dp"/>

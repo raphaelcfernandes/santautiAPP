@@ -9,6 +9,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import santauti.app.Model.Ficha.BombaInfusao.BombaInfusao;
 import santauti.app.Model.Ficha.FolhasBalanco.FolhasBalanco;
+import santauti.app.Model.Ficha.Gastrointestinal.Gastrointestinal;
 import santauti.app.Model.Paciente;
 import santauti.app.Model.User;
 

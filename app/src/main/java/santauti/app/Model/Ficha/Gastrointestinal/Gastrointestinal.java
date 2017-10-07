@@ -1,4 +1,4 @@
-package santauti.app.Model.Ficha;
+package santauti.app.Model.Ficha.Gastrointestinal;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -23,13 +23,59 @@ public class Gastrointestinal extends RealmObject implements Serializable {
     private String ascite;
     @SerializedName("massasPalpaveis")
     private RealmList<RealmString> massasPalpaveis;
+    private boolean massasPalpaveisFlag;
     @SerializedName("viscerasPalpaveis")
     private RealmList<RealmString> viscerasPalpaveis;
-
+    private boolean viscerasPalpaveisFlag;
+    @SerializedName("ostomias")
+    private RealmList<Ostomias> ostomias;
+    private boolean ostomiasFlag;
 
     public boolean checkObject(){
-        return ruidos!=null && formato!=null && tensao!=null && ascite!=null;
+        boolean flagoostomia=true;
+        boolean viscerasFlag=true;
+        boolean massasFlag=true;
+        if(ostomiasFlag && ostomias.isEmpty())
+            flagoostomia=false;
+        if(viscerasPalpaveisFlag && viscerasPalpaveis.isEmpty())
+            viscerasFlag=false;
+        if(massasPalpaveisFlag && massasPalpaveis.isEmpty())
+            massasFlag=false;
+        return ruidos!=null && formato!=null && tensao!=null && ascite!=null && flagoostomia && viscerasFlag && massasFlag;
     }
+
+    public boolean isMassasPalpaveisFlag() {
+        return massasPalpaveisFlag;
+    }
+
+    public void setMassasPalpaveisFlag(boolean massasPalpaveisFlag) {
+        this.massasPalpaveisFlag = massasPalpaveisFlag;
+    }
+
+    public boolean isViscerasPalpaveisFlag() {
+        return viscerasPalpaveisFlag;
+    }
+
+    public void setViscerasPalpaveisFlag(boolean viscerasPalpaveisFlag) {
+        this.viscerasPalpaveisFlag = viscerasPalpaveisFlag;
+    }
+
+    public boolean isOstomiasFlag() {
+        return ostomiasFlag;
+    }
+
+    public void setOstomiasFlag(boolean ostomiasFlag) {
+        this.ostomiasFlag = ostomiasFlag;
+    }
+
+    public RealmList<Ostomias> getOstomias() {
+        return ostomias;
+    }
+
+    public void setOstomias(RealmList<Ostomias> ostomias) {
+        this.ostomias = ostomias;
+    }
+
     public String getFormato() {
         return formato;
     }

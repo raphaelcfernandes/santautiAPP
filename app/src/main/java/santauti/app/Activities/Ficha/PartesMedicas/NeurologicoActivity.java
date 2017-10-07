@@ -6,22 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatRadioButton;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapter;
-import santauti.app.Adapters.Ficha.Neurologico.NeurologicoAdapterModel;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Neurologico;
@@ -42,24 +37,21 @@ public class NeurologicoActivity extends GenericoActivity {
     private int respostaMotoraSelection=-1;
     private int respostaVerbalSelection=-1;
     private int aberturaOcularSelection=-1;
-    private View avaliacaoPupilarItensLayout;
+    private View avaliacaoPupilarItensLayout,caracteristica2CAMICU,caracteristica4CAMICU;
     private TextView nivelConscienciaTextView;
     private TextView rassTextView;
     private TextView ramsayTextView;
-    private TextView escalaDeGlasgowTextView;
+    private TextView escalaDeGlasgowTextView,camIcuTextView;
     private TextView aberturaOcularTextView;
     private TextView respostaVerbalTextView;
     private TextView respostaMotoraTextView;
-    private TextView flutuacaoHint1;
-    private TextView flutuacaoHint2;
-    private TextView pensamentoDesorganizadoHint1;
-    private TextView pensamentoDesorganizadoHint2;
-    private TextView inatencaoHint1,textoAjudaPensamento,textoAjudaInatencao,textoAjudaFlutuacao;
-    private TextView inatencaoHint2;
-    private View simSedado,comaLayout,diferencaPupilaLayout,escalaGlasgowItensLayout,
-            deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout;
-    private CheckBox checkboxDeficitMotor,checkboxFlutuacao,checkBoxInatencao,checkBoxPensamento;
-    private AppCompatRadioButton paresiaMSE,plegiaMSE,orientado,desorientado;
+    private View simSedado,diferencaPupilaLayout,escalaGlasgowItensLayout,
+            deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout,CAMICU;
+    private CheckBox checkboxDeficitMotor;
+    private AppCompatRadioButton orientado,desorientado,
+            caracteristica1CAMICUSim,caracteristica1CAMICUNao,caracteristica2CAMICUMenos3erros,caracteristica2CAMICUMais3erros,
+            caracteristica4Mais2Erros,caracteristica4Menos2Erros;
+    private RadioGroup caracteristica1CAMICURadioGroup;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +60,9 @@ public class NeurologicoActivity extends GenericoActivity {
 
         /******************************VARIAVEIS LAYOUTS*************************************/
         simSedado = findViewById(R.id.sedado_sim_layout);
-        comaLayout = findViewById(R.id.coma_layout);
+        CAMICU = findViewById(R.id.CAMICU);
+        caracteristica2CAMICU = findViewById(R.id.caracteristica2CAMICU);
+        caracteristica4CAMICU = findViewById(R.id.caracteristica4CAMICU);
         diferencaPupilaLayout = findViewById(R.id.diferencaPupilaLayout);
         escalaGlasgowItensLayout = findViewById(R.id.escalaGlasgowItensLayout);
         deliriumItensLayout = findViewById(R.id.deliriumItens);
@@ -80,25 +74,68 @@ public class NeurologicoActivity extends GenericoActivity {
         aberturaOcularTextView = (TextView)findViewById(R.id.aberturaOcular);
         respostaVerbalTextView = (TextView)findViewById(R.id.respostaVerbal);
         respostaMotoraTextView = (TextView)findViewById(R.id.respostaMotora);
-        flutuacaoHint1 = (TextView)findViewById(R.id.flutuacaoHint1);
-        flutuacaoHint2 = (TextView)findViewById(R.id.flutuacaoHint2);
-        pensamentoDesorganizadoHint1 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint1);
-        pensamentoDesorganizadoHint2 = (TextView)findViewById(R.id.pensamentoDesorganizadoHint2);
-        inatencaoHint1 = (TextView)findViewById(R.id.inatencaoHint1);
-        inatencaoHint2 = (TextView)findViewById(R.id.inatencaoHint2);
+        camIcuTextView = (TextView)findViewById(R.id.camIcuTextView);
         temporoEspacialLayout = findViewById(R.id.temporoEspacialLayout);
         desorientadoLayout = findViewById(R.id.desorientadoLayout);
         avaliacaoPupilarItensLayout = findViewById(R.id.avaliacaoPupilarItensLayout);
-        textoAjudaFlutuacao = (TextView)findViewById(R.id.textoAjudaFlutuacao);
-        textoAjudaInatencao = (TextView)findViewById(R.id.textoAjudaInatencao);
-        textoAjudaPensamento = (TextView)findViewById(R.id.textoAjudaPensamento);
         /******************************VARIAVEIS LAYOUTS*************************************/
 
         /******************************VARIAVEIS RADIOBUTTON*********************************/
-        paresiaMSE = (AppCompatRadioButton)findViewById(R.id.paresiaMSE);
-        plegiaMSE = (AppCompatRadioButton)findViewById(R.id.plegiaMSE);
         orientado = (AppCompatRadioButton)findViewById(R.id.orientado);
         desorientado = (AppCompatRadioButton)findViewById(R.id.desorientado);
+        caracteristica1CAMICUSim = (AppCompatRadioButton)findViewById(R.id.caracteristica1CAMICUSim);
+        caracteristica1CAMICUSim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!caracteristica2CAMICU.isShown())
+                    caracteristica2CAMICU.setVisibility(View.VISIBLE);
+            }
+        });
+        caracteristica1CAMICUNao = (AppCompatRadioButton)findViewById(R.id.caracteristica1CAMICUNao);
+        caracteristica1CAMICUNao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                camIcuTextView.setText("Não há delirium");
+                if(caracteristica2CAMICU.isShown())
+                    caracteristica2CAMICU.setVisibility(View.GONE);
+                if(caracteristica4CAMICU.isShown())
+                    caracteristica4CAMICU.setVisibility(View.GONE);
+            }
+        });
+        caracteristica2CAMICUMenos3erros = (AppCompatRadioButton)findViewById(R.id.caracteristica2CAMICUMenos3erros);
+        caracteristica2CAMICUMenos3erros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(caracteristica4CAMICU.isShown())
+                    caracteristica4CAMICU.setVisibility(View.GONE);
+                camIcuTextView.setText("Não há delirium");
+            }
+        });
+        caracteristica2CAMICUMais3erros = (AppCompatRadioButton)findViewById(R.id.caracteristica2CAMICUMais3erros);
+        caracteristica2CAMICUMais3erros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!caracteristica4CAMICU.isShown() && rassSelection==4)
+                    caracteristica4CAMICU.setVisibility(View.VISIBLE);
+                if(rassSelection!=4)
+                    camIcuTextView.setText("Há delirium");
+            }
+        });
+        caracteristica4Mais2Erros = (AppCompatRadioButton)findViewById(R.id.caracteristica4Mais2Erros);
+        caracteristica4Mais2Erros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                camIcuTextView.setText("Há delirium");
+            }
+        });
+        caracteristica4Menos2Erros = (AppCompatRadioButton)findViewById(R.id.caracteristica4Menos2Erros);
+        caracteristica4Menos2Erros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                camIcuTextView.setText("Não há delirium");
+            }
+        });
+        caracteristica1CAMICURadioGroup = (RadioGroup)findViewById(R.id.caracteristica1CAMICURadioGroup);
 
         /******************************VARIAVEIS RADIOBUTTON*********************************/
 
@@ -114,10 +151,6 @@ public class NeurologicoActivity extends GenericoActivity {
                     myAnimation.slideDownView(getApplicationContext(), deficitMotorItensLayout);
             }
         });
-        checkboxFlutuacao = (CheckBox)findViewById(R.id.checkboxFlutuacao);
-        checkBoxInatencao = (CheckBox)findViewById(R.id.checkboxInatencao);
-        checkBoxPensamento = (CheckBox)findViewById(R.id.checkboxPensamento);
-        checkboxFlutuacao = (CheckBox)findViewById(R.id.checkboxFlutuacao);
         /******************************VARIAVEIS CHECKBOX*******************************/
 
 
@@ -265,12 +298,6 @@ public class NeurologicoActivity extends GenericoActivity {
         }
         if(((RadioGroup)findViewById(R.id.reatividadeLuz)).getCheckedRadioButtonId()!=-1)
             neurologico.setReatividadeLuzPupila(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.reatividadeLuz))));
-        if(checkboxFlutuacao.isChecked())
-            neurologico.setFlutuacaoEstadoMental(true);
-        if(checkBoxInatencao.isChecked())
-            neurologico.setInatencao(true);
-        if(checkBoxPensamento.isChecked())
-            neurologico.setPensamentoDesorganizado(true);
         Ficha r = getProperFicha();
         r.setNeurologico(neurologico);
         realm.copyToRealmOrUpdate(r);
@@ -368,7 +395,21 @@ public class NeurologicoActivity extends GenericoActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         rassTextView.setText(options[which]);
                         rassTextView.setVisibility(View.VISIBLE);
-                        rassSelection =which;
+                        rassSelection=which;
+                        if(rassSelection>0 && rassSelection<8)
+                            CAMICU.setVisibility(View.VISIBLE);
+                        else
+                            CAMICU.setVisibility(View.GONE);
+                        if(rassSelection!=4 && caracteristica4CAMICU.isShown()) {
+                            caracteristica4CAMICU.setVisibility(View.GONE);
+                            camIcuTextView.setText("Há delirium");
+                        }
+                        if(rassSelection==4 && !caracteristica2CAMICU.isShown())
+                            caracteristica4CAMICU.setVisibility(View.VISIBLE);
+                        if(((RadioGroup)findViewById(R.id.inatencaoRadioGroup)).getCheckedRadioButtonId()!=-1) {
+                            ((RadioGroup) findViewById(R.id.inatencaoRadioGroup)).clearCheck();
+                            camIcuTextView.setText("");
+                        }
                         dialog.dismiss();
                     }
                 });
@@ -537,45 +578,6 @@ public class NeurologicoActivity extends GenericoActivity {
             myAnimation.slideUpView(getApplicationContext(),escalaGlasgowItensLayout);
         else
             myAnimation.slideDownView(getApplicationContext(),escalaGlasgowItensLayout);
-    }
-
-    public void flutuacaoOnClick(View view){
-        if(flutuacaoHint1.isShown() && flutuacaoHint2.isShown()){
-            myAnimation.slideUpView(getApplicationContext(),flutuacaoHint1);
-            myAnimation.slideUpView(getApplicationContext(),flutuacaoHint2);
-            myAnimation.slideUpView(getApplicationContext(),textoAjudaFlutuacao);
-        }
-        else{
-            myAnimation.slideDownView(getApplicationContext(),flutuacaoHint1);
-            myAnimation.slideDownView(getApplicationContext(),flutuacaoHint2);
-            myAnimation.slideDownView(getApplicationContext(),textoAjudaFlutuacao);
-        }
-    }
-
-    public void pensamentoDesorganizadoOnClick(View view){
-        if(pensamentoDesorganizadoHint1.isShown() && pensamentoDesorganizadoHint2.isShown()){
-            myAnimation.slideUpView(getApplicationContext(),pensamentoDesorganizadoHint1);
-            myAnimation.slideUpView(getApplicationContext(),pensamentoDesorganizadoHint2);
-            myAnimation.slideUpView(getApplicationContext(),textoAjudaPensamento);
-        }
-        else{
-            myAnimation.slideDownView(getApplicationContext(),textoAjudaPensamento);
-            myAnimation.slideDownView(getApplicationContext(),pensamentoDesorganizadoHint1);
-            myAnimation.slideDownView(getApplicationContext(),pensamentoDesorganizadoHint2);
-        }
-    }
-
-    public void inatencaoOnClick(View view){
-        if(inatencaoHint1.isShown() && inatencaoHint2.isShown()){
-            myAnimation.slideUpView(getApplicationContext(),textoAjudaInatencao);
-            myAnimation.slideUpView(getApplicationContext(),inatencaoHint1);
-            myAnimation.slideUpView(getApplicationContext(),inatencaoHint2);
-        }
-        else{
-            myAnimation.slideDownView(getApplicationContext(),textoAjudaInatencao);
-            myAnimation.slideDownView(getApplicationContext(),inatencaoHint1);
-            myAnimation.slideDownView(getApplicationContext(),inatencaoHint2);
-        }
     }
 
     public void deliriumOnClick(View view){

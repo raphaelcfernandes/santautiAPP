@@ -25,39 +25,21 @@ Metabolico: Salvando.
 Dispositivos: Salvando.
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
 Gastro: Salvando. (Corrigir slide de checkbox -> estilo do Respiratorio)
-    OSTOMIAS: Colostomia ou ileostomia ou jejunostomia dps de ruidos antes de ascite
-
 Endocrino: Salvando.
 Osteomuscular: Salvando.
 Nutricional: Salvando.
 Renal: Salvando. (Corrigir slide de checkbox -> estilo do Respiratorio)
 Respiratorio: Salvando.
-    mascara de venturI: 28%, 35%, 50%, 70%
-        - cor + percentual (https://lh6.googleusercontent.com/-X2eiiBbwOig/TX-p9SLVclI/AAAAAAAAACA/I-oDrdp5kfs/s1600/mascara.bmp)
 Pele e Mucosas: Salvando.
-    - ulcera de pressao
-        - presente/ausente
-        - presente:
-            - Sacral, calcamio (direito/esquerdo)
-            - sacra, calcâneo, nádegas, trocânteres, cotovelos e tronco.
 Hemodinamico: Salvando.
-  - Hemodinacamente estavel e hemodinacamente instavel (Lembrar,revisar)
 Infeccioso: Salvando.
-    - antibiotico/antivirais/antifungicos
-        - Ceftriaxone, azitromicina, cefepime, neropenem, ertapenem, citrofloxacim, levofloxacim, fluconasol
-        - Polimixina, moxiflaxicino, tigeciclina, vancomicina, teicoplanina, metronidazol, pipe-tazo
-        - imipenem, oxacilina, clindamicina, daptomicina, linezolida, equinocandina, cefazolina, cefalexina
-        - Amoxicilina-clavulanato,
 Respirador: Salvando. Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL
 Bomba de infusao: Salvando.
 Folhas de balanćo: Salvando.
     - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
         - Volume/mlpa
         - aspecto: gastrico, fecaloide, biliar
-Exames: Salvando. ADICIONAR NORMAL EM GASOMETRIA ARTERIAL
-    - Gasometria arterial: Opcional?
-        - Normal, acidose metabolica/respiratoria Compensada/descompensada, alcalose metabolica/respiratoria Compensada/descompensada.
-        - Acidose/alcalose mista
+Exames: Salvando.
 /*****************MUDANÇAS FEITAS**********/
 
 Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei como).

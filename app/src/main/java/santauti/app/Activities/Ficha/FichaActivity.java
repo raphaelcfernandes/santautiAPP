@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.SharedElementCallback;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -301,14 +302,24 @@ public class FichaActivity extends GenericoActivity{
             @Override
             public final void onResponse(@NonNull Call<Ficha> call, @NonNull Response<Ficha> response) {
                 if(response.isSuccessful()) {
-                    SnackbarCreator.createText(view, "Ficha salvada com sucesso!");
+                    //SnackbarCreator.createText(view, "Ficha salva com sucesso!");
+                    Snackbar snackbar = Snackbar.make(view,"Ficha salva com sucesso!",Snackbar.LENGTH_SHORT);
+                    snackbar.addCallback(new Snackbar.Callback() {
+                        @Override
+                        public void onDismissed(Snackbar snackbar, int event) {
+                            finish();
+                        }
+                        @Override
+                        public void onShown(Snackbar snackbar) {
+                        }
+                    });
                     SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.remove("NroAtendimento");
                     editor.apply();
-                    finish();
+                    snackbar.show();
+                    //finish();
                 }
-
                 else
                     SnackbarCreator.createText(view, "Teste");
             }
@@ -317,7 +328,6 @@ public class FichaActivity extends GenericoActivity{
                 t.printStackTrace();
                 Log.d("ERROR",t.getMessage());
             }
-
         });
     }
 

@@ -96,16 +96,25 @@
     <string name="SimetriaPupila">Simetria</string>
     <string name="ReatividadeALuzPupila">Reatividade a Luz</string>
     <string name="DiferencaPupilar">Diferença entre Pupilas</string>
-    <string name="Delirium">Delirium</string>
+    <string name="CAMICU">CAM-ICU</string>
     <string name="Flutuacao">Flutuação do estado mental</string>
     <string name="Inatencao">Inatenção</string>
     <string name="PensamentoDesorganizado">Pensamento Desorganizado</string>
-    <string name="FlutuacaoHint1">Existe evidência de uma mudança aguda do estado mental em relação ao estado basal do paciente?</string>
-    <string name="FlutuacaoHint2">Esse comportamento anormal flutuou nas ultimas 24 horas, ou seja ele pareceu aumentar e diminuir em gravidade com o tempo?</string>
-    <string name="InatencaoHint1">Tem o paciente dificuldade em focar sua atenção?</string>
-    <string name="InatencaoHint2">Está reduzida a sua habilidade em manter ou mudar seu foco de atenção?</string>
-    <string name="PensamentoDesorganizadoHint1">Está o pensamento do paciente desorganizado ou incoerente, como fluxo não lógico ou claro de ideias, conversa irrelevante, ou troca imprevisível entre assuntos diferentes?</string>
+    <string name="FlutuacaoHint1">Há evidência de mudança no estado mental basal?</string>
+    <string name="FlutuacaoHint2">Essa mudança tem caráter flutuante nas últimas 24h?</string>
+    <string name="InatencaoHint1">O paciente tem dificuldade para manter atenção?</string>
+    <string name="InatencaoHint2">Diga ao paciente que irá falar dez letras e que ao ouvir a letra A, ele deverá apertar sua mão. Leia a seguinte sequência com intervalo de 3s para cada letra:</string>
+    <string name="LetrasTesteLetras">S A V E H A A R T</string>
+    <string name="Menosque3erros">Menos que 3 erros</string>
+    <string name="Maisque3erros">3 ou mais erros</string>
+    <string name="Menosque2erros">Menos que 2 erros</string>
+    <string name="Maisque2erros">2 ou mais erros</string>
+    <string name="TesteLetras">Teste das letras </string>
+    <string name="PensamentoDesorganizadoHint1">O paciente tem discurso incoerente?</string>
     <string name="PensamentoDesorganizadoHint2">O paciente é capaz de seguir comandos durante toda a entrevista?</string>
+    <string name="TesteDicotomico">Teste das perguntas dicotômicas</string>
+    <string name="TesteComando">Teste do comando</string>
+    <string name="TesteComandoDedos">Mostre dois dedos ao paciente por alguns segundos e peça para ele repetir. Após isto, peça para que ele faça com a outra mão. Caso o paciente esteja impossibilitado de utilizar uma das mãos, peça que ele adicione um dedo a mão inicialmente testada.</string>
     <string name="DeficitMotor">Déficit Motor</string>
     <string name="Paresia">Paresia</string>
     <string name="Plegia">Plegia</string>
@@ -141,8 +150,10 @@
     <string name="Hipercalcemia">Hipercalcemia</string>
     <string name="Hipoalbuminemia">Hipoalbuminemia</string>
     <string name="Hiperalbuminemia">Hiperalbuminemia</string>
+    <string name="Hemodinamicamente">Hemodinamicamente</string>
     <string name="PCR">PCR</string>
     <string name="Estavel">Estável</string>
+    <string name="Instavel">Instável</string>
     <string name="EmQueda">Em Queda</string>
     <string name="Elevando">Elevando</string>
     <string name="AntibioticoAntiviraisAntifungicos">Antibióticos/Antivirais/Antifungicos</string>
@@ -154,8 +165,9 @@
     <string name="TemporoEspacial">Orientação Temporo Espacial</string>
     <string name="Orientado">Orientado</string>
     <string name="Desorientado">Desorientado</string>
-    <string name="Miose">Miose</string>
-    <string name="Midriase">Midriase</string>
+    <string name="Medias">Médias</string>
+    <string name="Mioticas">Mióticas</string>
+    <string name="Midriaticas">Midriaticas</string>
     <string name="Isocoricas">Isocóricas</string>
     <string name="Anisocoricas">Anisocóricas</string>
     <string name="EsquerdaMdireita">Esquerda > Direita</string>
@@ -318,7 +330,7 @@
     <string name="Percent40">40% (rosa)</string>
     <string name="Percent50">50% (laranja)</string>
     <string name="Ictericia">Icterícia</string>
-    <string name="Sacra">Sacra</string>
+    <string name="Sacral">Sacral</string>
     <string name="Calcaneo">Calcâneo</string>
     <string name="Nadegas">Nádegas</string>
     <string name="Trocanteres">Trocanteres</string>
@@ -370,6 +382,10 @@
     <string name="MID">M.I.D</string>
     <string name="Inexistente">Inexistente</string>
     <string name="Sedado">SEDADO</string>
+    <string name="Colostomia">Colostomia</string>
+    <string name="Ileostomia">Ileostomia</string>
+    <string name="Jejunostomia">Jejunostomia</string>
+    <string name="AlteracaoNivelConsciencia">Alteração do nível de consciência</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

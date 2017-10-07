@@ -51,12 +51,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/Miose"
+                    android:text="@string/Mioticas"
                     android:theme="@style/radioButtonStyle" />
                 <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Normal"
+                    android:text="@string/Medias"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:theme="@style/radioButtonStyle"
@@ -64,7 +64,7 @@
                 <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Midriase"
+                    android:text="@string/Midriaticas"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:theme="@style/radioButtonStyle"

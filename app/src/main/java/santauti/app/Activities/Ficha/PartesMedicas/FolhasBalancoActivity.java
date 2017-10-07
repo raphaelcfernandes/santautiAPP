@@ -168,6 +168,8 @@ public class FolhasBalancoActivity extends GenericoActivity {
             FolhasBalanco folhasBalanco = ficha.getFolhasBalanco();
             if(folhasBalanco.getCurvaTermica()!=null)
                 setRadioButtonFromIdAndDatabase(R.id.curvaTermica,folhasBalanco.getCurvaTermica());
+            if(folhasBalanco.getHemodinamicamente()!=null)
+                setRadioButtonFromIdAndDatabase(R.id.hemodinamicamente,folhasBalanco.getHemodinamicamente());
             if(folhasBalanco.isEvacuacoesFlag()){
                 checkboxEvacuacoes.setChecked(true);
                 evacuacoesItens.setVisibility(View.VISIBLE);
@@ -243,6 +245,8 @@ public class FolhasBalancoActivity extends GenericoActivity {
         FolhasBalanco folhasBalanco = realm.createObject(FolhasBalanco.class);
         if(curvaTermicaRadioGroup.getCheckedRadioButtonId()!=-1)
             folhasBalanco.setCurvaTermica(getStringOfRadioButtonSelectedFromRadioGroup(curvaTermicaRadioGroup));
+        if(((RadioGroup)findViewById(R.id.hemodinamicamenteRadioGroup)).getCheckedRadioButtonId()!=-1)
+            folhasBalanco.setHemodinamicamente(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.hemodinamicamenteRadioGroup))));
         if(checkboxEvacuacoes.isChecked()){
             folhasBalanco.setEvacuacoesFlag(true);
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.evacuacoesItens);

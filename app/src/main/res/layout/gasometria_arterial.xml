@@ -18,6 +18,8 @@
             android:layout_height="wrap_content"
             android:text="@string/GasometriaArterial" />
         <LinearLayout
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -31,6 +33,7 @@
                 android:orientation="horizontal"
                 android:id="@+id/gasometriaArterialAcidoseRadioGroup">
                 <RadioButton
+                    android:id="@+id/gasometriaAcidose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -39,11 +42,19 @@
                     android:text="@string/Acidose"
                     android:theme="@style/radioButtonStyle" />
                 <RadioButton
+                    android:id="@+id/gasometriaAlcalose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="@string/Alcalose"
+                    android:paddingEnd="20dp"
                     android:theme="@style/radioButtonStyle" />
+                <RadioButton
+                    android:theme="@style/radioButtonStyle"
+                    android:id="@+id/gasometriaNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Normal"/>
             </RadioGroup>
         </LinearLayout>
         <LinearLayout
@@ -73,8 +84,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="@string/Respiratoria"
+                    android:paddingStart="0dp"
                     android:theme="@style/radioButtonStyle"
-                    android:paddingEnd="20dp"/>
+                    android:paddingEnd="9dp"/>
                 <RadioButton
                     android:theme="@style/radioButtonStyle"
                     android:id="@+id/gasometriaMista"

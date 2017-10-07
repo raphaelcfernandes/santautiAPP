@@ -18,11 +18,54 @@
         android:layout_height="0dp"
         android:scrollbars="vertical">
         <LinearLayout
-            android:layout_weight="0.9"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical">
 
+            <!--HEMODINAMICAMENTE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:id="@+id/hemodinamicamente">
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Hemodinamicamente"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp"/>
+                <RadioGroup
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hemodinamicamenteRadioGroup"
+                    >
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Estavel"
+                        android:theme="@style/radioButtonStyle" />
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Instavel"
+                        android:theme="@style/radioButtonStyle"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray">
+            </LinearLayout>
+            <!--HEMODINAMICAMENTE-->
 
             <!--CURVA TERMICA-->
             <LinearLayout

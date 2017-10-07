@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/CAMICU"
+    android:visibility="gone">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:paddingBottom="30dp"
         android:background="?attr/selectableItemBackground"
         android:onClick="deliriumOnClick"
         android:orientation="vertical">
@@ -16,62 +17,44 @@
             android:paddingEnd="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Delirium"
+            android:text="@string/CAMICU"
             style="@style/TitleTextStyleForLayoutSelection"/>
+        <TextView
+            android:id="@+id/camIcuTextView"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TitleTextStyleForLayoutSelection"
+            android:visibility="visible"
+            />
     </LinearLayout>
 
     <LinearLayout
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/deliriumItens"
-        android:visibility="visible">
-
+        android:visibility="visible" >
         <!--Flutuacao-->
         <LinearLayout
+            android:id="@+id/caracteristica1CAMICU"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="flutuacaoOnClick"
             android:paddingBottom="10dp"
-            android:paddingEnd="@dimen/activity_horizontal_margin">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Flutuacao"
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatCheckBox
-                        android:id="@+id/checkboxFlutuacao"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        style="@style/CheckBoxStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </LinearLayout>
+            android:visibility="visible">
             <TextView
-                android:id="@+id/textoAjudaFlutuacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Texto de ajuda"
+                android:text="@string/Flutuacao"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                style="@style/TitleTextStyleForLayoutSelection"
+                />
             <TextView
+                android:paddingTop="5dp"
                 android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,54 +73,55 @@
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/flutuacaoHint2"
                 android:text="@string/FlutuacaoHint2"/>
+            <RadioGroup
+                android:id="@+id/caracteristica1CAMICURadioGroup"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:paddingTop="5dp">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/caracteristica1CAMICUSim"
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Sim"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/caracteristica1CAMICUNao"
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Nao"/>
+            </RadioGroup>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray">
+            </LinearLayout>
         </LinearLayout>
+        <!--Flutuacao-->
 
         <!--Inatencao-->
         <LinearLayout
+            android:id="@+id/caracteristica2CAMICU"
+            android:paddingTop="5dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="0dp"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="inatencaoOnClick"
             android:paddingBottom="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Inatencao"
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatCheckBox
-                        android:id="@+id/checkboxInatencao"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        style="@style/CheckBoxStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </LinearLayout>
             <TextView
-                android:id="@+id/textoAjudaInatencao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Texto de ajuda"
+                android:text="@string/Inatencao"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                style="@style/TitleTextStyleForLayoutSelection"
+                />
             <TextView
+                android:paddingTop="5dp"
                 android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -148,6 +132,15 @@
                 android:paddingBottom="7dp"
                 android:text="@string/InatencaoHint1"/>
             <TextView
+                style="@style/ItemSelectedTextStyleForLayoutSelection"
+                android:textStyle="bold|italic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TesteLetras"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"/>
+            <TextView
+                android:paddingTop="5dp"
                 android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,53 +149,64 @@
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/inatencaoHint2"
                 android:text="@string/InatencaoHint2"/>
+            <TextView
+                android:paddingTop="5dp"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"
+                android:textStyle="bold|italic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/LetrasTesteLetras"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"/>
+            <RadioGroup
+                android:id="@+id/inatencaoRadioGroup"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:paddingTop="5dp">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/caracteristica2CAMICUMenos3erros"
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Menosque3erros"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/caracteristica2CAMICUMais3erros"
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Maisque3erros"/>
+            </RadioGroup>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray">
+            </LinearLayout>
         </LinearLayout>
+        <!--Inatencao-->
 
         <!--Pensamento-->
         <LinearLayout
+            android:paddingTop="10dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="pensamentoDesorganizadoOnClick"
-            android:paddingBottom="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingEnd="@dimen/activity_horizontal_margin">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/PensamentoDesorganizado"
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
-                        style="@style/TitleTextStyleForLayoutSelection"
-                        />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatCheckBox
-                        android:id="@+id/checkboxPensamento"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        style="@style/CheckBoxStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </LinearLayout>
+            android:paddingBottom="10dp"
+            android:id="@+id/caracteristica4CAMICU">
             <TextView
-                android:id="@+id/textoAjudaPensamento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Texto de ajuda"
+                android:text="@string/PensamentoDesorganizado"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                style="@style/TitleTextStyleForLayoutSelection"
+                />
             <TextView
+                android:paddingTop="5dp"
                 android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -221,14 +225,102 @@
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/pensamentoDesorganizadoHint2"/>
+            <TextView
+                android:paddingTop="5dp"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"
+                android:textStyle="bold|italic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TesteDicotomico"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"/>
+            <TextView
+                android:paddingTop="5dp"
+                android:text="Pergunte ao paciente se:"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+            <TextView
+                android:paddingTop="5dp"
+                android:text="- Uma pedra flutua na água? Resposta: Não"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+            <TextView
+                android:paddingTop="5dp"
+                android:text="- Há peixes no mar? Resposta: Sim"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+            <TextView
+                android:paddingTop="5dp"
+                android:text="- Um quilo pesa mais do que dois quilos? Resposta: Não"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+            <TextView
+                android:paddingTop="5dp"
+                android:text="- Você pode bater um prego com um martelo? Resposta: Sim"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+            <TextView
+                android:paddingTop="5dp"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"
+                android:textStyle="bold|italic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TesteComando"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"/>
+            <TextView
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"
+                android:paddingTop="5dp"
+                style="@style/ItemSelectedTextStyleForLayoutSelection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TesteComandoDedos"/>
+            <RadioGroup
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:paddingTop="5dp">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/caracteristica4Menos2Erros"
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Menosque2erros"/>
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/caracteristica4Mais2Erros"
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Maisque2erros"/>
+            </RadioGroup>
         </LinearLayout>
+        <!--Pensamento-->
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/gray">
-    </LinearLayout>
 
 </LinearLayout>

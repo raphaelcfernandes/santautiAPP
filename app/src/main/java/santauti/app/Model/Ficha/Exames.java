@@ -59,6 +59,10 @@ public class Exames extends RealmObject implements Serializable {
 
     public boolean checkObject(){
         boolean gasometria=false;
+        if(gasometriaArterialAcidoseAlcalose!=null){
+            if(gasometriaArterialAcidoseAlcalose.equals("Normal"))
+                gasometria=true;
+        }
         if(gasometrialArterialMetabolicaRespiratoria!=null){
             if(!gasometrialArterialMetabolicaRespiratoria.equals("Mista") && gasometriaArterialCompensadaDescompensada!=null)
                 gasometria=true;

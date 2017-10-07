@@ -27,7 +27,7 @@ import santauti.app.R;
  */
 
 public class ExamesActivity extends GenericoActivity {
-    private View eletrolitoItens;
+    private View eletrolitoItens,gasometriaArterialMetabolicaLinearLayout;
     private MyAnimation myAnimation;
     private CheckBox checkboxAmilase;
     private Realm realm = Realm.getDefaultInstance();
@@ -38,9 +38,9 @@ public class ExamesActivity extends GenericoActivity {
             fosforo,calcio,gasometriaArterialAcidoseRadioGroup,
             gasometriaArterialMetabolicaRespiratoriaRadioGroup,bilirrubinas,faggt,
             transaminases,lactato,amilaseItens,marcadoresInfeccao;
-    private RadioButton leucogramaNormal,leucogramaEstavel,leucogramaEmMelhora,
+    private RadioButton leucogramaNormal,leucogramaEstavel,leucogramaEmMelhora,gasometriaAlcalose,gasometriaAcidose,
             leucogramaEmPiora,hiperalbuminemia,albuminaNormal,hipoalbuminemia,
-            raioxNormal,pneumotorax,actelectasia,infiltradosNovos,gasometriaMista,gasometriaArterialMetabolica,gasometriaArterialRespiratoria;
+            raioxNormal,pneumotorax,actelectasia,infiltradosNovos,gasometriaMista,gasometriaArterialMetabolica,gasometriaArterialRespiratoria,gasometriaNormal;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +49,7 @@ public class ExamesActivity extends GenericoActivity {
         prepareNavigationButtons();
         setupUI(findViewById(R.id.exames_activity));
         eletrolitoItens = findViewById(R.id.eletrolitosItens);
+        gasometriaArterialMetabolicaLinearLayout = findViewById(R.id.gasometriaArterialMetabolicaLinearLayout);
         /**********************************TEXTINPUTEDITTEXT*******************************/
         hematocrito = (TextInputEditText)findViewById(R.id.hematocrito);
         hemoglobina = (TextInputEditText)findViewById(R.id.hemoglobina);
@@ -115,6 +116,24 @@ public class ExamesActivity extends GenericoActivity {
         gasometriaArterialMetabolica.setOnClickListener(gasometriaArterialMetabolicaRespiratoriaOnClickListener);
         gasometriaArterialRespiratoria = (RadioButton)findViewById(R.id.gasometriaArterialRespiratoria);
         gasometriaArterialRespiratoria.setOnClickListener(gasometriaArterialMetabolicaRespiratoriaOnClickListener);
+        gasometriaNormal = (RadioButton)findViewById(R.id.gasometriaNormal);
+        gasometriaAlcalose = (RadioButton)findViewById(R.id.gasometriaAlcalose);
+        gasometriaAlcalose.setOnClickListener(gasometriaArterialAcidoseAlcaloseOnClickListener);
+        gasometriaAcidose = (RadioButton)findViewById(R.id.gasometriaAcidose);
+        gasometriaAcidose.setOnClickListener(gasometriaArterialAcidoseAlcaloseOnClickListener);
+        gasometriaNormal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(gasometriaArterialMetabolicaLinearLayout.isShown())
+                    gasometriaArterialMetabolicaLinearLayout.setVisibility(View.GONE);
+                if(gasometriaArterialCompensadaDescompensada.isShown())
+                    gasometriaArterialCompensadaDescompensada.setVisibility(View.GONE);
+                if(((RadioGroup)findViewById(R.id.gasometriaArterialMetabolicaRespiratoriaRadioGroup)).getCheckedRadioButtonId()!=-1)
+                    ((RadioGroup)findViewById(R.id.gasometriaArterialMetabolicaRespiratoriaRadioGroup)).clearCheck();
+                if(((RadioGroup)findViewById(R.id.gasometriaArterialCompensadaDescompensada)).getCheckedRadioButtonId()!=-1)
+                    ((RadioGroup)findViewById(R.id.gasometriaArterialCompensadaDescompensada)).clearCheck();
+            }
+        });
         /*********************************RADIOBUTTON**************************************/
 
 
@@ -144,6 +163,14 @@ public class ExamesActivity extends GenericoActivity {
         setExamesFromDatabase();
     }
 
+    private View.OnClickListener gasometriaArterialAcidoseAlcaloseOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(!gasometriaArterialMetabolicaLinearLayout.isShown())
+                gasometriaArterialMetabolicaLinearLayout.setVisibility(View.VISIBLE);
+        }
+    };
+
     private void setExamesFromDatabase(){
         Ficha ficha = getProperFicha();
         if(ficha.getExames()!=null){
@@ -170,8 +197,11 @@ public class ExamesActivity extends GenericoActivity {
                 setRadioButtonFromIdAndDatabase(R.id.fosforoLinearLayout,exames.getFosforo());
             if(exames.getCalcio()!=null)
                 setRadioButtonFromIdAndDatabase(R.id.calcioLinearLayout,exames.getCalcio());
-            if(exames.getGasometriaArterialAcidoseAlcalose()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.gasometriaArterialAcidoseLinearLayout,exames.getGasometriaArterialAcidoseAlcalose());
+            if(exames.getGasometriaArterialAcidoseAlcalose()!=null) {
+                setRadioButtonFromIdAndDatabase(R.id.gasometriaArterialAcidoseLinearLayout, exames.getGasometriaArterialAcidoseAlcalose());
+                if(exames.getGasometriaArterialAcidoseAlcalose().equals(getString(R.string.Normal)))
+                    gasometriaArterialMetabolicaLinearLayout.setVisibility(View.GONE);
+            }
             if(exames.getGasometrialArterialMetabolicaRespiratoria()!=null) {
                 setRadioButtonFromIdAndDatabase(R.id.gasometriaArterialMetabolicaLinearLayout,exames.getGasometrialArterialMetabolicaRespiratoria());
                 if (!exames.getGasometrialArterialMetabolicaRespiratoria().equals(getString(R.string.Mista))) {
@@ -334,7 +364,8 @@ public class ExamesActivity extends GenericoActivity {
             exames.setCalcio(getStringOfRadioButtonSelectedFromRadioGroup(calcio));
         if(gasometriaArterialAcidoseRadioGroup.getCheckedRadioButtonId()!=-1)
             exames.setGasometriaArterialAcidoseAlcalose(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialAcidoseRadioGroup));
-        if(gasometriaArterialMetabolicaRespiratoriaRadioGroup.getCheckedRadioButtonId()!=-1){
+        if(gasometriaArterialMetabolicaRespiratoriaRadioGroup.getCheckedRadioButtonId()!=-1
+                && !getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialAcidoseRadioGroup).equals(getString(R.string.Normal))){
             exames.setGasometrialArterialMetabolicaRespiratoria(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialMetabolicaRespiratoriaRadioGroup));
             if(!getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialMetabolicaRespiratoriaRadioGroup).equals(getString(R.string.Mista))){
                 if(gasometriaArterialCompensadaDescompensada.getCheckedRadioButtonId()!=-1)

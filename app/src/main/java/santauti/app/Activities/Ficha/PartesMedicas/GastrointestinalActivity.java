@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.system.Os;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,9 +14,12 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Gastrointestinal;
+import santauti.app.Model.Ficha.Gastrointestinal.Gastrointestinal;
+import santauti.app.Model.Ficha.Gastrointestinal.Ostomias;
 import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
@@ -25,16 +29,22 @@ import santauti.app.R;
 
 public class GastrointestinalActivity extends GenericoActivity {
     private Realm realm;
-    private CheckBox massasPalpaveisCheckBox, viscerasPalpaveisCheckBox;
-    private RadioButton ruidosAumentados, ruidosReduzidos, ruidosNormais, ruidosAusentes, formatoPlano, formatoGloboso, formatoSemigloboso, formatoEscavado;
+    private CheckBox massasPalpaveisCheckBox, viscerasPalpaveisCheckBox,checkBoxOstomias,
+            checkBoxColostomia,checkBoxIleostomia,checkBoxJejunostomia;
+    private RadioButton ruidosAumentados, ruidosReduzidos, ruidosNormais,
+            ruidosAusentes, formatoPlano, formatoGloboso, formatoSemigloboso, formatoEscavado;
     private RadioGroup ruidosGroup1, ruidosGroup2, formatoAbdominalGroup1, formatoAbdominalGroup2, tensaoAbdominal, ascite;
-    private View massasPalpaveisItensLayout, viscerasPalpaveisItensLayout,massasPalpaveis,viscerasPalpaveis;
+    private View massasPalpaveisItensLayout, viscerasPalpaveisItensLayout,massasPalpaveis,viscerasPalpaveis,
+            ostomiasItens,colostomiaItens,ileostomiaItens,jejunostomiaItens;
+    private MyAnimation myAnimation = new MyAnimation();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gastrointestinal);
         findViewById(R.id.gastrointestinal_layout).requestFocus();
         setToolbar(getString(R.string.GastroIntestinal));
+
+        /****************************CHECKBOX***************************************/
         massasPalpaveisCheckBox = (CheckBox) findViewById(R.id.checkboxMassasPalpaveis);
         massasPalpaveisCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +65,53 @@ public class GastrointestinalActivity extends GenericoActivity {
                     viscerasPalpaveisItensLayout.setVisibility(View.VISIBLE);
             }
         });
+        checkBoxOstomias = (CheckBox)findViewById(R.id.checkBoxOstomias);
+        checkBoxOstomias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checkBoxOstomias.isChecked() && ostomiasItens.isShown())
+                    myAnimation.slideUpView(getApplicationContext(), ostomiasItens);
+                if(checkBoxOstomias.isChecked() && !ostomiasItens.isShown())
+                    myAnimation.slideDownView(getApplicationContext(), ostomiasItens);
+            }
+        });
+        checkBoxColostomia = (CheckBox)findViewById(R.id.checkBoxColostomia);
+        checkBoxColostomia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checkBoxColostomia.isChecked() && colostomiaItens.isShown())
+                    myAnimation.slideUpView(getApplicationContext(), colostomiaItens);
+                if(checkBoxColostomia.isChecked() && !colostomiaItens.isShown())
+                    myAnimation.slideDownView(getApplicationContext(), colostomiaItens);
+            }
+        });
+        checkBoxIleostomia = (CheckBox)findViewById(R.id.checkBoxIleostomia);
+        checkBoxIleostomia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checkBoxIleostomia.isChecked() && ileostomiaItens.isShown())
+                    myAnimation.slideUpView(getApplicationContext(), ileostomiaItens);
+                if(checkBoxIleostomia.isChecked() && !ileostomiaItens.isShown())
+                    myAnimation.slideDownView(getApplicationContext(), ileostomiaItens);
+            }
+        });
+        checkBoxJejunostomia = (CheckBox)findViewById(R.id.checkBoxJejunostomia);
+        checkBoxJejunostomia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checkBoxJejunostomia.isChecked() && jejunostomiaItens.isShown())
+                    myAnimation.slideUpView(getApplicationContext(), jejunostomiaItens);
+                if(checkBoxJejunostomia.isChecked() && !jejunostomiaItens.isShown())
+                    myAnimation.slideDownView(getApplicationContext(), jejunostomiaItens);
+            }
+        });
+        /****************************CHECKBOX***************************************/
+
+        /****************************VIEWS*****************************************/
+        ostomiasItens = findViewById(R.id.ostomiasItens);
+        colostomiaItens = findViewById(R.id.colostomiaItens);
+        ileostomiaItens = findViewById(R.id.ileostomiaItens);
+        jejunostomiaItens = findViewById(R.id.jejunostomiaItens);
         massasPalpaveis = findViewById(R.id.massasPalpaveis);
         massasPalpaveisItensLayout = findViewById(R.id.massasPalpaveisItensLayout);
         massasPalpaveis.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +139,9 @@ public class GastrointestinalActivity extends GenericoActivity {
                 }
             }
         });
+        /****************************VIEWS*****************************************/
+
+
         /*********************************RADIOBUTTON/RADIOGROUP*****************************/
         ascite = (RadioGroup) findViewById(R.id.asciteRadioGroup);
         tensaoAbdominal = (RadioGroup) findViewById(R.id.tensaoAbdominal);
@@ -174,6 +234,15 @@ public class GastrointestinalActivity extends GenericoActivity {
         setGastroIntestinalFromDataBase();
     }
 
+    public void ostomiasOnClick(View view){
+        if(ostomiasItens.isShown())
+            myAnimation.slideUpView(getApplicationContext(),ostomiasItens);
+        else
+        if(checkBoxOstomias.isChecked())
+            myAnimation.slideDownView(getApplicationContext(),ostomiasItens);
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -206,6 +275,7 @@ public class GastrointestinalActivity extends GenericoActivity {
          * Verifica quais Checkbox de massas Palpaveis esta marcado
          */
         if (massasPalpaveisCheckBox.isChecked()) {
+            gastrointestinal.setMassasPalpaveisFlag(true);
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.massasPalpaveisItensLayout);
             for (int i = 0; i < linearLayout.getChildCount(); i++) {
                 View v = linearLayout.getChildAt(i);
@@ -224,6 +294,7 @@ public class GastrointestinalActivity extends GenericoActivity {
         }
 
         if(viscerasPalpaveisCheckBox.isChecked()){
+            gastrointestinal.setViscerasPalpaveisFlag(true);
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.viscerasPalpaveisItensLayout);
             for (int i = 0; i < linearLayout.getChildCount(); i++) {
                 View v = linearLayout.getChildAt(i);
@@ -240,6 +311,37 @@ public class GastrointestinalActivity extends GenericoActivity {
                 }
             }
         }
+        if(checkBoxOstomias.isChecked()){
+            gastrointestinal.setOstomiasFlag(true);
+            if(((RadioGroup)findViewById(R.id.colostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
+                    && ((RadioGroup)findViewById(R.id.colostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
+                    && checkBoxColostomia.isChecked()){
+                Ostomias ostomias = realm.createObject(Ostomias.class);
+                ostomias.setTipoOstomia(checkBoxColostomia.getText().toString());
+                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.colostomiaFuncionamentoRadioGroup))));
+                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.colostomiaQualidadeRadioGroup))));
+                gastrointestinal.getOstomias().add(ostomias);
+            }
+            if(((RadioGroup)findViewById(R.id.ileostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
+                    && ((RadioGroup)findViewById(R.id.ileostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
+                    && checkBoxIleostomia.isChecked()){
+                Ostomias ostomias = realm.createObject(Ostomias.class);
+                ostomias.setTipoOstomia(checkBoxIleostomia.getText().toString());
+                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.ileostomiaFuncionamentoRadioGroup))));
+                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.ileostomiaQualidadeRadioGroup))));
+                gastrointestinal.getOstomias().add(ostomias);
+            }
+            if(((RadioGroup)findViewById(R.id.jejunostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
+                    && ((RadioGroup)findViewById(R.id.jejunostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
+                    && checkBoxJejunostomia.isChecked()){
+                Ostomias ostomias = realm.createObject(Ostomias.class);
+                ostomias.setTipoOstomia(checkBoxJejunostomia.getText().toString());
+                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.jejunostomiaFuncionamentoRadioGroup))));
+                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.jejunostomiaQualidadeRadioGroup))));
+                gastrointestinal.getOstomias().add(ostomias);
+            }
+        }
+
         Ficha r = getProperFicha();
         r.setGastrointestinal(gastrointestinal);
         realm.copyToRealmOrUpdate(r);
@@ -260,16 +362,19 @@ public class GastrointestinalActivity extends GenericoActivity {
 
     private void setGastroIntestinalFromDataBase(){
         Ficha ficha = getProperFicha();
-
         if(ficha.getGastrointestinal()!=null){
             Gastrointestinal gastrointestinal = ficha.getGastrointestinal();
-            if(!gastrointestinal.getMassasPalpaveis().isEmpty()) {
+            if(gastrointestinal.isMassasPalpaveisFlag()) {
                 massasPalpaveisCheckBox.setChecked(true);
                 massasPalpaveisItensLayout.setVisibility(View.VISIBLE);
+                if(!gastrointestinal.getMassasPalpaveis().isEmpty())
+                    preencheCheckboxes(R.id.massasPalpaveisItensLayout,gastrointestinal.getMassasPalpaveis());
             }
-            if(!gastrointestinal.getViscerasPalpaveis().isEmpty()) {
+            if(gastrointestinal.isViscerasPalpaveisFlag()) {
                 viscerasPalpaveisCheckBox.setChecked(true);
                 viscerasPalpaveisItensLayout.setVisibility(View.VISIBLE);
+                if(!gastrointestinal.getViscerasPalpaveis().isEmpty())
+                    preencheCheckboxes(R.id.viscerasPalpaveisItensLayout,gastrointestinal.getViscerasPalpaveis());
             }
             if(gastrointestinal.getFormato()!=null)
                 setRadioButtonFromIdAndDatabase(R.id.formato,gastrointestinal.getFormato());
@@ -279,10 +384,33 @@ public class GastrointestinalActivity extends GenericoActivity {
                 setRadioButtonFromIdAndDatabase(R.id.tensao,gastrointestinal.getTensao());
             if(gastrointestinal.getAscite()!=null)
                 setRadioButtonFromIdAndDatabase(R.id.ascite,gastrointestinal.getAscite());
-            if(!gastrointestinal.getViscerasPalpaveis().isEmpty())
-                preencheCheckboxes(R.id.viscerasPalpaveisItensLayout,gastrointestinal.getViscerasPalpaveis());
-            if(!gastrointestinal.getMassasPalpaveis().isEmpty())
-                preencheCheckboxes(R.id.massasPalpaveisItensLayout,gastrointestinal.getMassasPalpaveis());
+            if(gastrointestinal.isOstomiasFlag()){
+                checkBoxOstomias.setChecked(true);
+                ostomiasItens.setVisibility(View.VISIBLE);
+                if(!gastrointestinal.getOstomias().isEmpty()){
+                    RealmList<Ostomias> ostomiasRealmList = gastrointestinal.getOstomias();
+                    for(Ostomias ostomia : ostomiasRealmList){
+                        if(ostomia.getTipoOstomia().equals(getString(R.string.Colostomia))){
+                            checkBoxColostomia.setChecked(true);
+                            colostomiaItens.setVisibility(View.VISIBLE);
+                            setRadioButtonFromIdAndDatabase(R.id.colostomiaItens,ostomia.getFuncionamentoOstomia());
+                            setRadioButtonFromIdAndDatabase(R.id.colostomiaItens,ostomia.getQualidadeOstomia());
+                        }
+                        if(ostomia.getTipoOstomia().equals(getString(R.string.Ileostomia))){
+                            checkBoxIleostomia.setChecked(true);
+                            ileostomiaItens.setVisibility(View.VISIBLE);
+                            setRadioButtonFromIdAndDatabase(R.id.ileostomiaItens,ostomia.getFuncionamentoOstomia());
+                            setRadioButtonFromIdAndDatabase(R.id.ileostomiaItens,ostomia.getQualidadeOstomia());
+                        }
+                        if(ostomia.getTipoOstomia().equals(getString(R.string.Jejunostomia))){
+                            checkBoxJejunostomia.setChecked(true);
+                            jejunostomiaItens.setVisibility(View.VISIBLE);
+                            setRadioButtonFromIdAndDatabase(R.id.jejunostomiaItens,ostomia.getFuncionamentoOstomia());
+                            setRadioButtonFromIdAndDatabase(R.id.jejunostomiaItens,ostomia.getQualidadeOstomia());
+                        }
+                    }
+                }
+            }
         }
     }
 
