@@ -1,32 +1,18 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.SwitchCompat;
 import android.text.InputFilter;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 import io.realm.Realm;
@@ -34,14 +20,10 @@ import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.InputFilterMin;
 import santauti.app.Animation.MyAnimation;
-import santauti.app.Model.Ficha.BombaInfusao.BombaInfusaoItens;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.FolhasBalanco.Evacuacoes;
 import santauti.app.Model.Ficha.FolhasBalanco.FolhasBalanco;
 import santauti.app.Model.Ficha.FolhasBalanco.Nutricao;
-import santauti.app.Model.Ficha.Gastrointestinal;
-import santauti.app.Model.Ficha.MonitorMultiparametrico;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -186,7 +168,7 @@ public class FolhasBalancoActivity extends GenericoActivity {
             FolhasBalanco folhasBalanco = ficha.getFolhasBalanco();
             if(folhasBalanco.getCurvaTermica()!=null)
                 setRadioButtonFromIdAndDatabase(R.id.curvaTermica,folhasBalanco.getCurvaTermica());
-            if(folhasBalanco.isEvacuacoes()){
+            if(folhasBalanco.isEvacuacoesFlag()){
                 checkboxEvacuacoes.setChecked(true);
                 evacuacoesItens.setVisibility(View.VISIBLE);
                 RealmList<Evacuacoes> evacuacoes = ficha.getFolhasBalanco().getEvacuacoesList();
@@ -262,7 +244,7 @@ public class FolhasBalancoActivity extends GenericoActivity {
         if(curvaTermicaRadioGroup.getCheckedRadioButtonId()!=-1)
             folhasBalanco.setCurvaTermica(getStringOfRadioButtonSelectedFromRadioGroup(curvaTermicaRadioGroup));
         if(checkboxEvacuacoes.isChecked()){
-            folhasBalanco.setEvacuacoes(true);
+            folhasBalanco.setEvacuacoesFlag(true);
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.evacuacoesItens);
             for (int i = 0; i < linearLayout.getChildCount(); i++) {
                 View v = linearLayout.getChildAt(i);
@@ -285,7 +267,7 @@ public class FolhasBalancoActivity extends GenericoActivity {
             }
         }
         else
-            folhasBalanco.setEvacuacoes(false);
+            folhasBalanco.setEvacuacoesFlag(false);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.nutricao);
         for (int i = 0; i < linearLayout.getChildCount(); i++) {
             View v = linearLayout.getChildAt(i);

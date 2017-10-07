@@ -14,14 +14,15 @@ import io.realm.RealmObject;
 public class FolhasBalanco extends RealmObject implements Serializable {
     @SerializedName("curvaTermica")
     private String curvaTermica;
-    private boolean evacuacoes;
-    @SerializedName("evacuacoes")
+    @SerializedName("evacuacoesFlag")
+    private boolean evacuacoesFlag;
+    @SerializedName("evacuacoesList")
     private RealmList<Evacuacoes> evacuacoesList;
     @SerializedName("nutricao")
     private RealmList<Nutricao> nutricao;
 
     public boolean checkObject(){
-        if(evacuacoes){
+        if(evacuacoesFlag){
             return !evacuacoesList.isEmpty() && curvaTermica!=null && !nutricao.isEmpty();
         }
         else{
@@ -37,12 +38,12 @@ public class FolhasBalanco extends RealmObject implements Serializable {
         this.curvaTermica = curvaTermica;
     }
 
-    public boolean isEvacuacoes() {
-        return evacuacoes;
+    public boolean isEvacuacoesFlag() {
+        return evacuacoesFlag;
     }
 
-    public void setEvacuacoes(boolean evacuacoes) {
-        this.evacuacoes = evacuacoes;
+    public void setEvacuacoesFlag(boolean evacuacoesFlag) {
+        this.evacuacoesFlag = evacuacoesFlag;
     }
 
     public RealmList<Evacuacoes> getEvacuacoesList() {

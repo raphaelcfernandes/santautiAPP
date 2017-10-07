@@ -35,9 +35,6 @@ import santauti.app.R;
 public class NeurologicoActivity extends GenericoActivity {
     private Realm realm;
     private MyAnimation myAnimation;
-    private List<NeurologicoAdapterModel> neurologicoAdapterModelList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private NeurologicoAdapter neurologicoAdapter;
     private int escalaDeGlasgowSoma=0;
     private int nivelConscienciaSelection=-1;
     private int rassSelection=-1;
@@ -63,7 +60,6 @@ public class NeurologicoActivity extends GenericoActivity {
             deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout;
     private CheckBox checkboxDeficitMotor,checkboxFlutuacao,checkBoxInatencao,checkBoxPensamento;
     private AppCompatRadioButton paresiaMSE,plegiaMSE,orientado,desorientado;
-    private boolean checked=false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,6 +149,32 @@ public class NeurologicoActivity extends GenericoActivity {
                 finish();
             }
         });
+        setNeurologicoFromDatabase();
+    }
+
+    private void setNeurologicoFromDatabase(){
+//        Ficha ficha = getProperFicha();
+//        int j=0;
+//        if(ficha.getNeurologico()!=null){
+//            Neurologico neurologico = ficha.getNeurologico();
+//            if(neurologico.isSedado()){
+//                simSedado.setVisibility(View.VISIBLE);
+//                if(neurologico.getNivelConsciencia().equals(getString(R.string.Sedado))){
+//                    String[] options = getResources().getStringArray(R.array.nivelConsciencia);
+//                    for(j=0;j<options.length;j++){
+//                        StringBuilder stringBuilder = new StringBuilder(options[j]);
+//                        for(int i=0;i<stringBuilder.length();i++){
+//                            if(stringBuilder.charAt(i)==' ') {
+//                                if (neurologico.getNivelConsciencia().equals(stringBuilder.substring(0, i)))
+//                                    nivelConscienciaSelection = j;
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    nivelConscienciaTextView.setText(getResources().getStringArray(R.array.nivelConsciencia)[nivelConscienciaSelection]);
+//                }
+//            }
+//        }
     }
 
     @Override
@@ -181,7 +203,7 @@ public class NeurologicoActivity extends GenericoActivity {
         realm.beginTransaction();
         Neurologico neurologico = realm.createObject(Neurologico.class);
         StringBuilder stringBuilder;
-        if(nivelConscienciaTextView!=null){
+        if(nivelConscienciaSelection>-1){
             int i=0;
             stringBuilder = new StringBuilder(nivelConscienciaTextView.getText().toString());
             for(i=0;i<stringBuilder.length();i++)
@@ -191,24 +213,24 @@ public class NeurologicoActivity extends GenericoActivity {
         }
         if(neurologico.getNivelConsciencia()!=null && neurologico.getNivelConsciencia().equals(getString(R.string.Sedado))){
             neurologico.setSedado(true);
-            if(rassTextView!=null){
+            if(rassSelection>-1){
                 stringBuilder = new StringBuilder(rassTextView.getText().toString());
                 neurologico.setRass(stringBuilder.substring(0,stringBuilder.indexOf(".")));
             }
-            if(ramsayTextView!=null){
+            if(ramsaySelection>-1){
                 stringBuilder = new StringBuilder(ramsayTextView.getText().toString());
                 neurologico.setRamsay(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
             }
         }
-        if(aberturaOcularTextView!=null){
+        if(aberturaOcularSelection>-1){
             stringBuilder = new StringBuilder(aberturaOcularTextView.getText().toString());
             neurologico.setAberturaOcular(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
         }
-        if(respostaVerbalTextView!=null){
+        if(respostaVerbalSelection>-1){
             stringBuilder = new StringBuilder(respostaVerbalTextView.getText().toString());
             neurologico.setRespostaVerbal(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
         }
-        if(respostaMotoraTextView!=null) {
+        if(respostaMotoraSelection>-1) {
             stringBuilder = new StringBuilder(respostaMotoraTextView.getText().toString());
             neurologico.setRespostaMotora(Integer.parseInt(stringBuilder.substring(0, stringBuilder.indexOf(" "))));
         }
@@ -254,7 +276,7 @@ public class NeurologicoActivity extends GenericoActivity {
         realm.copyToRealmOrUpdate(r);
         realm.commitTransaction();
 //        if(neurologico.checkObject())
-            changeCardColorToGreen();
+        changeCardColorToGreen();
 //        else
 //            setCardColorToDefault();
     }

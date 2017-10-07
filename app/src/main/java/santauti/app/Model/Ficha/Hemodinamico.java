@@ -27,7 +27,7 @@ public class Hemodinamico extends RealmObject implements Serializable{
     private String extremidadesColoracao;
     @SerializedName("extremidadesTemperatura")
     private String extremidadesTemperatura;
-
+    @SerializedName("soproChecked")
     private boolean soproChecked;
 
     public boolean checkObject(){

@@ -301,7 +301,7 @@ public class FichaActivity extends GenericoActivity{
             @Override
             public final void onResponse(@NonNull Call<Ficha> call, @NonNull Response<Ficha> response) {
                 if(response.isSuccessful()) {
-                    SnackbarCreator.createText(view, "Teste");
+                    SnackbarCreator.createText(view, "Ficha salvada com sucesso!");
                     SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.remove("NroAtendimento");

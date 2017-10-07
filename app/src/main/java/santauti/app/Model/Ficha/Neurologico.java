@@ -15,6 +15,7 @@ import santauti.app.Model.Ficha.RealmObjects.RealmString;
 public class Neurologico extends RealmObject implements Serializable{
     @SerializedName("nivelConsciencia")
     private String nivelConsciencia;
+    @SerializedName("sedado")
     private boolean sedado;
     @SerializedName("ramsay")
     private int ramsay;
@@ -30,6 +31,7 @@ public class Neurologico extends RealmObject implements Serializable{
     private String orientacaoTemporoEspacial;
     @SerializedName("tipoDesorientacao")
     private RealmList<RealmString> tipoDesorientacao;
+    @SerializedName("deficitMotor")
     private boolean deficitMotor;
     @SerializedName("mse")
     private String mse;
