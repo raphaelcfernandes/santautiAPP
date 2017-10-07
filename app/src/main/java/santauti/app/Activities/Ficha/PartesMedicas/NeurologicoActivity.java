@@ -362,7 +362,6 @@ public class NeurologicoActivity extends GenericoActivity {
 
         //list of items
         final String[] options = getResources().getStringArray(R.array.rass);
-        Arrays.sort(options);
         builder.setSingleChoiceItems(options, rassSelection,
                 new DialogInterface.OnClickListener() {
                     @Override

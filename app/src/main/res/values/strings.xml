@@ -396,8 +396,8 @@
     </string-array>
 
     <string-array name="nivelConsciencia">
-        <item>VIGIL \u002d hiperalerta.</item>
         <item>ALERTA \u002d Acordado e resposta adequadas às perguntas.</item>
+        <item>VIGIL \u002d hiperalerta.</item>
         <item>SONOLÊNCIA \u002d Acorda ao chamado, responde às perguntas.</item>
         <item>OBNUBILACÃO \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
         <item>TORPOR \u002d Sonolencia profunda, responde somente a estimulo doloroso.</item>
