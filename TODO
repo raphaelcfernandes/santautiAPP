@@ -40,6 +40,9 @@ Folhas de balanćo: Salvando.
         - Volume/mlpa
         - aspecto: gastrico, fecaloide, biliar
 Exames: Salvando.
+Raio-x se diferente normal abrir menus = crepitacoes
+    opcao de nao realizou/nao pronto
+    albumina tambem
 /*****************MUDANÇAS FEITAS**********/
 
 Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei como).

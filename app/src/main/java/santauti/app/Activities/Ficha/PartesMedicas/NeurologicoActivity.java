@@ -37,14 +37,14 @@ public class NeurologicoActivity extends GenericoActivity {
     private int respostaMotoraSelection=-1;
     private int respostaVerbalSelection=-1;
     private int aberturaOcularSelection=-1;
-    private View avaliacaoPupilarItensLayout,caracteristica2CAMICU,caracteristica4CAMICU;
+    private View avaliacaoPupilarItensLayout,caracteristica2CAMICU,caracteristica3CAMICU,caracteristica4CAMICU;
     private TextView nivelConscienciaTextView;
     private TextView rassTextView;
     private TextView ramsayTextView;
     private TextView escalaDeGlasgowTextView,camIcuTextView;
     private TextView aberturaOcularTextView;
     private TextView respostaVerbalTextView;
-    private TextView respostaMotoraTextView;
+    private TextView respostaMotoraTextView,rassTextViewCAMICU;
     private View simSedado,diferencaPupilaLayout,escalaGlasgowItensLayout,
             deliriumItensLayout,deficitMotorItensLayout,temporoEspacialLayout,desorientadoLayout,CAMICU;
     private CheckBox checkboxDeficitMotor;
@@ -62,6 +62,7 @@ public class NeurologicoActivity extends GenericoActivity {
         simSedado = findViewById(R.id.sedado_sim_layout);
         CAMICU = findViewById(R.id.CAMICU);
         caracteristica2CAMICU = findViewById(R.id.caracteristica2CAMICU);
+        caracteristica3CAMICU = findViewById(R.id.caracteristica3CAMICU);
         caracteristica4CAMICU = findViewById(R.id.caracteristica4CAMICU);
         diferencaPupilaLayout = findViewById(R.id.diferencaPupilaLayout);
         escalaGlasgowItensLayout = findViewById(R.id.escalaGlasgowItensLayout);
@@ -75,20 +76,21 @@ public class NeurologicoActivity extends GenericoActivity {
         respostaVerbalTextView = (TextView)findViewById(R.id.respostaVerbal);
         respostaMotoraTextView = (TextView)findViewById(R.id.respostaMotora);
         camIcuTextView = (TextView)findViewById(R.id.camIcuTextView);
+        rassTextViewCAMICU = (TextView)findViewById(R.id.rassTextViewCAMICU);
         temporoEspacialLayout = findViewById(R.id.temporoEspacialLayout);
         desorientadoLayout = findViewById(R.id.desorientadoLayout);
         avaliacaoPupilarItensLayout = findViewById(R.id.avaliacaoPupilarItensLayout);
         /******************************VARIAVEIS LAYOUTS*************************************/
 
         /******************************VARIAVEIS RADIOBUTTON*********************************/
-        orientado = (AppCompatRadioButton)findViewById(R.id.orientado);
-        desorientado = (AppCompatRadioButton)findViewById(R.id.desorientado);
         caracteristica1CAMICUSim = (AppCompatRadioButton)findViewById(R.id.caracteristica1CAMICUSim);
         caracteristica1CAMICUSim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!caracteristica2CAMICU.isShown())
                     caracteristica2CAMICU.setVisibility(View.VISIBLE);
+                ((RadioGroup)findViewById(R.id.inatencaoRadioGroup)).clearCheck();
+                ((RadioGroup)findViewById(R.id.pensamentoRadioGroup)).clearCheck();
             }
         });
         caracteristica1CAMICUNao = (AppCompatRadioButton)findViewById(R.id.caracteristica1CAMICUNao);
@@ -98,6 +100,8 @@ public class NeurologicoActivity extends GenericoActivity {
                 camIcuTextView.setText("Não há delirium");
                 if(caracteristica2CAMICU.isShown())
                     caracteristica2CAMICU.setVisibility(View.GONE);
+                if(caracteristica3CAMICU.isShown())
+                    caracteristica3CAMICU.setVisibility(View.GONE);
                 if(caracteristica4CAMICU.isShown())
                     caracteristica4CAMICU.setVisibility(View.GONE);
             }
@@ -108,17 +112,31 @@ public class NeurologicoActivity extends GenericoActivity {
             public void onClick(View v) {
                 if(caracteristica4CAMICU.isShown())
                     caracteristica4CAMICU.setVisibility(View.GONE);
+                if(caracteristica3CAMICU.isShown())
+                    caracteristica3CAMICU.setVisibility(View.GONE);
                 camIcuTextView.setText("Não há delirium");
+                ((RadioGroup)findViewById(R.id.pensamentoRadioGroup)).clearCheck();
             }
         });
         caracteristica2CAMICUMais3erros = (AppCompatRadioButton)findViewById(R.id.caracteristica2CAMICUMais3erros);
         caracteristica2CAMICUMais3erros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!caracteristica4CAMICU.isShown() && rassSelection==4)
+                if(!caracteristica4CAMICU.isShown() && rassSelection==4 && simSedado.isShown())
                     caracteristica4CAMICU.setVisibility(View.VISIBLE);
-                if(rassSelection!=4)
+                if(rassSelection!=4 && simSedado.isShown())
                     camIcuTextView.setText("Há delirium");
+                else {
+                    camIcuTextView.setText("");
+                    if(!simSedado.isShown()) {
+                        rassSelection = -1;
+                        rassTextViewCAMICU.setText("");
+                    }
+
+                }
+                if(!simSedado.isShown())
+                    caracteristica3CAMICU.setVisibility(View.VISIBLE);
+
             }
         });
         caracteristica4Mais2Erros = (AppCompatRadioButton)findViewById(R.id.caracteristica4Mais2Erros);
@@ -268,14 +286,6 @@ public class NeurologicoActivity extends GenericoActivity {
             neurologico.setRespostaMotora(Integer.parseInt(stringBuilder.substring(0, stringBuilder.indexOf(" "))));
         }
 
-        if(((RadioGroup)findViewById(R.id.orientacaoTemporoEspacial)).getCheckedRadioButtonId()!=-1){
-            neurologico.setOrientacaoTemporoEspacial(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.orientacaoTemporoEspacial)))));
-            if(neurologico.getOrientacaoTemporoEspacial().equals(getString(R.string.Desorientado))){
-                RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.desorientadoLayout);
-                for(RealmString realmString : realmStrings)
-                    neurologico.getTipoDesorientacao().add(realmString);
-            }
-        }
         if(checkboxDeficitMotor.isChecked()){
             neurologico.setDeficitMotor(true);
             if(((RadioGroup)findViewById(R.id.mse)).getCheckedRadioButtonId()!=-1)
@@ -327,10 +337,23 @@ public class NeurologicoActivity extends GenericoActivity {
                                 !simSedado.isShown()){
                             myAnimation.slideDownView(getApplicationContext(),simSedado);
                         }
-                        else{
-                            if(simSedado.isShown())
-                                myAnimation.slideUpView(getApplicationContext(),simSedado);
+                        else {
+                            if (simSedado.isShown())
+                                myAnimation.slideUpView(getApplicationContext(), simSedado);
                         }
+                        rassSelection=-1;
+                        rassTextViewCAMICU.setText("");
+                        rassTextView.setText("");
+                        caracteristica1CAMICURadioGroup.clearCheck();
+                        camIcuTextView.setText("");
+                        ((RadioGroup) findViewById(R.id.inatencaoRadioGroup)).clearCheck();
+                        ((RadioGroup) findViewById(R.id.pensamentoRadioGroup)).clearCheck();
+                        if(caracteristica2CAMICU.isShown())
+                            caracteristica2CAMICU.setVisibility(View.GONE);
+                        if(caracteristica3CAMICU.isShown())
+                            caracteristica3CAMICU.setVisibility(View.GONE);
+                        if(caracteristica4CAMICU.isShown())
+                            caracteristica4CAMICU.setVisibility(View.GONE);
                         dialog.dismiss();
                     }
                 });
@@ -394,21 +417,23 @@ public class NeurologicoActivity extends GenericoActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         rassTextView.setText(options[which]);
+                        rassTextViewCAMICU.setText(options[which]);
                         rassTextView.setVisibility(View.VISIBLE);
+                        rassTextViewCAMICU.setVisibility(View.VISIBLE);
                         rassSelection=which;
-                        if(rassSelection>0 && rassSelection<8)
-                            CAMICU.setVisibility(View.VISIBLE);
-                        else
-                            CAMICU.setVisibility(View.GONE);
-                        if(rassSelection!=4 && caracteristica4CAMICU.isShown()) {
-                            caracteristica4CAMICU.setVisibility(View.GONE);
+                        if(rassSelection!=4 && !simSedado.isShown() && caracteristica3CAMICU.isShown())
                             camIcuTextView.setText("Há delirium");
-                        }
-                        if(rassSelection==4 && !caracteristica2CAMICU.isShown())
+                        if(rassSelection==4 && !simSedado.isShown() && caracteristica3CAMICU.isShown())
                             caracteristica4CAMICU.setVisibility(View.VISIBLE);
-                        if(((RadioGroup)findViewById(R.id.inatencaoRadioGroup)).getCheckedRadioButtonId()!=-1) {
+                        if(rassSelection!=4 && !simSedado.isShown() && caracteristica4CAMICU.isShown())
+                            caracteristica4CAMICU.setVisibility(View.GONE);
+                        if(((RadioGroup)findViewById(R.id.inatencaoRadioGroup)).getCheckedRadioButtonId()!=-1 && simSedado.isShown()) {
                             ((RadioGroup) findViewById(R.id.inatencaoRadioGroup)).clearCheck();
                             camIcuTextView.setText("");
+                        }
+                        if(rassSelection!=4 && caracteristica4CAMICU.isShown()) {
+                            camIcuTextView.setText("");
+                            caracteristica4CAMICU.setVisibility(View.GONE);
                         }
                         dialog.dismiss();
                     }
@@ -594,20 +619,6 @@ public class NeurologicoActivity extends GenericoActivity {
             if(checkboxDeficitMotor.isChecked())
                 myAnimation.slideDownView(getApplicationContext(), deficitMotorItensLayout);
         }
-    }
-
-    public void temporoEspacialOnCLick(View view){
-        switch(view.getId()) {
-            case R.id.desorientado:
-                if(!desorientadoLayout.isShown())
-                    myAnimation.slideDownView(getApplicationContext(),desorientadoLayout);
-                break;
-            case R.id.orientado:
-                if(desorientadoLayout.isShown())
-                    myAnimation.slideUpView(getApplicationContext(),desorientadoLayout);
-                break;
-        }
-
     }
 
     public void simetriaOnClick(View view){
