@@ -157,7 +157,7 @@
     <string name="EmQueda">Em Queda</string>
     <string name="Elevando">Elevando</string>
     <string name="AntibioticoAntiviraisAntifungicos">Antibióticos/Antivirais/Antifungicos</string>
-    <string name="RaioxTorax">Raio-x Torax</string>
+    <string name="RaioxTorax">Raio-X Torax</string>
     <string name="Leucograma">Leucograma</string>
     <string name="FuncaoHepatica">Função Hepática</string>
     <string name="Amilase">Amilase</string>
@@ -386,6 +386,7 @@
     <string name="Ileostomia">Ileostomia</string>
     <string name="Jejunostomia">Jejunostomia</string>
     <string name="AlteracaoNivelConsciencia">Alteração do nível de consciência</string>
+    <string name="NaoRealizado">Não realizou/sem resultados</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

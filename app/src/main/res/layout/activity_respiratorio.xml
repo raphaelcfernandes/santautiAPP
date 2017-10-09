@@ -464,7 +464,7 @@
                 android:id="@+id/roncosItensLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingStart="10dp"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
@@ -553,7 +553,7 @@
                 android:id="@+id/sibilosItensLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingStart="10dp"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
@@ -642,11 +642,11 @@
                 android:id="@+id/crepitacoesItensLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingStart="10dp"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
                 <RelativeLayout
                     android:paddingTop="10dp"
                     android:layout_width="match_parent"

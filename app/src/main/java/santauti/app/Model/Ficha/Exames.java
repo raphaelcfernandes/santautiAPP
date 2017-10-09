@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
+import santauti.app.Model.Ficha.RealmObjects.RealmString;
 
 /**
  * Created by rapha on 06-Oct-17.
@@ -56,11 +58,20 @@ public class Exames extends RealmObject implements Serializable {
     private String albumina;
     @SerializedName("raioxTorax")
     private String raioxTorax;
+    @SerializedName("raioxToraxList")
+    private RealmList<RealmString> raioxToraxList;
 
     public boolean checkObject(){
         boolean gasometria=false;
+        boolean raioxFlag=true;
+        if(raioxTorax!=null){
+            if((!raioxTorax.equals("Normal") && !raioxTorax.equals("Não realizou/sem resultados") && raioxToraxList.isEmpty()))
+                raioxFlag=false;
+        }
+        else
+            raioxFlag=false;
         if(gasometriaArterialAcidoseAlcalose!=null){
-            if(gasometriaArterialAcidoseAlcalose.equals("Normal"))
+            if(gasometriaArterialAcidoseAlcalose.equals("Normal") || gasometriaArterialAcidoseAlcalose.equals("Não realizou/sem resultados"))
                 gasometria=true;
         }
         if(gasometrialArterialMetabolicaRespiratoria!=null){
@@ -70,18 +81,26 @@ public class Exames extends RealmObject implements Serializable {
                 gasometria=true;
         }
         if(amilaseChecked){
-            return hematocrito>0 && hemoglobina>0 && plaquetas>0 && leucograma!=null && pcr!=null
-                    && ureia>0 && creatinina>0 && potassio!=null && magnesio!=null && fosforo!=null && calcio!=null
+            return hematocrito>=0 && hemoglobina>=0 && plaquetas>=0 && leucograma!=null && pcr!=null
+                    && ureia>=0 && creatinina>=0 && potassio!=null && magnesio!=null && fosforo!=null && calcio!=null
                     && gasometriaArterialAcidoseAlcalose!=null && gasometria
                     && funcaoHepaticaBilirrubinas!=null && funcaoHepaticaFAGGT!=null && funcaoHepaticaTransaminases!=null && lactato!=null
-                    && marcadoresInfeccao!=null && albumina!=null && raioxTorax!=null && amilase!=null;
+                    && marcadoresInfeccao!=null && albumina!=null && raioxFlag && amilase!=null;
         }
         else
-            return hematocrito>0 && hemoglobina>0 && plaquetas>0 && leucograma!=null && pcr!=null
-            && ureia>0 && creatinina>0 && potassio!=null && magnesio!=null && fosforo!=null && calcio!=null
+            return hematocrito>=0 && hemoglobina>=0 && plaquetas>=0 && leucograma!=null && pcr!=null
+            && ureia>=0 && creatinina>=0 && potassio!=null && magnesio!=null && fosforo!=null && calcio!=null
             && gasometriaArterialAcidoseAlcalose!=null && gasometria && funcaoHepaticaBilirrubinas!=null
             && funcaoHepaticaFAGGT!=null && funcaoHepaticaTransaminases!=null && lactato!=null
-            && marcadoresInfeccao!=null && albumina!=null && raioxTorax!=null;
+            && marcadoresInfeccao!=null && albumina!=null && raioxFlag;
+    }
+
+    public RealmList<RealmString> getRaioxToraxList() {
+        return raioxToraxList;
+    }
+
+    public void setRaioxToraxList(RealmList<RealmString> raioxToraxList) {
+        this.raioxToraxList = raioxToraxList;
     }
 
     public int getHematocrito() {

@@ -9,8 +9,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+        android:visibility="visible">
         <TextView
+            android:textStyle="bold"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
             style="@style/TitleTextStyleForLayoutSelection"
@@ -20,9 +22,9 @@
         <LinearLayout
             android:paddingStart="0dp"
             android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:id="@+id/gasometriaArterialAcidoseLinearLayout">
             <RadioGroup
                 android:paddingTop="10dp"
@@ -31,13 +33,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/gasometriaArterialAcidoseRadioGroup">
+                android:id="@+id/gasometriaArterialAcidoseRadioGroup1">
                 <RadioButton
                     android:id="@+id/gasometriaAcidose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingEnd="50dp"
+                    android:paddingEnd="25dp"
                     android:paddingStart="0dp"
                     android:text="@string/Acidose"
                     android:theme="@style/radioButtonStyle" />
@@ -49,20 +51,41 @@
                     android:text="@string/Alcalose"
                     android:paddingEnd="20dp"
                     android:theme="@style/radioButtonStyle" />
+            </RadioGroup>
+            <RadioGroup
+                android:paddingTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/gasometriaArterialAcidoseRadioGroup2">
                 <RadioButton
                     android:theme="@style/radioButtonStyle"
                     android:id="@+id/gasometriaNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Normal"/>
+                    android:text="@string/Normal"
+                    android:paddingEnd="40dp"
+                    android:paddingStart="0dp"/>
+                <RadioButton
+                    android:id="@+id/gasometriaArterialSemResultados"
+                    android:theme="@style/radioButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NaoRealizado"
+                    />
             </RadioGroup>
         </LinearLayout>
         <LinearLayout
+            android:paddingTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/gasometriaArterialMetabolicaLinearLayout">
+            android:id="@+id/gasometriaArterialMetabolicaLinearLayout"
+            android:visibility="gone">
             <RadioGroup
+                android:paddingTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -74,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingEnd="30dp"
+                    android:paddingEnd="5dp"
                     android:paddingStart="0dp"
                     android:text="@string/Metabolica"
                     android:theme="@style/radioButtonStyle" />
@@ -97,6 +120,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

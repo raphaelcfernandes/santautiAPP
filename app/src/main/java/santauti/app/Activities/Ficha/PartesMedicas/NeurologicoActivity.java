@@ -435,6 +435,22 @@ public class NeurologicoActivity extends GenericoActivity {
                             camIcuTextView.setText("");
                             caracteristica4CAMICU.setVisibility(View.GONE);
                         }
+                        if(rassSelection==0 || rassSelection>=8){
+                            camIcuTextView.setText("Avaliação não permitida, pois RASS maior que +4 ou menor que -4.");
+                            deliriumItensLayout.setVisibility(View.GONE);
+                        }
+                        else if(camIcuTextView.getText().toString().equals("Avaliação não permitida, pois RASS maior que +4 ou menor que -4.")) {
+                            camIcuTextView.setText("");
+                            deliriumItensLayout.setVisibility(View.VISIBLE);
+                            caracteristica2CAMICU.setVisibility(View.GONE);
+                            caracteristica3CAMICU.setVisibility(View.GONE);
+                            caracteristica4CAMICU.setVisibility(View.GONE);
+                            ((RadioGroup) findViewById(R.id.inatencaoRadioGroup)).clearCheck();
+                            ((RadioGroup) findViewById(R.id.pensamentoRadioGroup)).clearCheck();
+                            caracteristica1CAMICURadioGroup.clearCheck();
+
+
+                        }
                         dialog.dismiss();
                     }
                 });
@@ -577,25 +593,6 @@ public class NeurologicoActivity extends GenericoActivity {
         }
         else
             myAnimation.slideDownView(getApplicationContext(), avaliacaoPupilarItensLayout);
-//        if(avaliacaoPupilarItensLayout.isShown()) {
-//            myAnimation.slideUpView(getApplicationContext(), avaliacaoPupilarItensLayout);
-//            if(tamanhoPupilaTextView.getText().toString().length()>0)
-//                avaliacaoString.append("Tamanho: ").append(tamanhoPupilaTextView.getText().toString());
-//            if(simetriaPupilaTextView.getText().toString().length()>0)
-//                avaliacaoString.append(", Simetria: ").append(simetriaPupilaTextView.getText().toString());
-//            if(simetriaPupilaTextView.getText().equals(getResources().getStringArray(R.array.simetriaPupila)[1]))
-//                avaliacaoString.append(", Diferença: ").append(diferencaPupilaTextView.getText().toString());
-//            if(reatividadeLuzTextView.getText().length()>0)
-//                avaliacaoString.append(", Reatividade a Luz: ").append(reatividadeLuzTextView.getText().toString());
-//            if(avaliacaoString.length()!=0) {
-//                avaliacaoPupilarTextView.setText(avaliacaoString);
-//                avaliacaoPupilarTextView.setVisibility(View.VISIBLE);
-//            }
-//        }
-//        else {
-//            avaliacaoPupilarTextView.setVisibility(View.GONE);
-//            myAnimation.slideDownView(getApplicationContext(), avaliacaoPupilarItensLayout);
-//        }
     }
 
     public void escalaGlasgowOnClick(View view){
@@ -606,10 +603,11 @@ public class NeurologicoActivity extends GenericoActivity {
     }
 
     public void deliriumOnClick(View view){
-        if(deliriumItensLayout.isShown())
-            myAnimation.slideUpView(getApplicationContext(),deliriumItensLayout);
+
+        if (deliriumItensLayout.isShown())
+            myAnimation.slideUpView(getApplicationContext(), deliriumItensLayout);
         else
-            myAnimation.slideDownView(getApplicationContext(),deliriumItensLayout);
+            myAnimation.slideDownView(getApplicationContext(), deliriumItensLayout);
     }
 
     public void deficitMotorOnClick(View view){
