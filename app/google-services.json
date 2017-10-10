@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "145623855029",
+    "firebase_url": "https://santauti-5b3d0.firebaseio.com",
+    "project_id": "santauti-5b3d0",
+    "storage_bucket": "santauti-5b3d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145623855029:android:46b761027547bb3c",
+        "android_client_info": {
+          "package_name": "com.android.santauti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145623855029-j6dr1ummjd05e6jenuitlmn6hq09gfuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALhQGxs_QyWKOfcu5tT90Oku3fnfcb5oY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145623855029:android:5ad75d19bd2ca602",
+        "android_client_info": {
+          "package_name": "santauti.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145623855029-rthbpb5l7dc8u6f700od84rdr22r8u0n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "santauti.app",
+            "certificate_hash": "74d9b1fe3c3c03557867440f73624626e2c453fc"
+          }
+        },
+        {
+          "client_id": "145623855029-j6dr1ummjd05e6jenuitlmn6hq09gfuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALhQGxs_QyWKOfcu5tT90Oku3fnfcb5oY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145623855029-j6dr1ummjd05e6jenuitlmn6hq09gfuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

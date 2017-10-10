@@ -15,12 +15,10 @@ import santauti.app.Model.Ficha.RealmObjects.RealmString;
 public class Neurologico extends RealmObject implements Serializable{
     @SerializedName("nivelConsciencia")
     private String nivelConsciencia;
-    @SerializedName("sedado")
-    private boolean sedado;
     @SerializedName("ramsay")
     private int ramsay;
     @SerializedName("rass")
-    private String rass;
+    private int rass;
     @SerializedName("aberturaOcular")
     private int aberturaOcular;
     @SerializedName("repostaVerbal")
@@ -28,9 +26,9 @@ public class Neurologico extends RealmObject implements Serializable{
     @SerializedName("respostaMotora")
     private int respostaMotora;
     @SerializedName("orientacaoTemporoEspacial")
-    private String orientacaoTemporoEspacial;
-    @SerializedName("tipoDesorientacao")
-    private RealmList<RealmString> tipoDesorientacao;
+    private RealmList<RealmString> orientadoTemporoEspacial;
+    @SerializedName("desorientadoTemporoEspacial")
+    private RealmList<RealmString> desorientadoTemporoEspacial;
     @SerializedName("deficitMotor")
     private boolean deficitMotor;
     @SerializedName("mse")
@@ -49,34 +47,62 @@ public class Neurologico extends RealmObject implements Serializable{
     private String diferencaPupila;
     @SerializedName("reatividadeLuzPupila")
     private String reatividadeLuzPupila;
-    @SerializedName("flutuacaoEstadoMental")
-    private boolean flutuacaoEstadoMental;
-    @SerializedName("inatencao")
-    private boolean inatencao;
-    @SerializedName("pensamentoDesorganizado")
-    private boolean pensamentoDesorganizado;
+    @SerializedName("deliriumCAMICU")
+    private String deliciumCAMICU;
+    private boolean noTempo;
+    private boolean noEspaco;
 
-//    public boolean checkObject(){
-//        boolean sedadoFlag=false;
-//        boolean deficitMotorFlag=false;
-//        boolean orientacaoTemporoEspacialFlag=false;
-//        if(sedado && ramsay>0 && rass!=null)
-//            sedadoFlag=true;
-//        if(orientacaoTemporoEspacial!=null)
-//            if(orientacaoTemporoEspacial.equals("Desorientado") && !tipoDesorientacao.isEmpty())
-//                orientacaoTemporoEspacialFlag=true;
-//        if(simetriaPupila!=null) {
-//            if (simetriaPupila.equals("Anisocóricas"))
-//                return (sedadoFlag || nivelConsciencia != null) && aberturaOcular > 0 && respostaVerbal > 0 && respostaMotora > 0
-//                        && (orientacaoTemporoEspacialFlag || orientacaoTemporoEspacial != null) && tamanhoPupila != null && diferencaPupila != null
-//                        && reatividadeLuzPupila != null;
-//        }
-//        else
-//            return (sedadoFlag || nivelConsciencia!=null) && aberturaOcular>0 && respostaVerbal>0 && respostaMotora>0
-//                    && (orientacaoTemporoEspacialFlag || orientacaoTemporoEspacial!=null) && tamanhoPupila!=null && simetriaPupila!=null
-//                    && reatividadeLuzPupila!=null;
-//    }
+    public boolean checkObject(){
+        boolean nivelConscienciaFlag=false;
+        boolean deficitMotorFlag=false;
+        boolean avaliacaoPupilar=true;
+        if(nivelConsciencia!=null){
+            if(!nivelConsciencia.equals("SEDADO"))
+                nivelConscienciaFlag=true;
+            else
+                if(ramsay>=0 && rass>-6)
+                    nivelConscienciaFlag=true;
+        }
+        if(this.deficitMotor && (mse!=null || msd!=null || mie!=null ||mid!=null))
+            deficitMotorFlag=true;
+        if(!deficitMotor)
+            deficitMotorFlag=true;
+        if(simetriaPupila!=null) {
+            if (simetriaPupila.equals("Anisocóricas"))
+                if (tamanhoPupila != null && diferencaPupila!=null && reatividadeLuzPupila!=null)
+                    avaliacaoPupilar=true;
+            else
+                if(tamanhoPupila != null && reatividadeLuzPupila!=null)
+                    avaliacaoPupilar=true;
+        }
+        return nivelConscienciaFlag && aberturaOcular>0 && respostaMotora>0 && respostaVerbal>0 && noTempo && noEspaco
+               && deficitMotorFlag && avaliacaoPupilar && deliciumCAMICU!=null;
+    }
 
+
+    public boolean isNoTempo() {
+        return noTempo;
+    }
+
+    public void setNoTempo(boolean noTempo) {
+        this.noTempo = noTempo;
+    }
+
+    public boolean isNoEspaco() {
+        return noEspaco;
+    }
+
+    public void setNoEspaco(boolean noEspaco) {
+        this.noEspaco = noEspaco;
+    }
+
+    public String getDeliciumCAMICU() {
+        return deliciumCAMICU;
+    }
+
+    public void setDeliciumCAMICU(String deliciumCAMICU) {
+        this.deliciumCAMICU = deliciumCAMICU;
+    }
 
     public String getNivelConsciencia() {
         return nivelConsciencia;
@@ -86,13 +112,6 @@ public class Neurologico extends RealmObject implements Serializable{
         this.nivelConsciencia = nivelConsciencia;
     }
 
-    public boolean isSedado() {
-        return sedado;
-    }
-
-    public void setSedado(boolean sedado) {
-        this.sedado = sedado;
-    }
 
     public int getRamsay() {
         return ramsay;
@@ -102,11 +121,11 @@ public class Neurologico extends RealmObject implements Serializable{
         this.ramsay = ramsay;
     }
 
-    public String getRass() {
+    public int getRass() {
         return rass;
     }
 
-    public void setRass(String rass) {
+    public void setRass(int rass) {
         this.rass = rass;
     }
 
@@ -134,20 +153,20 @@ public class Neurologico extends RealmObject implements Serializable{
         this.respostaMotora = respostaMotora;
     }
 
-    public String getOrientacaoTemporoEspacial() {
-        return orientacaoTemporoEspacial;
+    public RealmList<RealmString> getOrientadoTemporoEspacial() {
+        return orientadoTemporoEspacial;
     }
 
-    public void setOrientacaoTemporoEspacial(String orientacaoTemporoEspacial) {
-        this.orientacaoTemporoEspacial = orientacaoTemporoEspacial;
+    public void setOrientadoTemporoEspacial(RealmList<RealmString> orientadoTemporoEspacial) {
+        this.orientadoTemporoEspacial = orientadoTemporoEspacial;
     }
 
-    public RealmList<RealmString> getTipoDesorientacao() {
-        return tipoDesorientacao;
+    public RealmList<RealmString> getDesorientadoTemporoEspacial() {
+        return desorientadoTemporoEspacial;
     }
 
-    public void setTipoDesorientacao(RealmList<RealmString> tipoDesorientacao) {
-        this.tipoDesorientacao = tipoDesorientacao;
+    public void setDesorientadoTemporoEspacial(RealmList<RealmString> desorientadoTemporoEspacial) {
+        this.desorientadoTemporoEspacial = desorientadoTemporoEspacial;
     }
 
     public boolean isDeficitMotor() {
@@ -220,29 +239,5 @@ public class Neurologico extends RealmObject implements Serializable{
 
     public void setReatividadeLuzPupila(String reatividadeLuzPupila) {
         this.reatividadeLuzPupila = reatividadeLuzPupila;
-    }
-
-    public boolean isFlutuacaoEstadoMental() {
-        return flutuacaoEstadoMental;
-    }
-
-    public void setFlutuacaoEstadoMental(boolean flutuacaoEstadoMental) {
-        this.flutuacaoEstadoMental = flutuacaoEstadoMental;
-    }
-
-    public boolean isInatencao() {
-        return inatencao;
-    }
-
-    public void setInatencao(boolean inatencao) {
-        this.inatencao = inatencao;
-    }
-
-    public boolean isPensamentoDesorganizado() {
-        return pensamentoDesorganizado;
-    }
-
-    public void setPensamentoDesorganizado(boolean pensamentoDesorganizado) {
-        this.pensamentoDesorganizado = pensamentoDesorganizado;
     }
 }

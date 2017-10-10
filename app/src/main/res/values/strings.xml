@@ -387,6 +387,7 @@
     <string name="Jejunostomia">Jejunostomia</string>
     <string name="AlteracaoNivelConsciencia">Alteração do nível de consciência</string>
     <string name="NaoRealizado">Não realizou/sem resultados</string>
+    <string name="AvaliacaoCAMICUNaoRealizada">Avaliação não permitida, pois RASS maior que +4 ou menor que -4.</string>
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->

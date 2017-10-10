@@ -203,6 +203,16 @@ public abstract class GenericoActivity extends AppCompatActivity {
         }
     }
 
+    public void setRadioGroup(int id, String stringFromDatabase){
+        RadioGroup radioGroup = (RadioGroup)findViewById(id);
+        for(int i=0;i<radioGroup.getChildCount();i++){
+            View v = radioGroup.getChildAt(i);
+            RadioButton radioButton = (RadioButton)v;
+            if(radioButton.getText().toString().equals(stringFromDatabase))
+                radioButton.setChecked(true);
+        }
+    }
+
     public void preencheCheckboxes(int id, RealmList<RealmString> realmStrings){
         for(RealmString realmString : realmStrings){
             LinearLayout linearLayout = (LinearLayout) findViewById(id);
