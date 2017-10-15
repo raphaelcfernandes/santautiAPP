@@ -32,6 +32,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -66,8 +68,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser;
     private Hospital hospital;
-    private ListenerRegistration registration;
-    private Query query;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,16 +84,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         homeAdapter = new HomeAdapter(homeModelList,this);
         recyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnItemClickListener(onItemClickListener);
-        //prepareListaPacientes();
         requestPacienteList();
-//
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        Pessoa pessoa = new Pessoa("02483575145","09-11-1994","1","MG17817760","Raphael","Fernandes");
-//        mDatabase.child("Pessoa").push().setValue(pessoa);
-//        pessoa = new Pessoa("12345678910","02-10-1984","1","MG17817750","Fulano","Da Silva Sauro");
-//        mDatabase.child("Pessoa").push().setValue(pessoa);
-//        pessoa = new Pessoa("02483275145","01-01-1932","1","MG17814260","Bartolomeu","Rocha");
-//        mDatabase.child("Pessoa").push().setValue(pessoa);
     }
 
     private void updateUI(){
@@ -120,12 +111,10 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                     case R.id.home:
                         if(FirebaseAuth.getInstance().getCurrentUser()!=null)
                             FirebaseAuth.getInstance().signOut();
+                        drawerLayout.closeDrawers();
+                        finish();
                         Intent it = new Intent(HomeActivity.this, MainActivity.class);
                         startActivity(it);
-                        if(registration!=null)
-                            registration.remove();
-                        finish();
-                        drawerLayout.closeDrawers();
                         break;
                 }
                 return true;
@@ -165,10 +154,11 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     private void requestPacienteList(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         progress.setVisibility(View.VISIBLE);
-        query = db.collection("Hospital");
-        registration = query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("Hospital").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if(e != null)
+                    return;
                 for(DocumentSnapshot documentSnapshot : documentSnapshots){
                     if(documentSnapshot.get("nome").equals("Santa Clara")){
                         hospital = documentSnapshot.toObject(Hospital.class);
@@ -177,15 +167,18 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                         db.collection("Hospital").document(hospital.getHospitalDocumentKey()).collection("Pacientes").addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                                if(e != null)
+                                    return;
                                 homeModelList.clear();
                                 for(DocumentSnapshot documentSnapshot : documentSnapshots){
                                     final Paciente paciente = documentSnapshot.toObject(Paciente.class);
                                     paciente.setPacienteKey(documentSnapshot.getId());
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                    db.collection("Pessoa").document(paciente.getProfissionalResponsavel()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                    db.collection("Pessoa").document(paciente.getProfissionalResponsavel()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                         @Override
-                                        public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                                            Profissional profissional = documentSnapshot.toObject(Profissional.class);
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            DocumentSnapshot documentSnapshot1 = task.getResult();
+                                            Profissional profissional = documentSnapshot1.toObject(Profissional.class);
                                             int[] covers = new int[]{
                                                     R.drawable.ic_person_black};
                                             HomeModel p = new HomeModel(paciente.getNome()+" "+paciente.getSobrenome(),paciente.getBox(),paciente.getLeito(),

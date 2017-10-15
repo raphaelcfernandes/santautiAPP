@@ -12,8 +12,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Activities.Home.HomeActivity;
@@ -30,7 +28,6 @@ public class MainActivity extends GenericoActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // SCREEN ELEMENTS ------------------------------------------------------------------------
         email = (TextInputEditText) findViewById(R.id.input_usuario);
         password = (TextInputEditText)findViewById(R.id.input_password);
@@ -59,17 +56,12 @@ public class MainActivity extends GenericoActivity {
     }
 
     public void login() {
-        mAuth.signInWithEmailAndPassword(user.getEmail(),user.getPassword())
+        mAuth.signInWithEmailAndPassword("udiacf@gmail.com","123456")
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName("Raphael Cardoso Fernandes").build();
-
-                            user.updateProfile(profileUpdates);
                             progressDialog.dismiss();
                             startActivity(intent);
                             finish();
