@@ -4,27 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.SharedElementCallback;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import santauti.app.APIServices.APIService;
-import santauti.app.APIServices.RestClient;
 import santauti.app.Activities.Ficha.PartesMedicas.BombaInfusaoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.DispositivoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
@@ -43,12 +31,9 @@ import santauti.app.Activities.Ficha.PartesMedicas.PelesMucosasActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiradorActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
-import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Adapters.Ficha.FichaAdapterModel;
 import santauti.app.Adapters.Ficha.FichaSectionAdapter;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Paciente;
-import santauti.app.Model.User;
 import santauti.app.R;
 
 public class FichaActivity extends GenericoActivity{
@@ -56,10 +41,7 @@ public class FichaActivity extends GenericoActivity{
     public static FichaSectionAdapter adapter;
     public static List<FichaAdapterModel> fichaAdapterModelList;
     private Intent intent;
-    private int idCriado;
-    private Realm realm;
     private FloatingActionButton floatingActionButton;
-    APIService apiService;
     private Ficha ficha;
 
     @Override
@@ -79,14 +61,6 @@ public class FichaActivity extends GenericoActivity{
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         /*******************LAYOUT VARIAVEIS*******************************/
 
-        /*******************Inicializacao Realm***************************/
-        Realm.init(this);
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm.setDefaultConfiguration(realmConfiguration);
-        realm = Realm.getDefaultInstance();
-        /*******************Inicializacao Realm***************************/
 
         /*******************Inicializacao RecyclerView*******************/
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);//O int representa quantos cards terão por grid
@@ -96,10 +70,7 @@ public class FichaActivity extends GenericoActivity{
         /*******************Inicializacao RecyclerView*******************/
 
         fichaAdapterModelList = new ArrayList<>();
-
-        apiService = RestClient.getClient(FichaActivity.this).create(APIService.class);
-
-        createNewFicha();
+        //createNewFicha();
         prepareFichas();
 
     }
@@ -108,42 +79,23 @@ public class FichaActivity extends GenericoActivity{
      * Método para criar um novo Objeto do tipo Model.Ficha
      */
     private void createNewFicha(){
-        int idPaciente = getIntent().getIntExtra("idPaciente",0);
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
-        Number currentIdNum = realm.where(Ficha.class).max("NroAtendimento");
-        idCriado = currentIdNum == null? 1 : currentIdNum.intValue()+1;
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("NroAtendimento",idCriado);
-        editor.apply();
-
-
-        realm.beginTransaction();
-        ficha = realm.createObject(Ficha.class,idCriado);
-        Calendar c = Calendar.getInstance();
-        ficha.setDataCriado(c.getTime());
-
-        User user = realm.createObject(User.class);
-        user.setRegistro(sharedPref.getInt(getString(R.string.registroMedico),0));
-        user.setToken(sharedPref.getString("acess_token",""));
-        user.setTipoProfissional(sharedPref.getInt("tipoProfissional",0));
-
-        Paciente paciente = realm.createObject(Paciente.class);
-        paciente.setID(idPaciente);
-        ficha.setPaciente(paciente);
-        ficha.setUser(user);
-
-        realm.insert(ficha);
-        realm.commitTransaction();
+//        SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//        Ficha ficha = new Ficha(sp.getString("pacienteKey",""),sp.getString("medicoKey",""));
+//        String fichaKeyGeradaPeloFirebase = databaseReference.child("Fichas").push().getKey();
+//        databaseReference.child("Fichas").child(fichaKeyGeradaPeloFirebase).setValue(ficha);
+//        SharedPreferences.Editor editor = sp.edit();
+//        editor.putString("FichaKEY",fichaKeyGeradaPeloFirebase);
+//        editor.apply();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences),Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove("NroAtendimento");
+        SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
         editor.apply();
-        realm.close();
     }
 
     @Override
@@ -153,8 +105,9 @@ public class FichaActivity extends GenericoActivity{
         for(FichaAdapterModel fichaAdapterModel : fichaAdapterModelList)
             if(fichaAdapterModel.getColor()==1)
                 i++;
-        if(i==fichaAdapterModelList.size())
-            floatingActionButton.setVisibility(View.VISIBLE);
+//        if(i==fichaAdapterModelList.size())
+//            floatingActionButton.setVisibility(View.VISIBLE);
+
     }
 
     /**
@@ -296,39 +249,39 @@ public class FichaActivity extends GenericoActivity{
      * Recebe: http statusCode
      */
     private void sendFichaToServer(final View view){
-        Ficha fichaToSend = realm.copyFromRealm(realm.where(Ficha.class).equalTo("NroAtendimento",idCriado).findFirst());
-        Call<Ficha> call = apiService.sendFichaFromAppToServer(fichaToSend);
-        call.enqueue(new Callback<Ficha>() {
-            @Override
-            public final void onResponse(@NonNull Call<Ficha> call, @NonNull Response<Ficha> response) {
-                if(response.isSuccessful()) {
-                    //SnackbarCreator.createText(view, "Ficha salva com sucesso!");
-                    Snackbar snackbar = Snackbar.make(view,"Ficha salva com sucesso!",Snackbar.LENGTH_SHORT);
-                    snackbar.addCallback(new Snackbar.Callback() {
-                        @Override
-                        public void onDismissed(Snackbar snackbar, int event) {
-                            finish();
-                        }
-                        @Override
-                        public void onShown(Snackbar snackbar) {
-                        }
-                    });
-                    SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.remove("NroAtendimento");
-                    editor.apply();
-                    snackbar.show();
-                    //finish();
-                }
-                else
-                    SnackbarCreator.createText(view, "Teste");
-            }
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
-                t.printStackTrace();
-                Log.d("ERROR",t.getMessage());
-            }
-        });
+//        Ficha fichaToSend = realm.copyFromRealm(realm.where(Ficha.class).equalTo("NroAtendimento",idCriado).findFirst());
+//        Call<Ficha> call = apiService.sendFichaFromAppToServer(fichaToSend);
+//        call.enqueue(new Callback<Ficha>() {
+//            @Override
+//            public final void onResponse(@NonNull Call<Ficha> call, @NonNull Response<Ficha> response) {
+//                if(response.isSuccessful()) {
+//                    //SnackbarCreator.createText(view, "Ficha salva com sucesso!");
+//                    Snackbar snackbar = Snackbar.make(view,"Ficha salva com sucesso!",Snackbar.LENGTH_SHORT);
+//                    snackbar.addCallback(new Snackbar.Callback() {
+//                        @Override
+//                        public void onDismissed(Snackbar snackbar, int event) {
+//                            finish();
+//                        }
+//                        @Override
+//                        public void onShown(Snackbar snackbar) {
+//                        }
+//                    });
+//                    SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPref.edit();
+//                    editor.remove("NroAtendimento");
+//                    editor.apply();
+//                    snackbar.show();
+//                    //finish();
+//                }
+//                else
+//                    SnackbarCreator.createText(view, "Teste");
+//            }
+//            @Override
+//            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
+//                t.printStackTrace();
+//                Log.d("ERROR",t.getMessage());
+//            }
+//        });
     }
 
 }

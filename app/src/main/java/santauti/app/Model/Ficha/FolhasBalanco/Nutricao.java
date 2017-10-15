@@ -1,12 +1,10 @@
 package santauti.app.Model.Ficha.FolhasBalanco;
 
-import io.realm.RealmObject;
-
 /**
  * Created by rapha on 06-Oct-17.
  */
 
-public class Nutricao extends RealmObject {
+public class Nutricao {
     private String tipoNutricao;
     private int volume;
 

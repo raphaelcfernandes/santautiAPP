@@ -5,17 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import io.realm.Realm;
-import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Dispositivos;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -25,14 +18,12 @@ import santauti.app.R;
 public class DispositivoActivity extends GenericoActivity {
     private boolean[] dispositivos = new boolean[16];
     private TextView dispositivosTextView;
-    private Realm realm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dispositivo);
         setToolbar("Dispositivos");
         prepareNavigationButtons();
-        realm = Realm.getDefaultInstance();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,16 +52,15 @@ public class DispositivoActivity extends GenericoActivity {
     }
 
     private void setDispositivosFromDataBase() {
-        Ficha ficha = getProperFicha();
-        if (ficha.getDispositivos() != null && !ficha.getDispositivos().getNomeDispositivos().isEmpty())
-            preencheCheckboxes(R.id.dispositivos,ficha.getDispositivos().getNomeDispositivos());
+//        Ficha ficha = getProperFicha();
+//        if (ficha.getDispositivos() != null && !ficha.getDispositivos().getNomeDispositivos().isEmpty())
+//            preencheCheckboxes(R.id.dispositivos,ficha.getDispositivos().getNomeDispositivos());
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override
@@ -90,16 +80,16 @@ public class DispositivoActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter(){
-        realm.beginTransaction();
-        Dispositivos dispositivos = realm.createObject(Dispositivos.class);
-        Ficha r = getProperFicha();
-        RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.dispositivos);
-        for(RealmString realmString : realmStrings)
-            dispositivos.getNomeDispositivos().add(realmString);
-        r.setDispositivos(dispositivos);
-        realm.copyToRealmOrUpdate(r);
-        realm.commitTransaction();
-        changeCardColorToGreen();
+//        realm.beginTransaction();
+//        Dispositivos dispositivos = realm.createObject(Dispositivos.class);
+//        Ficha r = getProperFicha();
+//        RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.dispositivos);
+//        for(RealmString realmString : realmStrings)
+//            dispositivos.getNomeDispositivos().add(realmString);
+//        r.setDispositivos(dispositivos);
+//        realm.copyToRealmOrUpdate(r);
+//        realm.commitTransaction();
+//        changeCardColorToGreen();
     }
 
 }

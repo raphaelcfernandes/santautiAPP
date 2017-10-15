@@ -1,13 +1,10 @@
 package santauti.app.Model.Ficha.FolhasBalanco;
 
-import io.realm.Realm;
-import io.realm.RealmObject;
-
 /**
  * Created by rapha on 06-Oct-17.
  */
 
-public class Evacuacoes extends RealmObject {
+public class Evacuacoes {
     private String tipoEvacuacao;
     private int eventos;
 

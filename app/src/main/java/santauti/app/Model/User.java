@@ -1,25 +1,14 @@
 package santauti.app.Model;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmObject;
-
 /**
  * Created by Raphael Fernandes on 21-May-17.
  */
 
-public class User extends RealmObject implements Serializable{
-    @SerializedName("user")
-    private String user;
-    @SerializedName("passw")
+public class User {
+    private String email;
     private String password;
-    @SerializedName("token")
     private String token;
-    @SerializedName("tipoProfissional")
     private int tipoProfissional;
-    @SerializedName("registro")
     private int registro;
 
     public int getRegistro() {
@@ -46,12 +35,12 @@ public class User extends RealmObject implements Serializable{
         this.tipoProfissional = tipoProfissional;
     }
 
-    public String getUser() {
-        return user;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

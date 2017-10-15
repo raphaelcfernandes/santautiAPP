@@ -11,11 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
-import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Nutricional;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -23,7 +21,6 @@ import santauti.app.R;
  */
 
 public class NutricionalActivity extends GenericoActivity {
-    private Realm realm;
     private CheckBox dietaOral, dietaEnteral, dietaParenteral;
     private RadioGroup aceitacaoRadioGroup;
     @Override
@@ -31,7 +28,6 @@ public class NutricionalActivity extends GenericoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nutricional);
         setToolbar(getString(R.string.Nutricional));
-        realm = Realm.getDefaultInstance();
 
         prepareNavigationButtons();
 
@@ -73,20 +69,19 @@ public class NutricionalActivity extends GenericoActivity {
     }
 
     private void setNutricionalFromDatabase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getNutricional()!=null){
-            if(!ficha.getNutricional().getDieta().isEmpty()){
-                preencheCheckboxes(R.id.dieta,ficha.getNutricional().getDieta());
-            }
-            if(ficha.getNutricional().getAceitacao()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.aceitacao,ficha.getNutricional().getAceitacao());
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getNutricional()!=null){
+//            if(!ficha.getNutricional().getDieta().isEmpty()){
+//                preencheCheckboxes(R.id.dieta,ficha.getNutricional().getDieta());
+//            }
+//            if(ficha.getNutricional().getAceitacao()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.aceitacao,ficha.getNutricional().getAceitacao());
+//        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override
@@ -106,32 +101,32 @@ public class NutricionalActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter(){
-        realm.beginTransaction();
-        Nutricional nutricional = realm.createObject(Nutricional.class);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.dieta);
-        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-            View v = linearLayout.getChildAt(i);
-            if(v instanceof RelativeLayout) {
-                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
-                    View view = ((RelativeLayout) v).getChildAt(k);
-                    if (view instanceof AppCompatCheckBox) {
-                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                        if (cb.isChecked()) {
-                            RealmString realmString = realm.createObject(RealmString.class);
-                            realmString.setName(cb.getText().toString());
-                            nutricional.getDieta().add(realmString);
-                        }
-                    }
-                }
-            }
-        }
-        if(aceitacaoRadioGroup.getCheckedRadioButtonId()!=-1)
-            nutricional.setAceitacao(getStringOfRadioButtonSelectedFromRadioGroup(aceitacaoRadioGroup));
-        Ficha r = getProperFicha();
-        r.setNutricional(nutricional);
-        realm.copyToRealmOrUpdate(r);
-        realm.commitTransaction();
-        if(nutricional.checkObject())
-            changeCardColorToGreen();
+//        realm.beginTransaction();
+//        Nutricional nutricional = realm.createObject(Nutricional.class);
+//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.dieta);
+//        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//            View v = linearLayout.getChildAt(i);
+//            if(v instanceof RelativeLayout) {
+//                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+//                    View view = ((RelativeLayout) v).getChildAt(k);
+//                    if (view instanceof AppCompatCheckBox) {
+//                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                        if (cb.isChecked()) {
+//                            RealmString realmString = realm.createObject(RealmString.class);
+//                            realmString.setName(cb.getText().toString());
+//                            nutricional.getDieta().add(realmString);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        if(aceitacaoRadioGroup.getCheckedRadioButtonId()!=-1)
+//            nutricional.setAceitacao(getStringOfRadioButtonSelectedFromRadioGroup(aceitacaoRadioGroup));
+//        Ficha r = getProperFicha();
+//        r.setNutricional(nutricional);
+//        realm.copyToRealmOrUpdate(r);
+//        realm.commitTransaction();
+//        if(nutricional.checkObject())
+//            changeCardColorToGreen();
     }
 }

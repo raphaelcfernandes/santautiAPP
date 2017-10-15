@@ -1,12 +1,10 @@
 package santauti.app.Model.Ficha.BombaInfusao;
 
-import io.realm.RealmObject;
-
 /**
  * Created by rapha on 06-Oct-17.
  */
 
-public class BombaInfusaoItens extends RealmObject {
+public class BombaInfusaoItens {
     private String droga;
     private int velocidade;
 

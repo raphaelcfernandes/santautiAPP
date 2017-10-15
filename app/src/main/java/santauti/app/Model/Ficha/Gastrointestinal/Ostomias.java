@@ -1,14 +1,10 @@
 package santauti.app.Model.Ficha.Gastrointestinal;
 
-import java.io.Serializable;
-
-import io.realm.RealmObject;
-
 /**
  * Created by rapha on 07-Oct-17.
  */
 
-public class Ostomias extends RealmObject implements Serializable {
+public class Ostomias{
     private String tipoOstomia;
     private String qualidadeOstomia;
     private String funcionamentoOstomia;

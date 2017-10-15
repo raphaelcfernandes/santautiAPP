@@ -1,43 +1,21 @@
 package santauti.app.Model.Ficha;
 
-import android.content.res.Resources;
-
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
-import santauti.app.R;
-
 /**
  * Created by Raphael Fernandes on 30-May-17.
  */
 
-public class Respiratorio extends RealmObject implements Serializable{
-    @SerializedName("viasAereas")
+public class Respiratorio {
     private String viasAereas;
-    @SerializedName("pressaoCuff")
     private int pressaoCuff;
-    @SerializedName("localizacaoCanula")
     private String localizacaoCanula;
-    @SerializedName("murmurioVesicular")
     private String murmurioVesicular;
-    @SerializedName("localizacaoMurmurioVesicular")
-    private RealmList<RealmString> localizacaoMurmurioVesicular;
-    @SerializedName("usoOxigenio")
+    //private RealmList<RealmString> localizacaoMurmurioVesicular;
     private String usoOxigenio;
-    @SerializedName("mascaraVenturi")
     private int mascaraVenturi;
-    @SerializedName("fluxo")
     private int fluxo;
-    @SerializedName("roncos")
-    private RealmList<RealmString> roncos;
-    @SerializedName("sibilos")
-    private RealmList<RealmString> sibilos;
-    @SerializedName("crepitacoes")
-    private RealmList<RealmString> crepitacoes;
+//    private RealmList<RealmString> roncos;
+//    private RealmList<RealmString> sibilos;
+//    private RealmList<RealmString> crepitacoes;
 
     public boolean checkObject(){
         boolean viasAereas=false;
@@ -55,7 +33,7 @@ public class Respiratorio extends RealmObject implements Serializable{
             if(this.murmurioVesicular.equals("Fisiológico"))
                 murmurioVesicular=true;
             else{
-                if(!localizacaoMurmurioVesicular.isEmpty())
+                //if(!localizacaoMurmurioVesicular.isEmpty())
                     murmurioVesicular=true;
             }
         }
@@ -102,14 +80,6 @@ public class Respiratorio extends RealmObject implements Serializable{
         this.murmurioVesicular = murmurioVesicular;
     }
 
-    public RealmList<RealmString> getLocalizacaoMurmurioVesicular() {
-        return localizacaoMurmurioVesicular;
-    }
-
-    public void setLocalizacaoMurmurioVesicular(RealmList<RealmString> localizacaoMurmurioVesicular) {
-        this.localizacaoMurmurioVesicular = localizacaoMurmurioVesicular;
-    }
-
     public String getUsoOxigenio() {
         return usoOxigenio;
     }
@@ -134,28 +104,5 @@ public class Respiratorio extends RealmObject implements Serializable{
         this.fluxo = fluxo;
     }
 
-    public RealmList<RealmString> getRoncos() {
-        return roncos;
-    }
-
-    public void setRoncos(RealmList<RealmString> roncos) {
-        this.roncos = roncos;
-    }
-
-    public RealmList<RealmString> getSibilos() {
-        return sibilos;
-    }
-
-    public void setSibilos(RealmList<RealmString> sibilos) {
-        this.sibilos = sibilos;
-    }
-
-    public RealmList<RealmString> getCrepitacoes() {
-        return crepitacoes;
-    }
-
-    public void setCrepitacoes(RealmList<RealmString> crepitacoes) {
-        this.crepitacoes = crepitacoes;
-    }
 }
 

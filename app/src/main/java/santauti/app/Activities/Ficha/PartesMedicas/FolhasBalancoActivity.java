@@ -15,8 +15,6 @@ import android.widget.RadioGroup;
 
 import java.util.HashMap;
 
-import io.realm.Realm;
-import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.InputFilterMin;
 import santauti.app.Animation.MyAnimation;
@@ -36,7 +34,6 @@ public class FolhasBalancoActivity extends GenericoActivity {
     private CheckBox checkboxEvacuacoes,checkboxGastrica,checkboxEnteral,checkboxOral,checkBoxEndurecidas,checkBoxDiarreicas,checkBoxNormais;
     private TextInputEditText numeroEventos;
     private TextInputLayout enteral,oral,gastrica,endurecidas,normais,diarreicas;
-    private Realm realm = Realm.getDefaultInstance();
     private RadioGroup curvaTermicaRadioGroup;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,75 +160,74 @@ public class FolhasBalancoActivity extends GenericoActivity {
     }
 
     private void setFolhasBalancoFromDatabase() {
-        Ficha ficha = getProperFicha();
-        if(ficha.getFolhasBalanco()!=null){
-            FolhasBalanco folhasBalanco = ficha.getFolhasBalanco();
-            if(folhasBalanco.getCurvaTermica()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.curvaTermica,folhasBalanco.getCurvaTermica());
-            if(folhasBalanco.getHemodinamicamente()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.hemodinamicamente,folhasBalanco.getHemodinamicamente());
-            if(folhasBalanco.isEvacuacoesFlag()){
-                checkboxEvacuacoes.setChecked(true);
-                evacuacoesItens.setVisibility(View.VISIBLE);
-                RealmList<Evacuacoes> evacuacoes = ficha.getFolhasBalanco().getEvacuacoesList();
-                HashMap<String,Integer> evacuacoesHashMap = new HashMap<>();
-                for(Evacuacoes evacuacao : evacuacoes)
-                    evacuacoesHashMap.put(evacuacao.getTipoEvacuacao(),evacuacao.getEventos());
-                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.evacuacoesItens);
-                for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                    View v = linearLayout.getChildAt(i);
-                    if(v instanceof LinearLayout){
-                        for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
-                            View view = ((LinearLayout) v).getChildAt(k);
-                            if (view instanceof AppCompatCheckBox) {
-                                AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                                if (evacuacoesHashMap.containsKey(cb.getText().toString())){
-                                    k++;
-                                    cb.setChecked(true);
-                                    view = ((LinearLayout)v).getChildAt(k);
-                                    view.setVisibility(View.VISIBLE);
-                                    ((TextInputLayout) view).getEditText().
-                                            setText(Integer.toString(evacuacoesHashMap.get(cb.getText().toString())));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if(!folhasBalanco.getNutricao().isEmpty()){
-                RealmList<Nutricao> nutricoes = ficha.getFolhasBalanco().getNutricao();
-                HashMap<String,Integer> nutricaoHashmap = new HashMap<>();
-                for(Nutricao nutricao : nutricoes)
-                    nutricaoHashmap.put(nutricao.getTipoNutricao(),nutricao.getVolume());
-                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.nutricao);
-                for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                    View v = linearLayout.getChildAt(i);
-                    if(v instanceof LinearLayout){
-                        for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
-                            View view = ((LinearLayout) v).getChildAt(k);
-                            if (view instanceof AppCompatCheckBox) {
-                                AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                                if (nutricaoHashmap.containsKey(cb.getText().toString())){
-                                    k++;
-                                    cb.setChecked(true);
-                                    view = ((LinearLayout)v).getChildAt(k);
-                                    view.setVisibility(View.VISIBLE);
-                                    ((TextInputLayout) view).getEditText().
-                                            setText(Integer.toString(nutricaoHashmap.get(cb.getText().toString())));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getFolhasBalanco()!=null){
+//            FolhasBalanco folhasBalanco = ficha.getFolhasBalanco();
+//            if(folhasBalanco.getCurvaTermica()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.curvaTermica,folhasBalanco.getCurvaTermica());
+//            if(folhasBalanco.getHemodinamicamente()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.hemodinamicamente,folhasBalanco.getHemodinamicamente());
+//            if(folhasBalanco.isEvacuacoesFlag()){
+//                checkboxEvacuacoes.setChecked(true);
+//                evacuacoesItens.setVisibility(View.VISIBLE);
+//                RealmList<Evacuacoes> evacuacoes = ficha.getFolhasBalanco().getEvacuacoesList();
+//                HashMap<String,Integer> evacuacoesHashMap = new HashMap<>();
+//                for(Evacuacoes evacuacao : evacuacoes)
+//                    evacuacoesHashMap.put(evacuacao.getTipoEvacuacao(),evacuacao.getEventos());
+//                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.evacuacoesItens);
+//                for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//                    View v = linearLayout.getChildAt(i);
+//                    if(v instanceof LinearLayout){
+//                        for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+//                            View view = ((LinearLayout) v).getChildAt(k);
+//                            if (view instanceof AppCompatCheckBox) {
+//                                AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                                if (evacuacoesHashMap.containsKey(cb.getText().toString())){
+//                                    k++;
+//                                    cb.setChecked(true);
+//                                    view = ((LinearLayout)v).getChildAt(k);
+//                                    view.setVisibility(View.VISIBLE);
+//                                    ((TextInputLayout) view).getEditText().
+//                                            setText(Integer.toString(evacuacoesHashMap.get(cb.getText().toString())));
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            if(!folhasBalanco.getNutricao().isEmpty()){
+//                RealmList<Nutricao> nutricoes = ficha.getFolhasBalanco().getNutricao();
+//                HashMap<String,Integer> nutricaoHashmap = new HashMap<>();
+//                for(Nutricao nutricao : nutricoes)
+//                    nutricaoHashmap.put(nutricao.getTipoNutricao(),nutricao.getVolume());
+//                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.nutricao);
+//                for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//                    View v = linearLayout.getChildAt(i);
+//                    if(v instanceof LinearLayout){
+//                        for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+//                            View view = ((LinearLayout) v).getChildAt(k);
+//                            if (view instanceof AppCompatCheckBox) {
+//                                AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                                if (nutricaoHashmap.containsKey(cb.getText().toString())){
+//                                    k++;
+//                                    cb.setChecked(true);
+//                                    view = ((LinearLayout)v).getChildAt(k);
+//                                    view.setVisibility(View.VISIBLE);
+//                                    ((TextInputLayout) view).getEditText().
+//                                            setText(Integer.toString(nutricaoHashmap.get(cb.getText().toString())));
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override
@@ -241,65 +237,65 @@ public class FolhasBalancoActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter() {
-        realm.beginTransaction();
-        FolhasBalanco folhasBalanco = realm.createObject(FolhasBalanco.class);
-        if(curvaTermicaRadioGroup.getCheckedRadioButtonId()!=-1)
-            folhasBalanco.setCurvaTermica(getStringOfRadioButtonSelectedFromRadioGroup(curvaTermicaRadioGroup));
-        if(((RadioGroup)findViewById(R.id.hemodinamicamenteRadioGroup)).getCheckedRadioButtonId()!=-1)
-            folhasBalanco.setHemodinamicamente(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.hemodinamicamenteRadioGroup))));
-        if(checkboxEvacuacoes.isChecked()){
-            folhasBalanco.setEvacuacoesFlag(true);
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.evacuacoesItens);
-            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                View v = linearLayout.getChildAt(i);
-                if(v instanceof LinearLayout){
-                    for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
-                        View view = ((LinearLayout) v).getChildAt(k);
-                        if (view instanceof AppCompatCheckBox) {
-                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                            if (cb.isChecked()) {
-                                k++;
-                                view = ((LinearLayout)v).getChildAt(k);
-                                Evacuacoes evacuacoes = realm.createObject(Evacuacoes.class);
-                                evacuacoes.setTipoEvacuacao(cb.getText().toString());
-                                evacuacoes.setEventos(Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
-                                folhasBalanco.getEvacuacoesList().add(evacuacoes);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else
-            folhasBalanco.setEvacuacoesFlag(false);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.nutricao);
-        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-            View v = linearLayout.getChildAt(i);
-            if(v instanceof LinearLayout){
-                for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
-                    View view = ((LinearLayout) v).getChildAt(k);
-                    if (view instanceof AppCompatCheckBox) {
-                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                        if (cb.isChecked()) {
-                            k++;
-                            view = ((LinearLayout)v).getChildAt(k);
-                            Nutricao nutricao = realm.createObject(Nutricao.class);
-                            nutricao.setTipoNutricao(cb.getText().toString());
-                            nutricao.setVolume(Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
-                            folhasBalanco.getNutricao().add(nutricao);
-                        }
-                    }
-                }
-            }
-        }
-        Ficha r = getProperFicha();
-        r.setFolhasBalanco(folhasBalanco);
-        realm.copyToRealmOrUpdate(r);
-        if (folhasBalanco.checkObject())
-            changeCardColorToGreen();
-        else
-            setCardColorToDefault();
-        realm.commitTransaction();
+//        realm.beginTransaction();
+//        FolhasBalanco folhasBalanco = realm.createObject(FolhasBalanco.class);
+//        if(curvaTermicaRadioGroup.getCheckedRadioButtonId()!=-1)
+//            folhasBalanco.setCurvaTermica(getStringOfRadioButtonSelectedFromRadioGroup(curvaTermicaRadioGroup));
+//        if(((RadioGroup)findViewById(R.id.hemodinamicamenteRadioGroup)).getCheckedRadioButtonId()!=-1)
+//            folhasBalanco.setHemodinamicamente(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.hemodinamicamenteRadioGroup))));
+//        if(checkboxEvacuacoes.isChecked()){
+//            folhasBalanco.setEvacuacoesFlag(true);
+//            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.evacuacoesItens);
+//            for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//                View v = linearLayout.getChildAt(i);
+//                if(v instanceof LinearLayout){
+//                    for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+//                        View view = ((LinearLayout) v).getChildAt(k);
+//                        if (view instanceof AppCompatCheckBox) {
+//                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                            if (cb.isChecked()) {
+//                                k++;
+//                                view = ((LinearLayout)v).getChildAt(k);
+//                                Evacuacoes evacuacoes = realm.createObject(Evacuacoes.class);
+//                                evacuacoes.setTipoEvacuacao(cb.getText().toString());
+//                                evacuacoes.setEventos(Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
+//                                folhasBalanco.getEvacuacoesList().add(evacuacoes);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        else
+//            folhasBalanco.setEvacuacoesFlag(false);
+//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.nutricao);
+//        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//            View v = linearLayout.getChildAt(i);
+//            if(v instanceof LinearLayout){
+//                for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+//                    View view = ((LinearLayout) v).getChildAt(k);
+//                    if (view instanceof AppCompatCheckBox) {
+//                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                        if (cb.isChecked()) {
+//                            k++;
+//                            view = ((LinearLayout)v).getChildAt(k);
+//                            Nutricao nutricao = realm.createObject(Nutricao.class);
+//                            nutricao.setTipoNutricao(cb.getText().toString());
+//                            nutricao.setVolume(Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
+//                            folhasBalanco.getNutricao().add(nutricao);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        Ficha r = getProperFicha();
+//        r.setFolhasBalanco(folhasBalanco);
+//        realm.copyToRealmOrUpdate(r);
+//        if (folhasBalanco.checkObject())
+//            changeCardColorToGreen();
+//        else
+//            setCardColorToDefault();
+//        realm.commitTransaction();
     }
 
     @Override

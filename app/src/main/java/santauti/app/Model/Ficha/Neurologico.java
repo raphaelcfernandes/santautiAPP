@@ -1,53 +1,27 @@
 package santauti.app.Model.Ficha;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
-
 /**
  * Created by Raphael Fernandes on 01-Jun-17.
  */
 
-public class Neurologico extends RealmObject implements Serializable{
-    @SerializedName("nivelConsciencia")
+public class Neurologico{
     private String nivelConsciencia;
-    @SerializedName("ramsay")
     private int ramsay;
-    @SerializedName("rass")
     private int rass;
-    @SerializedName("aberturaOcular")
     private int aberturaOcular;
-    @SerializedName("repostaVerbal")
     private int respostaVerbal;
-    @SerializedName("respostaMotora")
     private int respostaMotora;
-    @SerializedName("orientacaoTemporoEspacial")
-    private RealmList<RealmString> orientadoTemporoEspacial;
-    @SerializedName("desorientadoTemporoEspacial")
-    private RealmList<RealmString> desorientadoTemporoEspacial;
-    @SerializedName("deficitMotor")
+//    private RealmList<RealmString> orientadoTemporoEspacial;
+//    private RealmList<RealmString> desorientadoTemporoEspacial;
     private boolean deficitMotor;
-    @SerializedName("mse")
     private String mse;
-    @SerializedName("msd")
     private String msd;
-    @SerializedName("mie")
     private String mie;
-    @SerializedName("mid")
     private String mid;
-    @SerializedName("tamanhoPupila")
     private String tamanhoPupila;
-    @SerializedName("simetriaPupila")
     private String simetriaPupila;
-    @SerializedName("diferencaPupila")
     private String diferencaPupila;
-    @SerializedName("reatividadeLuzPupila")
     private String reatividadeLuzPupila;
-    @SerializedName("deliriumCAMICU")
     private String deliciumCAMICU;
     private boolean noTempo;
     private boolean noEspaco;
@@ -151,22 +125,6 @@ public class Neurologico extends RealmObject implements Serializable{
 
     public void setRespostaMotora(int respostaMotora) {
         this.respostaMotora = respostaMotora;
-    }
-
-    public RealmList<RealmString> getOrientadoTemporoEspacial() {
-        return orientadoTemporoEspacial;
-    }
-
-    public void setOrientadoTemporoEspacial(RealmList<RealmString> orientadoTemporoEspacial) {
-        this.orientadoTemporoEspacial = orientadoTemporoEspacial;
-    }
-
-    public RealmList<RealmString> getDesorientadoTemporoEspacial() {
-        return desorientadoTemporoEspacial;
-    }
-
-    public void setDesorientadoTemporoEspacial(RealmList<RealmString> desorientadoTemporoEspacial) {
-        this.desorientadoTemporoEspacial = desorientadoTemporoEspacial;
     }
 
     public boolean isDeficitMotor() {

@@ -1,128 +1,74 @@
 package santauti.app.Model;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmObject;
-
 /**
- * Created by Raphael Fernandes on 23-May-17.
+ * Created by rapha on 13-Oct-17.
  */
+@com.google.firebase.firestore.IgnoreExtraProperties
+public class Paciente {
+    private int box;
+    private int leito;
+    private String profissionalResponsavel;
+    private String nome;
+    private String sobrenome;
 
-public class Paciente extends RealmObject implements Serializable {
-    @SerializedName("ID")
-    private int ID;
-    @SerializedName("Leito")
-    private int Leito;
-    @SerializedName("Box")
-    private int Box;
-    @SerializedName("Profissao")
-    private String Profissao;
-    @SerializedName("Convenio")
-    private String Convenio;
-    @SerializedName("Internado")
-    private int Internado;
-    @SerializedName("Responsavel")
-    private int Responsavel;
-    @SerializedName("Nome")
-    private String Nome;
-    @SerializedName("Sobrenome")
-    private String Sobrenome;
-    @SerializedName("NomeMedico")
-    private String NomeMedico;
-    @SerializedName("SobrenomeMedico")
-    private String SobrenomeMedico;
+    private String pacienteKey;
+
+    public String getPacienteKey() {
+        return pacienteKey;
+    }
+
+    public void setPacienteKey(String pacienteKey) {
+        this.pacienteKey = pacienteKey;
+    }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
-    }
-
-    public int getInternado() {
-        return Internado;
+        this.nome = nome;
     }
 
     public String getSobrenome() {
-        return Sobrenome;
+        return sobrenome;
     }
 
     public void setSobrenome(String sobrenome) {
-        Sobrenome = sobrenome;
+        this.sobrenome = sobrenome;
     }
 
-    public String getNomeMedico() {
-        return NomeMedico;
+    public Paciente() {
     }
 
-    public void setNomeMedico(String nomeMedico) {
-        NomeMedico = nomeMedico;
-    }
-
-    public String getSobrenomeMedico() {
-        return SobrenomeMedico;
-    }
-
-    public void setSobrenomeMedico(String sobrenomeMedico) {
-        SobrenomeMedico = sobrenomeMedico;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public int getLeito() {
-        return Leito;
-    }
-
-    public void setLeito(int leito) {
-        Leito = leito;
+    public Paciente(int box, int leito, String profissionalResponsavel, String nome, String sobrenome) {
+        this.box = box;
+        this.leito = leito;
+        this.profissionalResponsavel = profissionalResponsavel;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
     }
 
     public int getBox() {
-        return Box;
+        return box;
     }
 
     public void setBox(int box) {
-        Box = box;
+        this.box = box;
     }
 
-    public String getProfissao() {
-        return Profissao;
+    public int getLeito() {
+        return leito;
     }
 
-    public void setProfissao(String profissao) {
-        Profissao = profissao;
+    public void setLeito(int leito) {
+        this.leito = leito;
     }
 
-    public String getConvenio() {
-        return Convenio;
+    public String getProfissionalResponsavel() {
+        return profissionalResponsavel;
     }
 
-    public void setConvenio(String convenio) {
-        Convenio = convenio;
-    }
-
-    public int isInternado() {
-        return Internado;
-    }
-
-    public void setInternado(int internado) {
-        Internado = internado;
-    }
-
-    public int getResponsavel() {
-        return Responsavel;
-    }
-
-    public void setResponsavel(int responsavel) {
-        Responsavel = responsavel;
+    public void setProfissionalResponsavel(String profissionalResponsavel) {
+        this.profissionalResponsavel = profissionalResponsavel;
     }
 }

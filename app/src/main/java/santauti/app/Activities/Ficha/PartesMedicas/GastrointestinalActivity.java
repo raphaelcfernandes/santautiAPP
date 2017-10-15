@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.system.Os;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,14 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
-import io.realm.Realm;
-import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Gastrointestinal.Gastrointestinal;
 import santauti.app.Model.Ficha.Gastrointestinal.Ostomias;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -28,7 +24,6 @@ import santauti.app.R;
  */
 
 public class GastrointestinalActivity extends GenericoActivity {
-    private Realm realm;
     private CheckBox massasPalpaveisCheckBox, viscerasPalpaveisCheckBox,checkBoxOstomias,
             checkBoxColostomia,checkBoxIleostomia,checkBoxJejunostomia;
     private RadioButton ruidosAumentados, ruidosReduzidos, ruidosNormais,
@@ -205,8 +200,6 @@ public class GastrointestinalActivity extends GenericoActivity {
 
         prepareNavigationButtons();
 
-        realm = Realm.getDefaultInstance();
-
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,7 +239,6 @@ public class GastrointestinalActivity extends GenericoActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override
@@ -256,98 +248,98 @@ public class GastrointestinalActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter() {
-        realm.beginTransaction();
-        Gastrointestinal gastrointestinal = realm.createObject(Gastrointestinal.class);
-        if (formatoAbdominalGroup1.getCheckedRadioButtonId() != -1)
-            gastrointestinal.setFormato(getStringOfRadioButtonSelectedFromRadioGroup(formatoAbdominalGroup1));
-        else if (formatoAbdominalGroup2.getCheckedRadioButtonId() != -1)
-            gastrointestinal.setFormato(getStringOfRadioButtonSelectedFromRadioGroup(formatoAbdominalGroup2));
-        if (tensaoAbdominal.getCheckedRadioButtonId() != -1)
-            gastrointestinal.setTensao(getStringOfRadioButtonSelectedFromRadioGroup(tensaoAbdominal));
-        if (ruidosGroup1.getCheckedRadioButtonId() != -1)
-            gastrointestinal.setRuidos(getStringOfRadioButtonSelectedFromRadioGroup(ruidosGroup1));
-        else if (ruidosGroup2.getCheckedRadioButtonId() != -1)
-            gastrointestinal.setRuidos(getStringOfRadioButtonSelectedFromRadioGroup(ruidosGroup2));
-        if (ascite.getCheckedRadioButtonId() != -1)
-            gastrointestinal.setAscite(getStringOfRadioButtonSelectedFromRadioGroup(ascite));
-
-        /**
-         * Verifica quais Checkbox de massas Palpaveis esta marcado
-         */
-        if (massasPalpaveisCheckBox.isChecked()) {
-            gastrointestinal.setMassasPalpaveisFlag(true);
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.massasPalpaveisItensLayout);
-            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                View v = linearLayout.getChildAt(i);
-                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
-                    View view = ((RelativeLayout) v).getChildAt(k);
-                    if (view instanceof AppCompatCheckBox) {
-                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                        if (cb.isChecked()) {
-                            RealmString realmString = realm.createObject(RealmString.class);
-                            realmString.setName(cb.getText().toString());
-                            gastrointestinal.getMassasPalpaveis().add(realmString);
-                        }
-                    }
-                }
-            }
-        }
-
-        if(viscerasPalpaveisCheckBox.isChecked()){
-            gastrointestinal.setViscerasPalpaveisFlag(true);
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.viscerasPalpaveisItensLayout);
-            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                View v = linearLayout.getChildAt(i);
-                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
-                    View view = ((RelativeLayout) v).getChildAt(k);
-                    if (view instanceof AppCompatCheckBox) {
-                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                        if (cb.isChecked()) {
-                            RealmString realmString = realm.createObject(RealmString.class);
-                            realmString.setName(cb.getText().toString());
-                            gastrointestinal.getViscerasPalpaveis().add(realmString);
-                        }
-                    }
-                }
-            }
-        }
-        if(checkBoxOstomias.isChecked()){
-            gastrointestinal.setOstomiasFlag(true);
-            if(((RadioGroup)findViewById(R.id.colostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
-                    && ((RadioGroup)findViewById(R.id.colostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
-                    && checkBoxColostomia.isChecked()){
-                Ostomias ostomias = realm.createObject(Ostomias.class);
-                ostomias.setTipoOstomia(checkBoxColostomia.getText().toString());
-                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.colostomiaFuncionamentoRadioGroup))));
-                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.colostomiaQualidadeRadioGroup))));
-                gastrointestinal.getOstomias().add(ostomias);
-            }
-            if(((RadioGroup)findViewById(R.id.ileostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
-                    && ((RadioGroup)findViewById(R.id.ileostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
-                    && checkBoxIleostomia.isChecked()){
-                Ostomias ostomias = realm.createObject(Ostomias.class);
-                ostomias.setTipoOstomia(checkBoxIleostomia.getText().toString());
-                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.ileostomiaFuncionamentoRadioGroup))));
-                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.ileostomiaQualidadeRadioGroup))));
-                gastrointestinal.getOstomias().add(ostomias);
-            }
-            if(((RadioGroup)findViewById(R.id.jejunostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
-                    && ((RadioGroup)findViewById(R.id.jejunostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
-                    && checkBoxJejunostomia.isChecked()){
-                Ostomias ostomias = realm.createObject(Ostomias.class);
-                ostomias.setTipoOstomia(checkBoxJejunostomia.getText().toString());
-                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.jejunostomiaFuncionamentoRadioGroup))));
-                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.jejunostomiaQualidadeRadioGroup))));
-                gastrointestinal.getOstomias().add(ostomias);
-            }
-        }
-
-        Ficha r = getProperFicha();
-        r.setGastrointestinal(gastrointestinal);
-        realm.copyToRealmOrUpdate(r);
-        if (gastrointestinal.checkObject())
-            changeCardColorToGreen();
-        realm.commitTransaction();
+//        realm.beginTransaction();
+//        Gastrointestinal gastrointestinal = realm.createObject(Gastrointestinal.class);
+//        if (formatoAbdominalGroup1.getCheckedRadioButtonId() != -1)
+//            gastrointestinal.setFormato(getStringOfRadioButtonSelectedFromRadioGroup(formatoAbdominalGroup1));
+//        else if (formatoAbdominalGroup2.getCheckedRadioButtonId() != -1)
+//            gastrointestinal.setFormato(getStringOfRadioButtonSelectedFromRadioGroup(formatoAbdominalGroup2));
+//        if (tensaoAbdominal.getCheckedRadioButtonId() != -1)
+//            gastrointestinal.setTensao(getStringOfRadioButtonSelectedFromRadioGroup(tensaoAbdominal));
+//        if (ruidosGroup1.getCheckedRadioButtonId() != -1)
+//            gastrointestinal.setRuidos(getStringOfRadioButtonSelectedFromRadioGroup(ruidosGroup1));
+//        else if (ruidosGroup2.getCheckedRadioButtonId() != -1)
+//            gastrointestinal.setRuidos(getStringOfRadioButtonSelectedFromRadioGroup(ruidosGroup2));
+//        if (ascite.getCheckedRadioButtonId() != -1)
+//            gastrointestinal.setAscite(getStringOfRadioButtonSelectedFromRadioGroup(ascite));
+//
+//        /**
+//         * Verifica quais Checkbox de massas Palpaveis esta marcado
+//         */
+//        if (massasPalpaveisCheckBox.isChecked()) {
+//            gastrointestinal.setMassasPalpaveisFlag(true);
+//            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.massasPalpaveisItensLayout);
+//            for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//                View v = linearLayout.getChildAt(i);
+//                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+//                    View view = ((RelativeLayout) v).getChildAt(k);
+//                    if (view instanceof AppCompatCheckBox) {
+//                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                        if (cb.isChecked()) {
+//                            RealmString realmString = realm.createObject(RealmString.class);
+//                            realmString.setName(cb.getText().toString());
+//                            gastrointestinal.getMassasPalpaveis().add(realmString);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        if(viscerasPalpaveisCheckBox.isChecked()){
+//            gastrointestinal.setViscerasPalpaveisFlag(true);
+//            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.viscerasPalpaveisItensLayout);
+//            for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//                View v = linearLayout.getChildAt(i);
+//                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+//                    View view = ((RelativeLayout) v).getChildAt(k);
+//                    if (view instanceof AppCompatCheckBox) {
+//                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                        if (cb.isChecked()) {
+//                            RealmString realmString = realm.createObject(RealmString.class);
+//                            realmString.setName(cb.getText().toString());
+//                            gastrointestinal.getViscerasPalpaveis().add(realmString);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        if(checkBoxOstomias.isChecked()){
+//            gastrointestinal.setOstomiasFlag(true);
+//            if(((RadioGroup)findViewById(R.id.colostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
+//                    && ((RadioGroup)findViewById(R.id.colostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
+//                    && checkBoxColostomia.isChecked()){
+//                Ostomias ostomias = realm.createObject(Ostomias.class);
+//                ostomias.setTipoOstomia(checkBoxColostomia.getText().toString());
+//                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.colostomiaFuncionamentoRadioGroup))));
+//                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.colostomiaQualidadeRadioGroup))));
+//                gastrointestinal.getOstomias().add(ostomias);
+//            }
+//            if(((RadioGroup)findViewById(R.id.ileostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
+//                    && ((RadioGroup)findViewById(R.id.ileostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
+//                    && checkBoxIleostomia.isChecked()){
+//                Ostomias ostomias = realm.createObject(Ostomias.class);
+//                ostomias.setTipoOstomia(checkBoxIleostomia.getText().toString());
+//                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.ileostomiaFuncionamentoRadioGroup))));
+//                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.ileostomiaQualidadeRadioGroup))));
+//                gastrointestinal.getOstomias().add(ostomias);
+//            }
+//            if(((RadioGroup)findViewById(R.id.jejunostomiaFuncionamentoRadioGroup)).getCheckedRadioButtonId()!=-1
+//                    && ((RadioGroup)findViewById(R.id.jejunostomiaQualidadeRadioGroup)).getCheckedRadioButtonId()!=-1
+//                    && checkBoxJejunostomia.isChecked()){
+//                Ostomias ostomias = realm.createObject(Ostomias.class);
+//                ostomias.setTipoOstomia(checkBoxJejunostomia.getText().toString());
+//                ostomias.setFuncionamentoOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.jejunostomiaFuncionamentoRadioGroup))));
+//                ostomias.setQualidadeOstomia(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.jejunostomiaQualidadeRadioGroup))));
+//                gastrointestinal.getOstomias().add(ostomias);
+//            }
+//        }
+//
+//        Ficha r = getProperFicha();
+//        r.setGastrointestinal(gastrointestinal);
+//        realm.copyToRealmOrUpdate(r);
+//        if (gastrointestinal.checkObject())
+//            changeCardColorToGreen();
+//        realm.commitTransaction();
     }
 
     @Override
@@ -361,57 +353,57 @@ public class GastrointestinalActivity extends GenericoActivity {
     }
 
     private void setGastroIntestinalFromDataBase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getGastrointestinal()!=null){
-            Gastrointestinal gastrointestinal = ficha.getGastrointestinal();
-            if(gastrointestinal.isMassasPalpaveisFlag()) {
-                massasPalpaveisCheckBox.setChecked(true);
-                massasPalpaveisItensLayout.setVisibility(View.VISIBLE);
-                if(!gastrointestinal.getMassasPalpaveis().isEmpty())
-                    preencheCheckboxes(R.id.massasPalpaveisItensLayout,gastrointestinal.getMassasPalpaveis());
-            }
-            if(gastrointestinal.isViscerasPalpaveisFlag()) {
-                viscerasPalpaveisCheckBox.setChecked(true);
-                viscerasPalpaveisItensLayout.setVisibility(View.VISIBLE);
-                if(!gastrointestinal.getViscerasPalpaveis().isEmpty())
-                    preencheCheckboxes(R.id.viscerasPalpaveisItensLayout,gastrointestinal.getViscerasPalpaveis());
-            }
-            if(gastrointestinal.getFormato()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.formato,gastrointestinal.getFormato());
-            if(gastrointestinal.getRuidos()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.ruidos,gastrointestinal.getRuidos());
-            if(gastrointestinal.getTensao()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.tensao,gastrointestinal.getTensao());
-            if(gastrointestinal.getAscite()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.ascite,gastrointestinal.getAscite());
-            if(gastrointestinal.isOstomiasFlag()){
-                checkBoxOstomias.setChecked(true);
-                ostomiasItens.setVisibility(View.VISIBLE);
-                if(!gastrointestinal.getOstomias().isEmpty()){
-                    RealmList<Ostomias> ostomiasRealmList = gastrointestinal.getOstomias();
-                    for(Ostomias ostomia : ostomiasRealmList){
-                        if(ostomia.getTipoOstomia().equals(getString(R.string.Colostomia))){
-                            checkBoxColostomia.setChecked(true);
-                            colostomiaItens.setVisibility(View.VISIBLE);
-                            setRadioButtonFromIdAndDatabase(R.id.colostomiaItens,ostomia.getFuncionamentoOstomia());
-                            setRadioButtonFromIdAndDatabase(R.id.colostomiaItens,ostomia.getQualidadeOstomia());
-                        }
-                        if(ostomia.getTipoOstomia().equals(getString(R.string.Ileostomia))){
-                            checkBoxIleostomia.setChecked(true);
-                            ileostomiaItens.setVisibility(View.VISIBLE);
-                            setRadioButtonFromIdAndDatabase(R.id.ileostomiaItens,ostomia.getFuncionamentoOstomia());
-                            setRadioButtonFromIdAndDatabase(R.id.ileostomiaItens,ostomia.getQualidadeOstomia());
-                        }
-                        if(ostomia.getTipoOstomia().equals(getString(R.string.Jejunostomia))){
-                            checkBoxJejunostomia.setChecked(true);
-                            jejunostomiaItens.setVisibility(View.VISIBLE);
-                            setRadioButtonFromIdAndDatabase(R.id.jejunostomiaItens,ostomia.getFuncionamentoOstomia());
-                            setRadioButtonFromIdAndDatabase(R.id.jejunostomiaItens,ostomia.getQualidadeOstomia());
-                        }
-                    }
-                }
-            }
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getGastrointestinal()!=null){
+//            Gastrointestinal gastrointestinal = ficha.getGastrointestinal();
+//            if(gastrointestinal.isMassasPalpaveisFlag()) {
+//                massasPalpaveisCheckBox.setChecked(true);
+//                massasPalpaveisItensLayout.setVisibility(View.VISIBLE);
+//                if(!gastrointestinal.getMassasPalpaveis().isEmpty())
+//                    preencheCheckboxes(R.id.massasPalpaveisItensLayout,gastrointestinal.getMassasPalpaveis());
+//            }
+//            if(gastrointestinal.isViscerasPalpaveisFlag()) {
+//                viscerasPalpaveisCheckBox.setChecked(true);
+//                viscerasPalpaveisItensLayout.setVisibility(View.VISIBLE);
+//                if(!gastrointestinal.getViscerasPalpaveis().isEmpty())
+//                    preencheCheckboxes(R.id.viscerasPalpaveisItensLayout,gastrointestinal.getViscerasPalpaveis());
+//            }
+//            if(gastrointestinal.getFormato()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.formato,gastrointestinal.getFormato());
+//            if(gastrointestinal.getRuidos()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.ruidos,gastrointestinal.getRuidos());
+//            if(gastrointestinal.getTensao()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.tensao,gastrointestinal.getTensao());
+//            if(gastrointestinal.getAscite()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.ascite,gastrointestinal.getAscite());
+//            if(gastrointestinal.isOstomiasFlag()){
+//                checkBoxOstomias.setChecked(true);
+//                ostomiasItens.setVisibility(View.VISIBLE);
+//                if(!gastrointestinal.getOstomias().isEmpty()){
+//                    RealmList<Ostomias> ostomiasRealmList = gastrointestinal.getOstomias();
+//                    for(Ostomias ostomia : ostomiasRealmList){
+//                        if(ostomia.getTipoOstomia().equals(getString(R.string.Colostomia))){
+//                            checkBoxColostomia.setChecked(true);
+//                            colostomiaItens.setVisibility(View.VISIBLE);
+//                            setRadioButtonFromIdAndDatabase(R.id.colostomiaItens,ostomia.getFuncionamentoOstomia());
+//                            setRadioButtonFromIdAndDatabase(R.id.colostomiaItens,ostomia.getQualidadeOstomia());
+//                        }
+//                        if(ostomia.getTipoOstomia().equals(getString(R.string.Ileostomia))){
+//                            checkBoxIleostomia.setChecked(true);
+//                            ileostomiaItens.setVisibility(View.VISIBLE);
+//                            setRadioButtonFromIdAndDatabase(R.id.ileostomiaItens,ostomia.getFuncionamentoOstomia());
+//                            setRadioButtonFromIdAndDatabase(R.id.ileostomiaItens,ostomia.getQualidadeOstomia());
+//                        }
+//                        if(ostomia.getTipoOstomia().equals(getString(R.string.Jejunostomia))){
+//                            checkBoxJejunostomia.setChecked(true);
+//                            jejunostomiaItens.setVisibility(View.VISIBLE);
+//                            setRadioButtonFromIdAndDatabase(R.id.jejunostomiaItens,ostomia.getFuncionamentoOstomia());
+//                            setRadioButtonFromIdAndDatabase(R.id.jejunostomiaItens,ostomia.getQualidadeOstomia());
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
 }

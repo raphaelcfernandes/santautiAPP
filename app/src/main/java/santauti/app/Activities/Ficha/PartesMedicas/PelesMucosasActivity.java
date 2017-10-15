@@ -8,13 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 
-import io.realm.Realm;
-import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.PelesMucosas;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.R;
 
 /**
@@ -26,14 +23,12 @@ public class PelesMucosasActivity extends GenericoActivity{
     private RadioGroup peleRadioGroup,ictericiaItensRadioGroup,mucosasColoracao,mucosasColoracao2,mucosasUmidade;
     private View ictericiaItensLayout,ulceraPressaoItensLayout;
     private MyAnimation myAnimation = new MyAnimation();
-    private Realm realm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peles_mucosas);
         setToolbar(getString(R.string.PelesMucosas));
         prepareNavigationButtons();
-        realm = Realm.getDefaultInstance();
 
         ictericiaItensLayout = findViewById(R.id.ictericiaItensLayout);
         ulceraPressaoItensLayout = findViewById(R.id.ulceraPressaoItensLayout);
@@ -96,30 +91,30 @@ public class PelesMucosasActivity extends GenericoActivity{
     }
 
     private void setPelesMucosasFromDatabase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getPelesMucosas()!=null){
-            PelesMucosas pelesMucosas = ficha.getPelesMucosas();
-            if(pelesMucosas.getPele()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.peleLayout,pelesMucosas.getPele());
-            if(!pelesMucosas.getUlceraPressao().isEmpty() || pelesMucosas.isUlceraPressaoChecked()) {
-                checkBoxUlceraPressao.setChecked(true);
-                myAnimation.slideDownView(getApplicationContext(),ulceraPressaoItensLayout);
-                abreLayoutMarcaCheckboxEPreenche(checkBoxUlceraPressao,ulceraPressaoItensLayout,R.id.ulceraPressaoItensLayout,pelesMucosas.getUlceraPressao());
-            }
-            if(pelesMucosas.getMucosasColoracao()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.mucosas,pelesMucosas.getMucosasColoracao());
-            if(pelesMucosas.getMucosasColoracao2()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.mucosas,pelesMucosas.getMucosasColoracao2());
-            if(pelesMucosas.getMucosasUmidade()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.mucosas,pelesMucosas.getMucosasUmidade());
-            if(pelesMucosas.getIctericia()>0){
-                checkBoxIctericia.setChecked(true);
-                myAnimation.slideDownView(getApplicationContext(),ictericiaItensLayout);
-                StringBuilder sb = new StringBuilder(Integer.toString(pelesMucosas.getIctericia()));
-                sb.insert(0,'+');
-                setRadioButtonFromIdAndDatabase(R.id.ictericiaItensLayout,sb.toString());
-            }
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getPelesMucosas()!=null){
+//            PelesMucosas pelesMucosas = ficha.getPelesMucosas();
+//            if(pelesMucosas.getPele()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.peleLayout,pelesMucosas.getPele());
+//            if(!pelesMucosas.getUlceraPressao().isEmpty() || pelesMucosas.isUlceraPressaoChecked()) {
+//                checkBoxUlceraPressao.setChecked(true);
+//                myAnimation.slideDownView(getApplicationContext(),ulceraPressaoItensLayout);
+//                abreLayoutMarcaCheckboxEPreenche(checkBoxUlceraPressao,ulceraPressaoItensLayout,R.id.ulceraPressaoItensLayout,pelesMucosas.getUlceraPressao());
+//            }
+//            if(pelesMucosas.getMucosasColoracao()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.mucosas,pelesMucosas.getMucosasColoracao());
+//            if(pelesMucosas.getMucosasColoracao2()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.mucosas,pelesMucosas.getMucosasColoracao2());
+//            if(pelesMucosas.getMucosasUmidade()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.mucosas,pelesMucosas.getMucosasUmidade());
+//            if(pelesMucosas.getIctericia()>0){
+//                checkBoxIctericia.setChecked(true);
+//                myAnimation.slideDownView(getApplicationContext(),ictericiaItensLayout);
+//                StringBuilder sb = new StringBuilder(Integer.toString(pelesMucosas.getIctericia()));
+//                sb.insert(0,'+');
+//                setRadioButtonFromIdAndDatabase(R.id.ictericiaItensLayout,sb.toString());
+//            }
+//        }
     }
 
     public void ulceraPressaoOnClick(View view){
@@ -149,46 +144,45 @@ public class PelesMucosasActivity extends GenericoActivity{
     }
 
     private void verificaCamposENotificaAdapter() {
-        realm.beginTransaction();
-        PelesMucosas pelesMucosas = realm.createObject(PelesMucosas.class);
-        if(peleRadioGroup.getCheckedRadioButtonId()!=-1)
-            pelesMucosas.setPele(getStringOfRadioButtonSelectedFromRadioGroup(peleRadioGroup));
-        if(checkBoxUlceraPressao.isChecked()){
-            pelesMucosas.setUlceraPressaoChecked(true);
-            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.ulceraPressaoItensLayout);
-            for(RealmString realmString : realmStrings)
-                pelesMucosas.getUlceraPressao().add(realmString);
-        }
-        if(mucosasColoracao.getCheckedRadioButtonId()!=-1)
-            pelesMucosas.setMucosasColoracao(getStringOfRadioButtonSelectedFromRadioGroup(mucosasColoracao));
-        if(mucosasColoracao2.getCheckedRadioButtonId()!=-1)
-            pelesMucosas.setMucosasColoracao2(getStringOfRadioButtonSelectedFromRadioGroup(mucosasColoracao2));
-        if(mucosasUmidade.getCheckedRadioButtonId()!=-1)
-            pelesMucosas.setMucosasUmidade(getStringOfRadioButtonSelectedFromRadioGroup(mucosasUmidade));
-        if(checkBoxIctericia.isChecked()){
-            if(ictericiaItensRadioGroup.getCheckedRadioButtonId()!=-1) {
-                StringBuilder sb = new StringBuilder(getStringOfRadioButtonSelectedFromRadioGroup(ictericiaItensRadioGroup));
-                sb.deleteCharAt(0);
-                pelesMucosas.setIctericia(Integer.parseInt(sb.toString()));
-            }
-        }
-        else if(!checkBoxIctericia.isChecked())
-            pelesMucosas.setIctericia(0);
-
-        Ficha r = getProperFicha();
-        r.setPelesMucosas(pelesMucosas);
-        realm.copyToRealmOrUpdate(r);
-        realm.commitTransaction();
-        if(pelesMucosas.checkObject())
-            changeCardColorToGreen();
-        else
-            setCardColorToDefault();
+//        realm.beginTransaction();
+//        PelesMucosas pelesMucosas = realm.createObject(PelesMucosas.class);
+//        if(peleRadioGroup.getCheckedRadioButtonId()!=-1)
+//            pelesMucosas.setPele(getStringOfRadioButtonSelectedFromRadioGroup(peleRadioGroup));
+//        if(checkBoxUlceraPressao.isChecked()){
+//            pelesMucosas.setUlceraPressaoChecked(true);
+//            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.ulceraPressaoItensLayout);
+//            for(RealmString realmString : realmStrings)
+//                pelesMucosas.getUlceraPressao().add(realmString);
+//        }
+//        if(mucosasColoracao.getCheckedRadioButtonId()!=-1)
+//            pelesMucosas.setMucosasColoracao(getStringOfRadioButtonSelectedFromRadioGroup(mucosasColoracao));
+//        if(mucosasColoracao2.getCheckedRadioButtonId()!=-1)
+//            pelesMucosas.setMucosasColoracao2(getStringOfRadioButtonSelectedFromRadioGroup(mucosasColoracao2));
+//        if(mucosasUmidade.getCheckedRadioButtonId()!=-1)
+//            pelesMucosas.setMucosasUmidade(getStringOfRadioButtonSelectedFromRadioGroup(mucosasUmidade));
+//        if(checkBoxIctericia.isChecked()){
+//            if(ictericiaItensRadioGroup.getCheckedRadioButtonId()!=-1) {
+//                StringBuilder sb = new StringBuilder(getStringOfRadioButtonSelectedFromRadioGroup(ictericiaItensRadioGroup));
+//                sb.deleteCharAt(0);
+//                pelesMucosas.setIctericia(Integer.parseInt(sb.toString()));
+//            }
+//        }
+//        else if(!checkBoxIctericia.isChecked())
+//            pelesMucosas.setIctericia(0);
+//
+//        Ficha r = getProperFicha();
+//        r.setPelesMucosas(pelesMucosas);
+//        realm.copyToRealmOrUpdate(r);
+//        realm.commitTransaction();
+//        if(pelesMucosas.checkObject())
+//            changeCardColorToGreen();
+//        else
+//            setCardColorToDefault();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override

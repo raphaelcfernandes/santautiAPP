@@ -3,21 +3,12 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 
-import java.util.HashMap;
-
-import io.realm.Realm;
-import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
-import santauti.app.Model.Ficha.BombaInfusao.BombaInfusao;
-import santauti.app.Model.Ficha.BombaInfusao.BombaInfusaoItens;
-import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
 
 /**
@@ -27,7 +18,6 @@ import santauti.app.R;
 public class BombaInfusaoActivity extends GenericoActivity {
     private AppCompatCheckBox adrenalina,amiodarona,dobutamina,dopamina,fentanil,hidrocortisona,insulina,
             ketamina,midozalam,milrinona,nitroglicerina,nitroprussiatoDeSodio,noradrenalina,precedex,propofol;
-    private Realm realm = Realm.getDefaultInstance();
     private MyAnimation myAnimation = new MyAnimation();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -142,33 +132,33 @@ public class BombaInfusaoActivity extends GenericoActivity {
     }
 
     private void setBombaInfusaoFromDatabase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getBombaInfusao()!=null && !ficha.getBombaInfusao().getBombaInfusaoItens().isEmpty()){
-            RealmList<BombaInfusaoItens> bombaInfusaoItens = ficha.getBombaInfusao().getBombaInfusaoItens();
-            HashMap<String,Integer> bombaInfusaoItensHashMap = new HashMap<>();
-            for(BombaInfusaoItens bombaInfusaoItem : bombaInfusaoItens)
-                bombaInfusaoItensHashMap.put(bombaInfusaoItem.getDroga(),bombaInfusaoItem.getVelocidade());
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
-            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                View v = linearLayout.getChildAt(i);
-                if(v instanceof LinearLayout){
-                    for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
-                        View view = ((LinearLayout) v).getChildAt(k);
-                        if (view instanceof AppCompatCheckBox) {
-                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                            if (bombaInfusaoItensHashMap.containsKey(cb.getText().toString())){
-                                k++;
-                                cb.setChecked(true);
-                                view = ((LinearLayout)v).getChildAt(k);
-                                view.setVisibility(View.VISIBLE);
-                                ((TextInputLayout) view).getEditText().
-                                        setText(Integer.toString(bombaInfusaoItensHashMap.get(cb.getText().toString())));
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getBombaInfusao()!=null && !ficha.getBombaInfusao().getBombaInfusaoItens().isEmpty()){
+//            RealmList<BombaInfusaoItens> bombaInfusaoItens = ficha.getBombaInfusao().getBombaInfusaoItens();
+//            HashMap<String,Integer> bombaInfusaoItensHashMap = new HashMap<>();
+//            for(BombaInfusaoItens bombaInfusaoItem : bombaInfusaoItens)
+//                bombaInfusaoItensHashMap.put(bombaInfusaoItem.getDroga(),bombaInfusaoItem.getVelocidade());
+//            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
+//            for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//                View v = linearLayout.getChildAt(i);
+//                if(v instanceof LinearLayout){
+//                    for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+//                        View view = ((LinearLayout) v).getChildAt(k);
+//                        if (view instanceof AppCompatCheckBox) {
+//                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                            if (bombaInfusaoItensHashMap.containsKey(cb.getText().toString())){
+//                                k++;
+//                                cb.setChecked(true);
+//                                view = ((LinearLayout)v).getChildAt(k);
+//                                view.setVisibility(View.VISIBLE);
+//                                ((TextInputLayout) view).getEditText().
+//                                        setText(Integer.toString(bombaInfusaoItensHashMap.get(cb.getText().toString())));
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     private void showTextInputEditText(int id){
@@ -181,7 +171,6 @@ public class BombaInfusaoActivity extends GenericoActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override
@@ -201,32 +190,32 @@ public class BombaInfusaoActivity extends GenericoActivity {
     }
 
     public void verificaCamposENotificaAdapter(){
-        realm.beginTransaction();
-        BombaInfusao bombaInfusao = realm.createObject(BombaInfusao.class);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
-        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-            View v = linearLayout.getChildAt(i);
-            if(v instanceof LinearLayout){
-                for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
-                    View view = ((LinearLayout) v).getChildAt(k);
-                    if (view instanceof AppCompatCheckBox) {
-                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                        if (cb.isChecked()) {
-                            k++;
-                            view = ((LinearLayout)v).getChildAt(k);
-                            BombaInfusaoItens bombaInfusaoItens = realm.createObject(BombaInfusaoItens.class);
-                            bombaInfusaoItens.setDroga(cb.getText().toString());
-                            bombaInfusaoItens.setVelocidade(Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
-                            bombaInfusao.getBombaInfusaoItens().add(bombaInfusaoItens);
-                        }
-                    }
-                }
-            }
-        }
-        Ficha ficha = getProperFicha();
-        ficha.setBombaInfusao(bombaInfusao);
-        realm.copyToRealmOrUpdate(ficha);
-        realm.commitTransaction();
-        changeCardColorToGreen();
+//        realm.beginTransaction();
+//        BombaInfusao bombaInfusao = realm.createObject(BombaInfusao.class);
+//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
+//        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//            View v = linearLayout.getChildAt(i);
+//            if(v instanceof LinearLayout){
+//                for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+//                    View view = ((LinearLayout) v).getChildAt(k);
+//                    if (view instanceof AppCompatCheckBox) {
+//                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                        if (cb.isChecked()) {
+//                            k++;
+//                            view = ((LinearLayout)v).getChildAt(k);
+//                            BombaInfusaoItens bombaInfusaoItens = realm.createObject(BombaInfusaoItens.class);
+//                            bombaInfusaoItens.setDroga(cb.getText().toString());
+//                            bombaInfusaoItens.setVelocidade(Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
+//                            bombaInfusao.getBombaInfusaoItens().add(bombaInfusaoItens);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        Ficha ficha = getProperFicha();
+//        ficha.setBombaInfusao(bombaInfusao);
+//        realm.copyToRealmOrUpdate(ficha);
+//        realm.commitTransaction();
+//        changeCardColorToGreen();
     }
 }

@@ -1,20 +1,11 @@
 package santauti.app.Model.Ficha;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.Realm;
-import io.realm.RealmObject;
-
 /**
  * Created by rapha on 03-Oct-17.
  */
 
-public class Osteomuscular extends RealmObject implements Serializable {
-    @SerializedName("tonusMuscular")
+public class Osteomuscular {
     private String tonusMuscular;
-    @SerializedName("trofismoMuscular")
     private String trofismoMuscular;
 
     public boolean checkObject(){

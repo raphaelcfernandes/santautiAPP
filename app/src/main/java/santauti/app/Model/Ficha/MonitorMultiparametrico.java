@@ -1,39 +1,21 @@
 package santauti.app.Model.Ficha;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmObject;
-
 /**
  * Created by Raphael Fernandes on 21-Jun-17.
  */
 
-public class MonitorMultiparametrico extends RealmObject implements Serializable {
-    @SerializedName("ritmo")
+public class MonitorMultiparametrico{
     private String ritmo;
-    @SerializedName("frequenciaRespiratoria")
     private int frequenciaRespiratoria;
-    @SerializedName("frequenciaCardiaca")
     private int frequenciaCardiaca;
-    @SerializedName("pam")
     private int PAM;
-    @SerializedName("temperatura")
     private float temperatura;
-    @SerializedName("pic")
     private int pic;
-    @SerializedName("ppc")
     private int ppc;
-    @SerializedName("pvc")
     private int pvc;
-    @SerializedName("swanGanz")
     private int swanGanz;
-    @SerializedName("capnometria")
     private int capnometria;
-    @SerializedName("spo2")
     private int spo2=-1;
-    @SerializedName("sjo2")
     private int sjo2=-1;
 
     public boolean checkObject(){

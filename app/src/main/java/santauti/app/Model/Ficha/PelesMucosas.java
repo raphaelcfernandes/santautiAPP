@@ -1,29 +1,15 @@
 package santauti.app.Model.Ficha;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
-
 /**
  * Created by rapha on 04-Oct-17.
  */
 
-public class PelesMucosas extends RealmObject implements Serializable {
-    @SerializedName("pele")
+public class PelesMucosas{
     private String pele;
-    @SerializedName("ulceraPressao")
-    private RealmList<RealmString> ulceraPressao;
-    @SerializedName("mucosasColoracao")
+    //private RealmList<RealmString> ulceraPressao;
     private String mucosasColoracao;
-    @SerializedName("mucosasColoracao2")
     private String mucosasColoracao2;
-    @SerializedName("mucosasUmidade")
     private String mucosasUmidade;
-    @SerializedName("ictericia")
     private int ictericia=-1;
 
     private boolean ulceraPressaoChecked=false;
@@ -38,7 +24,7 @@ public class PelesMucosas extends RealmObject implements Serializable {
 
     public boolean checkObject(){
         if(ulceraPressaoChecked)
-            return pele!=null && !ulceraPressao.isEmpty() && mucosasColoracao!=null && mucosasColoracao2!=null && mucosasUmidade!=null
+            return pele!=null /*&& !ulceraPressao.isEmpty()*/ && mucosasColoracao!=null && mucosasColoracao2!=null && mucosasUmidade!=null
                     && ictericia>=0;
         else
             return pele!=null && mucosasColoracao!=null && mucosasColoracao2!=null && mucosasUmidade!=null
@@ -59,14 +45,6 @@ public class PelesMucosas extends RealmObject implements Serializable {
 
     public void setPele(String pele) {
         this.pele = pele;
-    }
-
-    public RealmList<RealmString> getUlceraPressao() {
-        return ulceraPressao;
-    }
-
-    public void setUlceraPressao(RealmList<RealmString> ulceraPressao) {
-        this.ulceraPressao = ulceraPressao;
     }
 
     public String getMucosasColoracao() {

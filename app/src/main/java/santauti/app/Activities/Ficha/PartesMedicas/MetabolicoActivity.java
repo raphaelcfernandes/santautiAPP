@@ -8,10 +8,7 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.R;
 
 /**
@@ -20,7 +17,6 @@ import santauti.app.R;
 
 public class MetabolicoActivity extends GenericoActivity {
     private int i=0;
-    private Realm realm;
     private RadioGroup hidratacaoRadioGroup1,hidratacaoRadioGroup2;
     private RadioButton normoHidratado, edemaciado, desidratado;
     @Override
@@ -59,7 +55,6 @@ public class MetabolicoActivity extends GenericoActivity {
 
 
         prepareNavigationButtons();
-        realm = Realm.getDefaultInstance();
         setMetabolicoFromDataBase();
 
         antFicha.setOnClickListener(new View.OnClickListener() {
@@ -89,16 +84,15 @@ public class MetabolicoActivity extends GenericoActivity {
 
 
     private void setMetabolicoFromDataBase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getMetabolico()!=null)
-            setRadioButtonFromIdAndDatabase(R.id.hidratacao,ficha.getMetabolico().getHidratacao());
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getMetabolico()!=null)
+//            setRadioButtonFromIdAndDatabase(R.id.hidratacao,ficha.getMetabolico().getHidratacao());
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override
@@ -128,14 +122,11 @@ public class MetabolicoActivity extends GenericoActivity {
         else if(hidratacaoRadioGroup2.getCheckedRadioButtonId()!=-1)
             hidratacaoStr = getStringOfRadioButtonSelectedFromRadioGroup(hidratacaoRadioGroup2);
         if(hidratacaoStr!=null) {
-            realm.beginTransaction();
-            Metabolico metabolico = realm.createObject(Metabolico.class);
-            Ficha r = getProperFicha();
-            metabolico.setHidratacao(hidratacaoStr);
-            r.setMetabolico(metabolico);
-            realm.copyToRealmOrUpdate(r);
-            changeCardColorToGreen();
-            realm.commitTransaction();
+//            Metabolico metabolico = new Metabolico(hidratacaoStr);
+//            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+//            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//            databaseReference.child("Fichas").child(sharedPreferences.getString("FichaKEY","")).setValue(metabolico.getHidratacao());
+//            changeCardColorToGreen();
         }
     }
 }

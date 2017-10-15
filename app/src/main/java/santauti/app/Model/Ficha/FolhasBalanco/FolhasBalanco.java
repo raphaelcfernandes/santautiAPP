@@ -1,34 +1,23 @@
 package santauti.app.Model.Ficha.FolhasBalanco;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-
 /**
  * Created by rapha on 06-Oct-17.
  */
 
-public class FolhasBalanco extends RealmObject implements Serializable {
-    @SerializedName("curvaTermica")
+public class FolhasBalanco {
+
     private String curvaTermica;
-    @SerializedName("evacuacoesFlag")
     private boolean evacuacoesFlag;
-    @SerializedName("evacuacoesList")
-    private RealmList<Evacuacoes> evacuacoesList;
-    @SerializedName("nutricao")
-    private RealmList<Nutricao> nutricao;
-    @SerializedName("hemodinamicamente")
+//    private RealmList<Evacuacoes> evacuacoesList;
+//    private RealmList<Nutricao> nutricao;
     private String hemodinamicamente;
 
     public boolean checkObject(){
         if(evacuacoesFlag){
-            return !evacuacoesList.isEmpty() && curvaTermica!=null && !nutricao.isEmpty() && hemodinamicamente!=null;
+            return /*!evacuacoesList.isEmpty() &&*/ curvaTermica!=null && /*!nutricao.isEmpty() &&*/ hemodinamicamente!=null;
         }
         else{
-            return curvaTermica!=null && !nutricao.isEmpty() && hemodinamicamente!=null;
+            return curvaTermica!=null /*&& !nutricao.isEmpty()*/ && hemodinamicamente!=null;
         }
     }
 
@@ -56,19 +45,4 @@ public class FolhasBalanco extends RealmObject implements Serializable {
         this.evacuacoesFlag = evacuacoesFlag;
     }
 
-    public RealmList<Evacuacoes> getEvacuacoesList() {
-        return evacuacoesList;
-    }
-
-    public void setEvacuacoesList(RealmList<Evacuacoes> evacuacoesList) {
-        this.evacuacoesList = evacuacoesList;
-    }
-
-    public RealmList<Nutricao> getNutricao() {
-        return nutricao;
-    }
-
-    public void setNutricao(RealmList<Nutricao> nutricao) {
-        this.nutricao = nutricao;
-    }
 }

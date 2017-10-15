@@ -1,27 +1,15 @@
 package santauti.app.Model.Ficha;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmObject;
-
 /**
  * Created by Raphael Fernandes on 26-May-17.
  */
 
-public class Renal extends RealmObject implements Serializable{
-    @SerializedName("urina")
+public class Renal{
     private String urina;
-    @SerializedName("peso")
     private int peso;
-    @SerializedName("dialise")
     private boolean dialise;
-    @SerializedName("UF")
     private boolean UF;
-    @SerializedName("volume")
     private int volume;
-    @SerializedName("tempo")
     private int tempo;
 
     public boolean checkObject(){

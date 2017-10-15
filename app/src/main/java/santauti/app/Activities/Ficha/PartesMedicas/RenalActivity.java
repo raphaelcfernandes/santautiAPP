@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 
-import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Renal;
@@ -23,7 +22,6 @@ import santauti.app.R;
 public class RenalActivity extends GenericoActivity {
     private TextInputEditText volumeDialise, peso, tempoDialise;
     private View dialiseItensLayout, emDialise;
-    private Realm realm;
     private CheckBox checkboxEmDialise,ufCheckBox;
     private RadioGroup urinaRadioGroup;
     @Override
@@ -34,8 +32,6 @@ public class RenalActivity extends GenericoActivity {
         setToolbar(getString(R.string.Renal));
         setupUI(findViewById(R.id.activity_renal));
         prepareNavigationButtons();
-
-        realm = Realm.getDefaultInstance();
 
         /**************************TEXTINPUTEDITTEXT*******************/
         peso = (TextInputEditText)findViewById(R.id.peso);
@@ -106,39 +102,38 @@ public class RenalActivity extends GenericoActivity {
 
 
     private void setRenalFromDatabase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getRenal()!=null){
-            Renal renal = ficha.getRenal();
-            if(renal.getPeso()>0)
-                peso.setText(Integer.toString(renal.getPeso()));
-            if(renal.getUrina()!=null){
-                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.urinaRadioGroup);
-                for(int i=0;i<radioGroup.getChildCount();i++) {
-                    View v = radioGroup.getChildAt(i);
-                    AppCompatRadioButton appCompatRadioButton = (AppCompatRadioButton)v;
-                    if(appCompatRadioButton.getText().toString().equals(renal.getUrina())) {
-                        appCompatRadioButton.setChecked(true);
-                        break;
-                    }
-                }
-            }
-            if(renal.isDialise()){
-                checkboxEmDialise.setChecked(true);
-                dialiseItensLayout.setVisibility(View.VISIBLE);
-                if(renal.isUF())
-                    ufCheckBox.setChecked(true);
-                if(renal.getVolume()>0)
-                    volumeDialise.setText(Integer.toString(renal.getVolume()));
-                if(renal.getTempo()>0)
-                    tempoDialise.setText(Integer.toString(renal.getTempo()));
-            }
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getRenal()!=null){
+//            Renal renal = ficha.getRenal();
+//            if(renal.getPeso()>0)
+//                peso.setText(Integer.toString(renal.getPeso()));
+//            if(renal.getUrina()!=null){
+//                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.urinaRadioGroup);
+//                for(int i=0;i<radioGroup.getChildCount();i++) {
+//                    View v = radioGroup.getChildAt(i);
+//                    AppCompatRadioButton appCompatRadioButton = (AppCompatRadioButton)v;
+//                    if(appCompatRadioButton.getText().toString().equals(renal.getUrina())) {
+//                        appCompatRadioButton.setChecked(true);
+//                        break;
+//                    }
+//                }
+//            }
+//            if(renal.isDialise()){
+//                checkboxEmDialise.setChecked(true);
+//                dialiseItensLayout.setVisibility(View.VISIBLE);
+//                if(renal.isUF())
+//                    ufCheckBox.setChecked(true);
+//                if(renal.getVolume()>0)
+//                    volumeDialise.setText(Integer.toString(renal.getVolume()));
+//                if(renal.getTempo()>0)
+//                    tempoDialise.setText(Integer.toString(renal.getTempo()));
+//            }
+//        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override
@@ -148,27 +143,27 @@ public class RenalActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter() {
-        realm.beginTransaction();
-        Renal renal = realm.createObject(Renal.class);
-        if(!isTextInputEditTextEmpty(peso))
-            renal.setPeso(Integer.parseInt(peso.getText().toString()));
-        if(urinaRadioGroup.getCheckedRadioButtonId()!=-1)
-            renal.setUrina(getStringOfRadioButtonSelectedFromRadioGroup(urinaRadioGroup));
-        if(checkboxEmDialise.isChecked()){
-            renal.setDialise(true);
-            if(ufCheckBox.isChecked())
-                renal.setUF(true);
-            if(!isTextInputEditTextEmpty(volumeDialise))
-                renal.setVolume(Integer.parseInt(volumeDialise.getText().toString()));
-            if(!isTextInputEditTextEmpty(tempoDialise))
-                renal.setTempo(Integer.parseInt(tempoDialise.getText().toString()));
-        }
-        Ficha r = getProperFicha();
-        r.setRenal(renal);
-        realm.copyToRealmOrUpdate(r);
-        realm.commitTransaction();
-        if(renal.checkObject())
-            changeCardColorToGreen();
+//        realm.beginTransaction();
+//        Renal renal = realm.createObject(Renal.class);
+//        if(!isTextInputEditTextEmpty(peso))
+//            renal.setPeso(Integer.parseInt(peso.getText().toString()));
+//        if(urinaRadioGroup.getCheckedRadioButtonId()!=-1)
+//            renal.setUrina(getStringOfRadioButtonSelectedFromRadioGroup(urinaRadioGroup));
+//        if(checkboxEmDialise.isChecked()){
+//            renal.setDialise(true);
+//            if(ufCheckBox.isChecked())
+//                renal.setUF(true);
+//            if(!isTextInputEditTextEmpty(volumeDialise))
+//                renal.setVolume(Integer.parseInt(volumeDialise.getText().toString()));
+//            if(!isTextInputEditTextEmpty(tempoDialise))
+//                renal.setTempo(Integer.parseInt(tempoDialise.getText().toString()));
+//        }
+//        Ficha r = getProperFicha();
+//        r.setRenal(renal);
+//        realm.copyToRealmOrUpdate(r);
+//        realm.commitTransaction();
+//        if(renal.checkObject())
+//            changeCardColorToGreen();
     }
 
     @Override

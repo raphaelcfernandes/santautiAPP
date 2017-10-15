@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 
-import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Hematologico;
@@ -18,7 +17,6 @@ import santauti.app.R;
  */
 
 public class HematologicoActivity extends GenericoActivity {
-    private Realm realm;
     private RadioGroup tromboprofilaxia;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +24,6 @@ public class HematologicoActivity extends GenericoActivity {
         setContentView(R.layout.activity_hematologico);
         prepareNavigationButtons();
         setToolbar(getString(R.string.Hematologico));
-        realm = Realm.getDefaultInstance();
         tromboprofilaxia = (RadioGroup)findViewById(R.id.tromboprofilaxiaRadiogroup);
 
         setHematologicoFromDataBase();
@@ -60,7 +57,6 @@ public class HematologicoActivity extends GenericoActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override
@@ -80,29 +76,29 @@ public class HematologicoActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter(){
-        realm.beginTransaction();
-        Hematologico hematologico = realm.createObject(Hematologico.class);
-        String tromboprofilaxiaStr = getStringOfRadioButtonSelectedFromRadioGroup(tromboprofilaxia);
-        if(tromboprofilaxiaStr!=null){
-            Ficha r = getProperFicha();
-            hematologico.setTromboprofilaxia(tromboprofilaxiaStr);
-            r.setHematologico(hematologico);
-            realm.copyToRealmOrUpdate(r);
-            changeCardColorToGreen();
-        }
-        realm.commitTransaction();
+//        realm.beginTransaction();
+//        Hematologico hematologico = realm.createObject(Hematologico.class);
+//        String tromboprofilaxiaStr = getStringOfRadioButtonSelectedFromRadioGroup(tromboprofilaxia);
+//        if(tromboprofilaxiaStr!=null){
+//            Ficha r = getProperFicha();
+//            hematologico.setTromboprofilaxia(tromboprofilaxiaStr);
+//            r.setHematologico(hematologico);
+//            realm.copyToRealmOrUpdate(r);
+//            changeCardColorToGreen();
+//        }
+//        realm.commitTransaction();
     }
 
     private void setHematologicoFromDataBase(){
-        Ficha ficha = getProperFicha();
-
-        if(ficha.getHematologico()!=null){
-            if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.Nao)))
-                tromboprofilaxia.check(R.id.naoTromboprofilaxia);
-            else if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.HeparinaFracionada)))
-                tromboprofilaxia.check(R.id.heparinaFracionada);
-            else if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.HeparinaNaoFracionada)))
-                tromboprofilaxia.check(R.id.heparinaNaoFracionada);
-        }
+//        Ficha ficha = getProperFicha();
+//
+//        if(ficha.getHematologico()!=null){
+//            if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.Nao)))
+//                tromboprofilaxia.check(R.id.naoTromboprofilaxia);
+//            else if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.HeparinaFracionada)))
+//                tromboprofilaxia.check(R.id.heparinaFracionada);
+//            else if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.HeparinaNaoFracionada)))
+//                tromboprofilaxia.check(R.id.heparinaNaoFracionada);
+//        }
     }
 }

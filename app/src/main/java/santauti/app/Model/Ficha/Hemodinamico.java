@@ -1,38 +1,23 @@
 package santauti.app.Model.Ficha;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
-
 /**
  * Created by Raphael Fernandes on 16-Jun-17.
  */
 
-public class Hemodinamico extends RealmObject implements Serializable{
-    @SerializedName("pulso")
+public class Hemodinamico {
+
     private String pulso;
-    @SerializedName("foneseBulhas")
     private String foneseBulhas;
-    @SerializedName("tipoSopro")
-    private RealmList<RealmString> tipoSopro;
-    @SerializedName("intensidadeSopro")
+    //private RealmList<RealmString> tipoSopro;
     private int intensidadeSopro;
-    @SerializedName("perfusaoCapilar")
     private String perfusaoCapilar;
-    @SerializedName("extremidadesColoracao")
     private String extremidadesColoracao;
-    @SerializedName("extremidadesTemperatura")
     private String extremidadesTemperatura;
-    @SerializedName("soproChecked")
     private boolean soproChecked;
 
     public boolean checkObject(){
         if(soproChecked)
-            return pulso!=null && !tipoSopro.isEmpty() && foneseBulhas!=null && perfusaoCapilar!=null && extremidadesColoracao!=null
+            return pulso!=null && /*!tipoSopro.isEmpty() &&*/ foneseBulhas!=null && perfusaoCapilar!=null && extremidadesColoracao!=null
                     && intensidadeSopro>0 && extremidadesTemperatura!=null;
         else
             return pulso!=null && foneseBulhas!=null && perfusaoCapilar!=null && extremidadesColoracao!=null
@@ -53,14 +38,6 @@ public class Hemodinamico extends RealmObject implements Serializable{
 
     public void setFoneseBulhas(String foneseBulhas) {
         this.foneseBulhas = foneseBulhas;
-    }
-
-    public RealmList<RealmString> getTipoSopro() {
-        return tipoSopro;
-    }
-
-    public void setTipoSopro(RealmList<RealmString> tipoSopro) {
-        this.tipoSopro = tipoSopro;
     }
 
     public int getIntensidadeSopro() {

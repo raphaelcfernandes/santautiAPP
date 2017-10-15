@@ -10,12 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 
-import io.realm.Realm;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.InputFilterMin;
 import santauti.app.Animation.MyAnimation;
-import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Respirador;
 import santauti.app.R;
 
 /**
@@ -27,7 +24,6 @@ public class RespiradorActivity extends GenericoActivity{
     private View bipap, ventilacaoMecanica,naoInvasivo;
     private MyAnimation myAnimation;
     private View respiradorLayout;
-    private Realm realm;
     private TextInputEditText volumeBipap,IPAP,EPAP,saturacao,oxigenio, respiratorioVolumeNaoInvasiva, respiratorioPeepNaoInvasiva, respiratorioFio2NaoInvasiva,
             freqRespiratoriaPacienteNaoInvasiva, freqRespiratoriaRespiradorNaoInvasiva,respiratorioFio2Mecanico,respiratorioPeepMecanico,
             respiratorioVolumeMecanico,freqRespiratoriaPacienteMecanico,freqRespiratoriaRespiradorMecanico;
@@ -98,7 +94,6 @@ public class RespiradorActivity extends GenericoActivity{
         });
         /***************************CHECKBOX***************************/
         setupUI(findViewById(R.id.respirador_activity));
-        realm = Realm.getDefaultInstance();
         myAnimation = new MyAnimation();
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,42 +124,42 @@ public class RespiradorActivity extends GenericoActivity{
     }
 
     private void setRespiradorFromDatabase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getRespirador()!=null){
-            Respirador respirador = ficha.getRespirador();
-            if(respirador.isEmVentilacaoMecanica()){
-                checkBoxEmVentilacaoMecanica.setChecked(true);
-                myAnimation.slideDownView(getApplicationContext(),respiradorLayout);
-                if(respirador.getModoVentilatorio()!=null){
-                    setRadioButtonFromIdAndDatabase(R.id.modoVentilatorioLinearLayout,respirador.getModoVentilatorio());
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(modoVentilatorio).equals(getString(R.string.BIPAP))){
-                        myAnimation.slideDownView(getApplicationContext(),bipap);
-                        volumeBipap.setText(Integer.toString(respirador.getVolume()));
-                        IPAP.setText(Integer.toString(respirador.getIpap()));
-                        EPAP.setText(Integer.toString(respirador.getEpap()));
-                        saturacao.setText(Integer.toString(respirador.getSaturacao()));
-                        oxigenio.setText(Integer.toString(respirador.getOxigenio()));
-                    }
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(modoVentilatorio).equals(getString(R.string.NaoInvasiva))){
-                        myAnimation.slideDownView(getApplicationContext(),naoInvasivo);
-                        respiratorioVolumeNaoInvasiva.setText(Integer.toString(respirador.getVolume()));
-                        respiratorioPeepNaoInvasiva.setText(Integer.toString(respirador.getPeep()));
-                        respiratorioFio2NaoInvasiva.setText(Integer.toString(respirador.getFio2()));
-                        freqRespiratoriaPacienteNaoInvasiva.setText(Integer.toString(respirador.getFreqRespiratoriaPaciente()));
-                        freqRespiratoriaRespiradorNaoInvasiva.setText(Integer.toString(respirador.getFreqRespiratoriaRespirador()));
-                    }
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(modoVentilatorio).equals(getString(R.string.Mecanica))){
-                        myAnimation.slideDownView(getApplicationContext(), ventilacaoMecanica);
-                        setRadioButtonFromIdAndDatabase(R.id.parametros,respirador.getParametros());
-                        respiratorioFio2Mecanico.setText(Integer.toString(respirador.getFio2()));
-                        respiratorioPeepMecanico.setText(Integer.toString(respirador.getPeep()));
-                        respiratorioVolumeMecanico.setText(Integer.toString(respirador.getVolume()));
-                        freqRespiratoriaPacienteMecanico.setText(Integer.toString(respirador.getFreqRespiratoriaPaciente()));
-                        freqRespiratoriaRespiradorMecanico.setText(Integer.toString(respirador.getFreqRespiratoriaRespirador()));
-                    }
-                }
-            }
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getRespirador()!=null){
+//            Respirador respirador = ficha.getRespirador();
+//            if(respirador.isEmVentilacaoMecanica()){
+//                checkBoxEmVentilacaoMecanica.setChecked(true);
+//                myAnimation.slideDownView(getApplicationContext(),respiradorLayout);
+//                if(respirador.getModoVentilatorio()!=null){
+//                    setRadioButtonFromIdAndDatabase(R.id.modoVentilatorioLinearLayout,respirador.getModoVentilatorio());
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(modoVentilatorio).equals(getString(R.string.BIPAP))){
+//                        myAnimation.slideDownView(getApplicationContext(),bipap);
+//                        volumeBipap.setText(Integer.toString(respirador.getVolume()));
+//                        IPAP.setText(Integer.toString(respirador.getIpap()));
+//                        EPAP.setText(Integer.toString(respirador.getEpap()));
+//                        saturacao.setText(Integer.toString(respirador.getSaturacao()));
+//                        oxigenio.setText(Integer.toString(respirador.getOxigenio()));
+//                    }
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(modoVentilatorio).equals(getString(R.string.NaoInvasiva))){
+//                        myAnimation.slideDownView(getApplicationContext(),naoInvasivo);
+//                        respiratorioVolumeNaoInvasiva.setText(Integer.toString(respirador.getVolume()));
+//                        respiratorioPeepNaoInvasiva.setText(Integer.toString(respirador.getPeep()));
+//                        respiratorioFio2NaoInvasiva.setText(Integer.toString(respirador.getFio2()));
+//                        freqRespiratoriaPacienteNaoInvasiva.setText(Integer.toString(respirador.getFreqRespiratoriaPaciente()));
+//                        freqRespiratoriaRespiradorNaoInvasiva.setText(Integer.toString(respirador.getFreqRespiratoriaRespirador()));
+//                    }
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(modoVentilatorio).equals(getString(R.string.Mecanica))){
+//                        myAnimation.slideDownView(getApplicationContext(), ventilacaoMecanica);
+//                        setRadioButtonFromIdAndDatabase(R.id.parametros,respirador.getParametros());
+//                        respiratorioFio2Mecanico.setText(Integer.toString(respirador.getFio2()));
+//                        respiratorioPeepMecanico.setText(Integer.toString(respirador.getPeep()));
+//                        respiratorioVolumeMecanico.setText(Integer.toString(respirador.getVolume()));
+//                        freqRespiratoriaPacienteMecanico.setText(Integer.toString(respirador.getFreqRespiratoriaPaciente()));
+//                        freqRespiratoriaRespiradorMecanico.setText(Integer.toString(respirador.getFreqRespiratoriaRespirador()));
+//                    }
+//                }
+//            }
+//        }
     }
 
     public void emVentilacaoOnClick(View view){
@@ -212,68 +207,67 @@ public class RespiradorActivity extends GenericoActivity{
     }
 
     private void verificaCamposENotificaAdapter() {
-        realm.beginTransaction();
-        Respirador respirador = realm.createObject(Respirador.class);
-        if(checkBoxEmVentilacaoMecanica.isChecked()){
-            respirador.setEmVentilacaoMecanica(true);
-            if(modoVentilatorio.getCheckedRadioButtonId()!=-1){
-                respirador.setModoVentilatorio(getStringOfRadioButtonSelectedFromRadioGroup(modoVentilatorio));
-                if(respirador.getModoVentilatorio().equals(getString(R.string.NaoInvasiva))){
-                    if(!isTextInputEditTextEmpty(respiratorioVolumeNaoInvasiva))
-                        respirador.setVolume(getIntegerFromTextInputEditText(respiratorioVolumeNaoInvasiva));
-                    if(!isTextInputEditTextEmpty(respiratorioPeepNaoInvasiva))
-                        respirador.setPeep(getIntegerFromTextInputEditText(respiratorioPeepNaoInvasiva));
-                    if(!isTextInputEditTextEmpty(respiratorioFio2NaoInvasiva))
-                        respirador.setFio2(getIntegerFromTextInputEditText(respiratorioFio2NaoInvasiva));
-                    if(!isTextInputEditTextEmpty(freqRespiratoriaPacienteNaoInvasiva))
-                        respirador.setFreqRespiratoriaPaciente(getIntegerFromTextInputEditText(freqRespiratoriaPacienteNaoInvasiva));
-                    if(!isTextInputEditTextEmpty(freqRespiratoriaRespiradorNaoInvasiva))
-                        respirador.setFreqRespiratoriaRespirador(getIntegerFromTextInputEditText(freqRespiratoriaRespiradorNaoInvasiva));
-                }
-                else if(respirador.getModoVentilatorio().equals(getString(R.string.BIPAP))){
-                    if(!isTextInputEditTextEmpty(volumeBipap))
-                        respirador.setVolume(getIntegerFromTextInputEditText(volumeBipap));
-                    if(!isTextInputEditTextEmpty(IPAP))
-                        respirador.setIpap(getIntegerFromTextInputEditText(IPAP));
-                    if(!isTextInputEditTextEmpty(EPAP))
-                        respirador.setEpap(getIntegerFromTextInputEditText(EPAP));
-                    if(!isTextInputEditTextEmpty(saturacao))
-                        respirador.setSaturacao(getIntegerFromTextInputEditText(saturacao));
-                    if(!isTextInputEditTextEmpty(oxigenio))
-                        respirador.setOxigenio(getIntegerFromTextInputEditText(oxigenio));
-                }
-                else{
-                    if(parametrosRadioGroup.getCheckedRadioButtonId()!=-1)
-                        respirador.setParametros(getStringOfRadioButtonSelectedFromRadioGroup(parametrosRadioGroup));
-                    if(!isTextInputEditTextEmpty(respiratorioFio2Mecanico))
-                        respirador.setFio2(getIntegerFromTextInputEditText(respiratorioFio2Mecanico));
-                    if(!isTextInputEditTextEmpty(respiratorioPeepMecanico))
-                        respirador.setPeep(getIntegerFromTextInputEditText(respiratorioPeepMecanico));
-                    if(!isTextInputEditTextEmpty(respiratorioVolumeMecanico))
-                        respirador.setVolume(getIntegerFromTextInputEditText(respiratorioVolumeMecanico));
-                    if(!isTextInputEditTextEmpty(freqRespiratoriaPacienteMecanico))
-                        respirador.setFreqRespiratoriaPaciente(getIntegerFromTextInputEditText(freqRespiratoriaPacienteMecanico));
-                    if(!isTextInputEditTextEmpty(freqRespiratoriaRespiradorMecanico))
-                        respirador.setFreqRespiratoriaRespirador(getIntegerFromTextInputEditText(freqRespiratoriaRespiradorMecanico));
-                }
-            }
-        }
-        else
-            respirador.setEmVentilacaoMecanica(false);
-        Ficha r = getProperFicha();
-        r.setRespirador(respirador);
-        realm.copyToRealmOrUpdate(r);
-        realm.commitTransaction();
-        if(respirador.checkObject())
-            changeCardColorToGreen();
-        else
-            setCardColorToDefault();
+//        realm.beginTransaction();
+//        Respirador respirador = realm.createObject(Respirador.class);
+//        if(checkBoxEmVentilacaoMecanica.isChecked()){
+//            respirador.setEmVentilacaoMecanica(true);
+//            if(modoVentilatorio.getCheckedRadioButtonId()!=-1){
+//                respirador.setModoVentilatorio(getStringOfRadioButtonSelectedFromRadioGroup(modoVentilatorio));
+//                if(respirador.getModoVentilatorio().equals(getString(R.string.NaoInvasiva))){
+//                    if(!isTextInputEditTextEmpty(respiratorioVolumeNaoInvasiva))
+//                        respirador.setVolume(getIntegerFromTextInputEditText(respiratorioVolumeNaoInvasiva));
+//                    if(!isTextInputEditTextEmpty(respiratorioPeepNaoInvasiva))
+//                        respirador.setPeep(getIntegerFromTextInputEditText(respiratorioPeepNaoInvasiva));
+//                    if(!isTextInputEditTextEmpty(respiratorioFio2NaoInvasiva))
+//                        respirador.setFio2(getIntegerFromTextInputEditText(respiratorioFio2NaoInvasiva));
+//                    if(!isTextInputEditTextEmpty(freqRespiratoriaPacienteNaoInvasiva))
+//                        respirador.setFreqRespiratoriaPaciente(getIntegerFromTextInputEditText(freqRespiratoriaPacienteNaoInvasiva));
+//                    if(!isTextInputEditTextEmpty(freqRespiratoriaRespiradorNaoInvasiva))
+//                        respirador.setFreqRespiratoriaRespirador(getIntegerFromTextInputEditText(freqRespiratoriaRespiradorNaoInvasiva));
+//                }
+//                else if(respirador.getModoVentilatorio().equals(getString(R.string.BIPAP))){
+//                    if(!isTextInputEditTextEmpty(volumeBipap))
+//                        respirador.setVolume(getIntegerFromTextInputEditText(volumeBipap));
+//                    if(!isTextInputEditTextEmpty(IPAP))
+//                        respirador.setIpap(getIntegerFromTextInputEditText(IPAP));
+//                    if(!isTextInputEditTextEmpty(EPAP))
+//                        respirador.setEpap(getIntegerFromTextInputEditText(EPAP));
+//                    if(!isTextInputEditTextEmpty(saturacao))
+//                        respirador.setSaturacao(getIntegerFromTextInputEditText(saturacao));
+//                    if(!isTextInputEditTextEmpty(oxigenio))
+//                        respirador.setOxigenio(getIntegerFromTextInputEditText(oxigenio));
+//                }
+//                else{
+//                    if(parametrosRadioGroup.getCheckedRadioButtonId()!=-1)
+//                        respirador.setParametros(getStringOfRadioButtonSelectedFromRadioGroup(parametrosRadioGroup));
+//                    if(!isTextInputEditTextEmpty(respiratorioFio2Mecanico))
+//                        respirador.setFio2(getIntegerFromTextInputEditText(respiratorioFio2Mecanico));
+//                    if(!isTextInputEditTextEmpty(respiratorioPeepMecanico))
+//                        respirador.setPeep(getIntegerFromTextInputEditText(respiratorioPeepMecanico));
+//                    if(!isTextInputEditTextEmpty(respiratorioVolumeMecanico))
+//                        respirador.setVolume(getIntegerFromTextInputEditText(respiratorioVolumeMecanico));
+//                    if(!isTextInputEditTextEmpty(freqRespiratoriaPacienteMecanico))
+//                        respirador.setFreqRespiratoriaPaciente(getIntegerFromTextInputEditText(freqRespiratoriaPacienteMecanico));
+//                    if(!isTextInputEditTextEmpty(freqRespiratoriaRespiradorMecanico))
+//                        respirador.setFreqRespiratoriaRespirador(getIntegerFromTextInputEditText(freqRespiratoriaRespiradorMecanico));
+//                }
+//            }
+//        }
+//        else
+//            respirador.setEmVentilacaoMecanica(false);
+//        Ficha r = getProperFicha();
+//        r.setRespirador(respirador);
+//        realm.copyToRealmOrUpdate(r);
+//        realm.commitTransaction();
+//        if(respirador.checkObject())
+//            changeCardColorToGreen();
+//        else
+//            setCardColorToDefault();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override

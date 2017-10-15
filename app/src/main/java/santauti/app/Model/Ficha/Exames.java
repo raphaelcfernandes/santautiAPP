@@ -1,71 +1,40 @@
 package santauti.app.Model.Ficha;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
-
 /**
  * Created by rapha on 06-Oct-17.
  */
 
-public class Exames extends RealmObject implements Serializable {
-    @SerializedName("hematocrito")
+public class Exames{
     private int hematocrito;
-    @SerializedName("hemoglobina")
     private int hemoglobina;
-    @SerializedName("plaquetas")
     private int plaquetas;
-    @SerializedName("leucograma")
     private String leucograma;
-    @SerializedName("pcr")
     private String pcr;
-    @SerializedName("ureia")
     private int ureia;
-    @SerializedName("creatinina")
     private int creatinina;
-    @SerializedName("potassio")
     private String potassio;
-    @SerializedName("magnesio")
     private String magnesio;
-    @SerializedName("fosforo")
     private String fosforo;
-    @SerializedName("calcio")
     private String calcio;
-    @SerializedName("gasometriaArterialAcidoseAlcalose")
     private String gasometriaArterialAcidoseAlcalose;
-    @SerializedName("gasometriaArterialMetabolicaRespiratoria")
     private String gasometrialArterialMetabolicaRespiratoria;
-    @SerializedName("gasometriaArterialCompensadaDescompensada")
     private String gasometriaArterialCompensadaDescompensada;
-    @SerializedName("funcaoHepaticaBilirrubinas")
     private String funcaoHepaticaBilirrubinas;
-    @SerializedName("funcaoHepaticaFAGGT")
     private String funcaoHepaticaFAGGT;
-    @SerializedName("funcaoHepaticaTransaminases")
     private String funcaoHepaticaTransaminases;
-    @SerializedName("lactato")
     private String lactato;
     private boolean amilaseChecked;
-    @SerializedName("amilase")
     private String amilase;
-    @SerializedName("marcadoresInfeccao")
     private String marcadoresInfeccao;
-    @SerializedName("albumina")
     private String albumina;
-    @SerializedName("raioxTorax")
     private String raioxTorax;
-    @SerializedName("raioxToraxList")
-    private RealmList<RealmString> raioxToraxList;
+//    private RealmList<RealmString> raioxToraxList;
 
     public boolean checkObject(){
         boolean gasometria=false;
         boolean raioxFlag=true;
         if(raioxTorax!=null){
-            if((!raioxTorax.equals("Normal") && !raioxTorax.equals("Não realizou/sem resultados") && raioxToraxList.isEmpty()))
+            if((!raioxTorax.equals("Normal") && !raioxTorax.equals("Não realizou/sem resultados") /*&& raioxToraxList.isEmpty()*/))
                 raioxFlag=false;
         }
         else
@@ -93,14 +62,6 @@ public class Exames extends RealmObject implements Serializable {
             && gasometriaArterialAcidoseAlcalose!=null && gasometria && funcaoHepaticaBilirrubinas!=null
             && funcaoHepaticaFAGGT!=null && funcaoHepaticaTransaminases!=null && lactato!=null
             && marcadoresInfeccao!=null && albumina!=null && raioxFlag;
-    }
-
-    public RealmList<RealmString> getRaioxToraxList() {
-        return raioxToraxList;
-    }
-
-    public void setRaioxToraxList(RealmList<RealmString> raioxToraxList) {
-        this.raioxToraxList = raioxToraxList;
     }
 
     public int getHematocrito() {

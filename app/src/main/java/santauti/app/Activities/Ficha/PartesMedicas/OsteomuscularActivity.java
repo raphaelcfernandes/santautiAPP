@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
-import io.realm.Realm;
 import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Model.Ficha.Ficha;
@@ -21,13 +20,11 @@ import santauti.app.R;
 
 public class OsteomuscularActivity extends GenericoActivity {
     private RadioGroup musculaturaTrofismoRadioGroup, musculaturaTonusRadioGroup;
-    Realm realm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_osteomuscular);
         setToolbar(getString(R.string.OsteoMuscular));
-        realm = Realm.getDefaultInstance();
         prepareNavigationButtons();
 
 
@@ -59,39 +56,38 @@ public class OsteomuscularActivity extends GenericoActivity {
     }
 
     private void setOsteomuscularFromDatabase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getOsteomuscular()!=null) {
-            if(ficha.getOsteomuscular().getTonusMuscular()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.musculatura, ficha.getOsteomuscular().getTonusMuscular());
-            if(ficha.getOsteomuscular().getTrofismoMuscular()!=null)
-                setRadioButtonFromIdAndDatabase(R.id.musculatura, ficha.getOsteomuscular().getTrofismoMuscular());
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getOsteomuscular()!=null) {
+//            if(ficha.getOsteomuscular().getTonusMuscular()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.musculatura, ficha.getOsteomuscular().getTonusMuscular());
+//            if(ficha.getOsteomuscular().getTrofismoMuscular()!=null)
+//                setRadioButtonFromIdAndDatabase(R.id.musculatura, ficha.getOsteomuscular().getTrofismoMuscular());
+//        }
 
     }
 
 
     private void verificaCamposENotificaAdapter(){
-        realm.beginTransaction();
-        Osteomuscular osteomuscular = realm.createObject(Osteomuscular.class);
-        if(musculaturaTonusRadioGroup.getCheckedRadioButtonId()!=-1)
-            osteomuscular.setTonusMuscular(getStringOfRadioButtonSelectedFromRadioGroup(musculaturaTonusRadioGroup));
-        if(musculaturaTrofismoRadioGroup.getCheckedRadioButtonId()!=-1)
-            osteomuscular.setTrofismoMuscular(getStringOfRadioButtonSelectedFromRadioGroup(musculaturaTrofismoRadioGroup));
-
-        Ficha r = getProperFicha();
-        r.setOsteomuscular(osteomuscular);
-        realm.copyToRealmOrUpdate(r);
-        realm.commitTransaction();
-        if(osteomuscular.checkObject())
-            changeCardColorToGreen();
-        else
-            setCardColorToDefault();
+//        realm.beginTransaction();
+//        Osteomuscular osteomuscular = realm.createObject(Osteomuscular.class);
+//        if(musculaturaTonusRadioGroup.getCheckedRadioButtonId()!=-1)
+//            osteomuscular.setTonusMuscular(getStringOfRadioButtonSelectedFromRadioGroup(musculaturaTonusRadioGroup));
+//        if(musculaturaTrofismoRadioGroup.getCheckedRadioButtonId()!=-1)
+//            osteomuscular.setTrofismoMuscular(getStringOfRadioButtonSelectedFromRadioGroup(musculaturaTrofismoRadioGroup));
+//
+//        Ficha r = getProperFicha();
+//        r.setOsteomuscular(osteomuscular);
+//        realm.copyToRealmOrUpdate(r);
+//        realm.commitTransaction();
+//        if(osteomuscular.checkObject())
+//            changeCardColorToGreen();
+//        else
+//            setCardColorToDefault();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override

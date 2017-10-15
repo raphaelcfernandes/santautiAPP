@@ -13,12 +13,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
-import io.realm.Realm;
-import io.realm.RealmList;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.RealmObjects.RealmString;
 import santauti.app.Model.Ficha.Respiratorio;
 import santauti.app.R;
 
@@ -30,7 +27,6 @@ public class RespiratorioActivity extends GenericoActivity {
     private View pressaoCuff_layout,murmurioVesicularItensLayout;
     private View roncosItensLayout,sibilosItensLayout,crepitacoesItensLayout;
     private View mascaraDeVenturi_layout, fluxoOxigenio_layout;
-    private Realm realm;
     private Ficha ficha;
     private MyAnimation myAnimation;
     private Intent intent;
@@ -216,7 +212,6 @@ public class RespiratorioActivity extends GenericoActivity {
 
 
         myAnimation = new MyAnimation();
-        realm = Realm.getDefaultInstance();
         setRespiratorioFromDataBase();
     }
 
@@ -252,59 +247,59 @@ public class RespiratorioActivity extends GenericoActivity {
     };
 
     private void setRespiratorioFromDataBase(){
-        Ficha ficha = getProperFicha();
-        if(ficha.getRespiratorio()!=null){
-            Respiratorio respiratorio = ficha.getRespiratorio();
-            if(respiratorio.getViasAereas()!=null) {
-                setRadioButtonFromIdAndDatabase(R.id.viasAereas, respiratorio.getViasAereas());
-                if(!respiratorio.getViasAereas().equals(getString(R.string.Natural))){
-                    myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
-                    if(respiratorio.getPressaoCuff()>0)
-                        pressaoCuff.setText(Integer.toString(respiratorio.getPressaoCuff()));
-                    if(respiratorio.getLocalizacaoCanula()!=null)
-                        setRadioButtonFromIdAndDatabase(R.id.pressaoCuff_layout,respiratorio.getLocalizacaoCanula());
-
-                }
-            }
-            if(respiratorio.getMurmurioVesicular()!=null){
-                setRadioButtonFromIdAndDatabase(R.id.murmurioVesicular,respiratorio.getMurmurioVesicular());
-                if(!respiratorio.getMurmurioVesicular().equals(getString(R.string.Fisiologico))){
-                    myAnimation.slideDownView(getApplicationContext(),murmurioVesicularItensLayout);
-                    preencheCheckboxes(R.id.murmursioVesicularItens,respiratorio.getLocalizacaoMurmurioVesicular());
-                }
-            }
-            if(respiratorio.getUsoOxigenio()!=null ){
-                setRadioButtonFromIdAndDatabase(R.id.usoOxigenio,respiratorio.getUsoOxigenio());
-                if(!respiratorio.getUsoOxigenio().equals(getString(R.string.Nao))){
-                    if(respiratorio.getUsoOxigenio().equals(getString(R.string.EmMascaraVenturi))){
-                        myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
-                        if(respiratorio.getMascaraVenturi()==24)
-                            r24.setChecked(true);
-                        else if(respiratorio.getMascaraVenturi()==28)
-                            r28.setChecked(true);
-                        else if(respiratorio.getMascaraVenturi()==31)
-                            r31.setChecked(true);
-                        else if(respiratorio.getMascaraVenturi()==35)
-                            r35.setChecked(true);
-                        else if(respiratorio.getMascaraVenturi()==40)
-                            r40.setChecked(true);
-                        else if(respiratorio.getMascaraVenturi()==50)
-                            r50.setChecked(true);
-                    }
-                    else{
-                        myAnimation.slideDownView(getApplicationContext(),fluxoOxigenio_layout);
-                        if(respiratorio.getFluxo()>0)
-                            fluxoOxigenio.setText(Integer.toString(respiratorio.getFluxo()));
-                    }
-                }
-            }
-            if(!respiratorio.getRoncos().isEmpty())
-                abreLayoutMarcaCheckboxEPreenche(checkboxRoncos,roncosItensLayout,R.id.roncosItensLayout,respiratorio.getRoncos());
-            if(!respiratorio.getSibilos().isEmpty())
-                abreLayoutMarcaCheckboxEPreenche(checkboxSibilos,sibilosItensLayout,R.id.sibilosItensLayout,respiratorio.getSibilos());
-            if(!respiratorio.getCrepitacoes().isEmpty())
-                abreLayoutMarcaCheckboxEPreenche(checkboxCrepitacoes,crepitacoesItensLayout,R.id.crepitacoesItensLayout,respiratorio.getCrepitacoes());
-        }
+//        Ficha ficha = getProperFicha();
+//        if(ficha.getRespiratorio()!=null){
+//            Respiratorio respiratorio = ficha.getRespiratorio();
+//            if(respiratorio.getViasAereas()!=null) {
+//                setRadioButtonFromIdAndDatabase(R.id.viasAereas, respiratorio.getViasAereas());
+//                if(!respiratorio.getViasAereas().equals(getString(R.string.Natural))){
+//                    myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
+//                    if(respiratorio.getPressaoCuff()>0)
+//                        pressaoCuff.setText(Integer.toString(respiratorio.getPressaoCuff()));
+//                    if(respiratorio.getLocalizacaoCanula()!=null)
+//                        setRadioButtonFromIdAndDatabase(R.id.pressaoCuff_layout,respiratorio.getLocalizacaoCanula());
+//
+//                }
+//            }
+//            if(respiratorio.getMurmurioVesicular()!=null){
+//                setRadioButtonFromIdAndDatabase(R.id.murmurioVesicular,respiratorio.getMurmurioVesicular());
+//                if(!respiratorio.getMurmurioVesicular().equals(getString(R.string.Fisiologico))){
+//                    myAnimation.slideDownView(getApplicationContext(),murmurioVesicularItensLayout);
+//                    preencheCheckboxes(R.id.murmursioVesicularItens,respiratorio.getLocalizacaoMurmurioVesicular());
+//                }
+//            }
+//            if(respiratorio.getUsoOxigenio()!=null ){
+//                setRadioButtonFromIdAndDatabase(R.id.usoOxigenio,respiratorio.getUsoOxigenio());
+//                if(!respiratorio.getUsoOxigenio().equals(getString(R.string.Nao))){
+//                    if(respiratorio.getUsoOxigenio().equals(getString(R.string.EmMascaraVenturi))){
+//                        myAnimation.slideDownView(getApplicationContext(),mascaraDeVenturi_layout);
+//                        if(respiratorio.getMascaraVenturi()==24)
+//                            r24.setChecked(true);
+//                        else if(respiratorio.getMascaraVenturi()==28)
+//                            r28.setChecked(true);
+//                        else if(respiratorio.getMascaraVenturi()==31)
+//                            r31.setChecked(true);
+//                        else if(respiratorio.getMascaraVenturi()==35)
+//                            r35.setChecked(true);
+//                        else if(respiratorio.getMascaraVenturi()==40)
+//                            r40.setChecked(true);
+//                        else if(respiratorio.getMascaraVenturi()==50)
+//                            r50.setChecked(true);
+//                    }
+//                    else{
+//                        myAnimation.slideDownView(getApplicationContext(),fluxoOxigenio_layout);
+//                        if(respiratorio.getFluxo()>0)
+//                            fluxoOxigenio.setText(Integer.toString(respiratorio.getFluxo()));
+//                    }
+//                }
+//            }
+//            if(!respiratorio.getRoncos().isEmpty())
+//                abreLayoutMarcaCheckboxEPreenche(checkboxRoncos,roncosItensLayout,R.id.roncosItensLayout,respiratorio.getRoncos());
+//            if(!respiratorio.getSibilos().isEmpty())
+//                abreLayoutMarcaCheckboxEPreenche(checkboxSibilos,sibilosItensLayout,R.id.sibilosItensLayout,respiratorio.getSibilos());
+//            if(!respiratorio.getCrepitacoes().isEmpty())
+//                abreLayoutMarcaCheckboxEPreenche(checkboxCrepitacoes,crepitacoesItensLayout,R.id.crepitacoesItensLayout,respiratorio.getCrepitacoes());
+//        }
     }
 
     public void roncosOnClick(View view){
@@ -342,108 +337,107 @@ public class RespiratorioActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter() {
-        realm.beginTransaction();
-        RadioGroup viasAereasRadioGroup = (RadioGroup)findViewById(R.id.viasAereasRadioGroup);
-        RadioGroup localizacaoCanula = (RadioGroup)findViewById(R.id.localizacaoCanula);
-        RadioGroup murmurioVesicular = (RadioGroup)findViewById(R.id.murmurioVesicularRadioGroup);
-        TextInputEditText pressaoCuff = (TextInputEditText)findViewById(R.id.pressaoCuff);
-        TextInputEditText fluxoOxigenio = (TextInputEditText)findViewById(R.id.fluxoOxigenio);
-        Respiratorio respiratorio = realm.createObject(Respiratorio.class);
-        if(viasAereasRadioGroup.getCheckedRadioButtonId()!=-1){
-            if(getStringOfRadioButtonSelectedFromRadioGroup(viasAereasRadioGroup).equals(getString(R.string.Natural)))
-                respiratorio.setViasAereas(getString(R.string.Natural));
-            else {
-                respiratorio.setViasAereas(getStringOfRadioButtonSelectedFromRadioGroup(viasAereasRadioGroup));
-                if(!isTextInputEditTextEmpty(pressaoCuff))
-                    respiratorio.setPressaoCuff(Integer.parseInt(pressaoCuff.getText().toString()));
-                if(localizacaoCanula.getCheckedRadioButtonId()!=-1)
-                    respiratorio.setLocalizacaoCanula(getStringOfRadioButtonSelectedFromRadioGroup(localizacaoCanula));
-            }
-        }
-        if(murmurioVesicular.getCheckedRadioButtonId()!=-1){
-            if(getStringOfRadioButtonSelectedFromRadioGroup(murmurioVesicular).equals(getString(R.string.Fisiologico)))
-                respiratorio.setMurmurioVesicular(getString(R.string.Fisiologico));
-            else{
-                respiratorio.setMurmurioVesicular(getStringOfRadioButtonSelectedFromRadioGroup(murmurioVesicular));
-                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.murmursioVesicularItens);
-                for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                    View v = linearLayout.getChildAt(i);
-                    if(v instanceof RelativeLayout){
-                        for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
-                            View view = ((RelativeLayout) v).getChildAt(k);
-                            if (view instanceof AppCompatCheckBox) {
-                                AppCompatCheckBox cb = (AppCompatCheckBox) view;
-                                if (cb.isChecked()) {
-                                    RealmString realmString = realm.createObject(RealmString.class);
-                                    realmString.setName(cb.getText().toString());
-                                    respiratorio.getLocalizacaoMurmurioVesicular().add(realmString);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if(usoOxigenioRadioGroup1.getCheckedRadioButtonId()!=-1){
-            respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1));
-            if(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1).equals(getString(R.string.EmMascaraVenturi))){
-                if(mascaraVenturiRadioGroup1.getCheckedRadioButtonId()!=-1){
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent24)))
-                        respiratorio.setMascaraVenturi(24);
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent28)))
-                        respiratorio.setMascaraVenturi(28);
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent31)))
-                        respiratorio.setMascaraVenturi(31);
-                }
-                else if(mascaraVenturiRadioGroup2.getCheckedRadioButtonId()!=-1){
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent35)))
-                        respiratorio.setMascaraVenturi(35);
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent40)))
-                        respiratorio.setMascaraVenturi(40);
-                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent50)))
-                        respiratorio.setMascaraVenturi(50);
-                }
-            }
-            else{
-                respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1));
-                if(!isTextInputEditTextEmpty(fluxoOxigenio))
-                    respiratorio.setFluxo(Integer.parseInt(fluxoOxigenio.getText().toString()));
-            }
-        }
-        else if(usoOxigenioRadioGroup2.getCheckedRadioButtonId()!=-1){
-            respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup2));
-            if(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup2).equals(getString(R.string.EmMascaraReinalacao)) &&
-                    !isTextInputEditTextEmpty(fluxoOxigenio))
-                respiratorio.setFluxo(Integer.parseInt(fluxoOxigenio.getText().toString()));
-        }
-        if(checkboxRoncos.isChecked()){
-            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.roncosItensLayout);
-            for(RealmString realmString : realmStrings)
-                respiratorio.getRoncos().add(realmString);
-        }
-        if(checkboxSibilos.isChecked()){
-            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.sibilosItensLayout);
-            for(RealmString realmString : realmStrings)
-                respiratorio.getSibilos().add(realmString);
-        }
-        if(checkboxCrepitacoes.isChecked()){
-            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.crepitacoesItensLayout);
-            for(RealmString realmString : realmStrings)
-                respiratorio.getCrepitacoes().add(realmString);
-        }
-
-        Ficha r = getProperFicha();
-        r.setRespiratorio(respiratorio);
-        realm.copyToRealmOrUpdate(r);
-        realm.commitTransaction();
-        if(respiratorio.checkObject())
-            changeCardColorToGreen();
+//        realm.beginTransaction();
+//        RadioGroup viasAereasRadioGroup = (RadioGroup)findViewById(R.id.viasAereasRadioGroup);
+//        RadioGroup localizacaoCanula = (RadioGroup)findViewById(R.id.localizacaoCanula);
+//        RadioGroup murmurioVesicular = (RadioGroup)findViewById(R.id.murmurioVesicularRadioGroup);
+//        TextInputEditText pressaoCuff = (TextInputEditText)findViewById(R.id.pressaoCuff);
+//        TextInputEditText fluxoOxigenio = (TextInputEditText)findViewById(R.id.fluxoOxigenio);
+//        Respiratorio respiratorio = realm.createObject(Respiratorio.class);
+//        if(viasAereasRadioGroup.getCheckedRadioButtonId()!=-1){
+//            if(getStringOfRadioButtonSelectedFromRadioGroup(viasAereasRadioGroup).equals(getString(R.string.Natural)))
+//                respiratorio.setViasAereas(getString(R.string.Natural));
+//            else {
+//                respiratorio.setViasAereas(getStringOfRadioButtonSelectedFromRadioGroup(viasAereasRadioGroup));
+//                if(!isTextInputEditTextEmpty(pressaoCuff))
+//                    respiratorio.setPressaoCuff(Integer.parseInt(pressaoCuff.getText().toString()));
+//                if(localizacaoCanula.getCheckedRadioButtonId()!=-1)
+//                    respiratorio.setLocalizacaoCanula(getStringOfRadioButtonSelectedFromRadioGroup(localizacaoCanula));
+//            }
+//        }
+//        if(murmurioVesicular.getCheckedRadioButtonId()!=-1){
+//            if(getStringOfRadioButtonSelectedFromRadioGroup(murmurioVesicular).equals(getString(R.string.Fisiologico)))
+//                respiratorio.setMurmurioVesicular(getString(R.string.Fisiologico));
+//            else{
+//                respiratorio.setMurmurioVesicular(getStringOfRadioButtonSelectedFromRadioGroup(murmurioVesicular));
+//                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.murmursioVesicularItens);
+//                for (int i = 0; i < linearLayout.getChildCount(); i++) {
+//                    View v = linearLayout.getChildAt(i);
+//                    if(v instanceof RelativeLayout){
+//                        for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+//                            View view = ((RelativeLayout) v).getChildAt(k);
+//                            if (view instanceof AppCompatCheckBox) {
+//                                AppCompatCheckBox cb = (AppCompatCheckBox) view;
+//                                if (cb.isChecked()) {
+//                                    RealmString realmString = realm.createObject(RealmString.class);
+//                                    realmString.setName(cb.getText().toString());
+//                                    respiratorio.getLocalizacaoMurmurioVesicular().add(realmString);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        if(usoOxigenioRadioGroup1.getCheckedRadioButtonId()!=-1){
+//            respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1));
+//            if(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1).equals(getString(R.string.EmMascaraVenturi))){
+//                if(mascaraVenturiRadioGroup1.getCheckedRadioButtonId()!=-1){
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent24)))
+//                        respiratorio.setMascaraVenturi(24);
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent28)))
+//                        respiratorio.setMascaraVenturi(28);
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup1).equals(getString(R.string.Percent31)))
+//                        respiratorio.setMascaraVenturi(31);
+//                }
+//                else if(mascaraVenturiRadioGroup2.getCheckedRadioButtonId()!=-1){
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent35)))
+//                        respiratorio.setMascaraVenturi(35);
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent40)))
+//                        respiratorio.setMascaraVenturi(40);
+//                    if(getStringOfRadioButtonSelectedFromRadioGroup(mascaraVenturiRadioGroup2).equals(getString(R.string.Percent50)))
+//                        respiratorio.setMascaraVenturi(50);
+//                }
+//            }
+//            else{
+//                respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup1));
+//                if(!isTextInputEditTextEmpty(fluxoOxigenio))
+//                    respiratorio.setFluxo(Integer.parseInt(fluxoOxigenio.getText().toString()));
+//            }
+//        }
+//        else if(usoOxigenioRadioGroup2.getCheckedRadioButtonId()!=-1){
+//            respiratorio.setUsoOxigenio(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup2));
+//            if(getStringOfRadioButtonSelectedFromRadioGroup(usoOxigenioRadioGroup2).equals(getString(R.string.EmMascaraReinalacao)) &&
+//                    !isTextInputEditTextEmpty(fluxoOxigenio))
+//                respiratorio.setFluxo(Integer.parseInt(fluxoOxigenio.getText().toString()));
+//        }
+//        if(checkboxRoncos.isChecked()){
+//            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.roncosItensLayout);
+//            for(RealmString realmString : realmStrings)
+//                respiratorio.getRoncos().add(realmString);
+//        }
+//        if(checkboxSibilos.isChecked()){
+//            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.sibilosItensLayout);
+//            for(RealmString realmString : realmStrings)
+//                respiratorio.getSibilos().add(realmString);
+//        }
+//        if(checkboxCrepitacoes.isChecked()){
+//            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.crepitacoesItensLayout);
+//            for(RealmString realmString : realmStrings)
+//                respiratorio.getCrepitacoes().add(realmString);
+//        }
+//
+//        Ficha r = getProperFicha();
+//        r.setRespiratorio(respiratorio);
+//        realm.copyToRealmOrUpdate(r);
+//        realm.commitTransaction();
+//        if(respiratorio.checkObject())
+//            changeCardColorToGreen();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override

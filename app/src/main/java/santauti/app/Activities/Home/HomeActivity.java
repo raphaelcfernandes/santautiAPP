@@ -21,7 +21,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,83 +28,103 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import santauti.app.APIServices.APIService;
-import santauti.app.APIServices.RestClient;
 import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.MainActivity;
 import santauti.app.Adapters.Home.HomeAdapter;
 import santauti.app.Adapters.Home.HomeModel;
+import santauti.app.Model.Hospital;
 import santauti.app.Model.Paciente;
+import santauti.app.Model.Profissional;
 import santauti.app.R;
 
 public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
-
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
-    private List<HomeModel> homeModelList = null;
+    private List<HomeModel> homeModelList;
     private Toolbar tbar;
     private DrawerLayout drawerLayout;
-    ProgressBar progressBar;
     private Intent intent;
     SharedPreferences sp;
     ProgressBar progress;
-
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser;
+    private Hospital hospital;
+    private ListenerRegistration registration;
+    private Query query;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         tbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tbar);
-        initNavigationDrawer();
+        updateUI();
 
         progress = (ProgressBar) findViewById(R.id.progressbar_recycler);
-
-
-        sp = getSharedPreferences(getString(R.string.sharedPrefecences), 0);
-
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        progressBar = (ProgressBar)findViewById(R.id.progressbar_recycler);
-        if(homeModelList==null) {
-            homeModelList = new ArrayList<>();
-            requestPacienteList();
-        }
-
-        ActionBar toolbar = getSupportActionBar();
-        toolbar.setDisplayHomeAsUpEnabled(false);
-        SpannableString s = new SpannableString(toolbar.getTitle());
-        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        toolbar.setTitle(s);
-
+        homeModelList = new ArrayList<>();
+        homeAdapter = new HomeAdapter(homeModelList,this);
+        recyclerView.setAdapter(homeAdapter);
+        homeAdapter.setOnItemClickListener(onItemClickListener);
+        //prepareListaPacientes();
+        requestPacienteList();
+//
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        Pessoa pessoa = new Pessoa("02483575145","09-11-1994","1","MG17817760","Raphael","Fernandes");
+//        mDatabase.child("Pessoa").push().setValue(pessoa);
+//        pessoa = new Pessoa("12345678910","02-10-1984","1","MG17817750","Fulano","Da Silva Sauro");
+//        mDatabase.child("Pessoa").push().setValue(pessoa);
+//        pessoa = new Pessoa("02483275145","01-01-1932","1","MG17814260","Bartolomeu","Rocha");
+//        mDatabase.child("Pessoa").push().setValue(pessoa);
     }
 
-    public void initNavigationDrawer() {
+    private void updateUI(){
+        ActionBar toolbar = getSupportActionBar();
+        if (toolbar != null) {
+            toolbar.setDisplayHomeAsUpEnabled(false);
+            SpannableString s = new SpannableString(toolbar.getTitle());
+            s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            toolbar.setTitle(s);
+        }
+        firebaseUser = firebaseAuth.getCurrentUser();
+        initNavigationDrawer();
+    }
 
+    private void initNavigationDrawer() {
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 int id = menuItem.getItemId();
 
                 switch (id){
                     case R.id.home:
-                        sp.edit().clear().commit();
-
+                        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
+                            FirebaseAuth.getInstance().signOut();
                         Intent it = new Intent(HomeActivity.this, MainActivity.class);
                         startActivity(it);
+                        if(registration!=null)
+                            registration.remove();
                         finish();
-
                         drawerLayout.closeDrawers();
                         break;
                 }
@@ -113,8 +132,18 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
         View header = navigationView.getHeaderView(0);
-        TextView tv_email = (TextView)header.findViewById(R.id.tv_email);
-        tv_email.setText("Médico: Raphael Cardoso Fernandes");
+        final TextView tv_email = (TextView)header.findViewById(R.id.tv_email);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Pessoa").whereEqualTo("email",FirebaseAuth.getInstance().getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (DocumentSnapshot documentSnapshot : task.getResult()){
+                        tv_email.setText("Médico: "+documentSnapshot.get("nome")+" "+documentSnapshot.get("sobrenome"));
+                    }
+                }
+            }
+        });
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,tbar,R.string.openDrawer,R.string.closeDrawer){
@@ -133,50 +162,61 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         actionBarDrawerToggle.syncState();
     }
 
-    private void populateListaPacientes(Paciente paciente){
-        int[] covers = new int[]{
-                R.drawable.ic_person_black};
-        HomeModel p = new HomeModel(paciente.getNome()+" "+paciente.getSobrenome(),paciente.getLeito(),paciente.getBox(),
-                covers[0],paciente.getNomeMedico()+" "+paciente.getSobrenomeMedico(),paciente.getID(),paciente.getResponsavel());
-        homeModelList.add(p);
-    }
-
     private void requestPacienteList(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         progress.setVisibility(View.VISIBLE);
-
-        APIService apiService =
-                RestClient.getClient(this).create(APIService.class);
-        Call<List<Paciente>> call = apiService.getPacientes(getSharedPreferences(getString(R.string.sharedPrefecences),
-                Context.MODE_PRIVATE).getString("acess_token",""));
-        call.enqueue(new Callback<List<Paciente>>() {
+        query = db.collection("Hospital");
+        registration = query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response) {
-                progress.setVisibility(View.GONE);
-
-                for(Paciente i : response.body()){
-                    populateListaPacientes(i);
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                for(DocumentSnapshot documentSnapshot : documentSnapshots){
+                    if(documentSnapshot.get("nome").equals("Santa Clara")){
+                        hospital = documentSnapshot.toObject(Hospital.class);
+                        hospital.setHospitalDocumentKey(documentSnapshot.getId());
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        db.collection("Hospital").document(hospital.getHospitalDocumentKey()).collection("Pacientes").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                                homeModelList.clear();
+                                for(DocumentSnapshot documentSnapshot : documentSnapshots){
+                                    final Paciente paciente = documentSnapshot.toObject(Paciente.class);
+                                    paciente.setPacienteKey(documentSnapshot.getId());
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    db.collection("Pessoa").document(paciente.getProfissionalResponsavel()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                                            Profissional profissional = documentSnapshot.toObject(Profissional.class);
+                                            int[] covers = new int[]{
+                                                    R.drawable.ic_person_black};
+                                            HomeModel p = new HomeModel(paciente.getNome()+" "+paciente.getSobrenome(),paciente.getBox(),paciente.getLeito(),
+                                                    covers[0],profissional.getNome()+ " "+profissional.getSobrenome(),paciente.getPacienteKey());
+                                            homeModelList.add(p);
+                                            homeAdapter.notifyDataSetChanged();
+                                            prepareListaPacientes();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
                 }
-                prepareListaPacientes();
-            }
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
-                Log.d("ERROR",t.getMessage());
-                progress.setVisibility(View.GONE);
             }
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     private void prepareListaPacientes() {
+        progress.setVisibility(View.GONE);
         Collections.sort(homeModelList, new Comparator<HomeModel>() {
             @Override
             public int compare(final HomeModel object1, final HomeModel object2) {
                 return object1.getNomePaciente().compareTo(object2.getNomePaciente());
             }
         });
-
-        homeAdapter = new HomeAdapter(homeModelList,this);
-        recyclerView.setAdapter(homeAdapter);
-        homeAdapter.setOnItemClickListener(onItemClickListener);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -223,6 +263,8 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         return filteredModelList;
     }
 
+
+
     HomeAdapter.OnItemClickListener onItemClickListener = new HomeAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(final View view, final int position) {
@@ -232,7 +274,11 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
                     intent = new Intent(view.getContext(), FichaActivity.class);
-                    intent.putExtra("idPaciente", homeModelList.get(position).getIdPaciente());
+                    sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    //editor.putString("medicoKey",homeModelList.get(position).getMedicoKey());
+                    editor.putString("pacienteKey",homeModelList.get(position).getPacienteKey());
+                    editor.apply();
                     switch (item.getItemId()) {
                         case R.id.MnuOpc1:
                             intent.putExtra("tipoFicha", "Diurna");
