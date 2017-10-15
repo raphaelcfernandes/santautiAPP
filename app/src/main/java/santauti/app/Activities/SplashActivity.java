@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import santauti.app.Activities.Home.HomeActivity;
 import santauti.app.R;
 
 public class SplashActivity extends AppCompatActivity {

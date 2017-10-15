@@ -14,12 +14,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Activities.Home.HomeActivity;
-import santauti.app.Model.User;
 import santauti.app.R;
 
 public class MainActivity extends GenericoActivity {
-    private User user = new User();
     ProgressDialog progressDialog;
     View mainView;
     private FirebaseAuth mAuth;
@@ -43,8 +40,8 @@ public class MainActivity extends GenericoActivity {
                 progressDialog = new ProgressDialog(MainActivity.this,
                         R.style.Theme_AppCompat_DayNight_Dialog);
 
-                user.setPassword(password.getText().toString().trim());
-                user.setEmail(email.getText().toString().trim());
+                //user.setPassword(password.getText().toString().trim());
+                //user.setEmail(email.getText().toString().trim());
 
                 login();
 
