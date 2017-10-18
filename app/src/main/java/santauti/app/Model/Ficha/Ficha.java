@@ -1,11 +1,15 @@
 package santauti.app.Model.Ficha;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Raphael Fernandes on 25-May-17.
  */
-
+@IgnoreExtraProperties
 public class Ficha{
     private String pacienteKey;
     private String medicoKey;
@@ -54,4 +58,11 @@ public class Ficha{
     }
 
 
+    @Exclude
+    public Map<String,Object> toMap(){
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("pacienteKey",pacienteKey);
+        result.put("medicoKey",medicoKey);
+        return result;
+    }
 }

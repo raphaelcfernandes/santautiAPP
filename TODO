@@ -19,27 +19,27 @@ Descolorir card caso algum item tenha sido descelecionado (Funcionando -> Peles 
     Distribuir essa funcionalidade para os outros cards que possuem o mesmo esquema.
         -
 /*************MUDANĆAS*********************/
-Hematológico: Salvando.
-Monitor Multiparamétrico: Salvando.
-Metabolico: Salvando.
-Dispositivos: Salvando.
+Hematológico:
+Monitor Multiparamétrico:
+Metabolico:
+Dispositivos:
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
-Gastro: Salvando. (Corrigir slide de checkbox -> estilo do Respiratorio)
+Gastro:  (Corrigir slide de checkbox -> estilo do Respiratorio)
 Endocrino: Salvando.
 Osteomuscular: Salvando.
-Nutricional: Salvando.
-Renal: Salvando. (Corrigir slide de checkbox -> estilo do Respiratorio)
-Respiratorio: Salvando.
-Pele e Mucosas: Salvando.
-Hemodinamico: Salvando.
-Infeccioso: Salvando.
-Respirador: Salvando. Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL
-Bomba de infusao: Salvando.
-Folhas de balanćo: Salvando.
+Nutricional:
+Renal:  (Corrigir slide de checkbox -> estilo do Respiratorio)
+Respiratorio:
+Pele e Mucosas:
+Hemodinamico:
+Infeccioso:
+Respirador:  Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL
+Bomba de infusao:
+Folhas de balanćo:
     - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
         - Volume/mlpa
         - aspecto: gastrico, fecaloide, biliar
-Exames: Salvando.
+Exames:
 /*****************MUDANÇAS FEITAS**********/
 
 Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei como).

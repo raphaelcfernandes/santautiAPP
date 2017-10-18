@@ -1,9 +1,11 @@
 package santauti.app.Model;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by rapha on 13-Oct-17.
  */
-@com.google.firebase.firestore.IgnoreExtraProperties
+@IgnoreExtraProperties
 public class Paciente {
     private int box;
     private int leito;

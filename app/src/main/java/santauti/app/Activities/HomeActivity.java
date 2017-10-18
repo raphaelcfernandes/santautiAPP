@@ -31,20 +31,24 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Adapters.Home.HomeAdapter;
 import santauti.app.Adapters.Home.HomeModel;
@@ -115,21 +119,41 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         });
         View header = navigationView.getHeaderView(0);
         final TextView tv_email = (TextView)header.findViewById(R.id.tv_email);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Pessoa").whereEqualTo("email",FirebaseAuth.getInstance().getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FireBaseUtils.getDatabaseReference().child("Pessoa").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for (DocumentSnapshot documentSnapshot : task.getResult()){
-                        tv_email.setText("Médico: "+documentSnapshot.get("nome")+" "+documentSnapshot.get("sobrenome"));
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot documentSnapshot : dataSnapshot.getChildren()){
+                    if(documentSnapshot.child("email").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        tv_email.setText("Médico: "+documentSnapshot.child("nome").getValue()+" "+documentSnapshot.child("sobrenome").getValue());
                         SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
-                        editor.putString("userKey",documentSnapshot.getId());
+                        editor.putString("userKey",documentSnapshot.getKey());
                         editor.apply();
                     }
                 }
             }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         });
+        /*FIRESTORE*/
+        //        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        db.collection("Pessoa").whereEqualTo("email",FirebaseAuth.getInstance().getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if(task.isSuccessful()){
+//                    for (DocumentSnapshot documentSnapshot : task.getResult()){
+//                        tv_email.setText("Médico: "+documentSnapshot.get("nome")+" "+documentSnapshot.get("sobrenome"));
+//                        SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+//                        SharedPreferences.Editor editor = sp.edit();
+//                        editor.putString("userKey",documentSnapshot.getId());
+//                        editor.apply();
+//                    }
+//                }
+//            }
+//        });
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,tbar,R.string.openDrawer,R.string.closeDrawer){
@@ -149,49 +173,88 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     private void requestPacienteList(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        progress.setVisibility(View.VISIBLE);
-        db.collection("Hospital").addSnapshotListener(HomeActivity.this,new EventListener<QuerySnapshot>() {
+        FireBaseUtils.getDatabaseReference().child("Hospital").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                for(DocumentSnapshot documentSnapshot : documentSnapshots){
-                    if(documentSnapshot.get("nome").equals("Santa Clara")){
-                        hospital = documentSnapshot.toObject(Hospital.class);
-                        hospital.setHospitalDocumentKey(documentSnapshot.getId());
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        db.collection("Hospital").document(hospital.getHospitalDocumentKey()).collection("Pacientes").addSnapshotListener(HomeActivity.this,new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                                homeModelList.clear();
-                                for(DocumentSnapshot documentSnapshot : documentSnapshots){
-                                    final Paciente paciente = documentSnapshot.toObject(Paciente.class);
-                                    paciente.setPacienteKey(documentSnapshot.getId());
-                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                    db.collection("Pessoa").document(paciente.getProfissionalResponsavel()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                            DocumentSnapshot documentSnapshot1 = task.getResult();
-                                            Profissional profissional = documentSnapshot1.toObject(Profissional.class);
-                                            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                                            editor.putString("hospitalKey",hospital.getHospitalDocumentKey());
-                                            editor.apply();
-                                            int[] covers = new int[]{
-                                                    R.drawable.ic_person_black};
-                                            HomeModel p = new HomeModel(paciente.getNome()+" "+paciente.getSobrenome(),paciente.getBox(),paciente.getLeito(),
-                                                    covers[0],profissional.getNome()+ " "+profissional.getSobrenome(),paciente.getPacienteKey());
-                                            homeModelList.add(p);
-                                            homeAdapter.notifyDataSetChanged();
-                                            prepareListaPacientes();
-                                        }
-                                    });
-                                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshotItem : dataSnapshot.getChildren()){
+                    if(dataSnapshotItem.child("nome").getValue().equals("Santa Clara")){//Deve ser substituido para o nome do hospital escolhido pelo usuario E verificar se usuario trabalha lá
+                        hospital = dataSnapshotItem.getValue(Hospital.class);
+                        hospital.setHospitalDocumentKey(dataSnapshotItem.getKey());
+                        break;
+                    }
+                }
+                if(hospital!=null){
+                    homeModelList.clear();
+                    int[] covers = new int[]{
+                            R.drawable.ic_person_black};
+                    for (Map.Entry<String, Paciente> entry : hospital.getPacientes().entrySet()) {
+                        String medicoResponsavel = entry.getValue().getProfissionalResponsavel();
+                        for(Map.Entry<String,Profissional> entryProfissional : hospital.getProfissionais().entrySet()){
+                            if(entryProfissional.getKey().equals(medicoResponsavel)){
+                                HomeModel p = new HomeModel(entry.getValue().getNome()+" "+entry.getValue().getSobrenome(),entry.getValue().getBox(),entry.getValue().getLeito(),
+                                        covers[0],entryProfissional.getValue().getNome()+ " "+entryProfissional.getValue().getSobrenome(),entry.getKey());
+                                homeModelList.add(p);
+                                homeAdapter.notifyDataSetChanged();
+                                prepareListaPacientes();
                             }
-                        });
+                        }
                     }
                 }
             }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         });
+
+        /*FIRESTORE*/
+        //        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        progress.setVisibility(View.VISIBLE);
+//        db.collection("Hospital").whereEqualTo("nome","Santa Clara").addSnapshotListener(HomeActivity.this,new EventListener<QuerySnapshot>() {
+//            @Override
+//            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+//                for(DocumentSnapshot documentSnapshot : documentSnapshots){
+//                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+//                    hospital = documentSnapshot.toObject(Hospital.class);
+//                    hospital.setHospitalDocumentKey(documentSnapshot.getId());
+//                    SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("hospitalKey",hospital.getHospitalDocumentKey());
+//                    editor.apply();
+//                    db.collection("Hospital").document(hospital.getHospitalDocumentKey()).collection("Pacientes").addSnapshotListener(HomeActivity.this,new EventListener<QuerySnapshot>() {
+//                        @Override
+//                        public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+//                            homeModelList.clear();
+//                            for(DocumentSnapshot documentSnapshot : documentSnapshots){
+//                                final Paciente paciente = documentSnapshot.toObject(Paciente.class);
+//                                paciente.setPacienteKey(documentSnapshot.getId());
+//                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+//                                db.collection("Pessoa").document(paciente.getProfissionalResponsavel()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                                        DocumentSnapshot documentSnapshot1 = task.getResult();
+//                                        Profissional profissional = documentSnapshot1.toObject(Profissional.class);
+//                                        int[] covers = new int[]{
+//                                                R.drawable.ic_person_black};
+//                                        HomeModel p = new HomeModel(paciente.getNome()+" "+paciente.getSobrenome(),paciente.getBox(),paciente.getLeito(),
+//                                                covers[0],profissional.getNome()+ " "+profissional.getSobrenome(),paciente.getPacienteKey());
+//                                        homeModelList.add(p);
+//                                        homeAdapter.notifyDataSetChanged();
+//                                        prepareListaPacientes();
+//                                    }
+//                                });
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
     }
 
     @Override
@@ -265,6 +328,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                     sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("pacienteKey",homeModelList.get(position).getPacienteKey());
+                    editor.putString("hospitalKey",hospital.getHospitalDocumentKey());
                     editor.apply();
                     switch (item.getItemId()) {
                         case R.id.MnuOpc1:

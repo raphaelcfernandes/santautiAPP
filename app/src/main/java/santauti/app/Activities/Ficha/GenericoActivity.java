@@ -31,11 +31,8 @@ import santauti.app.R;
  */
 
 public abstract class GenericoActivity extends AppCompatActivity {
-    public String defaultSpinnerString = "Selecione";
     public Button proxFicha,antFicha;
     public Intent intent;
-    public int itemSelected =-1;
-    public AlertDialog.Builder builder;
     @Override
     public void onBackPressed(){
         finish();
@@ -94,17 +91,13 @@ public abstract class GenericoActivity extends AppCompatActivity {
     }
 
     public void changeCardColorToGreen(){
-        if(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position",0)).getColor()==0) {
-            FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
-            FichaActivity.adapter.notifyDataSetChanged();
-        }
+        FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
+        FichaActivity.adapter.notifyDataSetChanged();
     }
 
     public void setCardColorToDefault(){
-        if(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position",0)).getColor()==1) {
-            FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(0);
-            FichaActivity.adapter.notifyDataSetChanged();
-        }
+        FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(0);
+        FichaActivity.adapter.notifyDataSetChanged();
     }
 
     public final void prepareIntent(int position,Intent intent){

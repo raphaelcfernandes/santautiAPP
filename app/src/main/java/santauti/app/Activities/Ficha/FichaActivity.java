@@ -15,6 +15,9 @@ import android.view.View;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -23,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.PartesMedicas.BombaInfusaoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.DispositivoActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.EndocrinoActivity;
@@ -62,13 +66,13 @@ public class FichaActivity extends GenericoActivity{
         setToolbar(this.getString(R.string.Evolucao));
 
         /*******************LAYOUT VARIAVEIS*******************************/
-        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendFichaToServer(view);
-            }
-        });
+//        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                sendFichaToServer(view);
+//            }
+//        });
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         /*******************LAYOUT VARIAVEIS*******************************/
 
@@ -90,19 +94,24 @@ public class FichaActivity extends GenericoActivity{
      * Método para criar um novo Objeto do tipo Model.Ficha
      */
     private void createNewFicha(){
-        SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> docData = new HashMap<>();
-        docData.put("pacienteKey",sp.getString("pacienteKey",""));
-        docData.put("medicoKey",sp.getString("userKey",""));
-        db.collection("Hospital").document(sp.getString("hospitalKey","")).collection("Fichas").add(docData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                SnackbarCreator.createText(findViewById(R.id.fichaActivity).getRootView(), "Ficha salva com sucesso!");
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.fichaActivity).getRootView(),"Ficha salva com sucesso!",Snackbar.LENGTH_SHORT);
-                snackbar.show();
-            }
-        });
+        final SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        String key = FireBaseUtils.createNewFicha(sp.getString("pacienteKey",""),sp.getString("userKey",""),sp.getString("hospitalKey",""));
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("fichaKey",key);
+        editor.apply();
+        /*FIRESTORE*/
+        //        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        Map<String, Object> docData = new HashMap<>();
+//        docData.put("pacienteKey",sp.getString("pacienteKey",""));
+//        docData.put("medicoKey",sp.getString("userKey",""));
+//        db.collection("Hospital").document(sp.getString("hospitalKey","")).collection("Fichas").add(docData).addOnSuccessListener(FichaActivity.this,new OnSuccessListener<DocumentReference>() {
+//            @Override
+//            public void onSuccess(DocumentReference documentReference) {
+//                SharedPreferences.Editor editor = sp.edit();
+//                editor.putString("fichaKey",documentReference.getId());
+//                editor.apply();
+//            }
+//        });
     }
 
     @Override
@@ -110,7 +119,7 @@ public class FichaActivity extends GenericoActivity{
         super.onDestroy();
         SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.clear();
+        editor.remove("fichaKey");
         editor.apply();
     }
 
@@ -121,6 +130,8 @@ public class FichaActivity extends GenericoActivity{
         for(FichaAdapterModel fichaAdapterModel : fichaAdapterModelList)
             if(fichaAdapterModel.getColor()==1)
                 i++;
+        if(i>0 && i<fichaAdapterModelList.size())
+            adapter.notifyDataSetChanged();
 //        if(i==fichaAdapterModelList.size())
 //            floatingActionButton.setVisibility(View.VISIBLE);
 

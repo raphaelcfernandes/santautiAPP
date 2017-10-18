@@ -1,14 +1,33 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Model.Ficha.Metabolico;
 import santauti.app.R;
 
 /**
@@ -19,13 +38,15 @@ public class MetabolicoActivity extends GenericoActivity {
     private int i=0;
     private RadioGroup hidratacaoRadioGroup1,hidratacaoRadioGroup2;
     private RadioButton normoHidratado, edemaciado, desidratado;
+    SharedPreferences sharedPreferences;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_metabolico);
         findViewById(R.id.activity_metabolico).requestFocus();
         setToolbar(this.getString(R.string.Metabolico));
-
+        sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
         /********************RADIOGROUP****************************/
         hidratacaoRadioGroup1 = (RadioGroup)findViewById(R.id.hidratacaoRadioGroup1);
         hidratacaoRadioGroup2 = (RadioGroup)findViewById(R.id.hidratacaoRadioGroup2);
@@ -55,7 +76,7 @@ public class MetabolicoActivity extends GenericoActivity {
 
 
         prepareNavigationButtons();
-        setMetabolicoFromDataBase();
+
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,11 +103,41 @@ public class MetabolicoActivity extends GenericoActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setMetabolicoFromDataBase();
+    }
 
     private void setMetabolicoFromDataBase(){
-//        Ficha ficha = getProperFicha();
-//        if(ficha.getMetabolico()!=null)
-//            setRadioButtonFromIdAndDatabase(R.id.hidratacao,ficha.getMetabolico().getHidratacao());
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey",""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey","")).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("hidratacao"))
+                    setRadioButtonFromIdAndDatabase(R.id.hidratacao,dataSnapshot.child("hidratacao").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        /*FireSTORE*/
+        //        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//        databaseReference.child("Fichas").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if(dataSnapshot.exists())
+//                    setRadioButtonFromIdAndDatabase(R.id.hidratacao,dataSnapshot.getValue().toString());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 
 
@@ -122,11 +173,28 @@ public class MetabolicoActivity extends GenericoActivity {
         else if(hidratacaoRadioGroup2.getCheckedRadioButtonId()!=-1)
             hidratacaoStr = getStringOfRadioButtonSelectedFromRadioGroup(hidratacaoRadioGroup2);
         if(hidratacaoStr!=null) {
-//            Metabolico metabolico = new Metabolico(hidratacaoStr);
-//            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
-//            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-//            databaseReference.child("Fichas").child(sharedPreferences.getString("FichaKEY","")).setValue(metabolico.getHidratacao());
-//            changeCardColorToGreen();
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+            Metabolico metabolico = new Metabolico(hidratacaoStr);
+            FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                    .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(metabolico.toMap());
+            changeCardColorToGreen();
         }
+        /*FIRESTORE*/
+        //        String hidratacaoStr = null;
+//        if(hidratacaoRadioGroup1.getCheckedRadioButtonId()!=-1)
+//            hidratacaoStr = getStringOfRadioButtonSelectedFromRadioGroup(hidratacaoRadioGroup1);
+//        else if(hidratacaoRadioGroup2.getCheckedRadioButtonId()!=-1)
+//            hidratacaoStr = getStringOfRadioButtonSelectedFromRadioGroup(hidratacaoRadioGroup2);
+//        if(hidratacaoStr!=null){
+//            Metabolico metabolico = new Metabolico(hidratacaoStr);
+//            db.collection("Hospital").document(sharedPreferences.getString("hospitalKey",""))
+//                    .collection("Fichas").document(sharedPreferences.getString("fichaKey",""))
+//                    .update(metabolico.toMap()).addOnSuccessListener(MetabolicoActivity.this, new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void aVoid) {
+//                    changeCardColorToGreen();
+//                }
+//            });
+
     }
 }

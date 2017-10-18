@@ -8,7 +8,6 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class Profissional {
-    private boolean profissionalSaude;
     private String registro;
     private String especialidade;
     private String profissao;
@@ -18,14 +17,15 @@ public class Profissional {
     public Profissional() {
     }
 
-    public Profissional(boolean profissionalSaude, String registro, String especialidade, String profissao, String nome, String sobrenome) {
-        this.profissionalSaude = profissionalSaude;
+    public Profissional(String registro, String especialidade, String profissao, String nome, String sobrenome) {
         this.registro = registro;
         this.especialidade = especialidade;
         this.profissao = profissao;
         this.nome = nome;
         this.sobrenome = sobrenome;
     }
+
+
 
     public String getNome() {
         return nome;
@@ -41,14 +41,6 @@ public class Profissional {
 
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
-    }
-
-    public boolean isProfissionalSaude() {
-        return profissionalSaude;
-    }
-
-    public void setProfissionalSaude(boolean profissionalSaude) {
-        this.profissionalSaude = profissionalSaude;
     }
 
     public String getRegistro() {
