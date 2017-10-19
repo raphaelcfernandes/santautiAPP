@@ -1,11 +1,15 @@
 package santauti.app.APIServices;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 
 import santauti.app.Model.Ficha.Ficha;
+import santauti.app.R;
 
 /**
  * Created by rapha on 17-Oct-17.
@@ -13,7 +17,6 @@ import santauti.app.Model.Ficha.Ficha;
 
 public class FireBaseUtils {
     private static FirebaseDatabase mDatabase;
-
     public static FirebaseDatabase getDatabase() {
         if (mDatabase == null) {
             mDatabase = FirebaseDatabase.getInstance();
@@ -40,7 +43,7 @@ public class FireBaseUtils {
     }
 
     public static DatabaseReference getFichaHospitalReference(String hospitalKey,String fichaKey){
-        return getHospitalReference(hospitalKey).child(fichaKey);
+        return getHospitalReference("Hospital").child(hospitalKey).child("Fichas").child(fichaKey);
     }
 
 }

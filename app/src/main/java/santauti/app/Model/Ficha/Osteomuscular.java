@@ -1,7 +1,6 @@
 package santauti.app.Model.Ficha;
 
 import com.google.firebase.firestore.Exclude;
-import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +8,7 @@ import java.util.Map;
 /**
  * Created by rapha on 03-Oct-17.
  */
-@IgnoreExtraProperties
+
 public class Osteomuscular {
     private String tonusMuscular;
     private String trofismoMuscular;
@@ -34,6 +33,14 @@ public class Osteomuscular {
         this.trofismoMuscular = trofismoMuscular;
     }
 
+    public Osteomuscular() {
+    }
+
+    public Osteomuscular(String tonusMuscular, String trofismoMuscular) {
+        this.tonusMuscular = tonusMuscular;
+        this.trofismoMuscular = trofismoMuscular;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -41,6 +48,8 @@ public class Osteomuscular {
             result.put("tonusMuscular",tonusMuscular);
         if(trofismoMuscular!=null)
             result.put("trofismoMuscular",trofismoMuscular);
-        return result;
+        HashMap<String,Object> finalResult = new HashMap<>();
+        finalResult.put("Osteomuscular",result);
+        return finalResult;
     }
 }

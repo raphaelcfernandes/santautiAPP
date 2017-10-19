@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Renal;
 import santauti.app.R;
 
 /**
@@ -78,10 +75,10 @@ public class RenalActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), GastrointestinalActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -90,10 +87,10 @@ public class RenalActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), MetabolicoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
 

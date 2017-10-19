@@ -260,6 +260,10 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.apply();
     }
 
     private void prepareListaPacientes() {

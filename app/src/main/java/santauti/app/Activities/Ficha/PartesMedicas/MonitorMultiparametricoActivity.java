@@ -95,10 +95,10 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -107,10 +107,10 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), BombaInfusaoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
         setMonitorMultiparametricoFromDatabase();

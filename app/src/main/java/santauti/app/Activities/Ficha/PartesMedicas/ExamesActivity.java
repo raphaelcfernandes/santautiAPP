@@ -14,8 +14,6 @@ import android.widget.RadioGroup;
 import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
-import santauti.app.Model.Ficha.Exames;
-import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
 
 /**
@@ -247,10 +245,10 @@ public class ExamesActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), FolhasBalancoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
         setExamesFromDatabase();

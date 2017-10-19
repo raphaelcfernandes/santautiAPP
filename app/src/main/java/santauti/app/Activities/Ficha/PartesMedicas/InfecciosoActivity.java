@@ -7,8 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Infeccioso;
 import santauti.app.R;
 
 /**
@@ -29,10 +27,10 @@ public class InfecciosoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), MetabolicoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1,intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -41,10 +39,10 @@ public class InfecciosoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), NutricionalActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
         setInfecciosoFromDataBase();

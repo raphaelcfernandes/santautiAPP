@@ -175,10 +175,10 @@ public class NeurologicoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), RespiradorActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -187,10 +187,10 @@ public class NeurologicoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), HemodinamicoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
         setNeurologicoFromDatabase();

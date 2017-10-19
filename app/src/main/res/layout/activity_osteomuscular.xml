@@ -30,7 +30,7 @@
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Tonus"
+            android:text="@string/Trofismo"
             android:textSize="16sp"
             android:textColor="@android:color/black"
             android:paddingStart="@dimen/activity_horizontal_margin"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
-            android:id="@+id/musculaturaTonusRadioGroup">
+            android:id="@+id/musculaturaTrofismoRadioGroup">
             <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Trofismo"
+            android:text="@string/Tonus"
             android:textSize="16sp"
             android:textColor="@android:color/black"
             android:paddingStart="@dimen/activity_horizontal_margin"
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
-            android:id="@+id/musculaturaTrofismoRadioGroup">
+            android:id="@+id/musculaturaTonusRadioGroup">
             <android.support.v7.widget.AppCompatRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

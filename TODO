@@ -19,9 +19,9 @@ Descolorir card caso algum item tenha sido descelecionado (Funcionando -> Peles 
     Distribuir essa funcionalidade para os outros cards que possuem o mesmo esquema.
         -
 /*************MUDANĆAS*********************/
-Hematológico:
+Hematológico: Salvando.
 Monitor Multiparamétrico:
-Metabolico:
+Metabolico: Salvando.
 Dispositivos:
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
 Gastro:  (Corrigir slide de checkbox -> estilo do Respiratorio)

@@ -1,14 +1,23 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Model.Ficha.Ficha;
 import santauti.app.Model.Ficha.Hematologico;
 import santauti.app.R;
 
@@ -33,10 +42,10 @@ public class HematologicoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), NutricionalActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
            }
         });
 
@@ -45,10 +54,10 @@ public class HematologicoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), EndocrinoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
 
@@ -76,29 +85,37 @@ public class HematologicoActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter(){
-//        realm.beginTransaction();
-//        Hematologico hematologico = realm.createObject(Hematologico.class);
-//        String tromboprofilaxiaStr = getStringOfRadioButtonSelectedFromRadioGroup(tromboprofilaxia);
-//        if(tromboprofilaxiaStr!=null){
-//            Ficha r = getProperFicha();
-//            hematologico.setTromboprofilaxia(tromboprofilaxiaStr);
-//            r.setHematologico(hematologico);
-//            realm.copyToRealmOrUpdate(r);
-//            changeCardColorToGreen();
-//        }
-//        realm.commitTransaction();
+        String tromboprofilaxiaStr = getStringOfRadioButtonSelectedFromRadioGroup(tromboprofilaxia);
+        if(tromboprofilaxiaStr!=null){
+            Hematologico hematologico = new Hematologico(tromboprofilaxiaStr);
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+            FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                    .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(hematologico.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    changeCardColorToGreen();
+                }
+            });
+        }
     }
 
     private void setHematologicoFromDataBase(){
-//        Ficha ficha = getProperFicha();
-//
-//        if(ficha.getHematologico()!=null){
-//            if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.Nao)))
-//                tromboprofilaxia.check(R.id.naoTromboprofilaxia);
-//            else if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.HeparinaFracionada)))
-//                tromboprofilaxia.check(R.id.heparinaFracionada);
-//            else if(ficha.getHematologico().getTromboprofilaxia().equals(getString(R.string.HeparinaNaoFracionada)))
-//                tromboprofilaxia.check(R.id.heparinaNaoFracionada);
-//        }
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("Hematologico")){
+                    Hematologico hematologico = dataSnapshot.child("Hematologico").getValue(Hematologico.class);
+                    if(hematologico.getTromboprofilaxia()!=null)
+                        setRadioButtonFromIdAndDatabase(R.id.tromboprofilaxia_layout, hematologico.getTromboprofilaxia());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

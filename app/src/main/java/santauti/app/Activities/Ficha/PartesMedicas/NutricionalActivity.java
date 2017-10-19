@@ -3,17 +3,12 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Nutricional;
 import santauti.app.R;
 
 /**
@@ -46,10 +41,10 @@ public class NutricionalActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), InfecciosoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -58,10 +53,10 @@ public class NutricionalActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), HematologicoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
 

@@ -5,23 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-
-import java.util.HashMap;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.InputFilterMin;
 import santauti.app.Animation.MyAnimation;
-import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.FolhasBalanco.Evacuacoes;
-import santauti.app.Model.Ficha.FolhasBalanco.FolhasBalanco;
-import santauti.app.Model.Ficha.FolhasBalanco.Nutricao;
 import santauti.app.R;
 
 /**
@@ -137,10 +129,10 @@ public class FolhasBalancoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), ExamesActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -149,10 +141,10 @@ public class FolhasBalancoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), MonitorMultiparametricoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
 

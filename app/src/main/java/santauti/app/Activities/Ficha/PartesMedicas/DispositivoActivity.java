@@ -6,9 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Model.Ficha.Dispositivos;
-import santauti.app.Model.Ficha.Ficha;
 import santauti.app.R;
 
 /**
@@ -30,10 +29,10 @@ public class DispositivoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), BombaInfusaoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0) - 1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -42,10 +41,10 @@ public class DispositivoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), RespiradorActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0) + 1, intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
         setDispositivosFromDataBase();

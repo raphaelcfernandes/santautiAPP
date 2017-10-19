@@ -3,20 +3,14 @@ package santauti.app.Activities.Ficha.PartesMedicas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
-import santauti.app.Model.Ficha.Ficha;
-import santauti.app.Model.Ficha.Gastrointestinal.Gastrointestinal;
-import santauti.app.Model.Ficha.Gastrointestinal.Ostomias;
 import santauti.app.R;
 
 /**
@@ -205,10 +199,10 @@ public class GastrointestinalActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), RespiratorioActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0) - 1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -217,10 +211,10 @@ public class GastrointestinalActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), RenalActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0) + 1, intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
 

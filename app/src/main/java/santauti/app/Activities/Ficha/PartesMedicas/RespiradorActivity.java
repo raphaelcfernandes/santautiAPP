@@ -100,10 +100,10 @@ public class RespiradorActivity extends GenericoActivity{
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), DispositivoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -112,10 +112,10 @@ public class RespiradorActivity extends GenericoActivity{
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), NeurologicoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1, intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
 

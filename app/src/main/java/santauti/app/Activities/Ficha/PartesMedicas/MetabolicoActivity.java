@@ -12,18 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
@@ -83,10 +76,10 @@ public class MetabolicoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), RenalActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)-1, intent);
-                startActivity(intent);
-                exitActivityToLeft();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToLeft();
             }
         });
 
@@ -95,10 +88,10 @@ public class MetabolicoActivity extends GenericoActivity {
             public void onClick(View view) {
                 intent = new Intent(view.getContext(), InfecciosoActivity.class);
                 prepareIntent(getIntent().getIntExtra("Position", 0)+1,intent);
-                startActivity(intent);
-                exitActivityToRight();
                 verificaCamposENotificaAdapter();
                 finish();
+                startActivity(intent);
+                exitActivityToRight();
             }
         });
     }
@@ -112,11 +105,14 @@ public class MetabolicoActivity extends GenericoActivity {
     private void setMetabolicoFromDataBase(){
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
         FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey",""))
-                .child("Fichas").child(sharedPreferences.getString("fichaKey","")).addValueEventListener(new ValueEventListener() {
+                .child("Fichas").child(sharedPreferences.getString("fichaKey","")).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild("hidratacao"))
-                    setRadioButtonFromIdAndDatabase(R.id.hidratacao,dataSnapshot.child("hidratacao").getValue().toString());
+                if(dataSnapshot.hasChild("Metabolico")){
+                    Metabolico metabolico = dataSnapshot.child("Metabolico").getValue(Metabolico.class);
+                    if(metabolico.getHidratacao()!=null)
+                        setRadioButtonFromIdAndDatabase(R.id.hidratacao,metabolico.getHidratacao());
+                }
             }
 
             @Override
@@ -176,8 +172,12 @@ public class MetabolicoActivity extends GenericoActivity {
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
             Metabolico metabolico = new Metabolico(hidratacaoStr);
             FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
-                    .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(metabolico.toMap());
-            changeCardColorToGreen();
+                    .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(metabolico.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    changeCardColorToGreen();
+                }
+            });
         }
         /*FIRESTORE*/
         //        String hidratacaoStr = null;

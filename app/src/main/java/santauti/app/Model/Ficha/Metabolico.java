@@ -30,8 +30,10 @@ public class Metabolico {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        HashMap<String,Object> finalResult = new HashMap<>();
         result.put("hidratacao", hidratacao);
-        return result;
+        finalResult.put("Metabolico",result);
+        return finalResult;
     }
 
 }
