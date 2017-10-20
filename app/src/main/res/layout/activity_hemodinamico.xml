@@ -33,7 +33,7 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/TextStyle"
+                    android:textAppearance="@style/StyleParaTitulos"
                     android:text="@string/Pulso"
                     android:layout_gravity="start|center" />
                 <RadioGroup
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/FoneseBulhas"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
+                    android:textAppearance="@style/StyleParaTitulos"/>
                 <RadioGroup
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/Sopro"
-                    style="@style/TextStyle"
+                    android:textAppearance="@style/StyleParaTitulos"
                     />
                 <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/checkboxSopro"
@@ -171,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/TipoSopro"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
+                    style="@style/StyleParaTitulos"/>
                 <RelativeLayout
                     android:paddingTop="5dp"
                     android:orientation="horizontal"
@@ -239,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/IntensidadeSopro"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
+                    style="@style/StyleParaTitulos"/>
                 <RadioGroup
                     android:id="@+id/intensidadeSopro"
                     android:paddingTop="5dp"
@@ -324,7 +324,7 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/TextStyle"
+                    android:textAppearance="@style/StyleParaTitulos"
                     android:text="@string/PerfusaoCapilar"
                     android:layout_gravity="start|center"/>
                 <RadioGroup
@@ -379,7 +379,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Extremidades"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
+                    android:textAppearance="@style/StyleParaTitulos"/>
                 <RadioGroup
                     android:id="@+id/extremidadesCor"
                     android:orientation="horizontal"

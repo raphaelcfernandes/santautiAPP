@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/AvaliacaoPupilar"
-            style="@style/TitleTextStyleForLayoutSelection"/>
+            android:textAppearance="@style/StyleParaTitulos"/>
     </LinearLayout>
 
     <LinearLayout
@@ -37,7 +37,7 @@
                 android:text="@string/TamanhoPupila"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/TitleTextStyleForLayoutSelection"/>
+                style="@style/StyleParaTitulos"/>
             <RadioGroup
                 android:id="@+id/tamanhoPupila"
                 android:paddingTop="5dp"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/SimetriaPupila"
-                style="@style/TitleTextStyleForLayoutSelection"/>
+                style="@style/StyleParaTitulos"/>
             <RadioGroup
                 android:id="@+id/simetriaPupila"
                 android:paddingTop="5dp"
@@ -130,7 +130,7 @@
                 android:text="@string/DiferencaPupilar"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/TitleTextStyleForLayoutSelection"/>
+                style="@style/StyleParaTitulos"/>
             <RadioGroup
                 android:id="@+id/diferencaPupila"
                 android:paddingTop="5dp"
@@ -172,7 +172,7 @@
                 android:text="@string/ReatividadeALuzPupila"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="0dp"
-                style="@style/TitleTextStyleForLayoutSelection"/>
+                style="@style/StyleParaTitulos"/>
             <RadioGroup
                 android:paddingTop="5dp"
                 android:paddingStart="10dp"

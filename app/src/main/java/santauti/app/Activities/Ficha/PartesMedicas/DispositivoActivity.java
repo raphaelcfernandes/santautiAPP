@@ -1,13 +1,28 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Model.Ficha.Dispositivos;
+import santauti.app.Model.Ficha.Osteomuscular;
 import santauti.app.R;
 
 /**
@@ -51,9 +66,25 @@ public class DispositivoActivity extends GenericoActivity {
     }
 
     private void setDispositivosFromDataBase() {
-//        Ficha ficha = getProperFicha();
-//        if (ficha.getDispositivos() != null && !ficha.getDispositivos().getNomeDispositivos().isEmpty())
-//            preencheCheckboxes(R.id.dispositivos,ficha.getDispositivos().getNomeDispositivos());
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("Dispositivos")){
+                    Dispositivos dispositivos = new Dispositivos();
+                    dispositivos.initializeList();
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.child("Dispositivos").getChildren())
+                        dispositivos.addString(dataSnapshot1.getValue().toString());
+                    preencheCheckboxes(R.id.dispositivos,dispositivos.getDispositivos());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -79,16 +110,13 @@ public class DispositivoActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter(){
-//        realm.beginTransaction();
-//        Dispositivos dispositivos = realm.createObject(Dispositivos.class);
-//        Ficha r = getProperFicha();
-//        RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.dispositivos);
-//        for(RealmString realmString : realmStrings)
-//            dispositivos.getNomeDispositivos().add(realmString);
-//        r.setDispositivos(dispositivos);
-//        realm.copyToRealmOrUpdate(r);
-//        realm.commitTransaction();
-//        changeCardColorToGreen();
+        Dispositivos dispositivos = new Dispositivos();
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        List<String> strings = getCheckBoxesPreenchidos(R.id.dispositivos);
+        dispositivos.setDispositivos(strings);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(dispositivos.toMap());
+        changeCardColorToGreen();
     }
 
 }

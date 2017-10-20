@@ -1,14 +1,29 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.BombaInfusao;
+import santauti.app.Model.Ficha.Dispositivos;
 import santauti.app.R;
 
 /**
@@ -128,37 +143,56 @@ public class BombaInfusaoActivity extends GenericoActivity {
                 exitActivityToRight();
             }
         });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         setBombaInfusaoFromDatabase();
     }
 
     private void setBombaInfusaoFromDatabase(){
-//        Ficha ficha = getProperFicha();
-//        if(ficha.getBombaInfusao()!=null && !ficha.getBombaInfusao().getBombaInfusaoItens().isEmpty()){
-//            RealmList<BombaInfusaoItens> bombaInfusaoItens = ficha.getBombaInfusao().getBombaInfusaoItens();
-//            HashMap<String,Integer> bombaInfusaoItensHashMap = new HashMap<>();
-//            for(BombaInfusaoItens bombaInfusaoItem : bombaInfusaoItens)
-//                bombaInfusaoItensHashMap.put(bombaInfusaoItem.getDroga(),bombaInfusaoItem.getVelocidade());
-//            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
-//            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-//                View v = linearLayout.getChildAt(i);
-//                if(v instanceof LinearLayout){
-//                    for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
-//                        View view = ((LinearLayout) v).getChildAt(k);
-//                        if (view instanceof AppCompatCheckBox) {
-//                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
-//                            if (bombaInfusaoItensHashMap.containsKey(cb.getText().toString())){
-//                                k++;
-//                                cb.setChecked(true);
-//                                view = ((LinearLayout)v).getChildAt(k);
-//                                view.setVisibility(View.VISIBLE);
-//                                ((TextInputLayout) view).getEditText().
-//                                        setText(Integer.toString(bombaInfusaoItensHashMap.get(cb.getText().toString())));
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("BombaInfusao")){
+                    BombaInfusao bombaInfusao = new BombaInfusao();
+                    bombaInfusao.initializeMap();
+                    Map<String,Integer> map = new HashMap<>();
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.child("BombaInfusao").getChildren())
+                        map.put(dataSnapshot1.getKey(),Integer.parseInt(dataSnapshot1.getValue().toString()));
+                    LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
+                    for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                        View v = linearLayout.getChildAt(i);
+                        if(v instanceof LinearLayout){
+                            for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+                                View view = ((LinearLayout) v).getChildAt(k);
+                                if (view instanceof AppCompatCheckBox) {
+                                    AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                                    String str  = cb.getText().toString();
+                                    if (map.containsKey(str)){
+                                        k++;
+                                        cb.setChecked(true);
+                                        view = ((LinearLayout)v).getChildAt(k);
+                                        view.setVisibility(View.VISIBLE);
+                                        ((TextInputLayout) view).getEditText().
+                                                setText(Integer.toString(map.get(str)));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void showTextInputEditText(int id){
@@ -190,32 +224,29 @@ public class BombaInfusaoActivity extends GenericoActivity {
     }
 
     public void verificaCamposENotificaAdapter(){
-//        realm.beginTransaction();
-//        BombaInfusao bombaInfusao = realm.createObject(BombaInfusao.class);
-//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
-//        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-//            View v = linearLayout.getChildAt(i);
-//            if(v instanceof LinearLayout){
-//                for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
-//                    View view = ((LinearLayout) v).getChildAt(k);
-//                    if (view instanceof AppCompatCheckBox) {
-//                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-//                        if (cb.isChecked()) {
-//                            k++;
-//                            view = ((LinearLayout)v).getChildAt(k);
-//                            BombaInfusaoItens bombaInfusaoItens = realm.createObject(BombaInfusaoItens.class);
-//                            bombaInfusaoItens.setDroga(cb.getText().toString());
-//                            bombaInfusaoItens.setVelocidade(Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
-//                            bombaInfusao.getBombaInfusaoItens().add(bombaInfusaoItens);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        Ficha ficha = getProperFicha();
-//        ficha.setBombaInfusao(bombaInfusao);
-//        realm.copyToRealmOrUpdate(ficha);
-//        realm.commitTransaction();
-//        changeCardColorToGreen();
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.drogas);
+        BombaInfusao bombaInfusao = new BombaInfusao();
+        bombaInfusao.initializeMap();
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            View v = linearLayout.getChildAt(i);
+            if(v instanceof LinearLayout){
+                for (int k = 0; k < ((LinearLayout) v).getChildCount(); k++) {
+                    View view = ((LinearLayout) v).getChildAt(k);
+                    if (view instanceof AppCompatCheckBox) {
+                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                        if (cb.isChecked()) {
+                            k++;
+                            view = ((LinearLayout)v).getChildAt(k);
+                            if(!(((TextInputLayout) view).getEditText().getText().toString().trim().isEmpty()))
+                                bombaInfusao.inserseDispositivo(cb.getText().toString(),Integer.parseInt(((TextInputLayout) view).getEditText().getText().toString()));
+                        }
+                    }
+                }
+            }
+        }
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(bombaInfusao.toMap());
+        changeCardColorToGreen();
     }
 }

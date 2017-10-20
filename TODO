@@ -22,19 +22,19 @@ Descolorir card caso algum item tenha sido descelecionado (Funcionando -> Peles 
 Hematológico: Salvando.
 Monitor Multiparamétrico:
 Metabolico: Salvando.
-Dispositivos:
+Dispositivos: Salvando.
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
-Gastro:  (Corrigir slide de checkbox -> estilo do Respiratorio)
+Gastro:
 Endocrino: Salvando.
 Osteomuscular: Salvando.
 Nutricional:
-Renal:  (Corrigir slide de checkbox -> estilo do Respiratorio)
+Renal:
 Respiratorio:
 Pele e Mucosas:
 Hemodinamico:
-Infeccioso:
-Respirador:  Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL
-Bomba de infusao:
+Infeccioso: Salvando.
+Respirador:  Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL. Erro radio button modo ventilatorio
+Bomba de infusao: Salvando.
 Folhas de balanćo:
     - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
         - Volume/mlpa
@@ -42,7 +42,7 @@ Folhas de balanćo:
 Exames:
 /*****************MUDANÇAS FEITAS**********/
 
-Neurologico: OK -> (permitir que usuario desmarque radio button -> Ainda n sei como).
+Neurologico: Erro radio button anisocorico avaliacao pupilar
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Temporo espacial: Corrigir.
             - orientado, desorientado

@@ -15,7 +15,7 @@
             android:textStyle="bold"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingStart="@dimen/activity_horizontal_margin"
-            style="@style/TitleTextStyleForLayoutSelection"
+            style="@style/StyleParaTitulos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/GasometriaArterial" />

@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
@@ -22,7 +23,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import santauti.app.R;
 
@@ -181,47 +186,44 @@ public abstract class GenericoActivity extends AppCompatActivity {
         }
     }
 
-//    public void preencheCheckboxes(int id, RealmList<RealmString> realmStrings){
-//        for(RealmString realmString : realmStrings){
-//            LinearLayout linearLayout = (LinearLayout) findViewById(id);
-//            for (int i = 0; i < linearLayout.getChildCount(); i++) {
-//                View v = linearLayout.getChildAt(i);
-//                if (v instanceof RelativeLayout) {
-//                    for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
-//                        View view = ((RelativeLayout) v).getChildAt(k);
-//                        if (view instanceof AppCompatCheckBox) {
-//                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
-//                            if (cb.getText().toString().equals(realmString.getName()))
-//                                cb.setChecked(true);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    public void preencheCheckboxes(int id, List<String> strings){
+        for(String string : strings){
+            LinearLayout linearLayout = (LinearLayout) findViewById(id);
+            for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                View v = linearLayout.getChildAt(i);
+                if (v instanceof RelativeLayout) {
+                    for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+                        View view = ((RelativeLayout) v).getChildAt(k);
+                        if (view instanceof AppCompatCheckBox) {
+                            AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                            if (cb.getText().toString().equals(string))
+                                cb.setChecked(true);
+                        }
+                    }
+                }
+            }
+        }
+    }
 //
-//    public RealmList<RealmString> getCheckBoxesPreenchidos(int id){
-//        Realm realm = Realm.getDefaultInstance();
-//        RealmList<RealmString> realmStrings = new RealmList<>();
-//        LinearLayout linearLayout = (LinearLayout) findViewById(id);
-//        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-//            View v = linearLayout.getChildAt(i);
-//            if(v instanceof RelativeLayout){
-//                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
-//                    View view = ((RelativeLayout) v).getChildAt(k);
-//                    if (view instanceof AppCompatCheckBox) {
-//                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-//                        if (cb.isChecked()) {
-//                            RealmString realmString = realm.createObject(RealmString.class);
-//                            realmString.setName(cb.getText().toString());
-//                            realmStrings.add(realmString);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return realmStrings;
-//    }
+    public List<String> getCheckBoxesPreenchidos(int id){
+        List<String> strings = new ArrayList<>();
+        LinearLayout linearLayout = (LinearLayout) findViewById(id);
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            View v = linearLayout.getChildAt(i);
+            if(v instanceof RelativeLayout){
+                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
+                    View view = ((RelativeLayout) v).getChildAt(k);
+                    if (view instanceof AppCompatCheckBox) {
+                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
+                        if (cb.isChecked()) {
+                            strings.add(cb.getText().toString());
+                        }
+                    }
+                }
+            }
+        }
+        return strings;
+    }
 //
 //    public void abreLayoutMarcaCheckboxEPreenche(CheckBox checkbox, View view,int id,RealmList<RealmString> realmStrings){
 //        checkbox.setChecked(true);

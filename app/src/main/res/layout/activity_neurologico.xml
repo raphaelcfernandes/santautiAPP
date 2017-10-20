@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/TemporoEspacial"
-                    style="@style/TitleTextStyleForLayoutSelection"/>
+                    android:textAppearance="@style/StyleParaTitulos"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -51,13 +51,13 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="150dp"
-                        style="@style/TitleTextStyleForLayoutSelection"
+                        style="@style/StyleParaTitulos"
                         android:text="@string/Orientado"/>
                     <TextView
                         android:paddingTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/TitleTextStyleForLayoutSelection"
+                        style="@style/StyleParaTitulos"
                         android:text="@string/Desorientado"/>
                 </LinearLayout>
             </LinearLayout>

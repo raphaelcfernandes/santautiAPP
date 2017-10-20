@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/NivelConsciencia"
-            style="@style/TitleTextStyleForLayoutSelection"/>
+            android:textAppearance="@style/StyleParaTitulos"/>
         <TextView
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"

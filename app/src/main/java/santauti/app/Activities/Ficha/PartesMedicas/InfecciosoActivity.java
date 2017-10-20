@@ -1,12 +1,23 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Model.Ficha.Dispositivos;
+import santauti.app.Model.Ficha.Infeccioso;
 import santauti.app.R;
 
 /**
@@ -49,9 +60,25 @@ public class InfecciosoActivity extends GenericoActivity {
     }
 
     private void setInfecciosoFromDataBase(){
-//        Ficha ficha = getProperFicha();
-//        if(ficha.getInfeccioso()!=null && !ficha.getInfeccioso().getAntibioticos().isEmpty())
-//            preencheCheckboxes(R.id.antibioticos,ficha.getInfeccioso().getAntibioticos());
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("Infeccioso")){
+                    Infeccioso infeccioso = new Infeccioso();
+                    infeccioso.initializeList();
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.child("Infeccioso").getChildren())
+                        infeccioso.addString(dataSnapshot1.getValue().toString());
+                    preencheCheckboxes(R.id.antibioticos,infeccioso.getInfeccioso());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -76,15 +103,12 @@ public class InfecciosoActivity extends GenericoActivity {
     }
 
     public void verificaCamposENotificaAdapter(){
-//        realm.beginTransaction();
-//        Ficha ficha = getProperFicha();
-//        Infeccioso infeccioso = realm.createObject(Infeccioso.class);
-//        RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.antibioticos);
-//        for(RealmString realmString : realmStrings)
-//            infeccioso.getAntibioticos().add(realmString);
-//        ficha.setInfeccioso(infeccioso);
-//        realm.copyToRealmOrUpdate(ficha);
-//        changeCardColorToGreen();
-//        realm.commitTransaction();
+        Infeccioso infeccioso = new Infeccioso();
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        List<String> strings = getCheckBoxesPreenchidos(R.id.antibioticos);
+        infeccioso.setInfeccioso(strings);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(infeccioso.toMap());
+        changeCardColorToGreen();
     }
 }

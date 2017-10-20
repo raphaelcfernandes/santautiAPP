@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/FuncaoHepatica"
-            style="@style/TitleTextStyleForLayoutSelection"/>
+            style="@style/StyleParaTitulos"/>
         <LinearLayout
             android:layout_weight="0.9"
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:text="@string/Bilirrubinas"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="0dp"
-                style="@style/TitleTextStyleForLayoutSelection"
+                style="@style/StyleParaTitulos"
                 android:textSize="15sp"/>
             <RadioGroup
                 android:id="@+id/bilirrubinas"
@@ -73,7 +73,7 @@
                 android:text="@string/FAGGT"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="0dp"
-                style="@style/TitleTextStyleForLayoutSelection"
+                style="@style/StyleParaTitulos"
                 android:textSize="15sp"/>
             <RadioGroup
                 android:id="@+id/faggt"
@@ -115,7 +115,7 @@
                 android:text="@string/Transaminases"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="0dp"
-                style="@style/TitleTextStyleForLayoutSelection"
+                style="@style/StyleParaTitulos"
                 android:textSize="15sp"/>
             <RadioGroup
                 android:id="@+id/transaminases"

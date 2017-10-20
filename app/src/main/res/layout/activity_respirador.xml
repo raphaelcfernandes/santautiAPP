@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/EstaVentilacaoMecanica"
-                    style="@style/TextStyle"
+                    android:textAppearance="@style/StyleParaTitulos"
                     />
                 <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/checkboxEmVentilacaoMecanica"
@@ -74,7 +74,7 @@
                     android:paddingTop="10dp"
                     android:id="@+id/modoVentilatorioLinearLayout">
                     <TextView
-                        style="@style/TitleTextStyleForLayoutSelection"
+                        style="@style/StyleParaTitulos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"

@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
-                style="@style/TextStyle"
+                android:textAppearance="@style/StyleParaTitulos"
                 android:text="@string/Urina" />
             <RadioGroup
                 android:paddingBottom="5dp"
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/EmDialise"
-                    style="@style/TextStyle"
+                    android:textAppearance="@style/StyleParaTitulos"
                     />
                 <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/checkboxEmDialise"
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/UF"
-                        style="@style/TextStyle"
+                        android:textAppearance="@style/StyleParaTitulos"
                         />
                     <android.support.v7.widget.AppCompatCheckBox
                         android:id="@+id/ufCheckbox"
