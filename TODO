@@ -19,18 +19,21 @@ Descolorir card caso algum item tenha sido descelecionado (Funcionando -> Peles 
     Distribuir essa funcionalidade para os outros cards que possuem o mesmo esquema.
         -
 /*************MUDANĆAS*********************/
+Colocar itens para False caso n marcados. COMO EM RENAL.
+
+
 Hematológico: Salvando.
 Monitor Multiparamétrico:
 Metabolico: Salvando.
 Dispositivos: Salvando.
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
-Gastro:
+Gastro: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Endocrino: Salvando.
 Osteomuscular: Salvando.
-Nutricional:
-Renal:
+Nutricional: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
+Renal: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Respiratorio:
-Pele e Mucosas:
+Pele e Mucosas: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Hemodinamico:
 Infeccioso: Salvando.
 Respirador:  Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL. Erro radio button modo ventilatorio
@@ -53,7 +56,12 @@ Neurologico: Erro radio button anisocorico avaliacao pupilar
             Delirium, sim -> hipoativo,hiperativo
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinamicamente estavel e hemodinamicamente instavel -> Folhas Balanco
-
+Pendencias -> banco de dados (webSite)
+    - Tipo, data de insercao, data de solucao, campo livre para comentario
+    - Interligar com tela da secretaria. quando inserir pendencia, lanćar na scecretaria (tela só com pendencia) de modo q secretaria n consegue apagar
+    - lanćar numa tela "TODO" (Claudio) quadro publico. -> tela de consulta
+    - pendencia -> lanćamento de dados
+    - Realiza quando está editando ficha.
 -------------------------
 Website
 Neurologico

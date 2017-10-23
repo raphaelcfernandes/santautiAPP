@@ -1,15 +1,30 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.Metabolico;
+import santauti.app.Model.Ficha.PelesMucosas;
 import santauti.app.R;
 
 /**
@@ -89,7 +104,22 @@ public class PelesMucosasActivity extends GenericoActivity{
     }
 
     private void setPelesMucosasFromDatabase(){
-//        Ficha ficha = getProperFicha();
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey",""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey","")).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("PelesMucosas")){
+                    PelesMucosas pelesMucosas = dataSnapshot.child("PelesMucosas").getValue(PelesMucosas.class);
+                    System.out.println(pelesMucosas);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        //        Ficha ficha = getProperFicha();
 //        if(ficha.getPelesMucosas()!=null){
 //            PelesMucosas pelesMucosas = ficha.getPelesMucosas();
 //            if(pelesMucosas.getPele()!=null)
@@ -142,40 +172,42 @@ public class PelesMucosasActivity extends GenericoActivity{
     }
 
     private void verificaCamposENotificaAdapter() {
-//        realm.beginTransaction();
-//        PelesMucosas pelesMucosas = realm.createObject(PelesMucosas.class);
-//        if(peleRadioGroup.getCheckedRadioButtonId()!=-1)
-//            pelesMucosas.setPele(getStringOfRadioButtonSelectedFromRadioGroup(peleRadioGroup));
-//        if(checkBoxUlceraPressao.isChecked()){
-//            pelesMucosas.setUlceraPressaoChecked(true);
-//            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.ulceraPressaoItensLayout);
-//            for(RealmString realmString : realmStrings)
-//                pelesMucosas.getUlceraPressao().add(realmString);
-//        }
-//        if(mucosasColoracao.getCheckedRadioButtonId()!=-1)
-//            pelesMucosas.setMucosasColoracao(getStringOfRadioButtonSelectedFromRadioGroup(mucosasColoracao));
-//        if(mucosasColoracao2.getCheckedRadioButtonId()!=-1)
-//            pelesMucosas.setMucosasColoracao2(getStringOfRadioButtonSelectedFromRadioGroup(mucosasColoracao2));
-//        if(mucosasUmidade.getCheckedRadioButtonId()!=-1)
-//            pelesMucosas.setMucosasUmidade(getStringOfRadioButtonSelectedFromRadioGroup(mucosasUmidade));
-//        if(checkBoxIctericia.isChecked()){
-//            if(ictericiaItensRadioGroup.getCheckedRadioButtonId()!=-1) {
-//                StringBuilder sb = new StringBuilder(getStringOfRadioButtonSelectedFromRadioGroup(ictericiaItensRadioGroup));
-//                sb.deleteCharAt(0);
-//                pelesMucosas.setIctericia(Integer.parseInt(sb.toString()));
-//            }
-//        }
-//        else if(!checkBoxIctericia.isChecked())
-//            pelesMucosas.setIctericia(0);
-//
-//        Ficha r = getProperFicha();
-//        r.setPelesMucosas(pelesMucosas);
-//        realm.copyToRealmOrUpdate(r);
-//        realm.commitTransaction();
-//        if(pelesMucosas.checkObject())
-//            changeCardColorToGreen();
-//        else
-//            setCardColorToDefault();
+        final PelesMucosas pelesMucosas = new PelesMucosas();
+        pelesMucosas.initializeLists();
+
+        if(peleRadioGroup.getCheckedRadioButtonId()!=-1)
+            pelesMucosas.setPele(getStringOfRadioButtonSelectedFromRadioGroup(peleRadioGroup));
+        if(checkBoxUlceraPressao.isChecked()){
+            pelesMucosas.setUlceraPressao(getCheckBoxesPreenchidos(R.id.ulceraPressaoItensLayout));
+            pelesMucosas.setUlceraP(true);
+        }
+        if(mucosasColoracao.getCheckedRadioButtonId()!=-1)
+            pelesMucosas.addtMucosas(getStringOfRadioButtonSelectedFromRadioGroup(mucosasColoracao));
+        if(mucosasColoracao2.getCheckedRadioButtonId()!=-1)
+            pelesMucosas.addtMucosas(getStringOfRadioButtonSelectedFromRadioGroup(mucosasColoracao2));
+        if(mucosasUmidade.getCheckedRadioButtonId()!=-1)
+            pelesMucosas.addtMucosas(getStringOfRadioButtonSelectedFromRadioGroup(mucosasUmidade));
+        if(checkBoxIctericia.isChecked()) {
+            pelesMucosas.setIctericiaFlag(true);
+            if (ictericiaItensRadioGroup.getCheckedRadioButtonId() != -1)
+                pelesMucosas.setIctericia(Integer.parseInt(getStringOfRadioButtonSelectedFromRadioGroup(ictericiaItensRadioGroup)));
+        }
+        else if(!checkBoxIctericia.isChecked()) {
+            pelesMucosas.setIctericia(0);
+            pelesMucosas.setIctericiaFlag(false);
+        }
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(pelesMucosas.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(pelesMucosas.checkObject())
+                    changeCardColorToGreen();
+                else
+                    setCardColorToDefault();
+            }
+        });
     }
 
     @Override

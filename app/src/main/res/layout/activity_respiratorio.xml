@@ -206,7 +206,7 @@
                     android:visibility="gone"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
-                    android:id="@+id/murmursioVesicularItens">
+                    android:id="@+id/murmurioVesicularItens">
                     <RelativeLayout
                         android:paddingTop="10dp"
                         android:layout_width="match_parent"
