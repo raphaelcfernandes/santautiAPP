@@ -14,16 +14,12 @@ FICHA:
     - Meu pai sugeriu mostrar as fichas como o feed do FB
     - Snackbar por cima dos botoes
 
-
-Descolorir card caso algum item tenha sido descelecionado (Funcionando -> Peles e Mucosas)
-    Distribuir essa funcionalidade para os outros cards que possuem o mesmo esquema.
-        -
 /*************MUDANĆAS*********************/
 Colocar itens para False caso n marcados. COMO EM RENAL.
 
 
 Hematológico: Salvando.
-Monitor Multiparamétrico:
+Monitor Multiparamétrico: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Metabolico: Salvando.
 Dispositivos: Salvando.
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
@@ -32,20 +28,22 @@ Endocrino: Salvando.
 Osteomuscular: Salvando.
 Nutricional: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Renal: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
-Respiratorio:
+Respiratorio: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
+     - Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL.
 Pele e Mucosas: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
-Hemodinamico:
+Hemodinamico: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Infeccioso: Salvando.
-Respirador:  Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL. Erro radio button modo ventilatorio
+Respirador: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Bomba de infusao: Salvando.
-Folhas de balanćo:
+Folhas de balanćo: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
     - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
         - Volume/mlpa
         - aspecto: gastrico, fecaloide, biliar
-Exames:
+Exames: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
+Neurologico: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 /*****************MUDANÇAS FEITAS**********/
 
-Neurologico: Erro radio button anisocorico avaliacao pupilar
+Neurologico:
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Temporo espacial: Corrigir.
             - orientado, desorientado

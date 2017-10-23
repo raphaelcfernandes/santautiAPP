@@ -1,6 +1,8 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -11,9 +13,13 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.List;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.FichaActivity;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.Exames;
 import santauti.app.R;
 
 /**
@@ -312,8 +318,8 @@ public class ExamesActivity extends GenericoActivity {
 //                setRadioButtonFromIdAndDatabase(R.id.marcadoresInfeccaoLinearLayout,exames.getMarcadoresInfeccao());
 //            if(exames.getAlbumina()!=null)
 //                setRadioButtonFromIdAndDatabase(R.id.albuminaLinearLayout,exames.getAlbumina());
-//            if(exames.getRaioxTorax()!=null) {
-//                setRadioButtonFromIdAndDatabase(R.id.raioxToraxLayout, exames.getRaioxTorax());
+//            if(exames.getDiagnosticoRaioX()!=null) {
+//                setRadioButtonFromIdAndDatabase(R.id.raioxToraxLayout, exames.getDiagnosticoRaioX());
 //                if(!exames.getRaioxToraxList().isEmpty()) {
 //                    preencheCheckboxes(R.id.raioxToraxItensLayout, exames.getRaioxToraxList());
 //                    findViewById(R.id.raioxToraxItensLayout).setVisibility(View.VISIBLE);
@@ -334,7 +340,7 @@ public class ExamesActivity extends GenericoActivity {
         @Override
         public void onClick(View v) {
             if(marcadoresInfeccaoRadioGroup1.getCheckedRadioButtonId()!=-1)
-                calcioRadioGroup1.clearCheck();
+                marcadoresInfeccaoRadioGroup1.clearCheck();
         }
     };
 
@@ -531,111 +537,93 @@ public class ExamesActivity extends GenericoActivity {
     }
 
     public void verificaCamposENotificaAdapter(){
-//        realm.beginTransaction();
-//        Ficha ficha = getProperFicha();
-//        Exames exames = realm.createObject(Exames.class);
-//        if(!isTextInputEditTextEmpty(hematocrito))
-//            exames.setHematocrito(getIntegerFromTextInputEditText(hematocrito));
-//        else
-//            exames.setHematocrito(0);
-//        if(!isTextInputEditTextEmpty(hemoglobina))
-//            exames.setHemoglobina(getIntegerFromTextInputEditText(hemoglobina));
-//        else
-//            exames.setHemoglobina(0);
-//        if(!isTextInputEditTextEmpty(plaquetas))
-//            exames.setPlaquetas(getIntegerFromTextInputEditText(plaquetas));
-//        else
-//            exames.setPlaquetas(0);
-//        if(!isTextInputEditTextEmpty(ureia))
-//            exames.setUreia(getIntegerFromTextInputEditText(ureia));
-//        else
-//            exames.setUreia(0);
-//        if(!isTextInputEditTextEmpty(creatinina))
-//            exames.setCreatinina(getIntegerFromTextInputEditText(creatinina));
-//        else
-//            exames.setCreatinina(0);
-//        if(leucogramaRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setLeucograma(getStringOfRadioButtonSelectedFromRadioGroup(leucogramaRadioGroup1));
-//        else if(leucogramaRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setLeucograma(getStringOfRadioButtonSelectedFromRadioGroup(leucogramaRadioGroup2));
-//        if(pcrRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setPcr(getStringOfRadioButtonSelectedFromRadioGroup(pcrRadioGroup1));
-//        else if(pcrRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setPcr(getStringOfRadioButtonSelectedFromRadioGroup(pcrRadioGroup2));
-//        if(potassioRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setPotassio(getStringOfRadioButtonSelectedFromRadioGroup(potassioRadioGroup1));
-//        else if(potassioRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setPotassio(getStringOfRadioButtonSelectedFromRadioGroup(potassioRadioGroup2));
-//        if(magnesioRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setMagnesio(getStringOfRadioButtonSelectedFromRadioGroup(magnesioRadioGroup1));
-//        if(magnesioRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setMagnesio(getStringOfRadioButtonSelectedFromRadioGroup(magnesioRadioGroup2));
-//        if(fosforoRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setFosforo(getStringOfRadioButtonSelectedFromRadioGroup(fosforoRadioGroup1));
-//        if(fosforoRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setFosforo(getStringOfRadioButtonSelectedFromRadioGroup(fosforoRadioGroup2));
-//        if(calcioRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setCalcio(getStringOfRadioButtonSelectedFromRadioGroup(calcioRadioGroup1));
-//        if(calcioRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setCalcio(getStringOfRadioButtonSelectedFromRadioGroup(calcioRadioGroup2));
-//        if(gasometriaArterialAcidoseRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setGasometriaArterialAcidoseAlcalose(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialAcidoseRadioGroup1));
-//        else if(gasometriaArterialAcidoseRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setGasometriaArterialAcidoseAlcalose(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialAcidoseRadioGroup2));
-//        if(gasometriaArterialMetabolicaRespiratoriaRadioGroup.getCheckedRadioButtonId()!=-1){
-//            exames.setGasometrialArterialMetabolicaRespiratoria(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialMetabolicaRespiratoriaRadioGroup));
-//            if(!getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialMetabolicaRespiratoriaRadioGroup).equals(getString(R.string.Mista))){
-//                if(gasometriaArterialCompensadaDescompensada.getCheckedRadioButtonId()!=-1)
-//                    exames.setGasometriaArterialCompensadaDescompensada(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialCompensadaDescompensada));
-//            }
-//        }
-//        if(bilirrubinas.getCheckedRadioButtonId()!=-1)
-//            exames.setFuncaoHepaticaBilirrubinas(getStringOfRadioButtonSelectedFromRadioGroup(bilirrubinas));
-//        if(faggt.getCheckedRadioButtonId()!=-1)
-//            exames.setFuncaoHepaticaFAGGT(getStringOfRadioButtonSelectedFromRadioGroup(faggt));
-//        if(transaminases.getCheckedRadioButtonId()!=-1)
-//            exames.setFuncaoHepaticaTransaminases(getStringOfRadioButtonSelectedFromRadioGroup(transaminases));
-//        if(lactato.getCheckedRadioButtonId()!=-1)
-//            exames.setLactato(getStringOfRadioButtonSelectedFromRadioGroup(lactato));
-//        if(checkboxAmilase.isChecked()){
-//            exames.setAmilaseChecked(true);
-//            if(amilaseItens.getCheckedRadioButtonId()!=-1)
-//                exames.setAmilase(getStringOfRadioButtonSelectedFromRadioGroup(amilaseItens));
-//        }
-//        if(marcadoresInfeccaoRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setMarcadoresInfeccao(getStringOfRadioButtonSelectedFromRadioGroup(marcadoresInfeccaoRadioGroup1));
-//        if(marcadoresInfeccaoRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setMarcadoresInfeccao(getStringOfRadioButtonSelectedFromRadioGroup(marcadoresInfeccaoRadioGroup2));
-//        if(albuminaRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            exames.setAlbumina(getStringOfRadioButtonSelectedFromRadioGroup(albuminaRadioGroup1));
-//        else if(albuminaRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            exames.setAlbumina(getStringOfRadioButtonSelectedFromRadioGroup(albuminaRadioGroup2));
-//
-//        if(raioxToraxRadioGroup1.getCheckedRadioButtonId()!=-1){
-//            if(!raioxNormal.isChecked()){
-//                RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.raioxToraxItensLayout);
-//                for(RealmString realmString : realmStrings)
-//                    exames.getRaioxToraxList().add(realmString);
-//            }
-//            exames.setRaioxTorax(getStringOfRadioButtonSelectedFromRadioGroup(raioxToraxRadioGroup1));
-//        }
-//
-//        if(raioxToraxRadioGroup2.getCheckedRadioButtonId()!=-1){
-//            if(!raioxToraxSemResultados.isChecked()){
-//                RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.raioxToraxItensLayout);
-//                for(RealmString realmString : realmStrings)
-//                    exames.getRaioxToraxList().add(realmString);
-//            }
-//            exames.setRaioxTorax(getStringOfRadioButtonSelectedFromRadioGroup(raioxToraxRadioGroup2));
-//        }
-//
-//        ficha.setExames(exames);
-//        realm.copyToRealmOrUpdate(ficha);
-//        realm.commitTransaction();
-//        if(exames.checkObject())
-//            changeCardColorToGreen();
-//        else
-//            setCardColorToDefault();
+        Exames exames = new Exames();
+        if(!isTextInputEditTextEmpty(hematocrito))
+            exames.setHematocrito(getIntegerFromTextInputEditText(hematocrito));
+        if(!isTextInputEditTextEmpty(hemoglobina))
+            exames.setHemoglobina(getIntegerFromTextInputEditText(hemoglobina));
+        if(!isTextInputEditTextEmpty(plaquetas))
+            exames.setPlaquetas(getIntegerFromTextInputEditText(plaquetas));
+        if(!isTextInputEditTextEmpty(ureia))
+            exames.setUreia(getIntegerFromTextInputEditText(ureia));
+        if(!isTextInputEditTextEmpty(creatinina))
+            exames.setCreatinina(getIntegerFromTextInputEditText(creatinina));
+        if(leucogramaRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setLeucograma(getStringOfRadioButtonSelectedFromRadioGroup(leucogramaRadioGroup1));
+        else if(leucogramaRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setLeucograma(getStringOfRadioButtonSelectedFromRadioGroup(leucogramaRadioGroup2));
+        if(pcrRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setPcr(getStringOfRadioButtonSelectedFromRadioGroup(pcrRadioGroup1));
+        else if(pcrRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setPcr(getStringOfRadioButtonSelectedFromRadioGroup(pcrRadioGroup2));
+        if(potassioRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setPotassio(getStringOfRadioButtonSelectedFromRadioGroup(potassioRadioGroup1));
+        else if(potassioRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setPotassio(getStringOfRadioButtonSelectedFromRadioGroup(potassioRadioGroup2));
+        if(magnesioRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setMagnesio(getStringOfRadioButtonSelectedFromRadioGroup(magnesioRadioGroup1));
+        if(magnesioRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setMagnesio(getStringOfRadioButtonSelectedFromRadioGroup(magnesioRadioGroup2));
+        if(fosforoRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setFosforo(getStringOfRadioButtonSelectedFromRadioGroup(fosforoRadioGroup1));
+        if(fosforoRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setFosforo(getStringOfRadioButtonSelectedFromRadioGroup(fosforoRadioGroup2));
+        if(calcioRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setCalcio(getStringOfRadioButtonSelectedFromRadioGroup(calcioRadioGroup1));
+        if(calcioRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setCalcio(getStringOfRadioButtonSelectedFromRadioGroup(calcioRadioGroup2));
+        if(gasometriaArterialAcidoseRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setGasometriaArterialAcidoseAlcalose(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialAcidoseRadioGroup1));
+        else if(gasometriaArterialAcidoseRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setGasometriaArterialAcidoseAlcalose(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialAcidoseRadioGroup2));
+        if(gasometriaArterialMetabolicaRespiratoriaRadioGroup.getCheckedRadioButtonId()!=-1){
+            exames.setGasometrialArterialMetabolicaRespiratoria(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialMetabolicaRespiratoriaRadioGroup));
+            if(!getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialMetabolicaRespiratoriaRadioGroup).equals(getString(R.string.Mista))){
+                if(gasometriaArterialCompensadaDescompensada.getCheckedRadioButtonId()!=-1)
+                    exames.setGasometriaArterialCompensadaDescompensada(getStringOfRadioButtonSelectedFromRadioGroup(gasometriaArterialCompensadaDescompensada));
+            }
+        }
+        if(bilirrubinas.getCheckedRadioButtonId()!=-1)
+            exames.setFuncaoHepaticaBilirrubinas(getStringOfRadioButtonSelectedFromRadioGroup(bilirrubinas));
+        if(faggt.getCheckedRadioButtonId()!=-1)
+            exames.setFuncaoHepaticaFAGGT(getStringOfRadioButtonSelectedFromRadioGroup(faggt));
+        if(transaminases.getCheckedRadioButtonId()!=-1)
+            exames.setFuncaoHepaticaTransaminases(getStringOfRadioButtonSelectedFromRadioGroup(transaminases));
+        if(lactato.getCheckedRadioButtonId()!=-1)
+            exames.setLactato(getStringOfRadioButtonSelectedFromRadioGroup(lactato));
+        if(checkboxAmilase.isChecked()){
+            exames.setAmilaseChecked(true);
+            if(amilaseItens.getCheckedRadioButtonId()!=-1)
+                exames.setAmilase(getStringOfRadioButtonSelectedFromRadioGroup(amilaseItens));
+        }
+        if(marcadoresInfeccaoRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setMarcadoresInfeccao(getStringOfRadioButtonSelectedFromRadioGroup(marcadoresInfeccaoRadioGroup1));
+        if(marcadoresInfeccaoRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setMarcadoresInfeccao(getStringOfRadioButtonSelectedFromRadioGroup(marcadoresInfeccaoRadioGroup2));
+        if(albuminaRadioGroup1.getCheckedRadioButtonId()!=-1)
+            exames.setAlbumina(getStringOfRadioButtonSelectedFromRadioGroup(albuminaRadioGroup1));
+        else if(albuminaRadioGroup2.getCheckedRadioButtonId()!=-1)
+            exames.setAlbumina(getStringOfRadioButtonSelectedFromRadioGroup(albuminaRadioGroup2));
+
+        if(raioxToraxRadioGroup1.getCheckedRadioButtonId()!=-1){
+            if(!raioxNormal.isChecked()){
+                List<String> realmStrings = getCheckBoxesPreenchidos(R.id.raioxToraxItensLayout);
+                exames.setRaioxToraxList(realmStrings);
+            }
+            exames.setDiagnosticoRaioX(getStringOfRadioButtonSelectedFromRadioGroup(raioxToraxRadioGroup1));
+        }
+
+        if(raioxToraxRadioGroup2.getCheckedRadioButtonId()!=-1){
+            if(!raioxToraxSemResultados.isChecked()){
+                List<String> realmStrings = getCheckBoxesPreenchidos(R.id.raioxToraxItensLayout);
+                exames.setRaioxToraxList(realmStrings);
+            }
+            exames.setDiagnosticoRaioX(getStringOfRadioButtonSelectedFromRadioGroup(raioxToraxRadioGroup2));
+        }
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(exames.toMap());
+        changeCardColorToGreen();
     }
 
 }

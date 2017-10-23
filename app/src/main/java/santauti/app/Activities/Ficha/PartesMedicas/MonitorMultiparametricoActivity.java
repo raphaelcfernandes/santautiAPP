@@ -1,9 +1,13 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,8 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.InputFilterMin;
+import santauti.app.Model.Ficha.MonitorMultiparametrico;
 import santauti.app.R;
 
 /**
@@ -168,49 +177,50 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
     }
 
     private void verificaCamposENotificaAdapter(){
-//        realm.beginTransaction();
-//        Ficha r = getProperFicha();
-//        MonitorMultiparametrico monitorMultiparametrico = realm.createObject(MonitorMultiparametrico.class);
-//        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.ritmo);
-//        for(int i=0;i<linearLayout.getChildCount();i++) {
-//            View v = linearLayout.getChildAt(i);
-//            if (v instanceof RadioGroup) {
-//                for (int k = 0; k < ((RadioGroup) v).getChildCount(); k++) {
-//                    View view1 = ((RadioGroup)v).getChildAt(k);
-//                    AppCompatRadioButton appCompatRadioButton = (AppCompatRadioButton)view1;
-//                    if(appCompatRadioButton.isChecked()) {
-//                        monitorMultiparametrico.setRitmo(appCompatRadioButton.getText().toString());
-//                    }
-//                }
-//            }
-//        }
-//        if(!isTextInputEditTextEmpty(freqRespiratoria))
-//            monitorMultiparametrico.setFrequenciaRespiratoria(getIntegerFromTextInputEditText(freqRespiratoria));
-//        if(!isTextInputEditTextEmpty(freqCardiaca))
-//            monitorMultiparametrico.setFrequenciaCardiaca(getIntegerFromTextInputEditText(freqCardiaca));
-//        if(!isTextInputEditTextEmpty(PAM))
-//            monitorMultiparametrico.setPAM(getIntegerFromTextInputEditText(PAM));
-//        if(!isTextInputEditTextEmpty(temperatura))
-//            monitorMultiparametrico.setTemperatura(Float.parseFloat(temperatura.getText().toString()));
-//        if(!isTextInputEditTextEmpty(PIC))
-//            monitorMultiparametrico.setPic(getIntegerFromTextInputEditText(PIC));
-//        if(!isTextInputEditTextEmpty(PPC))
-//            monitorMultiparametrico.setPpc(getIntegerFromTextInputEditText(PPC));
-//        if(!isTextInputEditTextEmpty(PVC))
-//            monitorMultiparametrico.setPvc(getIntegerFromTextInputEditText(PVC));
-//        if(!isTextInputEditTextEmpty(swan_ganz))
-//            monitorMultiparametrico.setSwanGanz(getIntegerFromTextInputEditText(swan_ganz));
-//        if(!isTextInputEditTextEmpty(capnometria))
-//            monitorMultiparametrico.setCapnometria(getIntegerFromTextInputEditText(capnometria));
-//        if(!isTextInputEditTextEmpty(spo2))
-//            monitorMultiparametrico.setSpo2(getIntegerFromTextInputEditText(spo2));
-//        if(!isTextInputEditTextEmpty(sjo2))
-//            monitorMultiparametrico.setSjo2(getIntegerFromTextInputEditText(sjo2));
-//        r.setMonitorMultiparametrico(monitorMultiparametrico);
-//        realm.copyToRealmOrUpdate(r);
-//        realm.commitTransaction();
-//        if(monitorMultiparametrico.checkObject())
-//            changeCardColorToGreen();
+        MonitorMultiparametrico monitorMultiparametrico = new MonitorMultiparametrico();
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.ritmo);
+        for(int i=0;i<linearLayout.getChildCount();i++) {
+            View v = linearLayout.getChildAt(i);
+            if (v instanceof RadioGroup) {
+                for (int k = 0; k < ((RadioGroup) v).getChildCount(); k++) {
+                    View view1 = ((RadioGroup)v).getChildAt(k);
+                    AppCompatRadioButton appCompatRadioButton = (AppCompatRadioButton)view1;
+                    if(appCompatRadioButton.isChecked()) {
+                        monitorMultiparametrico.setRitmo(appCompatRadioButton.getText().toString());
+                    }
+                }
+            }
+        }
+        if(!isTextInputEditTextEmpty(freqRespiratoria))
+            monitorMultiparametrico.setFrequenciaRespiratoria(getIntegerFromTextInputEditText(freqRespiratoria));
+        if(!isTextInputEditTextEmpty(freqCardiaca))
+            monitorMultiparametrico.setFrequenciaCardiaca(getIntegerFromTextInputEditText(freqCardiaca));
+        if(!isTextInputEditTextEmpty(PAM))
+            monitorMultiparametrico.setPAM(getIntegerFromTextInputEditText(PAM));
+        if(!isTextInputEditTextEmpty(temperatura))
+            monitorMultiparametrico.setTemperatura(Float.parseFloat(temperatura.getText().toString()));
+        if(!isTextInputEditTextEmpty(PIC))
+            monitorMultiparametrico.setPic(getIntegerFromTextInputEditText(PIC));
+        if(!isTextInputEditTextEmpty(PPC))
+            monitorMultiparametrico.setPpc(getIntegerFromTextInputEditText(PPC));
+        if(!isTextInputEditTextEmpty(PVC))
+            monitorMultiparametrico.setPvc(getIntegerFromTextInputEditText(PVC));
+        if(!isTextInputEditTextEmpty(swan_ganz))
+            monitorMultiparametrico.setSwanGanz(getIntegerFromTextInputEditText(swan_ganz));
+        if(!isTextInputEditTextEmpty(capnometria))
+            monitorMultiparametrico.setCapnometria(getIntegerFromTextInputEditText(capnometria));
+        if(!isTextInputEditTextEmpty(spo2))
+            monitorMultiparametrico.setSpo2(getIntegerFromTextInputEditText(spo2));
+        if(!isTextInputEditTextEmpty(sjo2))
+            monitorMultiparametrico.setSjo2(getIntegerFromTextInputEditText(sjo2));
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(monitorMultiparametrico.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                changeCardColorToGreen();
+            }
+        });
     }
 
     @Override

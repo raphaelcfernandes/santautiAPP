@@ -1,10 +1,14 @@
 package santauti.app.Model.Ficha;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by rapha on 06-Oct-17.
  */
 
-public class Exames{
+public class Exames implements FichaMetodos{
     private int hematocrito;
     private int hemoglobina;
     private int plaquetas;
@@ -27,14 +31,66 @@ public class Exames{
     private String amilase;
     private String marcadoresInfeccao;
     private String albumina;
-    private String raioxTorax;
-//    private RealmList<RealmString> raioxToraxList;
+    private String diagnosticoRaioX;
+    private List<String> raioxToraxList;
+
+    @Override
+    public Map<String, Object> toMap() {
+        Map<String,Object> itens = new HashMap<>();
+        Map<String,Object> gasometriaArterialMap = new HashMap<>();
+        Map<String,Object> raioxToraxMap = new HashMap<>();
+        Map<String,Object> finalResult = new HashMap<>();
+        itens.put("hematocrito",hematocrito);
+        itens.put("hemoglobina",hemoglobina);
+        itens.put("plaquetas",plaquetas);
+        itens.put("leucograma",leucograma);
+        itens.put("pcr",pcr);
+        itens.put("ureia",ureia);
+        itens.put("creatinina",creatinina);
+        itens.put("potassio",potassio);
+        itens.put("magnesio",magnesio);
+        itens.put("fosforo",fosforo);
+        itens.put("calcio",calcio);
+        if(gasometriaArterialAcidoseAlcalose!=null){
+            gasometriaArterialMap.put("tipoGasometriaArterial",gasometriaArterialAcidoseAlcalose);
+            if(gasometriaArterialAcidoseAlcalose.equals("Acidose") || gasometriaArterialAcidoseAlcalose.equals("Alcalose")){
+                gasometriaArterialMap.put("metabolicaRespiratoria",gasometrialArterialMetabolicaRespiratoria);
+                if(!gasometrialArterialMetabolicaRespiratoria.equals("Mista"))
+                    gasometriaArterialMap.put("compensadaDescompensada",gasometriaArterialCompensadaDescompensada);
+                itens.put("gasometriaArterial",gasometriaArterialMap);
+            }
+            else
+                itens.put("gasometriaArterial",gasometriaArterialAcidoseAlcalose);
+        }
+        itens.put("funcaoHepaticaBilirrubinas",funcaoHepaticaBilirrubinas);
+        itens.put("funcaoHepaticaFAGGT",funcaoHepaticaFAGGT);
+        itens.put("funcaoHepaticaTransaminases",funcaoHepaticaTransaminases);
+        itens.put("lactato",lactato);
+        if(amilaseChecked)
+            itens.put("amilase",amilase);
+        else
+            itens.put("amilase",false);
+        itens.put("marcadoresInfeccao",marcadoresInfeccao);
+        itens.put("albumina",albumina);
+        if(diagnosticoRaioX !=null){
+            if(diagnosticoRaioX.equals("Pneumotorax") || diagnosticoRaioX.equals("Actelectasia") || diagnosticoRaioX.equals("Infiltrados Novos")){
+                for(String string : raioxToraxList)
+                    raioxToraxMap.put(string,true);
+                raioxToraxMap.put("diagnosticoRaiox", diagnosticoRaioX);
+                itens.put("raioxTorax",raioxToraxMap);
+            }
+            else
+                itens.put("raioxTorax",diagnosticoRaioX);
+        }
+        finalResult.put("Exames",itens);
+        return finalResult;
+    }
 
     public boolean checkObject(){
         boolean gasometria=false;
         boolean raioxFlag=true;
-        if(raioxTorax!=null){
-            if((!raioxTorax.equals("Normal") && !raioxTorax.equals("Não realizou/sem resultados") /*&& raioxToraxList.isEmpty()*/))
+        if(diagnosticoRaioX !=null){
+            if((!diagnosticoRaioX.equals("Normal") && !diagnosticoRaioX.equals("Não realizou/sem resultados") && raioxToraxList.isEmpty()))
                 raioxFlag=false;
         }
         else
@@ -62,6 +118,42 @@ public class Exames{
             && gasometriaArterialAcidoseAlcalose!=null && gasometria && funcaoHepaticaBilirrubinas!=null
             && funcaoHepaticaFAGGT!=null && funcaoHepaticaTransaminases!=null && lactato!=null
             && marcadoresInfeccao!=null && albumina!=null && raioxFlag;
+    }
+
+    public Exames(int hematocrito, int hemoglobina, int plaquetas, String leucograma, String pcr, int ureia, int creatinina, String potassio, String magnesio, String fosforo, String calcio, String gasometriaArterialAcidoseAlcalose, String gasometrialArterialMetabolicaRespiratoria, String gasometriaArterialCompensadaDescompensada, String funcaoHepaticaBilirrubinas, String funcaoHepaticaFAGGT, String funcaoHepaticaTransaminases, String lactato, boolean amilaseChecked, String amilase, String marcadoresInfeccao, String albumina) {
+        this.hematocrito = hematocrito;
+        this.hemoglobina = hemoglobina;
+        this.plaquetas = plaquetas;
+        this.leucograma = leucograma;
+        this.pcr = pcr;
+        this.ureia = ureia;
+        this.creatinina = creatinina;
+        this.potassio = potassio;
+        this.magnesio = magnesio;
+        this.fosforo = fosforo;
+        this.calcio = calcio;
+        this.gasometriaArterialAcidoseAlcalose = gasometriaArterialAcidoseAlcalose;
+        this.gasometrialArterialMetabolicaRespiratoria = gasometrialArterialMetabolicaRespiratoria;
+        this.gasometriaArterialCompensadaDescompensada = gasometriaArterialCompensadaDescompensada;
+        this.funcaoHepaticaBilirrubinas = funcaoHepaticaBilirrubinas;
+        this.funcaoHepaticaFAGGT = funcaoHepaticaFAGGT;
+        this.funcaoHepaticaTransaminases = funcaoHepaticaTransaminases;
+        this.lactato = lactato;
+        this.amilaseChecked = amilaseChecked;
+        this.amilase = amilase;
+        this.marcadoresInfeccao = marcadoresInfeccao;
+        this.albumina = albumina;
+    }
+
+    public Exames() {
+    }
+
+    public List<String> getRaioxToraxList() {
+        return raioxToraxList;
+    }
+
+    public void setRaioxToraxList(List<String> raioxToraxList) {
+        this.raioxToraxList = raioxToraxList;
     }
 
     public int getHematocrito() {
@@ -240,11 +332,11 @@ public class Exames{
         this.albumina = albumina;
     }
 
-    public String getRaioxTorax() {
-        return raioxTorax;
+    public String getDiagnosticoRaioX() {
+        return diagnosticoRaioX;
     }
 
-    public void setRaioxTorax(String raioxTorax) {
-        this.raioxTorax = raioxTorax;
+    public void setDiagnosticoRaioX(String diagnosticoRaioX) {
+        this.diagnosticoRaioX = diagnosticoRaioX;
     }
 }

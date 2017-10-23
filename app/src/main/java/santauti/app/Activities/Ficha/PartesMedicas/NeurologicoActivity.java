@@ -1,21 +1,30 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import java.util.Arrays;
 
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.Neurologico;
 import santauti.app.R;
 
 /**
@@ -319,97 +328,87 @@ public class NeurologicoActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter(){
-//        realm.beginTransaction();
-//        Neurologico neurologico = realm.createObject(Neurologico.class);
-//        StringBuilder stringBuilder;
-//        if(nivelConscienciaSelection>-1){
-//            int i=0;
-//            stringBuilder = new StringBuilder(nivelConscienciaTextView.getText().toString());
-//            for(i=0;i<stringBuilder.length();i++)
-//                if(stringBuilder.charAt(i)==' ')
-//                    break;
-//            neurologico.setNivelConsciencia(stringBuilder.substring(0,i));
-//        }
-//        if(rassSelection>-1){
-//            stringBuilder = new StringBuilder(rassTextView.getText().toString());
-//            neurologico.setRass(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf("."))));
-//        }
-//        if(((RadioGroup)findViewById(R.id.noEspaco)).getCheckedRadioButtonId()!=-1){
-//            RealmString realmString = realm.createObject(RealmString.class);
-//            if(((RadioButton)findViewById(R.id.orientadoNoEspaco)).isChecked()) {
-//                realmString.setName(((RadioButton) findViewById(R.id.orientadoNoEspaco)).getText().toString());
-//                neurologico.getOrientadoTemporoEspacial().add(realmString);
-//            }
-//
-//            else if (((RadioButton)findViewById(R.id.desorientadoNoEspaco)).isChecked()) {
-//                realmString.setName(((RadioButton) findViewById(R.id.desorientadoNoEspaco)).getText().toString());
-//                neurologico.getDesorientadoTemporoEspacial().add(realmString);
-//            }
-//            neurologico.setNoEspaco(true);
-//        }
-//
-//        if(((RadioGroup)findViewById(R.id.noTempo)).getCheckedRadioButtonId()!=-1){
-//            RealmString realmString = realm.createObject(RealmString.class);
-//            if(((RadioButton)findViewById(R.id.orientadoNoTempo)).isChecked()) {
-//                realmString.setName(((RadioButton) findViewById(R.id.orientadoNoTempo)).getText().toString());
-//                neurologico.getOrientadoTemporoEspacial().add(realmString);
-//            }
-//            else if (((RadioButton)findViewById(R.id.desorientadoNoTempo)).isChecked()) {
-//                realmString.setName(((RadioButton) findViewById(R.id.desorientadoNoTempo)).getText().toString());
-//                neurologico.getDesorientadoTemporoEspacial().add(realmString);
-//            }
-//            neurologico.setNoTempo(true);
-//        }
-//
-//        if(!camIcuTextView.getText().toString().equals(""))
-//            neurologico.setDeliciumCAMICU(camIcuTextView.getText().toString());
-//        if(ramsaySelection>-1){
-//            stringBuilder = new StringBuilder(ramsayTextView.getText().toString());
-//            neurologico.setRamsay(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
-//        }
-//        if(aberturaOcularSelection>-1){
-//            stringBuilder = new StringBuilder(aberturaOcularTextView.getText().toString());
-//            neurologico.setAberturaOcular(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
-//        }
-//        if(respostaVerbalSelection>-1){
-//            stringBuilder = new StringBuilder(respostaVerbalTextView.getText().toString());
-//            neurologico.setRespostaVerbal(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
-//        }
-//        if(respostaMotoraSelection>-1) {
-//            stringBuilder = new StringBuilder(respostaMotoraTextView.getText().toString());
-//            neurologico.setRespostaMotora(Integer.parseInt(stringBuilder.substring(0, stringBuilder.indexOf(" "))));
-//        }
-//
-//        if(checkboxDeficitMotor.isChecked()){
-//            neurologico.setDeficitMotor(true);
-//            if(((RadioGroup)findViewById(R.id.mse)).getCheckedRadioButtonId()!=-1)
-//                neurologico.setMse(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.mse)))));
-//            if(((RadioGroup)findViewById(R.id.msd)).getCheckedRadioButtonId()!=-1)
-//                neurologico.setMsd(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.msd)))));
-//            if(((RadioGroup)findViewById(R.id.mie)).getCheckedRadioButtonId()!=-1)
-//                neurologico.setMie(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.mie)))));
-//            if(((RadioGroup)findViewById(R.id.mid)).getCheckedRadioButtonId()!=-1)
-//                neurologico.setMid(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.mid)))));
-//        }
-//        if(((RadioGroup)findViewById(R.id.tamanhoPupila)).getCheckedRadioButtonId()!=-1)
-//            neurologico.setTamanhoPupila(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup)findViewById(R.id.tamanhoPupila)));
-//        if(((RadioGroup)findViewById(R.id.simetriaPupila)).getCheckedRadioButtonId()!=-1) {
-//            neurologico.setSimetriaPupila(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup) findViewById(R.id.simetriaPupila)));
-//            if(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.simetriaPupila))).equals(getString(R.string.Anisocoricas))
-//                    && ((RadioGroup)findViewById(R.id.diferencaPupila)).getCheckedRadioButtonId()!=-1)
-//                neurologico.setDiferencaPupila(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup)findViewById(R.id.diferencaPupila)));
-//
-//        }
-//        if(((RadioGroup)findViewById(R.id.reatividadeLuz)).getCheckedRadioButtonId()!=-1)
-//            neurologico.setReatividadeLuzPupila(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.reatividadeLuz))));
-//        Ficha r = getProperFicha();
-//        r.setNeurologico(neurologico);
-//        realm.copyToRealmOrUpdate(r);
-//        realm.commitTransaction();
-//        if(neurologico.checkObject())
-//            changeCardColorToGreen();
-//        else
-//            setCardColorToDefault();
+        Neurologico neurologico = new Neurologico();
+        neurologico.initializeLists();
+        StringBuilder stringBuilder;
+        if(nivelConscienciaSelection>-1){
+            int i=0;
+            stringBuilder = new StringBuilder(nivelConscienciaTextView.getText().toString());
+            for(i=0;i<stringBuilder.length();i++)
+                if(stringBuilder.charAt(i)==' ')
+                    break;
+            neurologico.setNivelConsciencia(stringBuilder.substring(0,i));
+        }
+        if(rassSelection>-1){
+            stringBuilder = new StringBuilder(rassTextView.getText().toString());
+            neurologico.setRass(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf("."))));
+        }
+        if(((RadioGroup)findViewById(R.id.noEspaco)).getCheckedRadioButtonId()!=-1){
+            if(((RadioButton)findViewById(R.id.orientadoNoEspaco)).isChecked())
+                neurologico.getOrientadoTemporoEspacial().add((((RadioButton) findViewById(R.id.orientadoNoEspaco)).getText().toString()));
+            else if (((RadioButton)findViewById(R.id.desorientadoNoEspaco)).isChecked())
+                neurologico.getDesorientadoTemporoEspacial().add(((RadioButton) findViewById(R.id.desorientadoNoEspaco)).getText().toString());
+            neurologico.setNoEspaco(true);
+        }
+
+        if(((RadioGroup)findViewById(R.id.noTempo)).getCheckedRadioButtonId()!=-1){
+            if(((RadioButton)findViewById(R.id.orientadoNoTempo)).isChecked())
+                neurologico.getOrientadoTemporoEspacial().add(((RadioButton) findViewById(R.id.orientadoNoTempo)).getText().toString());
+            else if (((RadioButton)findViewById(R.id.desorientadoNoTempo)).isChecked())
+                neurologico.getDesorientadoTemporoEspacial().add(((RadioButton) findViewById(R.id.desorientadoNoTempo)).getText().toString());
+            neurologico.setNoTempo(true);
+        }
+
+        if(!camIcuTextView.getText().toString().equals(""))
+            neurologico.setDeliciumCAMICU(camIcuTextView.getText().toString());
+        if(ramsaySelection>-1){
+            stringBuilder = new StringBuilder(ramsayTextView.getText().toString());
+            neurologico.setRamsay(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
+        }
+        if(aberturaOcularSelection>-1){
+            stringBuilder = new StringBuilder(aberturaOcularTextView.getText().toString());
+            neurologico.setAberturaOcular(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
+        }
+        if(respostaVerbalSelection>-1){
+            stringBuilder = new StringBuilder(respostaVerbalTextView.getText().toString());
+            neurologico.setRespostaVerbal(Integer.parseInt(stringBuilder.substring(0,stringBuilder.indexOf(" "))));
+        }
+        if(respostaMotoraSelection>-1) {
+            stringBuilder = new StringBuilder(respostaMotoraTextView.getText().toString());
+            neurologico.setRespostaMotora(Integer.parseInt(stringBuilder.substring(0, stringBuilder.indexOf(" "))));
+        }
+
+        if(checkboxDeficitMotor.isChecked()){
+            neurologico.setDeficitMotor(true);
+            if(((RadioGroup)findViewById(R.id.mse)).getCheckedRadioButtonId()!=-1)
+                neurologico.setMse(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.mse)))));
+            if(((RadioGroup)findViewById(R.id.msd)).getCheckedRadioButtonId()!=-1)
+                neurologico.setMsd(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.msd)))));
+            if(((RadioGroup)findViewById(R.id.mie)).getCheckedRadioButtonId()!=-1)
+                neurologico.setMie(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.mie)))));
+            if(((RadioGroup)findViewById(R.id.mid)).getCheckedRadioButtonId()!=-1)
+                neurologico.setMid(getStringOfRadioButtonSelectedFromRadioGroup((((RadioGroup)findViewById(R.id.mid)))));
+        }
+        if(((RadioGroup)findViewById(R.id.tamanhoPupila)).getCheckedRadioButtonId()!=-1)
+            neurologico.setTamanhoPupila(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup)findViewById(R.id.tamanhoPupila)));
+        if(((RadioGroup)findViewById(R.id.simetriaPupila)).getCheckedRadioButtonId()!=-1) {
+            neurologico.setSimetriaPupila(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup) findViewById(R.id.simetriaPupila)));
+            if(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.simetriaPupila))).equals(getString(R.string.Anisocoricas))
+                    && ((RadioGroup)findViewById(R.id.diferencaPupila)).getCheckedRadioButtonId()!=-1)
+                neurologico.setDiferencaPupila(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup)findViewById(R.id.diferencaPupila)));
+
+        }
+        if(((RadioGroup)findViewById(R.id.reatividadeLuz)).getCheckedRadioButtonId()!=-1)
+            neurologico.setReatividadeLuzPupila(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.reatividadeLuz))));
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(neurologico.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                changeCardColorToGreen();
+            }
+        });
+
     }
 
     public void nivelConscienciaOnClick(View view){

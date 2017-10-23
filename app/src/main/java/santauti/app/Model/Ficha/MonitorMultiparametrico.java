@@ -1,10 +1,13 @@
 package santauti.app.Model.Ficha;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Raphael Fernandes on 21-Jun-17.
  */
 
-public class MonitorMultiparametrico{
+public class MonitorMultiparametrico implements FichaMetodos{
     private String ritmo;
     private int frequenciaRespiratoria;
     private int frequenciaCardiaca;
@@ -18,26 +21,60 @@ public class MonitorMultiparametrico{
     private int spo2=-1;
     private int sjo2=-1;
 
+    @Override
+    public Map<String, Object> toMap() {
+        Map<String,Object> itens = new HashMap<>();
+        Map<String,Object> finalResult = new HashMap<>();
+        if(ritmo!=null)
+            itens.put("ritmo",ritmo);
+        if(frequenciaRespiratoria>0)
+            itens.put("frequenciaRespiratoria",frequenciaRespiratoria);
+        if(frequenciaCardiaca>0)
+            itens.put("frequenciaCardiaca",frequenciaCardiaca);
+        if(PAM>0)
+            itens.put("PAM",PAM);
+        if(temperatura>0)
+            itens.put("temperatura",temperatura);
+        if(pic>0)
+            itens.put("pic",pic);
+        if(ppc>0)
+            itens.put("ppc",ppc);
+        if(pvc>0)
+            itens.put("pvc",pvc);
+        if(swanGanz>0)
+            itens.put("swanGanz",swanGanz);
+        if(capnometria>0)
+            itens.put("capnometria",capnometria);
+        if(spo2>0)
+            itens.put("spo2",spo2);
+        if(sjo2>0)
+            itens.put("sjo2",sjo2);
+        finalResult.put("MonitorMultiparametrico",itens);
+        return finalResult;
+    }
+
     public boolean checkObject(){
         return ritmo!=null && frequenciaRespiratoria>0 && frequenciaCardiaca>0 &&
                 PAM>0 && pvc>0 && ppc>0 && pic>0 && temperatura>0.0 &&
                 swanGanz>0 && capnometria>0 && spo2 >=0 && sjo2>=0;
     }
 
-    public int getSpo2() {
-        return spo2;
-    }
-
-    public void setSpo2(int spo2) {
+    public MonitorMultiparametrico(String ritmo, int frequenciaRespiratoria, int frequenciaCardiaca, int PAM, float temperatura, int pic, int ppc, int pvc, int swanGanz, int capnometria, int spo2, int sjo2) {
+        this.ritmo = ritmo;
+        this.frequenciaRespiratoria = frequenciaRespiratoria;
+        this.frequenciaCardiaca = frequenciaCardiaca;
+        this.PAM = PAM;
+        this.temperatura = temperatura;
+        this.pic = pic;
+        this.ppc = ppc;
+        this.pvc = pvc;
+        this.swanGanz = swanGanz;
+        this.capnometria = capnometria;
         this.spo2 = spo2;
-    }
-
-    public int getSjo2() {
-        return sjo2;
-    }
-
-    public void setSjo2(int sjo2) {
         this.sjo2 = sjo2;
+    }
+
+    public MonitorMultiparametrico() {
     }
 
     public String getRitmo() {
@@ -118,5 +155,21 @@ public class MonitorMultiparametrico{
 
     public void setCapnometria(int capnometria) {
         this.capnometria = capnometria;
+    }
+
+    public int getSpo2() {
+        return spo2;
+    }
+
+    public void setSpo2(int spo2) {
+        this.spo2 = spo2;
+    }
+
+    public int getSjo2() {
+        return sjo2;
+    }
+
+    public void setSjo2(int sjo2) {
+        this.sjo2 = sjo2;
     }
 }
