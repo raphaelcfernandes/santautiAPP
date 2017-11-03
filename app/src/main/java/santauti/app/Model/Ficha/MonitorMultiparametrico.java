@@ -11,7 +11,7 @@ public class MonitorMultiparametrico implements FichaMetodos{
     private String ritmo;
     private int frequenciaRespiratoria;
     private int frequenciaCardiaca;
-    private int PAM;
+    private int pam;
     private float temperatura;
     private int pic;
     private int ppc;
@@ -31,8 +31,8 @@ public class MonitorMultiparametrico implements FichaMetodos{
             itens.put("frequenciaRespiratoria",frequenciaRespiratoria);
         if(frequenciaCardiaca>0)
             itens.put("frequenciaCardiaca",frequenciaCardiaca);
-        if(PAM>0)
-            itens.put("PAM",PAM);
+        if(pam >0)
+            itens.put("pam", pam);
         if(temperatura>0)
             itens.put("temperatura",temperatura);
         if(pic>0)
@@ -55,7 +55,7 @@ public class MonitorMultiparametrico implements FichaMetodos{
 
     public boolean checkObject(){
         return ritmo!=null && frequenciaRespiratoria>0 && frequenciaCardiaca>0 &&
-                PAM>0 && pvc>0 && ppc>0 && pic>0 && temperatura>0.0 &&
+                pam >0 && pvc>0 && ppc>0 && pic>0 && temperatura>0.0 &&
                 swanGanz>0 && capnometria>0 && spo2 >=0 && sjo2>=0;
     }
 
@@ -63,7 +63,7 @@ public class MonitorMultiparametrico implements FichaMetodos{
         this.ritmo = ritmo;
         this.frequenciaRespiratoria = frequenciaRespiratoria;
         this.frequenciaCardiaca = frequenciaCardiaca;
-        this.PAM = PAM;
+        this.pam = PAM;
         this.temperatura = temperatura;
         this.pic = pic;
         this.ppc = ppc;
@@ -101,12 +101,12 @@ public class MonitorMultiparametrico implements FichaMetodos{
         this.frequenciaCardiaca = frequenciaCardiaca;
     }
 
-    public int getPAM() {
-        return PAM;
+    public int getPam() {
+        return pam;
     }
 
-    public void setPAM(int PAM) {
-        this.PAM = PAM;
+    public void setPam(int pam) {
+        this.pam = pam;
     }
 
     public float getTemperatura() {

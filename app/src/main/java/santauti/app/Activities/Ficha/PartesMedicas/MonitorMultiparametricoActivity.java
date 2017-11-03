@@ -155,8 +155,8 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
 //                freqRespiratoria.setText(Integer.toString(monitorMultiparametrico.getFrequenciaRespiratoria()));
 //            if(monitorMultiparametrico.getFrequenciaCardiaca()>0)
 //                freqCardiaca.setText(Integer.toString(monitorMultiparametrico.getFrequenciaCardiaca()));
-//            if(monitorMultiparametrico.getPAM()>0)
-//                PAM.setText(Integer.toString(monitorMultiparametrico.getPAM()));
+//            if(monitorMultiparametrico.getPam()>0)
+//                PAM.setText(Integer.toString(monitorMultiparametrico.getPam()));
 //            if(monitorMultiparametrico.getTemperatura()>0)
 //                temperatura.setText(Float.toString(monitorMultiparametrico.getTemperatura()));
 //            if(monitorMultiparametrico.getPic()>0)
@@ -196,7 +196,7 @@ public class MonitorMultiparametricoActivity extends GenericoActivity{
         if(!isTextInputEditTextEmpty(freqCardiaca))
             monitorMultiparametrico.setFrequenciaCardiaca(getIntegerFromTextInputEditText(freqCardiaca));
         if(!isTextInputEditTextEmpty(PAM))
-            monitorMultiparametrico.setPAM(getIntegerFromTextInputEditText(PAM));
+            monitorMultiparametrico.setPam(getIntegerFromTextInputEditText(PAM));
         if(!isTextInputEditTextEmpty(temperatura))
             monitorMultiparametrico.setTemperatura(Float.parseFloat(temperatura.getText().toString()));
         if(!isTextInputEditTextEmpty(PIC))

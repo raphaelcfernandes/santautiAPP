@@ -4,7 +4,7 @@
 <resources>
     <string name="app_name">SantaUTI</string>
     <string name="login">Login</string>
-    <string name="Usuario">Usuario</string>
+    <string name="Usuario">Usuário</string>
     <string name="Senha">Senha</string>
     <string name="Normal">Normal</string>
     <string name="title_activity_ficha">Evolução</string>
@@ -42,7 +42,7 @@
     <string name="PIC">PIC</string>
     <string name="PVC">PVC</string>
     <string name="PPC">PPC</string>
-    <string name="Swanganz">Swan-ganz</string>
+    <string name="Swanganz">Swan-Ganz</string>
     <string name="SPO2">SPO2 (%)</string>
     <string name="SJO2">SJO2 (%)</string>
     <string name="PesoKG">Peso (kg)</string>
@@ -174,9 +174,9 @@
     <string name="DireitaMesquerda">Direita > Esquerda</string>
     <string name="Reativo">Reativo</string>
     <string name="NaoReativo">Não Reativo</string>
-    <string name="Hiperfonetica">Hiperfoneticas</string>
-    <string name="Normofonetica">Normofoneticas</string>
-    <string name="Hipofonetica">Hipofoneticas</string>
+    <string name="Hiperfonetica">Hiperfonéticas</string>
+    <string name="Normofonetica">Normofonéticas</string>
+    <string name="Hipofonetica">Hipofonéticas</string>
     <string name="Cianotica">Cianóticas</string>
     <string name="Acianotica">Acianóticas</string>
     <string name="Fria">Frias</string>
@@ -337,7 +337,7 @@
     <string name="Cotovelos">Cotovelos</string>
     <string name="Tronco">Tronco</string>
     <string name="Ritmico">Ritmico</string>
-    <string name="Aritmico">Aritmico</string>
+    <string name="Aritmico">Arítmico</string>
     <string name="Regular">Regular</string>
     <string name="AmoxicilinaClavulanato">Amoxicilina-clavulanato</string>
     <string name="Azitromicina">Azitromicina</string>
