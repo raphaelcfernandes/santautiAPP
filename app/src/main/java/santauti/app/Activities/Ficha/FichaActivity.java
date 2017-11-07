@@ -244,7 +244,7 @@ public class FichaActivity extends GenericoActivity{
         a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[15],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.PelesMucosas), covers[16],0);
+        a = new FichaAdapterModel(this.getString(R.string.PeleMucosas), covers[16],0);
         fichaAdapterModelList.add(a);
 
         a = new FichaAdapterModel(this.getString(R.string.OsteoMuscular), covers[17],0);

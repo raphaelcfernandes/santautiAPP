@@ -43,7 +43,8 @@ public class FireBaseUtils {
     }
 
     public static DatabaseReference getFichaHospitalReference(String hospitalKey,String fichaKey){
-        return getHospitalReference("Hospital").child(hospitalKey).child("Fichas").child(fichaKey);
+        return getDatabaseReference().child("Hospital").child(hospitalKey)
+                .child("Fichas").child(fichaKey);
     }
 
 }

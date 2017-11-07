@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by rapha on 04-Oct-17.
@@ -19,8 +18,7 @@ public class PelesMucosas implements FichaMetodos{
     private List<String> mucosas;
     @Exclude
     private boolean ulceraP;
-    @Exclude
-    private boolean ictericiaFlag;
+
 
     public boolean isUlceraP() {
         return ulceraP;
@@ -30,13 +28,6 @@ public class PelesMucosas implements FichaMetodos{
         this.ulceraP = ulceraP;
     }
 
-    public boolean isIctericiaFlag() {
-        return ictericiaFlag;
-    }
-
-    public void setIctericiaFlag(boolean ictericiaFlag) {
-        this.ictericiaFlag = ictericiaFlag;
-    }
 
     public String getPele() {
         return pele;
@@ -104,7 +95,7 @@ public class PelesMucosas implements FichaMetodos{
         Map<String,Object> finalResult = new HashMap<>();
         if(pele!=null)
             itens.put("pele",pele);
-        if(ictericia>0 && ictericiaFlag)
+        if(ictericia>0)
             itens.put("ictericia",ictericia);
         if(mucosas!=null)
             for(String str : mucosas)
@@ -114,19 +105,12 @@ public class PelesMucosas implements FichaMetodos{
                 ulceraPMap.put(str,true);
         itens.put("UlceraPressao",ulceraPMap);
         itens.put("Mucosas",mucosasMap);
-        finalResult.put("PelesMucosas",itens);
+        finalResult.put("PeleMucosas",itens);
         return finalResult;
     }
 
     @Override
     public boolean checkObject() {
-        if(ulceraP)
-            return pele!=null && !ulceraPressao.isEmpty() && mucosas.size()==3;
-        if(ictericiaFlag)
-            return pele!=null && ictericia>0 && mucosas.size()==3;
-        if(ulceraP && ictericiaFlag)
-            return pele!=null&& mucosas.size()==3 && ictericia>0 && !ulceraPressao.isEmpty();
-        else
-            return pele!=null && mucosas.size()==3;
+        return pele != null && mucosas.size() == 3 && !(ulceraP && ulceraPressao.isEmpty()) && !(mucosas.get(0).equals("Ictericas") && ictericia == 0);
     }
 }

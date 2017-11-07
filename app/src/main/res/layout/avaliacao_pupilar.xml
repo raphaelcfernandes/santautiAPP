@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/avaliacaoPupilarItensLayout"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -192,12 +192,144 @@
                 <android.support.v7.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/PoucoReativas"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/NaoReativo"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:theme="@style/radioButtonStyle"
                     />
             </RadioGroup>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:id="@+id/olhar">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AvaliacaoOlhar"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"
+                style="@style/StyleParaTitulos"/>
+            <RadioGroup
+                android:paddingTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:id="@+id/avaliacaOlhar">
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/Convergente"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/Normal"
+                    android:theme="@style/radioButtonStyle" />
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Divergente"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:theme="@style/radioButtonStyle"
+                    />
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/desvioOlhar"
+            android:background="?attr/selectableItemBackground">
+            <TextView
+                android:id="@+id/massasPalpaveisTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Desvio Para"
+                android:textAppearance="@style/StyleParaTitulos"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/olharOpcoes"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:visibility="visible">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/esquerda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Esquerda"
+                    android:theme="@style/CheckBoxStyle"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="15dp"/>
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/direita"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/esquerda"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Direita"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp">
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_centerVertical="true"
+                    android:id="@+id/cima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Cima"
+                    android:theme="@style/CheckBoxStyle"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="40dp"/>
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/baixo"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/cima"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/CheckBoxStyle"
+                    android:text="@string/Baixo"/>
+            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>

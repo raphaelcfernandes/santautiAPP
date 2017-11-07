@@ -96,13 +96,17 @@ public abstract class GenericoActivity extends AppCompatActivity {
     }
 
     public void changeCardColorToGreen(){
-        FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
-        FichaActivity.adapter.notifyDataSetChanged();
+        if(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).getColor()!=1) {
+            FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(1);
+            FichaActivity.adapter.notifyDataSetChanged();
+        }
     }
 
     public void setCardColorToDefault(){
-        FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(0);
-        FichaActivity.adapter.notifyDataSetChanged();
+        if(FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).getColor()!=0) {
+            FichaActivity.fichaAdapterModelList.get(getIntent().getIntExtra("Position", 0)).setColor(0);
+            FichaActivity.adapter.notifyDataSetChanged();
+        }
     }
 
     public final void prepareIntent(int position,Intent intent){
