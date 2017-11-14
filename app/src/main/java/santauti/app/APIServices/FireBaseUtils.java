@@ -1,15 +1,11 @@
 package santauti.app.APIServices;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 
 import santauti.app.Model.Ficha.Ficha;
-import santauti.app.R;
 
 /**
  * Created by rapha on 17-Oct-17.

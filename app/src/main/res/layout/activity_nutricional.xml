@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/activity_nutricional"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
@@ -9,116 +10,215 @@
     android:weightSum="1">
 
     <include layout="@layout/toolbar" />
-
-    <LinearLayout
+    <ScrollView
+        android:paddingTop="10dp"
         android:layout_weight="0.9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical">
-
+        android:scrollbars="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="vertical"
-            android:id="@+id/dieta">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Dieta"
-                android:textAppearance="@style/StyleParaTitulos"/>
-            <RelativeLayout
-                android:paddingTop="10dp"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <!--NUTRICAO-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Enteral"
-                    android:id="@+id/dietaEnteral"/>
-                <CheckBox
-                    android:layout_toEndOf="@id/dietaEnteral"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Oral"
-                    android:id="@+id/dietaOral"/>
-                <CheckBox
-                    android:layout_toEndOf="@id/dietaOral"
-                    android:id="@+id/dietaParenteral"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Parenteral"/>
-            </RelativeLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray">
-        </LinearLayout>
-
-
-        <!--Aceitacao/Tolerancia-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:id="@+id/aceitacao">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:text="@string/AceitacaoTolerancia"
-                android:textAppearance="@style/StyleParaTitulos"
-                />
-            <RadioGroup
-                android:paddingStart="10dp"
-                android:paddingEnd="0dp"
-                android:paddingTop="5dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                android:id="@+id/aceitacaoRadioGroup">
-                <android.support.v7.widget.AppCompatRadioButton
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:id="@+id/dieta">
+                <TextView
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="0dp"
-                    android:text="@string/Boa"
-                    android:theme="@style/radioButtonStyle" />
-                <android.support.v7.widget.AppCompatRadioButton
+                    android:text="@string/Dieta"
+                    android:textAppearance="@style/StyleParaTitulos"/>
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_marginStart="10dp"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/Enteral"
+                    android:id="@+id/checkBoxEnteral"/>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Media"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:theme="@style/radioButtonStyle"
-                    />
-                <android.support.v7.widget.AppCompatRadioButton
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/enteralTolerancia">
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Tolerancia"
+                        android:textAppearance="@style/StyleParaTitulos"
+                        />
+                    <RadioGroup
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:id="@+id/enteralRadioGroup">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/Boa"
+                            android:theme="@style/radioButtonStyle" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Media"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:gravity="center"
+                            android:text="@string/Ruim"
+                            android:theme="@style/radioButtonStyle" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_marginStart="10dp"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/Parenteral"
+                    android:id="@+id/checkboxParenteral"/>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center"
-                    android:gravity="center"
-                    android:text="@string/Ruim"
-                    android:theme="@style/radioButtonStyle" />
-            </RadioGroup>
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/parenteralTolerancia">
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Tolerancia"
+                        android:textAppearance="@style/StyleParaTitulos"
+                        />
+                    <RadioGroup
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:id="@+id/parenteralRadioGroup">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/Boa"
+                            android:theme="@style/radioButtonStyle" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Media"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:gravity="center"
+                            android:text="@string/Ruim"
+                            android:theme="@style/radioButtonStyle" />
+                    </RadioGroup>
+                </LinearLayout>
+
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_marginStart="10dp"
+                    android:theme="@style/CheckBoxStyle"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/Oral"
+                    android:id="@+id/checkboxOral"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/oralAceitacao">
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Aceitacao"
+                        android:textAppearance="@style/StyleParaTitulos"
+                        />
+                    <RadioGroup
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:id="@+id/oralAceitacaoRadioGroup">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/Boa"
+                            android:theme="@style/radioButtonStyle" />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Media"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:theme="@style/radioButtonStyle"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:gravity="center"
+                            android:text="@string/Ruim"
+                            android:theme="@style/radioButtonStyle" />
+                    </RadioGroup>
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray">
+            </LinearLayout>
+            <!--NUTRICAO-->
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray">
-        </LinearLayout>
-        <!--Aceitacao/Tolerancia-->
-    </LinearLayout>
+    </ScrollView>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

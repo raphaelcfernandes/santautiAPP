@@ -16,7 +16,6 @@ import java.util.List;
 
 import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
-import santauti.app.Model.Ficha.Dispositivos;
 import santauti.app.Model.Ficha.Infeccioso;
 import santauti.app.R;
 

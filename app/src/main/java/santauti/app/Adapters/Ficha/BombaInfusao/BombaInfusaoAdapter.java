@@ -5,15 +5,10 @@ import android.content.DialogInterface;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -23,7 +18,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import santauti.app.Activities.Ficha.PartesMedicas.ExamesActivity;
 import santauti.app.Animation.MyAnimation;
 import santauti.app.R;
 

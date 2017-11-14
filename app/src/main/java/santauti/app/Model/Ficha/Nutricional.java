@@ -1,7 +1,8 @@
 package santauti.app.Model.Ficha;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,48 +10,88 @@ import java.util.Map;
  */
 
 public class Nutricional implements FichaMetodos{
-    private List<String> dieta;
-    private String aceitacao;
+    private String enteralTolerancia;
+    private String parenteralTolerancia;
+    private String oralAceitacao;
+
+    @Exclude
+    private boolean enteralCheckBox = false;
+    @Exclude
+    private boolean parenteralCheckBox = false;
+    @Exclude
+    private boolean oralCheckBox = false;
 
     @Override
     public Map<String, Object> toMap() {
         Map<String,Object> dietaMap = new HashMap<>();
         Map<String,Object> itens = new HashMap<>();
-        Map<String,Object> finalResult = new HashMap<>();
-        if(dieta!=null) {
-            for (String string : dieta)
-                dietaMap.put(string, true);
-            itens.put("dieta",dietaMap);
-        }
-        if(aceitacao!=null)
-            itens.put("aceitacao",aceitacao);
-        finalResult.put("Nutricional",itens);
-        return finalResult;
+        if(enteralCheckBox)
+            itens.put("Enteral",enteralTolerancia);
+        if(parenteralCheckBox)
+            itens.put("Parenteral",parenteralTolerancia);
+        if(oralCheckBox)
+            itens.put("Oral",oralAceitacao);
+        dietaMap.put("Nutricional",itens);
+        return dietaMap;
     }
 
     public boolean checkObject(){
-        return aceitacao!=null && !dieta.isEmpty();
+        return (enteralCheckBox && enteralTolerancia != null) ||
+                (parenteralCheckBox && parenteralTolerancia != null) && (oralCheckBox && oralAceitacao != null);
     }
 
-    public String getAceitacao() {
-        return aceitacao;
+    public Nutricional(String enteralTolerancia, String parenteralTolerancia, String oralAceitacao) {
+        this.enteralTolerancia = enteralTolerancia;
+        this.parenteralTolerancia = parenteralTolerancia;
+        this.oralAceitacao = oralAceitacao;
     }
 
-    public void setAceitacao(String aceitacao) {
-        this.aceitacao = aceitacao;
+    public String getEnteralTolerancia() {
+        return enteralTolerancia;
     }
 
-    public List<String> getDieta() {
-        return dieta;
+    public void setEnteralTolerancia(String enteralTolerancia) {
+        this.enteralTolerancia = enteralTolerancia;
     }
 
-    public void setDieta(List<String> dieta) {
-        this.dieta = dieta;
+    public String getParenteralTolerancia() {
+        return parenteralTolerancia;
     }
 
-    public Nutricional(List<String> dieta, String aceitacao) {
-        this.dieta = dieta;
-        this.aceitacao = aceitacao;
+    public void setParenteralTolerancia(String parenteralTolerancia) {
+        this.parenteralTolerancia = parenteralTolerancia;
+    }
+
+    public String getOralAceitacao() {
+        return oralAceitacao;
+    }
+
+    public void setOralAceitacao(String oralAceitacao) {
+        this.oralAceitacao = oralAceitacao;
+    }
+
+    public boolean isEnteralCheckBox() {
+        return enteralCheckBox;
+    }
+
+    public void setEnteralCheckBox(boolean enteralCheckBox) {
+        this.enteralCheckBox = enteralCheckBox;
+    }
+
+    public boolean isParenteralCheckBox() {
+        return parenteralCheckBox;
+    }
+
+    public void setParenteralCheckBox(boolean parenteralCheckBox) {
+        this.parenteralCheckBox = parenteralCheckBox;
+    }
+
+    public boolean isOralCheckBox() {
+        return oralCheckBox;
+    }
+
+    public void setOralCheckBox(boolean oralCheckBox) {
+        this.oralCheckBox = oralCheckBox;
     }
 
     public Nutricional() {

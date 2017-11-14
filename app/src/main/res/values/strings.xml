@@ -245,7 +245,8 @@
     <string name="FezesNormais">Normais</string>
     <string name="Dieta">Dieta</string>
     <string name="Parenteral">Parenteral</string>
-    <string name="AceitacaoTolerancia">Aceitacao/Tolerancia</string>
+    <string name="Aceitacao">Aceitação</string>
+    <string name="Tolerancia">Tolerância</string>
     <string name="Boa">Boa</string>
     <string name="Ruim">Ruim</string>
     <string name="Anictericas">Anictéricas</string>
@@ -396,6 +397,7 @@
     <string name="Baixo">Baixo</string>
     <string name="Convergente">Convergente</string>
     <string name="Divergente">Divergente</string>
+
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
