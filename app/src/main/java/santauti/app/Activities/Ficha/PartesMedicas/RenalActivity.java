@@ -1,7 +1,10 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.view.MenuItem;
@@ -9,7 +12,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Model.Ficha.Renal;
 import santauti.app.R;
 
 /**
@@ -140,27 +148,31 @@ public class RenalActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter() {
-//        realm.beginTransaction();
-//        Renal renal = realm.createObject(Renal.class);
-//        if(!isTextInputEditTextEmpty(peso))
-//            renal.setPeso(Integer.parseInt(peso.getText().toString()));
-//        if(urinaRadioGroup.getCheckedRadioButtonId()!=-1)
-//            renal.setUrina(getStringOfRadioButtonSelectedFromRadioGroup(urinaRadioGroup));
-//        if(checkboxEmDialise.isChecked()){
-//            renal.setDialise(true);
-//            if(ufCheckBox.isChecked())
-//                renal.setUF(true);
-//            if(!isTextInputEditTextEmpty(volumeDialise))
-//                renal.setVolume(Integer.parseInt(volumeDialise.getText().toString()));
-//            if(!isTextInputEditTextEmpty(tempoDialise))
-//                renal.setTempo(Integer.parseInt(tempoDialise.getText().toString()));
-//        }
-//        Ficha r = getProperFicha();
-//        r.setRenal(renal);
-//        realm.copyToRealmOrUpdate(r);
-//        realm.commitTransaction();
-//        if(renal.checkObject())
-//            changeCardColorToGreen();
+        final Renal renal = new Renal();
+        if(!isTextInputEditTextEmpty(peso))
+            renal.setPeso(Integer.parseInt(peso.getText().toString()));
+        if(urinaRadioGroup.getCheckedRadioButtonId()!=-1)
+            renal.setUrina(getStringOfRadioButtonSelectedFromRadioGroup(urinaRadioGroup));
+        if(checkboxEmDialise.isChecked()){
+            renal.setDialise(true);
+            if(ufCheckBox.isChecked())
+                renal.setUF(true);
+            if(!isTextInputEditTextEmpty(volumeDialise))
+                renal.setVolume(Integer.parseInt(volumeDialise.getText().toString()));
+            if(!isTextInputEditTextEmpty(tempoDialise))
+                renal.setTempo(Integer.parseInt(tempoDialise.getText().toString()));
+        }
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(renal.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(renal.checkObject())
+                    changeCardColorToGreen();
+                else
+                    setCardColorToDefault();
+            }
+        });
     }
 
     @Override

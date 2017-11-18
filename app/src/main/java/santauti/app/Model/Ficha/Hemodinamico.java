@@ -1,27 +1,73 @@
 package santauti.app.Model.Ficha;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Raphael Fernandes on 16-Jun-17.
  */
 
-public class Hemodinamico {
-
+public class Hemodinamico implements FichaMetodos{
     private String pulso;
     private String foneseBulhas;
-    //private RealmList<RealmString> tipoSopro;
+    private List<String> tipoSopro;
     private int intensidadeSopro;
     private String perfusaoCapilar;
     private String extremidadesColoracao;
     private String extremidadesTemperatura;
     private boolean soproChecked;
 
-    public boolean checkObject(){
-        if(soproChecked)
-            return pulso!=null && /*!tipoSopro.isEmpty() &&*/ foneseBulhas!=null && perfusaoCapilar!=null && extremidadesColoracao!=null
-                    && intensidadeSopro>0 && extremidadesTemperatura!=null;
+    @Override
+    public Map<String, Object> toMap() {
+        Map<String,Object> itens = new HashMap<>();
+        Map<String,Object> soproMap = new HashMap<>();
+        Map<String,Object> finalResult = new HashMap<>();
+        if(pulso!=null)
+            itens.put("pulso",pulso);
+        if(foneseBulhas!=null)
+            itens.put("foneseBulhas",foneseBulhas);
+        if(perfusaoCapilar!=null)
+            itens.put("perfusaoCapilar",perfusaoCapilar);
+        if(extremidadesColoracao!=null)
+            itens.put("extremidadesColoracao",extremidadesColoracao);
+        if(extremidadesTemperatura!=null)
+            itens.put("extremidadesTemperatura",extremidadesTemperatura);
+        if(soproChecked){
+            if(intensidadeSopro>0)
+                soproMap.put("intensidadeSopro",intensidadeSopro);
+            if(tipoSopro!=null)
+                for(String string : tipoSopro)
+                    soproMap.put(string,true);
+            itens.put("sopro",soproMap);
+        }
         else
-            return pulso!=null && foneseBulhas!=null && perfusaoCapilar!=null && extremidadesColoracao!=null
-                    && extremidadesTemperatura!=null;
+            itens.put("sopro",false);
+        finalResult.put("Hemodinamico",itens);
+        return finalResult;
+    }
+
+    public boolean checkObject() {
+        if (soproChecked)
+            return pulso != null && /*!tipoSopro.isEmpty() &&*/ foneseBulhas != null && perfusaoCapilar != null && extremidadesColoracao != null
+                    && intensidadeSopro > 0 && extremidadesTemperatura != null;
+        else
+            return pulso != null && foneseBulhas != null && perfusaoCapilar != null && extremidadesColoracao != null
+                    && extremidadesTemperatura != null;
+    }
+
+    public Hemodinamico(String pulso, String foneseBulhas, List<String> tipoSopro, int intensidadeSopro, String perfusaoCapilar, String extremidadesColoracao, String extremidadesTemperatura, boolean soproChecked) {
+        this.pulso = pulso;
+        this.foneseBulhas = foneseBulhas;
+        this.tipoSopro = tipoSopro;
+        this.intensidadeSopro = intensidadeSopro;
+        this.perfusaoCapilar = perfusaoCapilar;
+        this.extremidadesColoracao = extremidadesColoracao;
+        this.extremidadesTemperatura = extremidadesTemperatura;
+        this.soproChecked = soproChecked;
+    }
+
+    public Hemodinamico() {
     }
 
     public String getPulso() {
@@ -38,6 +84,14 @@ public class Hemodinamico {
 
     public void setFoneseBulhas(String foneseBulhas) {
         this.foneseBulhas = foneseBulhas;
+    }
+
+    public List<String> getTipoSopro() {
+        return tipoSopro;
+    }
+
+    public void setTipoSopro(List<String> tipoSopro) {
+        this.tipoSopro = tipoSopro;
     }
 
     public int getIntensidadeSopro() {

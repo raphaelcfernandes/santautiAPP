@@ -4,7 +4,7 @@
 <resources>
     <string name="app_name">SantaUTI</string>
     <string name="login">Login</string>
-    <string name="Usuario">Usuario</string>
+    <string name="Usuario">Usuário</string>
     <string name="Senha">Senha</string>
     <string name="Normal">Normal</string>
     <string name="title_activity_ficha">Evolução</string>
@@ -42,7 +42,7 @@
     <string name="PIC">PIC</string>
     <string name="PVC">PVC</string>
     <string name="PPC">PPC</string>
-    <string name="Swanganz">Swan-ganz</string>
+    <string name="Swanganz">Swan-Ganz</string>
     <string name="SPO2">SPO2 (%)</string>
     <string name="SJO2">SJO2 (%)</string>
     <string name="PesoKG">Peso (kg)</string>
@@ -123,7 +123,7 @@
     <string name="UF">UF</string>
     <string name="TempoHora">Tempo/Hora</string>
     <string name="Nutricional">Nutricional</string>
-    <string name="PelesMucosas">Peles e Mucosas</string>
+    <string name="PeleMucosas">Pele e Mucosas</string>
     <string name="OsteoMuscular">Osteomuscular</string>
     <string name="Pele">Pele</string>
     <string name="UlceraPressao">Ulcera por Pressão</string>
@@ -172,11 +172,12 @@
     <string name="Anisocoricas">Anisocóricas</string>
     <string name="EsquerdaMdireita">Esquerda > Direita</string>
     <string name="DireitaMesquerda">Direita > Esquerda</string>
-    <string name="Reativo">Reativo</string>
-    <string name="NaoReativo">Não Reativo</string>
-    <string name="Hiperfonetica">Hiperfoneticas</string>
-    <string name="Normofonetica">Normofoneticas</string>
-    <string name="Hipofonetica">Hipofoneticas</string>
+    <string name="Reativo">Reativas</string>
+    <string name="NaoReativo">Não Reativas</string>
+    <string name="PoucoReativas">Pouco Reativas</string>
+    <string name="Hiperfonetica">Hiperfonéticas</string>
+    <string name="Normofonetica">Normofonéticas</string>
+    <string name="Hipofonetica">Hipofonéticas</string>
     <string name="Cianotica">Cianóticas</string>
     <string name="Acianotica">Acianóticas</string>
     <string name="Fria">Frias</string>
@@ -196,7 +197,7 @@
     <string name="Baixa">Baixa</string>
     <string name="NoTempo">No Tempo</string>
     <string name="NoEspaco">No Espaço</string>
-    <string name="EstaVentilacaoMecanica">Está em Ventilação Mecânica?</string>
+    <string name="EstaVentilacaoMecanica">Está em VM, VNI ou BIPAP?</string>
     <string name="NaoInvasiva">Não-invasiva</string>
     <string name="BIPAP">BIPAP</string>
     <string name="Mecanica">Mecânica</string>
@@ -244,14 +245,15 @@
     <string name="FezesNormais">Normais</string>
     <string name="Dieta">Dieta</string>
     <string name="Parenteral">Parenteral</string>
-    <string name="AceitacaoTolerancia">Aceitacao/Tolerancia</string>
+    <string name="Aceitacao">Aceitação</string>
+    <string name="Tolerancia">Tolerância</string>
     <string name="Boa">Boa</string>
     <string name="Ruim">Ruim</string>
-    <string name="Anictericas">Anictericas</string>
+    <string name="Anictericas">Anictéricas</string>
     <string name="Hidratadas">Hidratadas</string>
     <string name="Hiperhidratadas">Hiperhidratadas</string>
     <string name="Hipocoradas">Hipocoradas</string>
-    <string name="Ictericas">Ictericas</string>
+    <string name="Ictericas">Ictéricas</string>
     <string name="Normocoradas">Normocoradas</string>
     <string name="Secas">Secas</string>
     <string name="PCV">PCV</string>
@@ -307,12 +309,12 @@
     <string name="FossaIliacaDireita">Fossa Iliaca Direita</string>
     <string name="FossaIliacaEsquerda">Fossa Iliaca Esquerda</string>
     <string name="Hipogastrio">Hipogastrio</string>
-    <string name="Hipertrofico">Hipertrofico</string>
-    <string name="Normotrofico">Normotrofico</string>
-    <string name="Hipotrofico">Hipotrofico</string>
-    <string name="Hipertonico">Hipertonico</string>
-    <string name="Normotonico">Normotonico</string>
-    <string name="Hipotonico">Hipotonico</string>
+    <string name="Hipertrofico">Hipertrófico</string>
+    <string name="Normotrofico">Normotrófico</string>
+    <string name="Hipotrofico">Hipotrófico</string>
+    <string name="Hipertonico">Hipertônico</string>
+    <string name="Normotonico">Normotônico</string>
+    <string name="Hipotonico">Hipotoôico</string>
     <string name="Hematuria">Hematuria</string>
     <string name="Sinusal">Sinusal</string>
     <string name="FibrilacaoAtrial">Fibrilação Atrial</string>
@@ -337,7 +339,7 @@
     <string name="Cotovelos">Cotovelos</string>
     <string name="Tronco">Tronco</string>
     <string name="Ritmico">Ritmico</string>
-    <string name="Aritmico">Aritmico</string>
+    <string name="Arritmico">Arrítmico</string>
     <string name="Regular">Regular</string>
     <string name="AmoxicilinaClavulanato">Amoxicilina-clavulanato</string>
     <string name="Azitromicina">Azitromicina</string>
@@ -388,6 +390,17 @@
     <string name="AlteracaoNivelConsciencia">Alteração do nível de consciência</string>
     <string name="NaoRealizado">Não realizou/sem resultados</string>
     <string name="AvaliacaoCAMICUNaoRealizada">Avaliação não permitida, pois RASS maior que +4 ou menor que -4.</string>
+    <string name="AvaliacaoOlhar">Avaliação do movimento ocular </string>
+    <string name="Direita">Direita</string>
+    <string name="Esquerda">Esquerda</string>
+    <string name="Cima">Cima</string>
+    <string name="Baixo">Baixo</string>
+    <string name="Convergente">Convergente</string>
+    <string name="Divergente">Divergente</string>
+    <string name="PicosFebris">Nº Picos Febris</string>
+    <string name="Diurese">Diurese</string>
+    <string name="BalancoHidrico">Balanço Hídrico</string>
+
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
     <!--NORMAL MESSAGES-->
@@ -414,10 +427,10 @@
     </string-array>
 
     <string-array name="nivelConsciencia">
-        <item>ALERTA \u002d Acordado e resposta adequadas às perguntas.</item>
-        <item>VIGIL \u002d hiperalerta.</item>
+        <item>CONSCIENTE/ALERTA \u002d Acordado e resposta adequadas às perguntas.</item>
+        <item>VIGIL \u002d vigil.</item>
         <item>SONOLÊNCIA \u002d Acorda ao chamado, responde às perguntas.</item>
-        <item>OBNUBILACÃO \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
+        <item>OBNUBILAÇÃO \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
         <item>TORPOR \u002d Sonolencia profunda, responde somente a estimulo doloroso.</item>
         <item>COMA \u002d Não abre os olhos nem emite sons verbais sob estimulo verbal ou doloroso.</item>
         <item>SEDADO </item>

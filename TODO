@@ -14,35 +14,36 @@ FICHA:
     - Meu pai sugeriu mostrar as fichas como o feed do FB
     - Snackbar por cima dos botoes
 
-
-Descolorir card caso algum item tenha sido descelecionado (Funcionando -> Peles e Mucosas)
-    Distribuir essa funcionalidade para os outros cards que possuem o mesmo esquema.
-        -
 /*************MUDANĆAS*********************/
+Colocar itens para False caso n marcados. COMO EM RENAL.
+
+
 Hematológico: Salvando.
-Monitor Multiparamétrico:
+Monitor Multiparamétrico: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Metabolico: Salvando.
 Dispositivos: Salvando.
     - tubo traqueal e traqueostomia. VERIFICAR SE IRA FICAR AQUI OU EM RESPIRATORIO
-Gastro:
+Gastro: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Endocrino: Salvando.
 Osteomuscular: Salvando.
-Nutricional:
-Renal:
-Respiratorio:
-Pele e Mucosas:
-Hemodinamico:
+Nutricional: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
+Renal: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
+Respiratorio: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
+     - Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL.
+Pele e Mucosas: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
+Hemodinamico: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Infeccioso: Salvando.
-Respirador:  Murmurio vesicular pra baixo de roncos. Uso de oxigenio apenas se vias aereas NATURAL. Erro radio button modo ventilatorio
+Respirador: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 Bomba de infusao: Salvando.
-Folhas de balanćo:
+Folhas de balanćo: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
     - cateter nasogastrico. (aparece apenas se qlqr cateter gastrico selecionado em dispositivo e tenha drenado)
         - Volume/mlpa
         - aspecto: gastrico, fecaloide, biliar
-Exames:
+Exames: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
+Neurologico: Salvando. NAO ESTÁ SENDO TRATADO QUANDO REABRE ACTIVITY. (BUSCA NO BANCO MAS N SETA OS VALORES)
 /*****************MUDANÇAS FEITAS**********/
 
-Neurologico: Erro radio button anisocorico avaliacao pupilar
+Neurologico:
         - Nivel de consciencia primeiro item (Adicionar sedado como item no spinner), glasgow n obrigatorio
         - Temporo espacial: Corrigir.
             - orientado, desorientado
@@ -53,7 +54,12 @@ Neurologico: Erro radio button anisocorico avaliacao pupilar
             Delirium, sim -> hipoativo,hiperativo
 ---------------- DADOS ENFERMAGEM ----------------------------
 Hemodinamicamente estavel e hemodinamicamente instavel -> Folhas Balanco
-
+Pendencias -> banco de dados (webSite)
+    - Tipo, data de insercao, data de solucao, campo livre para comentario
+    - Interligar com tela da secretaria. quando inserir pendencia, lanćar na scecretaria (tela só com pendencia) de modo q secretaria n consegue apagar
+    - lanćar numa tela "TODO" (Claudio) quadro publico. -> tela de consulta
+    - pendencia -> lanćamento de dados
+    - Realiza quando está editando ficha.
 -------------------------
 Website
 Neurologico

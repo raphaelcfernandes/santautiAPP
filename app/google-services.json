@@ -46,6 +46,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "666817934398-92apak6gtep3jufvps227fadoul8m7c2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "santauti.app",
+            "certificate_hash": "e3a1e86b5bbdc575b480285f728d43b7567fcfc8"
+          }
+        },
+        {
           "client_id": "666817934398-3mk1tcjc803oe8amflc4ff1t2j5drlt4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

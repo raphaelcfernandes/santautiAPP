@@ -1,5 +1,6 @@
 package santauti.app.Model.Ficha;
 
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
@@ -29,9 +30,9 @@ public class Ficha{
         this.date = date;
     }
 
-//    public static java.util.Map<String, String> getCreationDate() {
-//        return ServerValue.TIMESTAMP;
-//    }
+    public static java.util.Map<String, String> getCreationDate() {
+        return ServerValue.TIMESTAMP;
+    }
 
     public String getPacienteKey() {
         return pacienteKey;
@@ -64,5 +65,12 @@ public class Ficha{
         result.put("pacienteKey",pacienteKey);
         result.put("medicoKey",medicoKey);
         return result;
+    }
+
+    @Exclude
+    public Map<String,Object> insereData(){
+        HashMap<String,Object> t = new HashMap<>();
+        t.put("dataCriada",getCreationDate());
+        return t;
     }
 }

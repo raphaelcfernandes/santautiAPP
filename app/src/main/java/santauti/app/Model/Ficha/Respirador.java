@@ -1,10 +1,13 @@
 package santauti.app.Model.Ficha;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by rapha on 05-Oct-17.
  */
 
-public class Respirador{
+public class Respirador implements FichaMetodos{
     private boolean emVentilacaoMecanica;
     private String modoVentilatorio;
     private int volume;
@@ -17,6 +20,55 @@ public class Respirador{
     private int saturacao;
     private int oxigenio;
     private String parametros;
+
+    @Override
+    public Map<String, Object> toMap() {
+        Map<String,Object> finalResult = new HashMap<>();
+        Map<String,Object> itens = new HashMap<>();
+        if(emVentilacaoMecanica){
+            if(modoVentilatorio!=null){
+                if(volume>0)
+                    itens.put("volume",volume);
+                itens.put("modoVentilatorio",modoVentilatorio);
+                if(modoVentilatorio.equals("BIPAP")){
+                    if(ipap>0)
+                        itens.put("ipap",ipap);
+                    if(epap>0)
+                        itens.put("epap",epap);
+                    if(saturacao>0)
+                        itens.put("saturacao",saturacao);
+                    if(oxigenio>0)
+                        itens.put("oxigenio",oxigenio);
+                }
+                else if(modoVentilatorio.equals("Mecânica") && parametros!=null){
+                    if(parametros!=null)
+                        itens.put("parametros",parametros);
+                    if(fio2>0)
+                        itens.put("fio2",fio2);
+                    if(peep>0)
+                        itens.put("peep",peep);
+                    if(freqRespiratoriaPaciente>0)
+                        itens.put("freqRespiratoriaPaciente",freqRespiratoriaPaciente);
+                    if(freqRespiratoriaRespirador>0)
+                        itens.put("freqRespiratoriaRespirador",freqRespiratoriaRespirador);
+                }
+                else{
+                    if(fio2>0)
+                        itens.put("fio2",fio2);
+                    if(peep>0)
+                        itens.put("peep",peep);
+                    if(freqRespiratoriaPaciente>0)
+                        itens.put("freqRespiratoriaPaciente",freqRespiratoriaPaciente);
+                    if(freqRespiratoriaRespirador>0)
+                        itens.put("freqRespiratoriaRespirador",freqRespiratoriaRespirador);
+                }
+            }
+        }
+        else
+            itens.put("ventilacaoMecanica",false);
+        finalResult.put("Respirador",itens);
+        return finalResult;
+    }
 
     public boolean checkObject(){
         if(emVentilacaoMecanica){
@@ -129,5 +181,23 @@ public class Respirador{
 
     public void setParametros(String parametros) {
         this.parametros = parametros;
+    }
+
+    public Respirador(boolean emVentilacaoMecanica, String modoVentilatorio, int volume, int peep, int fio2, int freqRespiratoriaPaciente, int freqRespiratoriaRespirador, int ipap, int epap, int saturacao, int oxigenio, String parametros) {
+        this.emVentilacaoMecanica = emVentilacaoMecanica;
+        this.modoVentilatorio = modoVentilatorio;
+        this.volume = volume;
+        this.peep = peep;
+        this.fio2 = fio2;
+        this.freqRespiratoriaPaciente = freqRespiratoriaPaciente;
+        this.freqRespiratoriaRespirador = freqRespiratoriaRespirador;
+        this.ipap = ipap;
+        this.epap = epap;
+        this.saturacao = saturacao;
+        this.oxigenio = oxigenio;
+        this.parametros = parametros;
+    }
+
+    public Respirador() {
     }
 }

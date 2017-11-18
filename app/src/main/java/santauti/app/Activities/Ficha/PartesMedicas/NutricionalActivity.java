@@ -1,14 +1,25 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import java.util.List;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
+import santauti.app.Model.Ficha.Nutricional;
 import santauti.app.R;
 
 /**
@@ -18,6 +29,7 @@ import santauti.app.R;
 public class NutricionalActivity extends GenericoActivity {
     private CheckBox dietaOral, dietaEnteral, dietaParenteral;
     private RadioGroup aceitacaoRadioGroup;
+    private LinearLayout enteralTolerancia, parenteralTolerancia, oralAceitacao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,14 +39,48 @@ public class NutricionalActivity extends GenericoActivity {
         prepareNavigationButtons();
 
         /*****************************CHECKBOX**************************/
-        dietaEnteral = (CheckBox)findViewById(R.id.dietaEnteral);
-        dietaOral = (CheckBox)findViewById(R.id.dietaOral);
-        dietaParenteral = (CheckBox)findViewById(R.id.dietaParenteral);
+        dietaEnteral = (CheckBox)findViewById(R.id.checkBoxEnteral);
+        dietaEnteral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(enteralTolerancia.isShown())
+                    enteralTolerancia.setVisibility(View.GONE);
+                else
+                    enteralTolerancia.setVisibility(View.VISIBLE);
+            }
+        });
+        dietaOral = (CheckBox)findViewById(R.id.checkboxOral);
+        dietaOral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(oralAceitacao.isShown())
+                    oralAceitacao.setVisibility(View.GONE);
+                else
+                    oralAceitacao.setVisibility(View.VISIBLE);
+            }
+        });
+        dietaParenteral = (CheckBox)findViewById(R.id.checkboxParenteral);
+        dietaParenteral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(parenteralTolerancia.isShown())
+                    parenteralTolerancia.setVisibility(View.GONE);
+                else
+                    parenteralTolerancia.setVisibility(View.VISIBLE);
+            }
+        });
         /*****************************CHECKBOX**************************/
 
         /****************************RADIOGROUP*************************/
-        aceitacaoRadioGroup = (RadioGroup)findViewById(R.id.aceitacaoRadioGroup);
+
         /****************************RADIOGROUP*************************/
+
+
+        /****************************VIEW*******************************/
+        enteralTolerancia = (LinearLayout) findViewById(R.id.enteralTolerancia);
+        parenteralTolerancia = (LinearLayout) findViewById(R.id.parenteralTolerancia);
+        oralAceitacao = (LinearLayout) findViewById(R.id.oralAceitacao);
+        /****************************VIEW*******************************/
 
         antFicha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,32 +142,30 @@ public class NutricionalActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter(){
-//        realm.beginTransaction();
-//        Nutricional nutricional = realm.createObject(Nutricional.class);
-//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.dieta);
-//        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-//            View v = linearLayout.getChildAt(i);
-//            if(v instanceof RelativeLayout) {
-//                for (int k = 0; k < ((RelativeLayout) v).getChildCount(); k++) {
-//                    View view = ((RelativeLayout) v).getChildAt(k);
-//                    if (view instanceof AppCompatCheckBox) {
-//                        AppCompatCheckBox cb = (AppCompatCheckBox) view;
-//                        if (cb.isChecked()) {
-//                            RealmString realmString = realm.createObject(RealmString.class);
-//                            realmString.setName(cb.getText().toString());
-//                            nutricional.getDieta().add(realmString);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        if(aceitacaoRadioGroup.getCheckedRadioButtonId()!=-1)
-//            nutricional.setAceitacao(getStringOfRadioButtonSelectedFromRadioGroup(aceitacaoRadioGroup));
-//        Ficha r = getProperFicha();
-//        r.setNutricional(nutricional);
-//        realm.copyToRealmOrUpdate(r);
-//        realm.commitTransaction();
-//        if(nutricional.checkObject())
-//            changeCardColorToGreen();
+        final Nutricional nutricional = new Nutricional();
+        if(dietaEnteral.isChecked()) {
+            nutricional.setEnteralCheckBox(true);
+            nutricional.setEnteralTolerancia(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup)(findViewById(R.id.enteralRadioGroup))));
+        }
+        if(dietaParenteral.isChecked()){
+            nutricional.setParenteralCheckBox(true);
+            nutricional.setParenteralTolerancia(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup)(findViewById(R.id.parenteralRadioGroup))));
+        }
+        if(dietaOral.isChecked()){
+            nutricional.setOralCheckBox(true);
+            nutricional.setOralAceitacao(getStringOfRadioButtonSelectedFromRadioGroup((RadioGroup)(findViewById(R.id.oralAceitacaoRadioGroup))));
+        }
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getFichaHospitalReference(sharedPreferences.getString("hospitalKey", ""),
+                sharedPreferences.getString("fichaKey", "")).updateChildren(nutricional.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(nutricional.checkObject())
+                    changeCardColorToGreen();
+                else
+                    setCardColorToDefault();
+            }
+        });
     }
 }

@@ -1,7 +1,10 @@
 package santauti.app.Activities.Ficha.PartesMedicas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,8 +12,15 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import java.util.List;
+
+import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.GenericoActivity;
 import santauti.app.Animation.MyAnimation;
+import santauti.app.Model.Ficha.Hemodinamico;
 import santauti.app.R;
 
 /**
@@ -183,43 +193,40 @@ public class HemodinamicoActivity extends GenericoActivity {
     }
 
     private void verificaCamposENotificaAdapter() {
-//        realm.beginTransaction();
-//        Hemodinamico hemodinamico = realm.createObject(Hemodinamico.class);
-//        if(pulso.getCheckedRadioButtonId()!=-1)
-//            hemodinamico.setPulso(getStringOfRadioButtonSelectedFromRadioGroup(pulso));
-//        if(foneseBulhasRadioGroup1.getCheckedRadioButtonId()!=-1)
-//            hemodinamico.setFoneseBulhas(getStringOfRadioButtonSelectedFromRadioGroup(foneseBulhasRadioGroup1));
-//        else if(foneseBulhasRadioGroup2.getCheckedRadioButtonId()!=-1)
-//            hemodinamico.setFoneseBulhas(getStringOfRadioButtonSelectedFromRadioGroup(foneseBulhasRadioGroup2));
-//
-//        if(perfusaoCapilar.getCheckedRadioButtonId()!=-1)
-//            hemodinamico.setPerfusaoCapilar(getStringOfRadioButtonSelectedFromRadioGroup(perfusaoCapilar));
-//        if(extremidadesCor.getCheckedRadioButtonId()!=-1)
-//            hemodinamico.setExtremidadesColoracao(getStringOfRadioButtonSelectedFromRadioGroup(extremidadesCor));
-//        if(extremidadesTemperatura.getCheckedRadioButtonId()!=-1)
-//            hemodinamico.setExtremidadesTemperatura(getStringOfRadioButtonSelectedFromRadioGroup(extremidadesTemperatura));
-//
-//        if(checkboxSopro.isChecked()){
-//            hemodinamico.setSoproChecked(true);
-//            RealmList<RealmString> realmStrings = getCheckBoxesPreenchidos(R.id.tipoSopro_layout);
-//            for(RealmString realmString : realmStrings)
-//                hemodinamico.getTipoSopro().add(realmString);
-//            if(intensidadeSopro.getCheckedRadioButtonId()!=-1) {
-//                StringBuilder sb = new StringBuilder(getStringOfRadioButtonSelectedFromRadioGroup(intensidadeSopro));
-//                sb.deleteCharAt(0);
-//                hemodinamico.setIntensidadeSopro(Integer.parseInt(sb.toString()));
-//            }
-//        }
-//        else if(!checkboxSopro.isChecked())
-//            hemodinamico.setSoproChecked(false);
-//
-//        Ficha r = getProperFicha();
-//        r.setHemodinamico(hemodinamico);
-//        realm.copyToRealmOrUpdate(r);
-//        realm.commitTransaction();
-//        if(hemodinamico.checkObject())
-//            changeCardColorToGreen();
-//        else
-//            setCardColorToDefault();
+        Hemodinamico hemodinamico = new Hemodinamico();
+        if(pulso.getCheckedRadioButtonId()!=-1)
+            hemodinamico.setPulso(getStringOfRadioButtonSelectedFromRadioGroup(pulso));
+        if(foneseBulhasRadioGroup1.getCheckedRadioButtonId()!=-1)
+            hemodinamico.setFoneseBulhas(getStringOfRadioButtonSelectedFromRadioGroup(foneseBulhasRadioGroup1));
+        else if(foneseBulhasRadioGroup2.getCheckedRadioButtonId()!=-1)
+            hemodinamico.setFoneseBulhas(getStringOfRadioButtonSelectedFromRadioGroup(foneseBulhasRadioGroup2));
+
+        if(perfusaoCapilar.getCheckedRadioButtonId()!=-1)
+            hemodinamico.setPerfusaoCapilar(getStringOfRadioButtonSelectedFromRadioGroup(perfusaoCapilar));
+        if(extremidadesCor.getCheckedRadioButtonId()!=-1)
+            hemodinamico.setExtremidadesColoracao(getStringOfRadioButtonSelectedFromRadioGroup(extremidadesCor));
+        if(extremidadesTemperatura.getCheckedRadioButtonId()!=-1)
+            hemodinamico.setExtremidadesTemperatura(getStringOfRadioButtonSelectedFromRadioGroup(extremidadesTemperatura));
+
+        if(checkboxSopro.isChecked()){
+            hemodinamico.setSoproChecked(true);
+            List<String> string = getCheckBoxesPreenchidos(R.id.tipoSopro_layout);
+            hemodinamico.setTipoSopro(string);
+            if(intensidadeSopro.getCheckedRadioButtonId()!=-1) {
+                StringBuilder sb = new StringBuilder(getStringOfRadioButtonSelectedFromRadioGroup(intensidadeSopro));
+                sb.deleteCharAt(0);
+                hemodinamico.setIntensidadeSopro(Integer.parseInt(sb.toString()));
+            }
+        }
+        else if(!checkboxSopro.isChecked())
+            hemodinamico.setSoproChecked(false);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(hemodinamico.toMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                changeCardColorToGreen();
+            }
+        });
     }
 }

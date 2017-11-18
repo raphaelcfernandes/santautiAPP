@@ -10,18 +10,18 @@
     <include layout="@layout/content_recycler_view" />
 
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="20dp"-->
-        <!--android:layout_marginEnd="20dp"-->
-        <!--android:clickable="true"-->
-        <!--android:elevation="8dp"-->
-        <!--android:visibility="gone"-->
-        <!--android:tint="@android:color/white"-->
-        <!--android:src="@drawable/ic_queue_play_next_black_24dp"-->
-        <!--android:backgroundTint="@color/colorPrimary"/>-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:layout_marginEnd="20dp"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:visibility="gone"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_queue_play_next_black_24dp"
+        android:backgroundTint="@color/colorPrimary"/>
 </android.support.design.widget.CoordinatorLayout>
 

@@ -202,6 +202,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp">
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/anictericas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -209,6 +210,7 @@
                         android:text="@string/Anictericas"
                         android:theme="@style/radioButtonStyle" />
                     <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/ictericas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Ictericas"
@@ -282,40 +284,21 @@
                 android:background="@color/gray">
             </LinearLayout>
 
-            <RelativeLayout
-                android:orientation="vertical"
+            <LinearLayout
                 android:paddingTop="10dp"
-                android:paddingBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="ictericiaOnClick"
-                android:background="?attr/selectableItemBackground"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                >
+                android:orientation="vertical"
+                android:id="@+id/ictericias"
+                android:visibility="gone">
                 <TextView
+                    android:paddingBottom="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
                     android:text="@string/Ictericia"
                     android:textAppearance="@style/StyleParaTitulos"
                     />
-                <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/checkBoxIctericia"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:gravity="end"
-                    android:theme="@style/CheckBoxStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/ictericiaItensLayout"
-                android:visibility="gone">
                 <RadioGroup
                     android:id="@+id/ictericiaItensRadioGroup"
                     android:paddingStart="10dp"

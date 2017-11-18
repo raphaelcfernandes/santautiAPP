@@ -6,25 +6,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import santauti.app.APIServices.FireBaseUtils;
 import santauti.app.Activities.Ficha.PartesMedicas.BombaInfusaoActivity;
@@ -45,7 +36,6 @@ import santauti.app.Activities.Ficha.PartesMedicas.PelesMucosasActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RenalActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiradorActivity;
 import santauti.app.Activities.Ficha.PartesMedicas.RespiratorioActivity;
-import santauti.app.Activities.SnackbarCreator;
 import santauti.app.Adapters.Ficha.FichaAdapterModel;
 import santauti.app.Adapters.Ficha.FichaSectionAdapter;
 import santauti.app.Model.Ficha.Ficha;
@@ -57,7 +47,6 @@ public class FichaActivity extends GenericoActivity{
     public static List<FichaAdapterModel> fichaAdapterModelList;
     private Intent intent;
     private FloatingActionButton floatingActionButton;
-    private Ficha ficha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +55,13 @@ public class FichaActivity extends GenericoActivity{
         setToolbar(this.getString(R.string.Evolucao));
 
         /*******************LAYOUT VARIAVEIS*******************************/
-//        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
-//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                sendFichaToServer(view);
-//            }
-//        });
+        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendFichaToServer(view);
+            }
+        });
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         /*******************LAYOUT VARIAVEIS*******************************/
 
@@ -130,10 +119,8 @@ public class FichaActivity extends GenericoActivity{
         for(FichaAdapterModel fichaAdapterModel : fichaAdapterModelList)
             if(fichaAdapterModel.getColor()==1)
                 i++;
-        if(i>0 && i<fichaAdapterModelList.size())
-            adapter.notifyDataSetChanged();
-//        if(i==fichaAdapterModelList.size())
-//            floatingActionButton.setVisibility(View.VISIBLE);
+        if(i==fichaAdapterModelList.size()-1)
+            floatingActionButton.setVisibility(View.VISIBLE);
 
     }
 
@@ -257,7 +244,7 @@ public class FichaActivity extends GenericoActivity{
         a = new FichaAdapterModel(this.getString(R.string.Endocrino), covers[15],0);
         fichaAdapterModelList.add(a);
 
-        a = new FichaAdapterModel(this.getString(R.string.PelesMucosas), covers[16],0);
+        a = new FichaAdapterModel(this.getString(R.string.PeleMucosas), covers[16],0);
         fichaAdapterModelList.add(a);
 
         a = new FichaAdapterModel(this.getString(R.string.OsteoMuscular), covers[17],0);
@@ -276,39 +263,15 @@ public class FichaActivity extends GenericoActivity{
      * Recebe: http statusCode
      */
     private void sendFichaToServer(final View view){
-//        Ficha fichaToSend = realm.copyFromRealm(realm.where(Ficha.class).equalTo("NroAtendimento",idCriado).findFirst());
-//        Call<Ficha> call = apiService.sendFichaFromAppToServer(fichaToSend);
-//        call.enqueue(new Callback<Ficha>() {
-//            @Override
-//            public final void onResponse(@NonNull Call<Ficha> call, @NonNull Response<Ficha> response) {
-//                if(response.isSuccessful()) {
-//                    //SnackbarCreator.createText(view, "Ficha salva com sucesso!");
-//                    Snackbar snackbar = Snackbar.make(view,"Ficha salva com sucesso!",Snackbar.LENGTH_SHORT);
-//                    snackbar.addCallback(new Snackbar.Callback() {
-//                        @Override
-//                        public void onDismissed(Snackbar snackbar, int event) {
-//                            finish();
-//                        }
-//                        @Override
-//                        public void onShown(Snackbar snackbar) {
-//                        }
-//                    });
-//                    SharedPreferences sharedPref = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPref.edit();
-//                    editor.remove("NroAtendimento");
-//                    editor.apply();
-//                    snackbar.show();
-//                    //finish();
-//                }
-//                else
-//                    SnackbarCreator.createText(view, "Teste");
-//            }
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull Throwable t) {
-//                t.printStackTrace();
-//                Log.d("ERROR",t.getMessage());
-//            }
-//        });
+        Ficha ficha = new Ficha();
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        FireBaseUtils.getDatabaseReference().child("Hospital").child(sharedPreferences.getString("hospitalKey", ""))
+                .child("Fichas").child(sharedPreferences.getString("fichaKey", "")).updateChildren(ficha.insereData()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                System.out.println("foi");
+            }
+        });
     }
 
 }
