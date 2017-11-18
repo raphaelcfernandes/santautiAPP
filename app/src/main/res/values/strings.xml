@@ -172,8 +172,8 @@
     <string name="Anisocoricas">Anisocóricas</string>
     <string name="EsquerdaMdireita">Esquerda > Direita</string>
     <string name="DireitaMesquerda">Direita > Esquerda</string>
-    <string name="Reativo">Reativo</string>
-    <string name="NaoReativo">Não Reativo</string>
+    <string name="Reativo">Reativas</string>
+    <string name="NaoReativo">Não Reativas</string>
     <string name="PoucoReativas">Pouco Reativas</string>
     <string name="Hiperfonetica">Hiperfonéticas</string>
     <string name="Normofonetica">Normofonéticas</string>
@@ -197,7 +197,7 @@
     <string name="Baixa">Baixa</string>
     <string name="NoTempo">No Tempo</string>
     <string name="NoEspaco">No Espaço</string>
-    <string name="EstaVentilacaoMecanica">Está em Ventilação Mecânica?</string>
+    <string name="EstaVentilacaoMecanica">Está em VM, VNI ou BIPAP?</string>
     <string name="NaoInvasiva">Não-invasiva</string>
     <string name="BIPAP">BIPAP</string>
     <string name="Mecanica">Mecânica</string>
@@ -397,6 +397,9 @@
     <string name="Baixo">Baixo</string>
     <string name="Convergente">Convergente</string>
     <string name="Divergente">Divergente</string>
+    <string name="PicosFebris">Nº Picos Febris</string>
+    <string name="Diurese">Diurese</string>
+    <string name="BalancoHidrico">Balanço Hídrico</string>
 
     <!--NORMAL MESSAGES-->
     <string name="autenticando">Autenticando…</string>
@@ -427,7 +430,7 @@
         <item>CONSCIENTE/ALERTA \u002d Acordado e resposta adequadas às perguntas.</item>
         <item>VIGIL \u002d vigil.</item>
         <item>SONOLÊNCIA \u002d Acorda ao chamado, responde às perguntas.</item>
-        <item>OBNUBILACÃO \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
+        <item>OBNUBILAÇÃO \u002d Sonolencia mais profunda, responde as perguntas com voz alta ou após estimulo moderada (balançar).</item>
         <item>TORPOR \u002d Sonolencia profunda, responde somente a estimulo doloroso.</item>
         <item>COMA \u002d Não abre os olhos nem emite sons verbais sob estimulo verbal ou doloroso.</item>
         <item>SEDADO </item>

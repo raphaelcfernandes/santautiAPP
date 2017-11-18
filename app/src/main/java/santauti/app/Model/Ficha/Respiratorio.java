@@ -31,7 +31,8 @@ public class Respiratorio implements FichaMetodos{
         if(viasAereas!=null){
             if(!viasAereas.equals("Natural")){
                 viasAereasMap.put("pressaoCuff",pressaoCuff);
-                viasAereasMap.put("localizacaoCanula",localizacaoCanula);
+                if(viasAereas.equals("Tubo Traqueal"))
+                    viasAereasMap.put("localizacaoCanula",localizacaoCanula);
                 viasAereasMap.put(viasAereas,true);
                 itens.put("ViasAereas",viasAereasMap);
             }

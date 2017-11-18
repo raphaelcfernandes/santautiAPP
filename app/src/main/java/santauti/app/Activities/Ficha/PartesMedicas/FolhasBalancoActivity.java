@@ -31,12 +31,11 @@ import santauti.app.R;
  */
 
 public class FolhasBalancoActivity extends GenericoActivity {
-    private View evacuacoesItens,volumeNutricao;
+    private View evacuacoesItens;
     private MyAnimation myAnimation;
     private CheckBox checkboxEvacuacoes,checkboxGastrica,checkboxEnteral,checkboxOral,checkBoxEndurecidas,checkBoxDiarreicas,checkBoxNormais;
-    private TextInputEditText numeroEventos;
     private TextInputLayout enteral,oral,gastrica,endurecidas,normais,diarreicas;
-    private RadioGroup curvaTermicaRadioGroup;
+    private TextInputEditText curvaTermica, picosFebris,diurese,balancoHidrico;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +43,6 @@ public class FolhasBalancoActivity extends GenericoActivity {
         setToolbar(getString(R.string.FolhasBalanco));
         prepareNavigationButtons();
         myAnimation = new MyAnimation();
-
-        curvaTermicaRadioGroup = (RadioGroup)findViewById(R.id.curvaTermicaRadioGroup);
 
         evacuacoesItens = findViewById(R.id.evacuacoesItens);
 
@@ -62,8 +59,14 @@ public class FolhasBalancoActivity extends GenericoActivity {
         });
         enteral = (TextInputLayout)findViewById(R.id.volumeNutricaoEnteral);
         enteral.getEditText().setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        balancoHidrico = (TextInputEditText)findViewById(R.id.balancoHidrico);
+        balancoHidrico.setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        diurese = (TextInputEditText)findViewById(R.id.diurese);
+        diurese.setFilters(new InputFilter[]{ new InputFilterMin(1)});
         oral = (TextInputLayout)findViewById(R.id.volumeNutricaoOral);
         oral.getEditText().setFilters(new InputFilter[]{ new InputFilterMin(1)});
+        curvaTermica = (TextInputEditText)findViewById(R.id.curvaTermica);
+        picosFebris = (TextInputEditText)findViewById(R.id.picosFebris);
         gastrica = (TextInputLayout)findViewById(R.id.volumeNutricaoGastrica);
         gastrica.getEditText().setFilters(new InputFilter[]{ new InputFilterMin(1)});
         endurecidas = (TextInputLayout)findViewById(R.id.eventosEndurecidas);
@@ -241,8 +244,14 @@ public class FolhasBalancoActivity extends GenericoActivity {
     private void verificaCamposENotificaAdapter() {
         FolhasBalanco folhasBalanco = new FolhasBalanco();
         folhasBalanco.initializeMaps();
-        if(curvaTermicaRadioGroup.getCheckedRadioButtonId()!=-1)
-            folhasBalanco.setCurvaTermica(getStringOfRadioButtonSelectedFromRadioGroup(curvaTermicaRadioGroup));
+        if(!isTextInputEditTextEmpty(curvaTermica))
+            folhasBalanco.setCurvaTermica(Float.parseFloat(curvaTermica.getText().toString()));
+        if(!isTextInputEditTextEmpty(picosFebris))
+            folhasBalanco.setPicosFebris(Integer.parseInt(picosFebris.getText().toString()));
+        if(!isTextInputEditTextEmpty(diurese))
+            folhasBalanco.setDiurese(Integer.parseInt(diurese.getText().toString()));
+        if(!isTextInputEditTextEmpty(balancoHidrico))
+            folhasBalanco.setBalancoHidrico(Integer.parseInt(balancoHidrico.getText().toString()));
         if(((RadioGroup)findViewById(R.id.hemodinamicamenteRadioGroup)).getCheckedRadioButtonId()!=-1)
             folhasBalanco.setHemodinamicamente(getStringOfRadioButtonSelectedFromRadioGroup(((RadioGroup)findViewById(R.id.hemodinamicamenteRadioGroup))));
         if(checkboxEvacuacoes.isChecked()){

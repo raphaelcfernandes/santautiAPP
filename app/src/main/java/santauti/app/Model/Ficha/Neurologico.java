@@ -45,7 +45,7 @@ public class Neurologico implements FichaMetodos{
         if(rass>-6)
             itens.put("rass",rass);
         if(aberturaOcular>0)
-            itens.put("abertaOcular",aberturaOcular);
+            itens.put("aberturaOcular",aberturaOcular);
         if(respostaVerbal>0)
             itens.put("respostaVerbal",respostaVerbal);
         if(respostaMotora>0)
@@ -53,12 +53,12 @@ public class Neurologico implements FichaMetodos{
         if(orientadoTemporoEspacial!=null){
             if(!orientadoTemporoEspacial.isEmpty())
                 for(String string : orientadoTemporoEspacial)
-                    itens.put(string,"orientado");
+                    itens.put(string,"Orientado");
         }
         if(desorientadoTemporoEspacial!=null){
             if(!desorientadoTemporoEspacial.isEmpty())
                 for(String string : desorientadoTemporoEspacial)
-                    itens.put(string,"desorientado");
+                    itens.put(string,"Desorientado");
         }
         if(deficitMotor){
             if(mse!=null)

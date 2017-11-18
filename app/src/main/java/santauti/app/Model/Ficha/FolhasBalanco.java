@@ -9,8 +9,11 @@ import java.util.Map;
 
 public class FolhasBalanco implements FichaMetodos{
 
-    private String curvaTermica;
+    private float curvaTermica;
+    private int picosFebris;
     private boolean evacuacoesFlag;
+    private int diurese;
+    private int balancoHidrico;
     private Map<String,Integer> evacuacoes;
     private Map<String,Integer> nutricao;
     private String hemodinamicamente;
@@ -18,12 +21,47 @@ public class FolhasBalanco implements FichaMetodos{
     public FolhasBalanco() {
     }
 
-    public FolhasBalanco(String curvaTermica, boolean evacuacoesFlag, Map<String, Integer> evacuacoes, Map<String, Integer> nutricao, String hemodinamicamente) {
+    public FolhasBalanco(float curvaTermica, int picosFebris, boolean evacuacoesFlag, int diurese, int balancoHidrico, Map<String, Integer> evacuacoes, Map<String, Integer> nutricao, String hemodinamicamente) {
         this.curvaTermica = curvaTermica;
+        this.picosFebris = picosFebris;
         this.evacuacoesFlag = evacuacoesFlag;
+        this.diurese = diurese;
+        this.balancoHidrico = balancoHidrico;
         this.evacuacoes = evacuacoes;
         this.nutricao = nutricao;
         this.hemodinamicamente = hemodinamicamente;
+    }
+
+    public int getDiurese() {
+        return diurese;
+    }
+
+    public void setDiurese(int diurese) {
+        this.diurese = diurese;
+    }
+
+    public int getBalancoHidrico() {
+        return balancoHidrico;
+    }
+
+    public void setBalancoHidrico(int balancoHidrico) {
+        this.balancoHidrico = balancoHidrico;
+    }
+
+    public float getCurvaTermica() {
+        return curvaTermica;
+    }
+
+    public void setCurvaTermica(float curvaTermica) {
+        this.curvaTermica = curvaTermica;
+    }
+
+    public int getPicosFebris() {
+        return picosFebris;
+    }
+
+    public void setPicosFebris(int picosFebris) {
+        this.picosFebris = picosFebris;
     }
 
     public void initializeMaps(){
@@ -41,13 +79,6 @@ public class FolhasBalanco implements FichaMetodos{
         nutricao.put(string,value);
     }
 
-    public String getCurvaTermica() {
-        return curvaTermica;
-    }
-
-    public void setCurvaTermica(String curvaTermica) {
-        this.curvaTermica = curvaTermica;
-    }
 
     public boolean isEvacuacoesFlag() {
         return evacuacoesFlag;
@@ -87,8 +118,14 @@ public class FolhasBalanco implements FichaMetodos{
         Map<String,Object> itens = new HashMap<>();
         if(hemodinamicamente!=null)
             itens.put("hemodinamicamente",hemodinamicamente);
-        if(curvaTermica!=null)
+        if(curvaTermica>0)
             itens.put("curvaTermica",curvaTermica);
+        if(picosFebris!=0)
+            itens.put("picosFebris",picosFebris);
+        if(balancoHidrico>0)
+            itens.put("balancoHidrico",balancoHidrico);
+        if(diurese>0)
+            itens.put("diurese",diurese);
         if(evacuacoesFlag && !evacuacoes.isEmpty()){
             itens.put("evacuacoes", evacuacoes);
         }
@@ -103,10 +140,10 @@ public class FolhasBalanco implements FichaMetodos{
 
     public boolean checkObject(){
         if(evacuacoesFlag){
-            return /*!evacuacoes.isEmpty() &&*/ curvaTermica!=null && /*!nutricao.isEmpty() &&*/ hemodinamicamente!=null;
+            return /*!evacuacoes.isEmpty() &&*/ curvaTermica>0 && /*!nutricao.isEmpty() &&*/ hemodinamicamente!=null;
         }
         else{
-            return curvaTermica!=null /*&& !nutricao.isEmpty()*/ && hemodinamicamente!=null;
+            return curvaTermica>0 /*&& !nutricao.isEmpty()*/ && hemodinamicamente!=null;
         }
     }
 

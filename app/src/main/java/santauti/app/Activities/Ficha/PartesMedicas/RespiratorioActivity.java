@@ -78,7 +78,15 @@ public class RespiratorioActivity extends GenericoActivity {
         viasAereasTubo = (RadioButton)findViewById(R.id.viasAereasTubo);
         viasAereasTubo.setOnClickListener(showPressaoCuffELocalizacaoCanula);
         viasAereasTraqueostomia = (RadioButton)findViewById(R.id.viasAereasTraqueostomia);
-        viasAereasTraqueostomia.setOnClickListener(showPressaoCuffELocalizacaoCanula);
+        viasAereasTraqueostomia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!pressaoCuff_layout.isShown())
+                    myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
+                findViewById(R.id.localizacaoCanula).setVisibility(View.GONE);
+                findViewById(R.id.menuLocalizacaoCanula).setVisibility(View.GONE);
+            }
+        });
         murmurioVesicularReduzido = (RadioButton)findViewById(R.id.murmurioVesicularReduzido);
         murmurioVesicularReduzido.setOnClickListener(showMurmurioVesicular);
         murmurioVesicularFisiologico = (RadioButton)findViewById(R.id.murmurioVesicularFisiologico);
@@ -241,6 +249,10 @@ public class RespiratorioActivity extends GenericoActivity {
         public void onClick(View v) {
             if(!pressaoCuff_layout.isShown())
                 myAnimation.slideDownView(getApplicationContext(),pressaoCuff_layout);
+            if(!findViewById(R.id.localizacaoCanula).isShown()) {
+                findViewById(R.id.menuLocalizacaoCanula).setVisibility(View.VISIBLE);
+                findViewById(R.id.localizacaoCanula).setVisibility(View.VISIBLE);
+            }
         }
     };
 
