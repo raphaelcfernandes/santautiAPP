@@ -31,11 +31,11 @@ public class ExamesActivity extends GenericoActivity {
     private MyAnimation myAnimation;
     private CheckBox checkboxAmilase;
     private TextInputEditText hematocrito,hemoglobina,plaquetas,ureia,creatinina;
-    private RadioGroup gasometriaArterialAcidoseRadioGroup2,gasometriaArterialAcidoseRadioGroup1,marcadoresInfeccaoRadioGroup1,marcadoresInfeccaoRadioGroup2,gasometriaArterialCompensadaDescompensada,leucogramaRadioGroup1,
+    private RadioGroup gasometriaArterialAcidoseRadioGroup2,gasometriaArterialAcidoseRadioGroup1,gasometriaArterialCompensadaDescompensada,leucogramaRadioGroup1,
             leucogramaRadioGroup2,albuminaRadioGroup1,albuminaRadioGroup2,
             raioxToraxRadioGroup1,raioxToraxRadioGroup2,pcrRadioGroup1,pcrRadioGroup2,potassioRadioGroup1,potassioRadioGroup2,gasometriaArterialMetabolicaRespiratoriaRadioGroup,bilirrubinas,faggt,
             transaminases,lactato,amilaseItens,magnesioRadioGroup1,magnesioRadioGroup2,fosforoRadioGroup1,fosforoRadioGroup2,calcioRadioGroup1,calcioRadioGroup2;
-    private RadioButton raioxToraxSemResultados,estaveis,emQueda,emMelhora,naoRealizado,gasometriaArterialSemResultados,hipercalcemia,hipocalcemia,calcioNormal,calcioSemResultados,
+    private RadioButton raioxToraxSemResultados,gasometriaArterialSemResultados,hipercalcemia,hipocalcemia,calcioNormal,calcioSemResultados,
             hiperfosfatemia,hipofosfatemia,fosforoNormal,fosforoSemResultados,hipermagnesemia,hipomagnesemia,
             magnesioNormal,magnesioSemResultados,leucogramaNormal,leucogramaEstavel,leucogramaEmMelhora,gasometriaAlcalose,gasometriaAcidose,
             leucogramaEmPiora,leucogramaSemResultados,hiperalbuminemia,albuminaNormal,hipoalbuminemia,
@@ -63,8 +63,6 @@ public class ExamesActivity extends GenericoActivity {
         /*********************************RADIOGROUP**************************************/
         gasometriaArterialAcidoseRadioGroup1 = (RadioGroup)findViewById(R.id.gasometriaArterialAcidoseRadioGroup1);
         gasometriaArterialAcidoseRadioGroup2 = (RadioGroup)findViewById(R.id.gasometriaArterialAcidoseRadioGroup2);
-        marcadoresInfeccaoRadioGroup1 = (RadioGroup)findViewById(R.id.marcadoresInfeccaoRadioGroup1);
-        marcadoresInfeccaoRadioGroup2 = (RadioGroup)findViewById(R.id.marcadoresInfeccaoRadioGroup2);
         fosforoRadioGroup1 = (RadioGroup)findViewById(R.id.fosforoRadioGroup1);
         fosforoRadioGroup2 = (RadioGroup)findViewById(R.id.fosforoRadioGroup2);
         calcioRadioGroup1 = (RadioGroup)findViewById(R.id.calcioRadioGroup1);
@@ -91,14 +89,6 @@ public class ExamesActivity extends GenericoActivity {
         /*********************************RADIOGROUP**************************************/
 
         /*********************************RADIOBUTTON**************************************/
-        estaveis = (RadioButton)findViewById(R.id.estaveis);
-        estaveis.setOnClickListener(marcadoresInfeccaoRadioGroup1OnClickListener);
-        emMelhora = (RadioButton)findViewById(R.id.emMelhora);
-        emMelhora.setOnClickListener(marcadoresInfeccaoRadioGroup1OnClickListener);
-        emQueda = (RadioButton)findViewById(R.id.emQueda);
-        emQueda.setOnClickListener(marcadoresInfeccaoRadioGroup2OnClickListener);
-        naoRealizado = (RadioButton)findViewById(R.id.naoRealizado);
-        naoRealizado.setOnClickListener(marcadoresInfeccaoRadioGroup2OnClickListener);
         hipercalcemia = (RadioButton)findViewById(R.id.hipercalcemia);
         hipercalcemia.setOnClickListener(calcioRadioGroup1OnClickListener);
         hipocalcemia = (RadioButton)findViewById(R.id.hipocalcemia);
@@ -327,22 +317,6 @@ public class ExamesActivity extends GenericoActivity {
 //            }
 //        }
     }
-
-    private View.OnClickListener marcadoresInfeccaoRadioGroup1OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(marcadoresInfeccaoRadioGroup2.getCheckedRadioButtonId()!=-1)
-                marcadoresInfeccaoRadioGroup2.clearCheck();
-        }
-    };
-
-    private View.OnClickListener marcadoresInfeccaoRadioGroup2OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(marcadoresInfeccaoRadioGroup1.getCheckedRadioButtonId()!=-1)
-                marcadoresInfeccaoRadioGroup1.clearCheck();
-        }
-    };
 
     private View.OnClickListener calcioRadioGroup1OnClickListener = new View.OnClickListener() {
         @Override
@@ -596,10 +570,6 @@ public class ExamesActivity extends GenericoActivity {
             if(amilaseItens.getCheckedRadioButtonId()!=-1)
                 exames.setAmilase(getStringOfRadioButtonSelectedFromRadioGroup(amilaseItens));
         }
-        if(marcadoresInfeccaoRadioGroup1.getCheckedRadioButtonId()!=-1)
-            exames.setMarcadoresInfeccao(getStringOfRadioButtonSelectedFromRadioGroup(marcadoresInfeccaoRadioGroup1));
-        if(marcadoresInfeccaoRadioGroup2.getCheckedRadioButtonId()!=-1)
-            exames.setMarcadoresInfeccao(getStringOfRadioButtonSelectedFromRadioGroup(marcadoresInfeccaoRadioGroup2));
         if(albuminaRadioGroup1.getCheckedRadioButtonId()!=-1)
             exames.setAlbumina(getStringOfRadioButtonSelectedFromRadioGroup(albuminaRadioGroup1));
         else if(albuminaRadioGroup2.getCheckedRadioButtonId()!=-1)

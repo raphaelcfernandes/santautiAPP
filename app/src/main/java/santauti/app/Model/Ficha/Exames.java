@@ -70,7 +70,6 @@ public class Exames implements FichaMetodos{
             itens.put("amilase",amilase);
         else
             itens.put("amilase",false);
-        itens.put("marcadoresInfeccao",marcadoresInfeccao);
         itens.put("albumina",albumina);
         if(diagnosticoRaioX !=null){
             if(diagnosticoRaioX.equals("Pneumotorax") || diagnosticoRaioX.equals("Actelectasia") || diagnosticoRaioX.equals("Infiltrados Novos")){
