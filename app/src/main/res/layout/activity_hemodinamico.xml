@@ -33,7 +33,6 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/StyleParaTitulos"
                     android:text="@string/Pulso"
                     android:layout_gravity="start|center" />
                 <RadioGroup
@@ -43,14 +42,14 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/Ritmico"
                         android:theme="@style/radioButtonStyle"/>
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Arritmico"
@@ -79,8 +78,7 @@
                     android:id="@+id/menuFoneseBulhas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/FoneseBulhas"
-                    android:textAppearance="@style/StyleParaTitulos"/>
+                    android:text="@string/FoneseBulhas" />
                 <RadioGroup
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
@@ -90,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:id="@+id/foneseBulhasRadioGroup1">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/hiperfoneticas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -98,7 +96,7 @@
                         android:paddingEnd="0dp"
                         android:text="@string/Hiperfonetica"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/normofoneticas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -114,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:id="@+id/foneseBulhasRadioGroup2">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/hipofoneticas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -146,9 +144,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/Sopro"
-                    android:textAppearance="@style/StyleParaTitulos"
                     />
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/checkboxSopro"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -170,8 +167,7 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/TipoSopro"
-                    style="@style/StyleParaTitulos"/>
+                    android:text="@string/TipoSopro" />
                 <RelativeLayout
                     android:paddingTop="5dp"
                     android:orientation="horizontal"
@@ -181,7 +177,7 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="5dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/FA"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -189,7 +185,7 @@
                         android:gravity="center"
                         android:text="@string/FA"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/FM"
                         android:layout_toEndOf="@id/FA"
                         android:layout_width="wrap_content"
@@ -199,7 +195,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/FT"
                         android:layout_toEndOf="@id/FM"
                         android:layout_width="wrap_content"
@@ -209,7 +205,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/FP"
                         android:layout_toEndOf="@id/FT"
                         android:layout_width="wrap_content"
@@ -238,8 +234,7 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/IntensidadeSopro"
-                    style="@style/StyleParaTitulos"/>
+                    android:text="@string/IntensidadeSopro" />
                 <RadioGroup
                     android:id="@+id/intensidadeSopro"
                     android:paddingTop="5dp"
@@ -250,14 +245,14 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="5dp">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="+1"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+2"
@@ -265,7 +260,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+3"
@@ -273,7 +268,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+4"
@@ -281,7 +276,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+5"
@@ -289,7 +284,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+6"
@@ -324,7 +319,6 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/StyleParaTitulos"
                     android:text="@string/PerfusaoCapilar"
                     android:layout_gravity="start|center"/>
                 <RadioGroup
@@ -334,12 +328,12 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Boa"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -347,7 +341,7 @@
                         android:gravity="center"
                         android:text="@string/Regular"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Ruim"
@@ -378,8 +372,7 @@
                     android:id="@+id/menuExtremidades"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Extremidades"
-                    android:textAppearance="@style/StyleParaTitulos"/>
+                    android:text="@string/Extremidades" />
                 <RadioGroup
                     android:id="@+id/extremidadesCor"
                     android:orientation="horizontal"
@@ -387,7 +380,7 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/acianotica"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -395,7 +388,7 @@
                         android:gravity="center"
                         android:text="@string/Acianotica"
                         android:theme="@style/radioButtonStyle"/>
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/cianotica"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -414,7 +407,7 @@
                     android:id="@+id/extremidadesTemperatura"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/frias"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -422,7 +415,7 @@
                         android:gravity="center"
                         android:text="@string/Fria"
                         android:theme="@style/radioButtonStyle"/>
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/normais"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -432,7 +425,7 @@
                         android:layout_marginStart="5dp"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/quentes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

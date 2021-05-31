@@ -5,19 +5,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.MenuItemCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -63,19 +64,19 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        tbar = (Toolbar) findViewById(R.id.toolbar);
+        tbar = findViewById(R.id.toolbar);
         setSupportActionBar(tbar);
         updateUI();
 
-        progress = (ProgressBar) findViewById(R.id.progressbar_recycler);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        progress = findViewById(R.id.progressbar_recycler);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         homeModelList = new ArrayList<>();
         homeAdapter = new HomeAdapter(homeModelList,this);
         recyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnItemClickListener(onItemClickListener);
-        requestPacienteList();
+//        requestPacienteList();
     }
 
     private void updateUI(){
@@ -86,39 +87,44 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
             s.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF")),0,toolbar.getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             toolbar.setTitle(s);
         }
-        initNavigationDrawer();
+//        initNavigationDrawer();
+        intent = new Intent(getBaseContext(), FichaActivity.class);
+        sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("pacienteKey", "blabla");
+        editor.putString("hospitalKey","Santa Clara");
+        editor.apply();
+        intent.putExtra("tipoFicha", "Diurna");
+        startActivity(intent);
     }
 
     private void initNavigationDrawer() {
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                switch (id){
-                    case R.id.home:
-                        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
-                            FirebaseAuth.getInstance().signOut();
-                        Intent it = new Intent(HomeActivity.this, MainActivity.class);
-                        drawerLayout.closeDrawers();
-                        finish();
-                        startActivity(it);
-                        break;
-                }
-                return true;
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            int id = menuItem.getItemId();
+            switch (id) {
+                case R.id.home:
+                    if(FirebaseAuth.getInstance().getCurrentUser() != null)
+                        FirebaseAuth.getInstance().signOut();
+                    Intent it = new Intent(HomeActivity.this, MainActivity.class);
+                    drawerLayout.closeDrawers();
+                    finish();
+                    startActivity(it);
+                    break;
             }
+            return true;
         });
         View header = navigationView.getHeaderView(0);
-        final TextView tv_email = (TextView)header.findViewById(R.id.tv_email);
+        final TextView tv_email = header.findViewById(R.id.tv_email);
         FireBaseUtils.getDatabaseReference().child("Pessoa").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot documentSnapshot : dataSnapshot.getChildren()){
+                for(DataSnapshot documentSnapshot : dataSnapshot.getChildren()) {
                     if(documentSnapshot.child("email").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                         tv_email.setText("Médico: "+documentSnapshot.child("nome").getValue()+" "+documentSnapshot.child("sobrenome").getValue());
                         SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
-                        editor.putString("userKey",documentSnapshot.getKey());
+                        editor.putString("userKey", documentSnapshot.getKey());
                         editor.apply();
                     }
                 }
@@ -129,23 +135,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
             }
         });
-        /*FIRESTORE*/
-        //        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("Pessoa").whereEqualTo("email",FirebaseAuth.getInstance().getCurrentUser().getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if(task.isSuccessful()){
-//                    for (DocumentSnapshot documentSnapshot : task.getResult()){
-//                        tv_email.setText("Médico: "+documentSnapshot.get("nome")+" "+documentSnapshot.get("sobrenome"));
-//                        SharedPreferences sp = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
-//                        SharedPreferences.Editor editor = sp.edit();
-//                        editor.putString("userKey",documentSnapshot.getId());
-//                        editor.apply();
-//                    }
-//                }
-//            }
-//        });
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,tbar,R.string.openDrawer,R.string.closeDrawer){
 
@@ -163,7 +153,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
         actionBarDrawerToggle.syncState();
     }
 
-    private void requestPacienteList(){
+    private void requestPacienteList() {
         FireBaseUtils.getDatabaseReference().child("Hospital").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -174,7 +164,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                         break;
                     }
                 }
-                if(hospital!=null){
+                if(hospital != null) {
                     homeModelList.clear();
                     int[] covers = new int[]{
                             R.drawable.ic_person_black};
@@ -198,49 +188,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
             }
         });
-
-        /*FIRESTORE*/
-        //        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        progress.setVisibility(View.VISIBLE);
-//        db.collection("Hospital").whereEqualTo("nome","Santa Clara").addSnapshotListener(HomeActivity.this,new EventListener<QuerySnapshot>() {
-//            @Override
-//            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-//                for(DocumentSnapshot documentSnapshot : documentSnapshots){
-//                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-//                    hospital = documentSnapshot.toObject(Hospital.class);
-//                    hospital.setHospitalDocumentKey(documentSnapshot.getId());
-//                    SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedPrefecences), Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putString("hospitalKey",hospital.getHospitalDocumentKey());
-//                    editor.apply();
-//                    db.collection("Hospital").document(hospital.getHospitalDocumentKey()).collection("Pacientes").addSnapshotListener(HomeActivity.this,new EventListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-//                            homeModelList.clear();
-//                            for(DocumentSnapshot documentSnapshot : documentSnapshots){
-//                                final Paciente paciente = documentSnapshot.toObject(Paciente.class);
-//                                paciente.setPacienteKey(documentSnapshot.getId());
-//                                FirebaseFirestore db = FirebaseFirestore.getInstance();
-//                                db.collection("Pessoa").document(paciente.getProfissionalResponsavel()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                                        DocumentSnapshot documentSnapshot1 = task.getResult();
-//                                        Profissional profissional = documentSnapshot1.toObject(Profissional.class);
-//                                        int[] covers = new int[]{
-//                                                R.drawable.ic_person_black};
-//                                        HomeModel p = new HomeModel(paciente.getNome()+" "+paciente.getSobrenome(),paciente.getBox(),paciente.getLeito(),
-//                                                covers[0],profissional.getNome()+ " "+profissional.getSobrenome(),paciente.getPacienteKey());
-//                                        homeModelList.add(p);
-//                                        homeAdapter.notifyDataSetChanged();
-//                                        prepareListaPacientes();
-//                                    }
-//                                });
-//                            }
-//                        }
-//                    });
-//                }
-//            }
-//        });
     }
 
     @Override

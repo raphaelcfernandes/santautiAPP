@@ -17,13 +17,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/EscalaGlasgow"
-            android:textAppearance="@style/StyleParaTitulos"/>
+            android:text="@string/EscalaGlasgow" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            style="@style/ItemSelectedTextStyleForLayoutSelection"
             android:id="@+id/escalaDeGlasgow"/>
     </LinearLayout>
 
@@ -47,7 +45,6 @@
                 android:text="@string/AberturaOcular"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/StyleParaTitulos"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +52,6 @@
                 android:visibility="invisible"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/aberturaOcular"/>
         </LinearLayout>
         <LinearLayout
@@ -72,7 +68,6 @@
                 android:text="@string/RespostaVerbal"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/StyleParaTitulos"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +75,6 @@
                 android:visibility="invisible"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/respostaVerbal"/>
         </LinearLayout>
 
@@ -104,8 +98,7 @@
                     android:layout_gravity="center"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="0dp"
-                    android:text="@string/RespostaMotora"
-                    style="@style/TextStyle"/>
+                    android:text="@string/RespostaMotora" />
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -113,8 +106,7 @@
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/submenu_right_padding"
                 android:visibility="invisible"
-                android:id="@+id/respostaMotora"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+                android:id="@+id/respostaMotora" />
         </LinearLayout>
 
     </LinearLayout>

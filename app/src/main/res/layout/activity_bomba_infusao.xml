@@ -33,37 +33,35 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Drogas"
-                    android:textAppearance="@style/StyleParaTitulos" />
+                    android:text="@string/Drogas" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Adrenalina"
                         android:id="@+id/checkBoxAdrenalina"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/adrenalinaTextInputLayout"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -71,29 +69,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Amiodarona"
                         android:id="@+id/checkboxAmiodarona"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/amiodaronaTextInputLayout"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -101,29 +98,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Dobutamina"
                         android:id="@+id/checkboxDobutamina"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:visibility="gone"
                         android:id="@+id/dobutaminaTextInputLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -131,29 +127,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Dopamina"
                         android:id="@+id/checkboxDopamina"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/dopaminaTextInputLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -161,29 +156,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Fentanil"
                         android:id="@+id/checkboxFentanil"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/fentanilTextInputLayout"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -191,29 +185,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Hidrocortisona"
                         android:id="@+id/checkboxHidrocortisona"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:visibility="gone"
                         android:id="@+id/hidrocortisonaTextInputLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -221,29 +214,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Insulina"
                         android:id="@+id/checkboxInsulina"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/insulinaTextInputLayout"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -251,29 +243,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Ketamina"
                         android:id="@+id/checkboxKetamina"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/ketaminaTextInputLayout"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -281,29 +272,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Midozalam"
                         android:id="@+id/checkboxMidazolam"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/midozalamTextInputLayout"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                 android:layout_width="wrap_content"
@@ -311,29 +301,28 @@
                 android:orientation="horizontal"
                 android:paddingStart="10dp"
                 android:paddingEnd="0dp">
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:theme="@style/CheckBoxStyle"
                     android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/Milrinona"
                     android:id="@+id/checkboxMilrinona"/>
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:visibility="gone"
                     android:id="@+id/milrinonaTextInputLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="30dp"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
+                    android:paddingStart="30dp">
+                    <com.google.android.material.textfield.TextInputEditText
                         android:textSize="16sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="8"
                         android:hint="@string/VelocidadeInfusao"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -341,29 +330,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Nitroglicerina"
                         android:id="@+id/checkboxNitrogelicerina"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:visibility="gone"
                         android:id="@+id/nitroglicerinaTextInputLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                 android:layout_width="wrap_content"
@@ -371,29 +359,28 @@
                 android:orientation="horizontal"
                 android:paddingStart="10dp"
                 android:paddingEnd="@dimen/activity_horizontal_margin">
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:theme="@style/CheckBoxStyle"
                     android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/NitroprussiatoDeSodio"
                     android:id="@+id/checkboxNitroprussiatoDeSodio"/>
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:visibility="gone"
                     android:id="@+id/nitroprussiatoDeSodioTextInputLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="5dp"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
+                    android:paddingStart="5dp">
+                    <com.google.android.material.textfield.TextInputEditText
                         android:textSize="16sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="8"
                         android:hint="@string/VelocidadeInfusao"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
                 <LinearLayout
                 android:layout_width="wrap_content"
@@ -401,29 +388,28 @@
                 android:orientation="horizontal"
                 android:paddingStart="10dp"
                 android:paddingEnd="0dp">
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:theme="@style/CheckBoxStyle"
                     android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/Noradrenalina"
                     android:id="@+id/checkboxNoradrenalina"/>
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/noradrenalinaTextInputLayout"
                     android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="30dp"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
+                    android:paddingStart="30dp">
+                    <com.google.android.material.textfield.TextInputEditText
                         android:textSize="16sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="8"
                         android:hint="@string/VelocidadeInfusao"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -431,29 +417,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Precedex"
                         android:id="@+id/checkboxPrecedex"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/precedexTextInputLayout"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -461,29 +446,28 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Propofol"
                         android:id="@+id/checkboxPropofol"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:visibility="gone"
                         android:id="@+id/propofolTextInputLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="30dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="30dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/VelocidadeInfusao"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

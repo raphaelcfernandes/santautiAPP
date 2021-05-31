@@ -35,8 +35,7 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Hemodinamicamente"
-                    android:textAppearance="@style/StyleParaTitulos"/>
+                    android:text="@string/Hemodinamicamente" />
                 <RadioGroup
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
@@ -46,12 +45,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/hemodinamicamenteRadioGroup"
                     >
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Estavel"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Instavel"
@@ -73,65 +72,61 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:orientation="vertical">
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
+                    android:paddingStart="@dimen/activity_horizontal_margin">
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/curvaTermica"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="6"
                         android:hint="@string/CurvaTermica"
                         android:inputType="number|numberDecimal" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
+                    android:paddingStart="@dimen/activity_horizontal_margin">
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/picosFebris"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="7"
                         android:hint="@string/PicosFebris"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
+                    android:paddingStart="@dimen/activity_horizontal_margin">
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/diurese"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="4"
                         android:hint="@string/Diurese"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
+                    android:paddingStart="@dimen/activity_horizontal_margin">
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/balancoHidrico"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="7"
                         android:hint="@string/BalancoHidrico"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -158,9 +153,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/Evacuacoes"
-                    android:textAppearance="@style/StyleParaTitulos"
                     />
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/checkboxEvacuacoes"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -183,28 +177,27 @@
                     android:orientation="horizontal"
                     android:layout_gravity="center_vertical"
                     >
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/FezesDiarreicas"
                         android:id="@+id/checkboxDiarreicas"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/eventosDiarreicas"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="40dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="40dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/NumeroEventos"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
                 <LinearLayout
@@ -213,28 +206,27 @@
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="@dimen/activity_horizontal_margin">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="12dp"
                         android:text="@string/FezesEndurecidas"
                         android:id="@+id/checkboxEndurecidas"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/eventosEndurecidas"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="27dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="27dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/NumeroEventos"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:paddingBottom="10dp"
@@ -243,28 +235,27 @@
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="@dimen/activity_horizontal_margin">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/FezesNormais"
                         android:id="@+id/checkBoxNormais"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/eventosNormais"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="50dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="50dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="8"
                             android:hint="@string/NumeroEventos"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -293,90 +284,86 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Nutricao"
-                    android:textAppearance="@style/StyleParaTitulos"/>
+                    android:text="@string/Nutricao" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_gravity="center_vertical"
                     >
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Enteral"
                         android:id="@+id/checkBoxEnteral"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/volumeNutricaoEnteral"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="50dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="50dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="5"
                             android:hint="@string/VolumeMl"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="12dp"
                         android:text="@string/Gastrica"
                         android:id="@+id/checkboxGastrica"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/volumeNutricaoGastrica"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="42dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="42dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="5"
                             android:hint="@string/VolumeMl"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/Oral"
                         android:id="@+id/checkBoxOral"/>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/volumeNutricaoOral"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingEnd="0dp"
-                        android:paddingStart="70dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:paddingStart="70dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="5"
                             android:hint="@string/VolumeMl"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

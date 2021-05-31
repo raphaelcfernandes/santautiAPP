@@ -32,7 +32,6 @@
 
                 <TextView
                     android:id="@+id/menuFoneseBulhas"
-                    style="@style/StyleParaTitulos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="0dp"
@@ -48,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/viasAereasNatural"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -58,7 +57,7 @@
                         android:paddingEnd="0dp"
                         android:text="@string/Natural"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/viasAereasTubo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -67,7 +66,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/viasAereasTraqueostomia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -86,14 +85,13 @@
                 android:orientation="vertical"
                 android:id="@+id/pressaoCuff_layout"
                 android:visibility="gone">
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:theme="@style/TextLabelBlue"
                     android:paddingTop="5dp">
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/pressaoCuff"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -101,7 +99,7 @@
                         android:ems="9"
                         android:hint="@string/PressaoCuff"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:paddingTop="5dp"
                     android:paddingStart="@dimen/activity_horizontal_margin"
@@ -109,8 +107,7 @@
                     android:id="@+id/menuLocalizacaoCanula"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/LocalizacaoCanula"
-                    style="@style/StyleParaTitulos"/>
+                    android:text="@string/LocalizacaoCanula" />
                 <RadioGroup
                     android:id="@+id/localizacaoCanula"
                     android:paddingStart="10dp"
@@ -120,14 +117,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/Alta"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Media"
@@ -135,7 +132,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
@@ -164,8 +161,7 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/MurmurioVesicular"
-                    style="@style/StyleParaTitulos"/>
+                    android:text="@string/MurmurioVesicular" />
                 <RadioGroup
                     android:id="@+id/murmurioVesicularRadioGroup"
                     android:paddingTop="5dp"
@@ -175,13 +171,13 @@
                     android:paddingBottom="5dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/murmurioVesicularReduzido"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Reduzido"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/murmurioVesicularFisiologico"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -190,7 +186,7 @@
                         android:layout_gravity="center"
                         android:theme="@style/radioButtonStyle"
                         />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/murmurioVesicularAumentado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -212,20 +208,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatCheckBox
+                        <androidx.appcompat.widget.AppCompatCheckBox
                             android:theme="@style/CheckBoxStyle"
                             android:id="@+id/apice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/Apice"/>
-                        <android.support.v7.widget.AppCompatCheckBox
+                        <androidx.appcompat.widget.AppCompatCheckBox
                             android:theme="@style/CheckBoxStyle"
                             android:layout_toEndOf="@id/apice"
                             android:id="@+id/BaseDireita"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/BaseDireita"/>
-                        <android.support.v7.widget.AppCompatCheckBox
+                        <androidx.appcompat.widget.AppCompatCheckBox
                             android:theme="@style/CheckBoxStyle"
                             android:layout_toEndOf="@id/BaseDireita"
                             android:layout_width="wrap_content"
@@ -236,13 +232,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatCheckBox
+                        <androidx.appcompat.widget.AppCompatCheckBox
                             android:theme="@style/CheckBoxStyle"
                             android:id="@+id/tercoMedioDireito"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/TercoMedioDireito"/>
-                        <android.support.v7.widget.AppCompatCheckBox
+                        <androidx.appcompat.widget.AppCompatCheckBox
                             android:theme="@style/CheckBoxStyle"
                             android:layout_toEndOf="@id/tercoMedioDireito"
                             android:layout_width="wrap_content"
@@ -271,8 +267,7 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/UsoDeOxigenio"
-                    android:textAppearance="@style/StyleParaTitulos"/>
+                    android:text="@string/UsoDeOxigenio" />
                 <RadioGroup
                     android:paddingStart="10dp"
                     android:paddingEnd="0dp"
@@ -282,7 +277,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:id="@+id/usoOxigenioRadioGroup1">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/emMascaraVenturi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -292,7 +287,7 @@
                         android:paddingEnd="0dp"
                         android:text="@string/EmMascaraVenturi"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/sobCateterNasal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -309,7 +304,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:id="@+id/usoOxigenioRadioGroup2">
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/emMascaraReinalacao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -319,7 +314,7 @@
                         android:paddingEnd="0dp"
                         android:text="@string/EmMascaraReinalacao"
                         android:theme="@style/radioButtonStyle" />
-                    <android.support.v7.widget.AppCompatRadioButton
+                    <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/usoOxigenioNao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -343,8 +338,7 @@
                     android:paddingEnd="@dimen/submenu_right_padding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/MascaraVenturi"
-                    style="@style/StyleParaTitulos"/>
+                    android:text="@string/MascaraVenturi" />
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -409,23 +403,22 @@
             </LinearLayout>
             <!--MASCARA VENTURI-->
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:theme="@style/TextLabelBlue"
                 android:id="@+id/fluxoOxigenioLayout"
                 android:visibility="gone">
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fluxoOxigenio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="6"
                     android:hint="@string/Fluxo"
                     android:inputType="number" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -449,11 +442,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textAppearance="@style/StyleParaTitulos"
                     android:layout_centerVertical="true"
                     android:text="@string/Roncos"
                     />
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_centerVertical="true"
                     android:id="@+id/checkboxRoncos"
                     android:layout_alignParentEnd="true"
@@ -476,20 +468,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:id="@+id/roncosApice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@id/roncosApice"
                         android:id="@+id/roncosBaseDireita"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@id/roncosBaseDireita"
                         android:id="@+id/roncosBaseEsquerda"
@@ -501,13 +493,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:id="@+id/roncosTercoMedioDireito"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioDireito"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@id/roncosTercoMedioDireito"
                         android:id="@+id/roncosTercoMedioEsquerdo"
@@ -538,11 +530,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textAppearance="@style/StyleParaTitulos"
                     android:layout_centerVertical="true"
                     android:text="@string/Sibilos"
                     />
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_centerVertical="true"
                     android:id="@+id/checkboxSibilos"
                     android:layout_alignParentEnd="true"
@@ -565,20 +556,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:id="@+id/sibilosApice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@id/sibilosApice"
                         android:id="@+id/sibilosBaseDireita"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@id/sibilosBaseDireita"
                         android:id="@+id/sibilosBaseEsquerda"
@@ -590,13 +581,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:id="@+id/sibilosTercoMedioDireito"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioDireito"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@+id/sibilosTercoMedioDireito"
                         android:id="@+id/sibilosTercoMedioEsquerdo"
@@ -627,11 +618,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textAppearance="@style/StyleParaTitulos"
                     android:layout_centerVertical="true"
                     android:text="@string/Crepitacoes"
                     />
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_centerVertical="true"
                     android:id="@+id/checkboxCrepitacoes"
                     android:layout_alignParentEnd="true"
@@ -654,20 +644,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:id="@+id/crepitacoesApice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Apice"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@id/crepitacoesApice"
                         android:id="@+id/crepitacoesBaseDireita"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/BaseDireita"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@id/crepitacoesBaseDireita"
                         android:id="@+id/crepitacoesBaseEsquerda"
@@ -679,13 +669,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:id="@+id/crepitacoesTercoMedioDireito"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/TercoMedioDireito"/>
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:theme="@style/CheckBoxStyle"
                         android:layout_toEndOf="@id/crepitacoesTercoMedioDireito"
                         android:id="@+id/crepitacoesTercoMedioEsquerdo"

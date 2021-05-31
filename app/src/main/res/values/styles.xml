@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorAccent</item>
@@ -14,7 +14,7 @@
         <item name="android:dropDownVerticalOffset">15dp</item>
     </style>
 
-    <style name="loginTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="loginTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
@@ -29,8 +29,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <style name="buttonPattern" parent="Widget.AppCompat.Button.Colored">
         <item name="android:colorButtonNormal">@color/colorPrimaryDark</item>
@@ -39,33 +39,33 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextLabelBlue" parent="TextAppearance.AppCompat">
-        <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@android:color/black</item>
-        <item name="android:textSize">17sp</item>
-        <item name="colorControlActivated">@color/colorPrimaryDark</item>
-    </style>
+<!--    <style name="TextLabelBlue" parent="TextAppearance.AppCompat">-->
+<!--        &lt;!&ndash; Hint color and label color in FALSE state &ndash;&gt;-->
+<!--        <item name="android:textColorHint">@android:color/black</item>-->
+<!--        <item name="android:textSize">17sp</item>-->
+<!--        <item name="colorControlActivated">@color/colorPrimaryDark</item>-->
+<!--    </style>-->
 
-    <style name="TextStyle" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
+<!--    <style name="TextStyle" parent="TextAppearance.AppCompat">-->
+<!--        <item name="android:textSize">17sp</item>-->
+<!--        <item name="android:textColor">@android:color/black</item>-->
+<!--    </style>-->
 
-    <style name="TextStyleListPopupWindow" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
+<!--    <style name="TextStyleListPopupWindow" parent="TextAppearance.AppCompat">-->
+<!--        <item name="android:textSize">16sp</item>-->
+<!--        <item name="android:textColor">@android:color/black</item>-->
+<!--    </style>-->
 
 
-    <style name="StyleParaTitulos" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+<!--    <style name="StyleParaTitulos" parent="TextAppearance.AppCompat">-->
+<!--        <item name="android:textSize">17sp</item>-->
+<!--        <item name="android:textColor">@android:color/black</item>-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--    </style>-->
 
-    <style name="ItemSelectedTextStyleForLayoutSelection" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">15sp</item>
-    </style>
+<!--    <style name="ItemSelectedTextStyleForLayoutSelection" parent="TextAppearance.AppCompat">-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--    </style>-->
 
 
     <style name="radioButtonStyle" >

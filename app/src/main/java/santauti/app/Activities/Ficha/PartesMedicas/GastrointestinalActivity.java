@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -46,14 +46,11 @@ public class GastrointestinalActivity extends GenericoActivity {
 
         /****************************CHECKBOX***************************************/
         massasPalpaveisCheckBox = (CheckBox) findViewById(R.id.checkboxMassasPalpaveis);
-        massasPalpaveisCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!massasPalpaveisCheckBox.isChecked())
-                    massasPalpaveisItensLayout.setVisibility(View.GONE);
-                else
-                    massasPalpaveisItensLayout.setVisibility(View.VISIBLE);
-            }
+        massasPalpaveisCheckBox.setOnClickListener(v -> {
+            if(!massasPalpaveisCheckBox.isChecked())
+                massasPalpaveisItensLayout.setVisibility(View.GONE);
+            else
+                massasPalpaveisItensLayout.setVisibility(View.VISIBLE);
         });
         viscerasPalpaveisCheckBox = (CheckBox) findViewById(R.id.checkboxEmDialise);
         viscerasPalpaveisCheckBox.setOnClickListener(new View.OnClickListener() {

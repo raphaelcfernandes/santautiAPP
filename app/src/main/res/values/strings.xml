@@ -29,9 +29,6 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
     <string name="sharedPrefecences">SantaUTISharedPreferences</string>
-    <string name="acess_token">acess_token</string>
-    <string name="registroMedico">registroMedico</string>
-    <string name="tipoProfissional">tipoProfissional</string>
     <string name="Ritmo">Ritmo</string>
     <string name="Hidratacao">Hidratação</string>
     <string name="FrequenciaCardiaca">Frequência Cardíaca</string>
@@ -73,8 +70,6 @@
     <string name="Apice">Ápice</string>
     <string name="UsoDeOxigenio">Uso de Oxigênio</string>
     <string name="Fluxo">Fluxo L/min</string>
-    <string name="Cancelar">Cancelar</string>
-    <string name="Selecionar">Selecionar</string>
     <string name="MascaraVenturi">Máscara de Venturi</string>
     <string name="Roncos">Roncos</string>
     <string name="Volume">Volume</string>
@@ -135,7 +130,6 @@
     <string name="Nutricao">Nutrição</string>
     <string name="Eletrolitos">Eletrólitos</string>
     <string name="Potassio">Potássio</string>
-    <string name="Sodio">Sódio</string>
     <string name="Magnesio">Magnésio</string>
     <string name="Fosforo">Fósforo</string>
     <string name="Calcio">Cálcio</string>
@@ -231,9 +225,6 @@
     <string name="Ressecada">Ressecada</string>
     <string name="EmMelhora">Em Melhora</string>
     <string name="Estaveis">Estáveis</string>
-    <string name="Afebril">Afebril</string>
-    <string name="Febril">Febril</string>
-    <string name="Subfebril">Subfebril</string>
     <string name="EventosHipoglicemia">Eventos de Hipoglicemia</string>
     <string name="EventosHiperglicemia">Eventos de Hiperglicemia</string>
     <string name="Normoglicemia">Normoglicemia</string>
@@ -382,14 +373,11 @@
     <string name="MSD">M.S.D</string>
     <string name="MIE">M.I.E</string>
     <string name="MID">M.I.D</string>
-    <string name="Inexistente">Inexistente</string>
-    <string name="Sedado">SEDADO</string>
     <string name="Colostomia">Colostomia</string>
     <string name="Ileostomia">Ileostomia</string>
     <string name="Jejunostomia">Jejunostomia</string>
     <string name="AlteracaoNivelConsciencia">Alteração do nível de consciência</string>
     <string name="NaoRealizado">Não realizou/sem resultados</string>
-    <string name="AvaliacaoCAMICUNaoRealizada">Avaliação não permitida, pois RASS maior que +4 ou menor que -4.</string>
     <string name="AvaliacaoOlhar">Avaliação do movimento ocular </string>
     <string name="Direita">Direita</string>
     <string name="Esquerda">Esquerda</string>
@@ -406,7 +394,6 @@
     <!--NORMAL MESSAGES-->
 
     <!--ERROR MESSAGES-->
-    <string name="perfilSemAcesso">Perfil sem acesso a esta área</string>
     <string name="usuarioSenhaIncorreto">Usuário e/ou senha incorretos</string>
     <!--ERROR MESSAGES-->
 

@@ -19,15 +19,13 @@
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Ramsay"
-            style="@style/StyleParaTitulos"/>
+            android:text="@string/Ramsay" />
         <TextView
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            style="@style/ItemSelectedTextStyleForLayoutSelection"
             android:id="@+id/ramsayTextView"/>
     </LinearLayout>
 
@@ -51,8 +49,7 @@
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/RASS"
-            style="@style/StyleParaTitulos"/>
+            android:text="@string/RASS" />
         <TextView
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -60,7 +57,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            style="@style/ItemSelectedTextStyleForLayoutSelection"
             android:id="@+id/rassTextView"/>
     </LinearLayout>
 

@@ -18,15 +18,13 @@
             android:paddingEnd="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/CAMICU"
-            style="@style/StyleParaTitulos"/>
+            android:text="@string/CAMICU" />
         <TextView
             android:id="@+id/camIcuTextView"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/StyleParaTitulos"
             android:visibility="visible"
             />
     </LinearLayout>
@@ -52,7 +50,6 @@
                 android:text="@string/Flutuacao"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/StyleParaTitulos"
                 />
             <TextView
                 android:paddingTop="5dp"
@@ -61,7 +58,6 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/flutuacaoHint1"
                 android:paddingBottom="7dp"
                 android:text="@string/FlutuacaoHint1"/>
@@ -71,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/flutuacaoHint2"
                 android:text="@string/FlutuacaoHint2"/>
             <RadioGroup
@@ -83,13 +78,13 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="0dp"
                 android:paddingTop="5dp">
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/caracteristica1CAMICUSim"
                     android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Sim"/>
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/caracteristica1CAMICUNao"
                     android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
@@ -119,7 +114,6 @@
                 android:text="@string/Inatencao"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/StyleParaTitulos"
                 />
             <TextView
                 android:paddingTop="5dp"
@@ -128,12 +122,10 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/inatencaoHint1"
                 android:paddingBottom="7dp"
                 android:text="@string/InatencaoHint1"/>
             <TextView
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:textStyle="bold|italic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,12 +139,10 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/inatencaoHint2"
                 android:text="@string/InatencaoHint2"/>
             <TextView
                 android:paddingTop="5dp"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:textStyle="bold|italic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,13 +158,13 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="0dp"
                 android:paddingTop="5dp">
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/caracteristica2CAMICUMenos3erros"
                     android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Menosque3erros"/>
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/caracteristica2CAMICUMais3erros"
                     android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
@@ -201,24 +191,21 @@
                 android:paddingEnd="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/AlteracaoNivelConsciencia"
-                style="@style/StyleParaTitulos"/>
+                android:text="@string/AlteracaoNivelConsciencia" />
             <TextView
                 android:paddingTop="10dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="O paciente está sonolento, comatosa ou agitado?"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+                android:text="O paciente está sonolento, comatosa ou agitado?" />
             <TextView
                 android:paddingTop="10dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Realizar avaliacão com Escala de RASS."
-                style="@style/ItemSelectedTextStyleForLayoutSelection"/>
+                android:text="Realizar avaliacão com Escala de RASS." />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -232,8 +219,7 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/RASS"
-                    style="@style/StyleParaTitulos"/>
+                    android:text="@string/RASS" />
                 <TextView
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -241,7 +227,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="invisible"
-                    style="@style/ItemSelectedTextStyleForLayoutSelection"
                     android:id="@+id/rassTextViewCAMICU"/>
             </LinearLayout>
             <LinearLayout
@@ -267,7 +252,6 @@
                 android:text="@string/PensamentoDesorganizado"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/StyleParaTitulos"
                 />
             <TextView
                 android:paddingTop="5dp"
@@ -276,7 +260,6 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/pensamentoDesorganizadoHint1"
                 android:paddingBottom="7dp"
                 android:text="@string/PensamentoDesorganizadoHint1"/>
@@ -287,11 +270,9 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:id="@+id/pensamentoDesorganizadoHint2"/>
             <TextView
                 android:paddingTop="5dp"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:textStyle="bold|italic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -305,8 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+                android:paddingEnd="@dimen/activity_horizontal_margin" />
             <TextView
                 android:paddingTop="5dp"
                 android:text="- Uma pedra flutua na água? Resposta: Não"
@@ -314,8 +294,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+                android:paddingEnd="@dimen/activity_horizontal_margin" />
             <TextView
                 android:paddingTop="5dp"
                 android:text="- Há peixes no mar? Resposta: Sim"
@@ -323,8 +302,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+                android:paddingEnd="@dimen/activity_horizontal_margin" />
             <TextView
                 android:paddingTop="5dp"
                 android:text="- Um quilo pesa mais do que dois quilos? Resposta: Não"
@@ -332,8 +310,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+                android:paddingEnd="@dimen/activity_horizontal_margin" />
             <TextView
                 android:paddingTop="5dp"
                 android:text="- Você pode bater um prego com um martelo? Resposta: Sim"
@@ -341,11 +318,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                style="@style/ItemSelectedTextStyleForLayoutSelection" />
+                android:paddingEnd="@dimen/activity_horizontal_margin" />
             <TextView
                 android:paddingTop="5dp"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:textStyle="bold|italic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -356,7 +331,6 @@
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="0dp"
                 android:paddingTop="5dp"
-                style="@style/ItemSelectedTextStyleForLayoutSelection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/TesteComandoDedos"/>
@@ -369,13 +343,13 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="0dp"
                 android:paddingTop="5dp">
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/caracteristica4Menos2Erros"
                     android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Menosque2erros"/>
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/caracteristica4Mais2Erros"
                     android:theme="@style/radioButtonStyle"
                     android:layout_width="wrap_content"

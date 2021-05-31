@@ -41,9 +41,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/EstaVentilacaoMecanica"
-                    android:textAppearance="@style/StyleParaTitulos"
                     />
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/checkboxEmVentilacaoMecanica"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -74,7 +73,6 @@
                     android:paddingTop="10dp"
                     android:id="@+id/modoVentilatorioLinearLayout">
                     <TextView
-                        style="@style/StyleParaTitulos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
@@ -89,7 +87,7 @@
                         android:paddingStart="10dp"
                         android:id="@+id/modoVentilatorio">
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/naoInvasivoModoVentilatorio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -97,7 +95,7 @@
                             android:text="@string/NaoInvasiva"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/bipapModoVentilatorio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -105,7 +103,7 @@
                             android:text="@string/BIPAP"
                             android:theme="@style/radioButtonStyle" />
 
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/mecanicaModoVentilatorio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -132,89 +130,84 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:paddingEnd="@dimen/activity_horizontal_margin"
-                            android:paddingStart="@dimen/activity_horizontal_margin"
-                            android:theme="@style/TextLabelBlue">
-                            <android.support.design.widget.TextInputEditText
+                            android:paddingStart="@dimen/activity_horizontal_margin">
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/volumeBipap"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="6"
                                 android:hint="@string/Volume"
                                 android:inputType="number" />
-                        </android.support.design.widget.TextInputLayout>
-                        <android.support.design.widget.TextInputLayout
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:paddingEnd="@dimen/activity_horizontal_margin"
-                            android:paddingStart="@dimen/activity_horizontal_margin"
-                            android:theme="@style/TextLabelBlue">
+                            android:paddingStart="@dimen/activity_horizontal_margin">
 
-                            <android.support.design.widget.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/IPAP"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="6"
                                 android:hint="@string/IPAP"
                                 android:inputType="number" />
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:paddingEnd="@dimen/activity_horizontal_margin"
-                            android:paddingStart="@dimen/activity_horizontal_margin"
-                            android:theme="@style/TextLabelBlue">
-                            <android.support.design.widget.TextInputEditText
+                            android:paddingStart="@dimen/activity_horizontal_margin">
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/EPAP"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="6"
                                 android:hint="@string/EPAP"
                                 android:inputType="number" />
-                        </android.support.design.widget.TextInputLayout>
-                        <android.support.design.widget.TextInputLayout
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:paddingEnd="@dimen/activity_horizontal_margin"
-                            android:paddingStart="@dimen/activity_horizontal_margin"
-                            android:theme="@style/TextLabelBlue">
-                            <android.support.design.widget.TextInputEditText
+                            android:paddingStart="@dimen/activity_horizontal_margin">
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/saturacao"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="6"
                                 android:hint="@string/Saturacao"
                                 android:inputType="number" />
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:paddingEnd="@dimen/activity_horizontal_margin"
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:theme="@style/TextLabelBlue">
+                        android:paddingStart="@dimen/activity_horizontal_margin">
 
-                        <android.support.design.widget.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/oxigenio"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="6"
                             android:hint="@string/Oxigenio"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <!--BIPAP-->
 

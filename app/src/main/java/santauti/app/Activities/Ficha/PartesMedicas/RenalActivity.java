@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.textfield.TextInputEditText;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -61,15 +61,12 @@ public class RenalActivity extends GenericoActivity {
         /**************************VIEW*********************************/
         dialiseItensLayout = findViewById(R.id.dialiseItensLayout);
         emDialise = findViewById(R.id.emDialise);
-        emDialise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(checkboxEmDialise.isChecked()) {
-                    if(dialiseItensLayout.isShown())
-                        dialiseItensLayout.setVisibility(View.GONE);
-                    else
-                        dialiseItensLayout.setVisibility(View.VISIBLE);
-                }
+        emDialise.setOnClickListener(v -> {
+            if(checkboxEmDialise.isChecked()) {
+                if(dialiseItensLayout.isShown())
+                    dialiseItensLayout.setVisibility(View.GONE);
+                else
+                    dialiseItensLayout.setVisibility(View.VISIBLE);
             }
         });
         /**************************VIEW*********************************/

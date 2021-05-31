@@ -1,91 +1,36 @@
 {
   "project_info": {
-    "project_number": "666817934398",
-    "firebase_url": "https://santauti-4c4da.firebaseio.com",
-    "project_id": "santauti-4c4da",
-    "storage_bucket": "santauti-4c4da.appspot.com"
+    "project_number": "218719249044",
+    "project_id": "santauti-88379",
+    "storage_bucket": "santauti-88379.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:666817934398:android:1d27e09670c57c1e",
-        "android_client_info": {
-          "package_name": "santauti.android"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "666817934398-o0kr6bb3ts39i1u2hrt43ucdiejotu13.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB-U8HCvQ-fLiLlYM3yCnX44CRuI61vk4c"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:666817934398:android:5ad75d19bd2ca602",
+        "mobilesdk_app_id": "1:218719249044:android:f2bcaf3d70d4e25e93ca81",
         "android_client_info": {
           "package_name": "santauti.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "666817934398-92apak6gtep3jufvps227fadoul8m7c2.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "santauti.app",
-            "certificate_hash": "e3a1e86b5bbdc575b480285f728d43b7567fcfc8"
-          }
-        },
-        {
-          "client_id": "666817934398-3mk1tcjc803oe8amflc4ff1t2j5drlt4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "santauti.app",
-            "certificate_hash": "74d9b1fe3c3c03557867440f73624626e2c453fc"
-          }
-        },
-        {
-          "client_id": "666817934398-o0kr6bb3ts39i1u2hrt43ucdiejotu13.apps.googleusercontent.com",
+          "client_id": "218719249044-jlt2bf3ktsro7flmc3a24doaekioqc3j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB-U8HCvQ-fLiLlYM3yCnX44CRuI61vk4c"
+          "current_key": "AIzaSyC5WYHWnHvs0shlRapmQy52YTfc_aO11U0"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "666817934398-o0kr6bb3ts39i1u2hrt43ucdiejotu13.apps.googleusercontent.com",
+              "client_id": "218719249044-jlt2bf3ktsro7flmc3a24doaekioqc3j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

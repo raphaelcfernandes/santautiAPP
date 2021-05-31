@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,14 +55,9 @@ public class FichaActivity extends GenericoActivity{
         setToolbar(this.getString(R.string.Evolucao));
 
         /*******************LAYOUT VARIAVEIS*******************************/
-        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendFichaToServer(view);
-            }
-        });
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        floatingActionButton = findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(this::sendFichaToServer);
+        recyclerView = findViewById(R.id.recycler_view);
         /*******************LAYOUT VARIAVEIS*******************************/
 
 
@@ -88,19 +83,6 @@ public class FichaActivity extends GenericoActivity{
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("fichaKey",key);
         editor.apply();
-        /*FIRESTORE*/
-        //        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        Map<String, Object> docData = new HashMap<>();
-//        docData.put("pacienteKey",sp.getString("pacienteKey",""));
-//        docData.put("medicoKey",sp.getString("userKey",""));
-//        db.collection("Hospital").document(sp.getString("hospitalKey","")).collection("Fichas").add(docData).addOnSuccessListener(FichaActivity.this,new OnSuccessListener<DocumentReference>() {
-//            @Override
-//            public void onSuccess(DocumentReference documentReference) {
-//                SharedPreferences.Editor editor = sp.edit();
-//                editor.putString("fichaKey",documentReference.getId());
-//                editor.apply();
-//            }
-//        });
     }
 
     @Override

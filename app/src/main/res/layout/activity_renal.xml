@@ -26,18 +26,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp">
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabelBlue">
-                    <android.support.design.widget.TextInputEditText
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/peso"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="5"
                         android:hint="@string/PesoKG"
                         android:inputType="number" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,7 +50,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
-                android:textAppearance="@style/StyleParaTitulos"
                 android:text="@string/Urina" />
             <RadioGroup
                 android:paddingBottom="5dp"
@@ -62,19 +60,19 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/urinaRadioGroup"
                 android:paddingTop="5dp">
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Clara"
                     android:theme="@style/radioButtonStyle"/>
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Escura"
                     android:layout_marginStart="5dp"
                     android:theme="@style/radioButtonStyle"
                     />
-                <android.support.v7.widget.AppCompatRadioButton
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Hematuria"
@@ -105,9 +103,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/EmDialise"
-                    android:textAppearance="@style/StyleParaTitulos"
                     />
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/checkboxEmDialise"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -137,9 +134,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/UF"
-                        android:textAppearance="@style/StyleParaTitulos"
                         />
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/ufCheckbox"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
@@ -152,32 +148,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:layout_marginStart="15dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/volumeDialise"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="5"
                             android:hint="@string/Volume"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:theme="@style/TextLabelBlue">
-                        <android.support.design.widget.TextInputEditText
+                        android:layout_marginStart="15dp">
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tempoDialise"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="6"
                             android:hint="@string/TempoHora"
                             android:inputType="number" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

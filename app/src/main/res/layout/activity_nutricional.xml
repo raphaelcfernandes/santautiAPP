@@ -34,9 +34,8 @@
                     android:paddingEnd="@dimen/activity_horizontal_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Dieta"
-                    android:textAppearance="@style/StyleParaTitulos"/>
-                <android.support.v7.widget.AppCompatCheckBox
+                    android:text="@string/Dieta" />
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_marginStart="10dp"
                     android:theme="@style/CheckBoxStyle"
                     android:layout_marginTop="12dp"
@@ -57,7 +56,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Tolerancia"
-                        android:textAppearance="@style/StyleParaTitulos"
                         />
                     <RadioGroup
                         android:paddingStart="10dp"
@@ -67,14 +65,14 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:id="@+id/enteralRadioGroup">
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@string/Boa"
                             android:theme="@style/radioButtonStyle" />
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/Media"
@@ -82,7 +80,7 @@
                             android:layout_gravity="center"
                             android:theme="@style/radioButtonStyle"
                             />
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|center"
@@ -92,7 +90,7 @@
                     </RadioGroup>
                 </LinearLayout>
 
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_marginStart="10dp"
                     android:theme="@style/CheckBoxStyle"
                     android:layout_marginTop="12dp"
@@ -113,7 +111,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Tolerancia"
-                        android:textAppearance="@style/StyleParaTitulos"
                         />
                     <RadioGroup
                         android:paddingStart="10dp"
@@ -123,14 +120,14 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:id="@+id/parenteralRadioGroup">
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@string/Boa"
                             android:theme="@style/radioButtonStyle" />
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/Media"
@@ -138,7 +135,7 @@
                             android:layout_gravity="center"
                             android:theme="@style/radioButtonStyle"
                             />
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|center"
@@ -149,7 +146,7 @@
                 </LinearLayout>
 
 
-                <android.support.v7.widget.AppCompatCheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_marginStart="10dp"
                     android:theme="@style/CheckBoxStyle"
                     android:layout_marginTop="12dp"
@@ -170,7 +167,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Aceitacao"
-                        android:textAppearance="@style/StyleParaTitulos"
                         />
                     <RadioGroup
                         android:paddingStart="10dp"
@@ -180,14 +176,14 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:id="@+id/oralAceitacaoRadioGroup">
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@string/Boa"
                             android:theme="@style/radioButtonStyle" />
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/Media"
@@ -195,7 +191,7 @@
                             android:layout_gravity="center"
                             android:theme="@style/radioButtonStyle"
                             />
-                        <android.support.v7.widget.AppCompatRadioButton
+                        <androidx.appcompat.widget.AppCompatRadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|center"

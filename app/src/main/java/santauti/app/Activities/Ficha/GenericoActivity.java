@@ -3,12 +3,12 @@ package santauti.app.Activities.Ficha;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.AppCompatRadioButton;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -43,17 +43,6 @@ public abstract class GenericoActivity extends AppCompatActivity {
     }
 
     public void setupUI(View view) {
-
-        // Set up touch listener for non-text box views to hide keyboard.
-        if (!(view instanceof EditText)) {
-            view.setOnTouchListener(new View.OnTouchListener() {
-                public boolean onTouch(View v, MotionEvent event) {
-                    hideSoftKeyboard(GenericoActivity.this);
-                    return false;
-                }
-            });
-        }
-
         //If a layout container, iterate over children and seed recursion.
         if (view instanceof ViewGroup) {
             for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
@@ -227,11 +216,4 @@ public abstract class GenericoActivity extends AppCompatActivity {
         }
         return strings;
     }
-//
-//    public void abreLayoutMarcaCheckboxEPreenche(CheckBox checkbox, View view,int id,RealmList<RealmString> realmStrings){
-//        checkbox.setChecked(true);
-//        MyAnimation myAnimation = new MyAnimation();
-//        myAnimation.slideDownView(getApplicationContext(),view);
-//        preencheCheckboxes(id,realmStrings);
-//    }
 }
